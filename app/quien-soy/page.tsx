@@ -26,7 +26,7 @@ export default function QuienSomos() {
                   Automatización • IA • Eficiencia
                 </div>
                 <div className="bg-slate-800 text-slate-300 px-6 py-3 rounded-lg font-semibold">
-                  Más de 30 empresas transformadas
+                  Más de 8 empresas transformadas
                 </div>
               </div>
             </div>
@@ -173,6 +173,45 @@ export default function QuienSomos() {
                 No se realizan promesas vacías. Cada solución entregada cuenta con métricas claras, objetivos medibles y resultados verificables. El éxito del cliente es la prioridad.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Empresas Trabajadas */}
+      <section className="py-20 px-6 bg-slate-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Empresas que Confían en Nosotros
+            </h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Hemos trabajado con ocho empresas exitosamente en diferentes sectores. Desde startups hasta pymes consolidadas.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { name: "Restaurante La Familia", icon: "🍽️" },
+              { name: "Inmobiliaria Moderna", icon: "🏠" },
+              { name: "Consultoría Estratégica", icon: "📊" },
+              { name: "Agencia Digital Plus", icon: "💼" },
+              { name: "Clínica Dental Nueva Era", icon: "😁" },
+              { name: "Fitness Elite Club", icon: "💪" },
+              { name: "Academia de Idiomas Pro", icon: "🎓" },
+              { name: "Tech Store Express", icon: "🛍️" }
+            ].map((empresa, index) => (
+              <div
+                key={index}
+                className="bg-slate-800 p-8 rounded-lg border border-slate-700 hover:border-cyan-500 transition-all duration-300 flex flex-col items-center justify-center text-center group"
+              >
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {empresa.icon}
+                </div>
+                <p className="text-white font-semibold text-sm">
+                  {empresa.name}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
