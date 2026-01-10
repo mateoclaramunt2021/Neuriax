@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Home",
+    "quien-soy": "About Us",
+    "soluciones": "Solutions",
+    "webs": "Websites",
+    "sectores": "Industries",
+    "casos": "Cases",
+    "trabajo": "Work",
+    "contacto": "Contact"
+  },
+  "cookie": {
+    "title": "🍪 Cookie Preferences",
+    "text": "We use cookies to remember your preferences (theme, language) and improve your experience. Your data is stored locally in your browser.",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
+  "pref": {
+    "theme": "Theme",
+    "language": "Language",
+    "dark": "Dark",
+    "light": "Light",
+    "spanish": "Español",
+    "english": "English"
+  },
+  "footer": {
+    "about": "About Neuriax",
+    "company": "We are Neuriax, your digital partner for automation, applied AI and websites that convert.",
+    "links": "Links",
+    "solutions": "Solutions",
+    "about-us": "About Us",
+    "cases": "Success Cases",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "copyright": "© 2024 Neuriax. All rights reserved."
+  },
+  "hero": {
+    "title": "Automation, AI and Websites That Sell",
+    "subtitle": "Eliminate operational friction and scale your business with intelligent digital solutions"
+  }
+}
