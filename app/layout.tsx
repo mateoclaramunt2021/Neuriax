@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   title: "Neuriax - Automatización, IA y Páginas Web Profesionales",
   description: "Soluciones digitales completas: automatización e IA para escalar operaciones + páginas web que convierten. Diseño profesional, SEO local y resultados medibles.",
   metadataBase: new URL('https://www.neuriax.com'),
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     title: "Neuriax - Automatización e IA para tu negocio",
     description: "Soluciones digitales que eliminan fricción y escalan operaciones. Automatización, IA aplicada y páginas web profesionales.",
