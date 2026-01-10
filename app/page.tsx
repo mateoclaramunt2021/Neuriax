@@ -17,7 +17,7 @@ export default function Home() {
 
         <div className="relative max-w-6xl mx-auto">
           <div className="mb-8 flex items-center gap-3">
-            <div className="relative h-40 w-40">
+            <div className="relative h-80 w-80">
               <Image
                 src="/chatgpt-logo.png"
                 alt="ChatGPT Logo"
