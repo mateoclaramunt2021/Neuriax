@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <div className="relative h-16 w-16">
+              <div className="relative h-24 w-24">
                 <Image
                   src="/chatgpt-logo.png"
                   alt="ChatGPT Logo"

@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative h-20 w-20">
+              <div className="relative h-28 w-28">
                 <Image
                   src="/chatgpt-logo.png"
                   alt="ChatGPT Logo"
