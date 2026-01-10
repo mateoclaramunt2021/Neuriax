@@ -1,10 +1,21 @@
+import Image from "next/image";
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-semibold mb-4">Neuriax</h3>
+            <div className="flex items-center gap-2 mb-4">
+              <Image
+                src="/logo-neuriax.png"
+                alt="Neuriax Logo"
+                width={40}
+                height={40}
+                className="h-10 w-auto"
+              />
+              <h3 className="text-lg font-semibold">Neuriax</h3>
+            </div>
             <p className="text-gray-300 text-sm">
               Soluciones digitales: automatización e IA aplicada a negocio + páginas web profesionales que venden.
             </p>
