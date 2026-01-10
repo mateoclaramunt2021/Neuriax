@@ -26,7 +26,7 @@ export default function QuienSomos() {
                   Automatización • IA • Eficiencia
                 </div>
                 <div className="bg-slate-800 text-slate-300 px-6 py-3 rounded-lg font-semibold">
-                  Más de 8 empresas transformadas
+                  ✓ Más de 8 empresas transformadas
                 </div>
               </div>
             </div>
