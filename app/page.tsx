@@ -147,8 +147,8 @@ export default function Home() {
 
       {/* Video Section */}
       <VideoSection
-        title="Cómo transformo negocios con tecnología"
-        description="Descubre casos reales de empresas que han optimizado sus operaciones con mis soluciones digitales."
+        title="Cómo transformamos negocios con tecnología"
+        description="Descubre casos reales de empresas que han optimizado sus operaciones con nuestras soluciones digitales."
         // videoId="YOUTUBE_VIDEO_ID" // Para YouTube
         // localVideo="/intro.mp4" // Para vídeo local
       />
@@ -288,8 +288,11 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 hover:scale-105 transition-transform duration-300">
               Cómo trabajamos para solucionar tus problemas
             </h2>
+            <p className="text-lg text-cyan-300 mb-4 font-medium">
+              Trabajamos con metodología, no con improvisación.
+            </p>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 hover:text-white transition-colors duration-300">
-              Nuestra metodología probada en múltiples proyectos garantiza resultados concretos y sostenibles.
+              Nuestro proceso probado en múltiples proyectos garantiza resultados concretos y sostenibles.
             </p>
           </div>
 
@@ -311,7 +314,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-red-300 transition-colors duration-300">Análisis</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Estudio detalladamente tus procesos actuales, identifico cuellos de botella y oportunidades de mejora.
+                  Estudiamos detalladamente tus procesos actuales, identificamos cuellos de botella y oportunidades de mejora.
                 </p>
               </div>
 
@@ -328,7 +331,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-orange-300 transition-colors duration-300">Diseño del sistema</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Creo la arquitectura digital perfecta para tu negocio, integrando automatización e inteligencia artificial.
+                  Creamos la arquitectura digital perfecta para tu negocio, integrando automatización e inteligencia artificial.
                 </p>
               </div>
 
@@ -345,7 +348,7 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-yellow-300 transition-colors duration-300">Implementación</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Despliego la solución de forma ágil, capacitando a tu equipo y asegurando una transición suave.
+                  Desplegamos la solución de forma ágil, capacitando a tu equipo y asegurando una transición suave.
                 </p>
               </div>
 
@@ -362,8 +365,9 @@ export default function Home() {
                 </div>
                 <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-green-300 transition-colors duration-300">Optimización continua</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Monitoreo el rendimiento, analizo métricas y realizo mejoras continuas para maximizar resultados.
+                  Monitoreamos el rendimiento, analizamos métricas y realizamos mejoras continuas para maximizar resultados.
                 </p>
+                <p className="text-gray-500 text-sm mt-2 font-medium">Entrega clara, documentación y soporte.</p>
               </div>
             </div>
           </div>
@@ -384,6 +388,73 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Resultados y experiencia - Prueba Social */}
+      <section className="py-20 px-6 bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Resultados y experiencia aplicada
+            </h2>
+            <p className="text-xl text-cyan-300 font-medium">
+              No hablamos de teoría. Aplicamos sistemas que ya funcionan.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* Tarjeta 1 */}
+            <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-xl p-8 border border-blue-700/50 hover:border-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-lg border border-blue-500/50">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Procesos automatizados en entornos reales</h3>
+              <p className="text-gray-300">
+                Implementación de flujos automáticos para captación, seguimiento y gestión de clientes en negocios de servicios.
+              </p>
+            </div>
+
+            {/* Tarjeta 2 */}
+            <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-800/20 rounded-xl p-8 border border-cyan-700/50 hover:border-cyan-500 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-cyan-500/20 rounded-lg border border-cyan-500/50">
+                  <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Optimización del tiempo operativo</h3>
+              <p className="text-gray-300">
+                Reducción de tareas manuales repetitivas mediante sistemas digitales y automatización inteligente.
+              </p>
+            </div>
+
+            {/* Tarjeta 3 */}
+            <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-xl p-8 border border-purple-700/50 hover:border-purple-500 transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+              <div className="mb-6">
+                <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-500/20 rounded-lg border border-purple-500/50">
+                  <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-3">Enfoque en conversión y eficiencia</h3>
+              <p className="text-gray-300">
+                Cada sistema se diseña con un objetivo claro: ahorrar tiempo y mejorar resultados.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <p className="text-gray-400 text-sm font-medium max-w-3xl mx-auto">
+              Los ejemplos concretos se muestran en llamada para adaptarlos a cada negocio.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Final */}
       <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
         {/* Background Elements */}
@@ -395,14 +466,14 @@ export default function Home() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Listo para eliminar la fricción en tu negocio?
+            ¿Tiene sentido automatizar tu negocio?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Automatización para escalar. Páginas web para vender. O ambas.
+            Si encaja, te lo diremos. Y si no, también.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
-              Agendar llamada gratuita
+              Mantener una llamada clara
             </CTAButton>
             <CTAButton href="/webs" variant="secondary" size="lg">
               Ver opciones de web

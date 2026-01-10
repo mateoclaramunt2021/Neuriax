@@ -35,14 +35,14 @@ export default function VideoSection({ videoId, localVideo, title, description }
               Tu navegador no soporta el elemento de vídeo.
             </video>
           ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+            <div className="w-full h-full bg-gray-900 flex items-center justify-center">
               <div className="text-center">
-                <div className="w-16 h-16 bg-gray-300 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-gray-500" fill="currentColor" viewBox="0 0 24 24">
+                <div className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-cyan-500">
+                  <svg className="w-8 h-8 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
-                <p className="text-gray-500">Vídeo próximamente</p>
+                <p className="text-cyan-300 font-medium">Te mostramos ejemplos reales y casos aplicados durante la llamada.</p>
               </div>
             </div>
           )}
