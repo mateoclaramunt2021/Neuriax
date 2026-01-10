@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const revalidate = 0; // Force no cache
 
 export default function QuienSomos() {

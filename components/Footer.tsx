@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -39,10 +41,9 @@ export default function Footer() {
             <div className="space-y-2 text-sm">
               <a href="/quien-soy" className="text-gray-300 hover:text-white transition-colors block">{t('nav.quien-soy', 'Quiénes Somos')}</a>
               <a href="/contacto" className="text-gray-300 hover:text-white transition-colors block">{t('nav.contacto', 'Contacto')}</a>
-                <a href="tel:+34631415151" className="text-gray-300 hover:text-white transition-colors">
-                  +34 631 415 151
-                </a>
-              </p>
+              <a href="tel:+34631415151" className="text-gray-300 hover:text-white transition-colors">
+                +34 631 415 151
+              </a>
             </div>
           </div>
 

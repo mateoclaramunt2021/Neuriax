@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import { usePreferences } from '@/hooks/usePreferences';
-import { t } from '@/lib/translations';
+import { useTranslation } from '@/hooks/useTranslation';
 
 export default function CookieConsent() {
   const { preferences } = usePreferences();
+  const { t } = useTranslation();
   const [showConsent, setShowConsent] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 

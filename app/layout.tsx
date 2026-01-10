@@ -7,7 +7,6 @@ import Chatbot from "../components/Chatbot";
 import ScheduleCallButton from "../components/ScheduleCallButton";
 import { PageTracker } from "../components/PageTracker";
 import VisitorForm from "../components/VisitorForm";
-import CookieConsent from "../components/CookieConsent";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,7 +86,6 @@ export default function RootLayout({
         <Chatbot />
         <ScheduleCallButton />
         <VisitorForm />
-        <CookieConsent />
       </body>
     </html>
   );

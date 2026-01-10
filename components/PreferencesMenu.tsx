@@ -1,11 +1,12 @@
 'use client';
 
 import { usePreferences } from '@/hooks/usePreferences';
+import { useTranslation } from '@/hooks/useTranslation';
 import { useState } from 'react';
-import { t } from '@/lib/translations';
 
 export default function PreferencesMenu() {
   const { preferences, toggleTheme, setLanguage } = usePreferences();
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
