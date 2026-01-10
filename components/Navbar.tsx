@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import PreferencesMenu from "./PreferencesMenu";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +56,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-4">
+            <PreferencesMenu />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden text-white hover:text-cyan-400 focus:outline-none focus:text-cyan-400"
