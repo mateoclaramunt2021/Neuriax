@@ -20,9 +20,9 @@ export default function Home() {
             <Image
               src="/logo-neuriax.png"
               alt="Neuriax Logo"
-              width={50}
-              height={50}
-              className="h-12 w-auto"
+              width={80}
+              height={80}
+              className="h-20 w-auto"
               priority
               style={{ 
                 filter: 'brightness(0) invert(1)',
