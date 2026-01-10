@@ -268,9 +268,6 @@ export default function WebsPage() {
               <h3 className="text-2xl font-semibold text-white mb-2">Profesional</h3>
               <p className="text-gray-300 mb-6">La más popular</p>
               <div className="mb-6">
-                <div className="flex items-baseline gap-2 mb-2">
-                  <span className="text-sm text-gray-400 line-through">1.500 €</span>
-                </div>
                 <span className="text-4xl font-bold text-cyan-400">A CONSULTAR</span>
                 <p className="text-cyan-300 text-sm mt-2">Presupuesto personalizado</p>
               </div>
