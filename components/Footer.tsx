@@ -15,7 +15,6 @@ export default function Footer() {
                 className="h-10 w-auto"
                 priority
               />
-              <h3 className="text-lg font-semibold">Neuriax</h3>
             </div>
             <p className="text-gray-300 text-sm">
               Soluciones digitales: automatización e IA aplicada a negocio + páginas web profesionales que venden.

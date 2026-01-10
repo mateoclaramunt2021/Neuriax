@@ -25,7 +25,6 @@ export default function Home() {
               className="h-12 w-auto"
               priority
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Neuriax</span>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
