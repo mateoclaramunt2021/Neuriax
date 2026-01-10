@@ -39,7 +39,7 @@ export default function WebsPage() {
                 <CTAButton href="#precios" size="lg">
                   Ver precios
                 </CTAButton>
-                <CTAButton href="https://calendly.com/mateoastraautomations/30min" variant="secondary" size="lg">
+                <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" size="lg">
                   Agendar llamada
                 </CTAButton>
               </div>
@@ -255,7 +255,7 @@ export default function WebsPage() {
                   SEO local básico
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/mateoastraautomations/30min" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
                 Contratar
               </CTAButton>
             </div>
@@ -271,8 +271,8 @@ export default function WebsPage() {
                 <div className="flex items-baseline gap-2 mb-2">
                   <span className="text-sm text-gray-400 line-through">1.500 €</span>
                 </div>
-                <span className="text-4xl font-bold text-white">1.300</span>
-                <span className="text-gray-300"> €</span>
+                <span className="text-4xl font-bold text-cyan-400">A CONSULTAR</span>
+                <p className="text-cyan-300 text-sm mt-2">Presupuesto personalizado</p>
               </div>
               <ul className="space-y-3 mb-8 text-gray-300">
                 <li className="flex items-center gap-2">
@@ -296,7 +296,7 @@ export default function WebsPage() {
                   Copy profesional
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/mateoastraautomations/30min" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+              <CTAButton href="https://calendly.com/neuriax/30min" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Contratar ahora
               </CTAButton>
             </div>
@@ -306,8 +306,8 @@ export default function WebsPage() {
               <h3 className="text-2xl font-semibold text-white mb-2">Premium</h3>
               <p className="text-gray-400 mb-6">Completa y personalizada</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold text-white">2.200</span>
-                <span className="text-gray-400"> €</span>
+                <span className="text-4xl font-bold text-white">A CONSULTAR</span>
+                <p className="text-gray-400 text-sm mt-2">Solución a medida</p>
               </div>
               <ul className="space-y-3 mb-8 text-gray-300">
                 <li className="flex items-center gap-2">
@@ -331,7 +331,7 @@ export default function WebsPage() {
                   Mantenimiento 3 meses
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/mateoastraautomations/30min" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
                 Consultar
               </CTAButton>
             </div>
