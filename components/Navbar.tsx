@@ -22,7 +22,7 @@ export default function Navbar() {
                   className="object-contain"
                   priority
                   style={{
-                    mixBlendMode: 'multiply'
+                    mixBlendMode: 'screen'
                   }}
                 />
               </div>

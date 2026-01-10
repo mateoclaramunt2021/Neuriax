@@ -25,7 +25,7 @@ export default function Home() {
                 className="object-contain"
                 priority
                 style={{
-                  mixBlendMode: 'multiply'
+                  mixBlendMode: 'screen'
                 }}
               />
             </div>
