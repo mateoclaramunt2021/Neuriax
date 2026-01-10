@@ -24,6 +24,10 @@ export default function Home() {
               height={50}
               className="h-12 w-auto"
               priority
+              style={{ 
+                filter: 'brightness(0) invert(1)',
+                mixBlendMode: 'screen'
+              }}
             />
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
