@@ -23,6 +23,7 @@ export default function Home() {
               width={50}
               height={50}
               className="h-12 w-auto"
+              priority
             />
             <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Neuriax</span>
           </div>

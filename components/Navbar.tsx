@@ -20,6 +20,7 @@ export default function Navbar() {
                 width={40}
                 height={40}
                 className="h-10 w-auto"
+                priority
               />
               <span className="text-xl font-bold text-white hidden sm:inline">Neuriax</span>
             </Link>
