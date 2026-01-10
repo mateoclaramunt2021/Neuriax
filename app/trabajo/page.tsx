@@ -56,29 +56,35 @@ export default function Trabajo() {
     setIsSubmitting(true);
     setSubmitMessage('');
 
-    // Using mailto as the email sending method
-    const emailBody = `
-Nombre: ${formData.nombre}
-Email: ${formData.email}
-Teléfono: ${formData.telefono}
-Posición deseada: ${formData.posicion}
-Experiencia: ${formData.experiencia}
-Mensaje: ${formData.mensaje}
-    `;
+    try {
+      // Enviar al API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    const mailtoLink = `mailto:mateoclaramunt2021@gmail.com?subject=Postulación de trabajo - ${formData.nombre}&body=${encodeURIComponent(emailBody)}`;
-    window.location.href = mailtoLink;
-
-    setSubmitMessage('¡Postulación preparada! Revisa tu cliente de email para enviarla.');
-    setFormData({
-      nombre: '',
-      email: '',
-      telefono: '',
-      posicion: '',
-      experiencia: '',
-      mensaje: ''
-    });
-    setIsSubmitting(false);
+      if (response.ok) {
+        setSubmitMessage('¡Tu postulación ha sido enviada exitosamente! Pronto recibirás un email de confirmación.');
+        setFormData({
+          nombre: '',
+          email: '',
+          telefono: '',
+          posicion: '',
+          experiencia: '',
+          mensaje: ''
+        });
+      } else {
+        setSubmitMessage('Error al enviar la postulación. Por favor, intenta de nuevo.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setSubmitMessage('Error al enviar la postulación. Por favor, intenta de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
