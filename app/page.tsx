@@ -19,14 +19,11 @@ export default function Home() {
           <div className="mb-8 flex items-center gap-3">
             <div className="relative h-20 w-20">
               <Image
-                src="/logo-neuriax.png"
-                alt="Neuriax Logo"
+                src="/chatgpt-logo.png"
+                alt="ChatGPT Logo"
                 fill
                 className="object-contain"
                 priority
-                style={{
-                  mixBlendMode: 'screen'
-                }}
               />
             </div>
           </div>

@@ -9,14 +9,11 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <div className="relative h-16 w-16">
                 <Image
-                  src="/logo-neuriax.png"
-                  alt="Neuriax Logo"
+                  src="/chatgpt-logo.png"
+                  alt="ChatGPT Logo"
                   fill
                   className="object-contain"
                   priority
-                  style={{
-                    mixBlendMode: 'screen'
-                  }}
                 />
               </div>
             </div>

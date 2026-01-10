@@ -16,14 +16,11 @@ export default function Navbar() {
             <Link href="/" className="flex items-center gap-2">
               <div className="relative h-14 w-14">
                 <Image
-                  src="/logo-neuriax.png"
-                  alt="Neuriax Logo"
+                  src="/chatgpt-logo.png"
+                  alt="ChatGPT Logo"
                   fill
                   className="object-contain"
                   priority
-                  style={{
-                    mixBlendMode: 'screen'
-                  }}
                 />
               </div>
             </Link>
