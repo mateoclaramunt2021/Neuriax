@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Home",
+    "quien-soy": "About Us",
+    "soluciones": "Solutions",
+    "webs": "Websites",
+    "sectores": "Sectors",
+    "casos": "Cases",
+    "trabajo": "Work",
+    "contacto": "Contact"
+  },
+  "hero": {
+    "title": "Transform Your Business with Intelligent Technology",
+    "subtitle": "Automation, AI and Websites That Sell",
+    "description": "Complete digital solutions that eliminate operational friction and scale your income. From intelligent automation to professional websites that convert.",
+    "cta": "Schedule Free Consultation",
+    "cta-secondary": "View Success Cases"
+  },
+  "cookie": {
+    "title": "🍪 Cookie Preferences",
+    "text": "We use cookies to remember your preferences (theme, language) and improve your experience. Your data is stored locally in your browser.",
+    "reject": "Reject",
+    "accept": "Accept"
+  },
+  "preferences": {
+    "theme": "Theme",
+    "dark": "Dark Mode",
+    "light": "Light Mode",
+    "language": "Language",
+    "info": "✓ Your preferences are saved locally in your browser."
+  },
+  "footer": {
+    "about": "About Neuriax",
+    "aboutText": "Specialists in transforming businesses through intelligent digital solutions. Automation, AI and websites that sell.",
+    "solutions": "Solutions",
+    "company": "Company",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "All rights reserved"
+  }
+}

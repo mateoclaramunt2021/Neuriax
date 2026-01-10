@@ -2,6 +2,7 @@
 
 import { usePreferences } from '@/hooks/usePreferences';
 import { useState } from 'react';
+import { t } from '@/lib/translations';
 
 export default function PreferencesMenu() {
   const { preferences, toggleTheme, setLanguage } = usePreferences();
@@ -27,7 +28,9 @@ export default function PreferencesMenu() {
           <div className="p-4 space-y-4">
             {/* Tema */}
             <div>
-              <p className="text-sm font-semibold text-slate-300 mb-2">Tema</p>
+              <p className="text-sm font-semibold text-slate-300 mb-2">
+                {t('pref.theme', preferences.language)}
+              </p>
               <button
                 onClick={toggleTheme}
                 className="w-full px-3 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded text-sm transition-colors flex items-center gap-2"
@@ -37,14 +40,14 @@ export default function PreferencesMenu() {
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
                     </svg>
-                    Modo Oscuro
+                    {t('pref.dark', preferences.language)}
                   </>
                 ) : (
                   <>
                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.536l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.828-2.828a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zm1.414-1.414a1 1 0 00-1.414 0l-.707.707a1 1 0 101.414 1.414l.707-.707a1 1 0 000-1.414zM9 17a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1z" clipRule="evenodd" />
                     </svg>
-                    Modo Claro
+                    {t('pref.light', preferences.language)}
                   </>
                 )}
               </button>
@@ -52,7 +55,9 @@ export default function PreferencesMenu() {
 
             {/* Idioma */}
             <div>
-              <p className="text-sm font-semibold text-slate-300 mb-2">Idioma</p>
+              <p className="text-sm font-semibold text-slate-300 mb-2">
+                {t('pref.language', preferences.language)}
+              </p>
               <div className="flex gap-2">
                 <button
                   onClick={() => setLanguage('es')}
@@ -80,7 +85,7 @@ export default function PreferencesMenu() {
             {/* Info de cookies */}
             <div className="pt-2 border-t border-slate-600">
               <p className="text-xs text-slate-400">
-                ✓ Tus preferencias se guardan localmente en tu navegador.
+                {t('pref.info', preferences.language)}
               </p>
             </div>
           </div>

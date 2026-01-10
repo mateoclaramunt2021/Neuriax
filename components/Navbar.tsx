@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import PreferencesMenu from "./PreferencesMenu";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -30,28 +32,28 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <Link href="/" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Inicio
+                {t('nav.home', 'Inicio')}
               </Link>
               <Link href="/quien-soy" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Quiénes Somos
+                {t('nav.quien-soy', 'Quiénes Somos')}
               </Link>
               <Link href="/soluciones" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Soluciones
+                {t('nav.soluciones', 'Soluciones')}
               </Link>
               <Link href="/webs" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Webs
+                {t('nav.webs', 'Webs')}
               </Link>
               <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Sectores
+                {t('nav.sectores', 'Sectores')}
               </Link>
               <Link href="/casos" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Casos
+                {t('nav.casos', 'Casos')}
               </Link>
               <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Trabajo
+                {t('nav.trabajo', 'Trabajo')}
               </Link>
               <Link href="/contacto" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                Contacto
+                {t('nav.contacto', 'Contacto')}
               </Link>
             </div>
           </div>
@@ -78,19 +80,19 @@ export default function Navbar() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95">
             <Link href="/" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Inicio
+              {t('nav.home', 'Inicio')}
             </Link>
             <Link href="/quien-soy" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Quiénes Somos
+              {t('nav.quien-soy', 'Quiénes Somos')}
             </Link>
             <Link href="/soluciones" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Soluciones
+              {t('nav.soluciones', 'Soluciones')}
             </Link>
             <Link href="/webs" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Webs
+              {t('nav.webs', 'Webs')}
             </Link>
             <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Sectores
+              {t('nav.sectores', 'Sectores')}
             </Link>
             <Link href="/casos" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               Casos

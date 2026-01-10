@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-type Theme = 'light' | 'dark';
-type Language = 'es' | 'en';
+export type Theme = 'light' | 'dark';
+export type Language = 'es' | 'en';
 
 interface Preferences {
   theme: Theme;
@@ -33,6 +33,7 @@ export function usePreferences() {
     const updated = { ...preferences, ...updates };
     setPreferences(updated);
     localStorage.setItem('userPreferences', JSON.stringify(updated));
+    localStorage.setItem('userLanguage', updated.language);
 
     // Aplicar tema
     if (updates.theme) {
@@ -41,6 +42,11 @@ export function usePreferences() {
       } else {
         document.documentElement.classList.remove('dark');
       }
+    }
+
+    // Disparar evento personalizado para notificar cambio de idioma
+    if (updates.language) {
+      window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: updated.language } }));
     }
   };
 

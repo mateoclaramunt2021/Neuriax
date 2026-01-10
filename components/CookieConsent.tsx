@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePreferences } from '@/hooks/usePreferences';
+import { t } from '@/lib/translations';
 
 export default function CookieConsent() {
+  const { preferences } = usePreferences();
   const [showConsent, setShowConsent] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,10 +37,10 @@ export default function CookieConsent() {
         <div className="grid md:grid-cols-3 gap-6 items-center">
           <div className="md:col-span-2">
             <h3 className="text-white font-semibold text-lg mb-2">
-              🍪 Preferencias de Cookies
+              {t('cookie.title', preferences.language)}
             </h3>
             <p className="text-slate-300 text-sm">
-              Usamos cookies para recordar tus preferencias (tema, idioma) y mejorar tu experiencia. Tus datos se guardan localmente en tu navegador.
+              {t('cookie.text', preferences.language)}
             </p>
           </div>
           <div className="flex gap-3 flex-col sm:flex-row">
@@ -45,13 +48,13 @@ export default function CookieConsent() {
               onClick={handleReject}
               className="px-6 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors font-medium text-sm"
             >
-              Rechazar
+              {t('cookie.reject', preferences.language)}
             </button>
             <button
               onClick={handleAccept}
               className="px-6 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all font-medium text-sm"
             >
-              Aceptar
+              {t('cookie.accept', preferences.language)}
             </button>
           </div>
         </div>
