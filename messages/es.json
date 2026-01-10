@@ -12,13 +12,13 @@
   "hero": {
     "title": "Transforma tu Negocio con Tecnología Inteligente",
     "subtitle": "Automatización, IA y Webs que Venden",
-    "description": "Soluciones digitales completas que eliminan fricción operativa y escalan tus ingresos. Desde automatización inteligente hasta páginas web profesionales que convierten.",
+    "description": "Soluciones digitales completas que eliminan fricción operativa y escalan tus ingresos.",
     "cta": "Agendar Consulta Gratuita",
     "cta-secondary": "Ver Casos de Éxito"
   },
   "cookie": {
     "title": "🍪 Preferencias de Cookies",
-    "text": "Usamos cookies para recordar tus preferencias (tema, idioma) y mejorar tu experiencia. Tus datos se guardan localmente en tu navegador.",
+    "text": "Usamos cookies para recordar tus preferencias (tema, idioma) y mejorar tu experiencia.",
     "reject": "Rechazar",
     "accept": "Aceptar"
   },
@@ -31,11 +31,20 @@
   },
   "footer": {
     "about": "Sobre Neuriax",
-    "aboutText": "Especialistas en transformar negocios mediante soluciones digitales inteligentes. Automatización, IA y páginas web que venden.",
+    "aboutText": "Especialistas en transformar negocios mediante soluciones digitales inteligentes.",
     "solutions": "Soluciones",
     "company": "Empresa",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
     "rights": "Todos los derechos reservados"
+  },
+  "common": {
+    "email": "Enviar email",
+    "schedule": "Agendar",
+    "learn-more": "Saber más",
+    "success-cases": "Casos de Éxito",
+    "solutions": "Soluciones",
+    "about": "Acerca de",
+    "contact": "Contacto"
   }
 }

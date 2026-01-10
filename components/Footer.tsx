@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -23,24 +25,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Servicios</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.solutions', 'Servicios')}</h3>
             <div className="space-y-2 text-sm">
-              <a href="/soluciones" className="text-gray-300 hover:text-white transition-colors block">Automatización & IA</a>
-              <a href="/webs" className="text-gray-300 hover:text-white transition-colors block">Páginas Web</a>
+              <a href="/soluciones" className="text-gray-300 hover:text-white transition-colors block">{t('nav.soluciones', 'Soluciones')}</a>
+              <a href="/webs" className="text-gray-300 hover:text-white transition-colors block">{t('nav.webs', 'Páginas Web')}</a>
               <a href="/precios" className="text-gray-300 hover:text-white transition-colors block">Precios</a>
               <a href="/portfolio" className="text-gray-300 hover:text-white transition-colors block">Portfolio</a>
             </div>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.company', 'Empresa')}</h3>
             <div className="space-y-2 text-sm">
-              <p>
-                <a href="mailto:mateoclaramunt2021@gmail.com" className="text-gray-300 hover:text-white transition-colors">
-                  mateoclaramunt2021@gmail.com
-                </a>
-              </p>
-              <p>
+              <a href="/quien-soy" className="text-gray-300 hover:text-white transition-colors block">{t('nav.quien-soy', 'Quiénes Somos')}</a>
+              <a href="/contacto" className="text-gray-300 hover:text-white transition-colors block">{t('nav.contacto', 'Contacto')}</a>
                 <a href="tel:+34631415151" className="text-gray-300 hover:text-white transition-colors">
                   +34 631 415 151
                 </a>
@@ -67,7 +65,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-          <p>&copy; 2026 Neuriax. Todos los derechos reservados.</p>
+          <p>&copy; 2026 Neuriax. {t('footer.rights', 'Todos los derechos reservados')}.</p>
         </div>
       </div>
     </footer>
