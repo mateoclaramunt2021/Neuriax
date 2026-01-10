@@ -22,12 +22,7 @@ export default function Navbar() {
                   className="object-contain"
                   priority
                   style={{
-                    backgroundColor: 'transparent',
-                    backgroundImage: 'url(/logo-neuriax.png)',
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                    mixBlendMode: 'lighten'
+                    mixBlendMode: 'multiply'
                   }}
                 />
               </div>
