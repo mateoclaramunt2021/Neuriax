@@ -52,7 +52,7 @@ export default function ScheduleCallButton() {
       {/* Botón fijo */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 md:bottom-8 md:right-8 z-40 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 p-4 md:p-5 flex items-center justify-center"
+        className="fixed bottom-24 right-6 md:bottom-28 md:right-8 z-50 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-110 p-4 md:p-5 flex items-center justify-center"
         title="Agendar llamada"
       >
         <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
