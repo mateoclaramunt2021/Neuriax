@@ -46,7 +46,7 @@ export default function Contacto() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
-                  href="https://calendly.com/mateoastraautomations/30min"
+                  href="https://calendly.com/neuriax/30min"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
                   Agendar consulta gratuita
@@ -112,7 +112,7 @@ export default function Contacto() {
               </div>
 
               <a
-                href="https://calendly.com/mateoastraautomations/30min"
+                href="https://calendly.com/neuriax/30min"
                 className="inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
               >
                 Agendar consulta gratuita
@@ -185,7 +185,7 @@ export default function Contacto() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="https://calendly.com/mateoastraautomations/30min"
+              href="https://calendly.com/neuriax/30min"
               className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
             >
               Agendar ahora

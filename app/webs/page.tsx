@@ -404,7 +404,7 @@ export default function WebsPage() {
           <p className="text-xl mb-8 opacity-90">
             Una web profesional que venda es tu mejor inversión. Agendemos una llamada sin compromiso.
           </p>
-          <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
+          <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
             Agendar llamada gratuita
           </CTAButton>
           <p className="text-sm mt-6 opacity-75">

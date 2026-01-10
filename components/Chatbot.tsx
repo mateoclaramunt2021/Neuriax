@@ -21,7 +21,7 @@ export default function Chatbot() {
     "servicios": "Ofrecemos soluciones de automatización personalizadas para restaurantes, inmobiliarias y servicios profesionales. Podemos ayudarte a eliminar tareas repetitivas, mejorar la eficiencia y aumentar tus ingresos.",
     "costos": "Los precios dependen de la complejidad del proyecto. Una automatización básica puede costar desde 500€, mientras que soluciones más complejas pueden llegar a 5000€. Ofrecemos consultoría gratuita para evaluar tu caso.",
     "sector": "Trabajamos principalmente con restaurantes, inmobiliarias y servicios profesionales, pero podemos adaptar soluciones para otros sectores. ¿Cuál es tu sector?",
-    "consulta": "¡Perfecto! Puedes agendar una consulta gratuita de 30 minutos aquí: https://calendly.com/mateoastraautomations/30min",
+    "consulta": "¡Perfecto! Puedes agendar una consulta gratuita de 30 minutos aquí: https://calendly.com/neuriax/30min",
     "casos": "Puedes ver nuestros casos de éxito en la página de Casos. Hemos ayudado a restaurantes a aumentar sus reservas un 300%, inmobiliarias a duplicar sus cierres, y consultorías a reducir tiempo administrativo un 85%.",
     "default": "Nos encantaría ayudarte mejor. ¿Puedes contarnos más sobre tu negocio o qué problema estás tratando de resolver?"
   };

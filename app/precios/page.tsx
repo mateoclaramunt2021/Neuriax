@@ -67,7 +67,7 @@ export default function PreciosPage() {
                   <span>Optimización básica de velocidad</span>
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+              <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Empezar con web básica
               </CTAButton>
             </div>
@@ -105,7 +105,7 @@ export default function PreciosPage() {
                   <span>Integración de reservas o formularios</span>
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+              <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar propuesta personalizada
               </CTAButton>
             </div>
@@ -237,7 +237,7 @@ export default function PreciosPage() {
             Agendemos 15 minutos para entender exactamente qué necesitas.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
               Agendar llamada gratuita
             </CTAButton>
             <CTAButton href="https://wa.me/34631415151?text=Hola%20Mateo,%20quiero%20saber%20m%C3%A1s%20sobre%20mis%20opciones%20de%20web." variant="secondary" size="lg">

@@ -25,7 +25,7 @@ export default function Home() {
                 Diseñamos sistemas digitales y automatizaciones que eliminan fricción, reducen costes y escalan operaciones.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-                <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg">
+                <CTAButton href="https://calendly.com/neuriax/30min" size="lg">
                   Agendar llamada gratuita
                 </CTAButton>
                 <CTAButton href="#problemas" variant="secondary" size="lg">
@@ -472,7 +472,7 @@ export default function Home() {
             Si encaja, te lo diremos. Y si no, también.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <CTAButton href="https://calendly.com/mateoastraautomations/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
+            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
               Mantener una llamada clara
             </CTAButton>
             <CTAButton href="/webs" variant="secondary" size="lg">
