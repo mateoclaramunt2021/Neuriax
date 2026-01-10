@@ -16,17 +16,6 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-6xl mx-auto">
-          <div className="mb-8 flex items-center gap-3">
-            <div className="relative h-32 w-32">
-              <Image
-                src="/chatgpt-logo.png"
-                alt="ChatGPT Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-          </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
