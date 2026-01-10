@@ -17,14 +17,19 @@ export default function Home() {
 
         <div className="relative max-w-6xl mx-auto">
           <div className="mb-8 flex items-center gap-3">
-            <Image
-              src="/logo-neuriax.png"
-              alt="Neuriax Logo"
-              width={80}
-              height={80}
-              className="h-20 w-auto"
-              priority
-            />
+            <div className="relative h-20 w-20">
+              <Image
+                src="/logo-neuriax.png"
+                alt="Neuriax Logo"
+                fill
+                className="object-contain"
+                priority
+                style={{
+                  backgroundColor: 'transparent',
+                  mixBlendMode: 'lighten'
+                }}
+              />
+            </div>
           </div>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>

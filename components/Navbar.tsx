@@ -14,14 +14,23 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo-neuriax.png"
-                alt="Neuriax Logo"
-                width={60}
-                height={60}
-                className="h-14 w-auto"
-                priority
-              />
+              <div className="relative h-14 w-14">
+                <Image
+                  src="/logo-neuriax.png"
+                  alt="Neuriax Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  style={{
+                    backgroundColor: 'transparent',
+                    backgroundImage: 'url(/logo-neuriax.png)',
+                    backgroundSize: 'contain',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    mixBlendMode: 'lighten'
+                  }}
+                />
+              </div>
             </Link>
           </div>
 

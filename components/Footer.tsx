@@ -7,14 +7,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Image
-                src="/logo-neuriax.png"
-                alt="Neuriax Logo"
-                width={60}
-                height={60}
-                className="h-16 w-auto"
-                priority
-              />
+              <div className="relative h-16 w-16">
+                <Image
+                  src="/logo-neuriax.png"
+                  alt="Neuriax Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                  style={{
+                    backgroundColor: 'transparent',
+                    mixBlendMode: 'lighten'
+                  }}
+                />
+              </div>
             </div>
             <p className="text-gray-300 text-sm">
               Soluciones digitales: automatización e IA aplicada a negocio + páginas web profesionales que venden.
