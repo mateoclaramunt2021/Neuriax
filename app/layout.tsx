@@ -5,6 +5,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Chatbot from "../components/Chatbot";
 import ScheduleCallButton from "../components/ScheduleCallButton";
+import { PageTracker } from "../components/PageTracker";
+import VisitorForm from "../components/VisitorForm";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,6 +77,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <PageTracker />
         <Navbar />
         <main className="pt-16">
           {children}
@@ -82,6 +85,7 @@ export default function RootLayout({
         <Footer />
         <Chatbot />
         <ScheduleCallButton />
+        <VisitorForm />
       </body>
     </html>
   );
