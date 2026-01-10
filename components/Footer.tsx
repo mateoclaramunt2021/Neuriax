@@ -14,10 +14,6 @@ export default function Footer() {
                 height={60}
                 className="h-16 w-auto"
                 priority
-                style={{ 
-                  filter: 'brightness(0) invert(1)',
-                  mixBlendMode: 'screen'
-                }}
               />
             </div>
             <p className="text-gray-300 text-sm">

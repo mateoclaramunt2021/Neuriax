@@ -21,10 +21,6 @@ export default function Navbar() {
                 height={60}
                 className="h-14 w-auto"
                 priority
-                style={{ 
-                  filter: 'brightness(0) invert(1)',
-                  mixBlendMode: 'screen'
-                }}
               />
             </Link>
           </div>
