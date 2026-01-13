@@ -19,13 +19,15 @@ export function usePreferences() {
 
   // Cargar preferencias del localStorage al montar
   useEffect(() => {
-    const saved = localStorage.getItem('userPreferences');
-    if (saved) {
-      try {
+    if (typeof window === 'undefined') return;
+    
+    try {
+      const saved = localStorage.getItem('userPreferences');
+      if (saved) {
         setPreferences(JSON.parse(saved));
-      } catch (e) {
-        console.error('Error parsing preferences:', e);
       }
+    } catch (e) {
+      console.error('Error parsing preferences:', e);
     }
     setIsLoaded(true);
   }, []);
@@ -34,21 +36,28 @@ export function usePreferences() {
   const updatePreferences = (updates: Partial<Preferences>) => {
     const updated = { ...preferences, ...updates };
     setPreferences(updated);
-    localStorage.setItem('userPreferences', JSON.stringify(updated));
-    localStorage.setItem('userLanguage', updated.language);
+    
+    if (typeof window === 'undefined') return;
+    
+    try {
+      localStorage.setItem('userPreferences', JSON.stringify(updated));
+      localStorage.setItem('userLanguage', updated.language);
 
-    // Aplicar tema
-    if (updates.theme) {
-      if (updates.theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
+      // Aplicar tema
+      if (updates.theme) {
+        if (updates.theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       }
-    }
 
-    // Disparar evento personalizado para notificar cambio de idioma
-    if (updates.language) {
-      window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: updated.language } }));
+      // Disparar evento personalizado para notificar cambio de idioma
+      if (updates.language) {
+        window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: updated.language } }));
+      }
+    } catch (e) {
+      console.error('Error updating preferences:', e);
     }
   };
 

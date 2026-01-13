@@ -10,6 +10,9 @@ export function PageTracker() {
   const visitorIdRef = useRef<number | null>(null)
 
   useEffect(() => {
+    // Solo ejecutar en cliente
+    if (typeof window === 'undefined') return;
+
     // Registrar página visitada
     const trackPageView = async () => {
       timeStartRef.current = Date.now()
@@ -31,6 +34,11 @@ export function PageTracker() {
             ])
             .select()
 
+          if (error) {
+            console.warn('Tracking unavailable:', error.message);
+            return;
+          }
+
           if (data && data[0]) {
             visitorId = String(data[0].id)
             sessionStorage.setItem('visitor_id', visitorId)
@@ -42,12 +50,13 @@ export function PageTracker() {
 
         // Registrar evento de page_view
         if (visitorIdRef.current) {
+          const referrer = typeof document !== 'undefined' ? document.referrer : '';
           await supabase.from('visitor_events').insert([
             {
               visitor_id: visitorIdRef.current,
               pagina: pathname,
               evento_tipo: 'page_view',
-              datos_adicionales: { referrer: document.referrer },
+              datos_adicionales: { referrer },
             },
           ])
         }
@@ -76,9 +85,9 @@ export function PageTracker() {
                     evento_tipo: 'time_spent',
                     datos_adicionales: { segundos: timeSpent },
                   },
-                ])
+                ]);
             } catch (error) {
-              console.error('Error tracking time:', error)
+              console.warn('Failed to track time spent:', error instanceof Error ? error.message : 'Unknown error');
             }
           }
           trackTime()

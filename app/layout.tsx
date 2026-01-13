@@ -77,9 +77,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* PageTracker gracefully handles Supabase failures */}
         <PageTracker />
         <Navbar />
-        <main className="pt-16">
+        <main className="pt-16 min-h-screen">
           {children}
         </main>
         <Footer />
