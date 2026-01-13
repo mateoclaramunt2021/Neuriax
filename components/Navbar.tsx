@@ -46,9 +46,6 @@ export default function Navbar() {
               <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 {t('nav.sectores', 'Sectores')}
               </Link>
-              <Link href="/casos" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.casos', 'Casos')}
-              </Link>
               <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 {t('nav.trabajo', 'Trabajo')}
               </Link>
@@ -93,9 +90,6 @@ export default function Navbar() {
             </Link>
             <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               {t('nav.sectores', 'Sectores')}
-            </Link>
-            <Link href="/casos" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Casos
             </Link>
             <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               Trabajo

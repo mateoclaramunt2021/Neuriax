@@ -5,7 +5,6 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.neuriax.com";
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "/",
-    "/casos",
     "/contacto",
     "/dashboard",
     "/login",

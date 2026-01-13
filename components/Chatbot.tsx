@@ -13,8 +13,7 @@ export default function Chatbot() {
     "Quiero saber más sobre tus servicios",
     "¿Cuánto cuesta una automatización?",
     "¿Trabajas con empresas de mi sector?",
-    "Agenda una consulta gratuita",
-    "Ver casos de éxito"
+    "Agenda una consulta gratuita"
   ];
 
   const botResponses = {
@@ -22,7 +21,6 @@ export default function Chatbot() {
     "costos": "Los precios dependen de la complejidad del proyecto. Una automatización básica puede costar desde 500€, mientras que soluciones más complejas pueden llegar a 5000€. Ofrecemos consultoría gratuita para evaluar tu caso.",
     "sector": "Trabajamos principalmente con restaurantes, inmobiliarias y servicios profesionales, pero podemos adaptar soluciones para otros sectores. ¿Cuál es tu sector?",
     "consulta": "¡Perfecto! Puedes agendar una consulta gratuita de 30 minutos aquí: https://calendly.com/neuriax/30min",
-    "casos": "Puedes ver nuestros casos de éxito en la página de Casos. Hemos ayudado a restaurantes a aumentar sus reservas un 300%, inmobiliarias a duplicar sus cierres, y consultorías a reducir tiempo administrativo un 85%.",
     "default": "Nos encantaría ayudarte mejor. ¿Puedes contarnos más sobre tu negocio o qué problema estás tratando de resolver?"
   };
 
@@ -52,9 +50,6 @@ export default function Chatbot() {
     }
     if (message.includes('consulta') || message.includes('llamada') || message.includes('reunión')) {
       return botResponses.consulta;
-    }
-    if (message.includes('caso') || message.includes('éxito') || message.includes('resultado')) {
-      return botResponses.casos;
     }
     return botResponses.default;
   };
