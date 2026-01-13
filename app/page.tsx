@@ -148,7 +148,7 @@ export default function Home() {
       {/* Video Section */}
       <VideoSection
         title="Cómo transformamos negocios con tecnología"
-        description="Descubre casos reales de empresas que han optimizado sus operaciones con nuestras soluciones digitales."
+        description="Descubre cómo empresas han optimizado sus operaciones con nuestras soluciones digitales."
         // videoId="YOUTUBE_VIDEO_ID" // Para YouTube
         // localVideo="/intro.mp4" // Para vídeo local
       />

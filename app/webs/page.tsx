@@ -84,7 +84,7 @@ export default function WebsPage() {
               { title: "Peluquerías & Estética", desc: "Reservas online, galería de cortes, promociones y contacto directo por WhatsApp." },
               { title: "Clínicas & Consultorios", desc: "Información de servicios, citas online, horarios y ubicación fácil de encontrar en Google." },
               { title: "Restaurantes & Bares", desc: "Menú online, reservas, ubicación con mapas, galería de platos y promociones." },
-              { title: "Servicios Profesionales", desc: "Portafolio, tarifas, clientes, casos de éxito y llamadas a acción claras." },
+              { title: "Servicios Profesionales", desc: "Portafolio, tarifas, clientes, testimonios y llamadas a acción claras." },
               { title: "E-commerce Local", desc: "Tienda online simple, carrito, métodos de pago y entregas rápidas." },
               { title: "Inmobiliarias", desc: "Galería de propiedades, fichas detalladas, citas de visita y contacto directo." },
             ].map((item, idx) => (

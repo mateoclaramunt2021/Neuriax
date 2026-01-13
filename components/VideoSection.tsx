@@ -42,7 +42,7 @@ export default function VideoSection({ videoId, localVideo, title, description }
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
-                <p className="text-cyan-300 font-medium">Te mostramos ejemplos reales y casos aplicados durante la llamada.</p>
+                <p className="text-cyan-300 font-medium">Te mostramos ejemplos reales de soluciones aplicadas durante la llamada.</p>
               </div>
             </div>
           )}
