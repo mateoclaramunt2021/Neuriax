@@ -17,15 +17,16 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-2">
-              <div className="relative h-48 w-48">
+              <div className="relative h-12 w-12">
                 <Image
                   src="/chatgpt-logo.png"
-                  alt="ChatGPT Logo"
+                  alt="Neuriax Logo"
                   fill
                   className="object-contain"
                   priority
                 />
               </div>
+              <span className="hidden sm:inline font-bold text-white text-lg">Neuriax</span>
             </Link>
           </div>
 

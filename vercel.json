@@ -1,0 +1,10 @@
+{
+  "buildCommand": "next build",
+  "framework": "nextjs",
+  "nodeVersion": "18.x",
+  "env": {
+    "NEXT_PUBLIC_SUPABASE_URL": "@supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@supabase_key",
+    "NEXT_PUBLIC_SITE_URL": "@site_url"
+  }
+}
