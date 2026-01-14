@@ -44,11 +44,14 @@ export default function Navbar() {
               <Link href="/webs" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 {t('nav.webs', 'Webs')}
               </Link>
-              <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.sectores', 'Sectores')}
-              </Link>
               <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 {t('nav.trabajo', 'Trabajo')}
+              </Link>
+              <Link href="/portfolio" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                {t('nav.portfolio', 'Portfolio')}
+              </Link>
+              <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                {t('nav.sectores', 'Sectores')}
               </Link>
               <Link href="/contacto" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
                 {t('nav.contacto', 'Contacto')}
@@ -89,11 +92,14 @@ export default function Navbar() {
             <Link href="/webs" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               {t('nav.webs', 'Webs')}
             </Link>
+            <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
+              {t('nav.trabajo', 'Trabajo')}
+            </Link>
+            <Link href="/portfolio" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
+              {t('nav.portfolio', 'Portfolio')}
+            </Link>
             <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               {t('nav.sectores', 'Sectores')}
-            </Link>
-            <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              Trabajo
             </Link>
             <Link href="/contacto" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               Contacto

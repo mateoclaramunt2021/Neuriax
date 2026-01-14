@@ -54,22 +54,23 @@ export default function PortfolioPage() {
       ]
     },
     {
-      title: "Demo Web Estética",
-      category: "Belleza",
+      title: "Demo Web Reformas",
+      category: "Construcción",
       features: [
-        "Galería de tratamientos",
-        "Paquetes y promociones",
-        "Integración con sistemas de pago"
+        "Galería de proyectos antes/después",
+        "Presupuestos y cronogramas",
+        "Contacto directo vía WhatsApp"
       ]
     },
     {
-      title: "Demo Web Local Store",
-      category: "Retail",
+      title: "¿Tu sector no está aquí?",
+      category: "Personalizado",
       features: [
-        "Catálogo de productos",
-        "Horarios y ubicación",
-        "Contacto directo y pedidos"
-      ]
+        "Adaptamos cualquier diseño a tu negocio",
+        "Sector: retail, logística, educación, etc.",
+        "Agendamos una llamada para diseñar juntos"
+      ],
+      isCustom: true
     },
   ];
 
@@ -95,22 +96,81 @@ export default function PortfolioPage() {
               <div key={idx} className="group bg-gray-800 rounded-xl overflow-hidden border border-gray-700 hover:border-cyan-500 transition-all duration-300 hover:shadow-2xl hover:shadow-cyan-500/20">
                 {/* Imagen placeholder */}
                 <div className="relative h-64 bg-gradient-to-br from-cyan-900/30 to-blue-900/30 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 opacity-20">
-                    <div style={{
-                      backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                    }} className="w-full h-full"></div>
-                  </div>
-                  <div className="relative text-center">
-                    <svg className="w-16 h-16 text-cyan-400/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-cyan-300 text-sm font-semibold group-hover:text-cyan-200 transition-colors">Vista previa</p>
-                  </div>
+                  {idx === 0 ? (
+                    <>
+                      <img 
+                        src="/demos/peluqueria/hero.jpg" 
+                        alt="Demo Web Peluquería"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
+                    </>
+                  ) : idx === 1 ? (
+                    <>
+                      <img 
+                        src="/demos/restaurante/hero.jpg" 
+                        alt="Demo Web Restaurante"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
+                    </>
+                  ) : idx === 2 ? (
+                    <>
+                      <img 
+                        src="/demos/clinica/hero.jpg" 
+                        alt="Demo Web Clínica"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
+                    </>
+                  ) : idx === 3 ? (
+                    <>
+                      <img 
+                        src="/demos/consultoria/hero.jpg" 
+                        alt="Demo Web Consultoría"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
+                    </>
+                  ) : idx === 4 ? (
+                    <>
+                      <img 
+                        src="/demos/reformas/cocina-gourmet.jpg" 
+                        alt="Demo Web Reformas"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
+                    </>
+                  ) : idx === 5 ? (
+                    <>
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/30 to-blue-600/30"></div>
+                      <div className="relative text-center">
+                        <svg className="w-16 h-16 text-cyan-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                        <p className="text-cyan-200 text-sm font-semibold">Tu proyecto personalizado</p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="absolute inset-0 opacity-20">
+                        <div style={{
+                          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                        }} className="w-full h-full"></div>
+                      </div>
+                      <div className="relative text-center">
+                        <svg className="w-16 h-16 text-cyan-400/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p className="text-cyan-300 text-sm font-semibold group-hover:text-cyan-200 transition-colors">Vista previa</p>
+                      </div>
+                    </>
+                  )}
                   
                   {/* Overlay con CTA */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <CTAButton href="https://calendly.com/neuriax/30min" className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                      Ver en detalle
+                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                      {idx === 5 ? "Agendar llamada" : "Ver en detalle"}
                     </CTAButton>
                   </div>
                 </div>
@@ -133,8 +193,8 @@ export default function PortfolioPage() {
                     ))}
                   </ul>
 
-                  <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
-                    Quiero una igual
+                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} variant="secondary" className="w-full text-center justify-center">
+                    {idx === 5 ? "Agendar llamada" : "Quiero una igual"}
                   </CTAButton>
                 </div>
               </div>

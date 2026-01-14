@@ -2,27 +2,31 @@
 
 import { useState } from 'react';
 
+interface Message {
+  text: string;
+  isBot: boolean;
+  isLink?: boolean;
+}
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    { text: "¡Hola! Soy Mateo, tu asistente virtual. ¿En qué puedo ayudarte hoy?", isBot: true }
+  const [messages, setMessages] = useState<Message[]>([
+    { text: "¡Hola! Soy el asistente de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
   ]);
   const [inputValue, setInputValue] = useState('');
+  const [conversationContext, setConversationContext] = useState<{
+    industry?: string;
+    goal?: string;
+    channel?: string;
+    messageCount?: number;
+  }>({});
 
   const quickResponses = [
-    "Quiero saber más sobre tus servicios",
-    "¿Cuánto cuesta una automatización?",
-    "¿Trabajas con empresas de mi sector?",
-    "Agenda una consulta gratuita"
+    "¿Qué servicios ofreceís?",
+    "Precio de una web",
+    "Chatbot + automatización",
+    "Agendar llamada"
   ];
-
-  const botResponses = {
-    "servicios": "Ofrecemos soluciones de automatización personalizadas para restaurantes, inmobiliarias y servicios profesionales. Podemos ayudarte a eliminar tareas repetitivas, mejorar la eficiencia y aumentar tus ingresos.",
-    "costos": "Los precios dependen de la complejidad del proyecto. Una automatización básica puede costar desde 500€, mientras que soluciones más complejas pueden llegar a 5000€. Ofrecemos consultoría gratuita para evaluar tu caso.",
-    "sector": "Trabajamos principalmente con restaurantes, inmobiliarias y servicios profesionales, pero podemos adaptar soluciones para otros sectores. ¿Cuál es tu sector?",
-    "consulta": "¡Perfecto! Puedes agendar una consulta gratuita de 30 minutos aquí: https://calendly.com/neuriax/30min",
-    "default": "Nos encantaría ayudarte mejor. ¿Puedes contarnos más sobre tu negocio o qué problema estás tratando de resolver?"
-  };
 
   const handleSendMessage = (message: string) => {
     if (!message.trim()) return;
@@ -31,27 +35,90 @@ export default function Chatbot() {
     setMessages(newMessages);
     setInputValue('');
 
+    const newContext = { ...conversationContext, messageCount: (conversationContext.messageCount || 0) + 1 };
+    setConversationContext(newContext);
+
     // Simulate bot response
     setTimeout(() => {
-      const response = getBotResponse(message.toLowerCase());
-      setMessages(prev => [...prev, { text: response, isBot: true }]);
-    }, 1000);
+      const response = getBotResponse(message.toLowerCase(), newContext);
+      setMessages(prev => [...prev, { text: response.text, isBot: true, isLink: response.isLink }]);
+    }, 800);
   };
 
-  const getBotResponse = (message: string) => {
-    if (message.includes('servicio') || message.includes('qué haces') || message.includes('ofreces')) {
-      return botResponses.servicios;
+  const getBotResponse = (message: string, context: any): { text: string; isLink?: boolean } => {
+    const lowerMsg = message.toLowerCase();
+
+    // FLUJO A: Precio / Web
+    if (lowerMsg.includes('precio') || lowerMsg.includes('cuesta') || lowerMsg.includes('coste') || lowerMsg.includes('web')) {
+      if (lowerMsg.includes('web')) {
+        const response = "Nuestra web Básica cuesta 790€. Incluye:\n✓ Diseño responsive\n✓ Información de negocio\n✓ Botón WhatsApp y llamada\n✓ Google Maps integrado\n✓ Optimización de velocidad\n✓ Dominio + hosting 1 año incluidos\n\nEntrega en 10-15 días según complejidad.\n\n¿Qué sector es y qué funcionalidad necesitarías (reservas, e-commerce, blog)?";
+        return { text: response };
+      }
+      return { text: "¿Estás preguntando por una web o por automatización/chatbot? Te doy un rango más exacto." };
     }
-    if (message.includes('cuesta') || message.includes('precio') || message.includes('cost')) {
-      return botResponses.costos;
+
+    // FLUJO B: Automatización / Chatbot / IA
+    if (lowerMsg.includes('chatbot') || lowerMsg.includes('automatiza') || lowerMsg.includes('whatsapp') || lowerMsg.includes('ia') || lowerMsg.includes('ai')) {
+      const response = "Implementamos:\n✓ Chatbots 24/7 (responder leads automáticamente)\n✓ Seguimiento automático + cualificación\n✓ Automatización WhatsApp con IA (desde 300€)\n✓ Dashboards y reportes automáticos\n\nCoste depende del alcance. ¿Por dónde te entran leads hoy? (WhatsApp, web, Instagram, llamadas)";
+      return { text: response };
     }
-    if (message.includes('sector') || message.includes('trabajas')) {
-      return botResponses.sector;
+
+    // FLUJO C: Casos / Ejemplos
+    if (lowerMsg.includes('caso') || lowerMsg.includes('ejemplo') || lowerMsg.includes('resultado') || lowerMsg.includes('funciona')) {
+      const response = "Aquí van 3 casos típicos:\n\n📱 RESTAURANTE: Sistema de reservas online + chatbot que responde 24/7 y recuerda reservas → 40% más ocupación.\n\n🏠 INMOBILIARIA: CRM integrado + seguimiento automático de propiedades → reducen tiempo de respuesta 80%.\n\n💼 CONSULTORÍA: Automatización de facturación + agendamiento + dashboard de KPIs → ahorran 15h/semana.\n\n¿Te encaja tu sector? Agendamos 30 min y lo aterrizamos a tu caso.";
+      return { text: response };
     }
-    if (message.includes('consulta') || message.includes('llamada') || message.includes('reunión')) {
-      return botResponses.consulta;
+
+    // FLUJO D: General - ¿Qué hacéis?
+    if (lowerMsg.includes('qué haces') || lowerMsg.includes('quién eres') || lowerMsg.includes('servicios') || lowerMsg.includes('ofrece')) {
+      const response = "Somos Neuriax. Ofrecemos dos líneas:\n\n🤖 AUTOMATIZACIÓN & IA\n→ Chatbots, seguimiento automático, reportes, procesos IA.\n→ Solucionamos: leads sin respuesta, tareas repetitivas, falta de seguimiento.\n\n💻 WEBS PROFESIONALES\n→ Diseño a medida, SEO local, reservas/WhatsApp, orientadas a conversión.\n→ Desde 790€.\n\n¿Cuál te interesa?";
+      return { text: response };
     }
-    return botResponses.default;
+
+    // FLUJO E: Tiempos / Plazos
+    if (lowerMsg.includes('tiempo') || lowerMsg.includes('plazo') || lowerMsg.includes('cuánto tarda') || lowerMsg.includes('entrega')) {
+      return { text: "⏱️ Tiempos típicos:\n\n🕐 Web: 10-15 días tras el brief (según complejidad e info que aportes).\n\n⚙️ Automatización: depende del alcance (rango 2-8 semanas).\n\nEn la llamada te confirmo el plazo exacto según tu proyecto." };
+    }
+
+    // FLUJO: Agendar llamada directamente
+    if (lowerMsg.includes('agendar') || lowerMsg.includes('llamada') || lowerMsg.includes('reunión') || lowerMsg.includes('consulta')) {
+      return { 
+        text: "Perfecto. 📅 La llamada es gratis, 30 minutos, sin compromiso. Análisis personalizado de tu caso.\n\nAqui el enlace: https://calendly.com/neuriax/30min\n\nSi me dices tu sector y tu principal problema, llegamos más preparados.",
+        isLink: true
+      };
+    }
+
+    // Preguntas frecuentes
+    if (lowerMsg.includes('dominio') || lowerMsg.includes('hosting')) {
+      return { text: "✓ Sí, dominio + hosting 1 año incluidos en cualquier plan web.\n\nRenovación anual: 120€/año." };
+    }
+
+    if (lowerMsg.includes('soporte') || lowerMsg.includes('mantenimiento')) {
+      return { text: "✓ Soporte sí, incluido.\n\n📌 Mantenimiento opcional: 49€/mes (actualizaciones, copias, seguridad, cambios pequeños)." };
+    }
+
+    if (lowerMsg.includes('reservas') || lowerMsg.includes('booking')) {
+      return { text: "✓ Integramos sistema de reservas online.\n\nCoste: +150€ (o a medida según complejidad)." };
+    }
+
+    if (lowerMsg.includes('reseña') || lowerMsg.includes('google')) {
+      return { text: "No se pueden eliminar reseñas, pero sí mejorar reputación con estrategia de generación de reviews positivas.\n\nEso lo analizamos en la llamada." };
+    }
+
+    if (lowerMsg.includes('extra') || lowerMsg.includes('multiidioma') || lowerMsg.includes('ecommerce') || lowerMsg.includes('blog') || lowerMsg.includes('seo')) {
+      return { text: "Extras típicos:\n✓ Multiidioma: +200€\n✓ E-commerce: +300€\n✓ Blog/CMS: +150€\n✓ Reservas: +150€\n✓ Automatización WhatsApp IA: desde 300€\n✓ SEO mensual: desde 250€/mes\n\n¿Cual necesitas?" };
+    }
+
+    // Detección de intención ALTA: sugerir llamada
+    if (lowerMsg.includes('quiero') || lowerMsg.includes('necesito') || lowerMsg.includes('presupuesto') || lowerMsg.includes('proyecto')) {
+      return { 
+        text: "Te lo aterrizamos en 30 min: revisamos tu caso, te digo si merece la pena y qué opción encaja.\n\nEs gratis y sin compromiso. ¿Agenamos? 📅 https://calendly.com/neuriax/30min",
+        isLink: true
+      };
+    }
+
+    // Default: capturar información
+    return { text: "Me encantaría ayudarte más. ¿Puedes decirme:\n\n1) Qué tipo de negocio es?\n2) Qué quieres mejorar (más leads, automatizar procesos, nueva web, visibilidad)?" };
   };
 
   const handleQuickResponse = (response: string) => {
@@ -78,16 +145,16 @@ export default function Chatbot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 w-80 h-96 bg-slate-900 rounded-lg shadow-2xl border border-slate-700 z-50 flex flex-col">
+        <div className="fixed bottom-6 right-6 w-96 h-[32rem] bg-slate-900 rounded-lg shadow-2xl border border-slate-700 z-50 flex flex-col">
           {/* Header */}
           <div className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
             <div className="flex items-center">
               <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center mr-3">
-                <span className="text-sm font-bold">M</span>
+                <span className="text-sm font-bold">N</span>
               </div>
               <div>
-                <h3 className="font-semibold">Mateo</h3>
-                <p className="text-xs opacity-90">Asistente virtual</p>
+                <h3 className="font-semibold">Neuriax</h3>
+                <p className="text-xs opacity-90">Asistente digital</p>
               </div>
             </div>
             <button
@@ -105,22 +172,23 @@ export default function Chatbot() {
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
             {messages.map((message, index) => (
               <div key={index} className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}>
-                <div className={`max-w-xs px-4 py-2 rounded-lg ${
+                <div className={`max-w-xs px-4 py-2 rounded-lg whitespace-pre-wrap text-sm ${
                   message.isBot
                     ? 'bg-slate-800 text-slate-200'
                     : 'bg-cyan-500 text-white'
                 }`}>
-                  <p className="text-sm">{message.text}</p>
+                  {message.text}
                 </div>
               </div>
             ))}
           </div>
 
           {/* Quick Responses */}
-          {messages.length === 1 && (
+          {messages.length <= 2 && (
             <div className="px-4 pb-2">
+              <p className="text-xs text-slate-400 mb-2">Temas rápidos:</p>
               <div className="flex flex-wrap gap-2">
-                {quickResponses.slice(0, 3).map((response, index) => (
+                {quickResponses.map((response, index) => (
                   <button
                     key={index}
                     onClick={() => handleQuickResponse(response)}
@@ -141,7 +209,7 @@ export default function Chatbot() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(inputValue)}
-                placeholder="Escribe tu mensaje..."
+                placeholder="Escribe tu pregunta..."
                 className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
               />
               <button

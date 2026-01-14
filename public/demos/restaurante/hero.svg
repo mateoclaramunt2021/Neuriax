@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600">
+  <defs>
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Fondo degradado -->
+  <rect width="1200" height="600" fill="url(#heroGrad)"/>
+  
+  <!-- Plato principal gourmet -->
+  <circle cx="600" cy="300" r="200" fill="#F5DEB3" filter="url(#shadow)"/>
+  
+  <!-- Decoración de plato -->
+  <circle cx="600" cy="300" r="190" fill="#FFFACD" opacity="0.3"/>
+  <circle cx="600" cy="300" r="180" stroke="#8B7355" stroke-width="3" fill="none"/>
+  
+  <!-- Comida artística -->
+  <ellipse cx="580" cy="280" rx="60" ry="40" fill="#C41E3A" opacity="0.8"/>
+  <ellipse cx="620" cy="290" rx="50" ry="45" fill="#2F5233" opacity="0.8"/>
+  <ellipse cx="600" cy="320" rx="55" ry="35" fill="#DAA520" opacity="0.7"/>
+  
+  <!-- Líneas decorativas -->
+  <path d="M 450 300 Q 600 250 750 300" stroke="#8B7355" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M 450 300 Q 600 350 750 300" stroke="#8B7355" stroke-width="2" fill="none" opacity="0.5"/>
+  
+  <!-- Texto -->
+  <text x="600" y="550" font-family="Georgia, serif" font-size="32" font-weight="bold" text-anchor="middle" fill="#FFFFFF">
+    Solsticio Gastronómico
+  </text>
+  <text x="600" y="580" font-family="Georgia, serif" font-size="18" text-anchor="middle" fill="#FFD700" opacity="0.9">
+    Premium Gastronomy Experience
+  </text>
+</svg>
