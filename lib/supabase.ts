@@ -1,14 +1,14 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
 
 // Validar variables de entorno
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
   console.warn('[Supabase] Missing environment variables. Tracking will be disabled.');
 }
 
-export const supabase = createClient(supabaseUrl || '', supabaseAnonKey || '')
+export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Tipos para TypeScript
 export interface Visitor {
