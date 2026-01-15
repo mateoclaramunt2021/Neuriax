@@ -491,7 +491,7 @@ export default function ReformasDemo() {
             {/* Mensaje */}
             <div>
               <label className="block text-sm font-semibold text-gray-900 mb-2">Detalles adicionales</label>
-              <textarea name="mensaje" value={formData.mensaje} onChange={handleFormChange} className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 resize-none" rows="4" placeholder="Describe brevemente tu proyecto (presupuesto aproximado, urgencia, etc.)" ></textarea>
+              <textarea name="mensaje" value={formData.mensaje} onChange={handleFormChange} className="w-full px-4 py-3 border border-gray-300 rounded-md text-gray-900 placeholder-gray-400 focus:outline-none focus:border-blue-500 resize-none" rows={4} placeholder="Describe brevemente tu proyecto (presupuesto aproximado, urgencia, etc.)" ></textarea>
             </div>
 
             {/* Botones */}
