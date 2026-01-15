@@ -13,10 +13,10 @@ export default function Navbar() {
     <>
       <nav className="fixed top-0 w-full bg-black/95 backdrop-blur-sm border-b border-slate-700 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-28">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-16 w-16">
+              <div className="relative h-24 w-24">
                 <Image
                   src="/chatgpt-logo.png"
                   alt="Neuriax Logo"
@@ -25,7 +25,6 @@ export default function Navbar() {
                   priority
                 />
               </div>
-              <span className="hidden sm:inline font-bold text-white text-xl">Neuriax</span>
             </Link>
           </div>
 
