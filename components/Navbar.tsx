@@ -3,11 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { useTranslation } from "@/hooks/useTranslation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { t } = useTranslation();
 
   return (
     <>
@@ -31,28 +29,28 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               <Link href="/" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.home', 'Inicio')}
+                Inicio
               </Link>
               <Link href="/quien-soy" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.quien-soy', 'Quiénes Somos')}
+                Quiénes Somos
               </Link>
               <Link href="/soluciones" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.soluciones', 'Soluciones')}
+                Soluciones
               </Link>
               <Link href="/webs" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.webs', 'Webs')}
+                Webs
               </Link>
               <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.trabajo', 'Trabajo')}
+                Trabajo
               </Link>
               <Link href="/portfolio" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.portfolio', 'Portfolio')}
+                Portfolio
               </Link>
               <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.sectores', 'Sectores')}
+                Sectores
               </Link>
               <Link href="/contacto" className="text-slate-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
-                {t('nav.contacto', 'Contacto')}
+                Contacto
               </Link>
             </div>
           </div>
@@ -78,25 +76,25 @@ export default function Navbar() {
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95">
             <Link href="/" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.home', 'Inicio')}
+              Inicio
             </Link>
             <Link href="/quien-soy" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.quien-soy', 'Quiénes Somos')}
+              Quiénes Somos
             </Link>
             <Link href="/soluciones" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.soluciones', 'Soluciones')}
+              Soluciones
             </Link>
             <Link href="/webs" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.webs', 'Webs')}
+              Webs
             </Link>
             <Link href="/trabajo" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.trabajo', 'Trabajo')}
+              Trabajo
             </Link>
             <Link href="/portfolio" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.portfolio', 'Portfolio')}
+              Portfolio
             </Link>
             <Link href="/sectores" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
-              {t('nav.sectores', 'Sectores')}
+              Sectores
             </Link>
             <Link href="/contacto" className="text-slate-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium">
               Contacto
