@@ -168,12 +168,12 @@ export default function ReformasDemo() {
     }
   ];
 
-  const handleFormChange = (e) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const mensaje = `Presupuesto solicitado: ${formData.nombre} - ${formData.telefono} - Tipo: ${formData.tipoReforma} - ${formData.metrosCuadrados} m²`;
     const whatsappUrl = `https://wa.me/34631415151?text=${encodeURIComponent(mensaje)}`;
