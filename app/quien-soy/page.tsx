@@ -28,7 +28,7 @@ export default function QuienSomos() {
                   Automatización • IA • Eficiencia
                 </div>
                 <div className="bg-slate-800 text-slate-300 px-6 py-3 rounded-lg font-semibold">
-                  ✓ Más de 8 empresas transformadas
+                  ✓ 15 empresas en 2 meses transformadas
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ export default function QuienSomos() {
               Empresas que Confían en Nosotros
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Hemos trabajado con ocho empresas exitosamente en diferentes sectores. Desde startups hasta pymes consolidadas.
+              Hemos trabajado con 15 empresas exitosamente en tan solo 2 meses en diferentes sectores. Desde startups hasta pymes consolidadas.
             </p>
           </div>
 
