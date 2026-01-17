@@ -42,9 +42,9 @@ export async function POST(request: NextRequest) {
     }
 
     // Enviar email de notificación con Resend
-    const { error: emailError } = await resend.emails.send({
+    const { data: emailData, error: emailError } = await resend.emails.send({
       from: 'Neuriax <onboarding@resend.dev>',
-      to: 'neuriaxx@gmail.com',
+      to: 'mateoclaramunt2021@gmail.com',
       subject: `🚀 Nueva postulación: ${posicion}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -73,11 +73,14 @@ export async function POST(request: NextRequest) {
 
     if (emailError) {
       console.error('Error enviando email:', emailError);
-      // No fallamos si el email falla, ya guardamos en DB
+      return NextResponse.json(
+        { message: 'Postulación guardada, pero error en email', emailError: emailError },
+        { status: 200 }
+      );
     }
 
     return NextResponse.json(
-      { message: 'Postulación enviada correctamente' },
+      { message: 'Postulación enviada correctamente', emailId: emailData?.id },
       { status: 200 }
     );
   } catch (error) {
