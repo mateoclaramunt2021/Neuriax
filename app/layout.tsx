@@ -35,7 +35,13 @@ export const metadata: Metadata = {
     "transformación digital"
   ],
   icons: {
-    icon: '/favicon.png?v=8',
+    icon: [
+      { url: '/favicon.png?v=9', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.png?v=9', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.png?v=9', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/favicon.png?v=9',
+    shortcut: '/favicon.png?v=9',
   },
   robots: {
     index: true,
