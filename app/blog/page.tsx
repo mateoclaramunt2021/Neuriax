@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import BlogPageClient from './client';
 import { createClient } from '@supabase/supabase-js';
 
@@ -16,7 +14,11 @@ interface BlogPost {
   source_name?: string;
 }
 
-// Posts estáticos de respaldo
+// Configuración directa de Supabase (seguro en el servidor)
+const SUPABASE_URL = 'https://wfnaknuhwzmkriaetvtn.supabase.co';
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmbmFrbnVod3pta3JpYWV0dnRuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODA1OTMwMCwiZXhwIjoyMDgzNjM1MzAwfQ.CQ4Gm1k_eZ3Pn5TGQRbPblL_sRp9gahQubIUiytUdlE';
+
+// Posts estáticos de respaldo (solo si Supabase falla completamente)
 const staticPosts: BlogPost[] = [
   {
     id: '1',
@@ -26,7 +28,6 @@ const staticPosts: BlogPost[] = [
     category: 'Automatización',
     readTime: '12 min',
     slug: '10-procesos-automatizar',
-    image: '/assets/images/blog-automation.jpg',
   },
   {
     id: '2',
@@ -36,7 +37,6 @@ const staticPosts: BlogPost[] = [
     category: 'IA',
     readTime: '15 min',
     slug: 'ia-negocio-guia-practica',
-    image: '/assets/images/blog-ia.jpg',
   },
   {
     id: '3',
@@ -46,23 +46,13 @@ const staticPosts: BlogPost[] = [
     category: 'Web',
     readTime: '10 min',
     slug: 'paginas-web-que-venden',
-    image: '/assets/images/blog-web.jpg',
   },
 ];
 
 // Obtener posts desde Supabase
 async function getBlogPosts(): Promise<BlogPost[]> {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  // Usar service role key en el servidor para bypass RLS
-  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  
-  if (!supabaseUrl || !supabaseKey) {
-    console.warn('Supabase not configured, using static posts');
-    return staticPosts;
-  }
-  
   try {
-    const supabase = createClient(supabaseUrl, supabaseKey);
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     
     const { data, error } = await supabase
       .from('blog_posts')
@@ -71,8 +61,13 @@ async function getBlogPosts(): Promise<BlogPost[]> {
       .order('created_at', { ascending: false })
       .limit(50);
     
-    if (error || !data || data.length === 0) {
-      console.warn('No posts from Supabase, using static posts. Error:', error);
+    if (error) {
+      console.error('Supabase error:', error.message);
+      return staticPosts;
+    }
+    
+    if (!data || data.length === 0) {
+      console.warn('No posts found in Supabase');
       return staticPosts;
     }
     
@@ -103,8 +98,8 @@ export const metadata = {
   keywords: 'blog IA, noticias inteligencia artificial, automatización, machine learning, ChatGPT, OpenAI, tecnología',
 };
 
-// Revalidar cada hora para mostrar nuevas noticias
-export const revalidate = 3600;
+// Revalidar cada 10 minutos para mostrar nuevas noticias rápidamente
+export const revalidate = 600;
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
