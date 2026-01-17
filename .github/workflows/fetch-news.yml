@@ -1,0 +1,22 @@
+name: Fetch AI News Daily
+
+on:
+  schedule:
+    # Ejecutar cada día a las 8:00 AM UTC (9:00 AM España)
+    - cron: '0 8 * * *'
+  workflow_dispatch: # Permite ejecutar manualmente
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Trigger Fetch News API
+        run: |
+          curl -X GET "${{ secrets.SITE_URL }}/api/fetch-news" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json"
+        continue-on-error: true
+      
+      - name: Log Result
+        run: echo "News fetch completed at $(date)"
