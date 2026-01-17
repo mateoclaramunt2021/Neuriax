@@ -53,7 +53,8 @@ const staticPosts: BlogPost[] = [
 // Obtener posts desde Supabase
 async function getBlogPosts(): Promise<BlogPost[]> {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  // Usar service role key en el servidor para bypass RLS
+  const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   
   if (!supabaseUrl || !supabaseKey) {
     console.warn('Supabase not configured, using static posts');
@@ -71,7 +72,7 @@ async function getBlogPosts(): Promise<BlogPost[]> {
       .limit(50);
     
     if (error || !data || data.length === 0) {
-      console.warn('No posts from Supabase, using static posts');
+      console.warn('No posts from Supabase, using static posts. Error:', error);
       return staticPosts;
     }
     
