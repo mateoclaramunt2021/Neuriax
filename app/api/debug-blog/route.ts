@@ -9,21 +9,23 @@ export async function GET() {
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     
-    // Query simple sin filtros para ver todos los posts y sus columnas
+    // Contar TODOS los posts
+    const { count: totalCount, error: countError } = await supabase
+      .from('blog_posts')
+      .select('*', { count: 'exact', head: true });
+    
+    // Obtener los últimos 5 posts ordenados por created_at
     const { data, error } = await supabase
       .from('blog_posts')
-      .select('*')
-      .limit(3);
-    
-    // Obtener las columnas disponibles
-    const columns = data && data.length > 0 ? Object.keys(data[0]) : [];
+      .select('id, title, slug, category, created_at')
+      .order('created_at', { ascending: false })
+      .limit(5);
     
     return NextResponse.json({
       success: !error,
-      postsCount: data?.length || 0,
-      columns: columns,
-      samplePost: data?.[0] || null,
-      error: error?.message || null,
+      totalPosts: totalCount,
+      latestPosts: data?.map(p => ({ title: p.title, slug: p.slug })) || [],
+      error: error?.message || countError?.message || null,
       timestamp: new Date().toISOString()
     });
   } catch (e: any) {
