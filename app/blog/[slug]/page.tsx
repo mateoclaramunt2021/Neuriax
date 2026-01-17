@@ -16,6 +16,395 @@ interface BlogPostData {
 
 const blogPostsData: Record<string, BlogPostData> = {
   '10-procesos-automatizar': {
+    title: 'Automatización Estratégica: 10 Procesos de Alto Impacto para tu Empresa',
+    description: 'Descubre cómo automatizar procesos críticos de tu negocio. Estrategias probadas, ROI mensurable, implementación en 30 días.',
+    date: '2026-01-17',
+    category: 'Automatización',
+    readTime: '12 min',
+    author: 'Mateo Claramunt',
+    content: `
+# Automatización Estratégica: Transforma tu Operación en 30 Días
+
+La diferencia entre empresas que crecen exponencialmente y las que crecen lentamente no es suerte. Es automatización.
+
+Mientras tus competidores siguen haciendo tareas manuales, tú estás liberando capital humano para estrategia, innovación y crecimiento.
+
+## El ROI Real de la Automatización
+
+- Procesamiento de documentos: 400-600% ROI
+- Gestión de leads: 500-1000% ROI
+- Reportes automáticos: 300-400% ROI
+- Recordatorios: 200-300% ROI
+- Inventario: 200-350% ROI
+
+**Promedio:** 730% ROI en Mes 1. Payback en 4 días.
+
+---
+
+## Los 10 Procesos Más Rentables
+
+### 1. Procesamiento de Documentos & Datos
+**Tiempo:** 40-80 horas/mes ahorradas
+**ROI:** 400-600%
+**Impacto:** Errores reducidos 99%, datos en tiempo real
+
+### 2. Generación de Reportes
+**Tiempo:** 20 horas/mes ahorradas
+**ROI:** 300-400%
+**Impacto:** Reportes automáticos, decisiones más rápidas
+
+### 3. Calificación Automática de Leads
+**Tiempo:** 15 horas/mes ahorradas
+**ROI:** 500-1000%
+**Impacto:** Conversión: 2-3% → 8-12%
+
+### 4. Confirmaciones & Recordatorios
+**Tiempo:** 10-15 horas/mes ahorradas
+**ROI:** 200-300%
+**Impacto:** No-shows reducidos 30-40%
+
+### 5. Sincronización de Bases de Datos
+**Tiempo:** 8 horas/mes ahorradas
+**ROI:** 150-250%
+**Impacto:** Datos siempre consistentes
+
+### 6. Gestión de Inventario
+**Tiempo:** 10 horas/mes ahorradas
+**ROI:** 200-350%
+**Impacto:** 0 stockouts, 20% menos inventario muerto
+
+### 7. Transcripción de Reuniones
+**Tiempo:** 8 horas/mes ahorradas
+**ROI:** 150-300%
+**Impacto:** Transcripción en minutos, resúmenes automáticos
+
+### 8. Enrutamiento de Soporte
+**Tiempo:** 15 horas/mes ahorradas
+**ROI:** 250-400%
+**Impacto:** Respuestas en < 2 horas, satisfacción +25%
+
+### 9. Generación de Documentos
+**Tiempo:** 20 horas/mes ahorradas
+**ROI:** 180-350%
+**Impacto:** Presupuestos en 10 segundos, errores 0
+
+### 10. Marketing Automático
+**Tiempo:** 25 horas/mes ahorradas
+**ROI:** 300-600%
+**Impacto:** Conversión +40-80%, leads siempre en seguimiento
+
+---
+
+## El Plan: 30 Días
+
+**Semana 1:** Auditoría de procesos. Elige el top-3 por impacto.
+
+**Semana 2-3:** Implementa con Make, Zapier o similar.
+
+**Semana 4:** Monitorea resultados y escalea.
+
+---
+
+## Lo Más Importante
+
+Empieza pequeño. Un proceso. Un mes. Mide el impacto. Escala lo que funciona.
+
+La mayoría de empresas ven ROI positivo en menos de 2 semanas.
+
+---
+
+[Agendar Auditoría Gratuita](/contacto)
+    `,
+  },
+  'ia-negocio-guia-practica': {
+    title: 'Inteligencia Artificial para Empresas: Del Concepto al Resultado Real',
+    description: 'Guía práctica: cómo implementar IA en tu negocio. Casos de uso reales, ROI comprobado, herramientas, presupuestos.',
+    date: '2026-01-18',
+    category: 'IA',
+    readTime: '15 min',
+    author: 'Mateo Claramunt',
+    content: `
+# Inteligencia Artificial para Empresas: Implementación Práctica
+
+La IA no es el futuro. Es el presente. Empresas que implementan IA estratégicamente generan 40% más revenue con el mismo equipo.
+
+---
+
+## Los 5 Casos de Uso de Mayor Impacto
+
+### 1. Chatbots Inteligentes (ROI: 400-800%)
+
+**Problema:** Tu equipo de soporte está saturado. Clientes esperan respuestas 24/7.
+
+**Solución:** IA chatbot que resuelve 70-80% de preguntas automáticamente.
+
+**Caso Real:**
+- Empresa SaaS con 5,000 clientes
+- Antes: 3 agentes, tiempo respuesta 4h, resolución 45%, costo €12,000/mes
+- Después: 1 agente + chatbot, tiempo respuesta 2min, resolución 82%, costo €6,000/mes
+- ROI: 240% en mes 1
+
+### 2. Análisis Predictivo (ROI: 500-1500%)
+
+**Problema:** Pierdes clientes sin saber por qué. No sabes quién se va antes de que se vaya.
+
+**Solución:** IA predice qué clientes están en riesgo. Automáticamente activa intervención.
+
+**Caso Real:**
+- E-commerce 15,000 clientes
+- Churn antes: 8%/mes
+- Churn después: 3.5%/mes
+- Clientes salvados: 70%
+- Ingresos recuperados: €21,000/mes
+- ROI: 1400%
+
+### 3. Personalización Inteligente (ROI: 200-500%)
+
+**Problema:** Todos tus clientes ven el mismo contenido. Conversión es promedio.
+
+**Solución:** Cada cliente ve recomendaciones únicas.
+
+**Caso Real:**
+- B2B SaaS 500 clientes
+- AOV antes: €250, upsell 8%, churn 6%
+- AOV después: €340, upsell 22%, churn 3.5%
+- Impacto: €45,000/mes + €7,500/mes
+- ROI: 2650%
+
+### 4. Generación de Contenido (ROI: 100-300%)
+
+**Problema:** Crear contenido lleva tiempo. Escribir copy es caro.
+
+**Solución:** Generar automáticamente descripciones, emails, artículos.
+
+**Caso Real:**
+- E-commerce 2,000 SKUs
+- Descripciones: 100h/mes → 5h/mes
+- Conversión: 1.8% → 3.2%
+- Ahorro + ingresos adicionales: €12,750/mes
+- ROI: 4150%
+
+### 5. Business Intelligence (ROI: 150-400%)
+
+**Problema:** Datos dispersos. Análisis manual toma horas.
+
+**Solución:** IA centraliza datos, analiza automáticamente, genera insights.
+
+**Caso Real:**
+- Agencia 25 empleados, 30 clientes
+- Reportes manuales: 8h/semana → 0h
+- Insights automáticos en tiempo real
+- Nuevos servicios identificados: €5,000/mes
+- ROI: 520%
+
+---
+
+## ROI Proyectado: 90 Días
+
+| Caso | Mes 1 | Mes 2 | Mes 3 | Total |
+|------|-------|-------|-------|-------|
+| Chatbot | €2,000 | €4,500 | €6,000 | €1150% |
+| Predictivo | -€1,000 | €8,000 | €15,000 | €1100% |
+| Personalización | -€500 | €6,000 | €12,000 | €900% |
+| Contenido | €1,500 | €3,500 | €5,000 | €600% |
+| BI | €500 | €2,000 | €4,000 | €325% |
+
+**Total:** €2,500 inversión → €40,500 retorno = 1620% ROI
+
+---
+
+## Implementación: 60 Días
+
+**Semana 1-2:** Diagnóstico. Elige 1 use case.
+
+**Semana 3-4:** MVP rápido. Testing con 20% usuarios.
+
+**Semana 5-6:** Rollout 100%. Monitoreo y optimización.
+
+---
+
+## Herramientas por Presupuesto
+
+### Gratuito
+- ChatGPT, Google Bard
+
+### €100-500/mes
+- Make.com, Copy.ai
+
+### €500-2,000/mes
+- Custom chatbots, BI solutions
+
+### €2,000+/mes
+- Enterprise, modelos custom
+
+---
+
+[Agendar Consulta IA Gratuita](/contacto)
+    `,
+  },
+  'paginas-web-que-venden': {
+    title: 'Páginas Web Premium que Convierten: Los 7 Elementos Clave',
+    description: 'Descubre los 7 elementos que hacen que una web convierta 15-20% de visitantes. Diseño, copy, UX y psicología.',
+    date: '2026-01-19',
+    category: 'Web',
+    readTime: '10 min',
+    author: 'Mateo Claramunt',
+    content: `
+# Páginas Web Que Convierten: Los 7 Elementos Clave
+
+El promedio de conversión es 2-3%. Las buenas convierten 8-12%. Las excelentes, 20%+.
+
+La diferencia son 7 elementos específicos.
+
+---
+
+## 1. Propuesta de Valor Cristalina
+
+**Principio:** 3 segundos. Ese es tu tiempo.
+
+**Fórmula:** Beneficio específico + Para quién + Resultado cuantificable
+
+❌ "Soluciones de automatización e IA"
+✅ "Reduce costos 30-40% en 4 semanas"
+
+---
+
+## 2. Arquitectura Visual de Confianza
+
+**Elementos:**
+- ✅ Paleta coherente (máx 3 colores)
+- ✅ Tipografía clara
+- ✅ Espaciado generoso
+- ✅ Imágenes premium
+- ✅ Accesibilidad (contraste 4.5:1)
+
+❌ Muchos colores, animaciones, auto-play, pop-ups
+
+---
+
+## 3. Prueba Social & Credibilidad
+
+**Elementos:**
+- Testimonios con foto + nombre + empresa
+- Casos con números
+- Clientes atendidos
+- Awards y certificaciones
+
+**Ubicación:** Después del primer CTA, mitad de página, antes de CTA final
+
+---
+
+## 4. CTAs Irresistibles
+
+**Color:** Contrastante (rojo, azul, naranja)
+
+**Texto:** Orientado a beneficio
+- ✅ "Agendar Llamada Gratuita"
+- ✅ "Ver Casos de Éxito"
+- ❌ "Enviar", "Hacer clic"
+
+**Tamaño:** 44px mínimo (thumb-friendly)
+
+**Posición:** Hero, cada 300-400 palabras, final
+
+---
+
+## 5. Formularios Cortos
+
+**Máximo 3 campos:**
+1. Nombre
+2. Email
+3. Teléfono/Empresa
+
+**Resultado:**
+- 3 campos: 8-12% conversión
+- 5 campos: 3-4%
+- 10+ campos: <1%
+
+❌ Empresa, presupuesto, necesidades, comentarios
+
+---
+
+## 6. Velocidad
+
+**Métricas:**
+- LCP: <2.5s
+- FID: <100ms
+- CLS: <0.1
+
+**Impacto:**
+- 1seg demora = 7% conversión perdida
+- Optimización de 4.2s → 1.8s = +30% conversión
+
+---
+
+## 7. SEO Técnico
+
+**On-Page:**
+- H1 con keyword
+- Meta description con CTA
+- Alt text en imágenes
+- Internal links
+- Schema markup
+
+**Technical:**
+- XML sitemap
+- Robots.txt
+- Structured data
+- Mobile-first
+- HTTPS
+
+---
+
+## Checklist: ¿Tu Web Convierte?
+
+- [ ] Propuesta de valor clara
+- [ ] Diseño visual premium
+- [ ] Testimonios visibles
+- [ ] CTAs contrastantes
+- [ ] Formulario 3 campos max
+- [ ] Carga <2.5s
+- [ ] Optimizada SEO
+
+**Puntuación:**
+- 7/7 = Premium (15-20%)
+- 5-6/7 = Buena (8-10%)
+- 3-4/7 = Promedio (3-5%)
+- <3/7 = Débil (<2%)
+
+---
+
+## Caso Real
+
+**Antes:**
+- Propuesta vaga
+- Formulario 12 campos
+- 4.8 segundos
+- Conversión: 1.2%
+- 60 leads/mes
+
+**Cambios:**
+- H1 clara
+- Diseño premium
+- 4 casos de éxito
+- Formulario 3 campos
+- 1.8 segundos
+- SEO técnico completo
+
+**Resultado:**
+- Conversión: 9.2%
+- Leads: 570/mes
+- Revenue: +€45,000/mes
+
+---
+
+[Auditoría Web Gratuita](/contacto)
+
+*Típicamente encontramos 3-5 cambios que multiplican conversiones 3-5x.*
+    `,
+  }
+};
+  '10-procesos-automatizar': {
     title: '10 Procesos que Puedes Automatizar HOY en tu Negocio',
     description: 'Descubre los 10 procesos más comunes que pueden automatizarse para ahorrar tiempo, reducir errores y aumentar productividad.',
     date: '2026-01-17',
@@ -344,244 +733,6 @@ IA empresarial = Máquinas que aprenden a hacer tareas mejor que los humanos.
 - Desarrollo de modelos propios
 - Consultoría estratégica
 
----
-
-## ROI Típico de IA
-
-| Caso | Inversión | Retorno Mes 1 | Payback |
-|------|-----------|---------------|---------|
-| Chatbot | €300 | €1,500 | < 1 semana |
-| Análisis Predictivo | €2,000 | €10,000 | 1 semana |
-| Personalización | €1,500 | €5,000 | 2 semanas |
-| Procesamiento de imágenes | €1,000 | €4,000 | 10 días |
-
----
-
-## Preguntas Frecuentes
-
-**¿Es complicado implementar IA?**  
-No. Herramientas como Make o Zapier lo hacen visual y simple.
-
-**¿Necesito datos masivos?**  
-No. Puedes empezar con 100-1000 registros.
-
-**¿Cuánto tarda?**  
-2-4 semanas típicamente.
-
-**¿Es seguro?**  
-Sí. Datos encriptados, GDPR compliant.
-
----
-
-## Siguiente Paso
-
-¿Listo para implementar IA en tu negocio?
-
-**[Solicitar Consulta Gratuita](/contacto)**
-
-*Típicamente el ROI es positivo en la primera semana.*
-    `,
-  },
-  'paginas-web-que-venden': {
-    title: 'Páginas Web que Venden: Elementos Clave para Conversión',
-    description: 'Qué elementos hacen que una página web convierta visitantes en clientes. Diseño, UX, copy y psicología de conversión.',
-    date: '2026-01-19',
-    category: 'Web',
-    readTime: '10 min',
-    author: 'Mateo Claramunt',
-    content: `
-# Páginas Web que Venden: Elementos Clave para Conversión
-
-Una página web promedio convierte el 1-2% de visitantes. Las buenas convierten el 5-10%. Las excelentes, el 15%+.
-
-¿La diferencia? 7 elementos específicos que te enseñaremos aquí.
-
-## 1. Propuesta de Valor Clara (En los primeros 3 segundos)
-
-
-**El Problema:** El visitante NO entiende qué haces en 3 segundos → Se va.
-
-**La Solución:**
-\`\`\`
-"Automatización e IA para Empresas" es vago.
-
-"Reduce costos operacionales 30-40% en 4 semanas" es claro.
-\`\`\`
-
-**Elemento:** H1 + Subtítulo en la sección Hero
-
-**Fórmula:**
-- Qué haces
-- Para quién
-- Resultado cuantificable
-
-## 2. CTA (Call To Action) Estratégica
-
-**El Problema:** 90% de las webs tienen CTAs débiles o confusas.
-
-**Ejemplos MALOS:**
-- "Enviar" (genérico)
-- "Hacer clic aquí" (invisible)
-- "Más información" (vago)
-
-**Ejemplos BUENOS:**
-- "Agendar Llamada Gratuita" (específico)
-- "Ver Caso de Éxito" (beneficio claro)
-- "Solicitar Presupuesto" (acción clara)
-
-**Elementos:**
-- Color contrastante (rojo, azul, verde)
-- Texto orientado a beneficio (no a acción)
-- Ubicación: Arriba, mitad, abajo
-- Botón, no link
-- Padding generoso (fácil de clickear)
-
-## 3. Prueba Social (Testimonios, Casos de Éxito, Números)
-
-**El Problema:** El visitante no confía. "¿Y si es estafa?"
-
-**La Solución:**
-- Testimonios de clientes reales
-- Fotos + nombre + empresa
-- Número de clientes atendidos
-- Awards/certificaciones
-- Casos de éxito cuantitativos
-
-**Ejemplos:**
-- "42 empresas convierten con nosotros" ✅
-- "Satisfacción del cliente: 4.9/5" ✅
-- "Ahorro promedio: €2,500/mes" ✅
-
-**Ubicación:** Después del primer CTA o en sidebar
-
-## 4. Formularios Cortos (Max 3 campos)
-
-**El Problema:** Formularios de 10 campos tienen 90% de abandono.
-
-**Formulario Óptimo:**
-- Nombre
-- Email
-- Teléfono
-
-Eso. Nada más.
-
-**NO incluyas:**
-- Empresa (puedes preguntar después)
-- Presupuesto (conversación)
-- Múltiples opciones
-
-**Resultado:**
-- Tasa de conversión: 8-12%
-- vs formularios largos: 1-2%
-
-## 5. Diseño Visual Limpio (No Abrumar)
-
-**El Problema:** Demasiada información = Parálisis = No conversión.
-
-**Elementos de un buen diseño:**
-- ✅ Máximo 3 colores principales
-- ✅ Tipografía clara (2 fonts max)
-- ✅ Mucho espacio en blanco
-- ✅ Una columna = fácil de leer
-- ✅ Sin animaciones distrayentes
-- ✅ Imágenes de calidad (no stock photos genéricos)
-
-**NO:**
-- ❌ 50 colores diferentes
-- ❌ Texto pequeño
-- ❌ Fondos con patrón (ilegible)
-- ❌ Autoplay videos/audio
-- ❌ Pop-ups invasivos
-
-## 6. Velocidad (Menos de 2 segundos)
-
-**El Problema:** Cada segundo que tarda, pierdes 7% de conversión.
-
-**Indicadores:**
-- LCP (Largest Contentful Paint): < 2.5s ✅
-- FID (First Input Delay): < 100ms ✅
-- CLS (Cumulative Layout Shift): < 0.1 ✅
-
-**Cómo mejorar:**
-- Optimizar imágenes (WebP, AVIF)
-- Lazy loading
-- Minificar CSS/JS
-- Usar CDN
-
-**Herramientas de test:**
-- PageSpeed Insights (Google)
-- GTmetrix
-- Lighthouse
-
-## 7. SEO On-Page (Ser Encontrado)
-
-**El Problema:** Convertir bien no sirve si nadie te encuentra.
-
-**Elementos:**
-- H1 con keyword principal
-- Meta description con CTA
-- Internal links relevantes
-- Alt text en imágenes
-- Schema markup
-
-**Resultado:**
-- Posicionamiento en Google
-- Tráfico orgánico consistente
-- Conversiones automáticas
-
----
-
-## Checklist: ¿Tu Web Convierte?
-
-- [ ] ¿Propuesta de valor clara en 3 segundos?
-- [ ] ¿CTA estratégica visible?
-- [ ] ¿Testimonios/prueba social?
-- [ ] ¿Formulario de max 3 campos?
-- [ ] ¿Diseño limpio?
-- [ ] ¿Carga en < 2 segundos?
-- [ ] ¿Optimizada para SEO?
-
-**Puntuación:**
-- 7/7 = Web excelente (15%+ conversión)
-- 5-6/7 = Web buena (5-10% conversión)
-- 3-4/7 = Web promedio (2-5% conversión)
-- < 3/7 = Web débil (< 2% conversión)
-
----
-
-## Caso de Éxito Real
-
-**Antes:**
-- Web genérica
-- Formulario de 8 campos
-- Conversión: 1.2%
-
-**Mejoras implementadas:**
-- H1 clara: "Páginas Web que Venden"
-- Formulario reducido a 3 campos
-- Testimonios destacados
-- CTA optimizada
-- Velocidad mejorada (2.1s → 1.8s)
-- SEO on-page
-
-**Resultado:**
-- Conversión: 9.5%
-- Mismo tráfico → 8x más leads
-- Revenue: +€15,000/mes
-
----
-
-## Siguiente Paso
-
-¿Tu web está convirtiendo?
-
-**[Auditoría Web Gratuita](/contacto)**
-
-*Típicamente encontramos 3-5 cambios que multiplican conversiones por 3-5x.*
-    `,
-  },
-};
-
 export default function BlogPostPage() {
   const params = useParams();
   const slug = params?.slug as string;
@@ -618,34 +769,35 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-black pt-32 pb-20">
-      <article className="container mx-auto px-4 max-w-3xl">
+      <article className="container mx-auto px-4 max-w-4xl">
         {/* Navegación */}
-        <Link href="/blog" className="text-blue-500 hover:text-blue-400 mb-8 inline-block">
+        <Link href="/blog" className="text-blue-400 hover:text-blue-300 mb-8 inline-block text-sm font-medium">
           ← Volver al blog
         </Link>
 
         {/* Header */}
         <div className="mb-12">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="bg-blue-900 text-blue-200 px-3 py-1 rounded text-sm font-medium">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="bg-blue-900 text-blue-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide">
               {post.category}
             </span>
+            <span className="text-gray-500 text-sm">•</span>
             <span className="text-gray-500 text-sm">{post.readTime}</span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
             {post.title}
           </h1>
 
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-gray-300 mb-8 leading-relaxed">
             {post.description}
           </p>
 
           {/* Autor y fecha */}
           <div className="flex items-center gap-4 text-gray-400 pb-8 border-b border-gray-800">
             <div>
-              <div className="font-medium text-white">{post.author}</div>
-              <div className="text-sm">
+              <div className="font-semibold text-white text-sm">{post.author}</div>
+              <div className="text-xs text-gray-500">
                 {new Date(post.date).toLocaleDateString('es-ES', {
                   year: 'numeric',
                   month: 'long',
@@ -657,33 +809,31 @@ export default function BlogPostPage() {
         </div>
 
         {/* Contenido */}
-        <div className="prose prose-invert max-w-none mb-12">
+        <div className="mb-16">
           <div
-            className="text-gray-300 leading-relaxed space-y-6"
+            className="text-gray-300 leading-relaxed space-y-6 text-lg"
             dangerouslySetInnerHTML={{
               __html: post.content
                 .split('\n')
                 .map((line) => {
                   if (line.startsWith('# ')) {
-                    return `<h1 class="text-4xl font-bold text-white mt-8 mb-4">${line.replace('# ', '')}</h1>`;
+                    return `<h1 class="text-4xl font-bold text-white mt-10 mb-6">${line.replace('# ', '')}</h1>`;
                   } else if (line.startsWith('## ')) {
-                    return `<h2 class="text-3xl font-bold text-white mt-6 mb-3">${line.replace('## ', '')}</h2>`;
+                    return `<h2 class="text-3xl font-bold text-white mt-8 mb-4">${line.replace('## ', '')}</h2>`;
                   } else if (line.startsWith('### ')) {
-                    return `<h3 class="text-2xl font-bold text-white mt-5 mb-2">${line.replace('### ', '')}</h3>`;
-                  } else if (line.startsWith('**')) {
-                    return `<p class="font-bold text-white">${line}</p>`;
+                    return `<h3 class="text-2xl font-bold text-blue-400 mt-6 mb-3">${line.replace('### ', '')}</h3>`;
+                  } else if (line.startsWith('**') && line.endsWith('**')) {
+                    return `<p class="font-bold text-white text-lg">${line.replace(/\*\*/g, '')}</p>`;
                   } else if (line.startsWith('- ')) {
-                    return `<li class="ml-4">${line.replace('- ', '')}</li>`;
-                  } else if (line.startsWith('| ')) {
-                    return `<div class="overflow-x-auto"><table class="w-full border border-gray-700 mt-4 mb-4"><tr>${line
-                      .split('|')
-                      .slice(1, -1)
-                      .map((cell) => `<td class="border border-gray-700 p-2">${cell.trim()}</td>`)
-                      .join('')}</tr></table></div>`;
-                  } else if (line === '') {
-                    return '<div class="h-2"></div>';
+                    return `<li class="ml-6 text-gray-300">${line.replace('- ', '')}</li>`;
+                  } else if (line.startsWith('- [ ]')) {
+                    return `<li class="ml-6 text-gray-300 list-none before:content-['☐'] before:mr-2">${line.replace('- [ ] ', '')}</li>`;
+                  } else if (line === '' || line.trim() === '') {
+                    return '<div class="h-3"></div>';
+                  } else if (line.includes('€') || line.includes('|')) {
+                    return `<p class="font-mono text-sm text-gray-400">${line}</p>`;
                   } else {
-                    return `<p>${line}</p>`;
+                    return `<p class="text-gray-300">${line}</p>`;
                   }
                 })
                 .join(''),
@@ -692,22 +842,22 @@ export default function BlogPostPage() {
         </div>
 
         {/* CTA Final */}
-        <div className="bg-gradient-to-r from-blue-900 to-purple-900 rounded-lg p-8 border border-blue-700">
-          <h3 className="text-2xl font-bold text-white mb-3">¿Listo para implementar?</h3>
-          <p className="text-gray-300 mb-6">
-            Nuestro equipo puede ayudarte a automatizar procesos, implementar IA o crear una web que convierte.
+        <div className="bg-gradient-to-r from-blue-900 to-purple-900 rounded-xl p-10 border border-blue-700/50 mb-16">
+          <h3 className="text-2xl font-bold text-white mb-4">¿Listo para transformar tu negocio?</h3>
+          <p className="text-gray-300 mb-8 leading-relaxed">
+            Nuestro equipo especializado en automatización, IA y optimización web está listo para ayudarte a implementar estas estrategias.
           </p>
           <Link
             href="/contacto"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition transform hover:scale-105"
           >
-            Solicitar Consulta Gratuita
+            Agendar Consulta Gratuita
           </Link>
         </div>
 
         {/* Posts Relacionados */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold text-white mb-6">Más artículos</h3>
+        <div>
+          <h3 className="text-2xl font-bold text-white mb-8">Artículos relacionados</h3>
           <div className="grid md:grid-cols-2 gap-6">
             {['ia-negocio-guia-practica', 'paginas-web-que-venden', '10-procesos-automatizar']
               .filter((s) => s !== slug)
@@ -715,9 +865,9 @@ export default function BlogPostPage() {
                 <Link
                   key={relatedSlug}
                   href={`/blog/${relatedSlug}`}
-                  className="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition border border-gray-800 hover:border-blue-500"
+                  className="bg-gray-900 rounded-lg p-6 hover:bg-gray-800 transition border border-gray-800 hover:border-blue-500 group"
                 >
-                  <h4 className="text-lg font-bold text-white mb-2">
+                  <h4 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition">
                     {blogPostsData[relatedSlug]?.title || 'Post'}
                   </h4>
                   <p className="text-gray-400 text-sm line-clamp-2">

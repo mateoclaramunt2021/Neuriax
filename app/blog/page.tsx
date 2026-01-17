@@ -16,8 +16,8 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: '1',
-    title: '10 Procesos que Puedes Automatizar HOY en tu Negocio',
-    description: 'Descubre los procesos más comunes que pueden automatizarse para ahorrar tiempo y costos en tu empresa. Guía práctica con ejemplos reales.',
+    title: 'Automatización Estratégica: 10 Procesos de Alto Impacto',
+    description: 'Descubre cómo automatizar procesos críticos de tu negocio. Estrategias probadas, ROI mensurable (730% promedio), implementación en 30 días.',
     date: '2026-01-17',
     category: 'Automatización',
     readTime: '12 min',
@@ -26,8 +26,8 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: '2',
-    title: 'IA para tu Negocio: Guía Práctica y Casos de Uso',
-    description: 'Cómo implementar inteligencia artificial en tu empresa. Casos de éxito, herramientas recomendadas y presupuestos.',
+    title: 'Inteligencia Artificial para Empresas: Implementación Práctica',
+    description: 'Guía completa de IA empresarial. Casos de uso reales, ROI comprobado (1600%+ en 90 días), herramientas por presupuesto.',
     date: '2026-01-18',
     category: 'IA',
     readTime: '15 min',
@@ -36,8 +36,8 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: '3',
-    title: 'Páginas Web que Venden: Elementos Clave',
-    description: 'Qué hace que una página web convierta visitantes en clientes. Diseño, UX, SEO y psicología de conversión.',
+    title: 'Páginas Web Premium que Convierten: Los 7 Elementos Clave',
+    description: 'Descubre qué hace que una web convierta 15-20% de visitantes. Diseño, copywriting, UX y psicología de conversión comprobada.',
     date: '2026-01-19',
     category: 'Web',
     readTime: '10 min',
