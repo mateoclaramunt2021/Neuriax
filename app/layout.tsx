@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "transformación digital"
   ],
   icons: {
-    icon: '/favicon.png?v=4',
+    icon: '/favicon.png?v=5',
   },
   robots: {
     index: true,
