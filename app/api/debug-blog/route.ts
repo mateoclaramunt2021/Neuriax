@@ -9,17 +9,20 @@ export async function GET() {
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     
-    const { data, error, count } = await supabase
+    // Query simple sin filtros para ver todos los posts y sus columnas
+    const { data, error } = await supabase
       .from('blog_posts')
-      .select('id, title, slug, category', { count: 'exact' })
-      .eq('published', true)
-      .order('created_at', { ascending: false })
-      .limit(10);
+      .select('*')
+      .limit(3);
+    
+    // Obtener las columnas disponibles
+    const columns = data && data.length > 0 ? Object.keys(data[0]) : [];
     
     return NextResponse.json({
       success: !error,
-      postsCount: count || data?.length || 0,
-      posts: data,
+      postsCount: data?.length || 0,
+      columns: columns,
+      samplePost: data?.[0] || null,
       error: error?.message || null,
       timestamp: new Date().toISOString()
     });

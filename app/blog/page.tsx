@@ -54,12 +54,14 @@ async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
     
+    // Query sin filtro de published para obtener todos los posts
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*')
-      .eq('published', true)
       .order('created_at', { ascending: false })
       .limit(50);
+    
+    console.log('Supabase query result:', { data: data?.length, error: error?.message });
     
     if (error) {
       console.error('Supabase error:', error.message);
@@ -70,6 +72,8 @@ async function getBlogPosts(): Promise<BlogPost[]> {
       console.warn('No posts found in Supabase');
       return staticPosts;
     }
+    
+    console.log('Posts recibidos:', data.length, data.slice(0, 3));
     
     // Transformar datos de Supabase al formato esperado
     const posts: BlogPost[] = data.map((post: any) => ({

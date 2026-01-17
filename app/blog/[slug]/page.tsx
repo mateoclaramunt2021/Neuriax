@@ -81,7 +81,15 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
   
-  const formattedDate = new Date(post.date).toLocaleDateString('es-ES', {
+  // Normalizar campos que pueden tener diferentes nombres
+  const postData = {
+    ...post,
+    date: post.created_at,
+    readTime: post.read_time || '5 min',
+    image: post.image_url,
+  };
+  
+  const formattedDate = new Date(postData.date).toLocaleDateString('es-ES', {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -105,7 +113,7 @@ export default async function BlogPostPage({ params }: PageProps) {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-gray-300 truncate max-w-[200px]">{post.title}</li>
+            <li className="text-gray-300 truncate max-w-[200px]">{postData.title}</li>
           </ol>
         </nav>
 
@@ -113,32 +121,32 @@ export default async function BlogPostPage({ params }: PageProps) {
         <header className="mb-10">
           <div className="flex items-center gap-4 mb-4">
             <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-              {post.category}
+              {postData.category}
             </span>
-            <span className="text-gray-400 text-sm">{post.readTime} de lectura</span>
+            <span className="text-gray-400 text-sm">{postData.readTime} de lectura</span>
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-            {post.title}
+            {postData.title}
           </h1>
           
           <div className="flex items-center gap-4 text-gray-400">
-            <time dateTime={post.date}>{formattedDate}</time>
-            {post.source_name && (
+            <time dateTime={postData.date}>{formattedDate}</time>
+            {postData.source_name && (
               <>
                 <span>•</span>
-                <span>Fuente: {post.source_name}</span>
+                <span>Fuente: {postData.source_name}</span>
               </>
             )}
           </div>
         </header>
 
         {/* Imagen destacada */}
-        {post.image && (
+        {postData.image && (
           <div className="mb-10 rounded-xl overflow-hidden">
             <img 
-              src={post.image} 
-              alt={post.title}
+              src={postData.image} 
+              alt={postData.title}
               className="w-full h-auto object-cover"
             />
           </div>
@@ -154,7 +162,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           ) : (
             <div className="space-y-6">
               <p className="text-xl text-gray-300 leading-relaxed">
-                {post.description}
+                {postData.description}
               </p>
               
               <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-500/30 rounded-xl p-6 mt-8">
