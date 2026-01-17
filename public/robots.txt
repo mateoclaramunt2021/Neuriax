@@ -1,0 +1,26 @@
+# Robots.txt optimizado para máximo crawleo de Google
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /login/
+Disallow: /signup/
+Allow: /public/
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
+
+# Sitemap
+Sitemap: https://www.neuriax.com/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 0
+
+# Request rate
+Request-rate: 1 request per 1 second

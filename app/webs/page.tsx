@@ -3,11 +3,12 @@ import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Páginas Web Profesionales - Neuriax | Diseño + SEO Local",
-  description: "Páginas web diseñadas para convertir visitas en clientes. Incluye SEO local, reservas online y WhatsApp. Desde 790€. Entrega en 15 días.",
+  title: "Páginas Web Profesionales con SEO Local | Neuriax | Diseño + Automatización",
+  description: "Páginas web profesionales diseñadas para convertir. Incluye SEO local, reservas automáticas, WhatsApp integrado. Perfectas para negocios locales. Desde 790€.",
+  keywords: "páginas web profesionales, diseño web, páginas web con SEO, reservas online, páginas web negocios, web profesional, agencia web",
   openGraph: {
     title: "Páginas Web Profesionales que Convierten - Neuriax",
-    description: "Diseño responsivo + SEO local + Reservas online. Ideal para negocios locales que venden.",
+    description: "Diseño responsivo + SEO local + Reservas automáticas. Páginas web que generan clientes para tu negocio.",
     url: "https://www.neuriax.com/webs",
   },
   alternates: {

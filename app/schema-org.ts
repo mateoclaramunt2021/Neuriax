@@ -1,0 +1,72 @@
+// app/schema-org.ts - Schema Organization completo
+export const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  '@id': 'https://www.neuriax.com',
+  'name': 'Neuriax',
+  'url': 'https://www.neuriax.com',
+  'image': 'https://www.neuriax.com/logo.png',
+  'description': 'Agencia digital especializada en automatización e IA. Soluciones inteligentes para transformación digital empresarial.',
+  'telephone': '+34640791041',
+  'email': 'mateoclaramunt2021@gmail.com',
+  'areaServed': 'ES',
+  'serviceType': [
+    'Automatización de Procesos',
+    'Inteligencia Artificial',
+    'Desarrollo Web Profesional',
+    'SEO Local',
+    'Transformación Digital',
+    'Consultoría Digital',
+  ],
+  'knowsAbout': [
+    'Automatización',
+    'Inteligencia Artificial',
+    'IA Aplicada',
+    'Páginas Web',
+    'Diseño Web',
+    'SEO',
+    'Marketing Digital',
+    'Transformación Digital',
+    'Soluciones Digitales',
+  ],
+  'sameAs': [
+    'https://www.instagram.com/neuriax.ia_',
+    'https://www.linkedin.com/company/neuriax',
+  ],
+  'contactPoint': {
+    '@type': 'ContactPoint',
+    'contactType': 'Customer Service',
+    'telephone': '+34-640-791-041',
+    'email': 'mateoclaramunt2021@gmail.com',
+    'availableLanguage': ['es', 'en'],
+  },
+  'priceRange': '€€',
+  'aggregateRating': {
+    '@type': 'AggregateRating',
+    'ratingValue': '4.9',
+    'ratingCount': '42',
+    'bestRating': '5',
+    'worstRating': '1',
+  },
+};
+
+export const servicesSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  'name': 'Automatización e IA + Páginas Web Profesionales',
+  'description': 'Soluciones digitales completas: automatización inteligente con IA, páginas web optimizadas en SEO, transformación empresarial.',
+  'provider': {
+    '@type': 'LocalBusiness',
+    'name': 'Neuriax',
+    'url': 'https://www.neuriax.com',
+  },
+  'areaServed': 'ES',
+  'availableLanguage': ['es', 'en'],
+  'serviceType': ['Automatización', 'IA', 'Diseño Web', 'SEO Local'],
+  'offers': {
+    '@type': 'AggregateOffer',
+    'priceCurrency': 'EUR',
+    'priceRange': '790-5000',
+    'availability': 'InStock',
+  },
+};

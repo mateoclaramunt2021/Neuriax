@@ -1,5 +1,20 @@
 import SolutionCard from "../../components/SolutionCard";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Soluciones de Automatización e IA | Neuriax | Transformación Digital",
+  description: "Soluciones inteligentes de automatización e IA para empresas. Eliminamos procesos manuales, optimizamos operaciones y escalamos resultados. Consulta gratuita.",
+  keywords: "automatización de procesos, inteligencia artificial, soluciones digitales, automatización IA, sistemas inteligentes, transformación digital",
+  openGraph: {
+    title: "Soluciones de Automatización e IA | Neuriax",
+    description: "Automatización inteligente + IA aplicada = Operaciones escalables sin fricción",
+    url: "https://www.neuriax.com/soluciones",
+  },
+  alternates: {
+    canonical: 'https://www.neuriax.com/soluciones',
+  },
+};
 
 export default function Soluciones() {
   return (
@@ -17,17 +32,20 @@ export default function Soluciones() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Soluciones Digitales a Medida
+                Soluciones de Automatización e IA Profesionales
               </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Sistemas inteligentes que transforman cómo operas tu negocio, eliminando fricción y maximizando resultados.
+              <h2 className="text-xl md:text-2xl mb-4 font-semibold text-blue-400">
+                Transforma tu negocio con inteligencia artificial
+              </h2>
+              <p className="text-lg mb-8 opacity-90">
+                Sistemas inteligentes de automatización que eliminan procesos manuales, reducen costos operacionales y escalan tu negocio. Soluciones digitales de IA aplicada.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
                   href="https://calendly.com/neuriax/30min"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
-                  Agendar consulta gratuita
+                  Consulta Gratuita - Automatización e IA
                 </a>
                 <a
                   href="#soluciones"

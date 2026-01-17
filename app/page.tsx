@@ -2,11 +2,52 @@ import CTAButton from "../components/CTAButton";
 import VideoSection from "../components/VideoSection";
 import ProblemCard from "../components/ProblemCard";
 import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Automatización e IA + Páginas Web Profesionales | Neuriax | Transformación Digital",
+  description: "Soluciones digitales completas: automatización inteligente con IA, páginas web optimizadas en SEO, transformación empresarial. Agencia digital especializada en automatización e IA. Resultados medibles.",
+  keywords: "automatización procesos, inteligencia artificial, IA aplicada, páginas web profesionales, agencia digital, automatización IA, soluciones digitales, transformación digital, SEO local, desarrollo web",
+};
 
 export default function Home() {
+  const faqs = [
+    {
+      question: "¿Cómo la automatización e IA puede transformar mi negocio?",
+      answer: "La automatización elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automáticas, resultando en mayor eficiencia, reducción de costos y escalabilidad infinita de tu operación."
+    },
+    {
+      question: "¿Qué es mejor: páginas web profesionales o automatización?",
+      answer: "Ambas son complementarias. Las páginas web atraen clientes y la automatización te permite gestionar más clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
+    },
+    {
+      question: "¿Cuánto cuesta la automatización e IA?",
+      answer: "Depende de complejidad, pero ROI promedio es 300-500% en 6 meses. Disponemos de paquetes desde PYMEs hasta empresas grandes."
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
+      {/* Schema para FAQ */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer
+              }
+            }))
+          })
+        }}
+      />
+      
+      {/* Hero Section - Ultra optimizado para SEO */}
       <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
@@ -19,14 +60,26 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Tu empresa pierde tiempo y oportunidades en procesos manuales. Nosotros lo solucionamos.
+                Automatización e IA: Transforma tu Negocio Digitalmente
               </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Diseñamos sistemas digitales y automatizaciones que eliminan fricción, reducen costes y escalan operaciones.
+              <p className="text-xl md:text-2xl mb-4 opacity-90 font-semibold">
+                Soluciones digitales inteligentes para empresas modernas
               </p>
+              <p className="text-lg mb-8 opacity-80">
+                Automatización de procesos con IA, páginas web optimizadas en SEO profesional y transformación empresarial comprobada. Agencia digital especializada en potenciar tu negocio.
+              </p>
+              <div className="mb-4">
+                <p className="text-sm text-blue-400 font-bold mb-3">Servicios principales de IA y automatización:</p>
+                <ul className="list-disc list-inside space-y-1 text-gray-300">
+                  <li>Automatización inteligente de procesos</li>
+                  <li>Páginas web profesionales con SEO</li>
+                  <li>Inteligencia artificial aplicada</li>
+                  <li>Transformación digital completa</li>
+                </ul>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <CTAButton href="https://calendly.com/neuriax/30min" size="lg">
-                  Agendar llamada gratuita
+                  Consulta Gratuita - Automatización e IA
                 </CTAButton>
                 <CTAButton href="#problemas" variant="secondary" size="lg">
                   Ver soluciones

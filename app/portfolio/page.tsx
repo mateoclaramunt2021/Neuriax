@@ -3,11 +3,12 @@ import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Portfolio de Webs - Neuriax | Diseños Profesionales",
-  description: "Ejemplos de páginas web profesionales diseñadas por Neuriax. Webs que venden para peluquerías, restaurantes, clínicas y servicios locales.",
+  title: "Portfolio de Webs Profesionales | Neuriax | Diseño + Automatización + SEO",
+  description: "Ejemplos reales de páginas web profesionales. Webs que venden para peluquerías, restaurantes, clínicas, consultoría. Diseño responsivo + SEO local + Automatización.",
+  keywords: "portfolio webs, diseño web ejemplos, páginas web profesionales, webs que venden, casos de éxito web, diseño responsivo",
   openGraph: {
-    title: "Portfolio de Webs - Neuriax",
-    description: "Ejemplos reales de webs optimizadas para conversión. Diseño, SEO local y resultados medibles.",
+    title: "Portfolio de Webs Profesionales - Neuriax",
+    description: "Ejemplos reales de webs optimizadas para conversión. Diseño, SEO local y automatización inteligente.",
     url: "https://www.neuriax.com/portfolio",
   },
   alternates: {

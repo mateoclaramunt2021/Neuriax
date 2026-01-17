@@ -7,6 +7,7 @@ import Chatbot from "../components/Chatbot";
 import ScheduleCallButton from "../components/ScheduleCallButton";
 import { PageTracker } from "../components/PageTracker";
 import VisitorForm from "../components/VisitorForm";
+import CookieBanner from "../components/CookieBanner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,33 +20,66 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Neuriax - Automatización, IA y Páginas Web Profesionales",
-  description: "Soluciones digitales completas: automatización e IA para escalar operaciones + páginas web que convierten. Diseño profesional, SEO local y resultados medibles.",
+  title: "Neuriax | Automatización e IA + Páginas Web Profesionales | SEO Local",
+  description: "Soluciones digitales premium: automatización inteligente con IA, páginas web de alto rendimiento y SEO local. Escala tu negocio con sistemas que generan resultados comprobables.",
   metadataBase: new URL('https://www.neuriax.com'),
+  keywords: [
+    "automatización de procesos",
+    "inteligencia artificial negocios",
+    "páginas web profesionales",
+    "agencia digital",
+    "soluciones digitales",
+    "SEO local España",
+    "automatización IA",
+    "web desarrollo",
+    "transformación digital"
+  ],
   icons: {
     icon: '/favicon.png?v=3',
   },
-  openGraph: {
-    title: "Neuriax - Automatización e IA para tu negocio",
-    description: "Soluciones digitales que eliminan fricción y escalan operaciones. Automatización, IA aplicada y páginas web profesionales.",
-    url: "https://www.neuriax.com",
-    siteName: "Neuriax",
-    locale: "es_ES",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Neuriax - Soluciones Digitales y IA",
-    description: "Automatización, IA aplicada a negocio y páginas web que venden.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   alternates: {
     canonical: 'https://www.neuriax.com',
+  },
+  openGraph: {
+    title: "Neuriax - Automatización e IA + Páginas Web | Transforma Tu Negocio",
+    description: "Soluciones digitales completas: automatización inteligente, IA aplicada a negocios y páginas web optimizadas. Resultados medibles y ROI garantizado.",
+    url: 'https://www.neuriax.com',
+    siteName: 'Neuriax',
+    images: [
+      {
+        url: 'https://www.neuriax.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Neuriax - Automatización e IA',
+        type: 'image/jpeg',
+      },
+    ],
+    type: 'website',
+    locale: 'es_ES',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Neuriax | Automatización e IA + Páginas Web',
+    description: 'Transforma tu negocio con soluciones digitales inteligentes',
+    creator: '@neuriax.ia_',
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  themeColor: '#000000',
 };
 
 export default function RootLayout({
@@ -77,10 +111,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Cookie Banner - Must be before other components to establish consent state */}
+        <CookieBanner />
         {/* PageTracker gracefully handles Supabase failures */}
         <PageTracker />
         <Navbar />
-        <main className="pt-16 min-h-screen">
+        <main className="pt-20 md:pt-24 min-h-screen">
           {children}
         </main>
         <Footer />
