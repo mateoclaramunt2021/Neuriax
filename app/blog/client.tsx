@@ -19,6 +19,9 @@ interface BlogPost {
 export default function BlogPageClient({ posts }: { posts: BlogPost[] }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
+  // Debug: mostrar posts en consola
+  console.log('Posts recibidos:', posts.length, posts);
+
   // Extraer categorías únicas de los posts
   const uniqueCategories = Array.from(new Set(posts.map(p => p.category)));
 
