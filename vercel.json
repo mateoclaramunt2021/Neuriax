@@ -4,5 +4,8 @@
   "regions": ["mad1"],
   "env": {
     "NODE_ENV": "production"
+  },
+  "git": {
+    "silent": false
   }
 }
