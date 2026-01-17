@@ -60,8 +60,8 @@ export default function LegalLayout({ children, title, lastUpdated, toc }: Legal
           <p className="text-xs text-gray-500">
             Este documento se proporciona únicamente a efectos informativos. No constituye asesoramiento legal. 
             Si tienes dudas sobre nuestras políticas, contáctanos en{' '}
-            <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:text-blue-800">
-              mateoclaramunt2021@gmail.com
+            <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:text-blue-800">
+              neuriaxx@gmail.com
             </a>.
           </p>
         </div>

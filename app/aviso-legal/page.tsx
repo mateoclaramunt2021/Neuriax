@@ -51,8 +51,8 @@ export default function AvisoLegal() {
           </p>
           <p>
             <strong>Correo electrónico:</strong>{' '}
-            <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">
-              mateoclaramunt2021@gmail.com
+            <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">
+              neuriaxx@gmail.com
             </a>
           </p>
           <p>
@@ -207,8 +207,8 @@ export default function AvisoLegal() {
           Neuriax se reserva el derecho de modificarlo en cualquier momento sin aviso previo.
         </p>
         <p className="text-sm text-gray-700 mt-3">
-          Para consultas o aclaraciones: <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">
-            mateoclaramunt2021@gmail.com
+          Para consultas o aclaraciones: <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">
+            neuriaxx@gmail.com
           </a>
         </p>
       </section>

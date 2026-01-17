@@ -52,7 +52,7 @@ export default function Contacto() {
                   Agendar consulta gratuita
                 </a>
                 <a
-                  href="mailto:mateoclaramunt2021@gmail.com"
+                  href="mailto:neuriaxx@gmail.com"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
                 >
                   Enviar email
@@ -95,7 +95,7 @@ export default function Contacto() {
                   <svg className="w-6 h-6 text-cyan-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-slate-300">mateoclaramunt2021@gmail.com</span>
+                  <span className="text-slate-300">neuriaxx@gmail.com</span>
                 </div>
                 <div className="flex items-center">
                   <svg className="w-6 h-6 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -191,7 +191,7 @@ export default function Contacto() {
               Agendar ahora
             </a>
             <a
-              href="mailto:mateoclaramunt2021@gmail.com"
+              href="mailto:neuriaxx@gmail.com"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
             >
               Enviar email

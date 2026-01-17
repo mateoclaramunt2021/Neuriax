@@ -24,7 +24,7 @@
   - Últimos 20 visitantes identificados
 
 ### 4. **Emails Diarios Automáticos**
-- Resumen diario enviado a: `mateoclaramunt2021@gmail.com`
+- Resumen diario enviado a: `neuriaxx@gmail.com`
 - Contiene:
   - Total de nuevos visitantes
   - Total de eventos
@@ -113,7 +113,7 @@ Ya configuradas en `.env.local`:
 ```
 NEXT_PUBLIC_SUPABASE_URL=https://wfnaknuhwzmkriaetvtn.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_qKnEdSIWOhTWkhGHGwJMCA_dgX6lpWa
-EMAIL_USER=mateoclaramunt2021@gmail.com
+EMAIL_USER=neuriaxx@gmail.com
 EMAIL_PASSWORD=Angiacmac23
 ```
 

@@ -288,7 +288,7 @@ Si sigues estos documentos al 100%:
 ## 📞 INFORMACIÓN
 
 **Sitio Web:** https://neuriax.com  
-**Email:** mateoclaramunt2021@gmail.com  
+**Email:** neuriaxx@gmail.com  
 **Instagram:** @neuriax.ia_  
 **Responsable:** Mateo Claramunt
 

@@ -251,7 +251,7 @@ Suscriptores newsletter: hasta solicitar baja
 ## 📞 CONTACTO Y RESPONSABILIDAD
 
 **Titular (responsable del tratamiento):**
-- Email: mateoclaramunt2021@gmail.com
+- Email: neuriaxx@gmail.com
 - Teléfono: +34 640 791 041
 - Dominio: neuriax.com
 - Estado: En proceso de constitución (actualizar cuando se formalice)

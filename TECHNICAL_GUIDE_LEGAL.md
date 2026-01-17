@@ -501,7 +501,7 @@ Verificar:
 
 ## 📞 Soporte
 
-**Email:** mateoclaramunt2021@gmail.com  
+**Email:** neuriaxx@gmail.com  
 **Teléfono:** +34 640 791 041  
 **Dominio:** neuriax.com
 

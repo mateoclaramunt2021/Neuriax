@@ -8,7 +8,7 @@ export const organizationSchema = {
   'image': 'https://www.neuriax.com/logo.png',
   'description': 'Agencia digital especializada en automatización e IA. Soluciones inteligentes para transformación digital empresarial.',
   'telephone': '+34640791041',
-  'email': 'mateoclaramunt2021@gmail.com',
+  'email': 'neuriaxx@gmail.com',
   'areaServed': 'ES',
   'serviceType': [
     'Automatización de Procesos',
@@ -37,7 +37,7 @@ export const organizationSchema = {
     '@type': 'ContactPoint',
     'contactType': 'Customer Service',
     'telephone': '+34-640-791-041',
-    'email': 'mateoclaramunt2021@gmail.com',
+    'email': 'neuriaxx@gmail.com',
     'availableLanguage': ['es', 'en'],
   },
   'priceRange': '€€',

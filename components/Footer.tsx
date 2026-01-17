@@ -172,13 +172,13 @@ export default function Footer() {
                 </h4>
                 <div className="space-y-4">
                   <a
-                    href="mailto:mateoclaramunt2021@gmail.com"
+                    href="mailto:neuriaxx@gmail.com"
                     className="flex items-center gap-3 text-sm group/contact hover:text-cyan-400 transition-colors"
                   >
                     <div className="w-8 h-8 flex items-center justify-center bg-slate-800 group-hover/contact:bg-cyan-500/20 rounded-lg transition-colors">
                       <span>✉</span>
                     </div>
-                    <span className="text-gray-400 group-hover/contact:text-cyan-400">mateoclaramunt2021@gmail.com</span>
+                    <span className="text-gray-400 group-hover/contact:text-cyan-400">neuriaxx@gmail.com</span>
                   </a>
                   <a
                     href="tel:+34640791041"

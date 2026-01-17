@@ -52,8 +52,8 @@ export default function PoliticaPrivacidad() {
           </p>
           <p>
             <strong>Correo:</strong>{' '}
-            <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">
-              mateoclaramunt2021@gmail.com
+            <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">
+              neuriaxx@gmail.com
             </a>
           </p>
           <p>
@@ -372,7 +372,7 @@ export default function PoliticaPrivacidad() {
           Para ejercer cualquiera de estos derechos, contáctanos en:
         </p>
         <div className="bg-gray-100 p-4 rounded text-sm text-gray-700 space-y-2">
-          <p><strong>Email:</strong> <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">mateoclaramunt2021@gmail.com</a></p>
+          <p><strong>Email:</strong> <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">neuriaxx@gmail.com</a></p>
           <p><strong>Teléfono:</strong> +34 640 791 041</p>
           <p><strong>Asunto:</strong> "Ejercicio de derechos RGPD"</p>
         </div>
@@ -409,7 +409,7 @@ export default function PoliticaPrivacidad() {
         </ul>
         <p className="text-gray-700 mt-4">
           Sin embargo, no podemos garantizar seguridad absoluta. Si detectas una brecha de seguridad, notifícalo de inmediato a 
-          <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline"> mateoclaramunt2021@gmail.com</a>.
+          <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline"> neuriaxx@gmail.com</a>.
         </p>
       </section>
 
@@ -422,7 +422,7 @@ export default function PoliticaPrivacidad() {
         </p>
         <p className="text-gray-700 mt-3">
           Si eres menor de 14 años y el titular de la patria potestad desea ejercer derechos, puede contactarnos en 
-          <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline"> mateoclaramunt2021@gmail.com</a>.
+          <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline"> neuriaxx@gmail.com</a>.
         </p>
       </section>
 
@@ -446,7 +446,7 @@ export default function PoliticaPrivacidad() {
           Si tienes preguntas sobre esta Política de Privacidad o deseas ejercer tus derechos RGPD:
         </p>
         <div className="mt-3 space-y-2 text-sm text-gray-700">
-          <p>📧 <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">mateoclaramunt2021@gmail.com</a></p>
+          <p>📧 <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">neuriaxx@gmail.com</a></p>
           <p>📞 +34 640 791 041</p>
           <p>🌐 www.neuriax.com</p>
         </div>

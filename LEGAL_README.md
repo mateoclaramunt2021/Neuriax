@@ -249,7 +249,7 @@ export default function Page() {
 
 **Titular del Sitio:**
 - Nombre: Mateo Claramunt González
-- Email: mateoclaramunt2021@gmail.com
+- Email: neuriaxx@gmail.com
 - Teléfono: +34 640 791 041
 - Dominio: neuriax.com
 
@@ -324,4 +324,4 @@ export default function Page() {
 
 **Última actualización:** 16 de enero de 2026  
 **Versión:** 1.0  
-**¿Dudas?** Consulta [TECHNICAL_GUIDE_LEGAL.md](TECHNICAL_GUIDE_LEGAL.md) o contacta: mateoclaramunt2021@gmail.com
+**¿Dudas?** Consulta [TECHNICAL_GUIDE_LEGAL.md](TECHNICAL_GUIDE_LEGAL.md) o contacta: neuriaxx@gmail.com

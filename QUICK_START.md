@@ -321,7 +321,7 @@ Checklist por post:
 2. RESUMEN_FINAL.md (resumen)
 3. El documento específico que necesitas
 
-**Todavía con dudas?** Email: mateoclaramunt2021@gmail.com
+**Todavía con dudas?** Email: neuriaxx@gmail.com
 
 ---
 

@@ -411,7 +411,7 @@ export default function CondicionesGenerales() {
           estas condiciones con aviso previo razonable.
         </p>
         <div className="mt-4 space-y-2 text-sm text-gray-700">
-          <p>📧 <a href="mailto:mateoclaramunt2021@gmail.com" className="text-blue-600 hover:underline">mateoclaramunt2021@gmail.com</a></p>
+          <p>📧 <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">neuriaxx@gmail.com</a></p>
           <p>📞 +34 640 791 041</p>
           <p>🌐 www.neuriax.com</p>
         </div>

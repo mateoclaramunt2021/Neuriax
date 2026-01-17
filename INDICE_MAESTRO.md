@@ -327,7 +327,7 @@ Para profundizar:
 ## ✉️ CONTACTO Y RESPONSABLES
 
 **Propietario:** Mateo Claramunt  
-**Email:** mateoclaramunt2021@gmail.com  
+**Email:** neuriaxx@gmail.com  
 **Teléfono:** +34 611 234 567  
 **Website:** https://neuriax.com  
 **Instagram:** @neuriax.ia_

@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Email al propietario
     const ownerMailOptions = {
       from: process.env.EMAIL_USER,
-      to: 'mateoclaramunt2021@gmail.com',
+      to: 'neuriaxx@gmail.com',
       subject: `Nueva postulación de trabajo - ${nombre}`,
       html: `
         <h2>Nueva Postulación Recibida</h2>

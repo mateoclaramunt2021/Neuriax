@@ -241,7 +241,7 @@ export default function QuienSomos() {
               Agendar consulta gratuita
             </a>
             <a
-              href="mailto:mateoclaramunt2021@gmail.com"
+              href="mailto:neuriaxx@gmail.com"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
             >
               Enviar email

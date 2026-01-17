@@ -100,7 +100,7 @@ export default function RootLayout({
               description: 'Soluciones digitales, automatización e IA aplicada a negocio',
               url: 'https://www.neuriax.com',
               telephone: '+34631415151',
-              email: 'mateoclaramunt2021@gmail.com',
+              email: 'neuriaxx@gmail.com',
               priceRange: '$$',
               areaServed: 'ES',
               serviceType: ['Automatización Digital', 'Desarrollo de IA', 'Diseño Web', 'SEO Local'],
