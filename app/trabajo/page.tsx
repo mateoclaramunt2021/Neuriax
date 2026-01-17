@@ -11,6 +11,7 @@ export default function Trabajo() {
     experiencia: '',
     mensaje: ''
   });
+  const [cvFile, setCvFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [touched, setTouched] = useState<{[key: string]: boolean}>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,6 +46,25 @@ export default function Trabajo() {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validar tipo de archivo
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowedTypes.includes(file.type)) {
+        setErrors({ ...errors, cv: 'Solo se permiten archivos PDF o Word' });
+        return;
+      }
+      // Validar tamaño (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setErrors({ ...errors, cv: 'El archivo no puede superar 5MB' });
+        return;
+      }
+      setCvFile(file);
+      setErrors({ ...errors, cv: '' });
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -57,13 +77,22 @@ export default function Trabajo() {
     setSubmitMessage('');
 
     try {
+      // Crear FormData para enviar archivo
+      const submitData = new FormData();
+      submitData.append('nombre', formData.nombre);
+      submitData.append('email', formData.email);
+      submitData.append('telefono', formData.telefono);
+      submitData.append('posicion', formData.posicion);
+      submitData.append('experiencia', formData.experiencia);
+      submitData.append('mensaje', formData.mensaje);
+      if (cvFile) {
+        submitData.append('cv', cvFile);
+      }
+
       // Enviar al API
       const response = await fetch('/api/send-email', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: submitData,
       });
 
       if (response.ok) {
@@ -76,6 +105,7 @@ export default function Trabajo() {
           experiencia: '',
           mensaje: ''
         });
+        setCvFile(null);
       } else {
         setSubmitMessage('Error al enviar la postulación. Por favor, intenta de nuevo.');
       }
@@ -228,6 +258,48 @@ export default function Trabajo() {
                   placeholder="Describe tu experiencia, habilidades y por qué quieres unirte a Neuriax..."
                 />
                 {errors.mensaje && <p className="mt-1 text-sm text-red-400">{errors.mensaje}</p>}
+              </div>
+
+              {/* Campo para subir CV */}
+              <div>
+                <label htmlFor="cv" className="block text-sm font-medium text-slate-300 mb-2">
+                  Curriculum Vitae (PDF o Word, máx. 5MB)
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="cv"
+                    name="cv"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="cv"
+                    className={`flex items-center justify-center w-full px-4 py-4 bg-slate-700 border-2 border-dashed rounded-lg cursor-pointer hover:bg-slate-600 transition-colors ${errors.cv ? 'border-red-500' : 'border-slate-500'}`}
+                  >
+                    <div className="text-center">
+                      <svg className="mx-auto h-10 w-10 text-slate-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                      </svg>
+                      {cvFile ? (
+                        <span className="text-cyan-400 font-medium">{cvFile.name}</span>
+                      ) : (
+                        <span className="text-slate-400">Haz clic para subir tu CV</span>
+                      )}
+                    </div>
+                  </label>
+                </div>
+                {errors.cv && <p className="mt-1 text-sm text-red-400">{errors.cv}</p>}
+                {cvFile && (
+                  <button
+                    type="button"
+                    onClick={() => setCvFile(null)}
+                    className="mt-2 text-sm text-red-400 hover:text-red-300"
+                  >
+                    ✕ Eliminar archivo
+                  </button>
+                )}
               </div>
 
               <div className="text-center">

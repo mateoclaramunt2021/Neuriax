@@ -11,8 +11,15 @@ const supabase = createClient(
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { nombre, email, telefono, posicion, experiencia, mensaje } = body;
+    const formData = await request.formData();
+    
+    const nombre = formData.get('nombre') as string;
+    const email = formData.get('email') as string;
+    const telefono = formData.get('telefono') as string;
+    const posicion = formData.get('posicion') as string;
+    const experiencia = formData.get('experiencia') as string;
+    const mensaje = formData.get('mensaje') as string;
+    const cvFile = formData.get('cv') as File | null;
 
     // Validar datos
     if (!nombre || !email || !posicion || !mensaje) {
@@ -20,6 +27,37 @@ export async function POST(request: NextRequest) {
         { error: 'Faltan campos requeridos' },
         { status: 400 }
       );
+    }
+
+    let cvUrl = null;
+
+    // Subir CV a Supabase Storage si existe
+    if (cvFile && cvFile.size > 0) {
+      const timestamp = Date.now();
+      const sanitizedName = nombre.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+      const extension = cvFile.name.split('.').pop();
+      const fileName = `cv_${sanitizedName}_${timestamp}.${extension}`;
+
+      const arrayBuffer = await cvFile.arrayBuffer();
+      const buffer = new Uint8Array(arrayBuffer);
+
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('cvs')
+        .upload(fileName, buffer, {
+          contentType: cvFile.type,
+          upsert: false
+        });
+
+      if (uploadError) {
+        console.error('Error subiendo CV:', uploadError);
+        // Continuamos sin el CV si hay error
+      } else {
+        // Obtener URL pública del CV
+        const { data: urlData } = supabase.storage
+          .from('cvs')
+          .getPublicUrl(fileName);
+        cvUrl = urlData.publicUrl;
+      }
     }
 
     // Guardar en Supabase
@@ -30,6 +68,7 @@ export async function POST(request: NextRequest) {
       posicion,
       experiencia: experiencia || null,
       mensaje,
+      cv_url: cvUrl,
       leido: false
     });
 
@@ -56,6 +95,7 @@ export async function POST(request: NextRequest) {
             <p><strong>📧 Email:</strong> ${email}</p>
             <p><strong>📞 Teléfono:</strong> ${telefono || 'No proporcionado'}</p>
             <p><strong>💼 Experiencia:</strong> ${experiencia || 'No especificada'}</p>
+            ${cvUrl ? `<p><strong>📄 CV:</strong> <a href="${cvUrl}" style="color: #6366f1;">Descargar CV</a></p>` : '<p><strong>📄 CV:</strong> No adjuntado</p>'}
           </div>
           
           <h3 style="color: #374151;">Mensaje:</h3>
