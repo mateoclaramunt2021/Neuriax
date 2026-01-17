@@ -398,16 +398,15 @@ Una página web promedio convierte el 1-2% de visitantes. Las buenas convierten 
 
 ## 1. Propuesta de Valor Clara (En los primeros 3 segundos)
 
+
 **El Problema:** El visitante NO entiende qué haces en 3 segundos → Se va.
 
 **La Solución:**
-```
-"Automatización e IA para Empresas"
-es vago.
+\`\`\`
+"Automatización e IA para Empresas" es vago.
 
-"Reduce costos operacionales 30-40% en 4 semanas"
-es claro.
-```
+"Reduce costos operacionales 30-40% en 4 semanas" es claro.
+\`\`\`
 
 **Elemento:** H1 + Subtítulo en la sección Hero
 
