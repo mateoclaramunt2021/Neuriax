@@ -128,6 +128,7 @@ export default function Navbar() {
                   { href: "/soluciones", label: "Soluciones" },
                   { href: "/webs", label: "Webs" },
                   { href: "/portfolio", label: "Portfolio" },
+                  { href: "/blog", label: "Blog" },
                   { href: "/sectores", label: "Sectores" },
                   { href: "/trabajo", label: "Trabajo" },
                   { href: "/quien-soy", label: "Quiénes Somos" },
