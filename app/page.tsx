@@ -206,15 +206,15 @@ export default function Home() {
         // localVideo="/intro.mp4" // Para vídeo local
       />
 
-      {/* Problemas que resuelvo */}
+      {/* Problemas que resolvemos */}
       <section id="problemas" className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 hover:scale-105 transition-transform duration-300">
-              Problemas que resuelvo en tu negocio
+              Problemas que resolvemos en tu negocio
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto hover:text-white transition-colors duration-300">
-              Estos son los dolores más comunes que veo en empresas y que soluciono con sistemas digitales inteligentes.
+              Estos son los dolores más comunes que vemos en empresas y que solucionamos con sistemas digitales inteligentes.
             </p>
           </div>
 

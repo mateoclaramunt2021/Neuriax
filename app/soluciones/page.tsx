@@ -97,7 +97,7 @@ export default function Soluciones() {
               }
               title="Automatización de atención y captación"
               problem="Clientes potenciales contactan pero nunca reciben respuesta oportuna, perdiendo oportunidades de venta por procesos manuales lentos."
-              solution="Implemento chatbots inteligentes y sistemas de seguimiento automático que responden instantáneamente y califican leads según su potencial."
+              solution="Implementamos chatbots inteligentes y sistemas de seguimiento automático que responden instantáneamente y califican leads según su potencial."
               result="Aumento del 300% en respuestas a leads, reducción del 80% en tiempo de respuesta y mejora del 150% en conversión de oportunidades."
             />
 
@@ -131,7 +131,7 @@ export default function Soluciones() {
               }
               title="Paneles operativos"
               problem="Gerentes sin visibilidad clara de métricas clave, tomando decisiones basadas en intuición en lugar de datos objetivos."
-              solution="Implemento dashboards en tiempo real con KPIs personalizados, alertas automáticas y reportes inteligentes que facilitan la toma de decisiones."
+              solution="Implementamos dashboards en tiempo real con KPIs personalizados, alertas automáticas y reportes inteligentes que facilitan la toma de decisiones."
               result="Mejora del 150% en velocidad de decisión, reducción del 70% en reuniones innecesarias y aumento del 80% en cumplimiento de objetivos."
             />
 
@@ -165,7 +165,7 @@ export default function Soluciones() {
               }
               title="Optimización de procesos con IA"
               problem="Procesos ineficientes que consumen recursos valiosos, con cuellos de botella que frenan el crecimiento del negocio."
-              solution="Utilizo algoritmos de IA para analizar patrones, predecir demandas y optimizar flujos de trabajo de manera continua."
+              solution="Utilizamos algoritmos de IA para analizar patrones, predecir demandas y optimizar flujos de trabajo de manera continua."
               result="Reducción del 50% en costes operativos, aumento del 90% en capacidad de procesamiento y mejora del 200% en satisfacción del cliente."
             />
           </div>
