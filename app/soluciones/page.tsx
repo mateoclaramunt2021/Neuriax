@@ -205,6 +205,146 @@ export default function Soluciones() {
         </div>
       </section>
 
+      {/* Planes de Automatización */}
+      <section className="py-20 px-6 bg-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Planes de Automatización
+            </h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Soluciones adaptadas a cada nivel de necesidad. Todas incluyen soporte y formación.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            {/* PLAN STARTER */}
+            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
+              <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+              <p className="text-gray-400 text-sm mb-6">Automatización esencial</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold text-white">600€ - 1.200€</span>
+                <p className="text-gray-400 text-sm mt-2">Pago único</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>1 flujo de automatización</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Integración con 2-3 herramientas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Configuración y puesta en marcha</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Formación básica de uso</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Soporte 30 días</span>
+                </li>
+              </ul>
+              <a 
+                href="https://calendly.com/neuriax/30min" 
+                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
+              >
+                Empezar con Starter
+              </a>
+            </div>
+
+            {/* PLAN BUSINESS */}
+            <div className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-lg p-8 border-2 border-cyan-500 relative flex flex-col">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                Más popular
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
+              <p className="text-gray-300 text-sm mb-6">Automatización avanzada</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold text-cyan-400">A CONSULTAR</span>
+                <p className="text-cyan-300 text-sm mt-2">Presupuesto personalizado</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Múltiples flujos de automatización</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Integración con CRM y herramientas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Chatbot con IA incluido</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Dashboard de métricas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Soporte 90 días</span>
+                </li>
+              </ul>
+              <a 
+                href="https://calendly.com/neuriax/30min" 
+                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
+              >
+                Solicitar propuesta
+              </a>
+            </div>
+
+            {/* PLAN ENTERPRISE */}
+            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
+              <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
+              <p className="text-gray-400 text-sm mb-6">Transformación digital completa</p>
+              <div className="mb-6">
+                <span className="text-3xl font-bold text-white">A CONSULTAR</span>
+                <p className="text-gray-400 text-sm mt-2">Proyecto a medida</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Ecosistema de automatización completo</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Agentes de IA personalizados</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Integraciones ilimitadas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Consultoría estratégica incluida</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Soporte prioritario 12 meses</span>
+                </li>
+              </ul>
+              <a 
+                href="https://wa.me/34631415151?text=Hola%20Mateo,%20quiero%20conocer%20el%20plan%20Enterprise%20de%20automatizaci%C3%B3n" 
+                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
+              >
+                Hablar con un experto
+              </a>
+            </div>
+          </div>
+
+          {/* Texto aclaratorio */}
+          <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700 text-center">
+            <p className="text-gray-300 text-lg">
+              <span className="font-semibold text-white">Cada negocio tiene necesidades únicas.</span> Los planes Business y Enterprise se presupuestan según la complejidad del proyecto y los sistemas a integrar.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
         {/* Background Elements */}
