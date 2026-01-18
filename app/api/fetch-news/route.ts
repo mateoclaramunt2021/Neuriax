@@ -147,6 +147,7 @@ export async function GET(request: Request) {
       source_url: string;
       source_name: string;
       read_time: string;
+      created_at: string;
     }> = [];
     
     // Obtener noticias de todas las fuentes
@@ -156,6 +157,14 @@ export async function GET(request: Request) {
       for (const item of items) {
         // Solo incluir noticias relacionadas con IA
         if (isAIRelated(item.title, item.description)) {
+          // Parsear la fecha de publicación del RSS
+          let createdAt: string;
+          try {
+            createdAt = new Date(item.pubDate).toISOString();
+          } catch {
+            createdAt = new Date().toISOString();
+          }
+          
           allNews.push({
             title: item.title,
             description: item.description || 'Lee más sobre esta noticia de IA.',
@@ -163,7 +172,8 @@ export async function GET(request: Request) {
             category: source.category,
             source_url: item.link,
             source_name: source.name,
-            read_time: `${Math.ceil(item.description.length / 200) + 2} min`
+            read_time: `${Math.ceil(item.description.length / 200) + 2} min`,
+            created_at: createdAt
           });
         }
       }
