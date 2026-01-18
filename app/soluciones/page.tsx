@@ -254,12 +254,12 @@ export default function Soluciones() {
             </div>
 
             {/* PLAN BUSINESS */}
-            <div className="relative bg-gradient-to-br from-cyan-950 via-slate-900 to-blue-950 rounded-2xl p-8 border-2 border-cyan-500 flex flex-col group overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+            <div className="relative bg-gradient-to-br from-cyan-950 via-slate-900 to-blue-950 rounded-2xl p-8 pt-12 border-2 border-cyan-500 flex flex-col group transform hover:scale-[1.02] transition-all duration-300">
               {/* Glow effect */}
-              <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl"></div>
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl"></div>
+              <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
               
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-lg">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-lg z-10">
                 Más popular
               </div>
               
