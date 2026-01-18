@@ -14,7 +14,7 @@ export default function QuienSomos() {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          <div className="text-center">
+          <div className="text-center mb-16">
             <span className="inline-block bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-8">
               SOBRE NEURIAX
             </span>
@@ -25,6 +25,27 @@ export default function QuienSomos() {
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
               Somos una agencia digital especializada en diseño web profesional y automatización con inteligencia artificial.
             </p>
+          </div>
+
+          {/* Fundador destacado */}
+          <div className="flex flex-col md:flex-row items-center gap-8 bg-gradient-to-r from-slate-800/50 to-slate-900/50 backdrop-blur-sm rounded-3xl p-8 border border-slate-700/50">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-xl opacity-30"></div>
+              <Image
+                src="/assets/images/mateo.png"
+                alt="Mateo MC - Fundador de Neuriax"
+                width={140}
+                height={140}
+                className="relative rounded-full border-4 border-cyan-500/30 object-cover"
+              />
+            </div>
+            <div className="text-center md:text-left">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo MC</h2>
+              <p className="text-cyan-400 font-semibold mb-4">Fundador & CEO</p>
+              <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
+                Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Autodidacta, apasionado por la IA y la productividad.
+              </p>
+            </div>
           </div>
         </div>
       </section>
