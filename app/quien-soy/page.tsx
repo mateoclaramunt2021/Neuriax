@@ -252,14 +252,14 @@ export default function QuienSomos() {
               </div>
             </div>
 
-            {/* María del Carmen */}
+            {/* María Pérez */}
             <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-2xl border border-slate-700 hover:border-cyan-500 transition-all duration-300 text-center group">
               <div className="relative w-32 h-32 mx-auto mb-6">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-4xl font-bold text-white group-hover:scale-110 transition-transform duration-300">
-                  MC
+                  MP
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">María del Carmen</h3>
+              <h3 className="text-xl font-bold text-white mb-2">María Pérez</h3>
               <p className="text-cyan-400 font-semibold mb-4">Directora de Administración</p>
               <p className="text-slate-400 text-sm">
                 Responsable de la gestión administrativa, financiera y coordinación de recursos empresariales.
