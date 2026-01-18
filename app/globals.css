@@ -25,177 +25,182 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ========== FUTURISTIC HERO ANIMATIONS ========== */
+/* ========== FUTURISTIC HERO ANIMATIONS - PROFESSIONAL ========== */
 
-/* Gradient animation for background */
+/* Smooth gradient animation */
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
-/* Floating particles */
-@keyframes float {
-  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-100vh) translateX(20px) rotate(360deg); opacity: 0; }
+/* Gentle floating particles */
+@keyframes floatUp {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
 }
 
-/* Pulse glow effect */
+/* Smooth pulse glow */
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.05); }
 }
 
-/* Text glow animation */
+/* Elegant text glow */
 @keyframes textGlow {
-  0%, 100% { text-shadow: 0 0 20px rgba(34, 211, 238, 0.5), 0 0 40px rgba(34, 211, 238, 0.3); }
-  50% { text-shadow: 0 0 40px rgba(34, 211, 238, 0.8), 0 0 80px rgba(34, 211, 238, 0.5), 0 0 120px rgba(34, 211, 238, 0.3); }
+  0%, 100% { 
+    text-shadow: 0 0 30px rgba(34, 211, 238, 0.3), 0 0 60px rgba(34, 211, 238, 0.15); 
+    filter: brightness(1);
+  }
+  50% { 
+    text-shadow: 0 0 40px rgba(34, 211, 238, 0.5), 0 0 80px rgba(34, 211, 238, 0.25); 
+    filter: brightness(1.05);
+  }
 }
 
-/* Circuit line animation */
-@keyframes circuitFlow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-/* Orbit animation */
+/* Smooth orbit */
 @keyframes orbit {
-  0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+  0% { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
 }
 
-/* Data stream animation */
-@keyframes dataStream {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(100vh); opacity: 0; }
+/* Gentle float */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
-/* Scan line effect */
-@keyframes scanLine {
-  0% { top: -10%; }
-  100% { top: 110%; }
+/* Smooth ring rotation */
+@keyframes smoothSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Hex grid pulse */
-@keyframes hexPulse {
-  0%, 100% { opacity: 0.03; }
-  50% { opacity: 0.08; }
+/* Grid line animation */
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.02; }
+  50% { opacity: 0.05; }
 }
 
-/* Floating orb */
-@keyframes floatOrb {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.1); }
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
 }
 
-/* Typing cursor */
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
+/* Fade in scale */
+@keyframes fadeInScale {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
 }
 
-/* Neural network connections */
-@keyframes neuralPulse {
-  0%, 100% { stroke-dashoffset: 1000; opacity: 0.2; }
-  50% { stroke-dashoffset: 0; opacity: 0.8; }
+/* Subtle shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
-/* Hero classes */
+/* Professional hero classes */
 .hero-futuristic {
-  background: linear-gradient(-45deg, #000000, #0a0a1a, #0f172a, #000000);
+  background: linear-gradient(-45deg, #000000, #020617, #0f172a, #000000);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 20s ease infinite;
 }
 
 .text-glow-cyan {
-  animation: textGlow 3s ease-in-out infinite;
+  animation: textGlow 4s ease-in-out infinite;
 }
 
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  width: 3px;
+  height: 3px;
+  background: rgba(34, 211, 238, 0.6);
   border-radius: 50%;
-  animation: float linear infinite;
+  animation: floatUp linear infinite;
   pointer-events: none;
 }
 
 .orb-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
+  animation: pulseGlow 6s ease-in-out infinite;
 }
 
 .orb-float {
-  animation: floatOrb 6s ease-in-out infinite;
+  animation: gentleFloat 8s ease-in-out infinite;
 }
 
-.circuit-lines {
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(34, 211, 238, 0.1) 25%, 
-    rgba(34, 211, 238, 0.3) 50%, 
-    rgba(34, 211, 238, 0.1) 75%, 
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: circuitFlow 3s linear infinite;
+.smooth-spin {
+  animation: smoothSpin linear infinite;
 }
 
-.scan-line {
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), transparent);
-  animation: scanLine 4s linear infinite;
-  pointer-events: none;
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-.hex-grid {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2322d3ee' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  animation: hexPulse 4s ease-in-out infinite;
+.fade-in-scale {
+  animation: fadeInScale 1s ease-out forwards;
 }
 
-.data-stream {
-  position: absolute;
-  width: 1px;
-  height: 50px;
-  background: linear-gradient(180deg, transparent, #22d3ee, transparent);
-  animation: dataStream 3s linear infinite;
+/* Professional grid background */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridPulse 6s ease-in-out infinite;
 }
 
-/* Button hover effects */
-.btn-futuristic {
+/* Shimmer button effect */
+.btn-shimmer {
   position: relative;
   overflow: hidden;
 }
 
-.btn-futuristic::before {
+.btn-shimmer::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
 }
 
-.btn-futuristic:hover::before {
-  left: 100%;
+/* Glass morphism cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Glitch effect for text */
-@keyframes glitch {
-  0%, 90%, 100% { transform: translate(0); }
-  92% { transform: translate(-2px, 2px); }
-  94% { transform: translate(2px, -2px); }
-  96% { transform: translate(-2px, -2px); }
-  98% { transform: translate(2px, 2px); }
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(34, 211, 238, 0.3);
+  transform: translateY(-2px);
 }
 
-.glitch-hover:hover {
-  animation: glitch 0.3s ease-in-out;
+/* Smooth transitions */
+.smooth-transition {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
