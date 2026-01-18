@@ -11,7 +11,7 @@ interface Message {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "¡Hola! Soy el asistente de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
+    { text: "¡Hola! Soy Maria,la asistenta de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [conversationContext, setConversationContext] = useState<{

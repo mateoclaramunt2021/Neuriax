@@ -2,8 +2,10 @@ name: Fetch AI News Daily
 
 on:
   schedule:
-    # Ejecutar cada día a las 8:00 AM UTC (9:00 AM España)
+    # Ejecutar 3 veces al día: 8:00, 14:00, 20:00 UTC
     - cron: '0 8 * * *'
+    - cron: '0 14 * * *'
+    - cron: '0 20 * * *'
   workflow_dispatch: # Permite ejecutar manualmente
 
 jobs:
@@ -12,11 +14,15 @@ jobs:
     
     steps:
       - name: Trigger Fetch News API
+        id: fetch
         run: |
-          curl -X GET "${{ secrets.SITE_URL }}/api/fetch-news" \
-            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            -H "Content-Type: application/json"
-        continue-on-error: true
+          RESPONSE=$(curl -s -X GET "https://neuriax.com/api/fetch-news" \
+            -H "Authorization: Bearer neuriax-cron-2026" \
+            -H "Content-Type: application/json")
+          echo "Response: $RESPONSE"
+          echo "response=$RESPONSE" >> $GITHUB_OUTPUT
       
       - name: Log Result
-        run: echo "News fetch completed at $(date)"
+        run: |
+          echo "✅ News fetch completed at $(date)"
+          echo "📊 Result: ${{ steps.fetch.outputs.response }}"

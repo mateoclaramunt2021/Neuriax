@@ -26,6 +26,26 @@ const RSS_SOURCES = [
     name: 'Wired',
     url: 'https://www.wired.com/feed/category/business/latest/rss',
     category: 'Tecnología'
+  },
+  {
+    name: 'The Verge AI',
+    url: 'https://www.theverge.com/rss/ai-artificial-intelligence/index.xml',
+    category: 'IA'
+  },
+  {
+    name: 'Ars Technica',
+    url: 'https://feeds.arstechnica.com/arstechnica/technology-lab',
+    category: 'Tecnología'
+  },
+  {
+    name: 'OpenAI Blog',
+    url: 'https://openai.com/blog/rss/',
+    category: 'IA'
+  },
+  {
+    name: 'Google AI Blog',
+    url: 'https://blog.google/technology/ai/rss/',
+    category: 'IA'
   }
 ];
 
