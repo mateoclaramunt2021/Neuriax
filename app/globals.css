@@ -25,69 +25,69 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* ========== FUTURISTIC HERO ANIMATIONS - PROFESSIONAL ========== */
+/* ========== FUTURISTIC HERO ANIMATIONS - ULTRA FLUID ========== */
 
-/* Smooth gradient animation */
+/* Ultra smooth gradient animation */
 @keyframes gradientShift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
 
-/* Gentle floating particles */
+/* Gentle floating particles - very smooth */
 @keyframes floatUp {
-  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
-  10% { opacity: 0.6; }
-  90% { opacity: 0.6; }
-  100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
+  0% { transform: translateY(100vh) translateX(0) scale(0.5); opacity: 0; }
+  5% { opacity: 0.4; }
+  95% { opacity: 0.4; }
+  100% { transform: translateY(-50px) translateX(50px) scale(1); opacity: 0; }
 }
 
-/* Smooth pulse glow */
+/* Ultra smooth pulse */
 @keyframes pulseGlow {
-  0%, 100% { opacity: 0.15; transform: scale(1); }
-  50% { opacity: 0.25; transform: scale(1.05); }
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50% { opacity: 0.15; transform: scale(1.02); }
 }
 
-/* Elegant text glow */
+/* Elegant text glow - subtle */
 @keyframes textGlow {
   0%, 100% { 
-    text-shadow: 0 0 30px rgba(34, 211, 238, 0.3), 0 0 60px rgba(34, 211, 238, 0.15); 
+    text-shadow: 0 0 40px rgba(34, 211, 238, 0.2), 0 0 80px rgba(34, 211, 238, 0.1); 
     filter: brightness(1);
   }
   50% { 
-    text-shadow: 0 0 40px rgba(34, 211, 238, 0.5), 0 0 80px rgba(34, 211, 238, 0.25); 
-    filter: brightness(1.05);
+    text-shadow: 0 0 60px rgba(34, 211, 238, 0.35), 0 0 100px rgba(34, 211, 238, 0.15); 
+    filter: brightness(1.03);
   }
 }
 
-/* Smooth orbit */
+/* Ultra smooth orbit */
 @keyframes orbit {
-  0% { transform: rotate(0deg) translateX(180px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+  0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
 }
 
-/* Gentle float */
+/* Gentle float - very subtle */
 @keyframes gentleFloat {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-15px); }
 }
 
-/* Smooth ring rotation */
+/* Ultra smooth ring rotation */
 @keyframes smoothSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* Grid line animation */
+/* Subtle grid pulse */
 @keyframes gridPulse {
-  0%, 100% { opacity: 0.02; }
-  50% { opacity: 0.05; }
+  0%, 100% { opacity: 0.015; }
+  50% { opacity: 0.03; }
 }
 
-/* Fade in up animation */
+/* Smooth fade in up */
 @keyframes fadeInUp {
   from { 
     opacity: 0; 
-    transform: translateY(30px); 
+    transform: translateY(40px); 
   }
   to { 
     opacity: 1; 
@@ -95,11 +95,11 @@ body {
   }
 }
 
-/* Fade in scale */
+/* Smooth fade in scale */
 @keyframes fadeInScale {
   from { 
     opacity: 0; 
-    transform: scale(0.9); 
+    transform: scale(0.95); 
   }
   to { 
     opacity: 1; 
@@ -107,60 +107,78 @@ body {
   }
 }
 
-/* Subtle shimmer */
+/* Elegant shimmer */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
+/* Floating animation - ultra smooth */
+@keyframes floatSmooth {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-8px) rotate(0.5deg); }
+  50% { transform: translateY(-12px) rotate(0deg); }
+  75% { transform: translateY(-8px) rotate(-0.5deg); }
+}
+
 /* Professional hero classes */
 .hero-futuristic {
-  background: linear-gradient(-45deg, #000000, #020617, #0f172a, #000000);
+  background: linear-gradient(-45deg, #000000, #020617, #0c1222, #000000);
   background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+  animation: gradientShift 30s ease infinite;
 }
 
 .text-glow-cyan {
-  animation: textGlow 4s ease-in-out infinite;
+  animation: textGlow 5s ease-in-out infinite;
 }
 
 .particle {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(34, 211, 238, 0.6);
+  width: 2px;
+  height: 2px;
+  background: rgba(34, 211, 238, 0.5);
   border-radius: 50%;
   animation: floatUp linear infinite;
   pointer-events: none;
 }
 
 .orb-glow {
-  animation: pulseGlow 6s ease-in-out infinite;
+  animation: pulseGlow 8s ease-in-out infinite;
+  will-change: opacity, transform;
 }
 
 .orb-float {
-  animation: gentleFloat 8s ease-in-out infinite;
+  animation: gentleFloat 10s ease-in-out infinite;
+  will-change: transform;
 }
 
 .smooth-spin {
   animation: smoothSpin linear infinite;
+  will-change: transform;
 }
 
 .fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
 
 .fade-in-scale {
-  animation: fadeInScale 1s ease-out forwards;
+  animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.float-smooth {
+  animation: floatSmooth 6s ease-in-out infinite;
+  will-change: transform;
 }
 
 /* Professional grid background */
 .grid-pattern {
   background-image: 
-    linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-  animation: gridPulse 6s ease-in-out infinite;
+    linear-gradient(rgba(34, 211, 238, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 8s ease-in-out infinite;
 }
 
 /* Shimmer button effect */
@@ -179,28 +197,28 @@ body {
   background: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.08) 50%,
     transparent 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
+  animation: shimmer 4s ease-in-out infinite;
 }
 
-/* Glass morphism cards */
+/* Glass morphism cards - refined */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(34, 211, 238, 0.3);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(34, 211, 238, 0.2);
+  transform: translateY(-4px);
 }
 
-/* Smooth transitions */
+/* Ultra smooth transitions */
 .smooth-transition {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
