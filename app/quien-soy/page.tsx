@@ -146,145 +146,6 @@ export default function QuienSomos() {
         </div>
       </section>
 
-      {/* Qué hacemos */}
-      <section className="py-24 px-6 bg-black">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-4 block">Qué hacemos</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Dos servicios, un objetivo
-            </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Ayudamos a negocios a tener presencia digital profesional y a automatizar lo que les quita tiempo.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Diseño Web */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-10 border border-slate-700 hover:border-cyan-500 transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Diseño Web Profesional</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Webs rápidas, modernas y optimizadas para convertir visitantes en clientes. Desde landing pages hasta tiendas online.
-              </p>
-              <ul className="space-y-3 text-slate-400">
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  Diseño responsivo
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  SEO local incluido
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  Velocidad optimizada
-                </li>
-              </ul>
-            </div>
-
-            {/* Automatización */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-10 border border-slate-700 hover:border-purple-500 transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Automatización con IA</h3>
-              <p className="text-slate-300 mb-6 leading-relaxed">
-                Sistemas que trabajan por ti 24/7. Chatbots, seguimiento de leads, dashboards y flujos automatizados.
-              </p>
-              <ul className="space-y-3 text-slate-400">
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  Chatbots inteligentes
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  Paneles de métricas
-                </li>
-                <li className="flex items-center gap-3">
-                  <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                  Integraciones personalizadas
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Por qué Neuriax */}
-      <section className="py-24 px-6 bg-black">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-4 block">Por qué elegirnos</span>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Nuestro enfoque
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🎯</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Tecnología accesible</h3>
-              <p className="text-slate-400">
-                Las mejores herramientas no deberían estar reservadas para grandes empresas. Las hacemos accesibles para todos.
-              </p>
-            </div>
-
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">⚡</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Productividad real</h3>
-              <p className="text-slate-400">
-                Cada solución está pensada para ahorrarte tiempo. Menos tareas manuales, más foco en lo importante.
-              </p>
-            </div>
-
-            <div className="text-center p-8">
-              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl">🤝</span>
-              </div>
-              <h3 className="text-xl font-bold text-white mb-4">Trabajo cercano</h3>
-              <p className="text-slate-400">
-                No somos una agencia gigante. Trabajamos contigo directamente, entendiendo tu negocio de verdad.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Agentes de IA */}
       <section className="py-24 px-6 bg-gradient-to-br from-slate-900 via-slate-950 to-black">
         <div className="max-w-6xl mx-auto">
@@ -379,6 +240,50 @@ export default function QuienSomos() {
                   <span>Activo</span>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Por qué Neuriax */}
+      <section className="py-24 px-6 bg-black">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-4 block">Por qué elegirnos</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Nuestro enfoque
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl">🎯</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">Tecnología accesible</h3>
+              <p className="text-slate-400">
+                Las mejores herramientas no deberían estar reservadas para grandes empresas. Las hacemos accesibles para todos.
+              </p>
+            </div>
+
+            <div className="text-center p-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl">⚡</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">Productividad real</h3>
+              <p className="text-slate-400">
+                Cada solución está pensada para ahorrarte tiempo. Menos tareas manuales, más foco en lo importante.
+              </p>
+            </div>
+
+            <div className="text-center p-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-emerald-500/20 to-teal-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                <span className="text-3xl">🤝</span>
+              </div>
+              <h3 className="text-xl font-bold text-white mb-4">Trabajo cercano</h3>
+              <p className="text-slate-400">
+                No somos una agencia gigante. Trabajamos contigo directamente, entendiendo tu negocio de verdad.
+              </p>
             </div>
           </div>
         </div>
