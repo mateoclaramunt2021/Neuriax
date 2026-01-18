@@ -98,7 +98,7 @@ export default function Soluciones() {
               title="Automatización de atención y captación"
               problem="Clientes potenciales contactan pero nunca reciben respuesta oportuna, perdiendo oportunidades de venta por procesos manuales lentos."
               solution="Implementamos chatbots inteligentes y sistemas de seguimiento automático que responden instantáneamente y califican leads según su potencial."
-              result="Aumento del 300% en respuestas a leads, reducción del 80% en tiempo de respuesta y mejora del 150% en conversión de oportunidades."
+              result="Respuestas más rápidas a leads, menos tareas manuales y mejor conversión de oportunidades. Resultados varían según sector."
             />
 
             <div className="relative group cursor-pointer">
@@ -132,7 +132,7 @@ export default function Soluciones() {
               title="Paneles operativos"
               problem="Gerentes sin visibilidad clara de métricas clave, tomando decisiones basadas en intuición en lugar de datos objetivos."
               solution="Implementamos dashboards en tiempo real con KPIs personalizados, alertas automáticas y reportes inteligentes que facilitan la toma de decisiones."
-              result="Mejora del 150% en velocidad de decisión, reducción del 70% en reuniones innecesarias y aumento del 80% en cumplimiento de objetivos."
+              result="Decisiones más ágiles, menos reuniones innecesarias y mayor cumplimiento de objetivos. Te mostramos casos reales en la llamada."
             />
 
             <div className="relative group cursor-pointer">
@@ -166,7 +166,7 @@ export default function Soluciones() {
               title="Optimización de procesos con IA"
               problem="Procesos ineficientes que consumen recursos valiosos, con cuellos de botella que frenan el crecimiento del negocio."
               solution="Utilizamos algoritmos de IA para analizar patrones, predecir demandas y optimizar flujos de trabajo de manera continua."
-              result="Reducción del 50% en costes operativos, aumento del 90% en capacidad de procesamiento y mejora del 200% en satisfacción del cliente."
+              result="Reducción notable de costes operativos, mayor capacidad de procesamiento y clientes más satisfechos. Casos reales disponibles."
             />
           </div>
         </div>

@@ -110,18 +110,19 @@ export default function QuienSomos() {
                 Cada solución implementada incluye métricas claras y objetivos específicos. Neuriax garantiza resultados verificables.
               </p>
               <p className="text-slate-300 mb-6">
-                Desde reducciones de costes operativos de hasta 50% hasta aumentos de ingresos de hasta 200%, los clientes reportan ROI desde el primer mes.
+                Desde reducción significativa en costes operativos hasta mejoras claras en eficiencia, los clientes reportan retorno desde el primer mes.
               </p>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 text-center">
-                  <div className="text-2xl font-bold text-cyan-400">85%</div>
-                  <div className="text-slate-400 text-sm">Reducción tiempo administrativo</div>
+                  <div className="text-2xl font-bold text-cyan-400">✓</div>
+                  <div className="text-slate-400 text-sm">Menos tiempo administrativo</div>
                 </div>
                 <div className="bg-slate-800 p-4 rounded-lg border border-slate-700 text-center">
-                  <div className="text-2xl font-bold text-cyan-400">200%</div>
-                  <div className="text-slate-400 text-sm">Aumento eficiencia</div>
+                  <div className="text-2xl font-bold text-cyan-400">✓</div>
+                  <div className="text-slate-400 text-sm">Mayor eficiencia operativa</div>
                 </div>
               </div>
+              <p className="text-slate-500 text-xs mt-4">Los resultados varían según sector y punto de partida.</p>
             </div>
           </div>
         </div>

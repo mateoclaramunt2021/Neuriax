@@ -40,22 +40,22 @@ export default function ConsultoriaDemo() {
   const casos = [
     {
       titulo: "Peluquería",
-      resultado: "+150% reservas online",
+      resultado: "Reservas duplicadas",
       tiempo: "6 meses"
     },
     {
       titulo: "Restaurante",
-      resultado: "+200% visitas a web",
+      resultado: "Más visitas a web",
       tiempo: "8 meses"
     },
     {
       titulo: "Clínica Médica",
-      resultado: "+180% citas agendadas",
+      resultado: "Citas automatizadas",
       tiempo: "5 meses"
     },
     {
       titulo: "E-commerce",
-      resultado: "+300% ventas online",
+      resultado: "Más ventas online",
       tiempo: "4 meses"
     }
   ];
@@ -76,7 +76,7 @@ export default function ConsultoriaDemo() {
     {
       nombre: "Carlos López",
       empresa: "Clínica Dental",
-      texto: "Profesionales serios que entienden los negocios. ROI comprobado. Los recomiendo sin dudarlo.",
+      texto: "Profesionales serios que entienden los negocios. Resultados reales y medibles. Los recomiendo sin dudarlo.",
       estrellas: 5
     }
   ];
@@ -145,7 +145,7 @@ export default function ConsultoriaDemo() {
                 Somos una agencia de consultoría digital especializada en transformar negocios locales en referencias en línea. Con más de 10 años de experiencia, hemos ayudado a cientos de empresas a crecer exponencialmente.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Nuestro enfoque es simple: combinar estrategia, tecnología y creatividad para obtener resultados medibles. No creemos en promesas vagas, solo en ROI comprobado.
+                Nuestro enfoque es simple: combinar estrategia, tecnología y creatividad para obtener resultados medibles. No creemos en promesas vagas, solo en resultados verificables.
               </p>
               
               <div className="grid grid-cols-3 gap-6">
@@ -158,7 +158,7 @@ export default function ConsultoriaDemo() {
                   <p className="text-sm text-gray-600 mt-1">Proyectos Exitosos</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-indigo-600">95%</p>
+                  <p className="text-3xl font-bold text-indigo-600">✓</p>
                   <p className="text-sm text-gray-600 mt-1">Clientes Satisfechos</p>
                 </div>
               </div>

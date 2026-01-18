@@ -23,7 +23,7 @@ const staticPosts: BlogPost[] = [
   {
     id: '1',
     title: 'Automatización Estratégica: 10 Procesos de Alto Impacto',
-    description: 'Descubre cómo automatizar procesos críticos de tu negocio. Estrategias probadas, ROI mensurable (730% promedio), implementación en 30 días.',
+    description: 'Descubre cómo automatizar procesos críticos de tu negocio. Estrategias probadas, retorno mensurable, implementación en 30 días.',
     date: '2026-01-17',
     category: 'Automatización',
     readTime: '12 min',
@@ -32,7 +32,7 @@ const staticPosts: BlogPost[] = [
   {
     id: '2',
     title: 'Inteligencia Artificial para Empresas: Implementación Práctica',
-    description: 'Guía completa de IA empresarial. Casos de uso reales, ROI comprobado (1600%+ en 90 días), herramientas por presupuesto.',
+    description: 'Guía completa de IA empresarial. Casos de uso reales, retorno comprobado, herramientas por presupuesto.',
     date: '2026-01-18',
     category: 'IA',
     readTime: '15 min',
@@ -41,7 +41,7 @@ const staticPosts: BlogPost[] = [
   {
     id: '3',
     title: 'Páginas Web Premium que Convierten: Los 7 Elementos Clave',
-    description: 'Descubre qué hace que una web convierta 15-20% de visitantes. Diseño, copywriting, UX y psicología de conversión comprobada.',
+    description: 'Descubre qué hace que una web convierta visitantes en clientes. Diseño, copywriting, UX y psicología de conversión comprobada.',
     date: '2026-01-19',
     category: 'Web',
     readTime: '10 min',

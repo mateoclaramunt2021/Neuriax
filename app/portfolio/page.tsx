@@ -285,28 +285,30 @@ export default function PortfolioPage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">+150%</span>
+                <span className="text-2xl font-bold text-green-400">✓</span>
               </div>
-              <p className="text-white font-semibold mb-2">Incremento en consultas</p>
-              <p className="text-gray-300 text-sm">Clínica dental que pasó de 5 a 12 consultas/mes en 3 meses con la web + SEO.</p>
+              <p className="text-white font-semibold mb-2">Más consultas</p>
+              <p className="text-gray-300 text-sm">Clínica dental que duplicó sus consultas mensuales en 3 meses con la web + SEO.</p>
             </div>
 
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">+80%</span>
+                <span className="text-2xl font-bold text-green-400">✓</span>
               </div>
               <p className="text-white font-semibold mb-2">Reservas online</p>
-              <p className="text-gray-300 text-sm">Restaurante que automatizó reservas y bajó en un 40% las llamadas a cocina.</p>
+              <p className="text-gray-300 text-sm">Restaurante que automatizó reservas y redujo significativamente las llamadas a cocina.</p>
             </div>
 
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">3.2k</span>
+                <span className="text-2xl font-bold text-green-400">✓</span>
               </div>
-              <p className="text-white font-semibold mb-2">Clientes nuevos/año</p>
+              <p className="text-white font-semibold mb-2">Más clientes</p>
               <p className="text-gray-300 text-sm">Peluquería con web + maps que ahora tiene lista de espera los fines de semana.</p>
             </div>
           </div>
+
+          <p className="text-center text-gray-500 text-sm mt-8">Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.</p>
         </div>
       </section>
 

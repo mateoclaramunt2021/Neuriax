@@ -197,33 +197,37 @@ export default function Sectores() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Resultados por Sector
+              Beneficios por Sector
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Cada sector tiene sus propias métricas de éxito. Aquí te muestro los resultados típicos que conseguimos.
+              Cada sector tiene sus propias necesidades. Aquí te mostramos los beneficios habituales que conseguimos.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">85%</div>
-              <p className="text-slate-300 mb-2">Aumento en reservas (Restaurantes)</p>
-              <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-4">65%</div>
-              <p className="text-slate-300">Reducción en tiempo de gestión</p>
+            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+              <div className="text-4xl mb-4">🍽️</div>
+              <h3 className="text-xl font-bold text-cyan-400 mb-4">Restaurantes</h3>
+              <p className="text-slate-300 mb-2">Más reservas online y menos llamadas</p>
+              <p className="text-slate-400 text-sm">Gestión de mesas automatizada</p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">200%</div>
-              <p className="text-slate-300 mb-2">Más leads cualificados (Inmobiliarias)</p>
-              <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-4">75%</div>
-              <p className="text-slate-300">Aumento en cierres de ventas</p>
+            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+              <div className="text-4xl mb-4">🏠</div>
+              <h3 className="text-xl font-bold text-cyan-400 mb-4">Inmobiliarias</h3>
+              <p className="text-slate-300 mb-2">Leads mejor cualificados</p>
+              <p className="text-slate-400 text-sm">Seguimiento automático de propiedades</p>
             </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">90%</div>
-              <p className="text-slate-300 mb-2">Reducción en tareas administrativas</p>
-              <div className="text-2xl md:text-3xl font-bold text-cyan-400 mb-4">150%</div>
-              <p className="text-slate-300">Mejora en satisfacción del cliente</p>
+            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+              <div className="text-4xl mb-4">💼</div>
+              <h3 className="text-xl font-bold text-cyan-400 mb-4">Servicios</h3>
+              <p className="text-slate-300 mb-2">Menos tareas administrativas</p>
+              <p className="text-slate-400 text-sm">Clientes más satisfechos</p>
             </div>
           </div>
+
+          <p className="text-center text-slate-500 text-sm mt-8">
+            Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.
+          </p>
         </div>
       </section>
 

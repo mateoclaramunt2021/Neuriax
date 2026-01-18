@@ -22,7 +22,7 @@ export default function Home() {
     },
     {
       question: "¿Cuánto cuesta la automatización e IA?",
-      answer: "Depende de complejidad, pero ROI promedio es 300-500% en 6 meses. Disponemos de paquetes desde PYMEs hasta empresas grandes."
+      answer: "Depende de la complejidad del proyecto. En la llamada te mostramos casos reales con retornos medibles. Disponemos de paquetes desde PYMEs hasta empresas grandes."
     },
   ];
 
