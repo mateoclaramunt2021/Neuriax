@@ -173,7 +173,7 @@ export default function Soluciones() {
       </section>
 
       {/* Planes de Automatización */}
-      <section className="py-20 px-6 bg-gray-900">
+      <section className="py-20 px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
@@ -186,126 +186,218 @@ export default function Soluciones() {
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {/* PLAN STARTER */}
-            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
-              <p className="text-gray-400 text-sm mb-6">Automatización esencial</p>
-              <div className="mb-6">
-                <span className="text-3xl font-bold text-white">600€ - 1.200€</span>
-                <p className="text-gray-400 text-sm mt-2">Pago único</p>
+            <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 flex flex-col group overflow-hidden">
+              {/* Glow effect */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-cyan-500/5 rounded-full blur-3xl group-hover:bg-cyan-500/10 transition-all"></div>
+              
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyan-500/20 to-blue-600/20 rounded-xl flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
+                <p className="text-slate-400 text-sm mb-6">Automatización esencial</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-white">600€ - 1.200€</span>
+                  <p className="text-slate-500 text-sm mt-2">Pago único</p>
+                </div>
+                <ul className="space-y-4 text-slate-300 mb-8 flex-grow">
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>1 flujo de automatización</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Integración con 2-3 herramientas</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Configuración y puesta en marcha</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Formación básica de uso</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Soporte 30 días</span>
+                  </li>
+                </ul>
+                <a 
+                  href="https://calendly.com/neuriax/30min" 
+                  className="w-full text-center px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
+                >
+                  Empezar con Starter
+                </a>
               </div>
-              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>1 flujo de automatización</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Integración con 2-3 herramientas</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Configuración y puesta en marcha</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Formación básica de uso</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Soporte 30 días</span>
-                </li>
-              </ul>
-              <a 
-                href="https://calendly.com/neuriax/30min" 
-                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
-              >
-                Empezar con Starter
-              </a>
             </div>
 
             {/* PLAN BUSINESS */}
-            <div className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-lg p-8 border-2 border-cyan-500 relative flex flex-col">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+            <div className="relative bg-gradient-to-br from-cyan-950 via-slate-900 to-blue-950 rounded-2xl p-8 border-2 border-cyan-500 flex flex-col group overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
+              {/* Glow effect */}
+              <div className="absolute top-0 right-0 w-48 h-48 bg-cyan-500/20 rounded-full blur-3xl"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl"></div>
+              
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-lg">
                 Más popular
               </div>
-              <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
-              <p className="text-gray-300 text-sm mb-6">Automatización avanzada</p>
-              <div className="mb-6">
-                <span className="text-3xl font-bold text-cyan-400">A CONSULTAR</span>
-                <p className="text-cyan-300 text-sm mt-2">Presupuesto personalizado</p>
+              
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg shadow-cyan-500/30">
+                  <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
+                <p className="text-cyan-300 text-sm mb-6">Automatización avanzada</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-cyan-400">A CONSULTAR</span>
+                  <p className="text-cyan-400/70 text-sm mt-2">Presupuesto personalizado</p>
+                </div>
+                <ul className="space-y-4 text-slate-200 mb-8 flex-grow">
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Múltiples flujos de automatización</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Integración con CRM y herramientas</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Chatbot con IA incluido</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Dashboard de métricas</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-cyan-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Soporte 90 días</span>
+                  </li>
+                </ul>
+                <a 
+                  href="https://calendly.com/neuriax/30min" 
+                  className="w-full text-center px-6 py-4 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl transition-all shadow-lg"
+                >
+                  Solicitar propuesta
+                </a>
               </div>
-              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Múltiples flujos de automatización</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Integración con CRM y herramientas</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Chatbot con IA incluido</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Dashboard de métricas</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Soporte 90 días</span>
-                </li>
-              </ul>
-              <a 
-                href="https://calendly.com/neuriax/30min" 
-                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
-              >
-                Solicitar propuesta
-              </a>
             </div>
 
             {/* PLAN ENTERPRISE */}
-            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
-              <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
-              <p className="text-gray-400 text-sm mb-6">Transformación digital completa</p>
-              <div className="mb-6">
-                <span className="text-3xl font-bold text-white">A CONSULTAR</span>
-                <p className="text-gray-400 text-sm mt-2">Proyecto a medida</p>
+            <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 hover:border-purple-500/50 transition-all duration-300 flex flex-col group overflow-hidden">
+              {/* Glow effect */}
+              <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/5 rounded-full blur-3xl group-hover:bg-purple-500/10 transition-all"></div>
+              
+              <div className="relative">
+                <div className="w-14 h-14 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-xl flex items-center justify-center mb-6">
+                  <svg className="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
+                <p className="text-slate-400 text-sm mb-6">Transformación digital completa</p>
+                <div className="mb-8">
+                  <span className="text-4xl font-bold text-white">A CONSULTAR</span>
+                  <p className="text-slate-500 text-sm mt-2">Proyecto a medida</p>
+                </div>
+                <ul className="space-y-4 text-slate-300 mb-8 flex-grow">
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Ecosistema de automatización completo</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Agentes de IA personalizados</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Integraciones ilimitadas</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Consultoría estratégica incluida</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3 text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                    <span>Soporte prioritario 12 meses</span>
+                  </li>
+                </ul>
+                <a 
+                  href="https://wa.me/34631415151?text=Hola%20Mateo,%20quiero%20conocer%20el%20plan%20Enterprise%20de%20automatizaci%C3%B3n" 
+                  className="w-full text-center px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
+                >
+                  Hablar con un experto
+                </a>
               </div>
-              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Ecosistema de automatización completo</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Agentes de IA personalizados</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Integraciones ilimitadas</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Consultoría estratégica incluida</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
-                  <span>Soporte prioritario 12 meses</span>
-                </li>
-              </ul>
-              <a 
-                href="https://wa.me/34631415151?text=Hola%20Mateo,%20quiero%20conocer%20el%20plan%20Enterprise%20de%20automatizaci%C3%B3n" 
-                className="w-full text-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg transition-all"
-              >
-                Hablar con un experto
-              </a>
             </div>
           </div>
 
           {/* Texto aclaratorio */}
-          <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700 text-center">
-            <p className="text-gray-300 text-lg">
+          <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 rounded-2xl p-8 border border-slate-700 text-center">
+            <p className="text-slate-300 text-lg">
               <span className="font-semibold text-white">Cada negocio tiene necesidades únicas.</span> Los planes Business y Enterprise se presupuestan según la complejidad del proyecto y los sistemas a integrar.
             </p>
           </div>
