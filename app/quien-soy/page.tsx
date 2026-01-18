@@ -43,7 +43,7 @@ export default function QuienSomos() {
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo</h2>
               <p className="text-cyan-400 font-semibold mb-4">Fundador & CEO</p>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
-                Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Autodidacta, apasionado por la IA y la productividad.
+                Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Aprendiendo de los mejores en el sector y formándome constantemente.
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function QuienSomos() {
               <h3 className="text-xl font-bold text-white mb-1">Mateo Claramunt</h3>
               <p className="text-cyan-400 font-semibold text-sm mb-4">CEO & Fundador</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Autodidacta, apasionado por la IA y la productividad.
+                Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Aprendiendo de los mejores en el sector y formándome constantemente.
               </p>
               <div className="mt-4">
                 <a href="https://www.linkedin.com/in/mateoclaramunt" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full inline-flex items-center justify-center transition-colors">
