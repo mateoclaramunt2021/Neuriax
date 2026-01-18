@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import TimeAgo from '@/components/TimeAgo';
 
 interface BlogPost {
   id: string;
@@ -130,11 +131,7 @@ export default function BlogPageClient({ posts }: { posts: BlogPost[] }) {
                   {/* Meta */}
                   <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-gray-800">
                     <span className="flex items-center gap-1">
-                      📅 {new Date(post.date).toLocaleDateString('es-ES', { 
-                        day: 'numeric', 
-                        month: 'short',
-                        year: 'numeric'
-                      })}
+                      � <TimeAgo date={post.date} />
                     </span>
                     <span className="flex items-center gap-1">
                       ⏱️ {post.readTime}
