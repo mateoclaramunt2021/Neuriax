@@ -33,14 +33,14 @@ export default function QuienSomos() {
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-xl opacity-30"></div>
               <Image
                 src="/assets/images/mateo.png"
-                alt="Mateo MC - Fundador de Neuriax"
+                alt="Mateo - Fundador de Neuriax"
                 width={140}
                 height={140}
                 className="relative rounded-full border-4 border-cyan-500/30 object-cover"
               />
             </div>
             <div className="text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo MC</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo</h2>
               <p className="text-cyan-400 font-semibold mb-4">Fundador & CEO</p>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
                 Fundó Neuriax con la visión de hacer la tecnología accesible para cualquier negocio. Autodidacta, apasionado por la IA y la productividad.
