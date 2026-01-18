@@ -213,60 +213,9 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 hover:scale-105 transition-transform duration-300">
               Problemas que resuelvo en tu negocio
             </h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 hover:text-white transition-colors duration-300">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto hover:text-white transition-colors duration-300">
               Estos son los dolores más comunes que veo en empresas y que soluciono con sistemas digitales inteligentes.
             </p>
-
-            {/* Diagrama de flujo */}
-            <div className="relative mb-16">
-              <div className="flex justify-center">
-                <div className="bg-gray-800 rounded-2xl shadow-2xl p-8 max-w-4xl w-full hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] border border-gray-700">
-                  <h3 className="text-2xl font-bold text-white mb-8 text-center">Flujo típico de problemas empresariales</h3>
-                  <div className="grid md:grid-cols-4 gap-6">
-                    <div className="text-center group cursor-pointer">
-                      <div className="w-16 h-16 bg-red-900/50 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-red-800 group-hover:bg-red-800 group-hover:scale-110 transition-all duration-300">
-                        <svg className="w-8 h-8 text-red-400 group-hover:text-red-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-                        </svg>
-                      </div>
-                      <h4 className="font-semibold text-white mb-2 group-hover:text-red-300 transition-colors duration-300">Problema</h4>
-                      <p className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">Procesos manuales lentos</p>
-                    </div>
-
-                    <div className="flex items-center justify-center">
-                      <svg className="w-8 h-8 text-gray-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-
-                    <div className="text-center group cursor-pointer">
-                      <div className="w-16 h-16 bg-orange-900/50 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-orange-800 group-hover:bg-orange-800 group-hover:scale-110 transition-all duration-300">
-                        <svg className="w-8 h-8 text-orange-400 group-hover:text-orange-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                        </svg>
-                      </div>
-                      <h4 className="font-semibold text-white mb-2 group-hover:text-orange-300 transition-colors duration-300">Consecuencia</h4>
-                      <p className="text-sm text-gray-400 group-hover:text-gray-200 transition-colors duration-300">Pérdida de oportunidades</p>
-                    </div>
-
-                    <div className="flex items-center justify-center">
-                      <svg className="w-8 h-8 text-gray-600 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  <div className="text-center mt-8">
-                    <div className="inline-flex items-center bg-green-900/50 rounded-full px-6 py-3 border-4 border-green-800 hover:bg-green-800 hover:scale-105 transition-all duration-300 cursor-pointer">
-                      <svg className="w-8 h-8 text-green-400 hover:text-green-200 transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="font-semibold text-green-200 hover:text-green-100 transition-colors duration-300">Mi solución</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
