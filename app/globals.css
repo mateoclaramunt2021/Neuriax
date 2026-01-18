@@ -24,3 +24,178 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ========== FUTURISTIC HERO ANIMATIONS ========== */
+
+/* Gradient animation for background */
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Floating particles */
+@keyframes float {
+  0%, 100% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(20px) rotate(360deg); opacity: 0; }
+}
+
+/* Pulse glow effect */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+/* Text glow animation */
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 20px rgba(34, 211, 238, 0.5), 0 0 40px rgba(34, 211, 238, 0.3); }
+  50% { text-shadow: 0 0 40px rgba(34, 211, 238, 0.8), 0 0 80px rgba(34, 211, 238, 0.5), 0 0 120px rgba(34, 211, 238, 0.3); }
+}
+
+/* Circuit line animation */
+@keyframes circuitFlow {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* Orbit animation */
+@keyframes orbit {
+  0% { transform: rotate(0deg) translateX(150px) rotate(0deg); }
+  100% { transform: rotate(360deg) translateX(150px) rotate(-360deg); }
+}
+
+/* Data stream animation */
+@keyframes dataStream {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Scan line effect */
+@keyframes scanLine {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
+/* Hex grid pulse */
+@keyframes hexPulse {
+  0%, 100% { opacity: 0.03; }
+  50% { opacity: 0.08; }
+}
+
+/* Floating orb */
+@keyframes floatOrb {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+}
+
+/* Typing cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Neural network connections */
+@keyframes neuralPulse {
+  0%, 100% { stroke-dashoffset: 1000; opacity: 0.2; }
+  50% { stroke-dashoffset: 0; opacity: 0.8; }
+}
+
+/* Hero classes */
+.hero-futuristic {
+  background: linear-gradient(-45deg, #000000, #0a0a1a, #0f172a, #000000);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.text-glow-cyan {
+  animation: textGlow 3s ease-in-out infinite;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(135deg, #22d3ee, #3b82f6);
+  border-radius: 50%;
+  animation: float linear infinite;
+  pointer-events: none;
+}
+
+.orb-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+.orb-float {
+  animation: floatOrb 6s ease-in-out infinite;
+}
+
+.circuit-lines {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(34, 211, 238, 0.1) 25%, 
+    rgba(34, 211, 238, 0.3) 50%, 
+    rgba(34, 211, 238, 0.1) 75%, 
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: circuitFlow 3s linear infinite;
+}
+
+.scan-line {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.5), transparent);
+  animation: scanLine 4s linear infinite;
+  pointer-events: none;
+}
+
+.hex-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%2322d3ee' fill-opacity='0.05'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.31h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  animation: hexPulse 4s ease-in-out infinite;
+}
+
+.data-stream {
+  position: absolute;
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(180deg, transparent, #22d3ee, transparent);
+  animation: dataStream 3s linear infinite;
+}
+
+/* Button hover effects */
+.btn-futuristic {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-futuristic::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-futuristic:hover::before {
+  left: 100%;
+}
+
+/* Glitch effect for text */
+@keyframes glitch {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-2px, 2px); }
+  94% { transform: translate(2px, -2px); }
+  96% { transform: translate(-2px, -2px); }
+  98% { transform: translate(2px, 2px); }
+}
+
+.glitch-hover:hover {
+  animation: glitch 0.3s ease-in-out;
+}
