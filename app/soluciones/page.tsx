@@ -172,39 +172,6 @@ export default function Soluciones() {
         </div>
       </section>
 
-      {/* Estadísticas */}
-      <section className="py-20 px-6 bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Resultados Comprobados
-            </h2>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Nuestras soluciones han transformado cientos de negocios con resultados medibles y sostenibles.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">300%</div>
-              <p className="text-slate-300">Aumento en respuestas a leads</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">90%</div>
-              <p className="text-slate-300">Reducción en leads perdidos</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">60%</div>
-              <p className="text-slate-300">Ahorro en tiempo administrativo</p>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">200%</div>
-              <p className="text-slate-300">Mejora en satisfacción del cliente</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Planes de Automatización */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-6xl mx-auto">
