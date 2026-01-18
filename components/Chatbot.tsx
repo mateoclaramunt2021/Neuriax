@@ -177,7 +177,27 @@ export default function Chatbot() {
                     ? 'bg-slate-800 text-slate-200'
                     : 'bg-cyan-500 text-white'
                 }`}>
-                  {message.text}
+                  {message.isLink ? (
+                    <>
+                      {message.text.split(/(https:\/\/[^\s]+)/g).map((part, i) => 
+                        part.startsWith('https://') ? (
+                          <a 
+                            key={i} 
+                            href={part} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-cyan-400 hover:text-cyan-300 underline font-semibold"
+                          >
+                            📅 Agendar llamada aquí
+                          </a>
+                        ) : (
+                          <span key={i}>{part}</span>
+                        )
+                      )}
+                    </>
+                  ) : (
+                    message.text
+                  )}
                 </div>
               </div>
             ))}
