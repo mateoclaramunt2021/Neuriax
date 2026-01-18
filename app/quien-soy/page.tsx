@@ -222,9 +222,9 @@ export default function QuienSomos() {
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Daniel Domínguez</h3>
-              <p className="text-cyan-400 font-semibold mb-4">Director de Operaciones</p>
+              <p className="text-cyan-400 font-semibold mb-4">Lead Web Developer</p>
               <p className="text-slate-400 text-sm">
-                Experto en gestión de proyectos y optimización de procesos empresariales.
+                Especialista en desarrollo web, diseño UI/UX y creación de experiencias digitales de alto impacto.
               </p>
               <div className="mt-4 flex justify-center gap-3">
                 <a href="#" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full flex items-center justify-center transition-colors">
@@ -268,6 +268,105 @@ export default function QuienSomos() {
                 <a href="#" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full flex items-center justify-center transition-colors">
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                 </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Agentes de IA */}
+      <section className="py-20 px-6 bg-gradient-to-br from-slate-900 via-slate-950 to-black">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
+              </span>
+              <span className="text-cyan-400 text-sm font-medium">Trabajando 24/7</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Nuestros Agentes de IA
+            </h2>
+            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+              Contamos con agentes de inteligencia artificial especializados que trabajan incansablemente para optimizar cada proceso.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* ARIA - Asistente de Atención */}
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-cyan-500/30 hover:border-cyan-400 transition-all duration-300 group overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl group-hover:bg-cyan-500/20 transition-all"></div>
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                  🤖
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">ARIA</h3>
+                <p className="text-cyan-400 text-sm font-semibold mb-3">Asistente de Atención al Cliente</p>
+                <p className="text-slate-400 text-sm mb-4">
+                  Responde consultas, gestiona tickets de soporte y proporciona asistencia instantánea a clientes 24/7.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span>Activo</span>
+                </div>
+              </div>
+            </div>
+
+            {/* NOVA - Análisis de Datos */}
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-purple-500/30 hover:border-purple-400 transition-all duration-300 group overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all"></div>
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                  📊
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">NOVA</h3>
+                <p className="text-purple-400 text-sm font-semibold mb-3">Analista de Datos</p>
+                <p className="text-slate-400 text-sm mb-4">
+                  Procesa métricas, genera informes automáticos y detecta patrones para la toma de decisiones estratégicas.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span>Activo</span>
+                </div>
+              </div>
+            </div>
+
+            {/* ATLAS - Automatización */}
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-emerald-500/30 hover:border-emerald-400 transition-all duration-300 group overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all"></div>
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                  ⚡
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">ATLAS</h3>
+                <p className="text-emerald-400 text-sm font-semibold mb-3">Motor de Automatización</p>
+                <p className="text-slate-400 text-sm mb-4">
+                  Ejecuta flujos de trabajo automatizados, integra sistemas y elimina tareas repetitivas en tiempo real.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span>Activo</span>
+                </div>
+              </div>
+            </div>
+
+            {/* SAGE - Generación de Contenido */}
+            <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-2xl border border-amber-500/30 hover:border-amber-400 transition-all duration-300 group overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-all"></div>
+              <div className="relative">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-600 rounded-2xl flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform">
+                  ✍️
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">SAGE</h3>
+                <p className="text-amber-400 text-sm font-semibold mb-3">Creador de Contenido</p>
+                <p className="text-slate-400 text-sm mb-4">
+                  Genera textos, emails, posts para redes sociales y contenido optimizado para SEO automáticamente.
+                </p>
+                <div className="flex items-center gap-2 text-xs text-slate-500">
+                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                  <span>Activo</span>
+                </div>
               </div>
             </div>
           </div>
