@@ -194,7 +194,7 @@ export default function Home() {
                   {/* Floating accent cards */}
                   <div className="absolute -top-4 -right-4 glass-card rounded-xl px-4 py-3 float-smooth" style={{ animationDelay: '2s' }}>
                     <div className="text-xl font-semibold text-cyan-400/90">24/7</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">Automatización</div>
+                    <div className="text-[10px] text-slate-500 mt-0.5">Asistente</div>
                   </div>
                   <div className="absolute -bottom-4 -left-4 glass-card rounded-xl px-4 py-3 float-smooth" style={{ animationDelay: '3.5s' }}>
                     <div className="text-xl font-semibold text-purple-400/90">+SEO</div>
