@@ -43,7 +43,7 @@ export default function QuienSomos() {
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo</h2>
               <p className="text-cyan-400 font-semibold mb-4">Fundador & CEO</p>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
-                Con 19 años, descubrí que la tecnología podía transformar negocios. Empecé creando webs para comercios locales que no podían permitirse agencias tradicionales. Hoy, lidero Neuriax con la misma misión: democratizar el acceso a soluciones digitales de calidad. Me formo constantemente con los mejores del sector para ofrecer resultados reales.
+                Mientras trabajaba de camarero, dedicaba cada hora libre a aprender desarrollo web e inteligencia artificial. Creé mis primeras webs para negocios locales, demostrando que la pasión y la constancia pueden más que cualquier título. Hoy, con esa experiencia real, fundo Neuriax para ayudar a negocios que merecen crecer con tecnología de verdad.
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@ export default function QuienSomos() {
               <h3 className="text-xl font-bold text-white mb-1">Mateo Claramunt</h3>
               <p className="text-cyan-400 font-semibold text-sm mb-4">CEO & Fundador</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Emprendedor desde los 19 años. Fundó Neuriax para hacer la tecnología accesible a negocios que merecen competir con las grandes empresas.
+                De camarero a fundador. Aprendió desarrollo web y IA por su cuenta, vendió sus primeros proyectos, y ahora lidera Neuriax.
               </p>
               <div className="mt-4">
                 <a href="https://www.linkedin.com/in/mateoclaramunt" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full inline-flex items-center justify-center transition-colors">
