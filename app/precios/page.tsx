@@ -168,7 +168,7 @@ export default function PreciosPage() {
               { title: "Multiidioma", price: "+200€", desc: "Web en 2 o más idiomas con cambio automático según localización." },
               { title: "Galería / Portafolio avanzado", price: "+100€", desc: "Galería con filtros, zoom, lightbox y gestión de categorías." },
               { title: "Integración e-commerce", price: "+300€", desc: "Carrito, métodos de pago (Stripe, PayPal), gestión de inventario." },
-              { title: "Blog / CMS", price: "+150€", desc: "Sistema para publicar contenido, mejorar SEO y posicionamiento." },
+              // ...eliminado Blog / CMS...
             ].map((service, idx) => (
               <div key={idx} className="bg-gray-900 rounded-lg p-6 border border-gray-700 hover:border-cyan-500 transition-colors">
                 <h3 className="text-xl font-semibold text-white mb-2">{service.title}</h3>

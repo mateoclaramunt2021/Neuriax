@@ -124,7 +124,7 @@ export default function Footer() {
                   {[
                     { label: 'Quiénes Somos', href: '/quien-soy' },
                     { label: 'Trabajo', href: '/trabajo' },
-                    { label: 'Blog (Próximamente)', href: '#' },
+                    // ...eliminado enlace a Blog...
                     { label: 'Contacto', href: '/contacto' },
                   ].map((link) => (
                     <a

@@ -43,7 +43,7 @@ export default function Navbar() {
                   { href: "/soluciones", label: "Soluciones", badge: "core" },
                   { href: "/webs", label: "Webs", badge: "hot" },
                   { href: "/portfolio", label: "Portfolio", badge: "work" },
-                  { href: "/blog", label: "Blog", badge: "new" },
+                  // ...eliminado enlace a Blog...
                   { href: "/sectores", label: "Sectores", badge: null },
                   { href: "/trabajo", label: "Trabajo", badge: null },
                   { href: "/quien-soy", label: "Quiénes Somos", badge: null },
@@ -128,7 +128,7 @@ export default function Navbar() {
                   { href: "/soluciones", label: "Soluciones" },
                   { href: "/webs", label: "Webs" },
                   { href: "/portfolio", label: "Portfolio" },
-                  { href: "/blog", label: "Blog" },
+                  // ...eliminado enlace a Blog...
                   { href: "/sectores", label: "Sectores" },
                   { href: "/trabajo", label: "Trabajo" },
                   { href: "/quien-soy", label: "Quiénes Somos" },

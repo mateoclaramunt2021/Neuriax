@@ -37,16 +37,7 @@ const RSS_SOURCES = [
     url: 'https://feeds.arstechnica.com/arstechnica/technology-lab',
     category: 'Tecnología'
   },
-  {
-    name: 'OpenAI Blog',
-    url: 'https://openai.com/blog/rss/',
-    category: 'IA'
-  },
-  {
-    name: 'Google AI Blog',
-    url: 'https://blog.google/technology/ai/rss/',
-    category: 'IA'
-  }
+
 ];
 
 // Función para parsear RSS básico (sin dependencias externas)
@@ -179,39 +170,11 @@ export async function GET(request: Request) {
       }
     }
     
-    // Insertar en Supabase (ignorar duplicados por título similar)
-    let inserted = 0;
-    let skipped = 0;
-    
-    for (const news of allNews.slice(0, 10)) { // Max 10 noticias por ejecución
-      // Verificar si ya existe una noticia similar
-      const { data: existing } = await supabase
-        .from('blog_posts')
-        .select('id')
-        .ilike('title', `%${news.title.substring(0, 30)}%`)
-        .limit(1);
-      
-      if (existing && existing.length > 0) {
-        skipped++;
-        continue;
-      }
-      
-      const { error } = await supabase
-        .from('blog_posts')
-        .insert([news]);
-      
-      if (!error) {
-        inserted++;
-      } else {
-        console.error('Error inserting:', error);
-      }
-    }
+    // Noticias de IA ya no se guardan. El blog ha sido eliminado.
     
     return NextResponse.json({
-      success: true,
-      message: `Procesadas ${allNews.length} noticias de IA`,
-      inserted,
-      skipped,
+      success: false,
+      message: 'Este servicio no está disponible. El blog ha sido eliminado.',
       timestamp: new Date().toISOString()
     });
     

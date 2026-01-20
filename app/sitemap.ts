@@ -20,11 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/portfolio/reformas", priority: 0.85, changeFrequency: "monthly" as const },
     { path: "/portfolio/restaurante", priority: 0.85, changeFrequency: "monthly" as const },
     
-    // Blog
-    { path: "/blog", priority: 0.9, changeFrequency: "daily" as const },
-    { path: "/blog/10-procesos-automatizar", priority: 0.85, changeFrequency: "weekly" as const },
-    { path: "/blog/ia-negocio-guia-practica", priority: 0.85, changeFrequency: "weekly" as const },
-    { path: "/blog/paginas-web-que-venden", priority: 0.85, changeFrequency: "weekly" as const },
+    // ...eliminadas rutas de Blog...
     
     // Otros servicios
     { path: "/precios", priority: 0.85, changeFrequency: "weekly" as const },

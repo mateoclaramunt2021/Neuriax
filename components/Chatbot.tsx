@@ -51,7 +51,7 @@ export default function Chatbot() {
     // FLUJO A: Precio / Web
     if (lowerMsg.includes('precio') || lowerMsg.includes('cuesta') || lowerMsg.includes('coste') || lowerMsg.includes('web')) {
       if (lowerMsg.includes('web')) {
-        const response = "Nuestra web Básica cuesta 790€. Incluye:\n✓ Diseño responsive\n✓ Información de negocio\n✓ Botón WhatsApp y llamada\n✓ Google Maps integrado\n✓ Optimización de velocidad\n✓ Dominio + hosting 1 año incluidos\n\nEntrega en 10-15 días según complejidad.\n\n¿Qué sector es y qué funcionalidad necesitarías (reservas, e-commerce, blog)?";
+        const response = "Nuestra web Básica cuesta 790€. Incluye:\n✓ Diseño responsive\n✓ Información de negocio\n✓ Botón WhatsApp y llamada\n✓ Google Maps integrado\n✓ Optimización de velocidad\n✓ Dominio + hosting 1 año incluidos\n\nEntrega en 10-15 días según complejidad.\n\n¿Qué sector es y qué funcionalidad necesitarías (reservas, e-commerce)?";
         return { text: response };
       }
       return { text: "¿Estás preguntando por una web o por automatización/chatbot? Te doy un rango más exacto." };
@@ -105,8 +105,8 @@ export default function Chatbot() {
       return { text: "No se pueden eliminar reseñas, pero sí mejorar reputación con estrategia de generación de reviews positivas.\n\nEso lo analizamos en la llamada." };
     }
 
-    if (lowerMsg.includes('extra') || lowerMsg.includes('multiidioma') || lowerMsg.includes('ecommerce') || lowerMsg.includes('blog') || lowerMsg.includes('seo')) {
-      return { text: "Extras típicos:\n✓ Multiidioma: +200€\n✓ E-commerce: +300€\n✓ Blog/CMS: +150€\n✓ Reservas: +150€\n✓ Automatización WhatsApp IA: desde 300€\n✓ SEO mensual: desde 250€/mes\n\n¿Cual necesitas?" };
+    if (lowerMsg.includes('extra') || lowerMsg.includes('multiidioma') || lowerMsg.includes('ecommerce') || lowerMsg.includes('seo')) {
+      return { text: "Extras típicos:\n✓ Multiidioma: +200€\n✓ E-commerce: +300€\n✓ Reservas: +150€\n✓ Automatización WhatsApp IA: desde 300€\n✓ SEO mensual: desde 250€/mes\n\n¿Cual necesitas?" };
     }
 
     // Detección de intención ALTA: sugerir llamada
