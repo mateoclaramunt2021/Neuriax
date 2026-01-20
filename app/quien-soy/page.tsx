@@ -32,7 +32,7 @@ export default function QuienSomos() {
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full blur-xl opacity-30"></div>
               <Image
-                src="/assets/images/mateo.png"
+                src="/assets/images/mateo-ceo.jpeg"
                 alt="Mateo - Fundador de Neuriax"
                 width={140}
                 height={140}
