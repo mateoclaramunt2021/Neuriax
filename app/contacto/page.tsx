@@ -1,4 +1,3 @@
-import Image from "next/image";
 import ContactForm from "../../components/ContactForm";
 
 export default function Contacto() {
@@ -27,189 +26,62 @@ export default function Contacto() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
-
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Hablemos de tu negocio
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Estamos aquí para entender tus desafíos y diseñar la solución perfecta que transforme tu operación.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-                <a
-                  href="https://calendly.com/neuriax/30min"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-                >
-                  Agendar consulta gratuita
-                </a>
-                <a
-                  href="mailto:neuriaxx@gmail.com"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-                >
-                  Enviar email
-                </a>
-              </div>
-            </div>
-
-            <div className="relative group cursor-pointer">
-              <div className="relative h-96 w-full">
-                <Image
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="Consulta gratuita y transformación empresarial"
-                  fill
-                  className="object-cover rounded-lg shadow-2xl group-hover:scale-105 group-hover:shadow-3xl transition-all duration-500"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg group-hover:from-black/70 transition-all duration-300"></div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-500/30 transition-all duration-300"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-500/30 transition-all duration-300"></div>
-            </div>
+      {/* Formulario centrado */}
+      <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Cuéntanos sobre tu proyecto
+            </h1>
+            <p className="text-lg text-gray-300">
+              Rellena el formulario y nos pondremos en contacto pronto
+            </p>
+          </div>
+          <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
+            <ContactForm />
           </div>
         </div>
       </section>
 
-      {/* Contact Form Section */}
+      {/* Información de contacto */}
       <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Información de contacto */}
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h2 className="text-3xl font-bold text-white mb-6">¿Cómo podemos ayudarte?</h2>
-              <p className="text-slate-300 mb-8">
-                Rellena el formulario con tus datos y selecciona el tipo de servicio que te interesa. Te contactaremos rápidamente para agendar tu consulta gratuita.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-start">
-                  <svg className="w-6 h-6 text-cyan-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <div>
-                    <p className="text-sm text-slate-400">Email</p>
-                    <p className="text-slate-300 font-semibold">neuriaxx@gmail.com</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <svg className="w-6 h-6 text-cyan-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <div>
-                    <p className="text-sm text-slate-400">WhatsApp / Teléfono</p>
-                    <p className="text-slate-300 font-semibold">+34 631 415 151</p>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <svg className="w-6 h-6 text-cyan-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4" />
-                  </svg>
-                  <div>
-                    <p className="text-sm text-slate-400">Instagram</p>
-                    <a href="https://www.instagram.com/mateclaramunt" className="text-cyan-400 hover:text-cyan-300 transition-colors font-semibold">@mateclaramunt</a>
-                  </div>
-                </div>
+          <h2 className="text-3xl font-bold text-white mb-12 text-center">
+            Otras formas de contactarnos
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 text-center">
+              <div className="flex justify-center mb-4">
+                <svg className="w-12 h-12 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
-
-              <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-lg p-6 border border-cyan-700/50">
-                <h3 className="text-lg font-semibold text-white mb-3 flex items-center">
-                  <svg className="w-5 h-5 mr-2 text-green-400" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
-                  ¿Qué esperar?
-                </h3>
-                <ul className="space-y-2 text-sm text-slate-300">
-                  <li>✓ Respuesta en menos de 24 horas</li>
-                  <li>✓ Consulta inicial gratuita de 30 min</li>
-                  <li>✓ Propuesta personalizada sin compromiso</li>
-                  <li>✓ Soporte profesional durante todo el proceso</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Formulario */}
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h3 className="text-2xl font-bold text-white mb-6">Cuéntanos sobre tu proyecto</h3>
-              <ContactForm />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Info & CTA */}
-      <section className="py-20 px-6 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h2 className="text-3xl font-bold text-white mb-6">Agenda una consulta gratuita</h2>
-              <p className="text-slate-300 mb-8">
-                En una llamada de 30 minutos analizaremos tu situación actual, identificaremos las oportunidades de mejora y te presentaré un plan personalizado.
-              </p>
-
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span className="text-slate-300">neuriaxx@gmail.com</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="text-slate-700">+34 631 415 151</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m-6 4h8m-8 4h8m-8 4h8" />
-                  </svg>
-                  <a href="https://www.instagram.com/mateclaramunt?igsh=MXRjcXE2MXd1Y3ZrYg%3D%3D&utm_source=qr" className="text-slate-700 hover:text-cyan-600 transition-colors">@mateclaramunt</a>
-                </div>
-              </div>
-
-              <a
-                href="https://calendly.com/neuriax/30min"
-                className="inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-              >
-                Agendar consulta gratuita
+              <h3 className="text-xl font-semibold text-white mb-2">Email</h3>
+              <a href="mailto:neuriaxx@gmail.com" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+                neuriaxx@gmail.com
               </a>
             </div>
-
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h3 className="text-2xl font-bold text-white mb-6">¿Qué esperar de nuestra conversación?</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Análisis detallado de tus procesos actuales y puntos de dolor</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Identificación de oportunidades de automatización y mejora</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Propuesta de soluciones específicas para tu caso</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Estimación de tiempos, costes y retorno de inversión</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Plan de implementación paso a paso</span>
-                </li>
-              </ul>
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 text-center">
+              <div className="flex justify-center mb-4">
+                <svg className="w-12 h-12 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">WhatsApp</h3>
+              <a href="https://wa.me/34631415151" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+                +34 631 415 151
+              </a>
+            </div>
+            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700 text-center">
+              <div className="flex justify-center mb-4">
+                <svg className="w-12 h-12 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.057-1.645.069-4.849.069-3.203 0-3.584-.012-4.849-.069-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/>
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-white mb-2">Instagram</h3>
+              <a href="https://www.instagram.com/mateclaramunt" className="text-cyan-400 hover:text-cyan-300 font-semibold">
+                @mateclaramunt
+              </a>
             </div>
           </div>
         </div>
@@ -223,7 +95,7 @@ export default function Contacto() {
               Preguntas frecuentes
             </h2>
             <p className="text-lg text-slate-300">
-              Respuestas a las dudas más comunes sobre mis servicios
+              Respuestas a las dudas más comunes
             </p>
           </div>
           <div className="space-y-6">
@@ -242,25 +114,19 @@ export default function Contacto() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white">
+      <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             ¿Listo para transformar tu negocio?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            La primera conversación es gratuita. No tienes nada que perder y mucho que ganar.
+            La primera conversación es gratuita
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://calendly.com/neuriax/30min"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-            >
+            <a href="https://calendly.com/neuriax/30min" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all">
               Agendar ahora
             </a>
-            <a
-              href="mailto:neuriaxx@gmail.com"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-            >
+            <a href="mailto:neuriaxx@gmail.com" className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all">
               Enviar email
             </a>
           </div>
