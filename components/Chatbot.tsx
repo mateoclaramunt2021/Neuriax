@@ -57,7 +57,7 @@ export default function Chatbot() {
       return { text: "¿Estás preguntando por una web o por automatización/chatbot? Te doy un rango más exacto." };
     }
 
-    // FLUJO B: AutomatizaciÃ³n / Chatbot / IA
+    // FLUJO B: Automatización / Chatbot / IA
     if (lowerMsg.includes('chatbot') || lowerMsg.includes('automatiza') || lowerMsg.includes('whatsapp') || lowerMsg.includes('ia') || lowerMsg.includes('ai')) {
       const response = "Implementamos:\n✓ Chatbots 24/7 (responder leads automáticamente)\n✓ Seguimiento automático + cualificación\n✓ Automatización WhatsApp con IA (desde 300€)\n✓ Dashboards y reportes automáticos\n\nCoste depende del alcance. ¿Por dónde te entran leads hoy? (WhatsApp, web, Instagram, llamadas)";
       return { text: response };
@@ -69,8 +69,8 @@ export default function Chatbot() {
       return { text: response };
     }
 
-    // FLUJO D: General - Â¿QuÃ© hacÃ©is?
-    if (lowerMsg.includes('quÃ© haces') || lowerMsg.includes('quiÃ©n eres') || lowerMsg.includes('servicios') || lowerMsg.includes('ofrece')) {
+    // FLUJO D: General - ¿Qué hacéis?
+    if (lowerMsg.includes('qué haces') || lowerMsg.includes('quién eres') || lowerMsg.includes('servicios') || lowerMsg.includes('ofrece')) {
       const response = "Somos Neuriax. Ofrecemos dos líneas:\n\n🤖 AUTOMATIZACIÓN & IA\n→ Chatbots, seguimiento automático, reportes, procesos IA.\n→ Solucionamos: leads sin respuesta, tareas repetitivas, falta de seguimiento.\n\n💻 WEBS PROFESIONALES\n→ Diseño a medida, SEO local, reservas/WhatsApp, orientadas a conversión.\n→ Desde 790€.\n\n¿Cuál te interesa?";
       return { text: response };
     }
