@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -46,7 +46,7 @@ export default function Navbar() {
                   // ...eliminado enlace a Blog...
                   { href: "/sectores", label: "Sectores", badge: null },
                   { href: "/trabajo", label: "Trabajo", badge: null },
-                  { href: "/quien-soy", label: "QuiÃ©nes Somos", badge: null },
+                  { href: "/quien-soy", label: "Quiénes Somos", badge: null },
                   { href: "/contacto", label: "Contacto", badge: "cta" },
                 ].map((item) => (
                   <Link 
@@ -57,12 +57,12 @@ export default function Navbar() {
                     {item.label}
                     {item.badge && (
                       <span className="absolute -top-2 -right-1 text-xs bg-gradient-to-r from-blue-500 to-blue-600 text-white px-2 py-0.5 rounded-full font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        {item.badge === "core" && "â˜…"}
-                        {item.badge === "home" && "â—"}
-                        {item.badge === "hot" && "ðŸ”¥"}
-                        {item.badge === "work" && "âœ“"}
+                        {item.badge === "core" && "⭐"}
+                        {item.badge === "home" && "●"}
+                        {item.badge === "hot" && "🔥"}
+                        {item.badge === "work" && "✓"}
                         {item.badge === "new" && "NEW"}
-                        {item.badge === "cta" && "â†’"}
+                        {item.badge === "cta" && "↑"}
                       </span>
                     )}
                   </Link>
@@ -107,7 +107,7 @@ export default function Navbar() {
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="lg:hidden inline-flex items-center justify-center w-10 h-10 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-300"
-                  aria-label="MenÃº"
+                  aria-label="Menú"
                 >
                   <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     {isOpen ? (
@@ -131,7 +131,7 @@ export default function Navbar() {
                   // ...eliminado enlace a Blog...
                   { href: "/sectores", label: "Sectores" },
                   { href: "/trabajo", label: "Trabajo" },
-                  { href: "/quien-soy", label: "QuiÃ©nes Somos" },
+                  { href: "/quien-soy", label: "Quiénes Somos" },
                   { href: "/contacto", label: "Contacto" },
                 ].map((item) => (
                   <Link 

@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState } from 'react';
 
@@ -25,9 +25,9 @@ export default function ContactForm() {
 
   const servicios = [
     { value: 'consulta-general', label: 'Consulta General' },
-    { value: 'web-seo', label: 'Web + SEO (75â‚¬/mes)' },
-    { value: 'web-seo-ia', label: 'Web + SEO + IA (desde 150â‚¬/mes)' },
-    { value: 'automatizacion', label: 'AutomatizaciÃ³n' },
+    { value: 'web-seo', label: 'Web + SEO (75€/mes)' },
+    { value: 'web-seo-ia', label: 'Web + SEO + IA (desde 150€/mes)' },
+    { value: 'automatizacion', label: 'Automatización' },
     { value: 'seo', label: 'SEO Avanzado' },
     { value: 'otro', label: 'Otro' },
   ];
@@ -49,7 +49,7 @@ export default function ContactForm() {
     setSuccess(false);
 
     try {
-      // ValidaciÃ³n bÃ¡sica
+      // Validación básica
       if (!formData.nombre || !formData.email || !formData.telefono) {
         setError('Por favor, completa todos los campos requeridos');
         setLoading(false);
@@ -78,7 +78,7 @@ export default function ContactForm() {
         mensaje: '',
       });
 
-      // Redirigir a Calendly despuÃ©s de 2 segundos
+      // Redirigir a Calendly después de 2 segundos
       setTimeout(() => {
         window.location.href = `/contacto?name=${encodeURIComponent(
           formData.nombre
@@ -111,12 +111,12 @@ export default function ContactForm() {
             />
           </svg>
         </div>
-        <h3 className="text-2xl font-bold text-white mb-3">Â¡Perfecto!</h3>
+        <h3 className="text-2xl font-bold text-white mb-3">¡Perfecto!</h3>
         <p className="text-green-300 mb-4">
           Hemos recibido tu solicitud. Te redirigimos a Calendly para que agendes tu cita...
         </p>
         <p className="text-sm text-gray-400">
-          Si no se redirige automÃ¡ticamente, haz clic aquÃ­:{' '}
+          Si no se redirige automáticamente, haz clic aquí:{' '}
           <a
             href="/contacto"
             className="text-green-400 hover:underline font-semibold"
@@ -150,7 +150,7 @@ export default function ContactForm() {
       {/* Email */}
       <div>
         <label htmlFor="email" className="block text-sm font-semibold text-white mb-2">
-          Correo electrÃ³nico <span className="text-red-500">*</span>
+          Correo electrónico <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -164,10 +164,10 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* TelÃ©fono */}
+      {/* Teléfono */}
       <div>
         <label htmlFor="telefono" className="block text-sm font-semibold text-white mb-2">
-          TelÃ©fono <span className="text-red-500">*</span>
+          Teléfono <span className="text-red-500">*</span>
         </label>
         <input
           type="tel"
@@ -184,7 +184,7 @@ export default function ContactForm() {
       {/* Servicio */}
       <div>
         <label htmlFor="servicio" className="block text-sm font-semibold text-white mb-2">
-          Â¿QuÃ© tipo de servicio te interesa?
+          ¿Qué tipo de servicio te interesa?
         </label>
         <select
           id="servicio"
@@ -204,7 +204,7 @@ export default function ContactForm() {
       {/* Mensaje */}
       <div>
         <label htmlFor="mensaje" className="block text-sm font-semibold text-white mb-2">
-          CuÃ©ntanos tu proyecto o pregunta
+          Cuéntanos tu proyecto o pregunta
         </label>
         <textarea
           id="mensaje"
@@ -253,7 +253,7 @@ export default function ContactForm() {
       </button>
 
       <p className="text-xs text-gray-400 text-center">
-        Tus datos se guardarÃ¡n de forma segura y los usaremos solo para contactarte.
+        Tus datos se guardarán de forma segura y los usaremos solo para contactarte.
       </p>
     </form>
   );

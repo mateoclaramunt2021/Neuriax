@@ -1,4 +1,4 @@
-﻿import ContactForm from "../../components/ContactForm";
+import ContactForm from "../../components/ContactForm";
 
 export default function Contacto() {
   const faqs = [
@@ -31,7 +31,7 @@ export default function Contacto() {
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              CuÃ©ntanos sobre tu proyecto
+              Cuéntanos sobre tu proyecto
             </h1>
             <p className="text-lg text-gray-300">
               Rellena el formulario y nos pondremos en contacto pronto
@@ -43,7 +43,7 @@ export default function Contacto() {
         </div>
       </section>
 
-      {/* InformaciÃ³n de contacto */}
+      {/* Información de contacto */}
       <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-bold text-white mb-12 text-center">
@@ -95,7 +95,7 @@ export default function Contacto() {
               Preguntas frecuentes
             </h2>
             <p className="text-lg text-slate-300">
-              Respuestas a las dudas mÃ¡s comunes
+              Respuestas a las dudas más comunes
             </p>
           </div>
           <div className="space-y-6">
@@ -117,10 +117,10 @@ export default function Contacto() {
       <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Â¿Listo para transformar tu negocio?
+            ¿Listo para transformar tu negocio?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            La primera conversaciÃ³n es gratuita
+            La primera conversación es gratuita
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/contacto" className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all">
