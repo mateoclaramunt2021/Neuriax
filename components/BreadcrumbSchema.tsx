@@ -8,7 +8,7 @@ export const BreadcrumbSchema = (path: string) => {
     ],
     '/webs': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },
-      { name: 'PÃ¡ginas Web', url: 'https://www.neuriax.com/webs' },
+      { name: 'Páginas Web', url: 'https://www.neuriax.com/webs' },
     ],
     '/portfolio': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },

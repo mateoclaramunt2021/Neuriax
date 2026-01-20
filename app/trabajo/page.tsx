@@ -22,8 +22,8 @@ export default function Trabajo() {
 
     if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es requerido';
     if (!formData.email.trim()) newErrors.email = 'El email es requerido';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email invÃ¡lido';
-    if (!formData.posicion) newErrors.posicion = 'Selecciona una posiciÃ³n';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
+    if (!formData.posicion) newErrors.posicion = 'Selecciona una posición';
     if (!formData.mensaje.trim()) newErrors.mensaje = 'El mensaje es requerido';
 
     setErrors(newErrors);
@@ -55,7 +55,7 @@ export default function Trabajo() {
         setErrors({ ...errors, cv: 'Solo se permiten archivos PDF o Word' });
         return;
       }
-      // Validar tamaÃ±o (max 5MB)
+      // Validar tamaño (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         setErrors({ ...errors, cv: 'El archivo no puede superar 5MB' });
         return;
@@ -96,7 +96,7 @@ export default function Trabajo() {
       });
 
       if (response.ok) {
-        setSubmitMessage('Â¡Tu postulaciÃ³n ha sido enviada exitosamente! Pronto recibirÃ¡s un email de confirmaciÃ³n.');
+        setSubmitMessage('!¡Tu postulación ha sido enviada exitosamente! Pronto recibirás un email de confirmación.');
         setFormData({
           nombre: '',
           email: '',
@@ -130,10 +130,10 @@ export default function Trabajo() {
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Ãšnete a Nuestro Equipo
+            Únete a Nuestro Equipo
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Estamos buscando talento apasionado por la tecnologÃ­a y la innovaciÃ³n. Si quieres formar parte de Neuriax, envÃ­anos tu postulaciÃ³n.
+            Estamos buscando talento apasionado por la tecnología e innovación. Si quieres formar parte de Neuriax, envíanos tu postulación.
           </p>
         </div>
       </section>
@@ -142,7 +142,7 @@ export default function Trabajo() {
       <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-4xl mx-auto">
           <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Formulario de PostulaciÃ³n</h2>
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">Formulario de Postulación</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">

@@ -3,23 +3,23 @@
 export default function Contacto() {
   const faqs = [
     {
-      question: "Â¿CuÃ¡nto tiempo toma implementar una soluciÃ³n?",
-      answer: "Depende de la complejidad, pero la mayorÃ­a de soluciones bÃ¡sicas estÃ¡n operativas en 1-2 semanas. Soluciones mÃ¡s complejas pueden tomar 4-6 semanas."
+      question: "¿Cuánto tiempo toma implementar una solución?",
+      answer: "Depende de la complejidad, pero la mayoría de soluciones básicas están operativas en 1-2 semanas. Soluciones más complejas pueden tomar 4-6 semanas."
     },
     {
-      question: "Â¿Trabajas con empresas de cualquier tamaÃ±o?",
-      answer: "SÃ­, trabajamos tanto con startups y PYMEs como con empresas mÃ¡s grandes. Adaptamos nuestras soluciones al presupuesto y necesidades de cada cliente."
+      question: "¿Trabajas con empresas de cualquier tamaño?",
+      answer: "Sí, trabajamos tanto con startups y PYMEs como con empresas más grandes. Adaptamos nuestras soluciones al presupuesto y necesidades de cada cliente."
     },
     {
-      question: "Â¿QuÃ© pasa si no estoy satisfecho con los resultados?",
-      answer: "Todas nuestras implementaciones incluyen un perÃ­odo de garantÃ­a y ajustes gratuitos. Nuestro objetivo es que obtengas resultados concretos y medibles."
+      question: "¿Qué pasa si no estoy satisfecho con los resultados?",
+      answer: "Todas nuestras implementaciones incluyen un período de garantía y ajustes gratuitos. Nuestro objetivo es que obtengas resultados concretos y medibles."
     },
     {
-      question: "Â¿Ofreces soporte despuÃ©s de la implementaciÃ³n?",
-      answer: "SÃ­, incluimos soporte tÃ©cnico y mantenimiento por al menos 3 meses despuÃ©s de la implementaciÃ³n, con opciÃ³n a contratos de soporte continuo."
+      question: "¿Ofreces soporte después de la implementación?",
+      answer: "Sí, incluimos soporte técnico y mantenimiento por al menos 3 meses después de la implementación, con opción a contratos de soporte continuo."
     },
     {
-      question: "Â¿CÃ³mo mides el Ã©xito de las soluciones?",
+      question: "¿Cómo mides el éxito de las soluciones?",
       answer: "Establecemos KPIs claros desde el inicio y realizamos seguimiento mensual con reportes detallados de los resultados obtenidos."
     }
   ];

@@ -22,7 +22,7 @@ export default function Login() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validaciones bÃ¡sicas
+    // Validaciones básicas
     if (!formData.email || !formData.password) {
       setMessage('Todos los campos son obligatorios.');
       return;
@@ -45,7 +45,7 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Iniciar SesiÃ³n</h1>
+        <h1 className="text-3xl font-bold text-center text-gray-900 mb-8">Iniciar Sesión</h1>
         
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -62,7 +62,7 @@ export default function Login() {
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">ContraseÃ±a</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
             <input
               type="password"
               id="password"
@@ -78,7 +78,7 @@ export default function Login() {
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Iniciar sesiÃ³n (demo)
+            Iniciar sesión (demo)
           </button>
         </form>
         
