@@ -1,9 +1,9 @@
-import React from 'react';
+﻿import React from 'react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Legal | Neuriax - Automatización e IA',
-  description: 'Información legal, privacidad y políticas de cookies.',
+  title: 'Legal | Neuriax - AutomatizaciÃ³n e IA',
+  description: 'InformaciÃ³n legal, privacidad y polÃ­ticas de cookies.',
   robots: 'noindex, nofollow',
 };
 
@@ -23,7 +23,7 @@ export default function LegalLayout({ children, title, lastUpdated, toc }: Legal
           <h1 className="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
           {lastUpdated && (
             <p className="text-sm text-gray-500">
-              Última actualización: <strong>{lastUpdated}</strong>
+              Ãšltima actualizaciÃ³n: <strong>{lastUpdated}</strong>
             </p>
           )}
         </div>
@@ -58,8 +58,8 @@ export default function LegalLayout({ children, title, lastUpdated, toc }: Legal
         {/* Footer info */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <p className="text-xs text-gray-500">
-            Este documento se proporciona únicamente a efectos informativos. No constituye asesoramiento legal. 
-            Si tienes dudas sobre nuestras políticas, contáctanos en{' '}
+            Este documento se proporciona Ãºnicamente a efectos informativos. No constituye asesoramiento legal. 
+            Si tienes dudas sobre nuestras polÃ­ticas, contÃ¡ctanos en{' '}
             <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:text-blue-800">
               neuriaxx@gmail.com
             </a>.
@@ -69,3 +69,4 @@ export default function LegalLayout({ children, title, lastUpdated, toc }: Legal
     </div>
   );
 }
+

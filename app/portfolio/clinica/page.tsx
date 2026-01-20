@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -8,75 +8,75 @@ export default function ClinicaDemo() {
     {
       titulo: "Medicina General",
       desc: "Consultas de salud integral y seguimiento preventivo",
-      icon: "🩺"
+      icon: "ðŸ©º"
     },
     {
-      titulo: "Dermatología",
-      desc: "Tratamientos de piel, acné, envejecimiento y estética",
-      icon: "✨"
+      titulo: "DermatologÃ­a",
+      desc: "Tratamientos de piel, acnÃ©, envejecimiento y estÃ©tica",
+      icon: "âœ¨"
     },
     {
-      titulo: "Odontología",
-      desc: "Implantes, ortodoncia, limpieza y estética dental",
-      icon: "😁"
+      titulo: "OdontologÃ­a",
+      desc: "Implantes, ortodoncia, limpieza y estÃ©tica dental",
+      icon: "ðŸ˜"
     },
     {
-      titulo: "Oftalmología",
-      desc: "Revisión visual, graduación y cirugía refractiva",
-      icon: "👁️"
+      titulo: "OftalmologÃ­a",
+      desc: "RevisiÃ³n visual, graduaciÃ³n y cirugÃ­a refractiva",
+      icon: "ðŸ‘ï¸"
     },
     {
-      titulo: "Cardiología",
-      desc: "Prevención y tratamiento de enfermedades cardíacas",
-      icon: "❤️"
+      titulo: "CardiologÃ­a",
+      desc: "PrevenciÃ³n y tratamiento de enfermedades cardÃ­acas",
+      icon: "â¤ï¸"
     },
     {
       titulo: "Fisioterapia",
-      desc: "Rehabilitación y tratamiento de lesiones musculares",
-      icon: "💪"
+      desc: "RehabilitaciÃ³n y tratamiento de lesiones musculares",
+      icon: "ðŸ’ª"
     }
   ];
 
   const medicos = [
     {
-      nombre: "Dr. Juan García López",
-      especialidad: "Médico General",
-      experiencia: "18 años"
+      nombre: "Dr. Juan GarcÃ­a LÃ³pez",
+      especialidad: "MÃ©dico General",
+      experiencia: "18 aÃ±os"
     },
     {
-      nombre: "Dra. María Fernández Silva",
-      especialidad: "Dermatología",
-      experiencia: "12 años"
+      nombre: "Dra. MarÃ­a FernÃ¡ndez Silva",
+      especialidad: "DermatologÃ­a",
+      experiencia: "12 aÃ±os"
     },
     {
-      nombre: "Dr. Carlos Rodríguez Pérez",
-      especialidad: "Odontología",
-      experiencia: "15 años"
+      nombre: "Dr. Carlos RodrÃ­guez PÃ©rez",
+      especialidad: "OdontologÃ­a",
+      experiencia: "15 aÃ±os"
     },
     {
-      nombre: "Dra. Elena Martínez Ruiz",
-      especialidad: "Oftalmología",
-      experiencia: "14 años"
+      nombre: "Dra. Elena MartÃ­nez Ruiz",
+      especialidad: "OftalmologÃ­a",
+      experiencia: "14 aÃ±os"
     }
   ];
 
   const testimonios = [
     {
-      nombre: "Isabel González",
+      nombre: "Isabel GonzÃ¡lez",
       ciudad: "Barcelona",
-      texto: "Excelente atención. Los médicos son muy profesionales y el personal muy amable. La clínica tiene un ambiente tranquilo y acogedor.",
+      texto: "Excelente atenciÃ³n. Los mÃ©dicos son muy profesionales y el personal muy amable. La clÃ­nica tiene un ambiente tranquilo y acogedor.",
       estrellas: 5
     },
     {
-      nombre: "Antonio Rodríguez",
+      nombre: "Antonio RodrÃ­guez",
       ciudad: "Madrid",
-      texto: "Muy satisfecho con el servicio. El equipo médico escucha tus preocupaciones y explica bien los tratamientos. Lo recomiendo.",
+      texto: "Muy satisfecho con el servicio. El equipo mÃ©dico escucha tus preocupaciones y explica bien los tratamientos. Lo recomiendo.",
       estrellas: 5
     },
     {
-      nombre: "Laura Jiménez",
+      nombre: "Laura JimÃ©nez",
       ciudad: "Valencia",
-      texto: "Clínica moderna con excelentes instalaciones. Citas puntuales y un trato muy personal. Voy a volver sin duda.",
+      texto: "ClÃ­nica moderna con excelentes instalaciones. Citas puntuales y un trato muy personal. Voy a volver sin duda.",
       estrellas: 5
     }
   ];
@@ -87,11 +87,11 @@ export default function ClinicaDemo() {
       <div className="sticky top-0 z-50 w-full bg-yellow-100 border-b-4 border-yellow-400 px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-start gap-3">
-            <div className="text-2xl mt-1">⚠️</div>
+            <div className="text-2xl mt-1">âš ï¸</div>
             <div>
-              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÁGINA DE DEMOSTRACIÓN</p>
+              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÃGINA DE DEMOSTRACIÃ“N</p>
               <p className="text-yellow-800 mt-1">
-                Las imágenes mostradas son genéricas. Este es un ejemplo de diseño web para clínicas médicas. En una versión real, utilizarías fotos auténticas de tu clínica, equipo y pacientes.
+                Las imÃ¡genes mostradas son genÃ©ricas. Este es un ejemplo de diseÃ±o web para clÃ­nicas mÃ©dicas. En una versiÃ³n real, utilizarÃ­as fotos autÃ©nticas de tu clÃ­nica, equipo y pacientes.
               </p>
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function ClinicaDemo() {
         <div className="absolute inset-0">
           <img 
             src="/demos/clinica/hero.jpg"
-            alt="Clínica Médica"
+            alt="ClÃ­nica MÃ©dica"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-blue-900/60 via-blue-800/50 to-teal-800/40"></div>
@@ -115,7 +115,7 @@ export default function ClinicaDemo() {
               Tu salud en las mejores manos
             </h1>
             <p className="text-lg md:text-xl mb-10 opacity-95 font-light leading-relaxed">
-              Clínica integral con profesionales especializados. Atención personalizada, tecnología moderna y compromiso con tu bienestar.
+              ClÃ­nica integral con profesionales especializados. AtenciÃ³n personalizada, tecnologÃ­a moderna y compromiso con tu bienestar.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
@@ -142,24 +142,24 @@ export default function ClinicaDemo() {
             <div className="relative h-96 bg-blue-200 rounded-xl overflow-hidden shadow-lg">
               <img 
                 src="/demos/clinica/clinica.jpg"
-                alt="Clínica Médica"
+                alt="ClÃ­nica MÃ©dica"
                 className="w-full h-full object-cover"
               />
             </div>
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Sobre Nuestra Clínica</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Sobre Nuestra ClÃ­nica</h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Desde 2010, nos dedicamos a proporcionar atención médica de calidad con un enfoque centrado en el paciente. Nuestro equipo de profesionales cuenta con años de experiencia y se mantiene constantemente actualizado en los últimos avances médicos.
+                Desde 2010, nos dedicamos a proporcionar atenciÃ³n mÃ©dica de calidad con un enfoque centrado en el paciente. Nuestro equipo de profesionales cuenta con aÃ±os de experiencia y se mantiene constantemente actualizado en los Ãºltimos avances mÃ©dicos.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Disponemos de instalaciones modernas, equipamiento de última generación y un ambiente acogedor para que te sientas cómodo durante tu visita.
+                Disponemos de instalaciones modernas, equipamiento de Ãºltima generaciÃ³n y un ambiente acogedor para que te sientas cÃ³modo durante tu visita.
               </p>
               
               <div className="grid grid-cols-3 gap-6">
                 <div>
                   <p className="text-3xl font-bold text-blue-600">14+</p>
-                  <p className="text-sm text-gray-600 mt-1">Años de Experiencia</p>
+                  <p className="text-sm text-gray-600 mt-1">AÃ±os de Experiencia</p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-blue-600">12+</p>
@@ -181,7 +181,7 @@ export default function ClinicaDemo() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nuestros Servicios</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Amplia gama de especialidades médicas para cuidar tu salud de forma integral.
+              Amplia gama de especialidades mÃ©dicas para cuidar tu salud de forma integral.
             </p>
           </div>
 
@@ -200,11 +200,11 @@ export default function ClinicaDemo() {
         </div>
       </section>
 
-      {/* Equipo Médico */}
+      {/* Equipo MÃ©dico */}
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nuestro Equipo Médico</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nuestro Equipo MÃ©dico</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Profesionales especializados dedicados a tu salud y bienestar.
             </p>
@@ -217,7 +217,7 @@ export default function ClinicaDemo() {
                 className="bg-white rounded-lg shadow-md hover:shadow-xl transition-all overflow-hidden"
               >
                 <div className="h-48 bg-gradient-to-br from-blue-400 to-teal-400 flex items-center justify-center text-6xl">
-                  👨‍⚕️
+                  ðŸ‘¨â€âš•ï¸
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{medico.nombre}</h3>
@@ -266,7 +266,7 @@ export default function ClinicaDemo() {
             Agenda tu Cita Hoy
           </h2>
           <p className="text-lg md:text-xl mb-12 opacity-95">
-            Contáctanos y te atenderemos lo antes posible. Nuestro equipo está disponible para cuidar de ti.
+            ContÃ¡ctanos y te atenderemos lo antes posible. Nuestro equipo estÃ¡ disponible para cuidar de ti.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
@@ -285,39 +285,39 @@ export default function ClinicaDemo() {
         </div>
       </section>
 
-      {/* Ubicación y Contacto */}
+      {/* UbicaciÃ³n y Contacto */}
       <section id="ubicacion" className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Mapa */}
             <div className="rounded-xl overflow-hidden shadow-lg h-96 bg-gray-300 flex items-center justify-center">
               <div className="text-center">
-                <div className="text-6xl mb-4">🗺️</div>
-                <p className="text-gray-600">Mapa de ubicación</p>
+                <div className="text-6xl mb-4">ðŸ—ºï¸</div>
+                <p className="text-gray-600">Mapa de ubicaciÃ³n</p>
               </div>
             </div>
 
-            {/* Información */}
+            {/* InformaciÃ³n */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-10 text-gray-900">Ubicación y Horarios</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-10 text-gray-900">UbicaciÃ³n y Horarios</h2>
               
               <div className="mb-10">
-                <h3 className="text-xl font-bold mb-3 text-blue-600">📍 Dirección</h3>
+                <h3 className="text-xl font-bold mb-3 text-blue-600">ðŸ“ DirecciÃ³n</h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
                   Calle de la Salud, 123<br/>
-                  28001 Madrid, España<br/>
+                  28001 Madrid, EspaÃ±a<br/>
                   <span className="text-sm text-gray-600 mt-2 block">A 5 min de Metro Sevilla</span>
                 </p>
               </div>
 
               <div className="mb-10">
-                <h3 className="text-xl font-bold mb-3 text-blue-600">🕐 Horarios</h3>
+                <h3 className="text-xl font-bold mb-3 text-blue-600">ðŸ• Horarios</h3>
                 <ul className="text-gray-700 text-lg space-y-2">
-                  <li><strong>Lunes a Viernes:</strong> 08:00 – 20:00</li>
-                  <li><strong>Sábados:</strong> 09:00 – 14:00</li>
+                  <li><strong>Lunes a Viernes:</strong> 08:00 â€“ 20:00</li>
+                  <li><strong>SÃ¡bados:</strong> 09:00 â€“ 14:00</li>
                   <li><strong>Domingos y Festivos:</strong> Cerrado</li>
                 </ul>
-                <p className="text-xs text-gray-600 mt-4">💡 Urgencias: disponibles 24/7</p>
+                <p className="text-xs text-gray-600 mt-4">ðŸ’¡ Urgencias: disponibles 24/7</p>
               </div>
 
               <div className="space-y-4">
@@ -349,14 +349,14 @@ export default function ClinicaDemo() {
                   </div>
                   <div>
                     <p className="font-bold text-gray-900">WhatsApp</p>
-                    <p className="text-green-600 font-semibold">Envía mensaje directo</p>
+                    <p className="text-green-600 font-semibold">EnvÃ­a mensaje directo</p>
                   </div>
                 </a>
               </div>
 
               <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <p className="text-gray-700 text-sm">
-                  <strong>⚡ Respuesta rápida:</strong> Respondemos en menos de 30 minutos. Para urgencias contacta directamente.
+                  <strong>âš¡ Respuesta rÃ¡pida:</strong> Respondemos en menos de 30 minutos. Para urgencias contacta directamente.
                 </p>
               </div>
             </div>
@@ -369,9 +369,9 @@ export default function ClinicaDemo() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h4 className="text-white font-semibold mb-4">Clínica Médica</h4>
+              <h4 className="text-white font-semibold mb-4">ClÃ­nica MÃ©dica</h4>
               <p className="text-sm">
-                Atención médica integral con profesionales especializados. Tu salud es nuestra prioridad.
+                AtenciÃ³n mÃ©dica integral con profesionales especializados. Tu salud es nuestra prioridad.
               </p>
             </div>
 
@@ -380,7 +380,7 @@ export default function ClinicaDemo() {
               <ul className="text-sm space-y-2">
                 <li><a href="#servicios" className="hover:text-white transition-colors">Nuestros Servicios</a></li>
                 <li><a href="#servicios" className="hover:text-white transition-colors">Especialidades</a></li>
-                <li><a href="#ubicacion" className="hover:text-white transition-colors">Ubicación</a></li>
+                <li><a href="#ubicacion" className="hover:text-white transition-colors">UbicaciÃ³n</a></li>
                 <li><a href="#cita" className="hover:text-white transition-colors">Agendar Cita</a></li>
               </ul>
             </div>
@@ -390,13 +390,13 @@ export default function ClinicaDemo() {
               <ul className="text-sm space-y-2">
                 <li><a href="tel:+34915823456" className="hover:text-white transition-colors">+34 91 582 3456</a></li>
                 <li><a href="https://wa.me/34915823456" className="hover:text-white transition-colors">WhatsApp</a></li>
-                <li><a href="#ubicacion" className="hover:text-white transition-colors">Ubicación</a></li>
+                <li><a href="#ubicacion" className="hover:text-white transition-colors">UbicaciÃ³n</a></li>
                 <li><a href="#ubicacion" className="hover:text-white transition-colors">Horarios</a></li>
               </ul>
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Síguenos</h4>
+              <h4 className="text-white font-semibold mb-4">SÃ­guenos</h4>
               <div className="flex gap-4 text-sm">
                 <a href="#" className="hover:text-white transition-colors">Facebook</a>
                 <a href="#" className="hover:text-white transition-colors">Instagram</a>
@@ -407,13 +407,13 @@ export default function ClinicaDemo() {
 
           <div className="border-t border-gray-700 pt-8 text-center">
             <p className="text-sm mb-3">
-              © 2024 Clínica Médica. Todos los derechos reservados.
+              Â© 2024 ClÃ­nica MÃ©dica. Todos los derechos reservados.
             </p>
             <p className="text-xs text-gray-400 mb-4">
-              ⚠️ <strong>PÁGINA DE DEMOSTRACIÓN:</strong> Este es un ejemplo de diseño web para clínicas médicas.
+              âš ï¸ <strong>PÃGINA DE DEMOSTRACIÃ“N:</strong> Este es un ejemplo de diseÃ±o web para clÃ­nicas mÃ©dicas.
             </p>
             <p className="text-xs text-gray-500">
-              Diseñado por <a href="https://www.neuriax.com" className="text-blue-500 hover:text-blue-400 transition-colors">Neuriax</a> | Estrategia Digital para Negocios Locales
+              DiseÃ±ado por <a href="https://www.neuriax.com" className="text-blue-500 hover:text-blue-400 transition-colors">Neuriax</a> | Estrategia Digital para Negocios Locales
             </p>
           </div>
         </div>
@@ -421,3 +421,4 @@ export default function ClinicaDemo() {
     </div>
   );
 }
+

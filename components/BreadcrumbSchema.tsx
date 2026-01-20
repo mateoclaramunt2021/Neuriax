@@ -1,4 +1,4 @@
-// components/BreadcrumbSchema.tsx
+﻿// components/BreadcrumbSchema.tsx
 export const BreadcrumbSchema = (path: string) => {
   const routes: { [key: string]: { name: string; url: string }[] } = {
     '/': [{ name: 'Inicio', url: 'https://www.neuriax.com/' }],
@@ -8,7 +8,7 @@ export const BreadcrumbSchema = (path: string) => {
     ],
     '/webs': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },
-      { name: 'Páginas Web', url: 'https://www.neuriax.com/webs' },
+      { name: 'PÃ¡ginas Web', url: 'https://www.neuriax.com/webs' },
     ],
     '/portfolio': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },
@@ -33,3 +33,4 @@ export const BreadcrumbSchema = (path: string) => {
     })),
   };
 };
+

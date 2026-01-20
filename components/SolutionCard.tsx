@@ -1,4 +1,4 @@
-interface SolutionCardProps {
+﻿interface SolutionCardProps {
   icon: React.ReactNode;
   title: string;
   problem: string;
@@ -21,7 +21,7 @@ export default function SolutionCard({ icon, title, problem, solution, result }:
         </div>
 
         <div>
-          <h4 className="font-semibold text-blue-400 mb-2 group-hover:text-blue-300 transition-colors duration-300">Solución</h4>
+          <h4 className="font-semibold text-blue-400 mb-2 group-hover:text-blue-300 transition-colors duration-300">SoluciÃ³n</h4>
           <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">{solution}</p>
         </div>
 

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -7,75 +7,75 @@ export default function ConsultoriaDemo() {
   const servicios = [
     {
       titulo: "Estrategia Digital",
-      desc: "Plan integral de transformación digital para tu negocio",
-      icon: "📱"
+      desc: "Plan integral de transformaciÃ³n digital para tu negocio",
+      icon: "ðŸ“±"
     },
     {
       titulo: "Posicionamiento SEO",
-      desc: "Domina Google y atrae clientes orgánicos constantemente",
-      icon: "🔍"
+      desc: "Domina Google y atrae clientes orgÃ¡nicos constantemente",
+      icon: "ðŸ”"
     },
     {
       titulo: "Marketing Digital",
-      desc: "Campañas efectivas que convierten visitantes en clientes",
-      icon: "📊"
+      desc: "CampaÃ±as efectivas que convierten visitantes en clientes",
+      icon: "ðŸ“Š"
     },
     {
       titulo: "Desarrollo Web",
-      desc: "Webs rápidas, hermosas y que venden de verdad",
-      icon: "💻"
+      desc: "Webs rÃ¡pidas, hermosas y que venden de verdad",
+      icon: "ðŸ’»"
     },
     {
-      titulo: "Consultoría de Negocios",
-      desc: "Asesoramiento estratégico para crecer rentablemente",
-      icon: "📈"
+      titulo: "ConsultorÃ­a de Negocios",
+      desc: "Asesoramiento estratÃ©gico para crecer rentablemente",
+      icon: "ðŸ“ˆ"
     },
     {
-      titulo: "Branding y Diseño",
+      titulo: "Branding y DiseÃ±o",
       desc: "Identidad visual que comunica tu propuesta de valor",
-      icon: "🎨"
+      icon: "ðŸŽ¨"
     }
   ];
 
   const casos = [
     {
-      titulo: "Peluquería",
+      titulo: "PeluquerÃ­a",
       resultado: "Reservas duplicadas",
       tiempo: "6 meses"
     },
     {
       titulo: "Restaurante",
-      resultado: "Más visitas a web",
+      resultado: "MÃ¡s visitas a web",
       tiempo: "8 meses"
     },
     {
-      titulo: "Clínica Médica",
+      titulo: "ClÃ­nica MÃ©dica",
       resultado: "Citas automatizadas",
       tiempo: "5 meses"
     },
     {
       titulo: "E-commerce",
-      resultado: "Más ventas online",
+      resultado: "MÃ¡s ventas online",
       tiempo: "4 meses"
     }
   ];
 
   const testimonios = [
     {
-      nombre: "Juan Martínez",
-      empresa: "Peluquería Premium",
-      texto: "Transformaron completamente mi presencia online. Ahora recibo reservas todos los días. ¡Excelentes profesionales!",
+      nombre: "Juan MartÃ­nez",
+      empresa: "PeluquerÃ­a Premium",
+      texto: "Transformaron completamente mi presencia online. Ahora recibo reservas todos los dÃ­as. Â¡Excelentes profesionales!",
       estrellas: 5
     },
     {
-      nombre: "María García",
+      nombre: "MarÃ­a GarcÃ­a",
       empresa: "Restaurante Centro",
-      texto: "La estrategia de marketing nos posicionó como referentes en la zona. Ingresos triplicados en un año.",
+      texto: "La estrategia de marketing nos posicionÃ³ como referentes en la zona. Ingresos triplicados en un aÃ±o.",
       estrellas: 5
     },
     {
-      nombre: "Carlos López",
-      empresa: "Clínica Dental",
+      nombre: "Carlos LÃ³pez",
+      empresa: "ClÃ­nica Dental",
       texto: "Profesionales serios que entienden los negocios. Resultados reales y medibles. Los recomiendo sin dudarlo.",
       estrellas: 5
     }
@@ -87,11 +87,11 @@ export default function ConsultoriaDemo() {
       <div className="sticky top-0 z-50 w-full bg-yellow-100 border-b-4 border-yellow-400 px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-start gap-3">
-            <div className="text-2xl mt-1">⚠️</div>
+            <div className="text-2xl mt-1">âš ï¸</div>
             <div>
-              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÁGINA DE DEMOSTRACIÓN</p>
+              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÃGINA DE DEMOSTRACIÃ“N</p>
               <p className="text-yellow-800 mt-1">
-                Las imágenes mostradas son genéricas. Este es un ejemplo de diseño web para agencias de consultoría. En una versión real, utilizarías fotos de tu equipo, proyectos y clientes.
+                Las imÃ¡genes mostradas son genÃ©ricas. Este es un ejemplo de diseÃ±o web para agencias de consultorÃ­a. En una versiÃ³n real, utilizarÃ­as fotos de tu equipo, proyectos y clientes.
               </p>
             </div>
           </div>
@@ -101,7 +101,7 @@ export default function ConsultoriaDemo() {
       {/* Hero Section */}
       <section className="relative flex items-center justify-center overflow-hidden" style={{ minHeight: '75vh' }}>
         <div className="absolute inset-0">
-          <img src="/demos/consultoria/hero.jpg" alt="Consultoría Digital" className="w-full h-full object-cover" />
+          <img src="/demos/consultoria/hero.jpg" alt="ConsultorÃ­a Digital" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/70 via-purple-800/60 to-indigo-900/70"></div>
         </div>
         
@@ -136,29 +136,29 @@ export default function ConsultoriaDemo() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-96 rounded-xl overflow-hidden shadow-lg">
-              <img src="/demos/consultoria/about.jpg" alt="Equipo de Consultoría" className="w-full h-full object-cover" />
+              <img src="/demos/consultoria/about.jpg" alt="Equipo de ConsultorÃ­a" className="w-full h-full object-cover" />
             </div>
 
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Quiénes Somos</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">QuiÃ©nes Somos</h2>
               <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                Somos una agencia de consultoría digital especializada en transformar negocios locales en referencias en línea. Con más de 10 años de experiencia, hemos ayudado a cientos de empresas a crecer exponencialmente.
+                Somos una agencia de consultorÃ­a digital especializada en transformar negocios locales en referencias en lÃ­nea. Con mÃ¡s de 10 aÃ±os de experiencia, hemos ayudado a cientos de empresas a crecer exponencialmente.
               </p>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Nuestro enfoque es simple: combinar estrategia, tecnología y creatividad para obtener resultados medibles. No creemos en promesas vagas, solo en resultados verificables.
+                Nuestro enfoque es simple: combinar estrategia, tecnologÃ­a y creatividad para obtener resultados medibles. No creemos en promesas vagas, solo en resultados verificables.
               </p>
               
               <div className="grid grid-cols-3 gap-6">
                 <div>
                   <p className="text-3xl font-bold text-indigo-600">10+</p>
-                  <p className="text-sm text-gray-600 mt-1">Años Experiencia</p>
+                  <p className="text-sm text-gray-600 mt-1">AÃ±os Experiencia</p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-indigo-600">500+</p>
                   <p className="text-sm text-gray-600 mt-1">Proyectos Exitosos</p>
                 </div>
                 <div>
-                  <p className="text-3xl font-bold text-indigo-600">✓</p>
+                  <p className="text-3xl font-bold text-indigo-600">âœ“</p>
                   <p className="text-sm text-gray-600 mt-1">Clientes Satisfechos</p>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function ConsultoriaDemo() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Nuestros Servicios</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Soluciones integrales de consultoría digital para cada etapa de tu crecimiento.
+              Soluciones integrales de consultorÃ­a digital para cada etapa de tu crecimiento.
             </p>
           </div>
 
@@ -192,11 +192,11 @@ export default function ConsultoriaDemo() {
         </div>
       </section>
 
-      {/* Casos de Éxito */}
+      {/* Casos de Ã‰xito */}
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Casos de Éxito</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Casos de Ã‰xito</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Resultados reales de empresas que confiaron en nuestra estrategia.
             </p>
@@ -210,7 +210,7 @@ export default function ConsultoriaDemo() {
               >
                 <div className="flex items-start gap-3 mb-4">
                   <div className="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center">
-                    <span className="text-xl">✓</span>
+                    <span className="text-xl">âœ“</span>
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">{caso.titulo}</h3>
@@ -260,9 +260,9 @@ export default function ConsultoriaDemo() {
           
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { numero: "01", titulo: "Análisis", desc: "Entendemos tu negocio, mercado y oportunidades" },
-              { numero: "02", titulo: "Estrategia", desc: "Diseñamos plan personalizado con objetivos claros" },
-              { numero: "03", titulo: "Ejecución", desc: "Implementamos con precisión y dedicación total" },
+              { numero: "01", titulo: "AnÃ¡lisis", desc: "Entendemos tu negocio, mercado y oportunidades" },
+              { numero: "02", titulo: "Estrategia", desc: "DiseÃ±amos plan personalizado con objetivos claros" },
+              { numero: "03", titulo: "EjecuciÃ³n", desc: "Implementamos con precisiÃ³n y dedicaciÃ³n total" },
               { numero: "04", titulo: "Resultados", desc: "Medimos, optimizamos y escalamos el crecimiento" }
             ].map((paso, idx) => (
               <div key={idx} className="text-center">
@@ -281,7 +281,7 @@ export default function ConsultoriaDemo() {
       <section id="contacto" className="py-24 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            ¿Listo para crecer?
+            Â¿Listo para crecer?
           </h2>
           <p className="text-lg md:text-xl mb-12 opacity-95">
             Agenda una consulta gratuita con nuestro equipo. Sin compromisos, solo soluciones.
@@ -308,9 +308,9 @@ export default function ConsultoriaDemo() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div>
-              <h4 className="text-white font-semibold mb-4">Consultoría Digital</h4>
+              <h4 className="text-white font-semibold mb-4">ConsultorÃ­a Digital</h4>
               <p className="text-sm">
-                Transformamos negocios a través de estrategia digital integral. Resultados comprobados.
+                Transformamos negocios a travÃ©s de estrategia digital integral. Resultados comprobados.
               </p>
             </div>
 
@@ -334,7 +334,7 @@ export default function ConsultoriaDemo() {
             </div>
 
             <div>
-              <h4 className="text-white font-semibold mb-4">Síguenos</h4>
+              <h4 className="text-white font-semibold mb-4">SÃ­guenos</h4>
               <div className="flex gap-4 text-sm">
                 <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
                 <a href="#" className="hover:text-white transition-colors">Twitter</a>
@@ -345,13 +345,13 @@ export default function ConsultoriaDemo() {
 
           <div className="border-t border-gray-700 pt-8 text-center">
             <p className="text-sm mb-3">
-              © 2024 Consultoría Digital. Todos los derechos reservados.
+              Â© 2024 ConsultorÃ­a Digital. Todos los derechos reservados.
             </p>
             <p className="text-xs text-gray-400 mb-4">
-              ⚠️ <strong>PÁGINA DE DEMOSTRACIÓN:</strong> Este es un ejemplo de diseño web para agencias de consultoría.
+              âš ï¸ <strong>PÃGINA DE DEMOSTRACIÃ“N:</strong> Este es un ejemplo de diseÃ±o web para agencias de consultorÃ­a.
             </p>
             <p className="text-xs text-gray-500">
-              Diseñado por <a href="https://www.neuriax.com" className="text-indigo-500 hover:text-indigo-400 transition-colors">Neuriax</a> | Estrategia Digital para Agencias
+              DiseÃ±ado por <a href="https://www.neuriax.com" className="text-indigo-500 hover:text-indigo-400 transition-colors">Neuriax</a> | Estrategia Digital para Agencias
             </p>
           </div>
         </div>
@@ -359,3 +359,4 @@ export default function ConsultoriaDemo() {
     </div>
   );
 }
+

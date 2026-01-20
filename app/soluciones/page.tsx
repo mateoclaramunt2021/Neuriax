@@ -1,14 +1,14 @@
-import SolutionCard from "../../components/SolutionCard";
+﻿import SolutionCard from "../../components/SolutionCard";
 import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Soluciones de Automatización e IA | Neuriax | Transformación Digital",
-  description: "Soluciones inteligentes de automatización e IA para empresas. Eliminamos procesos manuales, optimizamos operaciones y escalamos resultados. Consulta gratuita.",
-  keywords: "automatización de procesos, inteligencia artificial, soluciones digitales, automatización IA, sistemas inteligentes, transformación digital",
+  title: "Soluciones de AutomatizaciÃ³n e IA | Neuriax | TransformaciÃ³n Digital",
+  description: "Soluciones inteligentes de automatizaciÃ³n e IA para empresas. Eliminamos procesos manuales, optimizamos operaciones y escalamos resultados. Consulta gratuita.",
+  keywords: "automatizaciÃ³n de procesos, inteligencia artificial, soluciones digitales, automatizaciÃ³n IA, sistemas inteligentes, transformaciÃ³n digital",
   openGraph: {
-    title: "Soluciones de Automatización e IA | Neuriax",
-    description: "Automatización inteligente + IA aplicada = Operaciones escalables sin fricción",
+    title: "Soluciones de AutomatizaciÃ³n e IA | Neuriax",
+    description: "AutomatizaciÃ³n inteligente + IA aplicada = Operaciones escalables sin fricciÃ³n",
     url: "https://www.neuriax.com/soluciones",
   },
   alternates: {
@@ -32,20 +32,20 @@ export default function Soluciones() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Soluciones de Automatización e IA Profesionales
+                Soluciones de AutomatizaciÃ³n e IA Profesionales
               </h1>
               <h2 className="text-xl md:text-2xl mb-4 font-semibold text-blue-400">
                 Transforma tu negocio con inteligencia artificial
               </h2>
               <p className="text-lg mb-8 opacity-90">
-                Sistemas inteligentes de automatización que eliminan procesos manuales, reducen costos operacionales y escalan tu negocio. Soluciones digitales de IA aplicada.
+                Sistemas inteligentes de automatizaciÃ³n que eliminan procesos manuales, reducen costos operacionales y escalan tu negocio. Soluciones digitales de IA aplicada.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
-                  href="https://calendly.com/neuriax/30min"
+                  href="/contacto"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
-                  Consulta Gratuita - Automatización e IA
+                  Consulta Gratuita - AutomatizaciÃ³n e IA
                 </a>
                 <a
                   href="#soluciones"
@@ -60,7 +60,7 @@ export default function Soluciones() {
               <div className="relative h-96 w-full">
                 <Image
                   src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="Automatización y soluciones digitales"
+                  alt="AutomatizaciÃ³n y soluciones digitales"
                   fill
                   className="object-cover rounded-lg shadow-2xl"
                   priority
@@ -84,15 +84,15 @@ export default function Soluciones() {
               SOLUCIONES
             </span>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
-              Tres pilares de transformación
+              Tres pilares de transformaciÃ³n
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Cada solución resuelve un problema crítico de tu negocio. Implementación rápida, resultados medibles.
+              Cada soluciÃ³n resuelve un problema crÃ­tico de tu negocio. ImplementaciÃ³n rÃ¡pida, resultados medibles.
             </p>
           </div>
 
           <div className="space-y-8">
-            {/* Solución 1: Captación */}
+            {/* SoluciÃ³n 1: CaptaciÃ³n */}
             <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300">
               <div className="grid lg:grid-cols-3 gap-0">
                 <div className="bg-gradient-to-br from-cyan-500 to-blue-600 p-8 lg:p-10 text-white">
@@ -101,7 +101,7 @@ export default function Soluciones() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">Captación Automatizada</h3>
+                  <h3 className="text-2xl font-bold mb-3">CaptaciÃ³n Automatizada</h3>
                   <p className="text-cyan-100 text-sm">Chatbots + Seguimiento inteligente</p>
                 </div>
                 
@@ -110,7 +110,7 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                          <span className="text-red-500 text-xs">✕</span>
+                          <span className="text-red-500 text-xs">âœ•</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Problema</span>
                       </div>
@@ -121,23 +121,23 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-cyan-100 rounded-full flex items-center justify-center">
-                          <span className="text-cyan-600 text-xs">⚙</span>
+                          <span className="text-cyan-600 text-xs">âš™</span>
                         </span>
-                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Solución</span>
+                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">SoluciÃ³n</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Chatbots inteligentes 24/7 + seguimiento automático que califica leads y agenda reuniones.
+                        Chatbots inteligentes 24/7 + seguimiento automÃ¡tico que califica leads y agenda reuniones.
                       </p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <span className="text-green-600 text-xs">✓</span>
+                          <span className="text-green-600 text-xs">âœ“</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Resultado</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Respuesta inmediata a todos los leads. Más conversiones con menos esfuerzo manual.
+                        Respuesta inmediata a todos los leads. MÃ¡s conversiones con menos esfuerzo manual.
                       </p>
                     </div>
                   </div>
@@ -145,7 +145,7 @@ export default function Soluciones() {
               </div>
             </div>
 
-            {/* Solución 2: Dashboards */}
+            {/* SoluciÃ³n 2: Dashboards */}
             <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300">
               <div className="grid lg:grid-cols-3 gap-0">
                 <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-8 lg:p-10 text-white">
@@ -163,34 +163,34 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                          <span className="text-red-500 text-xs">✕</span>
+                          <span className="text-red-500 text-xs">âœ•</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Problema</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Gerentes sin visibilidad de métricas clave. Decisiones basadas en intuición, no en datos.
+                        Gerentes sin visibilidad de mÃ©tricas clave. Decisiones basadas en intuiciÃ³n, no en datos.
                       </p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-violet-100 rounded-full flex items-center justify-center">
-                          <span className="text-violet-600 text-xs">⚙</span>
+                          <span className="text-violet-600 text-xs">âš™</span>
                         </span>
-                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Solución</span>
+                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">SoluciÃ³n</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Dashboards en tiempo real con KPIs personalizados, alertas automáticas y reportes inteligentes.
+                        Dashboards en tiempo real con KPIs personalizados, alertas automÃ¡ticas y reportes inteligentes.
                       </p>
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <span className="text-green-600 text-xs">✓</span>
+                          <span className="text-green-600 text-xs">âœ“</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Resultado</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Decisiones ágiles basadas en datos. Menos reuniones, más acción y mejores resultados.
+                        Decisiones Ã¡giles basadas en datos. Menos reuniones, mÃ¡s acciÃ³n y mejores resultados.
                       </p>
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function Soluciones() {
               </div>
             </div>
 
-            {/* Solución 3: IA */}
+            {/* SoluciÃ³n 3: IA */}
             <div className="bg-white rounded-2xl shadow-lg border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300">
               <div className="grid lg:grid-cols-3 gap-0">
                 <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-8 lg:p-10 text-white">
@@ -207,8 +207,8 @@ export default function Soluciones() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl font-bold mb-3">Optimización con IA</h3>
-                  <p className="text-emerald-100 text-sm">Algoritmos + Automatización avanzada</p>
+                  <h3 className="text-2xl font-bold mb-3">OptimizaciÃ³n con IA</h3>
+                  <p className="text-emerald-100 text-sm">Algoritmos + AutomatizaciÃ³n avanzada</p>
                 </div>
                 
                 <div className="p-8 lg:p-10 lg:col-span-2">
@@ -216,7 +216,7 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-red-100 rounded-full flex items-center justify-center">
-                          <span className="text-red-500 text-xs">✕</span>
+                          <span className="text-red-500 text-xs">âœ•</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Problema</span>
                       </div>
@@ -227,9 +227,9 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center">
-                          <span className="text-emerald-600 text-xs">⚙</span>
+                          <span className="text-emerald-600 text-xs">âš™</span>
                         </span>
-                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Solución</span>
+                        <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">SoluciÃ³n</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
                         Algoritmos de IA que analizan patrones, predicen demandas y optimizan flujos continuamente.
@@ -238,12 +238,12 @@ export default function Soluciones() {
                     <div>
                       <div className="flex items-center gap-2 mb-3">
                         <span className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
-                          <span className="text-green-600 text-xs">✓</span>
+                          <span className="text-green-600 text-xs">âœ“</span>
                         </span>
                         <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">Resultado</span>
                       </div>
                       <p className="text-slate-700 text-sm leading-relaxed">
-                        Menos costes operativos, mayor capacidad y clientes más satisfechos con el servicio.
+                        Menos costes operativos, mayor capacidad y clientes mÃ¡s satisfechos con el servicio.
                       </p>
                     </div>
                   </div>
@@ -253,12 +253,12 @@ export default function Soluciones() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-slate-500 text-sm mb-6">Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.</p>
+            <p className="text-slate-500 text-sm mb-6">Los resultados varÃ­an segÃºn sector y punto de partida. Te mostramos casos reales en la llamada.</p>
             <a
-              href="https://calendly.com/neuriax/30min"
+              href="/contacto"
               className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all"
             >
-              Ver qué solución encaja contigo
+              Ver quÃ© soluciÃ³n encaja contigo
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -267,15 +267,15 @@ export default function Soluciones() {
         </div>
       </section>
 
-      {/* Planes de Automatización */}
+      {/* Planes de AutomatizaciÃ³n */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Planes de Automatización
+              Planes de AutomatizaciÃ³n
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Soluciones adaptadas a cada nivel de necesidad. Todas incluyen soporte y formación.
+              Soluciones adaptadas a cada nivel de necesidad. Todas incluyen soporte y formaciÃ³n.
             </p>
           </div>
 
@@ -292,10 +292,10 @@ export default function Soluciones() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Starter</h3>
-                <p className="text-slate-400 text-sm mb-6">Automatización esencial</p>
+                <p className="text-slate-400 text-sm mb-6">AutomatizaciÃ³n esencial</p>
                 <div className="mb-8">
-                  <span className="text-4xl font-bold text-white">600€ - 1.200€</span>
-                  <p className="text-slate-500 text-sm mt-2">Pago único</p>
+                  <span className="text-4xl font-bold text-white">600â‚¬ - 1.200â‚¬</span>
+                  <p className="text-slate-500 text-sm mt-2">Pago Ãºnico</p>
                 </div>
                 <ul className="space-y-4 text-slate-300 mb-8 flex-grow">
                   <li className="flex items-center">
@@ -304,7 +304,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>1 flujo de automatización</span>
+                    <span>1 flujo de automatizaciÃ³n</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
@@ -312,7 +312,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Integración con 2-3 herramientas</span>
+                    <span>IntegraciÃ³n con 2-3 herramientas</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
@@ -320,7 +320,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Configuración y puesta en marcha</span>
+                    <span>ConfiguraciÃ³n y puesta en marcha</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
@@ -328,7 +328,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Formación básica de uso</span>
+                    <span>FormaciÃ³n bÃ¡sica de uso</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/20 rounded-full flex items-center justify-center mr-3">
@@ -336,11 +336,11 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Soporte 30 días</span>
+                    <span>Soporte 30 dÃ­as</span>
                   </li>
                 </ul>
                 <a 
-                  href="https://calendly.com/neuriax/30min" 
+                  href="/contacto" 
                   className="w-full text-center px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
                 >
                   Empezar con Starter
@@ -355,7 +355,7 @@ export default function Soluciones() {
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
               
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-6 py-1.5 rounded-full text-sm font-bold shadow-lg z-10">
-                Más popular
+                MÃ¡s popular
               </div>
               
               <div className="relative">
@@ -365,7 +365,7 @@ export default function Soluciones() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Business</h3>
-                <p className="text-cyan-300 text-sm mb-6">Automatización avanzada</p>
+                <p className="text-cyan-300 text-sm mb-6">AutomatizaciÃ³n avanzada</p>
                 <div className="mb-8">
                   <span className="text-4xl font-bold text-cyan-400">A CONSULTAR</span>
                   <p className="text-cyan-400/70 text-sm mt-2">Presupuesto personalizado</p>
@@ -377,7 +377,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Múltiples flujos de automatización</span>
+                    <span>MÃºltiples flujos de automatizaciÃ³n</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
@@ -385,7 +385,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Integración con CRM y herramientas</span>
+                    <span>IntegraciÃ³n con CRM y herramientas</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
@@ -401,7 +401,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Dashboard de métricas</span>
+                    <span>Dashboard de mÃ©tricas</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-cyan-500/30 rounded-full flex items-center justify-center mr-3">
@@ -409,11 +409,11 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Soporte 90 días</span>
+                    <span>Soporte 90 dÃ­as</span>
                   </li>
                 </ul>
                 <a 
-                  href="https://calendly.com/neuriax/30min" 
+                  href="/contacto" 
                   className="w-full text-center px-6 py-4 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl transition-all shadow-lg"
                 >
                   Solicitar propuesta
@@ -433,7 +433,7 @@ export default function Soluciones() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">Enterprise</h3>
-                <p className="text-slate-400 text-sm mb-6">Transformación digital completa</p>
+                <p className="text-slate-400 text-sm mb-6">TransformaciÃ³n digital completa</p>
                 <div className="mb-8">
                   <span className="text-4xl font-bold text-white">A CONSULTAR</span>
                   <p className="text-slate-500 text-sm mt-2">Proyecto a medida</p>
@@ -445,7 +445,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Ecosistema de automatización completo</span>
+                    <span>Ecosistema de automatizaciÃ³n completo</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
@@ -469,7 +469,7 @@ export default function Soluciones() {
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </span>
-                    <span>Consultoría estratégica incluida</span>
+                    <span>ConsultorÃ­a estratÃ©gica incluida</span>
                   </li>
                   <li className="flex items-center">
                     <span className="w-5 h-5 bg-purple-500/20 rounded-full flex items-center justify-center mr-3">
@@ -493,7 +493,7 @@ export default function Soluciones() {
           {/* Texto aclaratorio */}
           <div className="bg-gradient-to-r from-slate-800/50 to-slate-900/50 rounded-2xl p-8 border border-slate-700 text-center">
             <p className="text-slate-300 text-lg">
-              <span className="font-semibold text-white">Cada negocio tiene necesidades únicas.</span> Los planes Business y Enterprise se presupuestan según la complejidad del proyecto y los sistemas a integrar.
+              <span className="font-semibold text-white">Cada negocio tiene necesidades Ãºnicas.</span> Los planes Business y Enterprise se presupuestan segÃºn la complejidad del proyecto y los sistemas a integrar.
             </p>
           </div>
         </div>
@@ -509,19 +509,19 @@ export default function Soluciones() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Cuál de estas soluciones necesitas?
+            Â¿CuÃ¡l de estas soluciones necesitas?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Hablemos sobre tu situación específica y diseñemos la solución perfecta para tu negocio.
+            Hablemos sobre tu situaciÃ³n especÃ­fica y diseÃ±emos la soluciÃ³n perfecta para tu negocio.
           </p>
           <a
-            href="https://calendly.com/neuriax/30min"
+            href="/contacto"
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
           >
             Agendar consulta gratuita
           </a>
           <p className="text-sm mt-6 opacity-75">
-            Sin compromiso • Análisis personalizado • Soluciones a medida
+            Sin compromiso â€¢ AnÃ¡lisis personalizado â€¢ Soluciones a medida
           </p>
         </div>
       </section>

@@ -1,14 +1,14 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Portfolio de Webs Profesionales | Neuriax | Diseño + Automatización + SEO",
-  description: "Ejemplos reales de páginas web profesionales. Webs que venden para peluquerías, restaurantes, clínicas, consultoría. Diseño responsivo + SEO local + Automatización.",
-  keywords: "portfolio webs, diseño web ejemplos, páginas web profesionales, webs que venden, casos de éxito web, diseño responsivo",
+  title: "Portfolio de Webs Profesionales | Neuriax | DiseÃ±o + AutomatizaciÃ³n + SEO",
+  description: "Ejemplos reales de pÃ¡ginas web profesionales. Webs que venden para peluquerÃ­as, restaurantes, clÃ­nicas, consultorÃ­a. DiseÃ±o responsivo + SEO local + AutomatizaciÃ³n.",
+  keywords: "portfolio webs, diseÃ±o web ejemplos, pÃ¡ginas web profesionales, webs que venden, casos de Ã©xito web, diseÃ±o responsivo",
   openGraph: {
     title: "Portfolio de Webs Profesionales - Neuriax",
-    description: "Ejemplos reales de webs optimizadas para conversión. Diseño, SEO local y automatización inteligente.",
+    description: "Ejemplos reales de webs optimizadas para conversiÃ³n. DiseÃ±o, SEO local y automatizaciÃ³n inteligente.",
     url: "https://www.neuriax.com/portfolio",
   },
   alternates: {
@@ -19,34 +19,34 @@ export const metadata: Metadata = {
 export default function PortfolioPage() {
   const demos = [
     {
-      title: "Demo Web Peluquería",
-      category: "Estética",
+      title: "Demo Web PeluquerÃ­a",
+      category: "EstÃ©tica",
       features: [
-        "Galería de cortes y estilos",
-        "Reservas online automáticas",
-        "Mapa y ubicación fácil"
+        "GalerÃ­a de cortes y estilos",
+        "Reservas online automÃ¡ticas",
+        "Mapa y ubicaciÃ³n fÃ¡cil"
       ]
     },
     {
       title: "Demo Web Restaurante",
-      category: "Hostelería",
+      category: "HostelerÃ­a",
       features: [
-        "Menú online con categorías",
+        "MenÃº online con categorÃ­as",
         "Reservas para grupos",
-        "Ubicación en Google Maps"
+        "UbicaciÃ³n en Google Maps"
       ]
     },
     {
-      title: "Demo Web Clínica",
+      title: "Demo Web ClÃ­nica",
       category: "Salud",
       features: [
         "Servicios y especialidades",
         "Sistema de citas online",
-        "Contacto directo vía WhatsApp"
+        "Contacto directo vÃ­a WhatsApp"
       ]
     },
     {
-      title: "Demo Web Consultoría",
+      title: "Demo Web ConsultorÃ­a",
       category: "Servicios",
       features: [
         "Portafolio de proyectos",
@@ -56,20 +56,20 @@ export default function PortfolioPage() {
     },
     {
       title: "Demo Web Reformas",
-      category: "Construcción",
+      category: "ConstrucciÃ³n",
       features: [
-        "Galería de proyectos antes/después",
+        "GalerÃ­a de proyectos antes/despuÃ©s",
         "Presupuestos y cronogramas",
-        "Contacto directo vía WhatsApp"
+        "Contacto directo vÃ­a WhatsApp"
       ]
     },
     {
-      title: "¿Tu sector no está aquí?",
+      title: "Â¿Tu sector no estÃ¡ aquÃ­?",
       category: "Personalizado",
       features: [
-        "Adaptamos cualquier diseño a tu negocio",
-        "Sector: retail, logística, educación, etc.",
-        "Agendamos una llamada para diseñar juntos"
+        "Adaptamos cualquier diseÃ±o a tu negocio",
+        "Sector: retail, logÃ­stica, educaciÃ³n, etc.",
+        "Agendamos una llamada para diseÃ±ar juntos"
       ],
       isCustom: true
     },
@@ -81,10 +81,10 @@ export default function PortfolioPage() {
       <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Portfolio de diseños web
+            Portfolio de diseÃ±os web
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ejemplos reales de webs profesionales diseñadas para convertir. Cada una optimizada para su industria.
+            Ejemplos reales de webs profesionales diseÃ±adas para convertir. Cada una optimizada para su industria.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function PortfolioPage() {
                     <>
                       <img 
                         src="/demos/peluqueria/hero.jpg" 
-                        alt="Demo Web Peluquería"
+                        alt="Demo Web PeluquerÃ­a"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
@@ -119,7 +119,7 @@ export default function PortfolioPage() {
                     <>
                       <img 
                         src="/demos/clinica/hero.jpg" 
-                        alt="Demo Web Clínica"
+                        alt="Demo Web ClÃ­nica"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
@@ -128,7 +128,7 @@ export default function PortfolioPage() {
                     <>
                       <img 
                         src="/demos/consultoria/hero.jpg" 
-                        alt="Demo Web Consultoría"
+                        alt="Demo Web ConsultorÃ­a"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
@@ -170,7 +170,7 @@ export default function PortfolioPage() {
                   
                   {/* Overlay con CTA */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto" : "/contacto"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
                       {idx === 5 ? "Agendar llamada" : "Ver en detalle"}
                     </CTAButton>
                   </div>
@@ -194,7 +194,7 @@ export default function PortfolioPage() {
                     ))}
                   </ul>
 
-                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} variant="secondary" className="w-full text-center justify-center">
+                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto" : "/contacto"} variant="secondary" className="w-full text-center justify-center">
                     {idx === 5 ? "Agendar llamada" : "Quiero una igual"}
                   </CTAButton>
                 </div>
@@ -204,11 +204,11 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Beneficios de estos diseños */}
+      {/* Beneficios de estos diseÃ±os */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
-            Por qué estos diseños venden
+            Por quÃ© estos diseÃ±os venden
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -218,8 +218,8 @@ export default function PortfolioPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Velocidad ultrarrápida</h3>
-              <p className="text-gray-300">Carga en menos de 2 segundos. Google premia el speed, tus usuarios también.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">Velocidad ultrarrÃ¡pida</h3>
+              <p className="text-gray-300">Carga en menos de 2 segundos. Google premia el speed, tus usuarios tambiÃ©n.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -229,7 +229,7 @@ export default function PortfolioPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">SEO local optimizado</h3>
-              <p className="text-gray-300">Apareces en Google Maps y búsquedas locales. Clientes que buscan TU tipo de negocio te encuentran.</p>
+              <p className="text-gray-300">Apareces en Google Maps y bÃºsquedas locales. Clientes que buscan TU tipo de negocio te encuentran.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -238,8 +238,8 @@ export default function PortfolioPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Conversión clara</h3>
-              <p className="text-gray-300">Cada elemento está diseñado para guiar al cliente hacia la acción: llamada, reserva, compra o contacto.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">ConversiÃ³n clara</h3>
+              <p className="text-gray-300">Cada elemento estÃ¡ diseÃ±ado para guiar al cliente hacia la acciÃ³n: llamada, reserva, compra o contacto.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -248,8 +248,8 @@ export default function PortfolioPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Móvil first</h3>
-              <p className="text-gray-300">El 70% de tus clientes buscan desde el móvil. Nuestros diseños son perfectos en cualquier pantalla.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">MÃ³vil first</h3>
+              <p className="text-gray-300">El 70% de tus clientes buscan desde el mÃ³vil. Nuestros diseÃ±os son perfectos en cualquier pantalla.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -259,7 +259,7 @@ export default function PortfolioPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Copy orientado a resultados</h3>
-              <p className="text-gray-300">Cada palabra está escrita para persuadir, no para adornar. Textos que cierran ventas.</p>
+              <p className="text-gray-300">Cada palabra estÃ¡ escrita para persuadir, no para adornar. Textos que cierran ventas.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -268,14 +268,14 @@ export default function PortfolioPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Fácil de mantener</h3>
-              <p className="text-gray-300">Cambias fotos, textos y precios sin saber de código. O con mi soporte mensual por 49€.</p>
+              <h3 className="text-lg font-semibold text-white mb-2">FÃ¡cil de mantener</h3>
+              <p className="text-gray-300">Cambias fotos, textos y precios sin saber de cÃ³digo. O con mi soporte mensual por 49â‚¬.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Resultados reales (validación social) */}
+      {/* Resultados reales (validaciÃ³n social) */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
@@ -285,30 +285,30 @@ export default function PortfolioPage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">✓</span>
+                <span className="text-2xl font-bold text-green-400">âœ“</span>
               </div>
-              <p className="text-white font-semibold mb-2">Más consultas</p>
-              <p className="text-gray-300 text-sm">Clínica dental que duplicó sus consultas mensuales en 3 meses con la web + SEO.</p>
+              <p className="text-white font-semibold mb-2">MÃ¡s consultas</p>
+              <p className="text-gray-300 text-sm">ClÃ­nica dental que duplicÃ³ sus consultas mensuales en 3 meses con la web + SEO.</p>
             </div>
 
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">✓</span>
+                <span className="text-2xl font-bold text-green-400">âœ“</span>
               </div>
               <p className="text-white font-semibold mb-2">Reservas online</p>
-              <p className="text-gray-300 text-sm">Restaurante que automatizó reservas y redujo significativamente las llamadas a cocina.</p>
+              <p className="text-gray-300 text-sm">Restaurante que automatizÃ³ reservas y redujo significativamente las llamadas a cocina.</p>
             </div>
 
             <div className="bg-gradient-to-br from-green-900/20 to-emerald-900/20 rounded-lg p-8 border border-green-700/50">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-2xl font-bold text-green-400">✓</span>
+                <span className="text-2xl font-bold text-green-400">âœ“</span>
               </div>
-              <p className="text-white font-semibold mb-2">Más clientes</p>
-              <p className="text-gray-300 text-sm">Peluquería con web + maps que ahora tiene lista de espera los fines de semana.</p>
+              <p className="text-white font-semibold mb-2">MÃ¡s clientes</p>
+              <p className="text-gray-300 text-sm">PeluquerÃ­a con web + maps que ahora tiene lista de espera los fines de semana.</p>
             </div>
           </div>
 
-          <p className="text-center text-gray-500 text-sm mt-8">Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.</p>
+          <p className="text-center text-gray-500 text-sm mt-8">Los resultados varÃ­an segÃºn sector y punto de partida. Te mostramos casos reales en la llamada.</p>
         </div>
       </section>
 
@@ -319,10 +319,10 @@ export default function PortfolioPage() {
             Quiero una web como estas
           </h2>
           <p className="text-xl text-gray-300 mb-8">
-            Agendemos una llamada para diseñar la web perfecta para tu negocio.
+            Agendemos una llamada para diseÃ±ar la web perfecta para tu negocio.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+            <CTAButton href="/contacto" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
               Ver disponibilidad
             </CTAButton>
             <CTAButton href="/webs" variant="secondary" size="lg">
@@ -334,3 +334,4 @@ export default function PortfolioPage() {
     </div>
   );
 }
+

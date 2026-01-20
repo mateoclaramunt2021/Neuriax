@@ -1,6 +1,6 @@
-interface VideoSectionProps {
+﻿interface VideoSectionProps {
   videoId?: string; // Para YouTube
-  localVideo?: string; // Para vídeo local
+  localVideo?: string; // Para vÃ­deo local
   title: string;
   description: string;
 }
@@ -20,7 +20,7 @@ export default function VideoSection({ videoId, localVideo, title, description }
           {videoId ? (
             <iframe
               src={`https://www.youtube.com/embed/${videoId}`}
-              title="Video de introducción"
+              title="Video de introducciÃ³n"
               className="w-full h-full"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -32,7 +32,7 @@ export default function VideoSection({ videoId, localVideo, title, description }
               className="w-full h-full object-cover"
               poster="/video-poster.jpg"
             >
-              Tu navegador no soporta el elemento de vídeo.
+              Tu navegador no soporta el elemento de vÃ­deo.
             </video>
           ) : (
             <div className="w-full h-full bg-gray-900 flex items-center justify-center">

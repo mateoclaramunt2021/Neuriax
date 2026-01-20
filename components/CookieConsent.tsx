@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { usePreferences } from '@/hooks/usePreferences';
@@ -11,7 +11,7 @@ export default function CookieConsent() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar si el usuario ya aceptó cookies
+    // Verificar si el usuario ya aceptÃ³ cookies
     const consent = localStorage.getItem('cookieConsent');
     if (!consent) {
       setShowConsent(true);
@@ -63,3 +63,4 @@ export default function CookieConsent() {
     </div>
   );
 }
+

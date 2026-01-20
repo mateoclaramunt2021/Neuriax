@@ -1,8 +1,8 @@
-'use client';
+﻿'use client';
 
 export default function ScheduleCallButton() {
   const handleScheduleCall = () => {
-    const calendlyUrl = "https://calendly.com/neuriax/30min";
+    const calendlyUrl = "/contacto";
     window.open(calendlyUrl, "_blank", "noopener,noreferrer");
   };
 
@@ -19,3 +19,4 @@ export default function ScheduleCallButton() {
     </button>
   );
 }
+

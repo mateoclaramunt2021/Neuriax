@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+﻿import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
@@ -20,19 +20,19 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Neuriax | Automatización e IA + Páginas Web Profesionales | SEO Local",
-  description: "Soluciones digitales premium: automatización inteligente con IA, páginas web de alto rendimiento y SEO local. Escala tu negocio con sistemas que generan resultados comprobables.",
+  title: "Neuriax | AutomatizaciÃ³n e IA + PÃ¡ginas Web Profesionales | SEO Local",
+  description: "Soluciones digitales premium: automatizaciÃ³n inteligente con IA, pÃ¡ginas web de alto rendimiento y SEO local. Escala tu negocio con sistemas que generan resultados comprobables.",
   metadataBase: new URL('https://www.neuriax.com'),
   keywords: [
-    "automatización de procesos",
+    "automatizaciÃ³n de procesos",
     "inteligencia artificial negocios",
-    "páginas web profesionales",
+    "pÃ¡ginas web profesionales",
     "agencia digital",
     "soluciones digitales",
-    "SEO local España",
-    "automatización IA",
+    "SEO local EspaÃ±a",
+    "automatizaciÃ³n IA",
     "web desarrollo",
-    "transformación digital"
+    "transformaciÃ³n digital"
   ],
   icons: {
     icon: [
@@ -58,8 +58,8 @@ export const metadata: Metadata = {
     canonical: 'https://www.neuriax.com',
   },
   openGraph: {
-    title: "Neuriax - Automatización e IA + Páginas Web | Transforma Tu Negocio",
-    description: "Soluciones digitales completas: automatización inteligente, IA aplicada a negocios y páginas web optimizadas. Resultados medibles y sostenibles.",
+    title: "Neuriax - AutomatizaciÃ³n e IA + PÃ¡ginas Web | Transforma Tu Negocio",
+    description: "Soluciones digitales completas: automatizaciÃ³n inteligente, IA aplicada a negocios y pÃ¡ginas web optimizadas. Resultados medibles y sostenibles.",
     url: 'https://www.neuriax.com',
     siteName: 'Neuriax',
     images: [
@@ -67,7 +67,7 @@ export const metadata: Metadata = {
         url: 'https://www.neuriax.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Neuriax - Automatización e IA',
+        alt: 'Neuriax - AutomatizaciÃ³n e IA',
         type: 'image/jpeg',
       },
     ],
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Neuriax | Automatización e IA + Páginas Web',
+    title: 'Neuriax | AutomatizaciÃ³n e IA + PÃ¡ginas Web',
     description: 'Transforma tu negocio con soluciones digitales inteligentes',
     creator: '@neuriax.ia_',
   },
@@ -103,13 +103,13 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
               name: 'Neuriax',
-              description: 'Soluciones digitales, automatización e IA aplicada a negocio',
+              description: 'Soluciones digitales, automatizaciÃ³n e IA aplicada a negocio',
               url: 'https://www.neuriax.com',
               telephone: '+34631415151',
               email: 'neuriaxx@gmail.com',
               priceRange: '$$',
               areaServed: 'ES',
-              serviceType: ['Automatización Digital', 'Desarrollo de IA', 'Diseño Web', 'SEO Local'],
+              serviceType: ['AutomatizaciÃ³n Digital', 'Desarrollo de IA', 'DiseÃ±o Web', 'SEO Local'],
             }),
           }}
         />
@@ -133,3 +133,4 @@ export default function RootLayout({
     </html>
   );
 }
+

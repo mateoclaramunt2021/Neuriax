@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { usePreferences } from '@/hooks/usePreferences';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -11,7 +11,7 @@ export default function PreferencesMenu() {
 
   return (
     <div className="relative">
-      {/* Botón de preferencias */}
+      {/* BotÃ³n de preferencias */}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
@@ -23,7 +23,7 @@ export default function PreferencesMenu() {
         </svg>
       </button>
 
-      {/* Menú desplegable */}
+      {/* MenÃº desplegable */}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-slate-800 rounded-lg shadow-xl border border-slate-700 z-50">
           <div className="p-4 space-y-4">
@@ -95,3 +95,4 @@ export default function PreferencesMenu() {
     </div>
   );
 }
+

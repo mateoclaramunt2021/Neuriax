@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -23,7 +23,7 @@ export default function Signup() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validaciones básicas
+    // Validaciones bÃ¡sicas
     if (!formData.nombre || !formData.email || !formData.password) {
       setMessage('Todos los campos son obligatorios.');
       return;
@@ -31,18 +31,18 @@ export default function Signup() {
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setMessage('Por favor, ingresa un email válido.');
+      setMessage('Por favor, ingresa un email vÃ¡lido.');
       return;
     }
     
     if (formData.password.length < 8) {
-      setMessage('La contraseña debe tener al menos 8 caracteres.');
+      setMessage('La contraseÃ±a debe tener al menos 8 caracteres.');
       return;
     }
     
-    // Simulación de creación de cuenta
+    // SimulaciÃ³n de creaciÃ³n de cuenta
     setMessage('Cuenta creada (demo)');
-    // Navegar a login después de un breve delay
+    // Navegar a login despuÃ©s de un breve delay
     setTimeout(() => {
       router.push('/login');
     }, 1000);
@@ -81,7 +81,7 @@ export default function Signup() {
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">ContraseÃ±a</label>
             <input
               type="password"
               id="password"
@@ -114,3 +114,4 @@ export default function Signup() {
     </div>
   );
 }
+

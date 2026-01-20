@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 
@@ -31,7 +31,7 @@ function getTimeAgo(date: Date): string {
   
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 7) {
-    return `hace ${diffInDays} día${diffInDays !== 1 ? 's' : ''}`;
+    return `hace ${diffInDays} dÃ­a${diffInDays !== 1 ? 's' : ''}`;
   }
   
   const diffInWeeks = Math.floor(diffInDays / 7);
@@ -45,7 +45,7 @@ function getTimeAgo(date: Date): string {
   }
   
   const diffInYears = Math.floor(diffInDays / 365);
-  return `hace ${diffInYears} año${diffInYears !== 1 ? 's' : ''}`;
+  return `hace ${diffInYears} aÃ±o${diffInYears !== 1 ? 's' : ''}`;
 }
 
 export default function TimeAgo({ date, className = '' }: TimeAgoProps) {
@@ -59,18 +59,18 @@ export default function TimeAgo({ date, className = '' }: TimeAgoProps) {
     // Actualizar inmediatamente
     setTimeAgo(getTimeAgo(parsedDate));
     
-    // Determinar el intervalo de actualización basado en la antigüedad
+    // Determinar el intervalo de actualizaciÃ³n basado en la antigÃ¼edad
     const updateInterval = () => {
       const now = new Date();
       const diffInSeconds = Math.floor((now.getTime() - parsedDate.getTime()) / 1000);
       
       if (diffInSeconds < 60) return 1000; // Cada segundo si es menos de 1 minuto
       if (diffInSeconds < 3600) return 60000; // Cada minuto si es menos de 1 hora
-      if (diffInSeconds < 86400) return 300000; // Cada 5 minutos si es menos de 1 día
-      return 3600000; // Cada hora si es más de 1 día
+      if (diffInSeconds < 86400) return 300000; // Cada 5 minutos si es menos de 1 dÃ­a
+      return 3600000; // Cada hora si es mÃ¡s de 1 dÃ­a
     };
     
-    // Actualizar periódicamente
+    // Actualizar periÃ³dicamente
     const interval = setInterval(() => {
       setTimeAgo(getTimeAgo(parsedDate));
     }, updateInterval());
@@ -78,7 +78,7 @@ export default function TimeAgo({ date, className = '' }: TimeAgoProps) {
     return () => clearInterval(interval);
   }, [date]);
   
-  // Evitar hydration mismatch mostrando fecha estática en servidor
+  // Evitar hydration mismatch mostrando fecha estÃ¡tica en servidor
   if (!mounted) {
     return (
       <span className={className}>
@@ -97,3 +97,4 @@ export default function TimeAgo({ date, className = '' }: TimeAgoProps) {
     </span>
   );
 }
+

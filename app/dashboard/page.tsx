@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 
@@ -42,7 +42,7 @@ export default function Dashboard() {
 
   return (
     <div className="p-8 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">📊 Dashboard de Visitantes</h1>
+      <h1 className="text-3xl font-bold mb-8">ðŸ“Š Dashboard de Visitantes</h1>
 
       {/* Resumen */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -56,9 +56,9 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Páginas populares */}
+      {/* PÃ¡ginas populares */}
       <div className="bg-white p-6 rounded-lg border border-gray-200 mb-8">
-        <h2 className="text-xl font-bold mb-4">🔥 Páginas Más Visitadas</h2>
+        <h2 className="text-xl font-bold mb-4">ðŸ”¥ PÃ¡ginas MÃ¡s Visitadas</h2>
         <div className="space-y-3">
           {data?.topPages && data.topPages.length > 0 ? (
             data.topPages.map(([page, count]) => (
@@ -68,21 +68,21 @@ export default function Dashboard() {
               </div>
             ))
           ) : (
-            <p className="text-gray-500">Sin datos aún</p>
+            <p className="text-gray-500">Sin datos aÃºn</p>
           )}
         </div>
       </div>
 
       {/* Visitantes recientes */}
       <div className="bg-white p-6 rounded-lg border border-gray-200">
-        <h2 className="text-xl font-bold mb-4">👥 Últimos Visitantes</h2>
+        <h2 className="text-xl font-bold mb-4">ðŸ‘¥ Ãšltimos Visitantes</h2>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-gray-200">
                 <th className="text-left py-2 px-3 font-semibold">Nombre</th>
                 <th className="text-left py-2 px-3 font-semibold">Email</th>
-                <th className="text-left py-2 px-3 font-semibold">Teléfono</th>
+                <th className="text-left py-2 px-3 font-semibold">TelÃ©fono</th>
                 <th className="text-left py-2 px-3 font-semibold">Fecha</th>
               </tr>
             </thead>
@@ -90,7 +90,7 @@ export default function Dashboard() {
               {data?.recentVisitors && data.recentVisitors.length > 0 ? (
                 data.recentVisitors.map((visitor) => (
                   <tr key={visitor.id} className="border-b border-gray-100 hover:bg-gray-50">
-                    <td className="py-3 px-3">{visitor.nombre || 'Anónimo'}</td>
+                    <td className="py-3 px-3">{visitor.nombre || 'AnÃ³nimo'}</td>
                     <td className="py-3 px-3">{visitor.email}</td>
                     <td className="py-3 px-3">{visitor.telefono || '-'}</td>
                     <td className="py-3 px-3">
@@ -101,7 +101,7 @@ export default function Dashboard() {
               ) : (
                 <tr>
                   <td colSpan={4} className="py-4 px-3 text-center text-gray-500">
-                    Sin visitantes aún
+                    Sin visitantes aÃºn
                   </td>
                 </tr>
               )}

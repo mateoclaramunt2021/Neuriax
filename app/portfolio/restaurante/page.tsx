@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -6,44 +6,44 @@ import Link from "next/link";
 export default function RestauranteDemo() {
   const platos = [
     {
-      nombre: "Jamón Ibérico de Bellota Puro",
-      desc: "Corte artesanal de la mejor cría ibérica",
-      precio: "32€"
+      nombre: "JamÃ³n IbÃ©rico de Bellota Puro",
+      desc: "Corte artesanal de la mejor crÃ­a ibÃ©rica",
+      precio: "32â‚¬"
     },
     {
       nombre: "Ceviche de Gambas Rojas",
-      desc: "Ají amarillo, leche de tigre casera",
-      precio: "28€"
+      desc: "AjÃ­ amarillo, leche de tigre casera",
+      precio: "28â‚¬"
     },
     {
       nombre: "Pulpo a la Gallega",
       desc: "Paprika ahumada, patatas tiernas",
-      precio: "26€"
+      precio: "26â‚¬"
     },
     {
-      nombre: "Carne Maturada 60 Días",
+      nombre: "Carne Maturada 60 DÃ­as",
       desc: "Solomillo de res de pasto, sal marina",
-      precio: "45€"
+      precio: "45â‚¬"
     },
     {
-      nombre: "Pescado Salvaje del Cantábrico",
-      desc: "Turbot a la sal, hinojo y limón",
-      precio: "38€"
+      nombre: "Pescado Salvaje del CantÃ¡brico",
+      desc: "Turbot a la sal, hinojo y limÃ³n",
+      precio: "38â‚¬"
     },
     {
       nombre: "Setas Silvestres Rehidratadas",
       desc: "Porcini, boletus, con mantequilla negra",
-      precio: "24€"
+      precio: "24â‚¬"
     },
     {
       nombre: "Postre de Chocolate Artesanal",
       desc: "72% cacao con helado de remolacha",
-      precio: "14€"
+      precio: "14â‚¬"
     },
     {
       nombre: "Flan de Queso de Cabra",
       desc: "Mermelada de tomate, tostadas caseras",
-      precio: "12€"
+      precio: "12â‚¬"
     }
   ];
 
@@ -64,11 +64,11 @@ export default function RestauranteDemo() {
       <div className="sticky top-0 z-50 w-full bg-yellow-100 border-b-4 border-yellow-400 px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-start gap-3">
-            <div className="text-2xl mt-1">⚠️</div>
+            <div className="text-2xl mt-1">âš ï¸</div>
             <div>
-              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÁGINA DE DEMOSTRACIÓN</p>
+              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÃGINA DE DEMOSTRACIÃ“N</p>
               <p className="text-yellow-800 mt-1">
-                Las imágenes mostradas son genéricas. Este es un diseño de demostración para mostrar un restaurante de lujo premium. En una versión real, utilizarías fotos auténticas de tu restaurante.
+                Las imÃ¡genes mostradas son genÃ©ricas. Este es un diseÃ±o de demostraciÃ³n para mostrar un restaurante de lujo premium. En una versiÃ³n real, utilizarÃ­as fotos autÃ©nticas de tu restaurante.
               </p>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function RestauranteDemo() {
                 href="#menu" 
                 className="border border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black px-10 py-4 rounded-none font-light tracking-wide transition-all duration-300 uppercase text-sm inline-block"
               >
-                Ver Menú
+                Ver MenÃº
               </a>
             </div>
           </div>
@@ -127,59 +127,59 @@ export default function RestauranteDemo() {
               <span className="text-amber-400 font-light tracking-widest uppercase text-xs">Nuestro concepto</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-light mb-6 text-white">
-              Filosofía ATROZ
+              FilosofÃ­a ATROZ
             </h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Desde 2019, ATROZ representa un enfoque diferente a la gastronomía. No buscamos innovación por innovación, sino respeto absoluto por el producto de temporada y la técnica culinaria honesta.
+              Desde 2019, ATROZ representa un enfoque diferente a la gastronomÃ­a. No buscamos innovaciÃ³n por innovaciÃ³n, sino respeto absoluto por el producto de temporada y la tÃ©cnica culinaria honesta.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-12">
             <div className="text-center">
               <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">🌱</span>
+                <span className="text-2xl">ðŸŒ±</span>
               </div>
               <h3 className="text-2xl font-light mb-4 text-white">Producto de Temporada</h3>
               <p className="text-gray-400 leading-relaxed">
-                Cada ingrediente es seleccionado en su momento óptimo. Cambiamos menú con las estaciones para garantizar frescura y sabor genuino.
+                Cada ingrediente es seleccionado en su momento Ã³ptimo. Cambiamos menÃº con las estaciones para garantizar frescura y sabor genuino.
               </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">🔥</span>
+                <span className="text-2xl">ðŸ”¥</span>
               </div>
               <h3 className="text-2xl font-light mb-4 text-white">Fuego Lento</h3>
               <p className="text-gray-400 leading-relaxed">
-                Nuestras cocciones respetan los tiempos. No hay prisa en la cocina. Cada plato requiere atención y paciencia para alcanzar la perfección.
+                Nuestras cocciones respetan los tiempos. No hay prisa en la cocina. Cada plato requiere atenciÃ³n y paciencia para alcanzar la perfecciÃ³n.
               </p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-2xl">✋</span>
+                <span className="text-2xl">âœ‹</span>
               </div>
               <h3 className="text-2xl font-light mb-4 text-white">Cocina Honesta</h3>
               <p className="text-gray-400 leading-relaxed">
-                Sin pretensiones innecesarias. Cada elemento en el plato tiene un propósito. La técnica sirve al sabor, nunca al revés.
+                Sin pretensiones innecesarias. Cada elemento en el plato tiene un propÃ³sito. La tÃ©cnica sirve al sabor, nunca al revÃ©s.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Nuestro Menú */}
+      {/* Nuestro MenÃº */}
       <section id="menu" className="py-32 px-6 bg-gradient-to-b from-gray-900 to-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-block border border-amber-400 px-6 py-2 rounded-none mb-6">
-              <span className="text-amber-400 font-light tracking-widest uppercase text-xs">Menú actual</span>
+              <span className="text-amber-400 font-light tracking-widest uppercase text-xs">MenÃº actual</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-light mb-6 text-white">
               Platos de la Casa
             </h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Selección de creaciones que definen nuestra cocina. El menú varía según la disponibilidad de productos de temporada.
+              SelecciÃ³n de creaciones que definen nuestra cocina. El menÃº varÃ­a segÃºn la disponibilidad de productos de temporada.
             </p>
           </div>
 
@@ -202,37 +202,37 @@ export default function RestauranteDemo() {
             <h3 className="text-2xl font-light text-white mb-8 text-center">Maridaje Especial</h3>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="bg-gray-800/50 border border-gray-700 p-8 rounded-none">
-                <h4 className="text-xl font-light text-white mb-3">Menú Degustación ATROZ</h4>
+                <h4 className="text-xl font-light text-white mb-3">MenÃº DegustaciÃ³n ATROZ</h4>
                 <p className="text-gray-400 text-sm mb-6">
-                  6 tiempos preparados por el chef. Experiencia completa de nuestra cocina con ingredientes de temporada seleccionados cada día.
+                  6 tiempos preparados por el chef. Experiencia completa de nuestra cocina con ingredientes de temporada seleccionados cada dÃ­a.
                 </p>
-                <p className="text-amber-400 font-light text-xl">59€ por persona</p>
+                <p className="text-amber-400 font-light text-xl">59â‚¬ por persona</p>
               </div>
 
               <div className="bg-gray-800/50 border border-gray-700 p-8 rounded-none">
                 <h4 className="text-xl font-light text-white mb-3">Con Maridaje de Vinos</h4>
                 <p className="text-gray-400 text-sm mb-6">
-                  Degustación con selección de vinos españoles nacionales e internacionales. Cada copa acompaña a su plato de forma armónica.
+                  DegustaciÃ³n con selecciÃ³n de vinos espaÃ±oles nacionales e internacionales. Cada copa acompaÃ±a a su plato de forma armÃ³nica.
                 </p>
-                <p className="text-amber-400 font-light text-xl">+35€ por persona</p>
+                <p className="text-amber-400 font-light text-xl">+35â‚¬ por persona</p>
               </div>
             </div>
           </div>
 
           <div className="mt-12 p-6 bg-amber-900/20 border border-amber-400/30 rounded-none text-center">
             <p className="text-gray-300 text-sm">
-              💌 Consulta disponibilidad | Cambios según temporada | Alergias e intolerancias: informar con anticipación
+              ðŸ’Œ Consulta disponibilidad | Cambios segÃºn temporada | Alergias e intolerancias: informar con anticipaciÃ³n
             </p>
           </div>
         </div>
       </section>
 
-      {/* Galería Visual */}
+      {/* GalerÃ­a Visual */}
       <section className="py-32 px-6 bg-black border-t border-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20">
             <div className="inline-block border border-amber-400 px-6 py-2 rounded-none mb-6">
-              <span className="text-amber-400 font-light tracking-widest uppercase text-xs">Galería</span>
+              <span className="text-amber-400 font-light tracking-widest uppercase text-xs">GalerÃ­a</span>
             </div>
             <h2 className="text-5xl md:text-6xl font-light mb-6 text-white">
               Nuestro Mundo
@@ -268,7 +268,7 @@ export default function RestauranteDemo() {
               Creaciones Maestras
             </h2>
             <p className="text-lg text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Platos que definen nuestra identidad. Recetas que perfeccionamos durante años.
+              Platos que definen nuestra identidad. Recetas que perfeccionamos durante aÃ±os.
             </p>
           </div>
 
@@ -277,26 +277,26 @@ export default function RestauranteDemo() {
               <div className="relative h-80 overflow-hidden bg-gray-800">
                 <img 
                   src="/demos/restaurante/cocido.jpg"
-                  alt="Jamón Ibérico"
+                  alt="JamÃ³n IbÃ©rico"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <h3 className="text-4xl font-light mb-4 text-white">Jamón Ibérico Puro</h3>
-                <p className="text-amber-400 font-light text-lg mb-6">32€</p>
+                <h3 className="text-4xl font-light mb-4 text-white">JamÃ³n IbÃ©rico Puro</h3>
+                <p className="text-amber-400 font-light text-lg mb-6">32â‚¬</p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  Corte artesanal del mejor jamón ibérico de bellota de Jabugo. Seleccionado con cuidado, cortado a mano con técnica tradicional. Se sirve a temperatura ambiente para mantener toda su complejidad de sabores.
+                  Corte artesanal del mejor jamÃ³n ibÃ©rico de bellota de Jabugo. Seleccionado con cuidado, cortado a mano con tÃ©cnica tradicional. Se sirve a temperatura ambiente para mantener toda su complejidad de sabores.
                 </p>
-                <p className="text-gray-500 text-sm">Acompaña pan tostado casero con aceite de oliva virgen extra</p>
+                <p className="text-gray-500 text-sm">AcompaÃ±a pan tostado casero con aceite de oliva virgen extra</p>
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-4xl font-light mb-4 text-white">Pulpo a la Gallega</h3>
-                <p className="text-amber-400 font-light text-lg mb-6">26€</p>
+                <p className="text-amber-400 font-light text-lg mb-6">26â‚¬</p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  Pulpo gallego cocido en su punto exacto. Paprika ahumada de la Vera, aceite de oliva premium y patatas tiernas. Un clásico reinterpretado con respeto absoluto a la tradición.
+                  Pulpo gallego cocido en su punto exacto. Paprika ahumada de la Vera, aceite de oliva premium y patatas tiernas. Un clÃ¡sico reinterpretado con respeto absoluto a la tradiciÃ³n.
                 </p>
                 <p className="text-gray-500 text-sm">Recurso de temporada | Disponibilidad limitada</p>
               </div>
@@ -319,9 +319,9 @@ export default function RestauranteDemo() {
               </div>
               <div>
                 <h3 className="text-4xl font-light mb-4 text-white">Pescado Salvaje</h3>
-                <p className="text-amber-400 font-light text-lg mb-6">38€</p>
+                <p className="text-amber-400 font-light text-lg mb-6">38â‚¬</p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  Turbot del Cantábrico a la sal marina. Técnica ancestral que concentra los sabores naturales del pescado. Hinojo fresco y limón de Málaga como únicos acompañantes.
+                  Turbot del CantÃ¡brico a la sal marina. TÃ©cnica ancestral que concentra los sabores naturales del pescado. Hinojo fresco y limÃ³n de MÃ¡laga como Ãºnicos acompaÃ±antes.
                 </p>
                 <p className="text-gray-500 text-sm">Pescado diario | Se prepara bajo encargo</p>
               </div>
@@ -330,11 +330,11 @@ export default function RestauranteDemo() {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h3 className="text-4xl font-light mb-4 text-white">Carne Maturada</h3>
-                <p className="text-amber-400 font-light text-lg mb-6">45€</p>
+                <p className="text-amber-400 font-light text-lg mb-6">45â‚¬</p>
                 <p className="text-gray-400 leading-relaxed mb-6">
-                  Solomillo de res de pasto maturado 60 días. Sabor profundo y textura mantecosa. A la parrilla de leña con sal marina gruesa. Lo hacemos solo tres veces por semana.
+                  Solomillo de res de pasto maturado 60 dÃ­as. Sabor profundo y textura mantecosa. A la parrilla de leÃ±a con sal marina gruesa. Lo hacemos solo tres veces por semana.
                 </p>
-                <p className="text-gray-500 text-sm">Reserva con 24 horas de anticipación</p>
+                <p className="text-gray-500 text-sm">Reserva con 24 horas de anticipaciÃ³n</p>
               </div>
               <div className="relative h-80 overflow-hidden bg-gray-800">
                 <img 
@@ -364,24 +364,24 @@ export default function RestauranteDemo() {
             <div className="border border-gray-700 p-8 hover:border-amber-400 transition-colors">
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-amber-400">★</span>
+                  <span key={i} className="text-amber-400">â˜…</span>
                 ))}
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed italic">
-                "ATROZ es una revelación. Cada plato respira respeto por el producto. No necesita trucos de cocina, solo buenos ingredientes y técnica honesta. He vuelto tres veces en un mes."
+                "ATROZ es una revelaciÃ³n. Cada plato respira respeto por el producto. No necesita trucos de cocina, solo buenos ingredientes y tÃ©cnica honesta. He vuelto tres veces en un mes."
               </p>
-              <p className="font-light text-white">Mar García</p>
+              <p className="font-light text-white">Mar GarcÃ­a</p>
               <p className="text-xs text-gray-500">Barcelona</p>
             </div>
 
             <div className="border border-gray-700 p-8 hover:border-amber-400 transition-colors">
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-amber-400">★</span>
+                  <span key={i} className="text-amber-400">â˜…</span>
                 ))}
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed italic">
-                "El maridaje de vinos fue perfecto. El sommelier entiende profundamente su oficio. Cada copa amplificaba los sabores de la comida de forma mágica. Imprescindible si vienes."
+                "El maridaje de vinos fue perfecto. El sommelier entiende profundamente su oficio. Cada copa amplificaba los sabores de la comida de forma mÃ¡gica. Imprescindible si vienes."
               </p>
               <p className="font-light text-white">Javier Ruiz</p>
               <p className="text-xs text-gray-500">Madrid</p>
@@ -390,11 +390,11 @@ export default function RestauranteDemo() {
             <div className="border border-gray-700 p-8 hover:border-amber-400 transition-colors">
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-amber-400">★</span>
+                  <span key={i} className="text-amber-400">â˜…</span>
                 ))}
               </div>
               <p className="text-gray-300 mb-6 leading-relaxed italic">
-                "Cena de celebración inolvidable. La atmósfera es serena, sin pretensiones. El equipo de servicio anticipaba cada necesidad. Esto es lo que buscaba en Barcelona."
+                "Cena de celebraciÃ³n inolvidable. La atmÃ³sfera es serena, sin pretensiones. El equipo de servicio anticipaba cada necesidad. Esto es lo que buscaba en Barcelona."
               </p>
               <p className="font-light text-white">Elena Diaz</p>
               <p className="text-xs text-gray-500">Valencia</p>
@@ -410,7 +410,7 @@ export default function RestauranteDemo() {
             Reserva tu Mesa
           </h2>
           <p className="text-lg md:text-xl text-gray-300 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Lugares limitados. Recomendamos reservar con 2-3 semanas de anticipación para garantizar disponibilidad.
+            Lugares limitados. Recomendamos reservar con 2-3 semanas de anticipaciÃ³n para garantizar disponibilidad.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
@@ -431,7 +431,7 @@ export default function RestauranteDemo() {
         </div>
       </section>
 
-      {/* Ubicación y Horarios */}
+      {/* UbicaciÃ³n y Horarios */}
       <section id="ubicacion" className="py-32 px-6 bg-black border-t border-gray-800">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -448,30 +448,30 @@ export default function RestauranteDemo() {
               ></iframe>
             </div>
 
-            {/* Información */}
+            {/* InformaciÃ³n */}
             <div>
               <div className="inline-block border border-amber-400 px-6 py-2 rounded-none mb-6">
                 <span className="text-amber-400 font-light tracking-widest uppercase text-xs">Contacto</span>
               </div>
               
-              <h2 className="text-5xl md:text-6xl font-light mb-12 text-white">Ubicación & Horarios</h2>
+              <h2 className="text-5xl md:text-6xl font-light mb-12 text-white">UbicaciÃ³n & Horarios</h2>
               
               <div className="mb-12">
-                <h3 className="text-xl font-light mb-4 text-amber-400 uppercase tracking-wide">Dirección</h3>
+                <h3 className="text-xl font-light mb-4 text-amber-400 uppercase tracking-wide">DirecciÃ³n</h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
-                  Paseo Marítimo, 45<br/>
+                  Paseo MarÃ­timo, 45<br/>
                   08860 Castelldefels<br/>
-                  Barcelona, España<br/>
-                  <span className="text-sm text-gray-500 mt-2 block">Frente al Mediterráneo | Parking privado</span>
+                  Barcelona, EspaÃ±a<br/>
+                  <span className="text-sm text-gray-500 mt-2 block">Frente al MediterrÃ¡neo | Parking privado</span>
                 </p>
               </div>
 
               <div className="mb-12">
                 <h3 className="text-xl font-light mb-4 text-amber-400 uppercase tracking-wide">Horarios</h3>
                 <ul className="text-gray-300 text-lg space-y-3">
-                  <li className="flex justify-between"><span>Martes a Jueves</span> <span className="text-gray-500">13:30 – 16:00 | 20:00 – 23:30</span></li>
-                  <li className="flex justify-between"><span>Viernes y Sábado</span> <span className="text-gray-500">13:30 – 16:00 | 20:00 – 00:30</span></li>
-                  <li className="flex justify-between"><span>Domingo</span> <span className="text-gray-500">13:30 – 16:00</span></li>
+                  <li className="flex justify-between"><span>Martes a Jueves</span> <span className="text-gray-500">13:30 â€“ 16:00 | 20:00 â€“ 23:30</span></li>
+                  <li className="flex justify-between"><span>Viernes y SÃ¡bado</span> <span className="text-gray-500">13:30 â€“ 16:00 | 20:00 â€“ 00:30</span></li>
+                  <li className="flex justify-between"><span>Domingo</span> <span className="text-gray-500">13:30 â€“ 16:00</span></li>
                   <li className="flex justify-between text-amber-400"><span>Lunes</span> <span>Cerrado</span></li>
                 </ul>
                 <p className="text-xs text-gray-500 mt-4">Abierto en festivos bajo reserva previa</p>
@@ -483,7 +483,7 @@ export default function RestauranteDemo() {
                   className="flex items-center gap-4 bg-gray-900 border border-gray-700 p-5 hover:border-amber-400 transition-all group"
                 >
                   <div className="w-10 h-10 bg-amber-600/20 border border-amber-600 flex items-center justify-center">
-                    <span className="text-amber-400 text-lg">📞</span>
+                    <span className="text-amber-400 text-lg">ðŸ“ž</span>
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs uppercase tracking-wide">Llamadas</p>
@@ -498,11 +498,11 @@ export default function RestauranteDemo() {
                   className="flex items-center gap-4 bg-gray-900 border border-gray-700 p-5 hover:border-green-500 transition-all group"
                 >
                   <div className="w-10 h-10 bg-green-600/20 border border-green-600 flex items-center justify-center">
-                    <span className="text-green-400 text-lg">💬</span>
+                    <span className="text-green-400 text-lg">ðŸ’¬</span>
                   </div>
                   <div>
                     <p className="text-gray-400 text-xs uppercase tracking-wide">WhatsApp</p>
-                    <p className="text-white font-light">Envía un mensaje directo</p>
+                    <p className="text-white font-light">EnvÃ­a un mensaje directo</p>
                   </div>
                 </a>
               </div>
@@ -526,11 +526,11 @@ export default function RestauranteDemo() {
             </div>
 
             <div>
-              <h4 className="text-white font-light text-lg mb-6 uppercase tracking-wide">Menú</h4>
+              <h4 className="text-white font-light text-lg mb-6 uppercase tracking-wide">MenÃº</h4>
               <ul className="text-sm space-y-3">
                 <li><a href="#menu" className="text-gray-500 hover:text-white transition-colors">Platos de la Casa</a></li>
-                <li><a href="#galeria" className="text-gray-500 hover:text-white transition-colors">Galería</a></li>
-                <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">Ubicación</a></li>
+                <li><a href="#galeria" className="text-gray-500 hover:text-white transition-colors">GalerÃ­a</a></li>
+                <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">UbicaciÃ³n</a></li>
                 <li><a href="#reservar" className="text-gray-500 hover:text-white transition-colors">Reserva</a></li>
               </ul>
             </div>
@@ -540,7 +540,7 @@ export default function RestauranteDemo() {
               <ul className="text-sm space-y-3">
                 <li><a href="tel:+34915823456" className="text-gray-500 hover:text-white transition-colors">+34 91 582 3456</a></li>
                 <li><a href="https://wa.me/34915823456" className="text-gray-500 hover:text-white transition-colors">WhatsApp</a></li>
-                <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">Dirección</a></li>
+                <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">DirecciÃ³n</a></li>
                 <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">Horarios</a></li>
               </ul>
             </div>
@@ -557,13 +557,13 @@ export default function RestauranteDemo() {
 
           <div className="border-t border-gray-800 pt-8 text-center">
             <p className="text-sm text-gray-600 mb-3">
-              © 2024 ATROZ Restaurante. Todos los derechos reservados.
+              Â© 2024 ATROZ Restaurante. Todos los derechos reservados.
             </p>
             <p className="text-xs text-gray-700 mb-4 bg-amber-900/20 p-3 border border-amber-400/20 rounded-none inline-block">
-              ⚠️ <strong>PÁGINA DE DEMOSTRACIÓN:</strong> Este es un ejemplo de diseño web para restaurantes premium. Las imágenes son genéricas.
+              âš ï¸ <strong>PÃGINA DE DEMOSTRACIÃ“N:</strong> Este es un ejemplo de diseÃ±o web para restaurantes premium. Las imÃ¡genes son genÃ©ricas.
             </p>
             <p className="text-xs text-gray-600 mt-4">
-              Diseñado por <a href="https://www.neuriax.com" className="text-amber-600 hover:text-amber-400 transition-colors">Neuriax</a> | Estrategia Digital para Negocios Gastronómicos
+              DiseÃ±ado por <a href="https://www.neuriax.com" className="text-amber-600 hover:text-amber-400 transition-colors">Neuriax</a> | Estrategia Digital para Negocios GastronÃ³micos
             </p>
           </div>
         </div>
@@ -571,3 +571,4 @@ export default function RestauranteDemo() {
     </div>
   );
 }
+

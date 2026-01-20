@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
@@ -13,22 +13,22 @@ export function PageTracker() {
     // Solo ejecutar en cliente
     if (typeof window === 'undefined') return;
 
-    // Validar que Supabase esté configurado
+    // Validar que Supabase estÃ© configurado
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       console.warn('[PageTracker] Tracking disabled - missing Supabase credentials');
       return;
     }
 
-    // Registrar página visitada
+    // Registrar pÃ¡gina visitada
     const trackPageView = async () => {
       timeStartRef.current = Date.now()
 
       try {
-        // Obtener o crear visitante anónimo
+        // Obtener o crear visitante anÃ³nimo
         let visitorId = sessionStorage.getItem('visitor_id')
 
         if (!visitorId) {
-          // Crear visitante anónimo
+          // Crear visitante anÃ³nimo
           const { data, error } = await supabase
             .from('visitors')
             .insert([
@@ -73,13 +73,13 @@ export function PageTracker() {
 
     trackPageView()
 
-    // Limpiar: registrar tiempo invertido en la página
+    // Limpiar: registrar tiempo invertido en la pÃ¡gina
     return () => {
       if (visitorIdRef.current && timeStartRef.current) {
         const timeSpent = Math.round((Date.now() - timeStartRef.current) / 1000)
 
         if (timeSpent > 5) {
-          // Solo registrar si pasó más de 5 segundos
+          // Solo registrar si pasÃ³ mÃ¡s de 5 segundos
           const trackTime = async () => {
             try {
               await supabase
@@ -104,3 +104,4 @@ export function PageTracker() {
 
   return null
 }
+

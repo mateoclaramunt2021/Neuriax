@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useEffect } from 'react';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -75,7 +75,7 @@ export default function CookiePreferencesModal({
             </button>
           </div>
           <p className="text-slate-300 text-sm mt-2">
-            Personaliza tu experiencia eligiendo qué tipos de cookies deseas permitir.
+            Personaliza tu experiencia eligiendo quÃ© tipos de cookies deseas permitir.
           </p>
         </div>
 
@@ -84,7 +84,7 @@ export default function CookiePreferencesModal({
           {/* Necessary Cookies */}
           <div className="border-l-4 border-blue-500 bg-blue-50 p-4 rounded-r">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">🔒 Cookies Necesarias</h3>
+              <h3 className="text-lg font-semibold text-gray-900">ðŸ”’ Cookies Necesarias</h3>
               <div className="relative inline-flex h-8 w-14 items-center rounded-full bg-blue-500">
                 <input
                   type="checkbox"
@@ -97,20 +97,20 @@ export default function CookiePreferencesModal({
               </div>
             </div>
             <p className="text-sm text-gray-700">
-              Esenciales para el funcionamiento del sitio web. Se usan para autenticación, seguridad y preferencias básicas. 
+              Esenciales para el funcionamiento del sitio web. Se usan para autenticaciÃ³n, seguridad y preferencias bÃ¡sicas. 
               <strong> No se pueden desactivar.</strong>
             </p>
             <div className="mt-3 space-y-1 text-xs text-gray-600">
-              <p>• session_id</p>
-              <p>• csrf_token</p>
-              <p>• user_preferences</p>
+              <p>â€¢ session_id</p>
+              <p>â€¢ csrf_token</p>
+              <p>â€¢ user_preferences</p>
             </div>
           </div>
 
           {/* Analytics Cookies */}
           <div className="border-l-4 border-green-500 bg-green-50 p-4 rounded-r">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">📊 Cookies Analíticas</h3>
+              <h3 className="text-lg font-semibold text-gray-900">ðŸ“Š Cookies AnalÃ­ticas</h3>
               <button
                 onClick={() => handleToggle('analytics')}
                 className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
@@ -118,7 +118,7 @@ export default function CookiePreferencesModal({
                 }`}
                 role="switch"
                 aria-checked={localPrefs.analytics}
-                aria-label="Cookies analíticas"
+                aria-label="Cookies analÃ­ticas"
               >
                 <span
                   className={`inline-flex h-7 w-7 transform rounded-full bg-white transition-all ${
@@ -128,19 +128,19 @@ export default function CookiePreferencesModal({
               </button>
             </div>
             <p className="text-sm text-gray-700">
-              Nos ayudan a entender cómo usas el sitio para mejorar la experiencia. 
+              Nos ayudan a entender cÃ³mo usas el sitio para mejorar la experiencia. 
               {/* TODO: Especificar si se usa Google Analytics, Hotjar, etc. */}
             </p>
             <div className="mt-3 space-y-1 text-xs text-gray-600">
-              <p>• [PENDIENTE: Nombre de herramienta analítica]</p>
-              <p>• Información de navegación y comportamiento</p>
+              <p>â€¢ [PENDIENTE: Nombre de herramienta analÃ­tica]</p>
+              <p>â€¢ InformaciÃ³n de navegaciÃ³n y comportamiento</p>
             </div>
           </div>
 
           {/* Marketing Cookies */}
           <div className="border-l-4 border-orange-500 bg-orange-50 p-4 rounded-r">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-lg font-semibold text-gray-900">🎯 Cookies de Marketing</h3>
+              <h3 className="text-lg font-semibold text-gray-900">ðŸŽ¯ Cookies de Marketing</h3>
               <button
                 onClick={() => handleToggle('marketing')}
                 className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
@@ -162,15 +162,15 @@ export default function CookiePreferencesModal({
               {/* TODO: Especificar si se usa Meta Pixel, Google Ads, etc. */}
             </p>
             <div className="mt-3 space-y-1 text-xs text-gray-600">
-              <p>• [PENDIENTE: Meta Pixel / Google Ads / Otras plataformas]</p>
-              <p>• Cookies de redes sociales (si aplica)</p>
+              <p>â€¢ [PENDIENTE: Meta Pixel / Google Ads / Otras plataformas]</p>
+              <p>â€¢ Cookies de redes sociales (si aplica)</p>
             </div>
           </div>
 
           {/* Info box */}
           <div className="bg-blue-100 border border-blue-300 rounded p-4">
             <p className="text-sm text-blue-900">
-              <strong>💡 Tip:</strong> Puedes cambiar estas preferencias en cualquier momento desde el pie de página 
+              <strong>ðŸ’¡ Tip:</strong> Puedes cambiar estas preferencias en cualquier momento desde el pie de pÃ¡gina 
               haciendo clic en "Configurar cookies".
             </p>
           </div>
@@ -201,3 +201,4 @@ export default function CookiePreferencesModal({
     </div>
   );
 }
+

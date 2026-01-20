@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -10,11 +10,11 @@ export default function PeluqueriaDemo() {
       <div className="sticky top-0 z-50 w-full bg-yellow-100 border-b-4 border-yellow-400 px-6 py-4">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-start gap-3">
-            <div className="text-2xl mt-1">⚠️</div>
+            <div className="text-2xl mt-1">âš ï¸</div>
             <div>
-              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÁGINA DE DEMOSTRACIÓN</p>
+              <p className="font-bold text-lg text-yellow-900">ESTA ES UNA PÃGINA DE DEMOSTRACIÃ“N</p>
               <p className="text-yellow-800 mt-1">
-                Las imágenes mostradas son genéricas y de ejemplo. Este es un diseño de demostración para mostrar la estructura y funcionalidad de un sitio web para salones de peluquería. En una versión real, utilizarías fotos auténticas de tu salón, clientes y resultados de trabajos.
+                Las imÃ¡genes mostradas son genÃ©ricas y de ejemplo. Este es un diseÃ±o de demostraciÃ³n para mostrar la estructura y funcionalidad de un sitio web para salones de peluquerÃ­a. En una versiÃ³n real, utilizarÃ­as fotos autÃ©nticas de tu salÃ³n, clientes y resultados de trabajos.
               </p>
             </div>
           </div>
@@ -33,7 +33,7 @@ export default function PeluqueriaDemo() {
               backgroundPosition: 'center',
             }}
           />
-          {/* Overlay gradiente suave: izquierda oscura para legibilidad, derecha más clara */}
+          {/* Overlay gradiente suave: izquierda oscura para legibilidad, derecha mÃ¡s clara */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30"></div>
         </div>
 
@@ -44,7 +44,7 @@ export default function PeluqueriaDemo() {
               Color, corte y salud capilar con acabado premium
             </h1>
             <p className="text-lg md:text-xl mb-10 opacity-95 font-light leading-relaxed">
-              En Lumen Hair Studio combinamos técnicas de salón profesional con productos de alta gama. Cada cliente recibe diagnóstico personalizado y resultados que duran.
+              En Lumen Hair Studio combinamos tÃ©cnicas de salÃ³n profesional con productos de alta gama. Cada cliente recibe diagnÃ³stico personalizado y resultados que duran.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <a 
@@ -70,7 +70,7 @@ export default function PeluqueriaDemo() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Nuestros Servicios Premium</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Cada servicio incluye diagnóstico personalizado, aplicación de productos profesionales y asesoramiento experto.
+              Cada servicio incluye diagnÃ³stico personalizado, aplicaciÃ³n de productos profesionales y asesoramiento experto.
             </p>
           </div>
 
@@ -87,12 +87,12 @@ export default function PeluqueriaDemo() {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">Corte & Styling</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Corte personalizado con análisis de rasgos faciales y textura capilar. Incluye secado y peinado profesional.
+                  Corte personalizado con anÃ¡lisis de rasgos faciales y textura capilar. Incluye secado y peinado profesional.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 35€</p>
-                    <p className="text-gray-500 text-xs">45–60 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 35â‚¬</p>
+                    <p className="text-gray-500 text-xs">45â€“60 min</p>
                   </div>
                 </div>
               </div>
@@ -103,19 +103,19 @@ export default function PeluqueriaDemo() {
               <div className="relative h-40 bg-gray-300 overflow-hidden">
                 <img 
                   src="/demos/peluqueria/balayage.jpg" 
-                  alt="Coloración & Balayage"
+                  alt="ColoraciÃ³n & Balayage"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Coloración & Balayage</h3>
+                <h3 className="text-xl font-bold mb-2">ColoraciÃ³n & Balayage</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Coloración con pigmentación de larga duración. Técnica balayage para realces naturales y profundidad.
+                  ColoraciÃ³n con pigmentaciÃ³n de larga duraciÃ³n. TÃ©cnica balayage para realces naturales y profundidad.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 75€</p>
-                    <p className="text-gray-500 text-xs">90–120 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 75â‚¬</p>
+                    <p className="text-gray-500 text-xs">90â€“120 min</p>
                   </div>
                 </div>
               </div>
@@ -133,12 +133,12 @@ export default function PeluqueriaDemo() {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">Mechas & Babylights</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Realces finos y naturales para dimensión y luminosidad. Ideal para renovar el look sin cambio radical.
+                  Realces finos y naturales para dimensiÃ³n y luminosidad. Ideal para renovar el look sin cambio radical.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 95€</p>
-                    <p className="text-gray-500 text-xs">100–130 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 95â‚¬</p>
+                    <p className="text-gray-500 text-xs">100â€“130 min</p>
                   </div>
                 </div>
               </div>
@@ -149,19 +149,19 @@ export default function PeluqueriaDemo() {
               <div className="relative h-40 bg-gray-300 overflow-hidden">
                 <img 
                   src="/demos/peluqueria/transicion-canas.jpg" 
-                  alt="Tratamiento Capilar Reparación"
+                  alt="Tratamiento Capilar ReparaciÃ³n"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">Tratamiento Capilar Reparación</h3>
+                <h3 className="text-xl font-bold mb-2">Tratamiento Capilar ReparaciÃ³n</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Hidratación intensiva, queratina y proteínas. Ideal para cabellos dañados, quemados o secos.
+                  HidrataciÃ³n intensiva, queratina y proteÃ­nas. Ideal para cabellos daÃ±ados, quemados o secos.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 45€</p>
-                    <p className="text-gray-500 text-xs">50–70 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 45â‚¬</p>
+                    <p className="text-gray-500 text-xs">50â€“70 min</p>
                   </div>
                 </div>
               </div>
@@ -179,12 +179,12 @@ export default function PeluqueriaDemo() {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">Alisado & Keratina Premium</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Alisado brasileño o alisado a la keratina. Resultados lisos y brillantes durante 3–6 meses.
+                  Alisado brasileÃ±o o alisado a la keratina. Resultados lisos y brillantes durante 3â€“6 meses.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 120€</p>
-                    <p className="text-gray-500 text-xs">120–150 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 120â‚¬</p>
+                    <p className="text-gray-500 text-xs">120â€“150 min</p>
                   </div>
                 </div>
               </div>
@@ -202,12 +202,12 @@ export default function PeluqueriaDemo() {
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">Peinados & Eventos</h3>
                 <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                  Peinado de novia, eventos especiales. Incluye prueba previa, diseño personalizado y retoque el día.
+                  Peinado de novia, eventos especiales. Incluye prueba previa, diseÃ±o personalizado y retoque el dÃ­a.
                 </p>
                 <div className="flex justify-between items-center">
                   <div>
-                    <p className="text-amber-600 font-bold text-lg">Desde 80€</p>
-                    <p className="text-gray-500 text-xs">60–90 min</p>
+                    <p className="text-amber-600 font-bold text-lg">Desde 80â‚¬</p>
+                    <p className="text-gray-500 text-xs">60â€“90 min</p>
                   </div>
                 </div>
               </div>
@@ -216,19 +216,19 @@ export default function PeluqueriaDemo() {
 
           <div className="mt-16 p-6 bg-amber-50 rounded-lg border border-amber-200 text-center">
             <p className="text-gray-700 text-sm">
-              <strong>💡 Consulta de Diagnóstico Gratuita:</strong> Primera visita sin coste. Te asesoramos sobre el mejor servicio según tu cabello, estilo y presupuesto.
+              <strong>ðŸ’¡ Consulta de DiagnÃ³stico Gratuita:</strong> Primera visita sin coste. Te asesoramos sobre el mejor servicio segÃºn tu cabello, estilo y presupuesto.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Galería */}
+      {/* GalerÃ­a */}
       <section id="galeria" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Nuestro Trabajo</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Cada imagen cuenta una historia de transformación. Mira los cambios reales de nuestras clientes.
+              Cada imagen cuenta una historia de transformaciÃ³n. Mira los cambios reales de nuestras clientes.
             </p>
           </div>
 
@@ -236,10 +236,10 @@ export default function PeluqueriaDemo() {
             {[
               { title: 'Balayage Caramelo', img: '/demos/peluqueria/balayage.jpg' },
               { title: 'Peinado Evento', img: '/demos/peluqueria/peinado-evento.jpg' },
-              { title: 'Color Orgánico', img: '/demos/peluqueria/color-organico.jpg' },
+              { title: 'Color OrgÃ¡nico', img: '/demos/peluqueria/color-organico.jpg' },
               { title: 'Cabello Rizado', img: '/demos/peluqueria/curly.jpg' },
-              { title: 'Transición Canas', img: '/demos/peluqueria/transicion-canas.jpg' },
-              { title: 'Salón Principal', img: '/demos/peluqueria/salon-principal.jpg' },
+              { title: 'TransiciÃ³n Canas', img: '/demos/peluqueria/transicion-canas.jpg' },
+              { title: 'SalÃ³n Principal', img: '/demos/peluqueria/salon-principal.jpg' },
             ].map((item, idx) => (
               <div key={idx} className="relative h-72 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 group cursor-pointer">
                 <img 
@@ -264,7 +264,7 @@ export default function PeluqueriaDemo() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Lo que dicen nuestras clientes</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Testimonios reales de quienes confían en nosotros.
+              Testimonios reales de quienes confÃ­an en nosotros.
             </p>
           </div>
 
@@ -279,10 +279,10 @@ export default function PeluqueriaDemo() {
                 ))}
               </div>
               <p className="text-gray-700 mb-4 text-base leading-relaxed italic">
-                "Hice un balayage hace 4 meses y sigue perfecto. El corte me solucionó el problema que llevaba años con mi cabello. ¡Vuelvo seguro!"
+                "Hice un balayage hace 4 meses y sigue perfecto. El corte me solucionÃ³ el problema que llevaba aÃ±os con mi cabello. Â¡Vuelvo seguro!"
               </p>
-              <p className="font-semibold text-gray-900">Sofía Martínez</p>
-              <p className="text-gray-600 text-xs">✓ Cliente verificada</p>
+              <p className="font-semibold text-gray-900">SofÃ­a MartÃ­nez</p>
+              <p className="text-gray-600 text-xs">âœ“ Cliente verificada</p>
             </div>
 
             {/* Testimonio 2 */}
@@ -295,10 +295,10 @@ export default function PeluqueriaDemo() {
                 ))}
               </div>
               <p className="text-gray-700 mb-4 text-base leading-relaxed italic">
-                "Me hicieron un alisado keratina antes de mi boda. Quedé con el cabello liso, brillante y disciplinado. ¡Era exacto lo que quería!"
+                "Me hicieron un alisado keratina antes de mi boda. QuedÃ© con el cabello liso, brillante y disciplinado. Â¡Era exacto lo que querÃ­a!"
               </p>
-              <p className="font-semibold text-gray-900">Elena Rodríguez</p>
-              <p className="text-gray-600 text-xs">✓ Evento Especial (Noviembre 2025)</p>
+              <p className="font-semibold text-gray-900">Elena RodrÃ­guez</p>
+              <p className="text-gray-600 text-xs">âœ“ Evento Especial (Noviembre 2025)</p>
             </div>
 
             {/* Testimonio 3 */}
@@ -311,10 +311,10 @@ export default function PeluqueriaDemo() {
                 ))}
               </div>
               <p className="text-gray-700 mb-4 text-base leading-relaxed italic">
-                "Iba con mi cabello apagado y dañado. El tratamiento reparación + el nuevo corte = transformación total. Las chicas me preguntaban dónde me lo había hecho."
+                "Iba con mi cabello apagado y daÃ±ado. El tratamiento reparaciÃ³n + el nuevo corte = transformaciÃ³n total. Las chicas me preguntaban dÃ³nde me lo habÃ­a hecho."
               </p>
-              <p className="font-semibold text-gray-900">Laura Gómez</p>
-              <p className="text-gray-600 text-xs">✓ Cliente VIP (5 visitas)</p>
+              <p className="font-semibold text-gray-900">Laura GÃ³mez</p>
+              <p className="text-gray-600 text-xs">âœ“ Cliente VIP (5 visitas)</p>
             </div>
           </div>
         </div>
@@ -326,7 +326,7 @@ export default function PeluqueriaDemo() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Precios y Packs</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Tarifas transparentes y packs diseñados para obtener máxima transformación.
+              Tarifas transparentes y packs diseÃ±ados para obtener mÃ¡xima transformaciÃ³n.
             </p>
           </div>
 
@@ -342,16 +342,16 @@ export default function PeluqueriaDemo() {
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2">Pack Color + Corte</h3>
-                <p className="text-gray-600 mb-6 text-sm">Transformación completa</p>
-                <p className="text-4xl font-bold text-amber-600 mb-1">140€</p>
-                <p className="text-xs text-gray-500 mb-8">Normalmente 165€</p>
+                <p className="text-gray-600 mb-6 text-sm">TransformaciÃ³n completa</p>
+                <p className="text-4xl font-bold text-amber-600 mb-1">140â‚¬</p>
+                <p className="text-xs text-gray-500 mb-8">Normalmente 165â‚¬</p>
                 
                 <ul className="space-y-3 mb-8 text-sm">
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Coloración con técnica elegida</span>
+                    <span className="text-gray-700">ColoraciÃ³n con tÃ©cnica elegida</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -379,7 +379,7 @@ export default function PeluqueriaDemo() {
             {/* Pack 2 - Destacado */}
             <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-xl overflow-hidden border-2 border-amber-400 shadow-lg relative">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-amber-600 text-white px-5 py-1 rounded-full text-sm font-bold z-10">
-                MÁS POPULAR
+                MÃS POPULAR
               </div>
               <div className="relative h-48 bg-gray-300 overflow-hidden">
                 <img 
@@ -391,15 +391,15 @@ export default function PeluqueriaDemo() {
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2">Pack Completo</h3>
                 <p className="text-gray-600 mb-6 text-sm">Color + Corte + Tratamiento</p>
-                <p className="text-4xl font-bold text-amber-600 mb-1">185€</p>
-                <p className="text-xs text-gray-500 mb-8">Normalmente 225€</p>
+                <p className="text-4xl font-bold text-amber-600 mb-1">185â‚¬</p>
+                <p className="text-xs text-gray-500 mb-8">Normalmente 225â‚¬</p>
                 
                 <ul className="space-y-3 mb-8 text-sm">
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Coloración + Balayage</span>
+                    <span className="text-gray-700">ColoraciÃ³n + Balayage</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -411,7 +411,7 @@ export default function PeluqueriaDemo() {
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Tratamiento reparación intensiva</span>
+                    <span className="text-gray-700">Tratamiento reparaciÃ³n intensiva</span>
                   </li>
                 </ul>
 
@@ -435,8 +435,8 @@ export default function PeluqueriaDemo() {
               </div>
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-2">Pack Novia</h3>
-                <p className="text-gray-600 mb-6 text-sm">Prueba + día del evento</p>
-                <p className="text-4xl font-bold text-amber-600 mb-1">260€</p>
+                <p className="text-gray-600 mb-6 text-sm">Prueba + dÃ­a del evento</p>
+                <p className="text-4xl font-bold text-amber-600 mb-1">260â‚¬</p>
                 <p className="text-xs text-gray-500 mb-8">Incluye prueba + retoque</p>
                 
                 <ul className="space-y-3 mb-8 text-sm">
@@ -450,13 +450,13 @@ export default function PeluqueriaDemo() {
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Peinado día del evento</span>
+                    <span className="text-gray-700">Peinado dÃ­a del evento</span>
                   </li>
                   <li className="flex items-center gap-3">
                     <svg className="w-5 h-5 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-gray-700">Retoque sin cargo el día</span>
+                    <span className="text-gray-700">Retoque sin cargo el dÃ­a</span>
                   </li>
                 </ul>
 
@@ -472,13 +472,13 @@ export default function PeluqueriaDemo() {
 
           <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-8 text-center">
             <p className="text-gray-700 text-base leading-relaxed">
-              <strong>📋 Presupuesto Personalizado:</strong> El precio final depende de la densidad, largo y estado del cabello. Realizamos consulta gratuita y presupuesto sin compromiso. Todos los servicios incluyen productos profesionales y asesoramiento post-servicio.
+              <strong>ðŸ“‹ Presupuesto Personalizado:</strong> El precio final depende de la densidad, largo y estado del cabello. Realizamos consulta gratuita y presupuesto sin compromiso. Todos los servicios incluyen productos profesionales y asesoramiento post-servicio.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Ubicación y Contacto */}
+      {/* UbicaciÃ³n y Contacto */}
       <section id="ubicacion" className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -495,27 +495,27 @@ export default function PeluqueriaDemo() {
               ></iframe>
             </div>
 
-            {/* Información */}
+            {/* InformaciÃ³n */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-bold mb-10">Ubicación y Contacto</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-10">UbicaciÃ³n y Contacto</h2>
               
               <div className="mb-10">
-                <h3 className="text-xl font-bold mb-3">📍 Dirección</h3>
+                <h3 className="text-xl font-bold mb-3">ðŸ“ DirecciÃ³n</h3>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  Paseo de la Castellana, 156 – Local 3A<br/>
-                  28046 Madrid, España<br/>
-                  <span className="text-sm text-gray-600 mt-2 block">A 3 min de Metro Chamartín</span>
+                  Paseo de la Castellana, 156 â€“ Local 3A<br/>
+                  28046 Madrid, EspaÃ±a<br/>
+                  <span className="text-sm text-gray-600 mt-2 block">A 3 min de Metro ChamartÃ­n</span>
                 </p>
               </div>
 
               <div className="mb-10">
-                <h3 className="text-xl font-bold mb-3">🕐 Horarios</h3>
+                <h3 className="text-xl font-bold mb-3">ðŸ• Horarios</h3>
                 <ul className="text-gray-700 text-lg space-y-2">
-                  <li><strong>Lunes a Viernes:</strong> 10:00 – 19:00</li>
-                  <li><strong>Sábados:</strong> 10:00 – 15:00</li>
+                  <li><strong>Lunes a Viernes:</strong> 10:00 â€“ 19:00</li>
+                  <li><strong>SÃ¡bados:</strong> 10:00 â€“ 15:00</li>
                   <li><strong>Domingos:</strong> Cerrado</li>
                 </ul>
-                <p className="text-xs text-gray-600 mt-4">💡 Abierto en festivos locales bajo reserva previa</p>
+                <p className="text-xs text-gray-600 mt-4">ðŸ’¡ Abierto en festivos locales bajo reserva previa</p>
               </div>
 
               <div className="space-y-4">
@@ -547,14 +547,14 @@ export default function PeluqueriaDemo() {
                   </div>
                   <div>
                     <p className="font-bold text-gray-900">WhatsApp</p>
-                    <p className="text-green-600 font-semibold">Envía mensaje directo</p>
+                    <p className="text-green-600 font-semibold">EnvÃ­a mensaje directo</p>
                   </div>
                 </a>
               </div>
 
               <div className="mt-8 p-4 bg-amber-50 border border-amber-200 rounded-lg">
                 <p className="text-gray-700 text-sm">
-                  <strong>⚡ Respuesta rápida:</strong> Respondemos en menos de 1 hora en horario laboral. Fines de semana respondemos el lunes.
+                  <strong>âš¡ Respuesta rÃ¡pida:</strong> Respondemos en menos de 1 hora en horario laboral. Fines de semana respondemos el lunes.
                 </p>
               </div>
             </div>
@@ -569,7 +569,7 @@ export default function PeluqueriaDemo() {
             Reserva tu cita y te asesoramos sin compromiso
           </h2>
           <p className="text-lg md:text-xl mb-12 opacity-95">
-            Primera visita incluye diagnóstico gratuito y presupuesto personalizado.
+            Primera visita incluye diagnÃ³stico gratuito y presupuesto personalizado.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
@@ -602,7 +602,7 @@ export default function PeluqueriaDemo() {
               <h4 className="text-white font-semibold mb-4">Servicios</h4>
               <ul className="text-sm space-y-2">
                 <li><a href="#servicios" className="hover:text-white transition-colors">Corte & Styling</a></li>
-                <li><a href="#servicios" className="hover:text-white transition-colors">Coloración</a></li>
+                <li><a href="#servicios" className="hover:text-white transition-colors">ColoraciÃ³n</a></li>
                 <li><a href="#servicios" className="hover:text-white transition-colors">Tratamientos</a></li>
                 <li><a href="#servicios" className="hover:text-white transition-colors">Peinados Eventos</a></li>
               </ul>
@@ -612,7 +612,7 @@ export default function PeluqueriaDemo() {
               <ul className="text-sm space-y-2">
                 <li><a href="tel:+34917654321" className="hover:text-white transition-colors">+34 91 765 4321</a></li>
                 <li><a href="https://wa.me/34917654321" className="hover:text-white transition-colors">WhatsApp</a></li>
-                <li><a href="#ubicacion" className="hover:text-white transition-colors">Ubicación</a></li>
+                <li><a href="#ubicacion" className="hover:text-white transition-colors">UbicaciÃ³n</a></li>
                 <li><a href="#ubicacion" className="hover:text-white transition-colors">Horarios</a></li>
               </ul>
             </div>
@@ -628,13 +628,13 @@ export default function PeluqueriaDemo() {
 
           <div className="border-t border-gray-700 pt-8 text-center">
             <p className="text-sm mb-3">
-              © 2026 Lumen Hair Studio. Todos los derechos reservados.
+              Â© 2026 Lumen Hair Studio. Todos los derechos reservados.
             </p>
             <p className="text-xs text-gray-400 mb-4">
-              ⚠️ <strong>PÁGINA DE DEMOSTRACIÓN:</strong> Las imágenes mostradas son genéricas. Este es un ejemplo de diseño web para salones de peluquería.
+              âš ï¸ <strong>PÃGINA DE DEMOSTRACIÃ“N:</strong> Las imÃ¡genes mostradas son genÃ©ricas. Este es un ejemplo de diseÃ±o web para salones de peluquerÃ­a.
             </p>
             <p className="text-xs text-gray-500">
-              ✨ Demo creada por <Link href="/" className="text-amber-400 hover:text-amber-300 transition-colors font-semibold">Neuriax</Link> • Diseños web que venden para salones de belleza
+              âœ¨ Demo creada por <Link href="/" className="text-amber-400 hover:text-amber-300 transition-colors font-semibold">Neuriax</Link> â€¢ DiseÃ±os web que venden para salones de belleza
             </p>
           </div>
         </div>
@@ -642,3 +642,4 @@ export default function PeluqueriaDemo() {
     </div>
   );
 }
+

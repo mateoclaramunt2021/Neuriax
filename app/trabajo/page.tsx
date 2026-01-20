@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState } from 'react';
 
@@ -22,8 +22,8 @@ export default function Trabajo() {
 
     if (!formData.nombre.trim()) newErrors.nombre = 'El nombre es requerido';
     if (!formData.email.trim()) newErrors.email = 'El email es requerido';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido';
-    if (!formData.posicion) newErrors.posicion = 'Selecciona una posición';
+    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email invÃ¡lido';
+    if (!formData.posicion) newErrors.posicion = 'Selecciona una posiciÃ³n';
     if (!formData.mensaje.trim()) newErrors.mensaje = 'El mensaje es requerido';
 
     setErrors(newErrors);
@@ -55,7 +55,7 @@ export default function Trabajo() {
         setErrors({ ...errors, cv: 'Solo se permiten archivos PDF o Word' });
         return;
       }
-      // Validar tamaño (max 5MB)
+      // Validar tamaÃ±o (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
         setErrors({ ...errors, cv: 'El archivo no puede superar 5MB' });
         return;
@@ -96,7 +96,7 @@ export default function Trabajo() {
       });
 
       if (response.ok) {
-        setSubmitMessage('¡Tu postulación ha sido enviada exitosamente! Pronto recibirás un email de confirmación.');
+        setSubmitMessage('Â¡Tu postulaciÃ³n ha sido enviada exitosamente! Pronto recibirÃ¡s un email de confirmaciÃ³n.');
         setFormData({
           nombre: '',
           email: '',
@@ -107,11 +107,11 @@ export default function Trabajo() {
         });
         setCvFile(null);
       } else {
-        setSubmitMessage('Error al enviar la postulación. Por favor, intenta de nuevo.');
+        setSubmitMessage('Error al enviar la postulaciÃ³n. Por favor, intenta de nuevo.');
       }
     } catch (error) {
       console.error('Error:', error);
-      setSubmitMessage('Error al enviar la postulación. Por favor, intenta de nuevo.');
+      setSubmitMessage('Error al enviar la postulaciÃ³n. Por favor, intenta de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
@@ -130,10 +130,10 @@ export default function Trabajo() {
 
         <div className="relative max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Únete a Nuestro Equipo
+            Ãšnete a Nuestro Equipo
           </h1>
           <p className="text-xl md:text-2xl mb-8 opacity-90">
-            Estamos buscando talento apasionado por la tecnología y la innovación. Si quieres formar parte de Neuriax, envíanos tu postulación.
+            Estamos buscando talento apasionado por la tecnologÃ­a y la innovaciÃ³n. Si quieres formar parte de Neuriax, envÃ­anos tu postulaciÃ³n.
           </p>
         </div>
       </section>
@@ -142,7 +142,7 @@ export default function Trabajo() {
       <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-4xl mx-auto">
           <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-            <h2 className="text-3xl font-bold text-white mb-8 text-center">Formulario de Postulación</h2>
+            <h2 className="text-3xl font-bold text-white mb-8 text-center">Formulario de PostulaciÃ³n</h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
@@ -166,7 +166,7 @@ export default function Trabajo() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    Correo Electrónico *
+                    Correo ElectrÃ³nico *
                   </label>
                   <input
                     type="email"
@@ -186,7 +186,7 @@ export default function Trabajo() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="telefono" className="block text-sm font-medium text-slate-300 mb-2">
-                    Teléfono
+                    TelÃ©fono
                   </label>
                   <input
                     type="tel"
@@ -201,7 +201,7 @@ export default function Trabajo() {
 
                 <div>
                   <label htmlFor="posicion" className="block text-sm font-medium text-slate-300 mb-2">
-                    Posición Deseada *
+                    PosiciÃ³n Deseada *
                   </label>
                   <select
                     id="posicion"
@@ -212,9 +212,9 @@ export default function Trabajo() {
                     required
                     className={`w-full px-4 py-3 bg-slate-700 border rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent ${errors.posicion ? 'border-red-500' : 'border-slate-600'}`}
                   >
-                    <option value="">Selecciona una posición</option>
+                    <option value="">Selecciona una posiciÃ³n</option>
                     <option value="desarrollador">Desarrollador</option>
-                    <option value="consultor">Consultor de Automatización</option>
+                    <option value="consultor">Consultor de AutomatizaciÃ³n</option>
                     <option value="analista">Analista de Datos</option>
                     <option value="marketing">Especialista en Marketing Digital</option>
                     <option value="otro">Otro</option>
@@ -225,7 +225,7 @@ export default function Trabajo() {
 
               <div>
                 <label htmlFor="experiencia" className="block text-sm font-medium text-slate-300 mb-2">
-                  Años de Experiencia
+                  AÃ±os de Experiencia
                 </label>
                 <select
                   id="experiencia"
@@ -235,16 +235,16 @@ export default function Trabajo() {
                   className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 >
                   <option value="">Selecciona experiencia</option>
-                  <option value="0-1">0-1 años</option>
-                  <option value="1-3">1-3 años</option>
-                  <option value="3-5">3-5 años</option>
-                  <option value="5+">Más de 5 años</option>
+                  <option value="0-1">0-1 aÃ±os</option>
+                  <option value="1-3">1-3 aÃ±os</option>
+                  <option value="3-5">3-5 aÃ±os</option>
+                  <option value="5+">MÃ¡s de 5 aÃ±os</option>
                 </select>
               </div>
 
               <div>
                 <label htmlFor="mensaje" className="block text-sm font-medium text-slate-300 mb-2">
-                  Cuéntanos sobre ti *
+                  CuÃ©ntanos sobre ti *
                 </label>
                 <textarea
                   id="mensaje"
@@ -255,7 +255,7 @@ export default function Trabajo() {
                   required
                   rows={6}
                   className={`w-full px-4 py-3 bg-slate-700 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent resize-none ${errors.mensaje ? 'border-red-500' : 'border-slate-600'}`}
-                  placeholder="Describe tu experiencia, habilidades y por qué quieres unirte a Neuriax..."
+                  placeholder="Describe tu experiencia, habilidades y por quÃ© quieres unirte a Neuriax..."
                 />
                 {errors.mensaje && <p className="mt-1 text-sm text-red-400">{errors.mensaje}</p>}
               </div>
@@ -263,7 +263,7 @@ export default function Trabajo() {
               {/* Campo para subir CV */}
               <div>
                 <label htmlFor="cv" className="block text-sm font-medium text-slate-300 mb-2">
-                  Curriculum Vitae (PDF o Word, máx. 5MB)
+                  Curriculum Vitae (PDF o Word, mÃ¡x. 5MB)
                 </label>
                 <div className="relative">
                   <input
@@ -297,7 +297,7 @@ export default function Trabajo() {
                     onClick={() => setCvFile(null)}
                     className="mt-2 text-sm text-red-400 hover:text-red-300"
                   >
-                    ✕ Eliminar archivo
+                    âœ• Eliminar archivo
                   </button>
                 )}
               </div>
@@ -308,7 +308,7 @@ export default function Trabajo() {
                   disabled={isSubmitting}
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Postulación'}
+                  {isSubmitting ? 'Enviando...' : 'Enviar PostulaciÃ³n'}
                 </button>
                 {submitMessage && (
                   <p className={`mt-4 text-sm ${submitMessage.includes('exitosamente') ? 'text-green-400' : 'text-red-400'}`}>
