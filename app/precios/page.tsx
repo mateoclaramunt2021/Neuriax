@@ -151,6 +151,106 @@ export default function PreciosPage() {
         </div>
       </section>
 
+      {/* Ofertas especiales */}
+      <section className="py-20 px-6 bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
+            Planes mensuales - Boosts para tu negocio
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8 mb-8">
+            {/* OFERTA 1: WEB + SEO */}
+            <div className="bg-gradient-to-br from-cyan-900/40 to-slate-900/40 rounded-lg p-8 border-2 border-cyan-500 hover:border-cyan-400 transition-colors relative">
+              <div className="absolute -top-4 left-6 bg-cyan-500 text-black px-4 py-1 rounded-full text-sm font-bold">
+                POPULAR
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 mt-4">Web + SEO</h3>
+              <p className="text-gray-300 text-sm mb-6">Página profesional con posicionamiento incluido</p>
+              <div className="mb-8">
+                <div className="flex items-baseline">
+                  <span className="text-5xl font-bold text-cyan-400">75€</span>
+                  <span className="text-gray-400 ml-2">/mes</span>
+                </div>
+                <p className="text-gray-400 text-sm mt-2">Primer mes, luego se ajusta según necesidades</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Página web profesional</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>SEO local incluido</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Diseño responsive</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Dominio + hosting 1 año</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Soporte técnico incluido</span>
+                </li>
+              </ul>
+              <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                Empezar ahora
+              </CTAButton>
+            </div>
+
+            {/* OFERTA 2: WEB + SEO + IA */}
+            <div className="bg-gradient-to-br from-purple-900/40 to-slate-900/40 rounded-lg p-8 border-2 border-purple-500 hover:border-purple-400 transition-colors relative">
+              <div className="absolute -top-4 right-6 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                RECOMENDADO
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2 mt-4">Web + SEO + IA 24/7</h3>
+              <p className="text-gray-300 text-sm mb-6">Automatización inteligente para captar y calificar leads</p>
+              <div className="mb-8">
+                <div className="flex items-baseline">
+                  <span className="text-5xl font-bold text-purple-400">desde 150€</span>
+                  <span className="text-gray-400 ml-2">/mes</span>
+                </div>
+                <p className="text-gray-400 text-sm mt-2">Incluye todo del plan anterior +</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8">
+                <li className="flex items-start">
+                  <span className="text-purple-400 mr-3 font-bold">✓</span>
+                  <span>Todo lo del plan Web + SEO</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-purple-400 mr-3 font-bold">✓</span>
+                  <span>Bot WhatsApp inteligente con IA</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-purple-400 mr-3 font-bold">✓</span>
+                  <span>Captación automática de leads 24/7</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-purple-400 mr-3 font-bold">✓</span>
+                  <span>Calificación inteligente de prospectos</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-purple-400 mr-3 font-bold">✓</span>
+                  <span>Reportes automáticos diarios</span>
+                </li>
+              </ul>
+              <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="w-full bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700">
+                Agendar demo
+              </CTAButton>
+            </div>
+          </div>
+
+          {/* Nota aclaratoria */}
+          <div className="bg-gray-800/50 rounded-lg p-6 border border-gray-700 text-center">
+            <p className="text-gray-300">
+              <span className="text-cyan-400 font-semibold">Estos planes son flexibles:</span> puedes empezar con Web + SEO y agregar IA cuando lo necesites.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Servicios extras */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-7xl mx-auto">
