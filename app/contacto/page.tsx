@@ -1,204 +1,238 @@
-import Image from "next/image";
+'use client';
+
+import Link from 'next/link';
 
 export default function Contacto() {
-  const faqs = [
-    {
-      question: "¿Cuánto tiempo toma implementar una solución?",
-      answer: "Depende de la complejidad, pero la mayoría de soluciones básicas están operativas en 1-2 semanas. Soluciones más complejas pueden tomar 4-6 semanas."
-    },
-    {
-      question: "¿Trabajas con empresas de cualquier tamaño?",
-      answer: "Sí, trabajamos tanto con startups y PYMEs como con empresas más grandes. Adaptamos nuestras soluciones al presupuesto y necesidades de cada cliente."
-    },
-    {
-      question: "¿Qué pasa si no estoy satisfecho con los resultados?",
-      answer: "Todas nuestras implementaciones incluyen un período de garantía y ajustes gratuitos. Nuestro objetivo es que obtengas resultados concretos y medibles."
-    },
-    {
-      question: "¿Ofreces soporte después de la implementación?",
-      answer: "Sí, incluimos soporte técnico y mantenimiento por al menos 3 meses después de la implementación, con opción a contratos de soporte continuo."
-    },
-    {
-      question: "¿Cómo mides el éxito de las soluciones?",
-      answer: "Establecemos KPIs claros desde el inicio y realizamos seguimiento mensual con reportes detallados de los resultados obtenidos."
-    }
-  ];
+
+
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white pb-20 md:pb-0">
+      <div className="h-16"></div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Hablemos de tu negocio
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Estamos aquí para entender tus desafíos y diseñar la solución perfecta que transforme tu operación.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-                <a
-                  href="https://calendly.com/neuriax/30min"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-                >
-                  Agendar consulta gratuita
-                </a>
-                <a
-                  href="mailto:neuriaxx@gmail.com"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-                >
-                  Enviar email
-                </a>
-              </div>
-            </div>
+      {/* ========== HERO SECTION - FUTURISTIC ========== */}
+      <section className="relative hero-futuristic py-16 md:py-32 px-6 overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 grid-pattern opacity-50"></div>
+        
+        {/* Glowing Orbs */}
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[150px] -z-10"></div>
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-500/15 rounded-full blur-[120px] -z-10"></div>
 
-            <div className="relative group cursor-pointer">
-              <div className="relative h-96 w-full">
-                <Image
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="Consulta gratuita y transformación empresarial"
-                  fill
-                  className="object-cover rounded-lg shadow-2xl group-hover:scale-105 group-hover:shadow-3xl transition-all duration-500"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg group-hover:from-black/70 transition-all duration-300"></div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-500/30 transition-all duration-300"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-500/30 transition-all duration-300"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Info & CTA */}
-      <section className="py-20 px-6 bg-slate-900">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h2 className="text-3xl font-bold text-white mb-6">Agenda una consulta gratuita</h2>
-              <p className="text-slate-300 mb-8">
-                En una llamada de 30 minutos analizaremos tu situación actual, identificaremos las oportunidades de mejora y te presentaré un plan personalizado.
+          <div className="relative z-10 text-center">
+            {/* Left Content */}
+            <div>
+              {/* Main Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
+                <span className="block text-white">Automatiza tu negocio con</span>
+                <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                  IA y convierte más leads
+                </span>
+              </h1>
+
+              {/* Badge */}
+              <p className="text-cyan-300 text-lg italic mb-6 opacity-80">(al instante)</p>
+
+              {/* Subtitle */}
+              <p className="text-base md:text-lg text-slate-300 mb-8 leading-relaxed">
+                En 15–20 min te damos un plan claro con 3–5 mejoras aplicables esta semana.
               </p>
 
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span className="text-slate-300">neuriaxx@gmail.com</span>
+              {/* Promotional Cards */}
+              <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                {/* Automatización Card */}
+                <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl p-4 border border-cyan-500/50 backdrop-blur-sm hover:border-cyan-400 transition-all">
+                  <p className="text-cyan-400 font-bold text-center">Oferta de Automatización</p>
+                  <p className="text-white font-semibold text-center">¡Hasta el 15 de Febrero!</p>
                 </div>
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="text-slate-700">+34 631 415 151</span>
-                </div>
-                <div className="flex items-center">
-                  <svg className="w-6 h-6 text-cyan-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m-6 4h8m-8 4h8m-8 4h8" />
-                  </svg>
-                  <a href="https://www.instagram.com/mateclaramunt?igsh=MXRjcXE2MXd1Y3ZrYg%3D%3D&utm_source=qr" className="text-slate-700 hover:text-cyan-600 transition-colors">@mateclaramunt</a>
+
+                {/* Páginas Web Card */}
+                <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl p-4 border border-purple-500/50 backdrop-blur-sm hover:border-purple-400 transition-all">
+                  <p className="text-purple-400 font-bold text-center">Promoción de Páginas Web</p>
+                  <p className="text-white font-semibold text-center">¡Hasta el 1 de Febrero!</p>
                 </div>
               </div>
 
-              <a
-                href="https://calendly.com/neuriax/30min"
-                className="inline-flex items-center justify-center w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
+              {/* Main CTA Button */}
+              <Link
+                href="/contacto/formulario"
+                className="block w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 text-center border border-blue-400/50 mb-6"
               >
-                Agendar consulta gratuita
-              </a>
-            </div>
+                Agendar llamada (15 min)
+              </Link>
 
-            <div className="bg-slate-800 rounded-xl shadow-lg p-8 border border-slate-700">
-              <h3 className="text-2xl font-bold text-white mb-6">¿Qué esperar de nuestra conversación?</h3>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Análisis detallado de tus procesos actuales y puntos de dolor</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Identificación de oportunidades de automatización y mejora</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Propuesta de soluciones específicas para tu caso</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Estimación de tiempos, costes y retorno de inversión</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-green-400 mr-3 text-lg">✓</span>
-                  <span className="text-slate-300">Plan de implementación paso a paso</span>
-                </li>
-              </ul>
+              {/* Trust Note */}
+              <p className="text-sm text-slate-400">
+                Sin compromiso. Te llevas un plan claro aunque no trabájemos juntos.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-6 bg-slate-900">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Preguntas frecuentes
-            </h2>
-            <p className="text-lg text-slate-300">
-              Respuestas a las dudas más comunes sobre mis servicios
-            </p>
-          </div>
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-slate-800 rounded-lg shadow-lg p-6 border border-slate-700">
-                <h3 className="text-lg font-semibold text-white mb-3">
-                  {faq.question}
-                </h3>
-                <p className="text-slate-300">
-                  {faq.answer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            ¿Listo para transformar tu negocio?
+      {/* ========== CÓMO FUNCIONA (3 STEPS) ========== */}
+      <section className="py-16 md:py-20 px-6 bg-slate-900/30">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+            Cómo funciona en 3 pasos
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            La primera conversación es gratuita. No tienes nada que perder y mucho que ganar.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="https://calendly.com/neuriax/30min"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-            >
-              Agendar ahora
-            </a>
-            <a
-              href="mailto:neuriaxx@gmail.com"
-              className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-            >
-              Enviar email
-            </a>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Step 1 */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
+              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+                1
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-white">Diagnóstico rápido</h3>
+              <p className="text-slate-300">
+                En 5 minutos analizamos tu operación y entendemos dónde pierdes tiempo y dinero.
+              </p>
+            </div>
+
+            {/* Step 2 */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
+              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+                2
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-white">2–3 automatizaciones</h3>
+              <p className="text-slate-300">
+                Te presentamos las mejoras específicas para tu caso, con impacto medible.
+              </p>
+            </div>
+
+            {/* Step 3 */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
+              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+                3
+              </div>
+              <h3 className="text-xl font-bold mb-3 text-white">Demo y propuesta</h3>
+              <p className="text-slate-300">
+                Si encaja, te mostramos cómo funciona y te enviamos una propuesta sin compromiso.
+              </p>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* ========== EJEMPLOS POR SECTOR ========== */}
+      <section id="ejemplos-section" className="py-16 md:py-20 px-6">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+            Ejemplos por sector
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Restaurantes */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
+              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Restaurantes</h3>
+              <p className="text-slate-300 mb-4">
+                <strong>Automatización:</strong> Recibir reservas por WhatsApp, confirmar automáticamente y enviar recordatorio 24h antes.
+              </p>
+              <p className="text-sm text-slate-400">
+                Resultado: 30% menos no-shows, sin que nadie tenga que llamar.
+              </p>
+            </div>
+
+            {/* Inmobiliarias */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
+              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Inmobiliarias</h3>
+              <p className="text-slate-300 mb-4">
+                <strong>Automatización:</strong> Filtrar leads por presupuesto/zona, agendar visitas sin intervención manual.
+              </p>
+              <p className="text-sm text-slate-400">
+                Resultado: Cierra 2x más operaciones en menos tiempo.
+              </p>
+            </div>
+
+            {/* Belleza / Clínicas */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
+              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Belleza / Clínicas</h3>
+              <p className="text-slate-300 mb-4">
+                <strong>Automatización:</strong> Booking 24/7, recordatorios automáticos, reactivación de clientes dormidos por IA.
+              </p>
+              <p className="text-sm text-slate-400">
+                Resultado: 40% más citas, sin staff adicional.
+              </p>
+            </div>
+
+            {/* Servicios Locales */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
+              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Servicios Locales</h3>
+              <p className="text-slate-300 mb-4">
+                <strong>Automatización:</strong> Presupuestos automáticos, seguimiento por SMS, cierre de ventas con IA.
+              </p>
+              <p className="text-sm text-slate-400">
+                Resultado: 3x conversión con menos presupuestadores.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== RESULTADOS Y CONFIANZA ========== */}
+      <section className="py-16 md:py-20 px-6 bg-slate-900/30">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+            Resultados y confianza
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Implementación por fases */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700">
+              <h3 className="text-xl font-bold mb-4 text-cyan-400">Implementación por fases</h3>
+              <p className="text-slate-300">
+                No es todo de golpe. Empezamos con lo que más impacto genera, ajustamos y escalamos. Solo pagas por lo que funciona.
+              </p>
+            </div>
+
+            {/* Ajustes incluidos */}
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700">
+              <h3 className="text-xl font-bold mb-4 text-cyan-400">Ajustes incluidos</h3>
+              <p className="text-slate-300">
+                Durante los primeros 30 días, hacemos los cambios que necesites sin costo. Garantía de que funcione.
+              </p>
+            </div>
+          </div>
+
+          {/* Testimonios Placeholder */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700">
+              <div className="flex gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400">★</span>
+                ))}
+              </div>
+              <p className="text-slate-300 mb-4 italic">
+                "[Testimonial placeholder - Cliente (Sector)]"
+              </p>
+              <p className="text-slate-400 font-semibold">Cliente (Sector)</p>
+            </div>
+
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700">
+              <div className="flex gap-1 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <span key={i} className="text-yellow-400">★</span>
+                ))}
+              </div>
+              <p className="text-slate-300 mb-4 italic">
+                "[Testimonial placeholder - Cliente (Sector)]"
+              </p>
+              <p className="text-slate-400 font-semibold">Cliente (Sector)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========== MOBILE STICKY CTA ========== */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 to-slate-950/90 border-t border-slate-800 p-4 z-40">
+        <Link
+          href="/contacto/formulario"
+          className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-105 inline-block text-center"
+        >
+          Agendar llamada →
+        </Link>
+      </div>
     </div>
   );
 }
