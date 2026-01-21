@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const MAINTENANCE_MODE = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+// MAINTENANCE MODE - change to false to disable
+const MAINTENANCE_MODE = true;
 
 export function middleware(request: NextRequest) {
   // Si el modo mantenimiento está ON, redirigir TODOS a /mantenimiento
