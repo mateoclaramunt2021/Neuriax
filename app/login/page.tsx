@@ -30,13 +30,13 @@ export default function Login() {
     
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      setMessage('Por favor, ingresa un email vÃ¡lido.');
+      setMessage('Por favor, ingresa un email válido.');
       return;
     }
     
-    // SimulaciÃ³n de login
-    setMessage('Inicio de sesiÃ³n exitoso (demo)');
-    // Navegar al dashboard despuÃ©s de un breve delay
+    // Simulación de login
+    setMessage('Inicio de sesión exitoso (demo)');
+    // Navegar al dashboard después de un breve delay
     setTimeout(() => {
       router.push('/dashboard');
     }, 1000);

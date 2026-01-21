@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import React, { useState } from 'react';
 
@@ -166,7 +166,7 @@ export default function Trabajo() {
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    Correo ElectrÃ³nico *
+                    Correo Electrónico *
                   </label>
                   <input
                     type="email"
@@ -186,7 +186,7 @@ export default function Trabajo() {
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="telefono" className="block text-sm font-medium text-slate-300 mb-2">
-                    TelÃ©fono
+                    Teléfono
                   </label>
                   <input
                     type="tel"
@@ -214,7 +214,7 @@ export default function Trabajo() {
                   >
                     <option value="">Selecciona una posiciÃ³n</option>
                     <option value="desarrollador">Desarrollador</option>
-                    <option value="consultor">Consultor de AutomatizaciÃ³n</option>
+                    <option value="consultor">Consultor de Automatización</option>
                     <option value="analista">Analista de Datos</option>
                     <option value="marketing">Especialista en Marketing Digital</option>
                     <option value="otro">Otro</option>
@@ -225,7 +225,7 @@ export default function Trabajo() {
 
               <div>
                 <label htmlFor="experiencia" className="block text-sm font-medium text-slate-300 mb-2">
-                  AÃ±os de Experiencia
+                  Años de Experiencia
                 </label>
                 <select
                   id="experiencia"
@@ -235,10 +235,10 @@ export default function Trabajo() {
                   className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 >
                   <option value="">Selecciona experiencia</option>
-                  <option value="0-1">0-1 aÃ±os</option>
-                  <option value="1-3">1-3 aÃ±os</option>
-                  <option value="3-5">3-5 aÃ±os</option>
-                  <option value="5+">MÃ¡s de 5 aÃ±os</option>
+                  <option value="0-1">0-1 años</option>
+                  <option value="1-3">1-3 años</option>
+                  <option value="3-5">3-5 años</option>
+                  <option value="5+">MÃ¡s de 5 años</option>
                 </select>
               </div>
 

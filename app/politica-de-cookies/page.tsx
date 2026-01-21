@@ -1,4 +1,4 @@
-﻿import { Metadata } from 'next';
+import { Metadata } from 'next';
 import LegalLayout from '@/components/LegalLayout';
 
 export const metadata: Metadata = {
@@ -34,8 +34,8 @@ export default function PoliticaCookies() {
         
         <h4 className="font-semibold text-gray-900 mt-4 mb-2">CaracterÃ­sticas principales:</h4>
         <ul className="list-disc ml-6 space-y-1 text-gray-700 text-sm">
-          <li><strong>TamaÃ±o:</strong> Generalmente pequeÃ±os (menos de 4 KB)</li>
-          <li><strong>DuraciÃ³n:</strong> Pueden ser de sesiÃ³n (se elimina al cerrar navegador) o persistentes (duran dÃ­as/meses)</li>
+          <li><strong>Tamaño:</strong> Generalmente pequeÃ±os (menos de 4 KB)</li>
+          <li><strong>DuraciÃ³n:</strong> Pueden ser de sesión (se elimina al cerrar navegador) o persistentes (duran días/meses)</li>
           <li><strong>Origen:</strong> Propias (neuriax.com) o de terceros (servicios integrados)</li>
           <li><strong>Privacidad:</strong> No contienen virus ni acceden a tu informaciÃ³n personal sin consentimiento</li>
         </ul>
@@ -62,7 +62,7 @@ export default function PoliticaCookies() {
                 <th className="border border-gray-300 p-3 text-left font-semibold">Nombre Cookie</th>
                 <th className="border border-gray-300 p-3 text-left font-semibold">Tipo</th>
                 <th className="border border-gray-300 p-3 text-left font-semibold">DuraciÃ³n</th>
-                <th className="border border-gray-300 p-3 text-left font-semibold">DescripciÃ³n</th>
+                <th className="border border-gray-300 p-3 text-left font-semibold">Descripción</th>
               </tr>
             </thead>
             <tbody>
@@ -74,26 +74,26 @@ export default function PoliticaCookies() {
               </tr>
               <tr>
                 <td className="border border-gray-300 p-3"><code className="bg-gray-100 px-2 py-1 rounded text-xs">session_id</code></td>
-                <td className="border border-gray-300 p-3">SesiÃ³n</td>
-                <td className="border border-gray-300 p-3">Durante sesiÃ³n</td>
-                <td className="border border-gray-300 p-3">Identificar tu sesiÃ³n activa en el sitio</td>
+                <td className="border border-gray-300 p-3">Sesión</td>
+                <td className="border border-gray-300 p-3">Durante sesión</td>
+                <td className="border border-gray-300 p-3">Identificar tu sesión activa en el sitio</td>
               </tr>
               <tr className="bg-gray-50">
                 <td className="border border-gray-300 p-3"><code className="bg-gray-100 px-2 py-1 rounded text-xs">csrf_token</code></td>
-                <td className="border border-gray-300 p-3">SesiÃ³n</td>
-                <td className="border border-gray-300 p-3">Durante sesiÃ³n</td>
+                <td className="border border-gray-300 p-3">Sesión</td>
+                <td className="border border-gray-300 p-3">Durante sesión</td>
                 <td className="border border-gray-300 p-3">ProtecciÃ³n contra ataques CSRF</td>
               </tr>
               <tr>
                 <td className="border border-gray-300 p-3"><code className="bg-gray-100 px-2 py-1 rounded text-xs">cookie_consent_v1</code></td>
                 <td className="border border-gray-300 p-3">Persistente</td>
-                <td className="border border-gray-300 p-3">1 aÃ±o</td>
+                <td className="border border-gray-300 p-3">1 año</td>
                 <td className="border border-gray-300 p-3">Almacenar tus preferencias de cookies</td>
               </tr>
               <tr className="bg-gray-50">
                 <td className="border border-gray-300 p-3"><code className="bg-gray-100 px-2 py-1 rounded text-xs">user_preferences</code></td>
                 <td className="border border-gray-300 p-3">Persistente</td>
-                <td className="border border-gray-300 p-3">30 dÃ­as</td>
+                <td className="border border-gray-300 p-3">30 días</td>
                 <td className="border border-gray-300 p-3">Idioma, tema oscuro, otras configuraciones</td>
               </tr>
 
@@ -147,7 +147,7 @@ export default function PoliticaCookies() {
         <div className="bg-amber-50 border border-amber-200 rounded p-4 text-sm">
           <p className="text-amber-900">
             <strong>âš ï¸ Nota:</strong> Los campos marcados con [PENDIENTE] serÃ¡n completados una vez se integren las herramientas 
-            definitivas. Las cookies de terceros seguirÃ¡n los tÃ©rminos de privacidad de sus respectivos proveedores.
+            definitivas. Las cookies de terceros seguirÃ¡n los términos de privacidad de sus respectivos proveedores.
           </p>
         </div>
       </section>
@@ -158,21 +158,21 @@ export default function PoliticaCookies() {
 
         <div className="space-y-6">
           <div className="border-l-4 border-blue-500 pl-4 py-2">
-            <h4 className="font-semibold text-gray-900 mb-2">ðŸ”’ Cookies Necesarias / TÃ©cnicas</h4>
+            <h4 className="font-semibold text-gray-900 mb-2">ðŸ”’ Cookies Necesarias / Técnicas</h4>
             <p className="text-sm text-gray-700 mb-2">
               Esenciales para el funcionamiento correcto del sitio. Se cargan automÃ¡ticamente sin consentimiento previo, 
               conforme a la Directiva ePrivacy.
             </p>
-            <p className="text-sm text-gray-700"><strong>Ejemplos:</strong> AutenticaciÃ³n, CSRF, sesiÃ³n, preferencias de accesibilidad</p>
+            <p className="text-sm text-gray-700"><strong>Ejemplos:</strong> AutenticaciÃ³n, CSRF, sesión, preferencias de accesibilidad</p>
             <p className="text-sm text-gray-700"><strong>Base legal:</strong> Art. 82 LSSI-CE, considerando 47 RGPD</p>
           </div>
 
           <div className="border-l-4 border-green-500 pl-4 py-2">
             <h4 className="font-semibold text-gray-900 mb-2">ðŸ“Š Cookies AnalÃ­ticas / de Rendimiento</h4>
             <p className="text-sm text-gray-700 mb-2">
-              Nos permiten entender cÃ³mo usas el sitio: quÃ© pÃ¡ginas visitas, cuÃ¡nto tiempo pasas, de dÃ³nde vienes, etc.
+              Nos permiten entender cÃ³mo usas el sitio: quÃ© páginas visitas, cuÃ¡nto tiempo pasas, de dÃ³nde vienes, etc.
             </p>
-            <p className="text-sm text-gray-700"><strong>PropÃ³sito:</strong> Mejorar diseÃ±o, contenido y velocidad</p>
+            <p className="text-sm text-gray-700"><strong>PropÃ³sito:</strong> Mejorar diseño, contenido y velocidad</p>
             <p className="text-sm text-gray-700"><strong>Base legal:</strong> Consentimiento previo (Art. 6.1.a RGPD)</p>
             <p className="text-sm text-gray-700"><strong>Herramientas comunes:</strong> Google Analytics, Hotjar, Mixpanel</p>
             <p className="text-sm text-red-600"><strong>TODO:</strong> Confirmar cuÃ¡l/cuÃ¡les se utiliza(n)</p>
@@ -255,7 +255,7 @@ export default function PoliticaCookies() {
           <li><strong>Configurar:</strong> Elegir quÃ© categorÃ­as activar</li>
         </ul>
 
-        <h4 className="font-semibold text-gray-900 mb-3">OpciÃ³n 2: Cambiar Preferencias DespuÃ©s</h4>
+        <h4 className="font-semibold text-gray-900 mb-3">OpciÃ³n 2: Cambiar Preferencias Después</h4>
         <p className="text-sm text-gray-700 mb-3">
           En el pie de pÃ¡gina (footer) verÃ¡s el botÃ³n "Configurar cookies". Puedes cambiar tus preferencias cuando quieras.
         </p>
@@ -351,7 +351,7 @@ export default function PoliticaCookies() {
         </p>
         <ul className="list-disc ml-6 space-y-1 text-sm text-gray-700 mt-2 mb-4">
           <li>CategorÃ­as aceptadas</li>
-          <li>Timestamp de aceptaciÃ³n</li>
+          <li>Timestamp de aceptación</li>
         </ul>
 
         <h4 className="font-semibold text-gray-900 mb-3">Â¿CÃ³mo retirar consentimiento?</h4>

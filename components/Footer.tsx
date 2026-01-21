@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import Image from "next/image";
 import { useTranslation } from "@/hooks/useTranslation";
@@ -56,11 +56,11 @@ export default function Footer() {
                     <h3 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400 bg-clip-text text-transparent">
                       Neuriax
                     </h3>
-                    <p className="text-xs text-gray-500 uppercase tracking-widest">AutomatizaciÃ³n e IA</p>
+                    <p className="text-xs text-gray-500 uppercase tracking-widest">Automatización e IA</p>
                   </div>
                 </div>
                 <p className="text-gray-300 text-sm leading-relaxed max-w-sm">
-                  Soluciones digitales transformadoras: automatizaciÃ³n inteligente, IA aplicada a negocio y pÃ¡ginas web que convierten resultados en crecimiento exponencial.
+                  Soluciones digitales transformadoras: automatización inteligente, IA aplicada a negocio y páginas web que convierten resultados en crecimiento exponencial.
                 </p>
               </div>
 
@@ -98,7 +98,7 @@ export default function Footer() {
                 <div className="space-y-3">
                   {[
                     { label: 'Soluciones', href: '/soluciones' },
-                    { label: 'PÃ¡ginas Web', href: '/webs' },
+                    { label: 'Páginas Web', href: '/webs' },
                     { label: 'Precios', href: '/precios' },
                     { label: 'Portfolio', href: '/portfolio' },
                   ].map((link) => (

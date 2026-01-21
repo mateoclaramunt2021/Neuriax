@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 
 import { useState, useEffect } from 'react';
 import CookiePreferencesModal from './CookiePreferencesModal';
@@ -98,10 +98,10 @@ export default function CookieBanner() {
           <div className="grid md:grid-cols-3 gap-6 items-start md:items-center">
             <div className="md:col-span-2">
               <h3 className="text-white font-semibold text-lg mb-2">
-                ðŸª GestiÃ³n de Cookies y Consentimiento
+                ðŸª Gestión de Cookies y Consentimiento
               </h3>
               <p className="text-slate-300 text-sm mb-3">
-                Utilizamos cookies tÃ©cnicas (necesarias), analÃ­ticas y de marketing para mejorar tu experiencia. 
+                Utilizamos cookies técnicas (necesarias), analÃ­ticas y de marketing para mejorar tu experiencia. 
                 Puedes configurar tus preferencias o leer nuestra{' '}
                 <a href="/politica-de-cookies" className="text-cyan-400 hover:text-cyan-300 underline">
                   PolÃ­tica de Cookies

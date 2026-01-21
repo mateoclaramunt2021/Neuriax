@@ -1,14 +1,14 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Portfolio de Webs Profesionales | Neuriax | DiseÃ±o + AutomatizaciÃ³n + SEO",
-  description: "Ejemplos reales de pÃ¡ginas web profesionales. Webs que venden para peluquerÃ­as, restaurantes, clÃ­nicas, consultorÃ­a. DiseÃ±o responsivo + SEO local + AutomatizaciÃ³n.",
-  keywords: "portfolio webs, diseÃ±o web ejemplos, pÃ¡ginas web profesionales, webs que venden, casos de Ã©xito web, diseÃ±o responsivo",
+  title: "Portfolio de Webs Profesionales | Neuriax | Diseño + Automatización + SEO",
+  description: "Ejemplos reales de páginas web profesionales. Webs que venden para peluquerÃ­as, restaurantes, clÃ­nicas, consultoría. Diseño responsivo + SEO local + Automatización.",
+  keywords: "portfolio webs, diseño web ejemplos, páginas web profesionales, webs que venden, casos de Ã©xito web, diseño responsivo",
   openGraph: {
     title: "Portfolio de Webs Profesionales - Neuriax",
-    description: "Ejemplos reales de webs optimizadas para conversiÃ³n. DiseÃ±o, SEO local y automatizaciÃ³n inteligente.",
+    description: "Ejemplos reales de webs optimizadas para conversiÃ³n. Diseño, SEO local y automatización inteligente.",
     url: "https://www.neuriax.com/portfolio",
   },
   alternates: {
@@ -46,7 +46,7 @@ export default function PortfolioPage() {
       ]
     },
     {
-      title: "Demo Web ConsultorÃ­a",
+      title: "Demo Web Consultoría",
       category: "Servicios",
       features: [
         "Portafolio de proyectos",
@@ -58,7 +58,7 @@ export default function PortfolioPage() {
       title: "Demo Web Reformas",
       category: "ConstrucciÃ³n",
       features: [
-        "GalerÃ­a de proyectos antes/despuÃ©s",
+        "GalerÃ­a de proyectos antes/después",
         "Presupuestos y cronogramas",
         "Contacto directo vÃ­a WhatsApp"
       ]
@@ -67,7 +67,7 @@ export default function PortfolioPage() {
       title: "Â¿Tu sector no estÃ¡ aquÃ­?",
       category: "Personalizado",
       features: [
-        "Adaptamos cualquier diseÃ±o a tu negocio",
+        "Adaptamos cualquier diseño a tu negocio",
         "Sector: retail, logÃ­stica, educaciÃ³n, etc.",
         "Agendamos una llamada para diseÃ±ar juntos"
       ],
@@ -81,7 +81,7 @@ export default function PortfolioPage() {
       <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Portfolio de diseÃ±os web
+            Portfolio de diseños web
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Ejemplos reales de webs profesionales diseÃ±adas para convertir. Cada una optimizada para su industria.
@@ -128,7 +128,7 @@ export default function PortfolioPage() {
                     <>
                       <img 
                         src="/demos/consultoria/hero.jpg" 
-                        alt="Demo Web ConsultorÃ­a"
+                        alt="Demo Web Consultoría"
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-all duration-300"></div>
@@ -204,11 +204,11 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Beneficios de estos diseÃ±os */}
+      {/* Beneficios de estos diseños */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center">
-            Por quÃ© estos diseÃ±os venden
+            Por quÃ© estos diseños venden
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -249,7 +249,7 @@ export default function PortfolioPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">MÃ³vil first</h3>
-              <p className="text-gray-300">El 70% de tus clientes buscan desde el mÃ³vil. Nuestros diseÃ±os son perfectos en cualquier pantalla.</p>
+              <p className="text-gray-300">El 70% de tus clientes buscan desde el mÃ³vil. Nuestros diseños son perfectos en cualquier pantalla.</p>
             </div>
 
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
@@ -269,7 +269,7 @@ export default function PortfolioPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">FÃ¡cil de mantener</h3>
-              <p className="text-gray-300">Cambias fotos, textos y precios sin saber de cÃ³digo. O con mi soporte mensual por 49â‚¬.</p>
+              <p className="text-gray-300">Cambias fotos, textos y precios sin saber de código. O con mi soporte mensual por 49â‚¬.</p>
             </div>
           </div>
         </div>

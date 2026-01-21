@@ -1,9 +1,9 @@
-import { Metadata } from 'next';
+﻿import { Metadata } from 'next';
 import LegalLayout from '@/components/LegalLayout';
 
 export const metadata: Metadata = {
   title: 'Aviso Legal | Neuriax',
-  description: 'Aviso legal de Neuriax - InformaciÃ³n sobre el titular, objeto del sitio y condiciones de uso.',
+  description: 'Aviso legal de Neuriax - Información sobre el titular, objeto del sitio y condiciones de uso.',
   robots: 'noindex, nofollow',
 };
 
@@ -12,9 +12,9 @@ const toc = [
   { id: 'objeto', label: 'Objeto del Sitio' },
   { id: 'condiciones', label: 'Condiciones de Uso' },
   { id: 'propiedad', label: 'Propiedad Intelectual' },
-  { id: 'responsabilidad', label: 'LimitaciÃ³n de Responsabilidad' },
-  { id: 'enlaces', label: 'PolÃ­tica de Enlaces' },
-  { id: 'legislacion', label: 'LegislaciÃ³n Aplicable' },
+  { id: 'responsabilidad', label: 'Limitación de Responsabilidad' },
+  { id: 'enlaces', label: 'Política de Enlaces' },
+  { id: 'legislacion', label: 'Legislación Aplicable' },
 ];
 
 export default function AvisoLegal() {
@@ -29,13 +29,13 @@ export default function AvisoLegal() {
         <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Titular del Sitio Web</h2>
 
         <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-gray-900 mb-3">âš ï¸ Datos en Proceso de FormalizaciÃ³n</h3>
+          <h3 className="font-semibold text-gray-900 mb-3"> Datos en Proceso de Formalización</h3>
           <p className="text-sm text-gray-700 mb-2">
-            Este proyecto estÃ¡ en proceso de constituciÃ³n como entidad legal. Los datos fiscales definitivos serÃ¡n completados una vez se finalice el trÃ¡mite de alta:
+            Este proyecto está en proceso de constitución como entidad legal. Los datos fiscales definitivos serán completados una vez se finalice el trámite de alta:
           </p>
           <ul className="text-sm text-gray-700 space-y-1 ml-4 list-disc">
-            <li><strong>[PENDIENTE: NIF/CIF]</strong> â€“ Se actualizarÃ¡ al obtener el nÃºmero de identificaciÃ³n fiscal</li>
-            <li><strong>[PENDIENTE: RAZÃ“N SOCIAL / DOMICILIO FISCAL]</strong> â€“ Se completarÃ¡ con el domicilio profesional definitivo</li>
+            <li><strong>[PENDIENTE: NIF/CIF]</strong>  Se actualizará al obtener el número de identificación fiscal</li>
+            <li><strong>[PENDIENTE: RAZÓN SOCIAL / DOMICILIO FISCAL]</strong>  Se completará con el domicilio profesional definitivo</li>
           </ul>
         </div>
 
@@ -44,25 +44,25 @@ export default function AvisoLegal() {
             <strong>Nombre comercial:</strong> Neuriax
           </p>
           <p>
-            <strong>Titular provisional:</strong> Mateo Claramunt GonzÃ¡lez (persona fÃ­sica)
+            <strong>Titular provisional:</strong> Mateo Claramunt González (persona física)
           </p>
           <p>
             <strong>Domicilio provisional de contacto:</strong> [PENDIENTE: DOMICILIO FISCAL/PROFESIONAL]
           </p>
           <p>
-            <strong>Correo electrÃ³nico:</strong>{' '}
+            <strong>Correo electrónico:</strong>{' '}
             <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">
               neuriaxx@gmail.com
             </a>
           </p>
           <p>
-            <strong>TelÃ©fono:</strong> +34 640 791 041
+            <strong>Teléfono:</strong> +34 640 791 041
           </p>
           <p>
             <strong>Dominio:</strong> neuriax.com
           </p>
           <p>
-            <strong>Estado legal:</strong> En proceso de alta / constituciÃ³n. Se actualizarÃ¡ este aviso una vez se complete la formalizaciÃ³n.
+            <strong>Estado legal:</strong> En proceso de alta / constitución. Se actualizará este aviso una vez se complete la formalización.
           </p>
         </div>
       </section>
@@ -74,11 +74,11 @@ export default function AvisoLegal() {
           Este sitio web tiene como finalidad presentar y divulgar los servicios prestados por Neuriax, entre otros:
         </p>
         <ul className="list-disc ml-6 space-y-2 text-gray-700 mb-4">
-          <li>Servicios de automatizaciÃ³n digital y procesos</li>
+          <li>Servicios de automatización digital y procesos</li>
           <li>Soluciones de inteligencia artificial aplicada a negocio</li>
-          <li>IntegraciÃ³n de sistemas y herramientas tecnolÃ³gicas</li>
-          <li>Desarrollo y diseÃ±o de sitios web profesionales</li>
-          <li>Asesoramiento y consultorÃ­a tecnolÃ³gica</li>
+          <li>Integración de sistemas y herramientas tecnológicas</li>
+          <li>Desarrollo y diseño de sitios web profesionales</li>
+          <li>Asesoramiento y consultoría tecnológica</li>
         </ul>
         <p className="text-gray-700">
           El contenido de este sitio web es de naturaleza informativa y comercial. Neuriax se reserva el derecho a modificar, 
@@ -90,12 +90,12 @@ export default function AvisoLegal() {
       <section id="condiciones" className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">3. Condiciones de Uso</h2>
         <p className="text-gray-700 mb-4">
-          El acceso y uso de este sitio web estÃ¡ sujeto a las siguientes condiciones:
+          El acceso y uso de este sitio web está sujeto a las siguientes condiciones:
         </p>
         <ul className="list-disc ml-6 space-y-3 text-gray-700">
           <li>
             <strong>Legalidad:</strong> El usuario se compromete a utilizar el sitio web de conformidad con la ley 
-            espaÃ±ola y europea, incluyendo la Ley de Servicios de la Sociedad de la InformaciÃ³n y de Comercio ElectrÃ³nico (LSSI-CE).
+            española y europea, incluyendo la Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE).
           </li>
           <li>
             <strong>Prohibiciones:</strong> Queda prohibido el acceso y uso del sitio web para:
@@ -103,13 +103,13 @@ export default function AvisoLegal() {
               <li>Realizar actividades ilegales o que incumplan normas aplicables</li>
               <li>Enviar o transmitir contenido difamatorio, abusivo, obsceno o que viole derechos de terceros</li>
               <li>Interferir con el funcionamiento normal del sitio o sus servidores</li>
-              <li>Realizar ataques de negaciÃ³n de servicio (DoS) u otros actos malintencionados</li>
-              <li>Scrapear, minar datos o usar bots automatizados sin autorizaciÃ³n expresa</li>
+              <li>Realizar ataques de negación de servicio (DoS) u otros actos malintencionados</li>
+              <li>Scrapear, minar datos o usar bots automatizados sin autorización expresa</li>
             </ul>
           </li>
           <li>
-            <strong>ModificaciÃ³n de tÃ©rminos:</strong> Neuriax se reserva el derecho de modificar estos tÃ©rminos en cualquier 
-            momento. El uso continuado del sitio tras la publicaciÃ³n de cambios implica aceptaciÃ³n de los nuevos tÃ©rminos.
+            <strong>Modificación de términos:</strong> Neuriax se reserva el derecho de modificar estos términos en cualquier 
+            momento. El uso continuado del sitio tras la publicación de cambios implica aceptación de los nuevos términos.
           </li>
         </ul>
       </section>
@@ -118,92 +118,92 @@ export default function AvisoLegal() {
       <section id="propiedad" className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">4. Propiedad Intelectual</h2>
         <p className="text-gray-700 mb-4">
-          Todos los contenidos de este sitio web (textos, imÃ¡genes, logos, diseÃ±o, cÃ³digo, etc.) estÃ¡n protegidos por derechos 
+          Todos los contenidos de este sitio web (textos, imágenes, logos, diseño, código, etc.) están protegidos por derechos 
           de propiedad intelectual e industrial, siendo titularidad de Neuriax o sus correspondientes licenciadores.
         </p>
         <p className="text-gray-700 mb-4">
           <strong>Licencia de uso:</strong> Se concede al usuario una licencia limitada, no exclusiva y revocable para ver y usar 
-          el contenido de este sitio web para propÃ³sitos personales y no comerciales.
+          el contenido de este sitio web para propósitos personales y no comerciales.
         </p>
         <p className="text-gray-700">
           <strong>Prohibiciones:</strong> Queda expresamente prohibido:
         </p>
         <ul className="list-disc ml-6 space-y-2 text-gray-700 mt-3">
-          <li>Reproducir, distribuir, modificar o transmitir cualquier contenido sin autorizaciÃ³n expresa</li>
+          <li>Reproducir, distribuir, modificar o transmitir cualquier contenido sin autorización expresa</li>
           <li>Utilizar el contenido con fines comerciales o competitivos</li>
           <li>Eliminar, ocultar o alterar avisos de copyright, marcas registradas o de derechos de propiedad</li>
           <li>Crear obras derivadas basadas en el contenido del sitio</li>
         </ul>
       </section>
 
-      {/* LimitaciÃ³n de Responsabilidad */}
+      {/* Limitación de Responsabilidad */}
       <section id="responsabilidad" className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">5. LimitaciÃ³n de Responsabilidad</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">5. Limitación de Responsabilidad</h2>
         <p className="text-gray-700 mb-4">
-          <strong>Descargo de garantÃ­as:</strong> El contenido de este sitio web se proporciona "tal cual" sin garantÃ­a alguna, 
-          explÃ­cita o implÃ­cita. Neuriax no garantiza que el contenido sea preciso, completo, oportuno, seguro o libre de errores.
+          <strong>Descargo de garantías:</strong> El contenido de este sitio web se proporciona "tal cual" sin garantía alguna, 
+          explícita o implícita. Neuriax no garantiza que el contenido sea preciso, completo, oportuno, seguro o libre de errores.
         </p>
         <p className="text-gray-700 mb-4">
-          <strong>Responsabilidad limitada:</strong> En la mÃ¡xima medida permitida por la ley, Neuriax no serÃ¡ responsable por:
+          <strong>Responsabilidad limitada:</strong> En la máxima medida permitida por la ley, Neuriax no será responsable por:
         </p>
         <ul className="list-disc ml-6 space-y-2 text-gray-700 mb-4">
-          <li>DaÃ±os directos, indirectos, incidentales, especiales o punitivos derivados del acceso o uso del sitio</li>
-          <li>PÃ©rdida de datos, ingresos, oportunidades de negocio o informaciÃ³n</li>
+          <li>Daños directos, indirectos, incidentales, especiales o punitivos derivados del acceso o uso del sitio</li>
+          <li>Pérdida de datos, ingresos, oportunidades de negocio o información</li>
           <li>Interrupciones, retrasos o fallos en el servicio</li>
-          <li>Virus, malware u otros daÃ±os derivados de terceros</li>
+          <li>Virus, malware u otros daños derivados de terceros</li>
         </ul>
         <p className="text-gray-700">
-          <strong>Excepciones:</strong> Esta limitaciÃ³n no se aplicarÃ¡ a daÃ±os derivados de negligencia grave, fraude o incumplimiento 
+          <strong>Excepciones:</strong> Esta limitación no se aplicará a daños derivados de negligencia grave, fraude o incumplimiento 
           de obligaciones legales imperativas.
         </p>
       </section>
 
-      {/* PolÃ­tica de Enlaces */}
+      {/* Política de Enlaces */}
       <section id="enlaces" className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">6. PolÃ­tica de Enlaces</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">6. Política de Enlaces</h2>
         <p className="text-gray-700 mb-4">
           Este sitio web puede contener enlaces a sitios web de terceros. Neuriax no es responsable del contenido, exactitud, 
           legalidad o disponibilidad de dichos sitios externos.
         </p>
         <p className="text-gray-700 mb-4">
-          <strong>GeneraciÃ³n de enlaces entrantes:</strong> Se permite enlazar a este sitio web siempre que:
+          <strong>Generación de enlaces entrantes:</strong> Se permite enlazar a este sitio web siempre que:
         </p>
         <ul className="list-disc ml-6 space-y-2 text-gray-700">
-          <li>El enlace sea legÃ­timo y no engaÃ±oso</li>
-          <li>No se incurra en competencia desleal o daÃ±o reputacional</li>
-          <li>No se implique aprobaciÃ³n de terceros sin autorizaciÃ³n expresa</li>
+          <li>El enlace sea legítimo y no engañoso</li>
+          <li>No se incurra en competencia desleal o daño reputacional</li>
+          <li>No se implique aprobación de terceros sin autorización expresa</li>
           <li>Se respeten los derechos de propiedad intelectual de Neuriax</li>
         </ul>
       </section>
 
-      {/* LegislaciÃ³n Aplicable */}
+      {/* Legislación Aplicable */}
       <section id="legislacion" className="mb-12">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">7. LegislaciÃ³n Aplicable y JurisdicciÃ³n</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Legislación Aplicable y Jurisdicción</h2>
         <p className="text-gray-700 mb-4">
-          Este aviso legal se rige por la legislaciÃ³n espaÃ±ola:
+          Este aviso legal se rige por la legislación española:
         </p>
         <ul className="list-disc ml-6 space-y-2 text-gray-700 mb-4">
-          <li><strong>Ley de Servicios de la Sociedad de la InformaciÃ³n y de Comercio ElectrÃ³nico (LSSI-CE)</strong> â€“ Ley 34/1988</li>
-          <li><strong>Ley General de Publicidad (LGP)</strong> â€“ Ley 34/1988</li>
-          <li><strong>Reglamento General de ProtecciÃ³n de Datos (RGPD)</strong> â€“ Reglamento (UE) 2016/679</li>
-          <li><strong>Ley OrgÃ¡nica de ProtecciÃ³n de Datos (LOPDGDD)</strong> â€“ Ley OrgÃ¡nica 3/2018</li>
-          <li><strong>CÃ³digo Civil EspaÃ±ol</strong> â€“ ArtÃ­culos aplicables a responsabilidad civil y contratos</li>
+          <li><strong>Ley de Servicios de la Sociedad de la Información y de Comercio Electrónico (LSSI-CE)</strong>  Ley 34/1988</li>
+          <li><strong>Ley General de Publicidad (LGP)</strong>  Ley 34/1988</li>
+          <li><strong>Reglamento General de Protección de Datos (RGPD)</strong>  Reglamento (UE) 2016/679</li>
+          <li><strong>Ley Orgánica de Protección de Datos (LOPDGDD)</strong>  Ley Orgánica 3/2018</li>
+          <li><strong>Código Civil Español</strong>  Artículos aplicables a responsabilidad civil y contratos</li>
         </ul>
         <p className="text-gray-700 mb-4">
-          <strong>Competencia territorial:</strong> Ambas partes se someten a la jurisdicciÃ³n de los juzgados y tribunales 
-          competentes de <strong>EspaÃ±a</strong>, renunciando a cualquier otra jurisdicciÃ³n que pudiera corresponderle.
+          <strong>Competencia territorial:</strong> Ambas partes se someten a la jurisdicción de los juzgados y tribunales 
+          competentes de <strong>España</strong>, renunciando a cualquier otra jurisdicción que pudiera corresponderle.
         </p>
         <p className="text-gray-700">
-          En caso de conflicto, se intentarÃ¡ resolver mediante negociaciÃ³n amistosa. Si no se alcanza acuerdo, cualquiera de las 
-          partes puede ejercitar acciones ante los tribunales espaÃ±oles competentes.
+          En caso de conflicto, se intentará resolver mediante negociación amistosa. Si no se alcanza acuerdo, cualquiera de las 
+          partes puede ejercitar acciones ante los tribunales españoles competentes.
         </p>
       </section>
 
       {/* Final Notice */}
       <section className="bg-gray-100 p-6 rounded-lg mt-12">
-        <h3 className="font-semibold text-gray-900 mb-2">Ãšltima ActualizaciÃ³n</h3>
+        <h3 className="font-semibold text-gray-900 mb-2">Última Actualización</h3>
         <p className="text-sm text-gray-700">
-          Este aviso legal fue actualizado por Ãºltima vez el <strong>16 de enero de 2026</strong>. 
+          Este aviso legal fue actualizado por última vez el <strong>16 de enero de 2026</strong>. 
           Neuriax se reserva el derecho de modificarlo en cualquier momento sin aviso previo.
         </p>
         <p className="text-sm text-gray-700 mt-3">
@@ -215,4 +215,3 @@ export default function AvisoLegal() {
     </LegalLayout>
   );
 }
-
