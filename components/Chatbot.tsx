@@ -76,7 +76,7 @@ export default function Chatbot() {
     }
 
     // FLUJO E: Tiempos / Plazos
-    if (lowerMsg.includes('tiempo') || lowerMsg.includes('plazo') || lowerMsg.includes('cuÃ¡nto tarda') || lowerMsg.includes('entrega')) {
+    if (lowerMsg.includes('tiempo') || lowerMsg.includes('plazo') || lowerMsg.includes('cuánto tarda') || lowerMsg.includes('entrega')) {
       return { text: "⏱️ Tiempos típicos:\n\n📅 Web: 10-15 días tras el brief (según complejidad e info que aportes).\n\n⚙️ Automatización: depende del alcance (rango 2-8 semanas).\n\nEn la llamada te confirmo el plazo exacto según tu proyecto." };
     }
 

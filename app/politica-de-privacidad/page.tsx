@@ -1,4 +1,4 @@
-﻿import { Metadata } from 'next';
+import { Metadata } from 'next';
 import LegalLayout from '@/components/LegalLayout';
 
 export const metadata: Metadata = {

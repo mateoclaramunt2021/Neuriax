@@ -1,27 +1,27 @@
-﻿import CTAButton from "../components/CTAButton";
+import CTAButton from "../components/CTAButton";
 import VideoSection from "../components/VideoSection";
 import ProblemCard from "../components/ProblemCard";
 import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AutomatizaciÃ³n e IA + PÃ¡ginas Web Profesionales | Neuriax | TransformaciÃ³n Digital",
-  description: "Soluciones digitales completas: automatizaciÃ³n inteligente con IA, pÃ¡ginas web optimizadas en SEO, transformaciÃ³n empresarial. Agencia digital especializada en automatizaciÃ³n e IA. Resultados medibles.",
-  keywords: "automatizaciÃ³n procesos, inteligencia artificial, IA aplicada, pÃ¡ginas web profesionales, agencia digital, automatizaciÃ³n IA, soluciones digitales, transformaciÃ³n digital, SEO local, desarrollo web",
+  title: "Automatización e IA + Páginas Web profesionales | Neuriax | Transformación Digital",
+  description: "Soluciones digitales completas: automatización inteligente con IA, Páginas web optimizadas en SEO, transformación empresarial. Agencia digital especializada en automatización e IA. Resultados medibles.",
+  keywords: "automatización procesos, inteligencia artificial, IA aplicada, Páginas web profesionales, agencia digital, automatización IA, soluciones digitales, transformación digital, SEO local, Desarrollo web",
 };
 
 export default function Home() {
   const faqs = [
     {
-      question: "Â¿CÃ³mo la automatizaciÃ³n e IA puede transformar mi negocio?",
-      answer: "La automatizaciÃ³n elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automÃ¡ticas, resultando en mayor eficiencia, reducciÃ³n de costos y escalabilidad infinita de tu operaciÃ³n."
+      question: "¿Cómo la automatización e IA puede transformar mi negocio?",
+      answer: "La automatización elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automáticas, resultando en mayor eficiencia, reducción de costos y escalabilidad infinita de tu operación."
     },
     {
-      question: "Â¿QuÃ© es mejor: pÃ¡ginas web profesionales o automatizaciÃ³n?",
-      answer: "Ambas son complementarias. Las pÃ¡ginas web atraen clientes y la automatizaciÃ³n te permite gestionar mÃ¡s clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
+      question: "¿Qué es mejor: Páginas web profesionales o automatización?",
+      answer: "Ambas son complementarias. Las Páginas web atraen clientes y la automatización te permite gestionar más clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
     },
     {
-      question: "Â¿CuÃ¡nto cuesta la automatizaciÃ³n e IA?",
+      question: "¿Cuánto cuesta la automatización e IA?",
       answer: "Depende de la complejidad del proyecto. En la llamada te mostramos casos reales con retornos medibles. Disponemos de paquetes desde PYMEs hasta empresas grandes."
     },
   ];
@@ -84,7 +84,7 @@ export default function Home() {
 
               {/* Main Title - NUEVO */}
               <h1 className="text-4xl md:text-6xl font-semibold mb-6 leading-[1.1] tracking-tight fade-in-up" style={{ animationDelay: '0.15s' }}>
-                <span className="block text-white mb-2">PÃ¡ginas Web</span>
+                <span className="block text-white mb-2">Páginas Web</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 text-glow-cyan">
                   & Automatizaciones
                 </span>
@@ -93,7 +93,7 @@ export default function Home() {
 
               {/* Subtitle */}
               <p className="text-base md:text-lg text-slate-400 mb-8 max-w-lg leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
-                Creamos presencia digital profesional y automatizamos procesos para que tu negocio escale sin lÃ­mites.
+                Creamos presencia digital profesional y automatizamos procesos para que tu negocio escale sin límites.
               </p>
 
               {/* Features - Elegant pills */}
@@ -215,10 +215,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Dos lÃ­neas de servicio: IA + PÃ¡ginas Web
+              Dos lÃ­neas de servicio: IA + Páginas Web
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              AutomatizaciÃ³n e IA para operaciones que escalen. PÃ¡ginas web que convierten en ventas.
+              AutomatizaciÃ³n e IA para operaciones que escalen. Páginas web que convierten en ventas.
             </p>
           </div>
 
@@ -259,7 +259,7 @@ export default function Home() {
               </CTAButton>
             </div>
 
-            {/* PÃ¡ginas Web */}
+            {/* Páginas Web */}
             <div className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-xl p-8 border border-cyan-700/50 hover:border-cyan-500 transition-colors">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-cyan-500/20 rounded-lg">
@@ -268,9 +268,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">PÃ¡ginas Web Profesionales</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Páginas Web profesionales</h3>
               <p className="text-gray-300 mb-6">
-                Webs que convierten visitas en clientes. DiseÃ±o + SEO local + Reservas automÃ¡ticas.
+                Webs que convierten visitas en clientes. DiseÃ±o + SEO local + Reservas automáticas.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-gray-300">
@@ -287,7 +287,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Desde 790â‚¬ â€¢ Entrega 15 dÃ­as</span>
+                  <span>Desde 790‚¬ €¢ Entrega 15 dÃ­as</span>
                 </li>
               </ul>
               <CTAButton href="/webs" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
@@ -495,7 +495,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-              Resultados y experiencia aplicada
+              Resultados y experiencIA aplicada
             </h2>
             <p className="text-xl text-cyan-300 font-medium">
               No hablamos de teorÃ­a. Aplicamos sistemas que ya funcionan.
@@ -568,7 +568,7 @@ export default function Home() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Â¿Tiene sentido automatizar tu negocio?
+            ¿Tiene sentido automatizar tu negocio?
           </h2>
           <p className="text-xl mb-8 opacity-90">
             Si encaja, te lo diremos. Y si no, tambiÃ©n.
@@ -582,7 +582,7 @@ export default function Home() {
             </CTAButton>
           </div>
           <p className="text-sm opacity-75">
-            Sin compromiso â€¢ AnÃ¡lisis personalizado â€¢ Soluciones a medida
+            Sin compromiso €¢ AnÃ¡lisis personalizado €¢ Soluciones a medida
           </p>
         </div>
       </section>

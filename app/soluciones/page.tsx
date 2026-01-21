@@ -1,4 +1,4 @@
-﻿import SolutionCard from "../../components/SolutionCard";
+import SolutionCard from "../../components/SolutionCard";
 import Image from "next/image";
 import { Metadata } from "next";
 

@@ -1,4 +1,4 @@
-﻿import CTAButton from "../../components/CTAButton";
+import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export default function Sectores() {
