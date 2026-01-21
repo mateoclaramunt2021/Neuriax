@@ -5,23 +5,23 @@ import Image from "next/image";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Automatización e IA + Páginas Web profesionales | Neuriax | Transformación Digital",
-  description: "Soluciones digitales completas: automatización inteligente con IA, Páginas web optimizadas en SEO, transformación empresarial. Agencia digital especializada en automatización e IA. Resultados medibles.",
-  keywords: "automatización procesos, inteligencia artificial, IA aplicada, Páginas web profesionales, agencia digital, automatización IA, soluciones digitales, transformación digital, SEO local, Desarrollo web",
+  title: "AutomatizaciéƒÂ³n e IA + PéƒÂ¡ginas Web profesionales | Neuriax | TransformaciéƒÂ³n Digital",
+  description: "Soluciones digitales completas: automatizaciéƒÂ³n inteligente con IA, PéƒÂ¡ginas web optimizadas en SEO, transformaciéƒÂ³n empresarial. Agencia digital especializada en automatizaciéƒÂ³n e IA. Resultados medibles.",
+  keywords: "automatizaciéƒÂ³n procesos, inteligencia artificial, IA aplicada, PéƒÂ¡ginas web profesionales, agencia digital, automatizaciéƒÂ³n IA, soluciones digitales, transformaciéƒÂ³n digital, SEO local, Desarrollo web",
 };
 
 export default function Home() {
   const faqs = [
     {
-      question: "¿Cómo la automatización e IA puede transformar mi negocio?",
-      answer: "La automatización elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automáticas, resultando en mayor eficiencia, reducción de costos y escalabilidad infinita de tu operación."
+      question: "é‚Â¿CéƒÂ³mo la automatizaciéƒÂ³n e IA puede transformar mi negocio?",
+      answer: "La automatizaciéƒÂ³n elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automéƒÂ¡ticas, resultando en mayor eficiencia, reducciéƒÂ³n de costos y escalabilidad infinita de tu operaciéƒÂ³n."
     },
     {
-      question: "¿Qué es mejor: Páginas web profesionales o automatización?",
-      answer: "Ambas son complementarias. Las Páginas web atraen clientes y la automatización te permite gestionar más clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
+      question: "é‚Â¿QuéƒÂ© es mejor: PéƒÂ¡ginas web profesionales o automatizaciéƒÂ³n?",
+      answer: "Ambas son complementarias. Las PéƒÂ¡ginas web atraen clientes y la automatizaciéƒÂ³n te permite gestionar méƒÂ¡s clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
     },
     {
-      question: "¿Cuánto cuesta la automatización e IA?",
+      question: "é‚Â¿CuéƒÂ¡nto cuesta la automatizaciéƒÂ³n e IA?",
       answer: "Depende de la complejidad del proyecto. En la llamada te mostramos casos reales con retornos medibles. Disponemos de paquetes desde PYMEs hasta empresas grandes."
     },
   ];
@@ -84,7 +84,7 @@ export default function Home() {
 
               {/* Main Title - NUEVO */}
               <h1 className="text-4xl md:text-6xl font-semibold mb-6 leading-[1.1] tracking-tight fade-in-up" style={{ animationDelay: '0.15s' }}>
-                <span className="block text-white mb-2">Páginas Web</span>
+                <span className="block text-white mb-2">PéƒÂ¡ginas Web</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 text-glow-cyan">
                   & Automatizaciones
                 </span>
@@ -93,7 +93,7 @@ export default function Home() {
 
               {/* Subtitle */}
               <p className="text-base md:text-lg text-slate-400 mb-8 max-w-lg leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
-                Creamos presencia digital profesional y automatizamos procesos para que tu negocio escale sin límites.
+                Creamos presencia digital profesional y automatizamos procesos para que tu negocio escale sin léƒÂ­mites.
               </p>
 
               {/* Features - Elegant pills */}
@@ -102,13 +102,13 @@ export default function Home() {
                   <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                  <span className="text-sm text-slate-300">DiseÃ±o Web Premium</span>
+                  <span className="text-sm text-slate-300">DiseéƒÆ’é‚Â±o Web Premium</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
                   <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span className="text-sm text-slate-300">AutomatizaciÃ³n IA</span>
+                  <span className="text-sm text-slate-300">AutomatizaciéƒÆ’é‚Â³n IA</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
                   <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -130,7 +130,7 @@ export default function Home() {
                   href="/contacto" 
                   className="btn-shimmer group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700 shadow-lg shadow-cyan-500/15 hover:shadow-cyan-500/25 hover:scale-[1.02]"
                 >
-                  <span>Agenda tu Consulta Gratuita</span>
+                  <span>Agenda tu consulta Gratuita</span>
                   <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -164,7 +164,7 @@ export default function Home() {
                   <svg className="w-3.5 h-3.5 text-emerald-500/70" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  AnÃ¡lisis gratuito
+                  AnéƒÆ’é‚Â¡lisis gratuito
                 </span>
               </div>
             </div>
@@ -215,15 +215,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Dos lÃ­neas de servicio: IA + Páginas Web
+              Dos léƒÆ’é‚Â­neas de servicio: IA + PéƒÂ¡ginas Web
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              AutomatizaciÃ³n e IA para operaciones que escalen. Páginas web que convierten en ventas.
+              AutomatizaciéƒÆ’é‚Â³n e IA para operaciones que escalen. PéƒÂ¡ginas web que convierten en ventas.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            {/* AutomatizaciÃ³n */}
+            {/* AutomatizaciéƒÆ’é‚Â³n */}
             <div className="bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-xl p-8 border border-blue-700/50 hover:border-blue-500 transition-colors">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-500/20 rounded-lg">
@@ -232,14 +232,14 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">AutomatizaciÃ³n & IA</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">AutomatizaciéƒÆ’é‚Â³n & IA</h3>
               <p className="text-gray-300 mb-6">
                 Sistemas digitales que eliminan procesos manuales, reducen costos y escalan operaciones.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Leads automÃ¡ticos 24/7</span>
+                  <span>Leads automéƒÆ’é‚Â¡ticos 24/7</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -259,7 +259,7 @@ export default function Home() {
               </CTAButton>
             </div>
 
-            {/* Páginas Web */}
+            {/* PéƒÂ¡ginas Web */}
             <div className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-xl p-8 border border-cyan-700/50 hover:border-cyan-500 transition-colors">
               <div className="mb-6">
                 <div className="inline-flex items-center justify-center w-14 h-14 bg-cyan-500/20 rounded-lg">
@@ -268,14 +268,14 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Páginas Web profesionales</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">PéƒÂ¡ginas Web profesionales</h3>
               <p className="text-gray-300 mb-6">
-                Webs que convierten visitas en clientes. DiseÃ±o + SEO local + Reservas automáticas.
+                Webs que convierten visitas en clientes. DiseéƒÆ’é‚Â±o + SEO local + Reservas automéƒÂ¡ticas.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>DiseÃ±o a medida responsivo</span>
+                  <span>DiseéƒÆ’é‚Â±o a medida responsivo</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -287,7 +287,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Desde 790‚¬ €¢ Entrega 15 dÃ­as</span>
+                  <span>Desde 790é¢Å¡é‚Â¬ é¢âšÂ¬é‚Â¢ Entrega 15 déƒÆ’é‚Â­as</span>
                 </li>
               </ul>
               <CTAButton href="/webs" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
@@ -300,10 +300,10 @@ export default function Home() {
 
       {/* Video Section */}
       <VideoSection
-        title="CÃ³mo transformamos negocios con tecnologÃ­a"
-        description="Descubre cÃ³mo empresas han optimizado sus operaciones con nuestras soluciones digitales."
+        title="CéƒÆ’é‚Â³mo transformamos negocios con tecnologéƒÆ’é‚Â­a"
+        description="Descubre céƒÆ’é‚Â³mo empresas han optimizado sus operaciones con nuestras soluciones digitales."
         // videoId="YOUTUBE_VIDEO_ID" // Para YouTube
-        // localVideo="/intro.mp4" // Para vÃ­deo local
+        // localVideo="/intro.mp4" // Para véƒÆ’é‚Â­deo local
       />
 
       {/* Problemas que resolvemos */}
@@ -314,7 +314,7 @@ export default function Home() {
               Problemas que resolvemos en tu negocio
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto hover:text-white transition-colors duration-300">
-              Estos son los dolores mÃ¡s comunes que vemos en empresas y que solucionamos con sistemas digitales inteligentes.
+              Estos son los dolores méƒÆ’é‚Â¡s comunes que vemos en empresas y que solucionamos con sistemas digitales inteligentes.
             </p>
           </div>
 
@@ -336,7 +336,7 @@ export default function Home() {
                 </svg>
               }
               title="Tareas repetitivas"
-              description="Empleados dedicando horas a procesos manuales que podrÃ­an automatizarse completamente."
+              description="Empleados dedicando horas a procesos manuales que podréƒÆ’é‚Â­an automatizarse completamente."
             />
 
             <ProblemCard
@@ -356,7 +356,7 @@ export default function Home() {
                 </svg>
               }
               title="Procesos desordenados"
-              description="Flujos de trabajo caÃ³ticos, informaciÃ³n dispersa y falta de estÃ¡ndares operativos claros."
+              description="Flujos de trabajo caéƒÆ’é‚Â³ticos, informaciéƒÆ’é‚Â³n dispersa y falta de estéƒÆ’é‚Â¡ndares operativos claros."
             />
 
             <ProblemCard
@@ -366,7 +366,7 @@ export default function Home() {
                 </svg>
               }
               title="Datos dispersos"
-              description="InformaciÃ³n crÃ­tica repartida en Excel, emails y notas, imposible de analizar o acceder rÃ¡pidamente."
+              description="InformaciéƒÆ’é‚Â³n créƒÆ’é‚Â­tica repartida en Excel, emails y notas, imposible de analizar o acceder réƒÆ’é‚Â¡pidamente."
             />
 
             <ProblemCard
@@ -377,24 +377,24 @@ export default function Home() {
                 </svg>
               }
               title="Falta de visibilidad operativa"
-              description="Gerentes sin mÃ©tricas claras, equipos sin objetivos definidos y decisiones tomadas a ciegas."
+              description="Gerentes sin méƒÆ’é‚Â©tricas claras, equipos sin objetivos definidos y decisiones tomadas a ciegas."
             />
           </div>
         </div>
       </section>
 
-      {/* CÃ³mo trabajo */}
+      {/* CéƒÆ’é‚Â³mo trabajo */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 hover:scale-105 transition-transform duration-300">
-              CÃ³mo trabajamos para solucionar tus problemas
+              CéƒÆ’é‚Â³mo trabajamos para solucionar tus problemas
             </h2>
             <p className="text-lg text-cyan-300 mb-4 font-medium">
-              Trabajamos con metodologÃ­a, no con improvisaciÃ³n.
+              Trabajamos con metodologéƒÆ’é‚Â­a, no con improvisaciéƒÆ’é‚Â³n.
             </p>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 hover:text-white transition-colors duration-300">
-              Nuestro proceso probado en mÃºltiples proyectos garantiza resultados concretos y sostenibles.
+              Nuestro proceso probado en méƒÆ’é‚Âºltiples proyectos garantiza resultados concretos y sostenibles.
             </p>
           </div>
 
@@ -414,7 +414,7 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-red-300 transition-colors duration-300">AnÃ¡lisis</h3>
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-red-300 transition-colors duration-300">AnéƒÆ’é‚Â¡lisis</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
                   Estudiamos detalladamente tus procesos actuales, identificamos cuellos de botella y oportunidades de mejora.
                 </p>
@@ -431,9 +431,9 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-orange-300 transition-colors duration-300">DiseÃ±o del sistema</h3>
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-orange-300 transition-colors duration-300">DiseéƒÆ’é‚Â±o del sistema</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Creamos la arquitectura digital perfecta para tu negocio, integrando automatizaciÃ³n e inteligencia artificial.
+                  Creamos la arquitectura digital perfecta para tu negocio, integrando automatizaciéƒÆ’é‚Â³n e inteligencia artificial.
                 </p>
               </div>
 
@@ -448,9 +448,9 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-yellow-300 transition-colors duration-300">ImplementaciÃ³n</h3>
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-yellow-300 transition-colors duration-300">ImplementaciéƒÆ’é‚Â³n</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Desplegamos la soluciÃ³n de forma Ã¡gil, capacitando a tu equipo y asegurando una transiciÃ³n suave.
+                  Desplegamos la soluciéƒÆ’é‚Â³n de forma éƒÆ’é‚Â¡gil, capacitando a tu equipo y asegurando una transiciéƒÆ’é‚Â³n suave.
                 </p>
               </div>
 
@@ -465,11 +465,11 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-green-300 transition-colors duration-300">OptimizaciÃ³n continua</h3>
+                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-green-300 transition-colors duration-300">OptimizaciéƒÆ’é‚Â³n continua</h3>
                 <p className="text-gray-400 group-hover:text-gray-200 transition-colors duration-300">
-                  Monitoreamos el rendimiento, analizamos mÃ©tricas y realizamos mejoras continuas para maximizar resultados.
+                  Monitoreamos el rendimiento, analizamos méƒÆ’é‚Â©tricas y realizamos mejoras continuas para maximizar resultados.
                 </p>
-                <p className="text-gray-500 text-sm mt-2 font-medium">Entrega clara, documentaciÃ³n y soporte.</p>
+                <p className="text-gray-500 text-sm mt-2 font-medium">Entrega clara, documentaciéƒÆ’é‚Â³n y soporte.</p>
               </div>
             </div>
           </div>
@@ -479,7 +479,7 @@ export default function Home() {
             <div className="relative inline-block group cursor-pointer">
               <Image
                 src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                alt="Proceso de automatizaciÃ³n y optimizaciÃ³n"
+                alt="Proceso de automatizaciéƒÆ’é‚Â³n y optimizaciéƒÆ’é‚Â³n"
                 width={600}
                 height={300}
                 className="rounded-xl shadow-2xl group-hover:scale-105 group-hover:shadow-3xl transition-all duration-500"
@@ -498,7 +498,7 @@ export default function Home() {
               Resultados y experiencIA aplicada
             </h2>
             <p className="text-xl text-cyan-300 font-medium">
-              No hablamos de teorÃ­a. Aplicamos sistemas que ya funcionan.
+              No hablamos de teoréƒÆ’é‚Â­a. Aplicamos sistemas que ya funcionan.
             </p>
           </div>
 
@@ -514,7 +514,7 @@ export default function Home() {
               </div>
               <h3 className="text-xl font-bold text-white mb-3">Procesos automatizados en entornos reales</h3>
               <p className="text-gray-300">
-                ImplementaciÃ³n de flujos automÃ¡ticos para captaciÃ³n, seguimiento y gestiÃ³n de clientes en negocios de servicios.
+                ImplementaciéƒÆ’é‚Â³n de flujos automéƒÆ’é‚Â¡ticos para captaciéƒÆ’é‚Â³n, seguimiento y gestiéƒÆ’é‚Â³n de clientes en negocios de servicios.
               </p>
             </div>
 
@@ -527,9 +527,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">OptimizaciÃ³n del tiempo operativo</h3>
+              <h3 className="text-xl font-bold text-white mb-3">OptimizaciéƒÆ’é‚Â³n del tiempo operativo</h3>
               <p className="text-gray-300">
-                ReducciÃ³n de tareas manuales repetitivas mediante sistemas digitales y automatizaciÃ³n inteligente.
+                ReducciéƒÆ’é‚Â³n de tareas manuales repetitivas mediante sistemas digitales y automatizaciéƒÆ’é‚Â³n inteligente.
               </p>
             </div>
 
@@ -542,9 +542,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Enfoque en conversiÃ³n y eficiencia</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Enfoque en conversiéƒÆ’é‚Â³n y eficiencia</h3>
               <p className="text-gray-300">
-                Cada sistema se diseÃ±a con un objetivo claro: ahorrar tiempo y mejorar resultados.
+                Cada sistema se diseéƒÆ’é‚Â±a con un objetivo claro: ahorrar tiempo y mejorar resultados.
               </p>
             </div>
           </div>
@@ -568,10 +568,10 @@ export default function Home() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Tiene sentido automatizar tu negocio?
+            é‚Â¿Tiene sentido automatizar tu negocio?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Si encaja, te lo diremos. Y si no, tambiÃ©n.
+            Si encaja, te lo diremos. Y si no, tambiéƒÆ’é‚Â©n.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <CTAButton href="/contacto" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
@@ -582,7 +582,7 @@ export default function Home() {
             </CTAButton>
           </div>
           <p className="text-sm opacity-75">
-            Sin compromiso €¢ AnÃ¡lisis personalizado €¢ Soluciones a medida
+            Sin compromiso é¢âšÂ¬é‚Â¢ AnéƒÆ’é‚Â¡lisis personalizado é¢âšÂ¬é‚Â¢ Soluciones a medida
           </p>
         </div>
       </section>
