@@ -19,11 +19,11 @@ export default function QuienSomos() {
               SOBRE NEURIAX
             </span>
             <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              TecnologÃ­a que impulsa<br />
+              Tecnología que impulsa<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">negocios reales</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
-              Somos una agencia digital especializada en diseÃ±o web profesional y automatizaciÃ³n con inteligencia artificial.
+              Somos una agencia digital especializada en diseño web profesional y automatización con inteligencia artificial.
             </p>
           </div>
 
@@ -43,7 +43,7 @@ export default function QuienSomos() {
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">Mateo</h2>
               <p className="text-cyan-400 font-semibold mb-4">Fundador & CEO</p>
               <p className="text-lg text-slate-300 max-w-xl leading-relaxed">
-                Mientras trabajaba de camarero, dedicaba cada hora libre a aprender desarrollo web e inteligencia artificial. CreÃ© mis primeras webs para negocios locales, demostrando que la pasiÃ³n y la constancia pueden mÃ¡s que cualquier tÃ­tulo. Hoy, con esa experiencia real, fundo Neuriax para ayudar a negocios que merecen crecer con tecnologÃ­a de verdad.
+                Mientras trabajaba de camarero, dedicaba cada hora libre a aprender desarrollo web e inteligencia artificial. Creé mis primeras webs para negocios locales, demostrando que la pasión y la constancia pueden más que cualquier título. Hoy, con esa experiencia real, fundo Neuriax para ayudar a negocios que merecen crecer con tecnología de verdad.
               </p>
             </div>
           </div>
@@ -56,10 +56,10 @@ export default function QuienSomos() {
           <div className="text-center mb-16">
             <span className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-4 block">El equipo</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              QuiÃ©nes somos
+              Quiénes somos
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Profesionales comprometidos con el Ã©xito de cada proyecto.
+              Profesionales comprometidos con el éxito de cada proyecto.
             </p>
           </div>
 
@@ -75,13 +75,13 @@ export default function QuienSomos() {
                   className="w-full h-full rounded-full object-cover border-4 border-cyan-500/30 group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full flex items-center justify-center text-sm">
-                  ðŸ‘‘
+                  👑
                 </div>
               </div>
               <h3 className="text-xl font-bold text-white mb-1">Mateo Claramunt</h3>
               <p className="text-cyan-400 font-semibold text-sm mb-4">CEO & Fundador</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                De camarero a fundador. AprendiÃ³ desarrollo web y IA por su cuenta, vendiÃ³ sus primeros proyectos, y ahora lidera Neuriax.
+                De camarero a fundador. Aprendió desarrollo web y IA por su cuenta, vendió sus primeros proyectos, y ahora lidera Neuriax.
               </p>
               <div className="mt-4">
                 <a href="https://www.linkedin.com/in/mateoclaramunt" target="_blank" rel="noopener noreferrer" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full inline-flex items-center justify-center transition-colors">
@@ -101,10 +101,10 @@ export default function QuienSomos() {
                   className="w-full h-full rounded-full object-cover border-4 border-purple-500/30 group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <h3 className="text-xl font-bold text-white mb-1">Daniel DomÃ­nguez</h3>
+              <h3 className="text-xl font-bold text-white mb-1">Daniel Domínguez</h3>
               <p className="text-cyan-400 font-semibold text-sm mb-4">Lead Web Developer</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Especialista en desarrollo web, diseÃ±o UI/UX y creaciÃ³n de experiencias digitales de alto impacto.
+                Especialista en desarrollo web, diseño UI/UX y creación de experiencias digitales de alto impacto.
               </p>
               <div className="mt-4">
                 <a href="#" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full inline-flex items-center justify-center transition-colors">
@@ -123,7 +123,7 @@ export default function QuienSomos() {
               <h3 className="text-xl font-bold text-white mb-1">Alejandro Moreno</h3>
               <p className="text-cyan-400 font-semibold text-sm mb-4">Lead AI Engineer</p>
               <p className="text-slate-400 text-sm leading-relaxed">
-                Ingeniero especializado en arquitectura de sistemas de inteligencia artificial y automatizaciÃ³n.
+                Ingeniero especializado en arquitectura de sistemas de inteligencia artificial y automatización.
               </p>
               <div className="mt-4">
                 <a href="#" className="w-8 h-8 bg-slate-700 hover:bg-cyan-600 rounded-full inline-flex items-center justify-center transition-colors">
@@ -132,15 +132,15 @@ export default function QuienSomos() {
               </div>
             </div>
 
-            {/* MarÃ­a */}
+            {/* María */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-8 rounded-2xl border border-slate-700 hover:border-cyan-500 transition-all duration-300 text-center group">
               <div className="relative w-28 h-28 mx-auto mb-6">
                 <div className="w-full h-full rounded-full bg-gradient-to-br from-rose-500 to-pink-600 flex items-center justify-center text-4xl font-bold text-white group-hover:scale-110 transition-transform duration-300">
                   MP
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-1">MarÃ­a PÃ©rez</h3>
-              <p className="text-cyan-400 font-semibold text-sm mb-4">Directora de AdministraciÃ³n</p>
+              <h3 className="text-xl font-bold text-white mb-1">María Pérez</h3>
+              <p className="text-cyan-400 font-semibold text-sm mb-4">Directora de Administración</p>
               <p className="text-slate-400 text-sm leading-relaxed">
                 Responsable de la gestiÃ³n administrativa, financiera y coordinaciÃ³n de recursos empresariales.
               </p>
