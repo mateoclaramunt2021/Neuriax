@@ -4,39 +4,41 @@
     "quien-soy": "About Us",
     "soluciones": "Solutions",
     "webs": "Websites",
+    "sectores": "Industries",
     "trabajo": "Work",
-    "portfolio": "Portfolio",
-    "sectores": "Sectors",
     "contacto": "Contact"
-  },
-  "hero": {
-    "title": "Transform Your Business with Intelligent Technology",
-    "subtitle": "Automation, AI and Websites That Sell",
-    "description": "Complete digital solutions that eliminate operational friction and scale your revenue.",
-    "cta": "Schedule Free Consultation",
-    "cta-secondary": "View Solutions"
   },
   "cookie": {
     "title": "🍪 Cookie Preferences",
-    "text": "We use cookies to remember your preferences (theme, language) and improve your experience.",
+    "text": "We use cookies to remember your preferences (theme, language) and improve your experience. Your data is stored locally in your browser.",
     "reject": "Reject",
     "accept": "Accept"
   },
-  "preferences": {
+  "pref": {
     "theme": "Theme",
-    "dark": "Dark Mode",
-    "light": "Light Mode",
     "language": "Language",
+    "dark": "Dark",
+    "light": "Light",
+    "spanish": "Español",
+    "english": "English",
     "info": "✓ Your preferences are saved locally in your browser."
   },
   "footer": {
     "about": "About Neuriax",
-    "aboutText": "Specialists in transforming businesses through intelligent digital solutions.",
+    "company": "We are Neuriax, your digital partner for automation, applied AI and websites that convert.",
+    "links": "Links",
     "solutions": "Solutions",
-    "company": "Company",
+    "about-us": "About Us",
+    "cases": "Testimonials",
+    "contact": "Contact",
+    "legal": "Legal",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "rights": "All rights reserved"
+    "copyright": "© 2026 Neuriax. All rights reserved."
+  },
+  "hero": {
+    "title": "Automation, AI and Websites That Sell",
+    "subtitle": "Eliminate operational friction and scale your business with intelligent digital solutions"
   },
   "common": {
     "email": "Send email",

@@ -20,7 +20,8 @@
     "dark": "Oscuro",
     "light": "Claro",
     "spanish": "Español",
-    "english": "English"
+    "english": "English",
+    "info": "✓ Tus preferencias se guardan localmente en tu navegador."
   },
   "footer": {
     "about": "Sobre Neuriax",
@@ -33,7 +34,7 @@
     "legal": "Legal",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
-    "copyright": "© 2024 Neuriax. Todos los derechos reservados."
+    "copyright": "© 2026 Neuriax. Todos los derechos reservados."
   },
   "hero": {
     "title": "Automatización, IA y Páginas Web que Venden",

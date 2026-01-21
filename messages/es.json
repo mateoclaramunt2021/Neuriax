@@ -4,39 +4,41 @@
     "quien-soy": "Quiénes Somos",
     "soluciones": "Soluciones",
     "webs": "Webs",
-    "trabajo": "Trabajo",
-    "portfolio": "Portfolio",
     "sectores": "Sectores",
+    "trabajo": "Trabajo",
     "contacto": "Contacto"
-  },
-  "hero": {
-    "title": "Transforma tu Negocio con Tecnología Inteligente",
-    "subtitle": "Automatización, IA y Webs que Venden",
-    "description": "Soluciones digitales completas que eliminan fricción operativa y escalan tus ingresos.",
-    "cta": "Agendar Consulta Gratuita",
-    "cta-secondary": "Ver Soluciones"
   },
   "cookie": {
     "title": "🍪 Preferencias de Cookies",
-    "text": "Usamos cookies para recordar tus preferencias (tema, idioma) y mejorar tu experiencia.",
+    "text": "Usamos cookies para recordar tus preferencias (tema, idioma) y mejorar tu experiencia. Tus datos se guardan localmente en tu navegador.",
     "reject": "Rechazar",
     "accept": "Aceptar"
   },
-  "preferences": {
+  "pref": {
     "theme": "Tema",
-    "dark": "Modo Oscuro",
-    "light": "Modo Claro",
     "language": "Idioma",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "spanish": "Español",
+    "english": "English",
     "info": "✓ Tus preferencias se guardan localmente en tu navegador."
   },
   "footer": {
     "about": "Sobre Neuriax",
-    "aboutText": "Especialistas en transformar negocios mediante soluciones digitales inteligentes.",
+    "company": "Somos Neuriax, tu partner digital para automatización, IA aplicada y páginas web que convierten.",
+    "links": "Enlaces",
     "solutions": "Soluciones",
-    "company": "Empresa",
+    "about-us": "Quiénes Somos",
+    "cases": "Testimonios",
+    "contact": "Contacto",
+    "legal": "Legal",
     "privacy": "Política de Privacidad",
     "terms": "Términos de Servicio",
-    "rights": "Todos los derechos reservados"
+    "copyright": "© 2026 Neuriax. Todos los derechos reservados."
+  },
+  "hero": {
+    "title": "Automatización, IA y Páginas Web que Venden",
+    "subtitle": "Elimina fricción operativa y escala tu negocio con soluciones digitales inteligentes"
   },
   "common": {
     "email": "Enviar email",
