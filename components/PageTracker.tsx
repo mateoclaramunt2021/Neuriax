@@ -13,13 +13,13 @@ export function PageTracker() {
     // Solo ejecutar en cliente
     if (typeof window === 'undefined') return;
 
-    // Validar que Supabase estÃ© configurado
+    // Validar que Supabase esté configurado
     if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
       console.warn('[PageTracker] Tracking disabled - missing Supabase credentials');
       return;
     }
 
-    // Registrar pÃ¡gina visitada
+    // Registrar página visitada
     const trackPageView = async () => {
       timeStartRef.current = Date.now()
 
@@ -28,7 +28,7 @@ export function PageTracker() {
         let visitorId = sessionStorage.getItem('visitor_id')
 
         if (!visitorId) {
-          // Crear visitante anÃ³nimo
+          // Crear visitante anónimo
           const { data, error } = await supabase
             .from('visitors')
             .insert([

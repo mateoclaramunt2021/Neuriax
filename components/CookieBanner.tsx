@@ -40,13 +40,13 @@ export default function CookieBanner() {
   }, []);
 
   const loadConsentedScripts = (consent: CookieConsent) => {
-    // TODO: Integrar Google Analytics si estÃ¡ activo
+    // TODO: Integrar Google Analytics si está activo
     if (consent.analytics) {
       console.log('[COOKIES] Analytics scripts would load here');
       // Example: loadGoogleAnalytics();
     }
 
-    // TODO: Integrar Meta Pixel / Facebook Ads si estÃ¡ activo
+    // TODO: Integrar Meta Pixel / Facebook Ads si está activo
     if (consent.marketing) {
       console.log('[COOKIES] Marketing scripts would load here');
       // Example: loadMetaPixel();
@@ -98,10 +98,10 @@ export default function CookieBanner() {
           <div className="grid md:grid-cols-3 gap-6 items-start md:items-center">
             <div className="md:col-span-2">
               <h3 className="text-white font-semibold text-lg mb-2">
-                ðŸª Gestión de Cookies y Consentimiento
+                🍪 Gestión de Cookies y Consentimiento
               </h3>
-              <p className="text-slate-300 text-sm mb-3">
-                Utilizamos cookies técnicas (necesarias), analÃ­ticas y de marketing para mejorar tu experiencia. 
+              <p className="text-gray-200 text-sm mb-4">
+              Utilizamos cookies técnicas (necesarias), analíticas y de marketing para mejorar tu experiencia.
                 Puedes configurar tus preferencias o leer nuestra{' '}
                 <a href="/politica-de-cookies" className="text-cyan-400 hover:text-cyan-300 underline">
                   PolÃ­tica de Cookies
