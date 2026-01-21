@@ -3,23 +3,23 @@ import LegalLayout from '@/components/LegalLayout';
 
 export const metadata: Metadata = {
   title: 'Condiciones Generales | Neuriax',
-  description: 'Condiciones generales de servicio de Neuriax - Té©Â©rminos contractuales para servicios de automatizacié©Â³n e IA.',
+  description: 'Condiciones generales de servicio de Neuriax - Términos contractuales para servicios de automatización e IA.',
   robots: 'noindex, nofollow',
 };
 
 const toc = [
   { id: 'objeto', label: 'Objeto de las Condiciones' },
-  { id: 'servicios', label: 'Descripcié©Â³n de Servicios' },
+  { id: 'servicios', label: 'Descripción de Servicios' },
   { id: 'proceso', label: 'Proceso Comercial' },
   { id: 'tarifas', label: 'Tarifas y Pagos' },
   { id: 'plazos', label: 'Plazos' },
   { id: 'propiedad', label: 'Propiedad Intelectual' },
-  { id: 'Entregables', label: 'Entregables y Aceptacié©Â³n' },
-  { id: 'responsabilidad', label: 'Limitacié©Â³n de Responsabilidad' },
+  { id: 'Entregables', label: 'Entregables y Aceptación' },
+  { id: 'responsabilidad', label: 'Limitación de Responsabilidad' },
   { id: 'soporte', label: 'Soporte y Mantenimiento' },
   { id: 'confidencialidad', label: 'Confidencialidad' },
-  { id: 'incumplimiento', label: 'Incumplimiento y Resolucié©Â³n' },
-  { id: 'legislacion', label: 'Legislacié©Â³n Aplicable' },
+  { id: 'incumplimiento', label: 'Incumplimiento y Resolución' },
+  { id: 'legislacion', label: 'Legislación Aplicable' },
 ];
 
 export default function CondicionesGenerales() {
@@ -33,8 +33,8 @@ export default function CondicionesGenerales() {
       <section id="objeto" className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Objeto de las Condiciones Generales</h2>
         <p className="text-gray-700 mb-4">
-          Estas Condiciones Generales establecen los té©Â©rminos y condiciones bajo los cuales Neuriax presta sus servicios de 
-          automatizacié©Â³n digital, inteligencia artificial, integracié©Â³n de sistemas, desarrollo web y consultoré©Â­a tecnolé©Â³gica.
+          Estas Condiciones Generales establecen los términos y condiciones bajo los cuales Neuriax presta sus servicios de 
+          automatización digital, inteligencia artificial, integración de sistemas, desarrollo web y consultoría tecnológica.
         </p>
         <p className="text-gray-700">
           El cliente, al solicitar un presupuesto, aceptar una propuesta o contratar servicios, acepta é©Â­ntegramente estas condiciones. 
@@ -307,13 +307,13 @@ export default function CondicionesGenerales() {
           <li><strong>[PENDIENTE: Especificar servicios opcionales]</strong></li>
           <li>Mantenimiento de servidores, actualizaciones del sistema operativo</li>
           <li>Backups y recuperacié©Æ’aÂ³n ante desastres (si aplica)</li>
-          <li>Soporte 24/7 o SLA especé©Æ’aÂ­fico</li>
+          <li>Soporte 24/7 o SLA específico</li>
           <li>Modificaciones por cambios en requisitos del negocio</li>
         </ul>
 
-        <h4 className="font-semibold text-gray-900 mb-3 mt-4">Contratacié©Æ’aÂ³n de Servicios Continuos</h4>
+        <h4 className="font-semibold text-gray-900 mb-3 mt-4">Contratación de Servicios Continuos</h4>
         <p className="text-sm text-gray-700">
-          El cliente puede contratar paquetes de mantenimiento, soporte o evolucié©Æ’aÂ³n mensual/anual con té©Â©rminos especé©Æ’aÂ­ficos.
+          El cliente puede contratar paquetes de mantenimiento, soporte o evolución mensual/anual con términos específicos.
         </p>
       </section>
 
