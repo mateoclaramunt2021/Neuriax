@@ -94,14 +94,14 @@ export default function VisitorForm() {
               onClick={() => setIsOpen(false)}
               className="text-gray-500 hover:text-gray-700"
             >
-              âœ•
+              ✕
             </button>
           </div>
 
           {submitted ? (
             <div className="text-center py-4">
               <p className="text-green-600 font-semibold">
-                Â¡Gracias por tu informaciÃ³n!
+                ¡Gracias por tu información!
               </p>
             </div>
           ) : (
@@ -127,7 +127,7 @@ export default function VisitorForm() {
               <input
                 type="tel"
                 name="telefono"
-                placeholder="TelÃ©fono (opcional)"
+                placeholder="Teléfono (opcional)"
                 value={formData.telefono}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -79,7 +79,7 @@ export default function Footer() {
                   href="tel:+34640791041"
                   className="inline-flex items-center justify-center px-8 py-3 border border-slate-700 hover:border-cyan-500/50 bg-slate-900/50 hover:bg-slate-900 text-white font-semibold rounded-lg transition-all duration-300"
                 >
-                  ðŸ“ž +34 640 791 041
+                  📞 +34 640 791 041
                 </a>
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function Footer() {
                 </h4>
                 <div className="space-y-3">
                   {[
-                    { label: 'QuiÃ©nes Somos', href: '/quien-soy' },
+                    { label: 'Quiénes Somos', href: '/quien-soy' },
                     { label: 'Trabajo', href: '/trabajo' },
                     // ...eliminado enlace a Blog...
                     { label: 'Contacto', href: '/contacto' },
@@ -148,8 +148,8 @@ export default function Footer() {
                 <div className="space-y-3">
                   {[
                     { label: 'Aviso Legal', href: '/aviso-legal' },
-                    { label: 'PolÃ­tica de Privacidad', href: '/politica-de-privacidad' },
-                    { label: 'PolÃ­tica de Cookies', href: '/politica-de-cookies' },
+                    { label: 'Política de Privacidad', href: '/politica-de-privacidad' },
+                    { label: 'Política de Cookies', href: '/politica-de-cookies' },
                     { label: 'Condiciones Generales', href: '/condiciones-generales' },
                   ].map((link) => (
                     <Link
@@ -176,7 +176,7 @@ export default function Footer() {
                     className="flex items-center gap-3 text-sm group/contact hover:text-cyan-400 transition-colors"
                   >
                     <div className="w-8 h-8 flex items-center justify-center bg-slate-800 group-hover/contact:bg-cyan-500/20 rounded-lg transition-colors">
-                      <span>âœ‰</span>
+                      <span>✉️</span>
                     </div>
                     <span className="text-gray-400 group-hover/contact:text-cyan-400">neuriaxx@gmail.com</span>
                   </a>
@@ -185,7 +185,7 @@ export default function Footer() {
                     className="flex items-center gap-3 text-sm group/contact hover:text-cyan-400 transition-colors"
                   >
                     <div className="w-8 h-8 flex items-center justify-center bg-slate-800 group-hover/contact:bg-cyan-500/20 rounded-lg transition-colors">
-                      <span>ðŸ“ž</span>
+                      <span>📞</span>
                     </div>
                     <span className="text-gray-400 group-hover/contact:text-cyan-400">+34 640 791 041</span>
                   </a>
@@ -199,7 +199,7 @@ export default function Footer() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               {/* Social links */}
               <div className="flex items-center gap-4">
-                <span className="text-xs uppercase tracking-widest text-gray-500">SÃ­guenos</span>
+                <span className="text-xs uppercase tracking-widest text-gray-500">Síguenos</span>
                 <div className="flex gap-3">
                   <a
                     href="https://www.instagram.com/neuriax.ia_"
@@ -233,10 +233,10 @@ export default function Footer() {
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" />
                   </svg>
-                  ðŸª Cookies
+                  🍪 Cookies
                 </button>
                 <p className="text-xs text-gray-500">
-                  Â© 2026 <span className="font-semibold text-gray-400">Neuriax</span>. Todos los derechos reservados.
+                  © 2026 <span className="font-semibold text-gray-400">Neuriax</span>. Todos los derechos reservados.
                 </p>
               </div>
             </div>
