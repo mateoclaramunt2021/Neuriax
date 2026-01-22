@@ -55,7 +55,7 @@ export default function Contacto() {
 
             {/* Compact Subtitle */}
             <p className="text-lg md:text-xl text-slate-200 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
-              <span className="font-bold text-cyan-300">15–20 min</span> de llamada. <span className="font-bold text-cyan-300">3–5 mejoras</span> detectadas. <span className="font-bold text-cyan-300">Propuesta en 24h</span>.
+              <span className="font-bold text-cyan-300">15–20 minutos de llamada</span> sin compromiso
             </p>
 
             {/* Promotional Cards - COMPACT */}
