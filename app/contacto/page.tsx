@@ -64,8 +64,9 @@ export default function Contacto() {
               <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg blur-lg"></div>
                 <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-lg p-4 border border-cyan-500/50 backdrop-blur-xl hover:border-cyan-400 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20">
-                  <p className="text-cyan-400 font-bold text-sm mb-0.5">⚡ Automatización</p>
-                  <p className="text-white font-semibold text-xs">Hasta 15 Feb</p>
+                  <p className="text-cyan-400 font-bold text-sm mb-0.5">⚡ Oferta Limitada</p>
+                  <p className="text-white font-semibold text-xs mb-1">Automatización</p>
+                  <p className="text-cyan-300 font-bold text-xs">Hasta 15 Feb</p>
                 </div>
               </div>
 
@@ -73,8 +74,9 @@ export default function Contacto() {
               <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg blur-lg"></div>
                 <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-lg p-4 border border-purple-500/50 backdrop-blur-xl hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-500/20">
-                  <p className="text-purple-400 font-bold text-sm mb-0.5">🚀 Páginas Web</p>
-                  <p className="text-white font-semibold text-xs">Hasta 1 Feb</p>
+                  <p className="text-purple-400 font-bold text-sm mb-0.5">🚀 Oferta Limitada</p>
+                  <p className="text-white font-semibold text-xs mb-1">Páginas Web</p>
+                  <p className="text-purple-300 font-bold text-xs">Hasta 1 Feb</p>
                 </div>
               </div>
             </div>
