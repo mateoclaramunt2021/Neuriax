@@ -81,21 +81,6 @@ export default function Contacto() {
               </div>
             </div>
 
-            {/* Premium CTA Button */}
-            <div className="relative inline-block mb-6">
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 opacity-75 group-hover:opacity-100 blur-lg transition-all duration-300 rounded-full"></div>
-              <Link
-                href="/contacto/formulario"
-                className="group relative inline-flex items-center justify-center px-10 md:px-12 py-4 md:py-5 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-base md:text-lg rounded-full shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative flex items-center gap-2">
-                  <span>Agendar llamada</span>
-                  <span>→</span>
-                </span>
-              </Link>
-            </div>
-
             {/* Trust Statement - Compact */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-slate-300">
               <span>✓ Sin compromiso</span>
