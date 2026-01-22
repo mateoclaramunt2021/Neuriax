@@ -10,62 +10,122 @@ export default function Contacto() {
     <div className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white pb-20 md:pb-0">
       <div className="h-16"></div>
 
-      {/* ========== HERO SECTION - FUTURISTIC ========== */}
-      <section className="relative hero-futuristic py-16 md:py-32 px-6 overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 grid-pattern opacity-50"></div>
+      {/* ========== HERO SECTION - ULTRA PREMIUM ========== */}
+      <section className="relative hero-futuristic py-24 md:py-40 px-6 overflow-hidden">
+        {/* Multiple Animated Backgrounds */}
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
         
-        {/* Glowing Orbs */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-500/20 rounded-full blur-[150px] -z-10"></div>
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-500/15 rounded-full blur-[120px] -z-10"></div>
+        {/* Premium Glowing Orbs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/30 rounded-full blur-[200px] -z-10 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-cyan-500/20 rounded-full blur-[180px] -z-10" style={{ animation: 'pulse 8s ease-in-out infinite' }}></div>
+        <div className="absolute top-1/2 right-1/3 w-[300px] h-[300px] bg-purple-500/15 rounded-full blur-[150px] -z-10"></div>
 
-        <div className="max-w-6xl mx-auto">
-          <div className="relative z-10 text-center">
-            {/* Left Content */}
-            <div>
-              {/* Main Title */}
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-3 leading-tight">
-                <span className="block text-white">Automatiza tu negocio con</span>
-                <span className="block bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-                  IA y convierte más leads
-                </span>
-              </h1>
+        {/* Animated Particles */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(8)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-cyan-400/40 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animation: `floatUp ${20 + Math.random() * 10}s linear infinite`,
+                animationDelay: `${Math.random() * 5}s`
+              }}
+            />
+          ))}
+        </div>
 
-              {/* Badge */}
-              <p className="text-cyan-300 text-lg italic mb-6 opacity-80">(al instante)</p>
+        <div className="max-w-5xl mx-auto relative z-10">
+          {/* Main Content */}
+          <div className="text-center mb-12">
+            {/* Premium Badge */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 rounded-full px-6 py-3 mb-10 backdrop-blur-md shadow-lg shadow-cyan-500/20">
+              <span className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-pulse"></span>
+              <span className="text-cyan-300 font-semibold text-sm tracking-wider">(al instante)</span>
+            </div>
 
-              {/* Subtitle */}
-              <p className="text-base md:text-lg text-slate-300 mb-8 leading-relaxed">
-                En 15–20 min te damos un plan claro con 3–5 mejoras aplicables esta semana.
-              </p>
+            {/* Main Title - ULTRA PREMIUM */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight">
+              <span className="block text-white drop-shadow-lg">Automatiza</span>
+              <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-xl text-glow-cyan">
+                tu negocio con IA
+              </span>
+              <span className="block text-white drop-shadow-lg">convierte más leads</span>
+            </h1>
 
-              {/* Promotional Cards */}
-              <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                {/* Automatización Card */}
-                <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl p-4 border border-cyan-500/50 backdrop-blur-sm hover:border-cyan-400 transition-all">
-                  <p className="text-cyan-400 font-bold text-center">Oferta de Automatización</p>
-                  <p className="text-white font-semibold text-center">¡Hasta el 15 de Febrero!</p>
-                </div>
+            {/* Premium Subtitle */}
+            <p className="text-xl md:text-2xl text-slate-200 mb-10 leading-relaxed max-w-3xl mx-auto font-light tracking-wide">
+              En <span className="font-bold text-cyan-300">15–20 minutos</span> te damos un plan claro con <span className="font-bold text-cyan-300">3–5 mejoras</span> aplicables esta misma semana.
+            </p>
 
-                {/* Páginas Web Card */}
-                <div className="bg-gradient-to-br from-slate-900/50 to-slate-800/50 rounded-xl p-4 border border-purple-500/50 backdrop-blur-sm hover:border-purple-400 transition-all">
-                  <p className="text-purple-400 font-bold text-center">Promoción de Páginas Web</p>
-                  <p className="text-white font-semibold text-center">¡Hasta el 1 de Febrero!</p>
+            {/* Promotional Cards - PREMIUM DESIGN */}
+            <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-2xl mx-auto">
+              {/* Automatización Card */}
+              <div className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl"></div>
+                <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-2xl p-6 border border-cyan-500/50 backdrop-blur-xl hover:border-cyan-400 transition-all duration-300 shadow-2xl hover:shadow-cyan-500/30">
+                  <div className="flex items-center justify-center mb-3">
+                    <span className="text-3xl">⚡</span>
+                  </div>
+                  <p className="text-cyan-400 font-bold text-lg mb-1">Oferta Automatización</p>
+                  <p className="text-white font-semibold text-xl">¡Hasta 15 Feb!</p>
+                  <p className="text-slate-400 text-sm mt-2">Chatbots + Whatsapp</p>
                 </div>
               </div>
 
-              {/* Main CTA Button */}
+              {/* Páginas Web Card */}
+              <div className="group relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl"></div>
+                <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-2xl p-6 border border-purple-500/50 backdrop-blur-xl hover:border-purple-400 transition-all duration-300 shadow-2xl hover:shadow-purple-500/30">
+                  <div className="flex items-center justify-center mb-3">
+                    <span className="text-3xl">🚀</span>
+                  </div>
+                  <p className="text-purple-400 font-bold text-lg mb-1">Promo Páginas Web</p>
+                  <p className="text-white font-semibold text-xl">¡Hasta 1 Feb!</p>
+                  <p className="text-slate-400 text-sm mt-2">SEO + Diseño Premium</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Premium CTA Button */}
+            <div className="relative inline-block mb-8">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 opacity-75 group-hover:opacity-100 blur-xl transition-all duration-300 rounded-full"></div>
               <Link
                 href="/contacto/formulario"
-                className="block w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 text-center border border-blue-400/50 mb-6"
+                className="group relative inline-flex items-center justify-center px-10 md:px-14 py-5 md:py-6 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-lg md:text-xl rounded-full shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
               >
-                Agendar llamada (15 min)
+                <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative flex items-center gap-3">
+                  <span>Agendar llamada</span>
+                  <span className="text-2xl">→</span>
+                </span>
               </Link>
+            </div>
 
-              {/* Trust Note */}
-              <p className="text-sm text-slate-400">
-                Sin compromiso. Te llevas un plan claro aunque no trabájemos juntos.
-              </p>
+            {/* Trust Statement - Premium */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+              <p className="text-slate-300">✓ Sin compromiso</p>
+              <span className="hidden sm:block w-1 h-1 bg-slate-500 rounded-full"></span>
+              <p className="text-slate-300">✓ Confidencial</p>
+              <span className="hidden sm:block w-1 h-1 bg-slate-500 rounded-full"></span>
+              <p className="text-slate-300">✓ En 24h tendrás resultado</p>
+            </div>
+          </div>
+
+          {/* Stats Section */}
+          <div className="grid md:grid-cols-3 gap-8 mt-20 pt-12 border-t border-slate-700/50">
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">15-20</p>
+              <p className="text-slate-400 text-sm uppercase tracking-wider font-semibold">Minutos de llamada</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">3-5</p>
+              <p className="text-slate-400 text-sm uppercase tracking-wider font-semibold">Mejoras detectadas</p>
+            </div>
+            <div className="text-center">
+              <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent mb-2">24h</p>
+              <p className="text-slate-400 text-sm uppercase tracking-wider font-semibold">Propuesta recibida</p>
             </div>
           </div>
         </div>
