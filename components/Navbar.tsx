@@ -83,24 +83,20 @@ export default function Navbar() {
                 </a>
 
                 {/* CTA Button - Desktop */}
-                <a
+                <Link
                   href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="hidden sm:inline-flex px-6 py-2.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform hover:scale-105"
                 >
                   Llamada
-                </a>
+                </Link>
 
                 {/* CTA Button - Mobile */}
-                <a
+                <Link
                   href={BOOKING_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="sm:hidden inline-flex px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-semibold rounded-lg transition-all duration-300"
                 >
                   Demo
-                </a>
+                </Link>
 
                 {/* Mobile Menu Button */}
                 <button
