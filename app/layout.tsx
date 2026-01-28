@@ -114,23 +114,58 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* Google Consent Mode v2 - DEBE ir ANTES de gtag.js */}
+        <Script id="google-consent-mode" strategy="beforeInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            
+            // Configuración inicial de Consent Mode v2 (denegar por defecto para GDPR)
+            gtag('consent', 'default', {
+              'ad_storage': 'denied',
+              'ad_user_data': 'denied',
+              'ad_personalization': 'denied',
+              'analytics_storage': 'denied',
+              'wait_for_update': 500
+            });
+            
+            // Cargar preferencias guardadas inmediatamente
+            try {
+              const saved = localStorage.getItem('cookie_consent_v1');
+              if (saved) {
+                const prefs = JSON.parse(saved);
+                if (prefs.analytics) {
+                  gtag('consent', 'update', { 'analytics_storage': 'granted' });
+                }
+                if (prefs.marketing) {
+                  gtag('consent', 'update', {
+                    'ad_storage': 'granted',
+                    'ad_user_data': 'granted',
+                    'ad_personalization': 'granted'
+                  });
+                }
+              }
+            } catch(e) {}
+          `}
+        </Script>
+        {/* Google Analytics gtag.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
+          strategy="beforeInteractive"
+        />
+        <Script id="google-analytics" strategy="beforeInteractive">
+          {`
+            gtag('js', new Date());
+            gtag('config', 'G-JK6XH4LZ3C', {
+              page_path: window.location.pathname,
+              send_page_view: true
+            });
+          `}
+        </Script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/* Google Analytics - Usando Script de Next.js */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-JK6XH4LZ3C');
-          `}
-        </Script>
         {/* Cookie Banner - Must be before other components to establish consent state */}
         <CookieBanner />
         {/* PageTracker gracefully handles Supabase failures */}
