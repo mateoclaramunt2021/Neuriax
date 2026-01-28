@@ -40,44 +40,51 @@ export default function Contacto() {
           {/* Main Content */}
           <div className="text-center">
             {/* Premium Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 rounded-full px-5 py-2 mb-6 backdrop-blur-md shadow-lg shadow-cyan-500/20">
-              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-              <span className="text-cyan-300 font-semibold text-xs tracking-wider">(al instante)</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/50 rounded-full px-5 py-2 mb-6 backdrop-blur-md shadow-lg shadow-green-500/20">
+              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              <span className="text-green-300 font-semibold text-xs tracking-wider uppercase">Plazas limitadas — Respuesta inmediata</span>
             </div>
 
-            {/* Main Title - COMPACT PREMIUM */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-4 leading-tight tracking-tight">
-              <span className="block text-white drop-shadow-lg">Automatiza tu negocio</span>
-              <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-xl text-glow-cyan">
-                con IA y convierte leads
+            {/* Main Title - ULTRA PERSUASIVO */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
+              <span className="block text-white drop-shadow-lg mb-2">¿Cuántas ventas pierdes</span>
+              <span className="block text-white drop-shadow-lg mb-2">mientras lees esto?</span>
+              <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-xl text-glow-cyan text-3xl md:text-4xl lg:text-5xl mt-4">
+                Automatiza. Convierte. Escala.
               </span>
             </h1>
 
-            {/* Compact Subtitle */}
-            <p className="text-lg md:text-xl text-slate-200 mb-8 leading-relaxed max-w-3xl mx-auto font-light">
-              <span className="font-bold text-cyan-300">15–20 minutos de llamada</span> sin compromiso
+            {/* Propuesta de valor directa */}
+            <p className="text-xl md:text-2xl text-white mb-4 font-semibold max-w-3xl mx-auto">
+              Te muestro en <span className="text-cyan-300">15 minutos</span> cómo duplicar tus leads sin contratar más personal
+            </p>
+            
+            {/* Subtítulo con prueba social */}
+            <p className="text-base md:text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+              +50 negocios ya automatizan su captación con nosotros. Tú podrías ser el siguiente.
             </p>
 
-            {/* Promotional Cards - COMPACT */}
-            <div className="grid md:grid-cols-2 gap-4 mb-8 max-w-xl mx-auto">
-              {/* Automatización Card */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-lg p-4 border border-cyan-500/50 backdrop-blur-xl hover:border-cyan-400 transition-all duration-300 shadow-lg hover:shadow-cyan-500/20">
-                  <p className="text-cyan-400 font-bold text-sm mb-0.5">⚡ Oferta Limitada</p>
-                  <p className="text-white font-semibold text-xs mb-1">Automatización</p>
-                  <p className="text-cyan-300 font-bold text-xs">Hasta 15 Feb</p>
-                </div>
+            {/* Beneficios rápidos */}
+            <div className="grid md:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+              {/* Beneficio 1 */}
+              <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
+                <div className="text-3xl mb-2">🎯</div>
+                <p className="text-white font-bold text-sm mb-1">Más leads</p>
+                <p className="text-slate-400 text-xs">Captación automática 24/7</p>
               </div>
 
-              {/* Páginas Web Card */}
-              <div className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg blur-lg"></div>
-                <div className="relative bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-lg p-4 border border-purple-500/50 backdrop-blur-xl hover:border-purple-400 transition-all duration-300 shadow-lg hover:shadow-purple-500/20">
-                  <p className="text-purple-400 font-bold text-sm mb-0.5">🚀 Oferta Limitada</p>
-                  <p className="text-white font-semibold text-xs mb-1">Páginas Web</p>
-                  <p className="text-purple-300 font-bold text-xs">Hasta 1 Feb</p>
-                </div>
+              {/* Beneficio 2 */}
+              <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
+                <div className="text-3xl mb-2">⏰</div>
+                <p className="text-white font-bold text-sm mb-1">Menos trabajo manual</p>
+                <p className="text-slate-400 text-xs">La IA trabaja por ti</p>
+              </div>
+
+              {/* Beneficio 3 */}
+              <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
+                <div className="text-3xl mb-2">💰</div>
+                <p className="text-white font-bold text-sm mb-1">ROI garantizado</p>
+                <p className="text-slate-400 text-xs">O te devolvemos el dinero</p>
               </div>
             </div>
 
@@ -110,43 +117,61 @@ export default function Contacto() {
       {/* ========== CÓMO FUNCIONA (3 STEPS) ========== */}
       <section className="py-16 md:py-20 px-6 bg-slate-900/30">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
-            Cómo funciona en 3 pasos
-          </h2>
+          <div className="text-center mb-12">
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">Proceso simple</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              De la llamada a resultados en 7 días
+            </h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Sin complicaciones. Sin jerga técnica. Solo resultados.</p>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Step 1 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
-              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
+              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">5 min</div>
+              <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 1
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">Diagnóstico rápido</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Cuéntame tu problema</h3>
               <p className="text-slate-300">
-                En 5 minutos analizamos tu operación y entendemos dónde pierdes tiempo y dinero.
+                Me explicas dónde pierdes tiempo, dinero o clientes. Yo escucho y tomo notas.
               </p>
             </div>
 
             {/* Step 2 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
-              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
+              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">10 min</div>
+              <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 2
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">2–3 automatizaciones</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Te muestro la solución</h3>
               <p className="text-slate-300">
-                Te presentamos las mejoras específicas para tu caso, con impacto medible.
+                En pantalla compartida te enseño exactamente cómo lo automatizaríamos. Sin humo, solo hechos.
               </p>
             </div>
 
             {/* Step 3 */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all">
-              <div className="flex items-center justify-center w-12 h-12 bg-cyan-500 rounded-full text-white font-bold text-xl mb-6">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
+              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">24h</div>
+              <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 3
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">Demo y propuesta</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Propuesta personalizada</h3>
               <p className="text-slate-300">
-                Si encaja, te mostramos cómo funciona y te enviamos una propuesta sin compromiso.
+                Recibes presupuesto cerrado con todo detallado. Si te interesa, arrancamos. Si no, amigos.
               </p>
             </div>
+          </div>
+
+          {/* CTA intermedio */}
+          <div className="text-center mt-12">
+            <Link
+              href="https://calendly.com/neuriax/30min"
+              className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-lg transition-colors group"
+            >
+              <span>Reservar mi hueco ahora</span>
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -154,53 +179,89 @@ export default function Contacto() {
       {/* ========== EJEMPLOS POR SECTOR ========== */}
       <section id="ejemplos-section" className="py-16 md:py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
-            Ejemplos por sector
-          </h2>
+          <div className="text-center mb-12">
+            <span className="inline-block bg-purple-500/10 text-purple-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">Casos reales</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Esto es lo que consiguen negocios como el tuyo
+            </h2>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">¿Te identificas con alguno? Podemos hacer lo mismo por ti.</p>
+          </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6">
             {/* Restaurantes */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
-              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Restaurantes</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Automatización:</strong> Recibir reservas por WhatsApp, confirmar automáticamente y enviar recordatorio 24h antes.
-              </p>
-              <p className="text-sm text-slate-400">
-                Resultado: 30% menos no-shows, sin que nadie tenga que llamar.
-              </p>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 hover:border-green-500/50 transition-all group">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">🍽️</div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-green-400 transition-colors">Restaurantes</h3>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Reservas por WhatsApp + confirmación automática + recordatorio 24h antes.
+                  </p>
+                  <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2">
+                    <span className="text-green-400 font-bold text-lg">↓30%</span>
+                    <span className="text-green-300 text-sm">menos no-shows</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Inmobiliarias */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
-              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Inmobiliarias</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Automatización:</strong> Filtrar leads por presupuesto/zona, agendar visitas sin intervención manual.
-              </p>
-              <p className="text-sm text-slate-400">
-                Resultado: Cierra 2x más operaciones en menos tiempo.
-              </p>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 hover:border-green-500/50 transition-all group">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">🏠</div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-green-400 transition-colors">Inmobiliarias</h3>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Filtrar leads por presupuesto/zona + agendar visitas sin intervención manual.
+                  </p>
+                  <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2">
+                    <span className="text-green-400 font-bold text-lg">2x</span>
+                    <span className="text-green-300 text-sm">más operaciones cerradas</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Belleza / Clínicas */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
-              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Belleza / Clínicas</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Automatización:</strong> Booking 24/7, recordatorios automáticos, reactivación de clientes dormidos por IA.
-              </p>
-              <p className="text-sm text-slate-400">
-                Resultado: 40% más citas, sin staff adicional.
-              </p>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 hover:border-green-500/50 transition-all group">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">💇‍♀️</div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-green-400 transition-colors">Belleza / Clínicas</h3>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Booking 24/7 + recordatorios automáticos + reactivación de clientes dormidos por IA.
+                  </p>
+                  <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2">
+                    <span className="text-green-400 font-bold text-lg">↑40%</span>
+                    <span className="text-green-300 text-sm">más citas sin staff adicional</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Servicios Locales */}
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-400/30 transition-all">
-              <h3 className="text-2xl font-bold mb-4 text-cyan-400">Servicios Locales</h3>
-              <p className="text-slate-300 mb-4">
-                <strong>Automatización:</strong> Presupuestos automáticos, seguimiento por SMS, cierre de ventas con IA.
-              </p>
-              <p className="text-sm text-slate-400">
-                Resultado: 3x conversión con menos presupuestadores.
-              </p>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-6 border border-slate-700 hover:border-green-500/50 transition-all group">
+              <div className="flex items-start gap-4">
+                <div className="text-4xl">🔧</div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold mb-2 text-white group-hover:text-green-400 transition-colors">Servicios Locales</h3>
+                  <p className="text-slate-300 text-sm mb-3">
+                    Presupuestos automáticos + seguimiento por SMS + cierre de ventas con IA.
+                  </p>
+                  <div className="flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-lg px-3 py-2">
+                    <span className="text-green-400 font-bold text-lg">3x</span>
+                    <span className="text-green-300 text-sm">conversión con menos trabajo</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Sector personalizado */}
+          <div className="mt-8 text-center">
+            <div className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-full px-6 py-3">
+              <span className="text-2xl">🎯</span>
+              <span className="text-slate-300">¿Tu sector no está aquí? <span className="text-cyan-400 font-semibold">Te lo diseño a medida</span></span>
             </div>
           </div>
         </div>
