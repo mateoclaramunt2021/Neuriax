@@ -91,18 +91,68 @@ export default function Soluciones() {
         </div>
       </section>
 
+      {/* El problema que resuelvo */}
+      <section className="py-20 px-6 bg-gray-900">
+        <div className="max-w-7xl mx-auto">
+          {/* Problema */}
+          <div className="text-center mb-16">
+            <span className="inline-block bg-red-500/10 text-red-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">EL PROBLEMA</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
+              Pasas horas en tareas que <span className="text-red-400">no aportan valor</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Copiar datos de un sitio a otro. Responder los mismos emails. Seguimiento manual de clientes. Horas que podrías dedicar a lo que realmente importa.
+            </p>
+          </div>
+
+          {/* Ejemplos de problemas */}
+          <div className="grid md:grid-cols-4 gap-6 mb-16">
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">⏰</div>
+              <h3 className="text-lg font-bold text-white mb-2">Tiempo perdido</h3>
+              <p className="text-gray-400 text-sm">Tareas repetitivas que hacen que el día no te rinda.</p>
+            </div>
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">😤</div>
+              <h3 className="text-lg font-bold text-white mb-2">Leads sin responder</h3>
+              <p className="text-gray-400 text-sm">Clientes potenciales que se van porque tardas en contestar.</p>
+            </div>
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="text-lg font-bold text-white mb-2">Datos dispersos</h3>
+              <p className="text-gray-400 text-sm">Información en Excel, emails, notas... imposible de gestionar.</p>
+            </div>
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">🔄</div>
+              <h3 className="text-lg font-bold text-white mb-2">Errores humanos</h3>
+              <p className="text-gray-400 text-sm">Copiar y pegar, olvidar seguimientos, perder información.</p>
+            </div>
+          </div>
+
+          {/* La pregunta clave */}
+          <div className="bg-gradient-to-r from-cyan-900/30 to-blue-900/30 rounded-2xl p-8 border border-cyan-700/50 text-center">
+            <p className="text-2xl md:text-3xl text-white font-bold mb-4">
+              ¿Y si la tecnología hiciera eso por ti?
+            </p>
+            <p className="text-slate-300 text-lg max-w-2xl mx-auto">
+              No hablo de magia. Hablo de automatizaciones reales que funcionan mientras tú te dedicas a lo que importa: tu negocio, tu familia, tu vida.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Soluciones */}
       <section id="soluciones" className="py-24 px-6 bg-gradient-to-b from-white to-slate-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <span className="inline-block bg-cyan-100 text-cyan-700 text-sm font-semibold px-4 py-2 rounded-full mb-6">
-              SOLUCIONES
+              QUÉ PUEDO HACER POR TI
             </span>
             <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
-              Tres pilares de transformación
+              Tres formas de <span className="text-cyan-600">recuperar tu tiempo</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Cada solución resuelve un problema crítico de tu negocio. Implementación rápida, resultados medibles.
+              Dependiendo de lo que necesites, hay diferentes caminos. Te explico cuál encaja mejor contigo.
             </p>
           </div>
 
@@ -268,12 +318,12 @@ export default function Soluciones() {
           </div>
 
           <div className="text-center mt-12">
-            <p className="text-slate-500 text-sm mb-6">Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.</p>
+            <p className="text-slate-500 text-sm mb-6">No todos los negocios necesitan todo esto. En la llamada vemos qué tiene sentido para ti.</p>
             <a
               href="/contacto/formulario"
               className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all"
             >
-              Ver qué solución encaja contigo
+              Descubrir qué necesito
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -286,11 +336,13 @@ export default function Soluciones() {
       <section className="py-20 px-6 bg-black">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
+            <span className="inline-block bg-green-500/10 text-green-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">INVERSIÓN</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Planes de Automatización
+              ¿Cuánto cuesta automatizar?<br />
+              <span className="text-cyan-400">Menos de lo que imaginas.</span>
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Soluciones adaptadas a cada nivel de necesidad. Todas incluyen soporte y formación.
+              Te doy precio cerrado antes de empezar. Sin sorpresas, sin letra pequeña.
             </p>
           </div>
 
@@ -515,35 +567,48 @@ export default function Soluciones() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[150px]"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[120px]"></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Tiene sentido automatizar tu negocio?
+            Cada hora que pierdes en tareas manuales<br />
+            <span className="text-cyan-400">es una hora menos para tu negocio</span>
           </h2>
           <p className="text-xl mb-4 text-slate-300">
-            Puede que sí. Puede que no. Hablemos y te lo digo con honestidad.
+            No te vendo humo. Si después de hablar veo que no necesitas automatizar, te lo digo.
           </p>
           <p className="text-lg mb-8 text-slate-400 max-w-2xl mx-auto">
-            No voy a venderte algo que no necesitas. Si después de escucharte veo que la automatización no encaja con tu situación, te lo diré claramente.
+            Pero si hay algo que se puede mejorar, te lo muestro con números reales.
           </p>
-          <a
-            href="/contacto/formulario"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all hover:scale-105"
-          >
-            Agendar llamada sin compromiso
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </a>
-          <p className="text-sm mt-6 text-slate-500">
-            30 minutos • Sin presión • Te cuento lo que veo
-          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <a
+              href="/contacto/formulario"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-xl shadow-cyan-500/25 hover:from-cyan-600 hover:to-blue-700 transition-all hover:scale-105"
+            >
+              Quiero recuperar mi tiempo →
+            </a>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Garantía 30 días
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Te digo si no lo necesitas
+            </span>
+          </div>
         </div>
       </section>
     </div>
