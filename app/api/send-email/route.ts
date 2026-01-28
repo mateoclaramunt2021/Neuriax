@@ -143,6 +143,78 @@ export async function POST(request: NextRequest) {
         );
       }
 
+      // ========== ENVIAR EMAIL DE AGRADECIMIENTO AL CLIENTE ==========
+      const discountCode = 'BIENVENIDO10';
+      
+      await resend.emails.send({
+        from: 'Neuriax <onboarding@resend.dev>',
+        to: email,
+        subject: '🎉 ¡Gracias por contactar con Neuriax! Tu código de descuento',
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
+              <h1 style="color: white; margin: 0; font-size: 28px;">¡Hola ${nombre}! 👋</h1>
+              <p style="color: rgba(255,255,255,0.9); margin: 15px 0 0 0; font-size: 16px;">Gracias por confiar en Neuriax</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+              <p style="color: #374151; font-size: 16px; line-height: 1.6; margin-top: 0;">
+                Me llamo Mateo y soy el fundador de Neuriax. He recibido tu consulta y estoy revisando tu caso.
+              </p>
+              
+              <p style="color: #374151; font-size: 16px; line-height: 1.6;">
+                Como agradecimiento por elegirnos, aquí tienes un <strong>código de descuento del 10%</strong> para tu primer proyecto:
+              </p>
+              
+              <div style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); padding: 25px; border-radius: 12px; text-align: center; margin: 25px 0; border: 2px dashed #10b981;">
+                <p style="color: #065f46; font-size: 14px; margin: 0 0 10px 0; font-weight: 500;">Tu código de descuento:</p>
+                <p style="color: #047857; font-size: 32px; font-weight: bold; margin: 0; letter-spacing: 3px;">${discountCode}</p>
+                <p style="color: #059669; font-size: 14px; margin: 10px 0 0 0;">10% de descuento en tu primer proyecto</p>
+              </div>
+              
+              <p style="color: #374151; font-size: 16px; line-height: 1.6;">
+                <strong>¿Siguiente paso?</strong> Agenda una llamada gratuita de 15 minutos conmigo para hablar de tu proyecto:
+              </p>
+              
+              <div style="text-align: center; margin: 25px 0;">
+                <a href="https://calendly.com/neuriax/30min" style="display: inline-block; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; padding: 15px 35px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
+                  📅 Agendar llamada gratuita
+                </a>
+              </div>
+              
+              <p style="color: #6b7280; font-size: 14px; line-height: 1.6;">
+                En la llamada:
+              </p>
+              <ul style="color: #6b7280; font-size: 14px; line-height: 1.8;">
+                <li>Entenderé mejor tu caso y necesidades</li>
+                <li>Te daré un presupuesto cerrado sin sorpresas</li>
+                <li>Te diré honestamente si podemos ayudarte</li>
+              </ul>
+              
+              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 25px 0;">
+              
+              <p style="color: #9ca3af; font-size: 14px; margin-bottom: 5px;">
+                ¿Prefieres escribirme directamente?
+              </p>
+              <p style="color: #6b7280; font-size: 14px; margin-top: 0;">
+                📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
+                📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
+              </p>
+              
+              <p style="color: #374151; font-size: 16px; margin-top: 25px;">
+                ¡Hablamos pronto!<br>
+                <strong>Mateo</strong><br>
+                <span style="color: #6b7280; font-size: 14px;">Fundador de Neuriax</span>
+              </p>
+            </div>
+            
+            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
+              Recibes este email porque contactaste a través de neuriax.com
+            </p>
+          </div>
+        `
+      });
+
       return NextResponse.json(
         { message: 'Contacto enviado correctamente', emailId: emailData?.id },
         { status: 200 }

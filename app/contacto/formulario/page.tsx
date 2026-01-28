@@ -554,7 +554,7 @@ export default function FormularioContacto() {
       if (response.ok) {
         setCurrentStep('final');
         addBotMessage(
-          `¡Perfecto, ${leadData.nombre}! 🎉\n\nHe guardado toda tu información. Mateo la revisará antes de la llamada.\n\n**Haz clic en el botón de abajo** para elegir el día y hora que mejor te venga.\n\n👇`
+          `¡Perfecto, ${leadData.nombre}! 🎉\n\nHe guardado toda tu información y Mateo la revisará antes de la llamada.\n\n📧 **Te he enviado un email** con un código de descuento del 10% para tu primer proyecto.\n\n**Ahora haz clic en el botón de abajo** para elegir el día y hora que mejor te venga.\n\n👇`
         );
         setShowCalendly(true);
       } else {
