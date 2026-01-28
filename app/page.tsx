@@ -127,7 +127,7 @@ export default function Home() {
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 mb-6 fade-in-up" style={{ animationDelay: '0.6s' }}>
                 <a 
-                  href="https://calendly.com/neuriax/30min" 
+                  href="/contacto/formulario" 
                   className="btn-shimmer group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700 shadow-lg shadow-cyan-500/15 hover:shadow-cyan-500/25 hover:scale-[1.02]"
                 >
                   <span>Agenda tu Consulta Gratuita</span>
@@ -574,7 +574,7 @@ export default function Home() {
             Si encaja, te lo diremos. Y si no, también.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
+            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
               Mantener una llamada clara
             </CTAButton>
             <CTAButton href="/webs" variant="secondary" size="lg">

@@ -40,7 +40,7 @@ export default function WebsPage() {
                 <CTAButton href="#precios" size="lg">
                   Ver precios
                 </CTAButton>
-                <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" size="lg">
+                <CTAButton href="/contacto/formulario" variant="secondary" size="lg">
                   Agendar llamada
                 </CTAButton>
               </div>
@@ -256,7 +256,7 @@ export default function WebsPage() {
                   SEO local básico
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="/contacto/formulario" variant="secondary" className="w-full text-center justify-center">
                 Contratar
               </CTAButton>
             </div>
@@ -294,7 +294,7 @@ export default function WebsPage() {
                   Copy profesional
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/neuriax/30min" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+              <CTAButton href="/contacto/formulario" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Contratar ahora
               </CTAButton>
             </div>
@@ -329,7 +329,7 @@ export default function WebsPage() {
                   Mantenimiento 3 meses
                 </li>
               </ul>
-              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="/contacto/formulario" variant="secondary" className="w-full text-center justify-center">
                 Consultar
               </CTAButton>
             </div>
@@ -405,7 +405,7 @@ export default function WebsPage() {
           <p className="text-xl mb-8 opacity-90">
             Una web profesional que venda es tu mejor inversión. Agendemos una llamada sin compromiso.
           </p>
-          <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
+          <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
             Agendar llamada gratuita
           </CTAButton>
           <p className="text-sm mt-6 opacity-75">

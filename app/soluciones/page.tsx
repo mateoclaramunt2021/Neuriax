@@ -1,4 +1,4 @@
-import SolutionCard from "../../components/SolutionCard";
+﻿import SolutionCard from "../../components/SolutionCard";
 import Image from "next/image";
 import { Metadata } from "next";
 
@@ -42,7 +42,7 @@ export default function Soluciones() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
-                  href="https://calendly.com/neuriax/30min"
+                  href="/contacto/formulario"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
                   Consulta Gratuita - Automatización e IA
@@ -255,7 +255,7 @@ export default function Soluciones() {
           <div className="text-center mt-12">
             <p className="text-slate-500 text-sm mb-6">Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.</p>
             <a
-              href="https://calendly.com/neuriax/30min"
+              href="/contacto/formulario"
               className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-all"
             >
               Ver qué solución encaja contigo
@@ -340,7 +340,7 @@ export default function Soluciones() {
                   </li>
                 </ul>
                 <a 
-                  href="https://calendly.com/neuriax/30min" 
+                  href="/contacto/formulario" 
                   className="w-full text-center px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40"
                 >
                   Empezar con Starter
@@ -413,7 +413,7 @@ export default function Soluciones() {
                   </li>
                 </ul>
                 <a 
-                  href="https://calendly.com/neuriax/30min" 
+                  href="/contacto/formulario" 
                   className="w-full text-center px-6 py-4 bg-white hover:bg-slate-100 text-slate-900 font-bold rounded-xl transition-all shadow-lg"
                 >
                   Solicitar propuesta
@@ -515,7 +515,7 @@ export default function Soluciones() {
             Hablemos sobre tu situación específica y diseñemos la solución perfecta para tu negocio.
           </p>
           <a
-            href="https://calendly.com/neuriax/30min"
+            href="/contacto/formulario"
             className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
           >
             Agendar consulta gratuita

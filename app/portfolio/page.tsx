@@ -101,7 +101,7 @@ export default function PortfolioPage() {
           
           {/* CTA Hero */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
+            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
               Agendar llamada gratuita →
             </CTAButton>
           </div>
@@ -211,7 +211,7 @@ export default function PortfolioPage() {
                   
                   {/* Overlay con CTA */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/formulario" : "/contacto/formulario"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
                       {idx === 5 ? "Agendar llamada" : "Ver en detalle"}
                     </CTAButton>
                   </div>
@@ -235,7 +235,7 @@ export default function PortfolioPage() {
                     ))}
                   </ul>
 
-                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "https://calendly.com/neuriax/30min" : "https://calendly.com/neuriax/30min"} variant="secondary" className="w-full text-center justify-center">
+                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/formulario" : "/contacto/formulario"} variant="secondary" className="w-full text-center justify-center">
                     {idx === 5 ? "Agendar llamada" : "Quiero una igual"}
                   </CTAButton>
                 </div>
@@ -398,7 +398,7 @@ export default function PortfolioPage() {
           
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 text-lg px-8 py-4">
+            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 text-lg px-8 py-4">
               Reservar mi llamada gratuita →
             </CTAButton>
           </div>

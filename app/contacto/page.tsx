@@ -100,7 +100,7 @@ export default function Contacto() {
             {/* CTA Hero */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link
-                href="https://calendly.com/neuriax/30min"
+                href="/contacto/formulario"
                 className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-lg rounded-full shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
               >
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -166,7 +166,7 @@ export default function Contacto() {
           {/* CTA intermedio */}
           <div className="text-center mt-12">
             <Link
-              href="https://calendly.com/neuriax/30min"
+              href="/contacto/formulario"
               className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-lg transition-colors group"
             >
               <span>Reservar mi hueco ahora</span>
@@ -340,7 +340,7 @@ export default function Contacto() {
           {/* CTA Principal */}
           <div className="mb-8">
             <Link
-              href="https://calendly.com/neuriax/30min"
+              href="/contacto/formulario"
               className="group relative inline-flex items-center justify-center px-12 py-5 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-lg md:text-xl rounded-full shadow-2xl shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -389,7 +389,7 @@ export default function Contacto() {
       {/* ========== MOBILE STICKY CTA ========== */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 to-slate-950/90 border-t border-slate-800 p-4 z-40">
         <Link
-          href="https://calendly.com/neuriax/30min"
+          href="/contacto/formulario"
           className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-105 inline-block text-center"
         >
           Reservar llamada gratuita →

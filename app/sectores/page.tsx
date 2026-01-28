@@ -103,7 +103,7 @@ export default function Sectores() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
-                  href="https://calendly.com/neuriax/30min"
+                  href="/contacto/formulario"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
                   Agendar consulta gratuita
@@ -247,7 +247,7 @@ export default function Sectores() {
             Cuéntame sobre tu negocio y te muestro exactamente cómo puedo ayudarte a resolver tus problemas específicos.
           </p>
           <CTAButton
-            href="https://calendly.com/neuriax/30min"
+            href="/contacto/formulario"
             variant="secondary"
             size="lg"
           >

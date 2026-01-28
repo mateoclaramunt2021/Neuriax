@@ -1,9 +1,11 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 export default function ScheduleCallButton() {
+  const router = useRouter();
   const handleScheduleCall = () => {
-    const calendlyUrl = "https://calendly.com/neuriax/30min";
-    window.open(calendlyUrl, "_blank", "noopener,noreferrer");
+    router.push('/contacto/formulario');
   };
 
   return (
