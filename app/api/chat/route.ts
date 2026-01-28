@@ -76,13 +76,13 @@ export async function POST(request: NextRequest) {
   try {
     const { messages, leadData } = await request.json();
 
-    // Check if OpenAI API key is configured
-    const apiKey = process.env.OPENAI_API_KEY;
+    // Check if Groq API key is configured (FREE alternative to OpenAI)
+    const apiKey = process.env.GROQ_API_KEY;
     
     if (!apiKey) {
       // Fallback to simple responses if no API key
       return NextResponse.json({
-        message: "Gracias por tu mensaje. Para darte la mejor respuesta posible, te recomiendo agendar una llamada gratuita con Mateo donde podrá resolver todas tus dudas de forma personalizada.\n\n¿Seguimos con las preguntas para preparar esa llamada?",
+        message: "Gracias por tu mensaje. Para darte la mejor respuesta posible, te recomiendo agendar una llamada gratuita con Mateo donde podrá resolver todas tus dudas de forma personalizada.\n\n📅 https://calendly.com/neuriax/30min",
         fallback: true
       });
     }
@@ -102,15 +102,15 @@ export async function POST(request: NextRequest) {
       }))
     ];
 
-    // Call OpenAI API
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Call Groq API (FREE and fast - uses Llama 3)
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini', // Cost-effective model with good quality
+        model: 'llama-3.3-70b-versatile',
         messages: conversationHistory,
         max_tokens: 500,
         temperature: 0.7,
@@ -119,9 +119,8 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
-      console.error('OpenAI API error:', response.status, errorData);
+      console.error('Groq API error:', response.status, errorData);
       
-      // Devolver mensaje más específico según el error
       if (response.status === 401) {
         return NextResponse.json({
           message: "Error de configuración del sistema. Por favor, contacta con nosotros directamente en hola@neuriax.com o llama al +34 640 791 041.",
@@ -131,12 +130,6 @@ export async function POST(request: NextRequest) {
       if (response.status === 429) {
         return NextResponse.json({
           message: "Estamos recibiendo muchas consultas ahora mismo. ¿Puedes intentarlo en unos segundos?",
-          error: true
-        });
-      }
-      if (response.status === 402 || errorData?.error?.code === 'insufficient_quota') {
-        return NextResponse.json({
-          message: "El servicio de chat no está disponible temporalmente. Puedes contactarnos en hola@neuriax.com o agendar una llamada en https://calendly.com/neuriax/30min",
           error: true
         });
       }
