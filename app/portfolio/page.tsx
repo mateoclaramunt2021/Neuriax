@@ -78,53 +78,59 @@ export default function PortfolioPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero */}
-      <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Badge de urgencia */}
+      <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 relative overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/3 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/3 w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        </div>
+        
+        <div className="relative max-w-6xl mx-auto text-center">
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
-            <span className="text-cyan-300 text-sm font-medium">Llamada de 15-20 min sin compromiso</span>
+            <span className="text-cyan-300 text-sm font-medium">Ejemplos reales • Sin trucos</span>
           </div>
           
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            Webs que <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">venden mientras duermes</span>
+            Así quedan las webs <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">que construyo</span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-4">
-            No hacemos páginas bonitas. Hacemos máquinas de captar clientes.
+            Sin plantillas genéricas. Cada proyecto diseñado para que tu negocio destaque.
           </p>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
-            Diseño + SEO local + Automatización. Todo incluido. Resultados desde el primer mes.
+            Explora las demos. Si algo te gusta, hablamos y te cuento cómo adaptarlo a lo que necesitas.
           </p>
           
           {/* CTA Hero */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
-              Agendar llamada gratuita →
+              Cuéntame qué necesitas →
             </CTAButton>
           </div>
           
           {/* Trust badges */}
           <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
             <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Sin compromiso
+              Desde 790€
             </span>
             <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              100% confidencial
+              Lista en 15 días
             </span>
             <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Propuesta en 24h
+              Soporte incluido
             </span>
           </div>
         </div>

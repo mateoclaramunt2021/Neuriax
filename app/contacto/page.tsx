@@ -40,61 +40,60 @@ export default function Contacto() {
           {/* Main Content */}
           <div className="text-center">
             {/* Premium Badge */}
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-green-500/20 to-emerald-500/20 border border-green-400/50 rounded-full px-5 py-2 mb-6 backdrop-blur-md shadow-lg shadow-green-500/20">
-              <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-              <span className="text-green-300 font-semibold text-xs tracking-wider uppercase">Plazas limitadas — Respuesta inmediata</span>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-400/50 rounded-full px-5 py-2 mb-6 backdrop-blur-md shadow-lg shadow-cyan-500/20">
+              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
+              <span className="text-cyan-300 font-semibold text-xs tracking-wider uppercase">Trato directo • Sin intermediarios</span>
             </div>
 
-            {/* Main Title - ULTRA PERSUASIVO */}
+            {/* Main Title - HONESTO */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
-              <span className="block text-white drop-shadow-lg mb-2">¿Cuántas ventas pierdes</span>
-              <span className="block text-white drop-shadow-lg mb-2">mientras lees esto?</span>
+              <span className="block text-white drop-shadow-lg mb-2">Hablemos sin rodeos.</span>
               <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-xl text-glow-cyan text-3xl md:text-4xl lg:text-5xl mt-4">
-                Automatiza. Convierte. Escala.
+                ¿Te puedo ayudar? Te lo digo ya.
               </span>
             </h1>
 
             {/* Propuesta de valor directa */}
             <p className="text-xl md:text-2xl text-white mb-4 font-semibold max-w-3xl mx-auto">
-              Te muestro en <span className="text-cyan-300">15 minutos</span> cómo duplicar tus leads sin contratar más personal
+              En <span className="text-cyan-300">15 minutos</span> te digo si puedo ayudarte y cuánto costaría
             </p>
             
-            {/* Subtítulo con prueba social */}
+            {/* Subtítulo honesto */}
             <p className="text-base md:text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
-              +50 negocios ya automatizan su captación con nosotros. Tú podrías ser el siguiente.
+              Sin equipo de ventas. Sin guiones. Hablas directamente conmigo y decidimos juntos si tiene sentido trabajar juntos.
             </p>
 
             {/* Beneficios rápidos */}
             <div className="grid md:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
               {/* Beneficio 1 */}
               <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
-                <div className="text-3xl mb-2">🎯</div>
-                <p className="text-white font-bold text-sm mb-1">Más leads</p>
-                <p className="text-slate-400 text-xs">Captación automática 24/7</p>
+                <div className="text-3xl mb-2">💬</div>
+                <p className="text-white font-bold text-sm mb-1">Conversación honesta</p>
+                <p className="text-slate-400 text-xs">Te digo qué necesitas y qué no</p>
               </div>
 
               {/* Beneficio 2 */}
               <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
-                <div className="text-3xl mb-2">⏰</div>
-                <p className="text-white font-bold text-sm mb-1">Menos trabajo manual</p>
-                <p className="text-slate-400 text-xs">La IA trabaja por ti</p>
+                <div className="text-3xl mb-2">💰</div>
+                <p className="text-white font-bold text-sm mb-1">Precio claro</p>
+                <p className="text-slate-400 text-xs">Presupuesto antes de empezar</p>
               </div>
 
               {/* Beneficio 3 */}
               <div className="bg-gradient-to-br from-slate-900/80 to-slate-800/80 rounded-xl p-5 border border-slate-700/50 backdrop-blur-xl">
-                <div className="text-3xl mb-2">💰</div>
-                <p className="text-white font-bold text-sm mb-1">ROI garantizado</p>
-                <p className="text-slate-400 text-xs">O te devolvemos el dinero</p>
+                <div className="text-3xl mb-2">🤝</div>
+                <p className="text-white font-bold text-sm mb-1">Sin compromiso</p>
+                <p className="text-slate-400 text-xs">Si no encaja, no pasa nada</p>
               </div>
             </div>
 
             {/* Trust Statement - Compact */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-slate-300 mb-8">
-              <span>✓ Sin compromiso</span>
+              <span>✓ Sin letra pequeña</span>
               <span className="hidden sm:block text-slate-600">•</span>
-              <span>✓ Confidencial</span>
+              <span>✓ Respuesta en 24h</span>
               <span className="hidden sm:block text-slate-600">•</span>
-              <span>✓ Plan listo en 24h</span>
+              <span>✓ Garantía de 30 días</span>
             </div>
 
             {/* CTA Hero */}
@@ -105,7 +104,7 @@ export default function Contacto() {
               >
                 <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                 <span className="relative flex items-center gap-2">
-                  <span>Reservar mi llamada gratuita</span>
+                  <span>Cuéntame qué necesitas</span>
                   <span>→</span>
                 </span>
               </Link>

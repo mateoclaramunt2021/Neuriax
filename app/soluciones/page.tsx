@@ -19,58 +19,73 @@ export const metadata: Metadata = {
 export default function Soluciones() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+      {/* Hero Section - IMPACTANTE */}
+      <section className="relative min-h-[80vh] md:min-h-[90vh] flex items-center justify-center bg-black overflow-hidden">
+        {/* Animated background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-500/20 rounded-full blur-[100px] md:blur-[150px] animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-purple-600/15 rounded-full blur-[80px] md:blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"></div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Soluciones de Automatización e IA Profesionales
-              </h1>
-              <h2 className="text-xl md:text-2xl mb-4 font-semibold text-blue-400">
-                Transforma tu negocio con inteligencia artificial
-              </h2>
-              <p className="text-lg mb-8 opacity-90">
-                Sistemas inteligentes de automatización que eliminan procesos manuales, reducen costos operacionales y escalan tu negocio. Soluciones digitales de IA aplicada.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-                <a
-                  href="/contacto/formulario"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-                >
-                  Consulta Gratuita - Automatización e IA
-                </a>
-                <a
-                  href="#soluciones"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-                >
-                  Ver soluciones
-                </a>
-              </div>
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/40 rounded-full px-4 py-2 mb-6 md:mb-8 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span className="text-cyan-400 text-xs md:text-sm font-medium tracking-wide">AUTOMATIZACIÓN E IA</span>
+          </div>
+
+          {/* Main headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 md:mb-8 leading-[1.1] tracking-tight">
+            <span className="block text-white">Menos tareas manuales.</span>
+            <span className="block mt-2 md:mt-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+              Más tiempo para lo importante.
+            </span>
+          </h1>
+
+          {/* Subheadline - Mensaje auténtico */}
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed px-4">
+            No prometo resultados mágicos. Sí puedo <span className="text-cyan-400 font-semibold">analizar tus procesos</span>, encontrar dónde pierdes tiempo, y automatizar lo que tiene sentido automatizar.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 md:mb-16 px-4">
+            <a
+              href="/contacto/formulario"
+              className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
+            >
+              <span className="relative z-10">Analizar mi negocio gratis</span>
+              <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href="#soluciones"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 transition-all"
+            >
+              Ver soluciones
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Diferenciadores honestos */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto px-4">
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl mb-2">🎯</div>
+              <div className="text-sm text-slate-300">Solo automatizo lo que tiene sentido</div>
             </div>
-
-            <div className="relative">
-              <div className="relative h-96 w-full">
-                <Image
-                  src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="Automatización y soluciones digitales"
-                  fill
-                  className="object-cover rounded-lg shadow-2xl"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/50 to-transparent rounded-lg"></div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-cyan-500/20 rounded-full blur-xl"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl"></div>
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl mb-2">🤝</div>
+              <div className="text-sm text-slate-300">Trato directo, sin intermediarios</div>
+            </div>
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl mb-2">📊</div>
+              <div className="text-sm text-slate-300">Te explico todo sin tecnicismos</div>
             </div>
           </div>
         </div>
@@ -509,19 +524,25 @@ export default function Soluciones() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Cuál de estas soluciones necesitas?
+            ¿Tiene sentido automatizar tu negocio?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Hablemos sobre tu situación específica y diseñemos la solución perfecta para tu negocio.
+          <p className="text-xl mb-4 text-slate-300">
+            Puede que sí. Puede que no. Hablemos y te lo digo con honestidad.
+          </p>
+          <p className="text-lg mb-8 text-slate-400 max-w-2xl mx-auto">
+            No voy a venderte algo que no necesitas. Si después de escucharte veo que la automatización no encaja con tu situación, te lo diré claramente.
           </p>
           <a
             href="/contacto/formulario"
-            className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all hover:scale-105"
           >
-            Agendar consulta gratuita
+            Agendar llamada sin compromiso
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </a>
-          <p className="text-sm mt-6 opacity-75">
-            Sin compromiso • Análisis personalizado • Soluciones a medida
+          <p className="text-sm mt-6 text-slate-500">
+            30 minutos • Sin presión • Te cuento lo que veo
           </p>
         </div>
       </section>

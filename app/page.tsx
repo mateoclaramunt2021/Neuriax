@@ -13,16 +13,16 @@ export const metadata: Metadata = {
 export default function Home() {
   const faqs = [
     {
-      question: "¿Cómo la automatización e IA puede transformar mi negocio?",
-      answer: "La automatización elimina procesos manuales repetitivos, la IA analiza datos y toma decisiones automáticas, resultando en mayor eficiencia, reducción de costos y escalabilidad infinita de tu operación."
+      question: "¿Cómo sé si la automatización con IA me conviene?",
+      answer: "Te lo digo yo directamente en la llamada. Si tu negocio tiene procesos repetitivos (responder emails, gestionar citas, seguimiento de clientes), probablemente sí. Si no, te lo digo sin problema."
     },
     {
-      question: "¿Qué es mejor: páginas web profesionales o automatización?",
-      answer: "Ambas son complementarias. Las páginas web atraen clientes y la automatización te permite gestionar más clientes sin aumentar costos operacionales. Juntas generan crecimiento exponencial."
+      question: "¿Por qué no usas WordPress?",
+      answer: "WordPress está bien para blogs, pero para webs de negocio que necesitan velocidad, SEO real y mantenimiento mínimo, uso tecnología moderna (Next.js). Carga más rápido, posiciona mejor y no necesitas actualizaciones constantes."
     },
     {
-      question: "¿Cuánto cuesta la automatización e IA?",
-      answer: "Depende de la complejidad del proyecto. En la llamada te mostramos casos reales con retornos medibles. Disponemos de paquetes desde PYMEs hasta empresas grandes."
+      question: "¿Cuánto cuesta y cuánto tardas?",
+      answer: "Webs desde 790€, lista en 15 días. Automatizaciones dependen de la complejidad. En la llamada te doy precio exacto antes de empezar, sin sorpresas ni letra pequeña."
     },
   ];
 
@@ -79,21 +79,21 @@ export default function Home() {
               {/* Badge */}
               <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-white/[0.08] rounded-full px-6 py-2.5 mb-8 backdrop-blur-md fade-in-up" style={{ animationDelay: '0s' }}>
                 <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-                <span className="text-slate-400 text-sm font-medium tracking-wider">Agencia Digital Especializada</span>
+                <span className="text-slate-400 text-sm font-medium tracking-wider">Trato Directo • Sin Intermediarios</span>
               </div>
 
               {/* Main Title - NUEVO */}
               <h1 className="text-4xl md:text-6xl font-semibold mb-6 leading-[1.1] tracking-tight fade-in-up" style={{ animationDelay: '0.15s' }}>
-                <span className="block text-white mb-2">Páginas Web</span>
+                <span className="block text-white mb-2">Tu negocio merece</span>
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 text-glow-cyan">
-                  & Automatizaciones
+                  tecnología que funcione
                 </span>
-                <span className="block text-white/90 text-3xl md:text-4xl mt-3 font-normal">con Inteligencia Artificial</span>
+                <span className="block text-white/90 text-3xl md:text-4xl mt-3 font-normal">No promesas, resultados.</span>
               </h1>
 
               {/* Subtitle */}
               <p className="text-base md:text-lg text-slate-400 mb-8 max-w-lg leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
-                Creamos presencia digital profesional y automatizamos procesos para que tu negocio escale sin límites.
+                Webs profesionales y automatizaciones con IA. Hablas directamente conmigo, sin equipos de ventas ni intermediarios.
               </p>
 
               {/* Features - Elegant pills */}
@@ -215,10 +215,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Dos líneas de servicio: IA + Páginas Web
+              Dos servicios. Una forma de trabajar.
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Automatización e IA para operaciones que escalen. Páginas web que convierten en ventas.
+              Elijas lo que elijas, hablas directamente conmigo. Te explico qué necesitas, qué no, y cuánto cuesta realmente.
             </p>
           </div>
 
@@ -234,28 +234,28 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Automatización & IA</h3>
               <p className="text-gray-300 mb-6">
-                Sistemas digitales que eliminan procesos manuales, reducen costos y escalan operaciones.
+                Si pasas horas en tareas repetitivas que no aportan valor, probablemente se pueden automatizar.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Leads automáticos 24/7</span>
+                  <span>Respuesta automática a clientes</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Seguimiento inteligente</span>
+                  <span>Procesos internos optimizados</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Procesos IA avanzados</span>
+                  <span>IA que trabaja mientras duermes</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-blue-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Reportes en tiempo real</span>
+                  <span>Te explico si merece la pena</span>
                 </li>
               </ul>
               <CTAButton href="/soluciones" className="w-full text-center justify-center">
-                Ver soluciones
+                Ver cómo funciona
               </CTAButton>
             </div>
 
@@ -270,28 +270,28 @@ export default function Home() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Páginas Web Profesionales</h3>
               <p className="text-gray-300 mb-6">
-                Webs que convierten visitas en clientes. Diseño + SEO local + Reservas automáticas.
+                Webs que realmente convierten visitas en clientes. Sin plantillas genéricas, sin excusas.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Diseño a medida responsivo</span>
+                  <span>Diseño a medida, sin WordPress</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>SEO local + Google Maps</span>
+                  <span>SEO local incluido de verdad</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Reservas online + WhatsApp</span>
+                  <span>Dominio + hosting + soporte 1 año</span>
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Desde 790€ • Entrega 15 días</span>
+                  <span>Desde 790€ • Lista en 15 días</span>
                 </li>
               </ul>
               <CTAButton href="/webs" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
-                Ver webs
+                Ver planes
               </CTAButton>
             </div>
           </div>
@@ -388,13 +388,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 hover:scale-105 transition-transform duration-300">
-              Cómo trabajamos para solucionar tus problemas
+              Cómo trabajo contigo
             </h2>
             <p className="text-lg text-cyan-300 mb-4 font-medium">
-              Trabajamos con metodología, no con improvisación.
+              Sin sorpresas. Sin letra pequeña. Sin promesas vacías.
             </p>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 hover:text-white transition-colors duration-300">
-              Nuestro proceso probado en múltiples proyectos garantiza resultados concretos y sostenibles.
+              Un proceso sencillo que he refinado con cada proyecto. Tú decides si seguimos adelante.
             </p>
           </div>
 
@@ -498,7 +498,7 @@ export default function Home() {
               Resultados y experiencia aplicada
             </h2>
             <p className="text-xl text-cyan-300 font-medium">
-              No hablamos de teoría. Aplicamos sistemas que ya funcionan.
+              No te vendo humo. Te muestro sistemas reales que ya funcionan.
             </p>
           </div>
 
@@ -512,9 +512,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Procesos automatizados en entornos reales</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Automatizaciones que ahorran horas</h3>
               <p className="text-gray-300">
-                Implementación de flujos automáticos para captación, seguimiento y gestión de clientes en negocios de servicios.
+                Respuestas automáticas, seguimiento de clientes y gestión interna. Todo funcionando sin que tengas que estar pendiente.
               </p>
             </div>
 
@@ -527,9 +527,9 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Optimización del tiempo operativo</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Webs que convierten de verdad</h3>
               <p className="text-gray-300">
-                Reducción de tareas manuales repetitivas mediante sistemas digitales y automatización inteligente.
+                No plantillas genéricas. Webs diseñadas para tu negocio que hacen que los visitantes contacten.
               </p>
             </div>
 
@@ -542,16 +542,16 @@ export default function Home() {
                   </svg>
                 </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">Enfoque en conversión y eficiencia</h3>
+              <h3 className="text-xl font-bold text-white mb-3">Soporte real después de entregar</h3>
               <p className="text-gray-300">
-                Cada sistema se diseña con un objetivo claro: ahorrar tiempo y mejorar resultados.
+                No desaparezco después del pago. Si algo falla o tienes dudas, estoy ahí para resolverlo.
               </p>
             </div>
           </div>
 
           <div className="text-center">
             <p className="text-gray-400 text-sm font-medium max-w-3xl mx-auto">
-              Los ejemplos concretos se muestran en llamada para adaptarlos a cada negocio.
+              En la llamada te muestro ejemplos concretos adaptados a lo que necesita tu negocio.
             </p>
           </div>
         </div>
