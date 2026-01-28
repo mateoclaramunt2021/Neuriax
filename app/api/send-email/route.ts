@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
 
       // Enviar email de notificación con Resend
       const { data: emailData, error: emailError } = await resend.emails.send({
-        from: 'Mateo de Neuriax <mateo@send.neuriax.com>',
+        from: 'Neuriax <hola@send.neuriax.com>',
         to: 'mateoclaramunt2021@gmail.com',
         subject: `🎯 Nuevo lead de contacto: ${nombre}`,
         html: `
@@ -149,7 +149,7 @@ export async function POST(request: NextRequest) {
       // Intentar enviar email al cliente (puede fallar si el dominio no está verificado)
       try {
         const { data: clientEmailData, error: clientEmailError } = await resend.emails.send({
-          from: 'Mateo de Neuriax <mateo@send.neuriax.com>',
+          from: 'Neuriax <hola@send.neuriax.com>',
           to: email,
           subject: '🎉 ¡Gracias por contactar con Neuriax! Tu código de descuento',
           html: `
@@ -306,7 +306,7 @@ export async function POST(request: NextRequest) {
 
     // Enviar email de notificación con Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: 'Mateo de Neuriax <mateo@send.neuriax.com>',
+      from: 'Neuriax <hola@send.neuriax.com>',
       to: 'mateoclaramunt2021@gmail.com',
       subject: `🚀 Nueva postulación: ${posicion}`,
       html: `
