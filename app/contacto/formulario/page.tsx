@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 
 interface Message {
@@ -8,7 +8,6 @@ interface Message {
   type: 'bot' | 'user';
   content: string;
   options?: string[];
-  isTyping?: boolean;
 }
 
 interface LeadData {
@@ -42,6 +41,7 @@ export default function FormularioContacto() {
   const [inputValue, setInputValue] = useState('');
   const [currentStep, setCurrentStep] = useState<ConversationStep>('welcome');
   const [isTyping, setIsTyping] = useState(false);
+  const [useAI, setUseAI] = useState(true); // Flag para usar IA
   const [leadData, setLeadData] = useState<LeadData>({
     nombre: '',
     email: '',
@@ -55,16 +55,22 @@ export default function FormularioContacto() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showCalendly, setShowCalendly] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // Scroll dentro del contenedor de mensajes, no de la página
+  const scrollToBottom = useCallback(() => {
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Pequeño delay para asegurar que el DOM se actualizó
+    const timer = setTimeout(scrollToBottom, 100);
+    return () => clearTimeout(timer);
+  }, [messages, scrollToBottom]);
 
   // Mensaje inicial
   useEffect(() => {
@@ -79,7 +85,6 @@ export default function FormularioContacto() {
   const addBotMessage = (content: string, options?: string[]) => {
     setIsTyping(true);
     
-    // Simular escritura
     setTimeout(() => {
       setIsTyping(false);
       setMessages(prev => [...prev, {
@@ -88,7 +93,7 @@ export default function FormularioContacto() {
         content,
         options
       }]);
-    }, 800 + Math.random() * 400);
+    }, 600 + Math.random() * 300);
   };
 
   const addUserMessage = (content: string) => {
@@ -103,18 +108,47 @@ export default function FormularioContacto() {
     }));
   };
 
+  // Llamar a la API de IA
+  const getAIResponse = async (userMessage: string): Promise<string> => {
+    try {
+      const allMessages = [...messages, { type: 'user', content: userMessage }];
+      
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          messages: allMessages.map(m => ({ type: m.type, content: m.content })),
+          leadData
+        })
+      });
+
+      if (!response.ok) throw new Error('API error');
+      
+      const data = await response.json();
+      return data.message;
+    } catch (error) {
+      console.error('Error calling AI:', error);
+      return "Disculpa, tuve un pequeño problema. ¿Puedes repetir tu pregunta?";
+    }
+  };
+
   const handleOptionClick = (option: string) => {
     addUserMessage(option);
     processResponse(option);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim() || isTyping) return;
     
-    addUserMessage(inputValue);
-    processResponse(inputValue);
+    const userInput = inputValue;
     setInputValue('');
+    addUserMessage(userInput);
+    
+    // Mantener el foco en el input
+    inputRef.current?.focus();
+    
+    await processResponse(userInput);
   };
 
   // Base de conocimiento de Neuriax
@@ -290,12 +324,12 @@ export default function FormularioContacto() {
     return null; // No encontró respuesta en el knowledge base
   };
 
-  const processResponse = (response: string) => {
+  const processResponse = async (response: string) => {
     const lowerResponse = response.toLowerCase();
 
-    // Primero intentar responder desde el knowledge base
+    // Primero intentar responder desde el knowledge base (respuestas rápidas predefinidas)
     const knowledgeResponse = getKnowledgeResponse(response);
-    if (knowledgeResponse && currentStep !== 'welcome') {
+    if (knowledgeResponse && currentStep !== 'welcome' && currentStep !== 'dudas') {
       // Si estamos en medio del flujo, permitir preguntas pero guiar de vuelta
       setTimeout(() => {
         addBotMessage(knowledgeResponse.text, knowledgeResponse.options);
@@ -308,35 +342,17 @@ export default function FormularioContacto() {
       setCurrentStep('dudas');
       setTimeout(() => {
         addBotMessage(
-          "Por supuesto, pregúntame lo que necesites. Tengo información sobre precios, tiempos, servicios, garantías... lo que quieras saber.\n\n¿Qué te gustaría saber?",
+          "Por supuesto, pregúntame lo que necesites. Puedo ayudarte con información sobre precios, tiempos, servicios, garantías... lo que quieras saber.\n\n¿Qué te gustaría saber?",
           ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', '¿Qué garantía hay?', 'Seguir con las preguntas']
         );
       }, 300);
       return;
     }
 
-    // Respuestas a dudas - buscar en knowledge base
+    // Respuestas a dudas - usar IA si está activa
     if (currentStep === 'dudas') {
-      const kbResponse = getKnowledgeResponse(response);
-      if (kbResponse) {
-        setTimeout(() => {
-          addBotMessage(kbResponse.text, kbResponse.options);
-        }, 300);
-        return;
-      }
-
-      // Si no encuentra en knowledge base, respuesta educada
-      if (!lowerResponse.includes('seguir') && !lowerResponse.includes('pregunta') && !lowerResponse.includes('sí')) {
-        setTimeout(() => {
-          addBotMessage(
-            "Esa es una muy buena pregunta. 🤔\n\nPara darte una respuesta precisa sobre eso, lo mejor es hablarlo directamente con Mateo en la llamada. Él puede entrar en los detalles de tu caso específico.\n\n¿Seguimos con las preguntas para preparar esa llamada, o tienes otra duda que pueda resolver ahora?",
-            ['Seguir con las preguntas', 'Tengo otra duda', 'Agendar llamada directamente']
-          );
-        }, 300);
-        return;
-      }
-
-      if (lowerResponse.includes('seguir') || lowerResponse.includes('sí')) {
+      // Comandos para volver al flujo
+      if (lowerResponse.includes('seguir') || (lowerResponse.includes('sí') && lowerResponse.length < 10)) {
         setCurrentStep('nombre');
         setTimeout(() => {
           addBotMessage("Perfecto, continuamos. 😊\n\n¿Cómo te llamas?");
@@ -345,14 +361,36 @@ export default function FormularioContacto() {
       }
 
       if (lowerResponse.includes('agendar') || lowerResponse.includes('llamada directamente')) {
-        setTimeout(() => {
-          addBotMessage(
-            "Entendido. Para preparar la llamada, solo necesito unos datos básicos.\n\n¿Cómo te llamas?",
-          );
-        }, 300);
         setCurrentStep('nombre');
+        setTimeout(() => {
+          addBotMessage("Entendido. Para preparar la llamada, solo necesito unos datos básicos.\n\n¿Cómo te llamas?");
+        }, 300);
         return;
       }
+
+      // Usar IA para responder la pregunta
+      setIsTyping(true);
+      try {
+        const aiResponse = await getAIResponse(response);
+        setIsTyping(false);
+        
+        // Añadir opciones para continuar después de responder
+        const continueOptions = ['¿Otra pregunta?', 'Seguir con las preguntas', 'Agendar llamada directamente'];
+        
+        setMessages(prev => [...prev, {
+          id: Date.now().toString(),
+          type: 'bot',
+          content: aiResponse,
+          options: continueOptions
+        }]);
+      } catch (error) {
+        setIsTyping(false);
+        addBotMessage(
+          "Disculpa, no pude procesar tu pregunta. ¿Puedes intentarlo de nuevo o prefieres que sigamos con las preguntas?",
+          ['Seguir con las preguntas', 'Agendar llamada directamente']
+        );
+      }
+      return;
     }
 
     // Flujo principal de recopilación
@@ -580,7 +618,10 @@ export default function FormularioContacto() {
           {/* Chat Container */}
           <div className="bg-gradient-to-br from-slate-900/90 to-slate-800/90 rounded-2xl shadow-2xl border border-slate-700/50 overflow-hidden backdrop-blur-sm">
             {/* Messages Area */}
-            <div className="h-[400px] md:h-[450px] overflow-y-auto p-4 md:p-6 space-y-4">
+            <div 
+              ref={messagesContainerRef}
+              className="h-[400px] md:h-[450px] overflow-y-auto p-4 md:p-6 space-y-4"
+            >
               {messages.map((message) => (
                 <div
                   key={message.id}
