@@ -96,33 +96,18 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Google Analytics 4 - DEBE cargarse PRIMERO */}
+        {/* Google tag (gtag.js) - Código EXACTO de Google Analytics */}
         <script
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
         />
-        {/* Configuración de Google Analytics con Consent Mode v2 */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
-              
               gtag('js', new Date());
-              
-              // Configurar GA4 con el ID correcto
-              gtag('config', 'G-JK6XH4LZ3C', {
-                page_path: window.location.pathname,
-                send_page_view: true
-              });
-              
-              // Consent Mode v2 - Se actualizará cuando el usuario acepte cookies
-              gtag('consent', 'default', {
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied', 
-                'ad_personalization': 'denied',
-                'analytics_storage': 'granted'
-              });
+              gtag('config', 'G-JK6XH4LZ3C');
             `,
           }}
         />
