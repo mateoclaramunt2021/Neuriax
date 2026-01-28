@@ -96,6 +96,23 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* Google Analytics 4 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-JK6XH4LZ3C', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -105,8 +122,8 @@ export default function RootLayout({
               name: 'Neuriax',
               description: 'Soluciones digitales, automatización e IA aplicada a negocio',
               url: 'https://www.neuriax.com',
-              telephone: '+34631415151',
-              email: 'neuriaxx@gmail.com',
+              telephone: '+34640791041',
+              email: 'info@neuriax.com',
               priceRange: '$$',
               areaServed: 'ES',
               serviceType: ['Automatización Digital', 'Desarrollo de IA', 'Diseño Web', 'SEO Local'],
