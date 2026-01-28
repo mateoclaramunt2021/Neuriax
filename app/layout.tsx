@@ -120,32 +120,25 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             
-            // Configuración inicial de Consent Mode v2 (denegar por defecto para GDPR)
-            gtag('consent', 'default', {
-              'ad_storage': 'denied',
-              'ad_user_data': 'denied',
-              'ad_personalization': 'denied',
-              'analytics_storage': 'denied',
-              'wait_for_update': 500
-            });
-            
-            // Cargar preferencias guardadas inmediatamente
+            // Cargar preferencias guardadas ANTES de configurar consent
+            var analyticsGranted = false;
+            var marketingGranted = false;
             try {
-              const saved = localStorage.getItem('cookie_consent_v1');
+              var saved = localStorage.getItem('cookie_consent_v1');
               if (saved) {
-                const prefs = JSON.parse(saved);
-                if (prefs.analytics) {
-                  gtag('consent', 'update', { 'analytics_storage': 'granted' });
-                }
-                if (prefs.marketing) {
-                  gtag('consent', 'update', {
-                    'ad_storage': 'granted',
-                    'ad_user_data': 'granted',
-                    'ad_personalization': 'granted'
-                  });
-                }
+                var prefs = JSON.parse(saved);
+                analyticsGranted = prefs.analytics === true;
+                marketingGranted = prefs.marketing === true;
               }
             } catch(e) {}
+            
+            // Configuración inicial de Consent Mode v2
+            gtag('consent', 'default', {
+              'ad_storage': marketingGranted ? 'granted' : 'denied',
+              'ad_user_data': marketingGranted ? 'granted' : 'denied',
+              'ad_personalization': marketingGranted ? 'granted' : 'denied',
+              'analytics_storage': analyticsGranted ? 'granted' : 'denied'
+            });
           `}
         </Script>
         {/* Google Analytics gtag.js */}
@@ -156,10 +149,7 @@ export default function RootLayout({
         <Script id="google-analytics" strategy="beforeInteractive">
           {`
             gtag('js', new Date());
-            gtag('config', 'G-JK6XH4LZ3C', {
-              page_path: window.location.pathname,
-              send_page_view: true
-            });
+            gtag('config', 'G-JK6XH4LZ3C');
           `}
         </Script>
       </head>
