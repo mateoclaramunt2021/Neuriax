@@ -25,13 +25,11 @@ interface LeadData {
 type ConversationStep = 
   | 'welcome'
   | 'nombre'
-  | 'sector'
-  | 'problema'
-  | 'urgencia'
-  | 'presupuesto'
   | 'email'
   | 'telefono'
   | 'empresa'
+  | 'necesidad'
+  | 'recomendacion'
   | 'cierre'
   | 'dudas'
   | 'final';
@@ -62,13 +60,16 @@ export default function FormularioContacto() {
   // Scroll dentro del contenedor de mensajes, no de la página
   const scrollToBottom = useCallback(() => {
     if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+      messagesContainerRef.current.scrollTo({
+        top: messagesContainerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, []);
 
   useEffect(() => {
     // Pequeño delay para asegurar que el DOM se actualizó
-    const timer = setTimeout(scrollToBottom, 100);
+    const timer = setTimeout(scrollToBottom, 150);
     return () => clearTimeout(timer);
   }, [messages, scrollToBottom]);
 
@@ -76,7 +77,7 @@ export default function FormularioContacto() {
   useEffect(() => {
     setTimeout(() => {
       addBotMessage(
-        "¡Hola! 👋 Soy el asistente de Mateo en Neuriax.\n\nAntes de agendar una llamada, me gustaría hacerte unas preguntas rápidas para entender tu situación. Así Mateo puede prepararse y no hacerte perder el tiempo.\n\n¿Te parece bien?",
+        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\n¡Gracias por llegar hasta aquí! Eso me dice que buscas soluciones reales para tu negocio.\n\nTe ayudaré a rellenar un breve formulario para que Mateo pueda preparar tu llamada y darte la mejor atención posible.\n\n¿Empezamos?",
         ['Sí, empecemos', 'Tengo dudas primero']
       );
     }, 500);
@@ -139,14 +140,17 @@ export default function FormularioContacto() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     if (!inputValue.trim() || isTyping) return;
     
     const userInput = inputValue;
     setInputValue('');
     addUserMessage(userInput);
     
-    // Mantener el foco en el input
-    inputRef.current?.focus();
+    // Mantener el foco en el input sin causar scroll
+    setTimeout(() => {
+      inputRef.current?.focus({ preventScroll: true });
+    }, 100);
     
     await processResponse(userInput);
   };
@@ -343,7 +347,7 @@ export default function FormularioContacto() {
       setTimeout(() => {
         addBotMessage(
           "Por supuesto, pregúntame lo que necesites. Puedo ayudarte con información sobre precios, tiempos, servicios, garantías... lo que quieras saber.\n\n¿Qué te gustaría saber?",
-          ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', '¿Qué garantía hay?', 'Seguir con las preguntas']
+          ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', '¿Qué garantía hay?', 'Seguir con el formulario']
         );
       }, 300);
       return;
@@ -352,10 +356,10 @@ export default function FormularioContacto() {
     // Respuestas a dudas - usar IA si está activa
     if (currentStep === 'dudas') {
       // Comandos para volver al flujo
-      if (lowerResponse.includes('seguir') || (lowerResponse.includes('sí') && lowerResponse.length < 10)) {
+      if (lowerResponse.includes('seguir') || lowerResponse.includes('formulario') || lowerResponse.includes('empezar')) {
         setCurrentStep('nombre');
         setTimeout(() => {
-          addBotMessage("Perfecto, continuamos. 😊\n\n¿Cómo te llamas?");
+          addBotMessage("¡Perfecto! 😊\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
         }, 300);
         return;
       }
@@ -363,7 +367,7 @@ export default function FormularioContacto() {
       if (lowerResponse.includes('agendar') || lowerResponse.includes('llamada directamente')) {
         setCurrentStep('nombre');
         setTimeout(() => {
-          addBotMessage("Entendido. Para preparar la llamada, solo necesito unos datos básicos.\n\n¿Cómo te llamas?");
+          addBotMessage("Entendido. Para preparar la llamada, necesito unos datos básicos.\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
         }, 300);
         return;
       }
@@ -375,7 +379,7 @@ export default function FormularioContacto() {
         setIsTyping(false);
         
         // Añadir opciones para continuar después de responder
-        const continueOptions = ['¿Otra pregunta?', 'Seguir con las preguntas', 'Agendar llamada directamente'];
+        const continueOptions = ['¿Otra pregunta?', 'Seguir con el formulario', 'Agendar llamada directamente'];
         
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
@@ -386,27 +390,27 @@ export default function FormularioContacto() {
       } catch (error) {
         setIsTyping(false);
         addBotMessage(
-          "Disculpa, no pude procesar tu pregunta. ¿Puedes intentarlo de nuevo o prefieres que sigamos con las preguntas?",
-          ['Seguir con las preguntas', 'Agendar llamada directamente']
+          "Disculpa, no pude procesar tu pregunta. ¿Puedes intentarlo de nuevo o prefieres que sigamos con el formulario?",
+          ['Seguir con el formulario', 'Agendar llamada directamente']
         );
       }
       return;
     }
 
-    // Flujo principal de recopilación
+    // Flujo principal de recopilación - FORMULARIO ESTRUCTURADO
     switch (currentStep) {
       case 'welcome':
         if (lowerResponse.includes('sí') || lowerResponse.includes('empecemos') || lowerResponse.includes('vale') || lowerResponse.includes('ok')) {
           setCurrentStep('nombre');
           setTimeout(() => {
-            addBotMessage("Genial. 😊\n\nPrimero lo básico: ¿Cómo te llamas?");
+            addBotMessage("¡Perfecto! 😊\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
           }, 300);
         } else {
           setCurrentStep('dudas');
           setTimeout(() => {
             addBotMessage(
               "Claro, pregúntame lo que necesites. Prefiero que tengas toda la información antes de decidir.\n\n¿Qué te gustaría saber?",
-              ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', 'Empezar con las preguntas']
+              ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', 'Empezar con el formulario']
             );
           }, 300);
         }
@@ -414,53 +418,10 @@ export default function FormularioContacto() {
 
       case 'nombre':
         setLeadData(prev => ({ ...prev, nombre: response }));
-        setCurrentStep('sector');
-        setTimeout(() => {
-          addBotMessage(
-            `Encantado, ${response}. 👋\n\n¿En qué sector está tu negocio?`,
-            ['Restaurante / Hostelería', 'Inmobiliaria', 'Clínica / Belleza', 'Servicios profesionales', 'E-commerce', 'Otro']
-          );
-        }, 300);
-        break;
-
-      case 'sector':
-        setLeadData(prev => ({ ...prev, sector: response }));
-        setCurrentStep('problema');
-        setTimeout(() => {
-          addBotMessage(
-            `${response}, entendido.\n\n¿Cuál es el principal problema o reto que tienes ahora mismo en tu negocio?\n\nSé específico, así Mateo puede prepararse mejor.`
-          );
-        }, 300);
-        break;
-
-      case 'problema':
-        setLeadData(prev => ({ ...prev, problema: response }));
-        setCurrentStep('urgencia');
-        setTimeout(() => {
-          addBotMessage(
-            "Gracias por compartirlo. 🙏\n\n¿Cómo de urgente es solucionar esto para ti?",
-            ['Es urgente (este mes)', 'Pronto (1-2 meses)', 'Sin prisa, explorando opciones']
-          );
-        }, 300);
-        break;
-
-      case 'urgencia':
-        setLeadData(prev => ({ ...prev, urgencia: response }));
-        setCurrentStep('presupuesto');
-        setTimeout(() => {
-          addBotMessage(
-            "¿Tienes un rango de presupuesto en mente?\n\nNo te preocupes si no lo tienes claro, solo para que Mateo pueda proponerte opciones realistas.",
-            ['Menos de 500€', '500€ - 1.000€', '1.000€ - 3.000€', 'Más de 3.000€', 'No tengo claro']
-          );
-        }, 300);
-        break;
-
-      case 'presupuesto':
-        setLeadData(prev => ({ ...prev, presupuesto: response }));
         setCurrentStep('email');
         setTimeout(() => {
           addBotMessage(
-            `Perfecto, ${leadData.nombre}.\n\nYa casi terminamos. Necesito un email para enviarte la confirmación de la llamada:`
+            `¡Encantada, ${response}! 👋\n\n**Pregunta 2 de 5**\n\n¿Cuál es tu correo electrónico?\n\n_(Para enviarte la confirmación de la llamada)_`
           );
         }, 300);
         break;
@@ -469,14 +430,14 @@ export default function FormularioContacto() {
         // Validar email básico
         if (!response.includes('@') || !response.includes('.')) {
           setTimeout(() => {
-            addBotMessage("Hmm, ese email no parece válido. ¿Puedes escribirlo de nuevo?");
+            addBotMessage("Hmm, ese email no parece válido. ¿Puedes escribirlo de nuevo? 📧");
           }, 300);
           return;
         }
         setLeadData(prev => ({ ...prev, email: response }));
         setCurrentStep('telefono');
         setTimeout(() => {
-          addBotMessage("Y un teléfono de contacto (por si hay algún cambio con la llamada):");
+          addBotMessage(`Perfecto, ${leadData.nombre}. ✉️\n\n**Pregunta 3 de 5**\n\n¿Tu número de teléfono?\n\n_(Por si hay algún cambio de última hora)_`);
         }, 300);
         break;
 
@@ -484,19 +445,61 @@ export default function FormularioContacto() {
         setLeadData(prev => ({ ...prev, telefono: response }));
         setCurrentStep('empresa');
         setTimeout(() => {
-          addBotMessage("Última pregunta: ¿Nombre de tu empresa o negocio?");
+          addBotMessage("Genial. 📱\n\n**Pregunta 4 de 5**\n\n¿Cuál es el nombre de tu empresa o negocio?");
         }, 300);
         break;
 
       case 'empresa':
         setLeadData(prev => ({ ...prev, empresa: response }));
-        setCurrentStep('cierre');
+        setCurrentStep('necesidad');
         setTimeout(() => {
           addBotMessage(
-            `¡Genial, ${leadData.nombre}! 🎉\n\nTengo todo lo que necesito:\n\n✓ **Sector**: ${leadData.sector}\n✓ **Problema**: ${leadData.problema.substring(0, 50)}...\n✓ **Urgencia**: ${leadData.urgencia}\n✓ **Presupuesto**: ${leadData.presupuesto}\n\nMateo revisará esto antes de la llamada para llegar preparado.\n\n¿Listo para elegir un hueco en su agenda?`,
-            ['Sí, agendar llamada', 'Tengo más dudas']
+            `${response}, anotado. 🏢\n\n**Pregunta 5 de 5** (última)\n\n¿En qué te gustaría que te ayudáramos?`,
+            ['Necesito una web profesional', 'Quiero automatizar procesos', 'Chatbot para mi negocio', 'Mejorar ventas online', 'No tengo claro, quiero explorar opciones']
           );
         }, 300);
+        break;
+
+      case 'necesidad':
+        setLeadData(prev => ({ ...prev, problema: response }));
+        setCurrentStep('recomendacion');
+        
+        // Generar recomendación personalizada basada en la necesidad
+        setTimeout(async () => {
+          setIsTyping(true);
+          
+          let recomendacion = "";
+          const necesidadLower = response.toLowerCase();
+          
+          if (necesidadLower.includes('web')) {
+            recomendacion = `Perfecto, ${leadData.nombre}. Para una web profesional, te recomiendo:\n\n✅ **Web optimizada para conversión** - No solo bonita, sino que convierta visitantes en clientes\n✅ **SEO local incluido** - Para que te encuentren en Google\n✅ **Responsive** - Perfecta en móvil y ordenador\n✅ **Dominio + hosting 1 año incluidos**\n\n💰 Rango orientativo: desde 790€`;
+          } else if (necesidadLower.includes('automatizar') || necesidadLower.includes('proceso')) {
+            recomendacion = `Excelente, ${leadData.nombre}. Para automatizar tu negocio, te recomiendo:\n\n✅ **Análisis de procesos** - Identificar qué tareas te quitan más tiempo\n✅ **Automatización de leads** - Seguimiento automático de clientes potenciales\n✅ **Integraciones** - Conectar tus herramientas actuales\n✅ **Reportes automáticos** - Dashboard con métricas clave\n\n💰 Rango orientativo: desde 500€`;
+          } else if (necesidadLower.includes('chatbot') || necesidadLower.includes('bot')) {
+            recomendacion = `Genial, ${leadData.nombre}. Para un chatbot, te recomiendo:\n\n✅ **Chatbot 24/7** - Responde clientes mientras duermes\n✅ **Cualificación de leads** - Filtra automáticamente los clientes potenciales\n✅ **Respuestas inteligentes** - Con IA que entiende el contexto\n✅ **Integración WhatsApp/Web** - Donde estén tus clientes\n\n💰 Rango orientativo: desde 300€`;
+          } else if (necesidadLower.includes('ventas') || necesidadLower.includes('vender')) {
+            recomendacion = `Perfecto, ${leadData.nombre}. Para mejorar tus ventas online, te recomiendo:\n\n✅ **Estrategia de conversión** - Optimizar tu embudo de ventas\n✅ **Automatización de seguimiento** - No perder ningún lead\n✅ **Landing pages optimizadas** - Páginas que convierten\n✅ **Análisis de datos** - Entender qué funciona y qué no\n\n💰 Rango orientativo: depende del alcance`;
+          } else {
+            recomendacion = `Entendido, ${leadData.nombre}. Cuando no se tiene claro, lo mejor es:\n\n✅ **Análisis de tu situación** - Entender dónde estás y a dónde quieres llegar\n✅ **Propuesta personalizada** - Soluciones a medida para tu caso\n✅ **Sin compromiso** - Te decimos honestamente si podemos ayudarte o no\n\n🎯 Por eso la llamada con Mateo es clave`;
+          }
+          
+          setIsTyping(false);
+          addBotMessage(
+            `${recomendacion}\n\n---\n\n🎯 **Mi recomendación:** Lo mejor es que hables directamente con Mateo. En 15-20 minutos puede analizar tu caso específico y darte un plan concreto (sin compromiso).\n\n¿Agendamos la llamada?`,
+            ['Sí, agendar llamada ahora', 'Tengo más dudas']
+          );
+        }, 500);
+        break;
+
+      case 'recomendacion':
+        if (lowerResponse.includes('sí') || lowerResponse.includes('agendar') || lowerResponse.includes('llamada')) {
+          submitLeadAndShowCalendly();
+        } else {
+          setCurrentStep('dudas');
+          setTimeout(() => {
+            addBotMessage("Claro, pregúntame lo que necesites. ¿Qué duda tienes?");
+          }, 300);
+        }
         break;
 
       case 'cierre':
@@ -526,8 +529,8 @@ export default function FormularioContacto() {
         // Respuesta genérica para cualquier otro caso
         setTimeout(() => {
           addBotMessage(
-            "Entendido. ¿Quieres que sigamos con las preguntas o tienes alguna duda?",
-            ['Seguir con las preguntas', 'Tengo una duda']
+            "Entendido. ¿Quieres que sigamos con el formulario o tienes alguna duda?",
+            ['Seguir con el formulario', 'Tengo una duda']
           );
         }, 300);
     }
@@ -570,7 +573,7 @@ export default function FormularioContacto() {
   };
 
   const getStepProgress = (): number => {
-    const steps: ConversationStep[] = ['welcome', 'nombre', 'sector', 'problema', 'urgencia', 'presupuesto', 'email', 'telefono', 'empresa', 'cierre'];
+    const steps: ConversationStep[] = ['welcome', 'nombre', 'email', 'telefono', 'empresa', 'necesidad', 'recomendacion', 'cierre'];
     const currentIndex = steps.indexOf(currentStep);
     if (currentIndex === -1) return 100;
     return Math.round((currentIndex / (steps.length - 1)) * 100);
