@@ -580,198 +580,263 @@ export default function FormularioContacto() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
-      {/* Decorative background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-hidden">
+      {/* Animated Background - Ultra Premium */}
+      <div className="fixed inset-0 pointer-events-none">
+        {/* Gradient orbs */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/5 rounded-full blur-[150px]"></div>
+        
+        {/* Grid pattern */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `linear-gradient(rgba(34, 211, 238, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.3) 1px, transparent 1px)`,
+          backgroundSize: '50px 50px'
+        }}></div>
+        
+        {/* Floating particles */}
+        <div className="absolute top-20 left-20 w-2 h-2 bg-cyan-400/60 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-cyan-300/60 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 right-20 w-2 h-2 bg-purple-400/40 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
       </div>
       
       <div className="h-16"></div>
 
-      <section className="relative py-8 md:py-12 px-4 md:px-6">
-        <div className="max-w-2xl mx-auto">
-          {/* Back Link */}
-          <Link href="/contacto" className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 mb-8 transition-colors text-sm group">
+      <section className="relative py-6 md:py-10 px-4 md:px-6">
+        <div className="max-w-3xl mx-auto">
+          {/* Back Link - Minimal */}
+          <Link href="/contacto" className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-400 mb-6 transition-all text-sm group">
             <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            Volver a contacto
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity">Volver</span>
           </Link>
 
-          {/* Header - Premium Style */}
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-full px-5 py-2.5 mb-5 backdrop-blur-sm">
-              <div className="relative">
-                <div className="w-2.5 h-2.5 bg-green-400 rounded-full"></div>
-                <div className="absolute inset-0 w-2.5 h-2.5 bg-green-400 rounded-full animate-ping"></div>
-              </div>
-              <span className="text-cyan-300 text-sm font-medium">María está online</span>
-            </div>
-            <h1 className="text-3xl md:text-4xl font-bold mb-3 bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
-              Cuéntanos tu proyecto
-            </h1>
-            <p className="text-slate-400 text-base max-w-md mx-auto">
-              María te guiará para preparar tu llamada personalizada con Mateo
-            </p>
-          </div>
-
-          {/* Progress Bar - Premium */}
-          <div className="mb-8">
-            <div className="flex justify-between text-xs mb-2">
-              <span className="text-slate-400 font-medium">Progreso del formulario</span>
-              <span className="text-cyan-400 font-semibold">{getStepProgress()}%</span>
-            </div>
-            <div className="h-2 bg-slate-800/80 rounded-full overflow-hidden border border-slate-700/50">
-              <div 
-                className="h-full bg-gradient-to-r from-cyan-500 via-cyan-400 to-blue-500 transition-all duration-700 ease-out relative"
-                style={{ width: `${getStepProgress()}%` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-              </div>
-            </div>
-          </div>
-
-          {/* Chat Container - Premium Glass Effect */}
-          <div className="bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-slate-800/95 rounded-3xl shadow-2xl shadow-black/40 border border-slate-700/40 overflow-hidden backdrop-blur-xl">
-            {/* Chat Header */}
-            <div className="px-6 py-4 border-b border-slate-700/40 bg-slate-900/50">
-              <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                    <span className="text-white font-bold text-sm">M</span>
-                  </div>
-                  <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-green-400 rounded-full border-2 border-slate-900"></div>
-                </div>
-                <div>
-                  <h3 className="text-white font-semibold text-sm">María</h3>
-                  <p className="text-slate-400 text-xs">Asistente de Neuriax</p>
-                </div>
-              </div>
-            </div>
+          {/* Main Card - Ultra Premium Glass */}
+          <div className="relative">
+            {/* Glow effect behind card */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-[2rem] blur-xl opacity-50"></div>
             
-            {/* Messages Area */}
-            <div 
-              ref={messagesContainerRef}
-              className="h-[380px] md:h-[420px] overflow-y-auto p-5 md:p-6 space-y-5"
-            >
-              {messages.map((message) => (
-                <div
-                  key={message.id}
-                  className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}
-                >
-                  <div className={`max-w-[85%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
-                    <div
-                      className={`rounded-2xl px-5 py-3.5 ${
-                        message.type === 'user'
-                          ? 'bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/20'
-                          : 'bg-slate-800/60 text-slate-100 border border-slate-700/50 shadow-lg'
-                      }`}
-                    >
-                      <p className="whitespace-pre-line text-sm md:text-[15px] leading-relaxed">{message.content}</p>
-                    </div>
-                    
-                    {/* Options - Premium Buttons */}
-                    {message.options && message.type === 'bot' && (
-                      <div className="flex flex-wrap gap-2 mt-4">
-                        {message.options.map((option, index) => (
-                          <button
-                            key={index}
-                            onClick={() => handleOptionClick(option)}
-                            className="px-4 py-2.5 text-sm bg-slate-800/80 hover:bg-slate-700/80 text-white border border-slate-600/50 hover:border-cyan-500/50 rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-0.5"
-                          >
-                            {option}
-                          </button>
-                        ))}
+            <div className="relative bg-gradient-to-br from-slate-900/98 via-slate-900/95 to-slate-800/98 rounded-[2rem] shadow-2xl border border-white/10 overflow-hidden backdrop-blur-2xl">
+              
+              {/* Header Section */}
+              <div className="relative px-8 py-8 border-b border-white/5">
+                {/* Background decoration */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5"></div>
+                
+                <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                  {/* Left - Avatar & Info */}
+                  <div className="flex items-center gap-4">
+                    <div className="relative">
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <span className="text-white font-bold text-2xl">M</span>
                       </div>
-                    )}
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-lg border-3 border-slate-900 flex items-center justify-center">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <h2 className="text-xl font-bold text-white">María</h2>
+                        <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-300 text-[10px] font-semibold rounded-full uppercase tracking-wider">IA</span>
+                      </div>
+                      <p className="text-slate-400 text-sm">Asistente Personal de Neuriax</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-              
-              {/* Typing Indicator - Premium */}
-              {isTyping && (
-                <div className="flex justify-start animate-fade-in">
-                  <div className="bg-slate-800/60 rounded-2xl px-5 py-4 border border-slate-700/50">
-                    <div className="flex gap-1.5 items-center">
-                      <span className="text-slate-400 text-xs mr-2">María escribe</span>
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                      <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  
+                  {/* Right - Progress */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Progreso</p>
+                        <p className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{getStepProgress()}%</p>
+                      </div>
+                      <div className="w-16 h-16 relative">
+                        <svg className="w-16 h-16 -rotate-90" viewBox="0 0 64 64">
+                          <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="4" className="text-slate-800" />
+                          <circle 
+                            cx="32" cy="32" r="28" fill="none" stroke="url(#progressGradient)" strokeWidth="4" 
+                            strokeDasharray={`${getStepProgress() * 1.76} 176`}
+                            strokeLinecap="round"
+                            className="transition-all duration-700"
+                          />
+                          <defs>
+                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" stopColor="#22d3ee" />
+                              <stop offset="100%" stopColor="#3b82f6" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
               
-              <div ref={messagesEndRef} />
-            </div>
+              {/* Messages Area */}
+              <div 
+                ref={messagesContainerRef}
+                className="h-[400px] md:h-[450px] overflow-y-auto p-6 md:p-8 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent"
+              >
+                {messages.map((message, idx) => (
+                  <div
+                    key={message.id}
+                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <div className={`max-w-[85%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
+                      {/* Bot avatar */}
+                      {message.type === 'bot' && (
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                            <span className="text-white font-bold text-[10px]">M</span>
+                          </div>
+                          <span className="text-slate-500 text-xs">María</span>
+                        </div>
+                      )}
+                      
+                      <div
+                        className={`rounded-2xl px-5 py-4 ${
+                          message.type === 'user'
+                            ? 'bg-gradient-to-br from-cyan-500 via-cyan-500 to-blue-600 text-white shadow-xl shadow-cyan-500/25'
+                            : 'bg-white/[0.03] text-slate-100 border border-white/10 backdrop-blur-sm'
+                        }`}
+                      >
+                        <p className="whitespace-pre-line text-[15px] leading-relaxed">{message.content}</p>
+                      </div>
+                      
+                      {/* Options - Premium Pill Buttons */}
+                      {message.options && message.type === 'bot' && (
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {message.options.map((option, index) => (
+                            <button
+                              key={index}
+                              onClick={() => handleOptionClick(option)}
+                              className="group relative px-5 py-3 text-sm font-medium overflow-hidden rounded-xl transition-all duration-300"
+                            >
+                              <div className="absolute inset-0 bg-gradient-to-r from-slate-800 to-slate-700 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all duration-300"></div>
+                              <div className="absolute inset-0 border border-white/10 group-hover:border-cyan-500/50 rounded-xl transition-all duration-300"></div>
+                              <span className="relative text-slate-300 group-hover:text-white transition-colors">{option}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Typing Indicator - Premium */}
+                {isTyping && (
+                  <div className="flex justify-start animate-fade-in">
+                    <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/10">
+                      <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
+                        <span className="text-white font-bold text-[10px]">M</span>
+                      </div>
+                      <div className="flex gap-1.5">
+                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                <div ref={messagesEndRef} />
+              </div>
 
-            {/* Input Area - Premium */}
-            <div className="border-t border-slate-700/40 p-4 md:p-5 bg-slate-900/30">
-              <form onSubmit={handleSubmit} className="flex gap-3">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Escribe tu respuesta..."
-                  className="flex-1 px-5 py-3.5 bg-slate-800/70 border border-slate-600/50 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/70 focus:ring-2 focus:ring-cyan-500/20 transition-all text-sm"
-                  disabled={isSubmitting}
-                />
-                <button
-                  type="submit"
-                  disabled={!inputValue.trim() || isSubmitting}
-                  className="px-5 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white rounded-xl transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:-translate-y-0.5 disabled:hover:translate-y-0"
-                >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                </button>
-              </form>
+              {/* Input Area - Ultra Premium */}
+              <div className="border-t border-white/5 p-5 md:p-6 bg-gradient-to-t from-slate-900/50 to-transparent">
+                <form onSubmit={handleSubmit} className="flex gap-3">
+                  <div className="flex-1 relative group">
+                    <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-30 blur transition-opacity duration-300"></div>
+                    <input
+                      ref={inputRef}
+                      type="text"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      placeholder="Escribe tu respuesta..."
+                      className="relative w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all text-[15px]"
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={!inputValue.trim() || isSubmitting}
+                    className="group relative px-6 py-4 rounded-xl overflow-hidden transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300"></div>
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                    </div>
+                    <svg className="relative w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
 
-          {/* Calendly Button - Premium */}
+          {/* Calendly Button - Ultra Premium */}
           {showCalendly && (
-            <div className="mt-8 text-center animate-fade-in-up">
-              <a
-                href="https://calendly.com/neuriax/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold rounded-2xl shadow-xl shadow-green-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-lg"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Agendar mi llamada ahora
-              </a>
-              <p className="text-slate-400 text-sm mt-4">
-                📞 15-20 minutos · ✅ Sin compromiso · 🎁 100% gratis
-              </p>
+            <div className="mt-10 text-center animate-fade-in-up">
+              <div className="relative inline-block">
+                <div className="absolute -inset-2 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
+                <a
+                  href="https://calendly.com/neuriax/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-flex items-center justify-center gap-3 px-12 py-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Agendar mi llamada ahora
+                </a>
+              </div>
+              <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-400">
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">📞</span> 15-20 min
+                </span>
+                <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">✅</span> Sin compromiso
+                </span>
+                <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
+                <span className="flex items-center gap-2">
+                  <span className="text-lg">🎁</span> Gratis
+                </span>
+              </div>
             </div>
           )}
 
-          {/* Trust Indicators - Premium */}
-          <div className="mt-10 pt-8 border-t border-slate-800/50">
-            <p className="text-center text-xs text-slate-500 mb-4">Garantías de Neuriax</p>
-            <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-400">
-              <span className="flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+          {/* Trust Indicators - Minimal Premium */}
+          <div className="mt-16 mb-8">
+            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-sm text-slate-500">
+              <span className="flex items-center gap-2 group">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
                 </div>
-                Sin compromiso
+                <span>Datos protegidos</span>
               </span>
-              <span className="flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              <span className="flex items-center gap-2 group">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
-                Datos 100% seguros
+                <span>Respuesta en 24h</span>
               </span>
-              <span className="flex items-center gap-2">
-                <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center">
-                  <svg className="w-3 h-3 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              <span className="flex items-center gap-2 group">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
                 </div>
-                Honestidad garantizada
+                <span>100% honestidad</span>
               </span>
             </div>
           </div>
