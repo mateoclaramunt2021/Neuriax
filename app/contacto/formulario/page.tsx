@@ -30,8 +30,6 @@ type ConversationStep =
   | 'empresa'
   | 'necesidad'
   | 'recomendacion'
-  | 'cierre'
-  | 'dudas'
   | 'final';
 
 export default function FormularioContacto() {
@@ -39,7 +37,6 @@ export default function FormularioContacto() {
   const [inputValue, setInputValue] = useState('');
   const [currentStep, setCurrentStep] = useState<ConversationStep>('welcome');
   const [isTyping, setIsTyping] = useState(false);
-  const [useAI, setUseAI] = useState(true); // Flag para usar IA
   const [leadData, setLeadData] = useState<LeadData>({
     nombre: '',
     email: '',
@@ -77,8 +74,8 @@ export default function FormularioContacto() {
   useEffect(() => {
     setTimeout(() => {
       addBotMessage(
-        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\n¡Gracias por llegar hasta aquí! Eso me dice que buscas soluciones reales para tu negocio.\n\nTe ayudaré a rellenar un breve formulario para que Mateo pueda preparar tu llamada y darte la mejor atención posible.\n\n¿Empezamos?",
-        ['Sí, empecemos', 'Tengo dudas primero']
+        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
+        ['Sí, empecemos']
       );
     }, 500);
   }, []);
@@ -109,30 +106,6 @@ export default function FormularioContacto() {
     }));
   };
 
-  // Llamar a la API de IA
-  const getAIResponse = async (userMessage: string): Promise<string> => {
-    try {
-      const allMessages = [...messages, { type: 'user', content: userMessage }];
-      
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: allMessages.map(m => ({ type: m.type, content: m.content })),
-          leadData
-        })
-      });
-
-      if (!response.ok) throw new Error('API error');
-      
-      const data = await response.json();
-      return data.message;
-    } catch (error) {
-      console.error('Error calling AI:', error);
-      return "Disculpa, tuve un pequeño problema. ¿Puedes repetir tu pregunta?";
-    }
-  };
-
   const handleOptionClick = (option: string) => {
     addUserMessage(option);
     processResponse(option);
@@ -155,265 +128,17 @@ export default function FormularioContacto() {
     await processResponse(userInput);
   };
 
-  // Base de conocimiento de Neuriax
-  const getKnowledgeResponse = (message: string): { text: string; options?: string[] } | null => {
-    const lowerMsg = message.toLowerCase();
-
-    // === SERVICIOS ===
-    if (lowerMsg.includes('servicio') || lowerMsg.includes('ofrecéis') || lowerMsg.includes('hacéis') || lowerMsg.includes('qué haces') || lowerMsg.includes('a qué os dedicáis')) {
-      return {
-        text: "En Neuriax hacemos dos cosas principales:\n\n🤖 **Automatización & IA**\n→ Chatbots 24/7 (WhatsApp, web, Instagram)\n→ Seguimiento automático de leads\n→ Dashboards y reportes\n→ Procesos con inteligencia artificial\n\n💻 **Webs Profesionales**\n→ Diseño a medida, responsive\n→ Optimizadas para conversión\n→ SEO local incluido\n→ Sistemas de reservas, e-commerce\n\nMateo primero entiende tu caso y te dice honestamente si algo de esto te puede ayudar o no.\n\n¿Algo más o seguimos?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === PRECIOS ===
-    if (lowerMsg.includes('cuest') || lowerMsg.includes('precio') || lowerMsg.includes('cost') || lowerMsg.includes('tarifas') || lowerMsg.includes('cuánto vale') || lowerMsg.includes('presupuesto')) {
-      return {
-        text: "Te soy honesto con los rangos:\n\n💻 **Webs**\n→ Web básica (informativa): desde 790€\n→ Con reservas online: desde 990€\n→ E-commerce: desde 1.500€\n→ Dominio + hosting 1 año incluidos\n\n🤖 **Automatización**\n→ Chatbot WhatsApp básico: desde 300€\n→ Automatización de leads: desde 500€\n→ Proyecto completo (CRM + IA): desde 1.500€\n\n📌 El precio exacto depende de tu caso específico. En la llamada Mateo te da un presupuesto cerrado, sin sorpresas después.\n\n¿Algo más?",
-        options: ['¿Cuánto tarda?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === TIEMPOS ===
-    if (lowerMsg.includes('tarda') || lowerMsg.includes('tiempo') || lowerMsg.includes('plazo') || lowerMsg.includes('cuánto dura') || lowerMsg.includes('entrega') || lowerMsg.includes('días')) {
-      return {
-        text: "Tiempos realistas (no promesas vacías):\n\n💻 **Web básica**: 10-15 días\n💻 **Web con reservas/ecommerce**: 2-3 semanas\n🤖 **Chatbot simple**: 1 semana\n🤖 **Automatización completa**: 2-4 semanas\n🔧 **Proyecto integral**: 4-8 semanas\n\nMateo te confirma el plazo exacto en la llamada según tu caso. Preferimos ser realistas a quedar bien y luego fallar.\n\n¿Seguimos?",
-        options: ['¿Cuánto cuesta?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === GARANTÍAS ===
-    if (lowerMsg.includes('garantía') || lowerMsg.includes('garantia') || lowerMsg.includes('si no me gusta') || lowerMsg.includes('devolucion') || lowerMsg.includes('devolución')) {
-      return {
-        text: "Nuestra política es simple:\n\n✅ **Garantía de satisfacción 30 días** en webs\n✅ **Revisiones ilimitadas** hasta que estés contento\n✅ **Sin letra pequeña** - lo que acordamos es lo que se hace\n✅ **Soporte incluido** durante el primer mes\n\nSi no estás satisfecho con el resultado, trabajamos hasta que lo estés o te devolvemos el dinero. Así de claro.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === SOPORTE Y MANTENIMIENTO ===
-    if (lowerMsg.includes('soporte') || lowerMsg.includes('mantenimiento') || lowerMsg.includes('ayuda') || lowerMsg.includes('después') || lowerMsg.includes('problemas')) {
-      return {
-        text: "El soporte funciona así:\n\n✅ **Primer mes**: Soporte incluido sin coste\n✅ **Después**: Plan opcional de mantenimiento (49€/mes)\n\nEl mantenimiento incluye:\n→ Actualizaciones de seguridad\n→ Copias de seguridad\n→ Cambios pequeños (textos, fotos)\n→ Soporte prioritario por WhatsApp\n\nSi no contratas mantenimiento, igualmente puedes contactarnos para cambios puntuales (se presupuestan aparte).\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Qué garantía hay?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === QUÉ INCLUYE ===
-    if (lowerMsg.includes('incluye') || lowerMsg.includes('qué entra') || lowerMsg.includes('viene con')) {
-      return {
-        text: "Depende del servicio, pero en general:\n\n💻 **Web básica (790€) incluye:**\n→ Diseño responsive (móvil + PC)\n→ Hasta 5 secciones\n→ Formulario de contacto\n→ Botón WhatsApp y llamada\n→ Google Maps\n→ SEO básico local\n→ Dominio + hosting 1 año\n→ Certificado SSL\n\n🤖 **Automatización incluye:**\n→ Configuración completa\n→ Entrenamiento/personalización\n→ 1 mes de soporte\n→ Documentación de uso\n\nExtras típicos: reservas (+150€), multiidioma (+200€), e-commerce (+300€)\n\n¿Algo más?",
-        options: ['¿Cuánto tarda?', '¿Qué garantía hay?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === DOMINIO Y HOSTING ===
-    if (lowerMsg.includes('dominio') || lowerMsg.includes('hosting') || lowerMsg.includes('alojamiento')) {
-      return {
-        text: "✅ Sí, **dominio + hosting incluidos** el primer año en cualquier plan de web.\n\n→ Renovación anual: 120€/año (dominio + hosting + SSL)\n→ Si ya tienes dominio, lo conectamos sin problema\n→ Usamos servidores rápidos y seguros\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta una web?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === RESERVAS ===
-    if (lowerMsg.includes('reserva') || lowerMsg.includes('booking') || lowerMsg.includes('citas') || lowerMsg.includes('agenda')) {
-      return {
-        text: "Sí, integramos sistemas de reservas:\n\n📅 **Sistema básico de reservas**: +150€\n→ Calendario visual\n→ Confirmación automática por email\n→ Recordatorios\n\n📅 **Sistema avanzado**: +300€\n→ Múltiples servicios/empleados\n→ Pagos online\n→ Sincronización con Google Calendar\n\nTambién podemos integrar Calendly, SimplyBook, o crear algo a medida.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta una web?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === CHATBOTS ===
-    if (lowerMsg.includes('chatbot') || lowerMsg.includes('bot') || lowerMsg.includes('whatsapp') || lowerMsg.includes('responder automático')) {
-      return {
-        text: "Los chatbots que hacemos:\n\n🤖 **Chatbot WhatsApp** (desde 300€)\n→ Responde 24/7 a tus clientes\n→ Cualifica leads automáticamente\n→ Responde preguntas frecuentes\n→ Puede agendar citas\n\n🤖 **Chatbot Web** (desde 200€)\n→ Integrado en tu página\n→ Captura datos de contacto\n→ Deriva a WhatsApp si es necesario\n\n🤖 **IA Avanzada** (desde 500€)\n→ Entiende lenguaje natural\n→ Aprende de tu negocio\n→ Respuestas personalizadas\n\n¿Algo más?",
-        options: ['¿Cuánto tarda?', '¿Cómo funciona?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === AUTOMATIZACIÓN ===
-    if (lowerMsg.includes('automatiz') || lowerMsg.includes('automatico') || lowerMsg.includes('automático') || lowerMsg.includes('proceso')) {
-      return {
-        text: "Automatizamos procesos repetitivos:\n\n⚡ **Ejemplos comunes:**\n→ Seguimiento automático de leads (email/WhatsApp)\n→ Respuestas automáticas a consultas\n→ Recordatorios de citas\n→ Generación de presupuestos\n→ Sincronización entre herramientas\n→ Reportes automáticos\n\n📊 **Herramientas que usamos:**\n→ Make, Zapier, n8n\n→ APIs de WhatsApp Business\n→ CRMs (HubSpot, Notion, Airtable)\n→ Desarrollos a medida\n\nEl objetivo: que dejes de perder tiempo en tareas que una máquina puede hacer mejor.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === SEO ===
-    if (lowerMsg.includes('seo') || lowerMsg.includes('google') || lowerMsg.includes('posicion') || lowerMsg.includes('buscador') || lowerMsg.includes('aparecer')) {
-      return {
-        text: "Sobre SEO:\n\n✅ **SEO básico incluido** en todas las webs:\n→ Estructura optimizada\n→ Velocidad de carga\n→ Mobile-first\n→ Metadatos básicos\n→ Google Business Profile\n\n📈 **SEO mensual** (desde 250€/mes):\n→ Estrategia de contenidos\n→ Optimización continua\n→ Link building\n→ Reportes mensuales\n\n⚠️ **Importante**: El SEO tarda 3-6 meses en dar resultados. Si alguien te promete resultados inmediatos, desconfía.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta una web?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === E-COMMERCE ===
-    if (lowerMsg.includes('tienda') || lowerMsg.includes('ecommerce') || lowerMsg.includes('e-commerce') || lowerMsg.includes('vender online') || lowerMsg.includes('productos')) {
-      return {
-        text: "Para tiendas online:\n\n🛒 **E-commerce básico** (desde 1.500€):\n→ Hasta 50 productos\n→ Carrito de compra\n→ Pasarela de pago (Stripe/PayPal)\n→ Gestión de stock\n→ Envíos configurados\n\n🛒 **E-commerce avanzado** (desde 3.000€):\n→ Productos ilimitados\n→ Múltiples variantes\n→ Cupones y descuentos\n→ Integraciones (facturación, logística)\n\nUsamos WooCommerce o Shopify según tu caso.\n\n¿Algo más?",
-        options: ['¿Cuánto tarda?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === QUIÉN ES MATEO / NEURIAX ===
-    if (lowerMsg.includes('quién') || lowerMsg.includes('quien') || lowerMsg.includes('mateo') || lowerMsg.includes('neuriax') || lowerMsg.includes('empresa') || lowerMsg.includes('equipo')) {
-      return {
-        text: "Neuriax somos Mateo y un pequeño equipo:\n\n👨‍💻 **Mateo** es quien habla contigo en las llamadas y lidera los proyectos. Lleva años ayudando a negocios locales a digitalizarse.\n\n🎯 **Nuestra filosofía:**\n→ Honestidad ante todo (si no te conviene, te lo decimos)\n→ Sin humo ni promesas vacías\n→ Proyectos a medida, no plantillas\n→ Relación directa, sin intermediarios\n\nNo somos una agencia gigante. Eso significa trato personal y que Mateo conoce cada proyecto.\n\n¿Algo más?",
-        options: ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === CASOS / EJEMPLOS ===
-    if (lowerMsg.includes('caso') || lowerMsg.includes('ejemplo') || lowerMsg.includes('resultado') || lowerMsg.includes('portfolio') || lowerMsg.includes('trabajos')) {
-      return {
-        text: "Algunos casos típicos:\n\n🍽️ **Restaurante**: Web con reservas + chatbot WhatsApp\n→ Resultado: Menos llamadas, más reservas online\n\n🏠 **Inmobiliaria**: CRM + seguimiento automático\n→ Resultado: No pierden leads, respuesta inmediata\n\n💇 **Clínica estética**: Web + sistema de citas\n→ Resultado: Agenda llena sin gestión manual\n\n💼 **Consultoría**: Automatización de propuestas\n→ Resultado: 10h/semana menos en tareas admin\n\nEn la llamada te mostramos casos más específicos de tu sector.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === FORMA DE PAGO ===
-    if (lowerMsg.includes('pago') || lowerMsg.includes('pagar') || lowerMsg.includes('transferencia') || lowerMsg.includes('factura') || lowerMsg.includes('plazos')) {
-      return {
-        text: "Formas de pago:\n\n💳 **Estructura típica:**\n→ 50% al empezar el proyecto\n→ 50% al entregar\n\n💳 **Métodos aceptados:**\n→ Transferencia bancaria\n→ Bizum\n→ Tarjeta (Stripe)\n\n📄 **Factura** siempre incluida con IVA desglosado.\n\nPara proyectos grandes (+3.000€) podemos estudiar fraccionamiento.\n\n¿Algo más?",
-        options: ['¿Qué garantía hay?', '¿Cuánto cuesta?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === DIFERENCIA CON OTROS ===
-    if (lowerMsg.includes('diferencia') || lowerMsg.includes('competencia') || lowerMsg.includes('por qué vosotros') || lowerMsg.includes('mejor que') || lowerMsg.includes('otros')) {
-      return {
-        text: "¿Por qué Neuriax y no otros?\n\n✅ **Lo que SÍ hacemos:**\n→ Trato directo con Mateo (no comerciales)\n→ Proyectos a medida (no plantillas)\n→ Precios cerrados sin sorpresas\n→ Te decimos NO si no te conviene\n\n❌ **Lo que NO hacemos:**\n→ Prometer resultados mágicos\n→ Vender humo con palabras bonitas\n→ Desaparecer después de entregar\n→ Cobrar por mantenimiento obligatorio\n\nNo somos los más baratos ni los más caros. Somos honestos y cumplimos.\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Qué garantía hay?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === CONTACTO ===
-    if (lowerMsg.includes('contacto') || lowerMsg.includes('teléfono') || lowerMsg.includes('telefono') || lowerMsg.includes('email') || lowerMsg.includes('llamar')) {
-      return {
-        text: "Puedes contactarnos:\n\n📞 **Teléfono/WhatsApp**: +34 640 791 041\n📧 **Email**: hola@neuriax.com\n🌐 **Web**: neuriax.com\n\nPero lo mejor es agendar una llamada gratuita donde Mateo entiende tu caso y te dice si podemos ayudarte.\n\n¿Seguimos con las preguntas para preparar esa llamada?",
-        options: ['Sí, seguimos', 'Tengo otra duda']
-      };
-    }
-
-    // === IDIOMAS ===
-    if (lowerMsg.includes('idioma') || lowerMsg.includes('inglés') || lowerMsg.includes('ingles') || lowerMsg.includes('catalán') || lowerMsg.includes('catalan') || lowerMsg.includes('multiidioma')) {
-      return {
-        text: "Sobre idiomas:\n\n🌍 **Web multiidioma**: +200€ por idioma adicional\n→ Español, Inglés, Catalán, Francés...\n→ Selector de idioma integrado\n→ SEO para cada idioma\n\nLa web base es en español. Cada idioma extra requiere traducción (la puedes aportar tú o nos encargamos nosotros).\n\n¿Algo más?",
-        options: ['¿Cuánto cuesta?', '¿Qué incluye?', 'Seguir con las preguntas']
-      };
-    }
-
-    // === SECTOR ESPECÍFICO ===
-    if (lowerMsg.includes('restaurante') || lowerMsg.includes('hostelería') || lowerMsg.includes('bar')) {
-      return {
-        text: "Para restaurantes y hostelería:\n\n🍽️ **Lo típico que hacemos:**\n→ Web con carta/menú visual\n→ Sistema de reservas online\n→ Botón WhatsApp directo\n→ Integración Google Maps y reseñas\n→ Chatbot para reservas 24/7\n\n📊 **Resultado habitual:**\n→ Menos llamadas telefónicas\n→ Más reservas gestionadas solas\n→ Menos no-shows (confirmación automática)\n\n¿Te interesa esto para tu negocio?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    if (lowerMsg.includes('inmobiliaria') || lowerMsg.includes('pisos') || lowerMsg.includes('casas') || lowerMsg.includes('alquiler')) {
-      return {
-        text: "Para inmobiliarias:\n\n🏠 **Lo típico que hacemos:**\n→ Web con listado de propiedades\n→ Filtros de búsqueda\n→ Formularios por propiedad\n→ Seguimiento automático de leads\n→ CRM integrado\n\n📊 **Resultado habitual:**\n→ Leads mejor cualificados\n→ Respuesta inmediata 24/7\n→ Menos tiempo en seguimiento manual\n\n¿Te interesa esto para tu inmobiliaria?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    if (lowerMsg.includes('clínica') || lowerMsg.includes('clinica') || lowerMsg.includes('belleza') || lowerMsg.includes('estética') || lowerMsg.includes('estetica') || lowerMsg.includes('peluquería') || lowerMsg.includes('peluqueria')) {
-      return {
-        text: "Para clínicas y centros de belleza:\n\n💇 **Lo típico que hacemos:**\n→ Web elegante con servicios y precios\n→ Sistema de citas online\n→ Recordatorios automáticos\n→ WhatsApp para consultas rápidas\n→ Galería de trabajos (antes/después)\n\n📊 **Resultado habitual:**\n→ Agenda llena sin gestión manual\n→ Menos cancelaciones (recordatorios)\n→ Clientes nuevos desde Google\n\n¿Te interesa esto para tu negocio?",
-        options: ['¿Cuánto cuesta?', '¿Cuánto tarda?', 'Seguir con las preguntas']
-      };
-    }
-
-    return null; // No encontró respuesta en el knowledge base
-  };
-
   const processResponse = async (response: string) => {
     const lowerResponse = response.toLowerCase();
 
-    // Primero intentar responder desde el knowledge base (respuestas rápidas predefinidas)
-    const knowledgeResponse = getKnowledgeResponse(response);
-    if (knowledgeResponse && currentStep !== 'welcome' && currentStep !== 'dudas') {
-      // Si estamos en medio del flujo, permitir preguntas pero guiar de vuelta
-      setTimeout(() => {
-        addBotMessage(knowledgeResponse.text, knowledgeResponse.options);
-      }, 300);
-      return;
-    }
-
-    // Manejar flujo de dudas en cualquier momento
-    if (lowerResponse.includes('duda') || lowerResponse.includes('pregunta') || lowerResponse.includes('tengo dudas')) {
-      setCurrentStep('dudas');
-      setTimeout(() => {
-        addBotMessage(
-          "Por supuesto, pregúntame lo que necesites. Puedo ayudarte con información sobre precios, tiempos, servicios, garantías... lo que quieras saber.\n\n¿Qué te gustaría saber?",
-          ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', '¿Qué garantía hay?', 'Seguir con el formulario']
-        );
-      }, 300);
-      return;
-    }
-
-    // Respuestas a dudas - usar IA si está activa
-    if (currentStep === 'dudas') {
-      // Comandos para volver al flujo
-      if (lowerResponse.includes('seguir') || lowerResponse.includes('formulario') || lowerResponse.includes('empezar')) {
+    // Flujo principal de recopilación - FORMULARIO ESTRUCTURADO (sin desviaciones)
+    switch (currentStep) {
+      case 'welcome':
+        // Cualquier respuesta inicia el formulario
         setCurrentStep('nombre');
         setTimeout(() => {
           addBotMessage("¡Perfecto! 😊\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
         }, 300);
-        return;
-      }
-
-      if (lowerResponse.includes('agendar') || lowerResponse.includes('llamada directamente')) {
-        setCurrentStep('nombre');
-        setTimeout(() => {
-          addBotMessage("Entendido. Para preparar la llamada, necesito unos datos básicos.\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
-        }, 300);
-        return;
-      }
-
-      // Usar IA para responder la pregunta
-      setIsTyping(true);
-      try {
-        const aiResponse = await getAIResponse(response);
-        setIsTyping(false);
-        
-        // Añadir opciones para continuar después de responder
-        const continueOptions = ['¿Otra pregunta?', 'Seguir con el formulario', 'Agendar llamada directamente'];
-        
-        setMessages(prev => [...prev, {
-          id: Date.now().toString(),
-          type: 'bot',
-          content: aiResponse,
-          options: continueOptions
-        }]);
-      } catch (error) {
-        setIsTyping(false);
-        addBotMessage(
-          "Disculpa, no pude procesar tu pregunta. ¿Puedes intentarlo de nuevo o prefieres que sigamos con el formulario?",
-          ['Seguir con el formulario', 'Agendar llamada directamente']
-        );
-      }
-      return;
-    }
-
-    // Flujo principal de recopilación - FORMULARIO ESTRUCTURADO
-    switch (currentStep) {
-      case 'welcome':
-        if (lowerResponse.includes('sí') || lowerResponse.includes('empecemos') || lowerResponse.includes('vale') || lowerResponse.includes('ok')) {
-          setCurrentStep('nombre');
-          setTimeout(() => {
-            addBotMessage("¡Perfecto! 😊\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
-          }, 300);
-        } else {
-          setCurrentStep('dudas');
-          setTimeout(() => {
-            addBotMessage(
-              "Claro, pregúntame lo que necesites. Prefiero que tengas toda la información antes de decidir.\n\n¿Qué te gustaría saber?",
-              ['¿Qué servicios ofrecéis?', '¿Cuánto cuesta?', '¿Cuánto tarda?', 'Empezar con el formulario']
-            );
-          }, 300);
-        }
         break;
 
       case 'nombre':
@@ -437,7 +162,7 @@ export default function FormularioContacto() {
         setLeadData(prev => ({ ...prev, email: response }));
         setCurrentStep('telefono');
         setTimeout(() => {
-          addBotMessage(`Perfecto, ${leadData.nombre}. ✉️\n\n**Pregunta 3 de 5**\n\n¿Tu número de teléfono?\n\n_(Por si hay algún cambio de última hora)_`);
+          addBotMessage(`Perfecto. ✉️\n\n**Pregunta 3 de 5**\n\n¿Tu número de teléfono?\n\n_(Por si hay algún cambio de última hora)_`);
         }, 300);
         break;
 
@@ -454,8 +179,8 @@ export default function FormularioContacto() {
         setCurrentStep('necesidad');
         setTimeout(() => {
           addBotMessage(
-            `${response}, anotado. 🏢\n\n**Pregunta 5 de 5** (última)\n\n¿En qué te gustaría que te ayudáramos?`,
-            ['Necesito una web profesional', 'Quiero automatizar procesos', 'Chatbot para mi negocio', 'Mejorar ventas online', 'No tengo claro, quiero explorar opciones']
+            `${response}, anotado. 🏢\n\n**Pregunta 5 de 5** (última)\n\n¿Qué te gustaría conseguir? (web, automatización, chatbot, etc.)`,
+            ['Necesito una web profesional', 'Quiero automatizar procesos', 'Chatbot para mi negocio', 'No tengo claro, quiero explorar']
           );
         }, 300);
         break;
@@ -464,73 +189,31 @@ export default function FormularioContacto() {
         setLeadData(prev => ({ ...prev, problema: response }));
         setCurrentStep('recomendacion');
         
-        // Generar recomendación personalizada basada en la necesidad
-        setTimeout(async () => {
-          setIsTyping(true);
-          
-          let recomendacion = "";
-          const necesidadLower = response.toLowerCase();
-          
-          if (necesidadLower.includes('web')) {
-            recomendacion = `Perfecto, ${leadData.nombre}. Para una web profesional, te recomiendo:\n\n✅ **Web optimizada para conversión** - No solo bonita, sino que convierta visitantes en clientes\n✅ **SEO local incluido** - Para que te encuentren en Google\n✅ **Responsive** - Perfecta en móvil y ordenador\n✅ **Dominio + hosting 1 año incluidos**\n\n💰 Rango orientativo: desde 790€`;
-          } else if (necesidadLower.includes('automatizar') || necesidadLower.includes('proceso')) {
-            recomendacion = `Excelente, ${leadData.nombre}. Para automatizar tu negocio, te recomiendo:\n\n✅ **Análisis de procesos** - Identificar qué tareas te quitan más tiempo\n✅ **Automatización de leads** - Seguimiento automático de clientes potenciales\n✅ **Integraciones** - Conectar tus herramientas actuales\n✅ **Reportes automáticos** - Dashboard con métricas clave\n\n💰 Rango orientativo: desde 500€`;
-          } else if (necesidadLower.includes('chatbot') || necesidadLower.includes('bot')) {
-            recomendacion = `Genial, ${leadData.nombre}. Para un chatbot, te recomiendo:\n\n✅ **Chatbot 24/7** - Responde clientes mientras duermes\n✅ **Cualificación de leads** - Filtra automáticamente los clientes potenciales\n✅ **Respuestas inteligentes** - Con IA que entiende el contexto\n✅ **Integración WhatsApp/Web** - Donde estén tus clientes\n\n💰 Rango orientativo: desde 300€`;
-          } else if (necesidadLower.includes('ventas') || necesidadLower.includes('vender')) {
-            recomendacion = `Perfecto, ${leadData.nombre}. Para mejorar tus ventas online, te recomiendo:\n\n✅ **Estrategia de conversión** - Optimizar tu embudo de ventas\n✅ **Automatización de seguimiento** - No perder ningún lead\n✅ **Landing pages optimizadas** - Páginas que convierten\n✅ **Análisis de datos** - Entender qué funciona y qué no\n\n💰 Rango orientativo: depende del alcance`;
-          } else {
-            recomendacion = `Entendido, ${leadData.nombre}. Cuando no se tiene claro, lo mejor es:\n\n✅ **Análisis de tu situación** - Entender dónde estás y a dónde quieres llegar\n✅ **Propuesta personalizada** - Soluciones a medida para tu caso\n✅ **Sin compromiso** - Te decimos honestamente si podemos ayudarte o no\n\n🎯 Por eso la llamada con Mateo es clave`;
-          }
-          
-          setIsTyping(false);
+        // Mostrar directamente la opción de agendar
+        setTimeout(() => {
           addBotMessage(
-            `${recomendacion}\n\n---\n\n🎯 **Mi recomendación:** Lo mejor es que hables directamente con Mateo. En 15-20 minutos puede analizar tu caso específico y darte un plan concreto (sin compromiso).\n\n¿Agendamos la llamada?`,
-            ['Sí, agendar llamada ahora', 'Tengo más dudas']
+            `¡Perfecto, ${leadData.nombre}! ✅\n\n**Ya tengo toda la información.**\n\nAhora el siguiente paso es agendar una llamada gratuita de 15-20 minutos con Mateo, donde:\n\n📞 Analizará tu caso específico\n💡 Te dará una propuesta personalizada\n🤝 Resolverá todas tus dudas\n✨ Sin compromiso\n\n**¿Agendamos la llamada?**`,
+            ['Sí, agendar llamada ahora']
           );
         }, 500);
         break;
 
       case 'recomendacion':
-        if (lowerResponse.includes('sí') || lowerResponse.includes('agendar') || lowerResponse.includes('llamada')) {
-          submitLeadAndShowCalendly();
-        } else {
-          setCurrentStep('dudas');
-          setTimeout(() => {
-            addBotMessage("Claro, pregúntame lo que necesites. ¿Qué duda tienes?");
-          }, 300);
-        }
-        break;
-
-      case 'cierre':
-        if (lowerResponse.includes('sí') || lowerResponse.includes('agendar') || lowerResponse.includes('llamada')) {
-          submitLeadAndShowCalendly();
-        } else {
-          setCurrentStep('dudas');
-          setTimeout(() => {
-            addBotMessage("Claro, pregúntame lo que necesites. ¿Qué duda tienes?");
-          }, 300);
-        }
+        // Cualquier respuesta lleva a agendar
+        submitLeadAndShowCalendly();
         break;
 
       case 'final':
-        setTimeout(() => {
-          addBotMessage(
-            "Ya tienes toda la información. 😊\n\nCuando estés listo, haz clic en el botón de abajo para agendar la llamada con Mateo.",
-            ['Agendar llamada ahora']
-          );
-        }, 300);
-        if (lowerResponse.includes('agendar')) {
-          submitLeadAndShowCalendly();
-        }
+        // Si ya está en final, mostrar calendly
+        submitLeadAndShowCalendly();
         break;
 
       default:
-        // Respuesta genérica para cualquier otro caso
+        // Si se pierde, reiniciar al paso actual o siguiente lógico
         setTimeout(() => {
           addBotMessage(
-            "Entendido. ¿Quieres que sigamos con el formulario o tienes alguna duda?",
-            ['Seguir con el formulario', 'Tengo una duda']
+            "¿Continuamos con el formulario?",
+            ['Sí, continuar']
           );
         }, 300);
     }
@@ -573,7 +256,7 @@ export default function FormularioContacto() {
   };
 
   const getStepProgress = (): number => {
-    const steps: ConversationStep[] = ['welcome', 'nombre', 'email', 'telefono', 'empresa', 'necesidad', 'recomendacion', 'cierre'];
+    const steps: ConversationStep[] = ['welcome', 'nombre', 'email', 'telefono', 'empresa', 'necesidad', 'recomendacion', 'final'];
     const currentIndex = steps.indexOf(currentStep);
     if (currentIndex === -1) return 100;
     return Math.round((currentIndex / (steps.length - 1)) * 100);
