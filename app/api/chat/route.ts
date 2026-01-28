@@ -118,8 +118,29 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('OpenAI API error:', error);
+      const errorData = await response.json().catch(() => ({}));
+      console.error('OpenAI API error:', response.status, errorData);
+      
+      // Devolver mensaje más específico según el error
+      if (response.status === 401) {
+        return NextResponse.json({
+          message: "Error de configuración del sistema. Por favor, contacta con nosotros directamente en hola@neuriax.com o llama al +34 640 791 041.",
+          error: true
+        });
+      }
+      if (response.status === 429) {
+        return NextResponse.json({
+          message: "Estamos recibiendo muchas consultas ahora mismo. ¿Puedes intentarlo en unos segundos?",
+          error: true
+        });
+      }
+      if (response.status === 402 || errorData?.error?.code === 'insufficient_quota') {
+        return NextResponse.json({
+          message: "El servicio de chat no está disponible temporalmente. Puedes contactarnos en hola@neuriax.com o agendar una llamada en https://calendly.com/neuriax/30min",
+          error: true
+        });
+      }
+      
       return NextResponse.json({
         message: "Disculpa, tuve un pequeño problema técnico. ¿Puedes repetir tu pregunta?",
         error: true
