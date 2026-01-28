@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
     // Enviar email de notificación con Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
       from: 'Neuriax <onboarding@resend.dev>',
-      to: 'mateoclaramunt2021@gmail.com',
+      to: 'info@neuriax.com',
       subject: `🚀 Nueva postulación: ${posicion}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

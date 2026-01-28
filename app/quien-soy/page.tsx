@@ -314,7 +314,7 @@ export default function QuienSomos() {
               </svg>
             </a>
             <a
-              href="mailto:neuriaxx@gmail.com"
+              href="mailto:info@neuriax.com"
               className="inline-flex items-center justify-center px-8 py-4 bg-slate-800 text-white font-semibold rounded-xl hover:bg-slate-700 transition-all border border-slate-600"
             >
               Enviar email
