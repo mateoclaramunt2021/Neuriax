@@ -91,28 +91,59 @@ export default function WebsPage() {
         </div>
       </section>
 
-      {/* Para quién es */}
+      {/* El problema que resuelvo */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
+          {/* Problema */}
           <div className="text-center mb-16">
+            <span className="inline-block bg-red-500/10 text-red-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">EL PROBLEMA</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Ideal para negocios locales que necesitan presencia digital
+              Cada día, clientes buscan lo que vendes.<br />
+              <span className="text-red-400">Y encuentran a tu competencia.</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Si tu negocio vende servicios o productos locales, una buena web es tu mejor vendedor 24/7.
+              Sin web, o con una web anticuada, estás perdiendo dinero. La gente busca en Google, ve tus reseñas (o las de otros), y decide en segundos.
             </p>
+          </div>
+
+          {/* Qué pasa sin web */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">❌</div>
+              <h3 className="text-lg font-bold text-white mb-2">Sin web = Invisible</h3>
+              <p className="text-gray-400 text-sm">Si no apareces en Google, para muchos clientes no existes.</p>
+            </div>
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">😐</div>
+              <h3 className="text-lg font-bold text-white mb-2">Web vieja = Desconfianza</h3>
+              <p className="text-gray-400 text-sm">Una web lenta o fea genera rechazo. El cliente se va a otro lado.</p>
+            </div>
+            <div className="bg-red-900/20 border border-red-800/50 rounded-xl p-6 text-center">
+              <div className="text-4xl mb-4">📞</div>
+              <h3 className="text-lg font-bold text-white mb-2">Depender del teléfono</h3>
+              <p className="text-gray-400 text-sm">Sin reservas online, pierdes clientes que quieren algo rápido y fácil.</p>
+            </div>
+          </div>
+
+          {/* La solución */}
+          <div className="text-center mb-12">
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">LA SOLUCIÓN</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Una web profesional que <span className="text-cyan-400">trabaja para ti 24/7</span>
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "Peluquerías & Estética", desc: "Reservas online, galería de cortes, promociones y contacto directo por WhatsApp." },
-              { title: "Clínicas & Consultorios", desc: "Información de servicios, citas online, horarios y ubicación fácil de encontrar en Google." },
-              { title: "Restaurantes & Bares", desc: "Menú online, reservas, ubicación con mapas, galería de platos y promociones." },
-              { title: "Servicios Profesionales", desc: "Portafolio, tarifas, clientes, testimonios y llamadas a acción claras." },
-              { title: "E-commerce Local", desc: "Tienda online simple, carrito, métodos de pago y entregas rápidas." },
-              { title: "Inmobiliarias", desc: "Galería de propiedades, fichas detalladas, citas de visita y contacto directo." },
+              { icon: "✂️", title: "Peluquerías & Estética", desc: "Reservas online, galería de trabajos, WhatsApp directo. Tus clientes reservan mientras duermes." },
+              { icon: "🏥", title: "Clínicas & Consultorios", desc: "Citas online, servicios claros, ubicación en Google Maps. Profesional y confiable." },
+              { icon: "🍽️", title: "Restaurantes & Bares", desc: "Menú digital, reservas de mesa, fotos que abren el apetito. Lleno cada fin de semana." },
+              { icon: "💼", title: "Consultores & Freelance", desc: "Portfolio potente, testimonios reales, agenda de llamadas. Cierras más proyectos." },
+              { icon: "🏠", title: "Inmobiliarias", desc: "Fichas de propiedades, galería de fotos, contacto inmediato. Vendes más rápido." },
+              { icon: "🛠️", title: "Reformas & Construcción", desc: "Antes/después, presupuestos, zona de trabajo. Confianza desde el primer clic." },
             ].map((item, idx) => (
-              <div key={idx} className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-cyan-500 transition-colors">
+              <div key={idx} className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-xl p-6 border border-gray-700 hover:border-cyan-500 transition-all hover:scale-[1.02]">
+                <div className="text-3xl mb-4">{item.icon}</div>
                 <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
                 <p className="text-gray-300">{item.desc}</p>
               </div>
@@ -125,11 +156,12 @@ export default function WebsPage() {
       <section className="py-20 px-6 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">TODO INCLUIDO</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Qué incluye cada web
+              Sin letra pequeña. <span className="text-cyan-400">Esto es lo que recibes:</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Todo lo que necesitas para vender online sin complicaciones.
+              No escatimo en nada. Cada web incluye todo lo necesario para que funcione y venda.
             </p>
           </div>
 
@@ -198,44 +230,70 @@ export default function WebsPage() {
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">ASÍ TRABAJO</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Proceso simple y rápido
+              De nuestra llamada a <span className="text-cyan-400">tu web publicada</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              De cero a web lista en 15 días.
+              Sin complicaciones. Sin jerga técnica. Tú me cuentas qué necesitas y yo me encargo del resto.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-red-600 to-red-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-2xl font-bold text-white">1</span>
+          <div className="grid md:grid-cols-4 gap-6">
+            <div className="relative">
+              <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent -z-10"></div>
+              <div className="bg-gradient-to-br from-cyan-900/30 to-cyan-800/20 rounded-xl p-6 border border-cyan-700/50 h-full">
+                <div className="w-12 h-12 bg-cyan-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-cyan-500/30">
+                  <span className="text-xl font-bold text-white">1</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Hablamos</h3>
+                <p className="text-gray-300 text-sm">
+                  Me cuentas tu negocio, tus clientes y qué quieres conseguir. Yo escucho y tomo notas.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Brief 15 min</h3>
-              <p className="text-gray-300">
-                Llamada rápida para entender tu negocio, competencia, objetivos y qué quieres lograr.
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-2xl font-bold text-white">2</span>
+            <div className="relative">
+              <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-blue-500/50 to-transparent -z-10"></div>
+              <div className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-xl p-6 border border-blue-700/50 h-full">
+                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
+                  <span className="text-xl font-bold text-white">2</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Diseño</h3>
+                <p className="text-gray-300 text-sm">
+                  Creo el diseño, escribo los textos y preparo todo. Tú solo validas que te gusta.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Diseño + Textos</h3>
-              <p className="text-gray-300">
-                Creo la web con copy orientado a conversión, diseño profesional y llamadas a acción claras.
-              </p>
             </div>
 
-            <div className="text-center">
-              <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                <span className="text-2xl font-bold text-white">3</span>
+            <div className="relative">
+              <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-purple-500/50 to-transparent -z-10"></div>
+              <div className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-xl p-6 border border-purple-700/50 h-full">
+                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-purple-500/30">
+                  <span className="text-xl font-bold text-white">3</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">Ajustes</h3>
+                <p className="text-gray-300 text-sm">
+                  Hacemos los cambios que necesites hasta que esté perfecta. Sin límite de revisiones.
+                </p>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Publicación + Revisión</h3>
-              <p className="text-gray-300">
-                Deploy, testing, revisiones finales y capacitación. Tu web lista para vender.
-              </p>
             </div>
+
+            <div>
+              <div className="bg-gradient-to-br from-green-900/30 to-green-800/20 rounded-xl p-6 border border-green-700/50 h-full">
+                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-green-500/30">
+                  <span className="text-xl font-bold text-white">4</span>
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">¡Online!</h3>
+                <p className="text-gray-300 text-sm">
+                  Publicamos tu web. Te enseño a usarla y quedo disponible para cualquier duda.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <p className="text-cyan-400 font-semibold text-lg">⏱️ Todo esto en 15 días o menos</p>
           </div>
         </div>
       </section>
@@ -244,11 +302,12 @@ export default function WebsPage() {
       <section id="precios" className="py-20 px-6 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
+            <span className="inline-block bg-green-500/10 text-green-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">INVERSIÓN</span>
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Precios claros y sin sorpresas
+              ¿Cuánto cuesta tener una web que <span className="text-green-400">realmente venda</span>?
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Elige el plan que mejor se adapte a tu negocio.
+              Menos de lo que piensas. Y se paga sola con los primeros clientes que consigas.
             </p>
           </div>
 
@@ -415,25 +474,43 @@ export default function WebsPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
+      <section className="relative py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[150px]"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[120px]"></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Quieres dejar de perder clientes en Google?
+            Mientras lo piensas, <span className="text-cyan-400">tu competencia ya está vendiendo</span>
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Una web profesional que venda es tu mejor inversión. Agendemos una llamada sin compromiso.
+          <p className="text-xl mb-4 text-slate-300">
+            Cada día sin web profesional son clientes que van a otro sitio.
           </p>
-          <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
-            Agendar llamada gratuita
-          </CTAButton>
-          <p className="text-sm mt-6 opacity-75">
-            30 minutos • Sin compromiso • Análisis personalizado
+          <p className="text-lg mb-8 text-slate-400">
+            Una llamada de 15 minutos. Te digo si puedo ayudarte y cuánto costaría. Sin compromiso.
           </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl shadow-cyan-500/25">
+              Quiero mi web profesional →
+            </CTAButton>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Garantía 30 días
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Soporte incluido
+            </span>
+          </div>
         </div>
       </section>
     </div>
