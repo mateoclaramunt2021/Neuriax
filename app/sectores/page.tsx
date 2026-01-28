@@ -1,4 +1,4 @@
-﻿import CTAButton from "../../components/CTAButton";
+import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export default function Sectores() {
@@ -12,13 +12,13 @@ export default function Sectores() {
       ),
       problems: [
         "Reservas perdidas por falta de respuesta inmediata",
-        "GestiÃ³n manual de pedidos y mesas",
+        "Gestión manual de pedidos y mesas",
         "Dificultad para fidelizar clientes"
       ],
       solutions: [
-        "Sistema de reservas automÃ¡tico con confirmaciÃ³n instantÃ¡nea",
-        "Panel de control para gestiÃ³n de mesas y pedidos",
-        "Programa de fidelizaciÃ³n con recordatorios automÃ¡ticos"
+        "Sistema de reservas automático con confirmación instantánea",
+        "Panel de control para gestión de mesas y pedidos",
+        "Programa de fidelización con recordatorios automáticos"
       ],
       image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
@@ -31,13 +31,13 @@ export default function Sectores() {
       ),
       problems: [
         "Seguimiento manual de propiedades y clientes",
-        "ComunicaciÃ³n fragmentada con interesados",
+        "Comunicación fragmentada con interesados",
         "Dificultad para gestionar visitas y contratos"
       ],
       solutions: [
-        "CRM integrado para gestiÃ³n de propiedades y leads",
-        "Sistema de comunicaciÃ³n automÃ¡tica con interesados",
-        "AutomatizaciÃ³n de contratos y firma digital"
+        "CRM integrado para gestión de propiedades y leads",
+        "Sistema de comunicación automática con interesados",
+        "Automatización de contratos y firma digital"
       ],
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
@@ -49,14 +49,14 @@ export default function Sectores() {
         </svg>
       ),
       problems: [
-        "GestiÃ³n ineficiente de citas y agenda",
-        "Seguimiento manual de proyectos y facturaciÃ³n",
-        "Dificultad para mantener comunicaciÃ³n constante con clientes"
+        "Gestión ineficiente de citas y agenda",
+        "Seguimiento manual de proyectos y facturación",
+        "Dificultad para mantener comunicación constante con clientes"
       ],
       solutions: [
-        "Sistema de agendamiento automÃ¡tico con recordatorios",
+        "Sistema de agendamiento automático con recordatorios",
         "Dashboard de proyectos con seguimiento en tiempo real",
-        "AutomatizaciÃ³n de facturaciÃ³n y seguimiento de pagos"
+        "Automatización de facturación y seguimiento de pagos"
       ],
       image: "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
     },
@@ -70,10 +70,10 @@ export default function Sectores() {
       problems: [
         "Procesos manuales que consumen tiempo valioso",
         "Dificultad para escalar operaciones",
-        "Falta de visibilidad en mÃ©tricas clave"
+        "Falta de visibilidad en métricas clave"
       ],
       solutions: [
-        "AutomatizaciÃ³n de procesos administrativos",
+        "Automatización de procesos administrativos",
         "Sistemas escalables que crecen con el negocio",
         "Dashboards con KPIs en tiempo real"
       ],
@@ -99,11 +99,11 @@ export default function Sectores() {
                 Soluciones por Sector
               </h1>
               <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Entiendo los desafÃ­os especÃ­ficos de cada industria. AquÃ­ te muestro cÃ³mo mis soluciones se adaptan a diferentes sectores.
+                Entiendo los desafíos específicos de cada industria. Aquí te muestro cómo mis soluciones se adaptan a diferentes sectores.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <a
-                  href="/contacto/formulario"
+                  href="https://calendly.com/neuriax/30min"
                   className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
                 >
                   Agendar consulta gratuita
@@ -167,7 +167,7 @@ export default function Sectores() {
                     <ul className="space-y-2">
                       {sector.problems.map((problem, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-red-500 mr-2 mt-1">â€¢</span>
+                          <span className="text-red-500 mr-2 mt-1">•</span>
                           <span className="text-slate-700">{problem}</span>
                         </li>
                       ))}
@@ -179,7 +179,7 @@ export default function Sectores() {
                     <ul className="space-y-2">
                       {sector.solutions.map((solution, idx) => (
                         <li key={idx} className="flex items-start">
-                          <span className="text-green-500 mr-2 mt-1">â€¢</span>
+                          <span className="text-green-500 mr-2 mt-1">•</span>
                           <span className="text-slate-700">{solution}</span>
                         </li>
                       ))}
@@ -200,33 +200,33 @@ export default function Sectores() {
               Beneficios por Sector
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Cada sector tiene sus propias necesidades. AquÃ­ te mostramos los beneficios habituales que conseguimos.
+              Cada sector tiene sus propias necesidades. Aquí te mostramos los beneficios habituales que conseguimos.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
-              <div className="text-4xl mb-4">ðŸ½ï¸</div>
+              <div className="text-4xl mb-4">🍽️</div>
               <h3 className="text-xl font-bold text-cyan-400 mb-4">Restaurantes</h3>
-              <p className="text-slate-300 mb-2">MÃ¡s reservas online y menos llamadas</p>
-              <p className="text-slate-400 text-sm">GestiÃ³n de mesas automatizada</p>
+              <p className="text-slate-300 mb-2">Más reservas online y menos llamadas</p>
+              <p className="text-slate-400 text-sm">Gestión de mesas automatizada</p>
             </div>
             <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
-              <div className="text-4xl mb-4">ðŸ </div>
+              <div className="text-4xl mb-4">🏠</div>
               <h3 className="text-xl font-bold text-cyan-400 mb-4">Inmobiliarias</h3>
               <p className="text-slate-300 mb-2">Leads mejor cualificados</p>
-              <p className="text-slate-400 text-sm">Seguimiento automÃ¡tico de propiedades</p>
+              <p className="text-slate-400 text-sm">Seguimiento automático de propiedades</p>
             </div>
             <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
-              <div className="text-4xl mb-4">ðŸ’¼</div>
+              <div className="text-4xl mb-4">💼</div>
               <h3 className="text-xl font-bold text-cyan-400 mb-4">Servicios</h3>
               <p className="text-slate-300 mb-2">Menos tareas administrativas</p>
-              <p className="text-slate-400 text-sm">Clientes mÃ¡s satisfechos</p>
+              <p className="text-slate-400 text-sm">Clientes más satisfechos</p>
             </div>
           </div>
 
           <p className="text-center text-slate-500 text-sm mt-8">
-            Los resultados varÃ­an segÃºn sector y punto de partida. Te mostramos casos reales en la llamada.
+            Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.
           </p>
         </div>
       </section>
@@ -241,13 +241,13 @@ export default function Sectores() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Â¿En quÃ© sector operas?
+            ¿En qué sector operas?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            CuÃ©ntame sobre tu negocio y te muestro exactamente cÃ³mo puedo ayudarte a resolver tus problemas especÃ­ficos.
+            Cuéntame sobre tu negocio y te muestro exactamente cómo puedo ayudarte a resolver tus problemas específicos.
           </p>
           <CTAButton
-            href="/contacto/formulario"
+            href="https://calendly.com/neuriax/30min"
             variant="secondary"
             size="lg"
           >

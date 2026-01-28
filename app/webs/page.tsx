@@ -1,14 +1,14 @@
-﻿import { Metadata } from "next";
+import { Metadata } from "next";
 import CTAButton from "../../components/CTAButton";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "PÃ¡ginas Web Profesionales con SEO Local | Neuriax | DiseÃ±o + AutomatizaciÃ³n",
-  description: "PÃ¡ginas web profesionales diseÃ±adas para convertir. Incluye SEO local, reservas automÃ¡ticas, WhatsApp integrado. Perfectas para negocios locales. Desde 790â‚¬.",
-  keywords: "pÃ¡ginas web profesionales, diseÃ±o web, pÃ¡ginas web con SEO, reservas online, pÃ¡ginas web negocios, web profesional, agencia web",
+  title: "Páginas Web Profesionales con SEO Local | Neuriax | Diseño + Automatización",
+  description: "Páginas web profesionales diseñadas para convertir. Incluye SEO local, reservas automáticas, WhatsApp integrado. Perfectas para negocios locales. Desde 790€.",
+  keywords: "páginas web profesionales, diseño web, páginas web con SEO, reservas online, páginas web negocios, web profesional, agencia web",
   openGraph: {
-    title: "PÃ¡ginas Web Profesionales que Convierten - Neuriax",
-    description: "DiseÃ±o responsivo + SEO local + Reservas automÃ¡ticas. PÃ¡ginas web que generan clientes para tu negocio.",
+    title: "Páginas Web Profesionales que Convierten - Neuriax",
+    description: "Diseño responsivo + SEO local + Reservas automáticas. Páginas web que generan clientes para tu negocio.",
     url: "https://www.neuriax.com/webs",
   },
   alternates: {
@@ -31,21 +31,21 @@ export default function WebsPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                PÃ¡ginas web profesionales que convierten visitas en clientes
+                Páginas web profesionales que convierten visitas en clientes
               </h1>
               <p className="text-xl md:text-2xl mb-8 opacity-90">
-                DiseÃ±o + SEO local + WhatsApp / Reservas. Sin plantillas genÃ©ricas. PÃ¡ginas construidas para negocios locales que venden.
+                Diseño + SEO local + WhatsApp / Reservas. Sin plantillas genéricas. Páginas construidas para negocios locales que venden.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
                 <CTAButton href="#precios" size="lg">
                   Ver precios
                 </CTAButton>
-                <CTAButton href="/contacto/formulario" variant="secondary" size="lg">
+                <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" size="lg">
                   Agendar llamada
                 </CTAButton>
               </div>
               <p className="text-sm opacity-75">
-                Desde 790 â‚¬ â€¢ Entrega en 15 dÃ­as â€¢ Soporte incluido
+                Desde 790 € • Entrega en 15 días • Soporte incluido
               </p>
             </div>
 
@@ -53,7 +53,7 @@ export default function WebsPage() {
               <div className="relative h-96 w-full">
                 <Image
                   src="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="DiseÃ±o web profesional y moderno"
+                  alt="Diseño web profesional y moderno"
                   fill
                   className="object-cover rounded-lg shadow-2xl"
                   priority
@@ -68,7 +68,7 @@ export default function WebsPage() {
         </div>
       </section>
 
-      {/* Para quiÃ©n es */}
+      {/* Para quién es */}
       <section className="py-20 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -82,12 +82,12 @@ export default function WebsPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { title: "PeluquerÃ­as & EstÃ©tica", desc: "Reservas online, galerÃ­a de cortes, promociones y contacto directo por WhatsApp." },
-              { title: "ClÃ­nicas & Consultorios", desc: "InformaciÃ³n de servicios, citas online, horarios y ubicaciÃ³n fÃ¡cil de encontrar en Google." },
-              { title: "Restaurantes & Bares", desc: "MenÃº online, reservas, ubicaciÃ³n con mapas, galerÃ­a de platos y promociones." },
-              { title: "Servicios Profesionales", desc: "Portafolio, tarifas, clientes, testimonios y llamadas a acciÃ³n claras." },
-              { title: "E-commerce Local", desc: "Tienda online simple, carrito, mÃ©todos de pago y entregas rÃ¡pidas." },
-              { title: "Inmobiliarias", desc: "GalerÃ­a de propiedades, fichas detalladas, citas de visita y contacto directo." },
+              { title: "Peluquerías & Estética", desc: "Reservas online, galería de cortes, promociones y contacto directo por WhatsApp." },
+              { title: "Clínicas & Consultorios", desc: "Información de servicios, citas online, horarios y ubicación fácil de encontrar en Google." },
+              { title: "Restaurantes & Bares", desc: "Menú online, reservas, ubicación con mapas, galería de platos y promociones." },
+              { title: "Servicios Profesionales", desc: "Portafolio, tarifas, clientes, testimonios y llamadas a acción claras." },
+              { title: "E-commerce Local", desc: "Tienda online simple, carrito, métodos de pago y entregas rápidas." },
+              { title: "Inmobiliarias", desc: "Galería de propiedades, fichas detalladas, citas de visita y contacto directo." },
             ].map((item, idx) => (
               <div key={idx} className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-cyan-500 transition-colors">
                 <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
@@ -98,12 +98,12 @@ export default function WebsPage() {
         </div>
       </section>
 
-      {/* QuÃ© incluye */}
+      {/* Qué incluye */}
       <section className="py-20 px-6 bg-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              QuÃ© incluye cada web
+              Qué incluye cada web
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Todo lo que necesitas para vender online sin complicaciones.
@@ -119,8 +119,8 @@ export default function WebsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">DiseÃ±o responsivo premium</h3>
-                  <p className="text-gray-300">Perfecta en mÃ³vil, tablet y desktop. Carga rÃ¡pida y buena experiencia usuario.</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">Diseño responsivo premium</h3>
+                  <p className="text-gray-300">Perfecta en móvil, tablet y desktop. Carga rápida y buena experiencia usuario.</p>
                 </div>
               </div>
             </div>
@@ -134,7 +134,7 @@ export default function WebsPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-2">SEO local bÃ¡sico</h3>
+                  <h3 className="text-xl font-semibold text-white mb-2">SEO local básico</h3>
                   <p className="text-gray-300">Google Maps, palabras clave locales, meta tags optimizados para que te encuentren.</p>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export default function WebsPage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">WhatsApp + Reservas / Llamadas</h3>
-                  <p className="text-gray-300">BotÃ³n para contacto directo, sistema de reservas online o formulario de llamada.</p>
+                  <p className="text-gray-300">Botón para contacto directo, sistema de reservas online o formulario de llamada.</p>
                 </div>
               </div>
             </div>
@@ -163,7 +163,7 @@ export default function WebsPage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Velocidad + Seguridad</h3>
-                  <p className="text-gray-300">Hosting rÃ¡pido, certificado SSL, copias de seguridad automÃ¡ticas y soporte.</p>
+                  <p className="text-gray-300">Hosting rápido, certificado SSL, copias de seguridad automáticas y soporte.</p>
                 </div>
               </div>
             </div>
@@ -176,10 +176,10 @@ export default function WebsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-              Proceso simple y rÃ¡pido
+              Proceso simple y rápido
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              De cero a web lista en 15 dÃ­as.
+              De cero a web lista en 15 días.
             </p>
           </div>
 
@@ -190,7 +190,7 @@ export default function WebsPage() {
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">Brief 15 min</h3>
               <p className="text-gray-300">
-                Llamada rÃ¡pida para entender tu negocio, competencia, objetivos y quÃ© quieres lograr.
+                Llamada rápida para entender tu negocio, competencia, objetivos y qué quieres lograr.
               </p>
             </div>
 
@@ -198,9 +198,9 @@ export default function WebsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-orange-600 to-orange-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <span className="text-2xl font-bold text-white">2</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">DiseÃ±o + Textos</h3>
+              <h3 className="text-xl font-semibold text-white mb-3">Diseño + Textos</h3>
               <p className="text-gray-300">
-                Creo la web con copy orientado a conversiÃ³n, diseÃ±o profesional y llamadas a acciÃ³n claras.
+                Creo la web con copy orientado a conversión, diseño profesional y llamadas a acción claras.
               </p>
             </div>
 
@@ -208,9 +208,9 @@ export default function WebsPage() {
               <div className="w-16 h-16 bg-gradient-to-br from-green-600 to-green-800 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <span className="text-2xl font-bold text-white">3</span>
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">PublicaciÃ³n + RevisiÃ³n</h3>
+              <h3 className="text-xl font-semibold text-white mb-3">Publicación + Revisión</h3>
               <p className="text-gray-300">
-                Deploy, testing, revisiones finales y capacitaciÃ³n. Tu web lista para vender.
+                Deploy, testing, revisiones finales y capacitación. Tu web lista para vender.
               </p>
             </div>
           </div>
@@ -230,22 +230,22 @@ export default function WebsPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {/* BÃ¡sica */}
+            {/* Básica */}
             <div className="bg-gray-900 rounded-xl border border-gray-700 p-8 hover:border-cyan-500 transition-colors">
-              <h3 className="text-2xl font-semibold text-white mb-2">BÃ¡sica</h3>
+              <h3 className="text-2xl font-semibold text-white mb-2">Básica</h3>
               <p className="text-gray-400 mb-6">Para empezar</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-white">790</span>
-                <span className="text-gray-400"> â‚¬</span>
+                <span className="text-gray-400"> €</span>
               </div>
               <ul className="space-y-3 mb-8 text-gray-300">
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  5 pÃ¡ginas
+                  5 páginas
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  DiseÃ±o responsive
+                  Diseño responsive
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -253,10 +253,10 @@ export default function WebsPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  SEO local bÃ¡sico
+                  SEO local básico
                 </li>
               </ul>
-              <CTAButton href="/contacto/formulario" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
                 Contratar
               </CTAButton>
             </div>
@@ -267,7 +267,7 @@ export default function WebsPage() {
                 Recomendada
               </div>
               <h3 className="text-2xl font-semibold text-white mb-2">Profesional</h3>
-              <p className="text-gray-300 mb-6">La mÃ¡s popular</p>
+              <p className="text-gray-300 mb-6">La más popular</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-cyan-400">A CONSULTAR</span>
                 <p className="text-cyan-300 text-sm mt-2">Presupuesto personalizado</p>
@@ -275,11 +275,11 @@ export default function WebsPage() {
               <ul className="space-y-3 mb-8 text-gray-300">
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  Hasta 10 pÃ¡ginas
+                  Hasta 10 páginas
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  DiseÃ±o a medida
+                  Diseño a medida
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -294,7 +294,7 @@ export default function WebsPage() {
                   Copy profesional
                 </li>
               </ul>
-              <CTAButton href="/contacto/formulario" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+              <CTAButton href="https://calendly.com/neuriax/30min" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Contratar ahora
               </CTAButton>
             </div>
@@ -305,16 +305,16 @@ export default function WebsPage() {
               <p className="text-gray-400 mb-6">Completa y personalizada</p>
               <div className="mb-6">
                 <span className="text-4xl font-bold text-white">A CONSULTAR</span>
-                <p className="text-gray-400 text-sm mt-2">SoluciÃ³n a medida</p>
+                <p className="text-gray-400 text-sm mt-2">Solución a medida</p>
               </div>
               <ul className="space-y-3 mb-8 text-gray-300">
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  PÃ¡ginas ilimitadas
+                  Páginas ilimitadas
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  Tienda online bÃ¡sica
+                  Tienda online básica
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -322,14 +322,14 @@ export default function WebsPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  AnalÃ­tica + Dashboard
+                  Analítica + Dashboard
                 </li>
                 <li className="flex items-center gap-2">
                   <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   Mantenimiento 3 meses
                 </li>
               </ul>
-              <CTAButton href="/contacto/formulario" variant="secondary" className="w-full text-center justify-center">
+              <CTAButton href="https://calendly.com/neuriax/30min" variant="secondary" className="w-full text-center justify-center">
                 Consultar
               </CTAButton>
             </div>
@@ -337,7 +337,7 @@ export default function WebsPage() {
 
           <div className="text-center mb-12">
             <p className="text-gray-300 mb-4">
-              Â¿Necesitas algo mÃ¡s personalizado? <span className="text-cyan-400">Todos los planes incluyen dominio + hosting 1 aÃ±o.</span>
+              ¿Necesitas algo más personalizado? <span className="text-cyan-400">Todos los planes incluyen dominio + hosting 1 año.</span>
             </p>
             <CTAButton href="/precios" variant="secondary">
               Ver tabla completa de precios y extras
@@ -358,28 +358,28 @@ export default function WebsPage() {
           <div className="space-y-6">
             {[
               {
-                q: "Â¿Incluye dominio y hosting?",
-                a: "SÃ­, el primer aÃ±o de dominio + hosting estÃ¡ incluido en cualquier plan. DespuÃ©s es 120 â‚¬/aÃ±o."
+                q: "¿Incluye dominio y hosting?",
+                a: "Sí, el primer año de dominio + hosting está incluido en cualquier plan. Después es 120 €/año."
               },
               {
-                q: "Â¿CuÃ¡nto tiempo tarda la entrega?",
-                a: "Entre 10-15 dÃ­as desde el brief. Depende de la complejidad y quÃ© tan rÃ¡pido me des informaciÃ³n."
+                q: "¿Cuánto tiempo tarda la entrega?",
+                a: "Entre 10-15 días desde el brief. Depende de la complejidad y qué tan rápido me des información."
               },
               {
-                q: "Â¿Puedo hacer cambios despuÃ©s?",
-                a: "Claro, 1 mes de soporte tÃ©cnico incluido en todos los planes. Luego puedo hacer mantenimiento a 49 â‚¬/mes."
+                q: "¿Puedo hacer cambios después?",
+                a: "Claro, 1 mes de soporte técnico incluido en todos los planes. Luego puedo hacer mantenimiento a 49 €/mes."
               },
               {
-                q: "Â¿Me ayudas con las reseÃ±as de Google?",
-                a: "No se pueden eliminar reseÃ±as malas, pero sÃ­ podemos mejorar tu reputaciÃ³n digital con una estrategia completa. Consulta."
+                q: "¿Me ayudas con las reseñas de Google?",
+                a: "No se pueden eliminar reseñas malas, pero sí podemos mejorar tu reputación digital con una estrategia completa. Consulta."
               },
               {
-                q: "Â¿Necesito saber de tecnologÃ­a?",
-                a: "No, te capacito en todo. El sistema es fÃ¡cil de usar y te doy soporte siempre que lo necesites."
+                q: "¿Necesito saber de tecnología?",
+                a: "No, te capacito en todo. El sistema es fácil de usar y te doy soporte siempre que lo necesites."
               },
               {
-                q: "Â¿Hago mÃ¡s caro si necesito mÃ¡s pÃ¡ginas o funciones?",
-                a: "Reservas online (+150 â‚¬), integraciÃ³n WhatsApp IA (desde 300 â‚¬), SEO mensual (desde 250 â‚¬). Todo personalizable."
+                q: "¿Hago más caro si necesito más páginas o funciones?",
+                a: "Reservas online (+150 €), integración WhatsApp IA (desde 300 €), SEO mensual (desde 250 €). Todo personalizable."
               },
             ].map((faq, idx) => (
               <div key={idx} className="bg-gray-800 rounded-lg p-6 border border-gray-700 hover:border-cyan-500 transition-colors">
@@ -400,16 +400,16 @@ export default function WebsPage() {
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Â¿Quieres dejar de perder clientes en Google?
+            ¿Quieres dejar de perder clientes en Google?
           </h2>
           <p className="text-xl mb-8 opacity-90">
-            Una web profesional que venda es tu mejor inversiÃ³n. Agendemos una llamada sin compromiso.
+            Una web profesional que venda es tu mejor inversión. Agendemos una llamada sin compromiso.
           </p>
-          <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
+          <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
             Agendar llamada gratuita
           </CTAButton>
           <p className="text-sm mt-6 opacity-75">
-            30 minutos â€¢ Sin compromiso â€¢ AnÃ¡lisis personalizado
+            30 minutos • Sin compromiso • Análisis personalizado
           </p>
         </div>
       </section>
