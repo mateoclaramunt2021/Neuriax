@@ -117,47 +117,44 @@ export default function Contacto() {
       <section className="py-16 md:py-20 px-6 bg-slate-900/30">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">Proceso simple</span>
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">Así trabajo</span>
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              De la llamada a resultados en 7 días
+              Una conversación, sin rodeos
             </h2>
-            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Sin complicaciones. Sin jerga técnica. Solo resultados.</p>
+            <p className="text-slate-400 text-lg max-w-2xl mx-auto">Te escucho, te digo si puedo ayudarte, y si tiene sentido, te paso presupuesto.</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
-              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">5 min</div>
               <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 1
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">Cuéntame tu problema</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Me cuentas qué necesitas</h3>
               <p className="text-slate-300">
-                Me explicas dónde pierdes tiempo, dinero o clientes. Yo escucho y tomo notas.
+                Escucho tu situación actual, dónde pierdes tiempo y qué te gustaría mejorar.
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
-              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">10 min</div>
               <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 2
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">Te muestro la solución</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Te digo si puedo ayudarte</h3>
               <p className="text-slate-300">
-                En pantalla compartida te enseño exactamente cómo lo automatizaríamos. Sin humo, solo hechos.
+                Soy honesto. Si lo que necesitas no es mi especialidad o no te conviene, te lo digo.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl p-8 border border-slate-700 hover:border-cyan-500/50 transition-all relative">
-              <div className="absolute -top-3 -right-3 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">24h</div>
               <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-white font-bold text-xl mb-6 shadow-lg shadow-cyan-500/30">
                 3
               </div>
-              <h3 className="text-xl font-bold mb-3 text-white">Propuesta personalizada</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">Presupuesto claro</h3>
               <p className="text-slate-300">
-                Recibes presupuesto cerrado con todo detallado. Si te interesa, arrancamos. Si no, amigos.
+                Si encaja, te paso precio exacto con todo detallado. Sin letra pequeña, sin sorpresas.
               </p>
             </div>
           </div>
@@ -168,7 +165,7 @@ export default function Contacto() {
               href="/contacto/formulario"
               className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-lg transition-colors group"
             >
-              <span>Reservar mi hueco ahora</span>
+              <span>Cuéntame qué necesitas</span>
               <span className="group-hover:translate-x-1 transition-transform">→</span>
             </Link>
           </div>
