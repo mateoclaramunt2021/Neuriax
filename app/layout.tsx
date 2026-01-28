@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -96,21 +97,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Google tag (gtag.js) - Código EXACTO de Google Analytics */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-JK6XH4LZ3C');
-            `,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -132,6 +118,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Google Analytics - Usando Script de Next.js */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JK6XH4LZ3C');
+          `}
+        </Script>
         {/* Cookie Banner - Must be before other components to establish consent state */}
         <CookieBanner />
         {/* PageTracker gracefully handles Supabase failures */}
