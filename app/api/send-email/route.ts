@@ -20,6 +20,136 @@ export async function POST(request: NextRequest) {
       return rateLimitExceededResponse(rateLimit.resetIn);
     }
 
+    // Detectar el tipo de contenido para manejar JSON o FormData
+    const contentType = request.headers.get('content-type') || '';
+    
+    // ========== FORMULARIO DE CONTACTO (JSON) ==========
+    if (contentType.includes('application/json')) {
+      const jsonData = await request.json();
+      const { nombre, email, telefono, empresa, sector, mensaje, type } = jsonData;
+
+      // Validar datos del formulario de contacto
+      if (!nombre || !email) {
+        return NextResponse.json(
+          { error: 'Faltan campos requeridos (nombre y email)' },
+          { status: 400 }
+        );
+      }
+
+      // Guardar en Supabase (tabla contacts)
+      const { error: dbError } = await supabase.from('contacts').insert({
+        nombre,
+        email,
+        telefono: telefono || null,
+        empresa: empresa || null,
+        sector: sector || null,
+        mensaje: mensaje || null,
+        tipo: type || 'contact_form',
+        leido: false
+      });
+
+      if (dbError) {
+        console.error('Error guardando contacto:', dbError);
+        // Continuamos para enviar el email aunque falle la DB
+      }
+
+      // Enviar email de notificación con Resend
+      const { data: emailData, error: emailError } = await resend.emails.send({
+        from: 'Neuriax <onboarding@resend.dev>',
+        to: 'mateoclaramunt2021@gmail.com',
+        subject: `🎯 Nuevo lead de contacto: ${nombre}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
+            <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 30px; border-radius: 12px 12px 0 0;">
+              <h1 style="color: white; margin: 0; font-size: 24px;">🎯 Nuevo Lead de Contacto</h1>
+              <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">Alguien quiere agendar una llamada contigo</p>
+            </div>
+            
+            <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <strong style="color: #6b7280;">👤 Nombre:</strong>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
+                    ${nombre}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <strong style="color: #6b7280;">📧 Email:</strong>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <a href="mailto:${email}" style="color: #3b82f6;">${email}</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <strong style="color: #6b7280;">📞 Teléfono:</strong>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
+                    ${telefono || 'No proporcionado'}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <strong style="color: #6b7280;">🏢 Empresa:</strong>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
+                    ${empresa || 'No especificada'}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
+                    <strong style="color: #6b7280;">🏷️ Sector:</strong>
+                  </td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
+                    ${sector || 'No especificado'}
+                  </td>
+                </tr>
+              </table>
+              
+              ${mensaje ? `
+              <div style="margin-top: 20px;">
+                <strong style="color: #6b7280;">💬 Mensaje:</strong>
+                <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-top: 8px; color: #374151;">
+                  ${mensaje}
+                </div>
+              </div>
+              ` : ''}
+              
+              <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 8px; border: 1px solid #a7f3d0;">
+                <p style="margin: 0; color: #065f46; font-weight: 600;">
+                  ⏰ Este lead va a agendar una llamada en Calendly
+                </p>
+                <p style="margin: 8px 0 0 0; color: #047857; font-size: 14px;">
+                  Revisa tu calendario para la próxima disponibilidad
+                </p>
+              </div>
+            </div>
+            
+            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
+              Email enviado automáticamente desde el formulario de contacto de neuriax.com
+            </p>
+          </div>
+        `
+      });
+
+      if (emailError) {
+        console.error('Error enviando email de contacto:', emailError);
+        return NextResponse.json(
+          { error: 'Error al enviar el email', details: emailError.message },
+          { status: 500 }
+        );
+      }
+
+      return NextResponse.json(
+        { message: 'Contacto enviado correctamente', emailId: emailData?.id },
+        { status: 200 }
+      );
+    }
+
+    // ========== FORMULARIO DE TRABAJO (FormData con CV) ==========
     const formData = await request.formData();
     
     const nombre = formData.get('nombre') as string;
@@ -50,7 +180,7 @@ export async function POST(request: NextRequest) {
       const arrayBuffer = await cvFile.arrayBuffer();
       const buffer = new Uint8Array(arrayBuffer);
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('cvs')
         .upload(fileName, buffer, {
           contentType: cvFile.type,
@@ -135,7 +265,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json(
-      { error: 'Error al procesar la postulación' },
+      { error: 'Error al procesar la solicitud' },
       { status: 500 }
     );
   }
