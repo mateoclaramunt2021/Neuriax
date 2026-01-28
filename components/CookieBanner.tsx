@@ -40,16 +40,28 @@ export default function CookieBanner() {
   }, []);
 
   const loadConsentedScripts = (consent: CookieConsent) => {
-    // TODO: Integrar Google Analytics si está activo
-    if (consent.analytics) {
-      console.log('[COOKIES] Analytics scripts would load here');
-      // Example: loadGoogleAnalytics();
-    }
-
-    // TODO: Integrar Meta Pixel / Facebook Ads si está activo
-    if (consent.marketing) {
-      console.log('[COOKIES] Marketing scripts would load here');
-      // Example: loadMetaPixel();
+    // Update Google Consent Mode v2
+    if (typeof window !== 'undefined') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const gtag = (window as any).gtag;
+      
+      if (typeof gtag === 'function') {
+        if (consent.analytics) {
+          gtag('consent', 'update', {
+            'analytics_storage': 'granted'
+          });
+          console.log('[COOKIES] Analytics consent granted');
+        }
+        
+        if (consent.marketing) {
+          gtag('consent', 'update', {
+            'ad_storage': 'granted',
+            'ad_user_data': 'granted',
+            'ad_personalization': 'granted'
+          });
+          console.log('[COOKIES] Marketing consent granted');
+        }
+      }
     }
   };
 

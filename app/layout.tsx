@@ -96,22 +96,33 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        {/* Google Analytics 4 */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
-        />
+        {/* Google Consent Mode v2 - Default denied until user consents */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
+              
+              // Default consent state - denied until user accepts
+              gtag('consent', 'default', {
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'analytics_storage': 'denied',
+                'wait_for_update': 500
+              });
+              
               gtag('js', new Date());
               gtag('config', 'G-JK6XH4LZ3C', {
                 page_path: window.location.pathname,
               });
             `,
           }}
+        />
+        {/* Google Analytics 4 */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
         />
         <script
           type="application/ld+json"
