@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 interface Message {
   text: string;
@@ -8,117 +8,88 @@ interface Message {
   isLink?: boolean;
 }
 
+interface ConversationMessage {
+  type: 'user' | 'bot';
+  content: string;
+}
+
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "¡Hola! Soy Maria,la asistenta de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
+    { text: "¡Hola! Soy María, la asistente de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
   ]);
   const [inputValue, setInputValue] = useState('');
-  const [conversationContext, setConversationContext] = useState<{
-    industry?: string;
-    goal?: string;
-    channel?: string;
-    messageCount?: number;
-  }>({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [conversationHistory, setConversationHistory] = useState<ConversationMessage[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickResponses = [
-    "¿Qué servicios ofreceís?",
+    "¿Qué servicios ofrecéis?",
     "Precio de una web",
     "Chatbot + automatización",
     "Agendar llamada"
   ];
 
-  const handleSendMessage = (message: string) => {
-    if (!message.trim()) return;
+  // Auto-scroll al último mensaje
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
-    const newMessages = [...messages, { text: message, isBot: false }];
-    setMessages(newMessages);
+  const handleSendMessage = async (message: string) => {
+    if (!message.trim() || isLoading) return;
+
+    // Añadir mensaje del usuario
+    const userMessage: Message = { text: message, isBot: false };
+    setMessages(prev => [...prev, userMessage]);
     setInputValue('');
+    setIsLoading(true);
 
-    const newContext = { ...conversationContext, messageCount: (conversationContext.messageCount || 0) + 1 };
-    setConversationContext(newContext);
+    // Actualizar historial de conversación
+    const newHistory: ConversationMessage[] = [
+      ...conversationHistory,
+      { type: 'user', content: message }
+    ];
+    setConversationHistory(newHistory);
 
-    // Simulate bot response
-    setTimeout(() => {
-      const response = getBotResponse(message.toLowerCase(), newContext);
-      setMessages(prev => [...prev, { text: response.text, isBot: true, isLink: response.isLink }]);
-    }, 800);
-  };
+    try {
+      // Llamar a la API de IA
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: newHistory,
+        }),
+      });
 
-  const getBotResponse = (message: string, context: any): { text: string; isLink?: boolean } => {
-    const lowerMsg = message.toLowerCase();
+      const data = await response.json();
+      
+      const botMessage = data.message || "Disculpa, no pude procesar tu mensaje. ¿Puedes intentarlo de nuevo?";
+      const hasLink = botMessage.includes('https://');
 
-    // FLUJO A: Precio / Web
-    if (lowerMsg.includes('precio') || lowerMsg.includes('cuesta') || lowerMsg.includes('coste') || lowerMsg.includes('web')) {
-      if (lowerMsg.includes('web')) {
-        const response = "Nuestra web Básica cuesta 790€. Incluye:\n✓ Diseño responsive\n✓ Información de negocio\n✓ Botón WhatsApp y llamada\n✓ Google Maps integrado\n✓ Optimización de velocidad\n✓ Dominio + hosting 1 año incluidos\n\nEntrega en 10-15 días según complejidad.\n\n¿Qué sector es y qué funcionalidad necesitarías (reservas, e-commerce, blog)?";
-        return { text: response };
-      }
-      return { text: "¿Estás preguntando por una web o por automatización/chatbot? Te doy un rango más exacto." };
+      // Añadir respuesta del bot
+      setMessages(prev => [...prev, { 
+        text: botMessage, 
+        isBot: true, 
+        isLink: hasLink 
+      }]);
+
+      // Actualizar historial con respuesta del bot
+      setConversationHistory(prev => [
+        ...prev,
+        { type: 'bot', content: botMessage }
+      ]);
+
+    } catch (error) {
+      console.error('Error al enviar mensaje:', error);
+      setMessages(prev => [...prev, { 
+        text: "Disculpa, tuve un problema técnico. ¿Puedes intentarlo de nuevo?", 
+        isBot: true 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
-
-    // FLUJO B: Automatización / Chatbot / IA
-    if (lowerMsg.includes('chatbot') || lowerMsg.includes('automatiza') || lowerMsg.includes('whatsapp') || lowerMsg.includes('ia') || lowerMsg.includes('ai')) {
-      const response = "Implementamos:\n✓ Chatbots 24/7 (responder leads automáticamente)\n✓ Seguimiento automático + cualificación\n✓ Automatización WhatsApp con IA (desde 300€)\n✓ Dashboards y reportes automáticos\n\nCoste depende del alcance. ¿Por dónde te entran leads hoy? (WhatsApp, web, Instagram, llamadas)";
-      return { text: response };
-    }
-
-    // FLUJO C: Casos / Ejemplos
-    if (lowerMsg.includes('caso') || lowerMsg.includes('ejemplo') || lowerMsg.includes('resultado') || lowerMsg.includes('funciona')) {
-      const response = "Aquí van 3 casos típicos:\n\n📱 RESTAURANTE: Sistema de reservas online + chatbot que responde 24/7 y recuerda reservas → 40% más ocupación.\n\n🏠 INMOBILIARIA: CRM integrado + seguimiento automático de propiedades → reducen tiempo de respuesta 80%.\n\n💼 CONSULTORÍA: Automatización de facturación + agendamiento + dashboard de KPIs → ahorran 15h/semana.\n\n¿Te encaja tu sector? Agendamos 30 min y lo aterrizamos a tu caso.";
-      return { text: response };
-    }
-
-    // FLUJO D: General - ¿Qué hacéis?
-    if (lowerMsg.includes('qué haces') || lowerMsg.includes('quién eres') || lowerMsg.includes('servicios') || lowerMsg.includes('ofrece')) {
-      const response = "Somos Neuriax. Ofrecemos dos líneas:\n\n🤖 AUTOMATIZACIÓN & IA\n→ Chatbots, seguimiento automático, reportes, procesos IA.\n→ Solucionamos: leads sin respuesta, tareas repetitivas, falta de seguimiento.\n\n💻 WEBS PROFESIONALES\n→ Diseño a medida, SEO local, reservas/WhatsApp, orientadas a conversión.\n→ Desde 790€.\n\n¿Cuál te interesa?";
-      return { text: response };
-    }
-
-    // FLUJO E: Tiempos / Plazos
-    if (lowerMsg.includes('tiempo') || lowerMsg.includes('plazo') || lowerMsg.includes('cuánto tarda') || lowerMsg.includes('entrega')) {
-      return { text: "⏱️ Tiempos típicos:\n\n🕐 Web: 10-15 días tras el brief (según complejidad e info que aportes).\n\n⚙️ Automatización: depende del alcance (rango 2-8 semanas).\n\nEn la llamada te confirmo el plazo exacto según tu proyecto." };
-    }
-
-    // FLUJO: Agendar llamada directamente
-    if (lowerMsg.includes('agendar') || lowerMsg.includes('llamada') || lowerMsg.includes('reunión') || lowerMsg.includes('consulta')) {
-      return { 
-        text: "Perfecto. 📅 La llamada es gratis, 30 minutos, sin compromiso. Análisis personalizado de tu caso.\n\nAqui el enlace: https://calendly.com/neuriax/30min\n\nSi me dices tu sector y tu principal problema, llegamos más preparados.",
-        isLink: true
-      };
-    }
-
-    // Preguntas frecuentes
-    if (lowerMsg.includes('dominio') || lowerMsg.includes('hosting')) {
-      return { text: "✓ Sí, dominio + hosting 1 año incluidos en cualquier plan web.\n\nRenovación anual: 120€/año." };
-    }
-
-    if (lowerMsg.includes('soporte') || lowerMsg.includes('mantenimiento')) {
-      return { text: "✓ Soporte sí, incluido.\n\n📌 Mantenimiento opcional: 49€/mes (actualizaciones, copias, seguridad, cambios pequeños)." };
-    }
-
-    if (lowerMsg.includes('reservas') || lowerMsg.includes('booking')) {
-      return { text: "✓ Integramos sistema de reservas online.\n\nCoste: +150€ (o a medida según complejidad)." };
-    }
-
-    if (lowerMsg.includes('reseña') || lowerMsg.includes('google')) {
-      return { text: "No se pueden eliminar reseñas, pero sí mejorar reputación con estrategia de generación de reviews positivas.\n\nEso lo analizamos en la llamada." };
-    }
-
-    if (lowerMsg.includes('extra') || lowerMsg.includes('multiidioma') || lowerMsg.includes('ecommerce') || lowerMsg.includes('blog') || lowerMsg.includes('seo')) {
-      return { text: "Extras típicos:\n✓ Multiidioma: +200€\n✓ E-commerce: +300€\n✓ Blog/CMS: +150€\n✓ Reservas: +150€\n✓ Automatización WhatsApp IA: desde 300€\n✓ SEO mensual: desde 250€/mes\n\n¿Cual necesitas?" };
-    }
-
-    // Detección de intención ALTA: sugerir llamada
-    if (lowerMsg.includes('quiero') || lowerMsg.includes('necesito') || lowerMsg.includes('presupuesto') || lowerMsg.includes('proyecto')) {
-      return { 
-        text: "Te lo aterrizamos en 30 min: revisamos tu caso, te digo si merece la pena y qué opción encaja.\n\nEs gratis y sin compromiso. ¿Agenamos? 📅 https://calendly.com/neuriax/30min",
-        isLink: true
-      };
-    }
-
-    // Default: capturar información
-    return { text: "Me encantaría ayudarte más. ¿Puedes decirme:\n\n1) Qué tipo de negocio es?\n2) Qué quieres mejorar (más leads, automatizar procesos, nueva web, visibilidad)?" };
   };
 
   const handleQuickResponse = (response: string) => {
@@ -201,6 +172,19 @@ export default function Chatbot() {
                 </div>
               </div>
             ))}
+            {/* Indicador de escritura */}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-slate-800 text-slate-200 px-4 py-2 rounded-lg">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                    <div className="w-2 h-2 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
           </div>
 
           {/* Quick Responses */}
@@ -228,13 +212,15 @@ export default function Chatbot() {
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage(inputValue)}
-                placeholder="Escribe tu pregunta..."
-                className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500"
+                onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage(inputValue)}
+                placeholder={isLoading ? "María está escribiendo..." : "Escribe tu pregunta..."}
+                disabled={isLoading}
+                className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 disabled:opacity-50"
               />
               <button
                 onClick={() => handleSendMessage(inputValue)}
-                className="bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-lg transition-colors"
+                disabled={isLoading || !inputValue.trim()}
+                className="bg-cyan-500 hover:bg-cyan-600 text-white px-3 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 aria-label="Enviar mensaje"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
