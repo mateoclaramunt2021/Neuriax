@@ -84,54 +84,56 @@ export default function Sectores() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}></div>
+      <section className="relative min-h-[70vh] flex items-center bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-20 px-6 overflow-hidden">
+        {/* Background effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-cyan-500/15 rounded-full blur-[100px] md:blur-[150px] animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-blue-600/10 rounded-full blur-[80px] md:blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Soluciones por Sector
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 opacity-90">
-                Entiendo los desafíos específicos de cada industria. Aquí te muestro cómo mis soluciones se adaptan a diferentes sectores.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-start mb-8">
-                <a
-                  href="/contacto/formulario"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-600 hover:to-blue-700 transition-all"
-                >
-                  Agendar consulta gratuita
-                </a>
-                <a
-                  href="#sectores"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 font-semibold rounded-lg shadow-lg hover:bg-gray-50 transition-all"
-                >
-                  Ver sectores
-                </a>
-              </div>
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/40 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
+              <span className="text-cyan-400 text-sm font-medium">SOLUCIONES POR SECTOR</span>
             </div>
-
-            <div className="relative group cursor-pointer">
-              <div className="relative h-96 w-full">
-                <Image
-                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
-                  alt="Equipos de trabajo colaborando"
-                  fill
-                  className="object-cover rounded-lg shadow-2xl group-hover:scale-105 group-hover:shadow-3xl transition-all duration-500"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-lg group-hover:from-black/70 transition-all duration-300"></div>
-              </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -left-4 w-20 h-20 bg-cyan-500/20 rounded-full blur-xl group-hover:bg-cyan-500/30 transition-all duration-300"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-blue-500/20 rounded-full blur-xl group-hover:bg-blue-500/30 transition-all duration-300"></div>
+            
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              Cada negocio es diferente.<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Tus soluciones también.</span>
+            </h1>
+            <p className="text-xl md:text-2xl mb-8 text-slate-300 max-w-3xl mx-auto">
+              No vendo paquetes genéricos. Primero entiendo tu sector y tus problemas reales, luego te propongo lo que tiene sentido.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a
+                href="/contacto/formulario"
+                className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-lg shadow-cyan-500/25 hover:from-cyan-600 hover:to-blue-700 transition-all hover:scale-105"
+              >
+                Cuéntame tu sector →
+              </a>
+              <a
+                href="#sectores"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white/5 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 transition-all"
+              >
+                Ver ejemplos
+              </a>
+            </div>
+            
+            {/* Trust badges */}
+            <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                Adaptado a tu caso
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                Sin soluciones genéricas
+              </span>
+              <span className="flex items-center gap-2">
+                <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                Te digo si no encaja
+              </span>
             </div>
           </div>
         </div>
@@ -140,6 +142,17 @@ export default function Sectores() {
       {/* Sectores */}
       <section id="sectores" className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
+          {/* Encabezado */}
+          <div className="text-center mb-16">
+            <span className="inline-block bg-cyan-100 text-cyan-700 text-sm font-semibold px-4 py-2 rounded-full mb-4">EJEMPLOS POR SECTOR</span>
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
+              Problemas reales, <span className="text-cyan-600">soluciones concretas</span>
+            </h2>
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Estos son ejemplos de cómo trabajo en diferentes sectores. Tu caso puede ser diferente — hablemos y te cuento qué tiene sentido para ti.
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-2 gap-16">
             {sectors.map((sector, index) => (
               <div key={index} className="bg-slate-50 rounded-2xl shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-300">
@@ -196,63 +209,85 @@ export default function Sectores() {
       <section className="py-20 px-6 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
+            <span className="inline-block bg-cyan-500/10 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-4">RESULTADOS TÍPICOS</span>
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Beneficios por Sector
+              ¿Qué puedes conseguir? <span className="text-cyan-400">Esto es lo habitual:</span>
             </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Cada sector tiene sus propias necesidades. Aquí te mostramos los beneficios habituales que conseguimos.
+              No prometo números mágicos. Pero sí te cuento qué suele pasar cuando las cosas funcionan.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+            <div className="text-center bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-8 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all">
               <div className="text-4xl mb-4">🍽️</div>
-              <h3 className="text-xl font-bold text-cyan-400 mb-4">Restaurantes</h3>
-              <p className="text-slate-300 mb-2">Más reservas online y menos llamadas</p>
-              <p className="text-slate-400 text-sm">Gestión de mesas automatizada</p>
+              <h3 className="text-xl font-bold text-white mb-4">Restaurantes</h3>
+              <p className="text-cyan-400 font-semibold mb-2">Más reservas, menos lío</p>
+              <p className="text-slate-400 text-sm">Clientes que reservan solos, confirmaciones automáticas, menos no-shows.</p>
             </div>
-            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+            <div className="text-center bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-8 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all">
               <div className="text-4xl mb-4">🏠</div>
-              <h3 className="text-xl font-bold text-cyan-400 mb-4">Inmobiliarias</h3>
-              <p className="text-slate-300 mb-2">Leads mejor cualificados</p>
-              <p className="text-slate-400 text-sm">Seguimiento automático de propiedades</p>
+              <h3 className="text-xl font-bold text-white mb-4">Inmobiliarias</h3>
+              <p className="text-cyan-400 font-semibold mb-2">Leads que valen la pena</p>
+              <p className="text-slate-400 text-sm">Filtrado automático, seguimiento sin esfuerzo, menos tiempo perdido.</p>
             </div>
-            <div className="text-center bg-slate-800/50 p-8 rounded-xl border border-slate-700">
+            <div className="text-center bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-8 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all">
               <div className="text-4xl mb-4">💼</div>
-              <h3 className="text-xl font-bold text-cyan-400 mb-4">Servicios</h3>
-              <p className="text-slate-300 mb-2">Menos tareas administrativas</p>
-              <p className="text-slate-400 text-sm">Clientes más satisfechos</p>
+              <h3 className="text-xl font-bold text-white mb-4">Servicios</h3>
+              <p className="text-cyan-400 font-semibold mb-2">Menos papeleo, más facturar</p>
+              <p className="text-slate-400 text-sm">Agenda automática, recordatorios, menos tareas administrativas.</p>
             </div>
           </div>
 
           <p className="text-center text-slate-500 text-sm mt-8">
-            Los resultados varían según sector y punto de partida. Te mostramos casos reales en la llamada.
+            Cada negocio es diferente. En la llamada vemos qué es realista para tu caso.
           </p>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
         {/* Background Elements */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-40 h-40 bg-blue-400 rounded-full blur-3xl"></div>
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[150px]"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-blue-600/10 rounded-full blur-[120px]"></div>
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿En qué sector operas?
+            ¿Tu sector no está aquí?<br />
+            <span className="text-cyan-400">Da igual, hablemos.</span>
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Cuéntame sobre tu negocio y te muestro exactamente cómo puedo ayudarte a resolver tus problemas específicos.
+          <p className="text-xl mb-4 text-slate-300">
+            Estos son solo ejemplos. Cada negocio tiene sus particularidades.
           </p>
-          <CTAButton
-            href="/contacto/formulario"
-            variant="secondary"
-            size="lg"
-          >
-            Agendar consulta gratuita
-          </CTAButton>
+          <p className="text-lg mb-8 text-slate-400 max-w-2xl mx-auto">
+            Cuéntame qué haces, dónde pierdes tiempo, y te digo si puedo ayudarte.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <a
+              href="/contacto/formulario"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl shadow-xl shadow-cyan-500/25 hover:from-cyan-600 hover:to-blue-700 transition-all hover:scale-105"
+            >
+              Cuéntame sobre tu negocio →
+            </a>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Análisis gratis
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+              Solución a medida
+            </span>
+          </div>
         </div>
       </section>
     </div>
