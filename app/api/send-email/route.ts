@@ -161,7 +161,7 @@ export async function POST(request: NextRequest) {
             
             <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
               <p style="color: #374151; font-size: 16px; line-height: 1.6; margin-top: 0;">
-                Me llamo Mateo y soy el fundador de Neuriax. He recibido tu consulta y estoy revisando tu caso.
+                Somos el equipo de Neuriax. Hemos recibido tu consulta y estamos revisando tu caso.
               </p>
               
               <p style="color: #374151; font-size: 16px; line-height: 1.6;">
@@ -205,8 +205,7 @@ export async function POST(request: NextRequest) {
               
               <p style="color: #374151; font-size: 16px; margin-top: 25px;">
                 ¡Hablamos pronto!<br>
-                <strong>Mateo</strong><br>
-                <span style="color: #6b7280; font-size: 14px;">Fundador de Neuriax</span>
+                <strong>El equipo de Neuriax</strong>
               </p>
             </div>
             
