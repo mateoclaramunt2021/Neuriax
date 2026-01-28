@@ -82,12 +82,26 @@ export default function Contacto() {
             </div>
 
             {/* Trust Statement - Compact */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-slate-300">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-slate-300 mb-8">
               <span>✓ Sin compromiso</span>
               <span className="hidden sm:block text-slate-600">•</span>
               <span>✓ Confidencial</span>
               <span className="hidden sm:block text-slate-600">•</span>
               <span>✓ Plan listo en 24h</span>
+            </div>
+
+            {/* CTA Hero */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link
+                href="https://calendly.com/neuriax/30min"
+                className="group relative inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-lg rounded-full shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
+              >
+                <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                <span className="relative flex items-center gap-2">
+                  <span>Reservar mi llamada gratuita</span>
+                  <span>→</span>
+                </span>
+              </Link>
             </div>
           </div>
         </div>
@@ -216,19 +230,97 @@ export default function Contacto() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* CTA Section */}
-          <div className="text-center mt-12">
+      {/* ========== CTA FINAL - ULTRA PREMIUM ========== */}
+      <section className="py-20 md:py-28 px-6 relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0">
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full filter blur-[150px]"></div>
+          <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full filter blur-[150px]"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Badge de urgencia */}
+          <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="text-green-400 text-sm font-medium">⚡ Solo 5 plazas disponibles este mes</span>
+          </div>
+          
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <span className="text-white">¿Listo para dejar de</span>
+            <br />
+            <span className="bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent">perder clientes?</span>
+          </h2>
+          
+          <p className="text-xl md:text-2xl text-slate-300 mb-4 max-w-2xl mx-auto">
+            En 15-20 minutos te muestro exactamente cómo automatizar tu negocio y multiplicar tus resultados.
+          </p>
+          
+          {/* Qué incluye la llamada */}
+          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-5 border border-slate-700/50">
+              <div className="text-3xl mb-3">🎯</div>
+              <p className="text-white font-semibold">Análisis gratuito</p>
+              <p className="text-slate-400 text-sm">De tu situación actual</p>
+            </div>
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-5 border border-slate-700/50">
+              <div className="text-3xl mb-3">🤖</div>
+              <p className="text-white font-semibold">2-3 automatizaciones</p>
+              <p className="text-slate-400 text-sm">Específicas para ti</p>
+            </div>
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-5 border border-slate-700/50">
+              <div className="text-3xl mb-3">💰</div>
+              <p className="text-white font-semibold">ROI estimado</p>
+              <p className="text-slate-400 text-sm">Cuánto vas a ahorrar</p>
+            </div>
+          </div>
+          
+          {/* CTA Principal */}
+          <div className="mb-8">
             <Link
-              href="/contacto/formulario"
-              className="group relative inline-flex items-center justify-center px-10 md:px-12 py-4 md:py-5 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-base md:text-lg rounded-full shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
+              href="https://calendly.com/neuriax/30min"
+              className="group relative inline-flex items-center justify-center px-12 py-5 bg-gradient-to-r from-cyan-500 via-blue-600 to-cyan-500 hover:from-cyan-600 hover:via-blue-700 hover:to-cyan-600 text-white font-bold text-lg md:text-xl rounded-full shadow-2xl shadow-cyan-500/40 hover:shadow-cyan-500/60 transition-all duration-300 transform hover:scale-105 border border-white/20 overflow-hidden"
             >
               <span className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="relative flex items-center gap-2">
-                <span>Agendar llamada</span>
-                <span>→</span>
+              <span className="relative flex items-center gap-3">
+                <span>Reservar mi llamada gratuita</span>
+                <span className="text-2xl">→</span>
               </span>
             </Link>
+          </div>
+          
+          {/* Trust elements */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-400 mb-10">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Garantía 30 días
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Propuesta en 24h
+            </span>
+          </div>
+          
+          {/* Contacto directo */}
+          <div className="border-t border-slate-800 pt-8">
+            <p className="text-slate-500 text-sm mb-3">¿Prefieres hablar directamente?</p>
+            <a href="tel:+34640791041" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-lg transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              +34 640 791 041
+            </a>
           </div>
         </div>
       </section>
@@ -236,10 +328,10 @@ export default function Contacto() {
       {/* ========== MOBILE STICKY CTA ========== */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 to-slate-950/90 border-t border-slate-800 p-4 z-40">
         <Link
-          href="/contacto/formulario"
+          href="https://calendly.com/neuriax/30min"
           className="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold rounded-lg shadow-lg transition-all transform hover:scale-105 inline-block text-center"
         >
-          Agendar llamada →
+          Reservar llamada gratuita →
         </Link>
       </div>
     </div>
