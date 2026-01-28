@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
+import { checkRateLimit, getClientIP, rateLimitExceededResponse, RATE_LIMIT_CONFIGS } from '@/lib/rate-limit';
 
 const resend = new Resend('re_SkvxdW82_ChjGZRx157xETMZ3ejJfYCg9');
 
@@ -11,6 +12,14 @@ const supabase = createClient(
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting - máximo 3 requests por minuto para formularios de contacto
+    const clientIP = getClientIP(request);
+    const rateLimit = checkRateLimit(`send-email:${clientIP}`, RATE_LIMIT_CONFIGS.contact);
+    
+    if (!rateLimit.allowed) {
+      return rateLimitExceededResponse(rateLimit.resetIn);
+    }
+
     const formData = await request.formData();
     
     const nombre = formData.get('nombre') as string;
