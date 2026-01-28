@@ -5,32 +5,99 @@ export const revalidate = 0; // Force no cache
 export default function QuienSomos() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-black via-slate-950 to-slate-900 text-white py-24 px-6 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+      {/* Hero Section - IMPACTANTE */}
+      <section className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center bg-black overflow-hidden">
+        {/* Animated background effects */}
+        <div className="absolute inset-0">
+          {/* Gradient orbs */}
+          <div className="absolute top-1/4 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-cyan-500/30 rounded-full blur-[100px] md:blur-[150px] animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-blue-600/20 rounded-full blur-[80px] md:blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-purple-500/10 rounded-full blur-[60px] md:blur-[100px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+          
+          {/* Grid pattern */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)`,
+            backgroundSize: '50px 50px'
           }}></div>
+          
+          {/* Radial gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black"></div>
         </div>
 
-        <div className="relative max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-sm font-semibold px-4 py-2 rounded-full mb-8">
-              NUESTRA HISTORIA
+        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/40 rounded-full px-4 py-2 mb-6 md:mb-8 backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              No vendemos sueños,<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">construimos realidades</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">
-              Neuriax nació de una idea simple: la tecnología de verdad debería estar al alcance de cualquier negocio, no solo de las grandes corporaciones.
-            </p>
+            <span className="text-cyan-400 text-xs md:text-sm font-medium tracking-wide">ESTO ES NEURIAX</span>
+          </div>
+
+          {/* Main headline */}
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black mb-6 md:mb-8 leading-[1.1] tracking-tight">
+            <span className="block text-white">No vendemos</span>
+            <span className="block text-white">sueños.</span>
+            <span className="block mt-2 md:mt-4 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 animate-gradient-x">
+              Construimos realidades.
+            </span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto mb-8 md:mb-12 leading-relaxed px-4">
+            La tecnología que transforma negocios <span className="text-cyan-400 font-semibold">no debería ser un privilegio</span>. Debería ser una herramienta.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 md:mb-16 px-4">
+            <a
+              href="/contacto/formulario"
+              className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
+            >
+              <span className="relative z-10">Quiero transformar mi negocio</span>
+              <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
+            <a
+              href="#historia"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all"
+            >
+              Conoce la historia
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
+          </div>
+
+          {/* Stats row */}
+          <div className="grid grid-cols-3 gap-4 md:gap-8 max-w-3xl mx-auto px-4">
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">100%</div>
+              <div className="text-xs sm:text-sm text-slate-400 mt-1">Autodidacta</div>
+            </div>
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">0</div>
+              <div className="text-xs sm:text-sm text-slate-400 mt-1">Promesas vacías</div>
+            </div>
+            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500">∞</div>
+              <div className="text-xs sm:text-sm text-slate-400 mt-1">Compromiso</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce hidden md:block">
+          <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
+            <div className="w-1 h-2 bg-white/50 rounded-full animate-pulse"></div>
           </div>
         </div>
       </section>
 
       {/* La Historia */}
-      <section className="py-24 px-6 bg-slate-900">
+      <section id="historia" className="py-24 px-6 bg-slate-900">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
             <div>
