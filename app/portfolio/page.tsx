@@ -80,12 +80,53 @@ export default function PortfolioPage() {
       {/* Hero */}
       <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Portfolio de diseños web
+          {/* Badge de urgencia */}
+          <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+            <span className="text-cyan-300 text-sm font-medium">Llamada de 15-20 min sin compromiso</span>
+          </div>
+          
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            Webs que <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">venden mientras duermes</span>
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Ejemplos reales de webs profesionales diseñadas para convertir. Cada una optimizada para su industria.
+          <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-4">
+            No hacemos páginas bonitas. Hacemos máquinas de captar clientes.
           </p>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto mb-8">
+            Diseño + SEO local + Automatización. Todo incluido. Resultados desde el primer mes.
+          </p>
+          
+          {/* CTA Hero */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
+              Agendar llamada gratuita →
+            </CTAButton>
+          </div>
+          
+          {/* Trust badges */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              100% confidencial
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Propuesta en 24h
+            </span>
+          </div>
         </div>
       </section>
 
@@ -313,21 +354,86 @@ export default function PortfolioPage() {
       </section>
 
       {/* CTA Final */}
-      <section className="py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-            Quiero una web como estas
+      <section className="py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 relative overflow-hidden">
+        {/* Background decoration */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-0 left-1/4 w-72 h-72 bg-cyan-500 rounded-full filter blur-[128px]"></div>
+          <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-blue-500 rounded-full filter blur-[128px]"></div>
+        </div>
+        
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="text-green-400 text-sm font-medium">⚡ Solo 3 proyectos nuevos al mes</span>
+          </div>
+          
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
+            Tu competencia ya tiene web.
+            <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">¿Cuánto más vas a esperar?</span>
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
-            Agendemos una llamada para diseñar la web perfecta para tu negocio.
+          
+          <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
+            En 15-20 minutos te muestro exactamente cómo sería tu web y qué resultados puedes esperar.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
-              Ver disponibilidad
+          
+          {/* Qué incluye la llamada */}
+          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
+              <div className="text-2xl mb-2">📋</div>
+              <p className="text-white font-semibold text-sm">Diagnóstico gratis</p>
+              <p className="text-gray-400 text-xs">Analizamos tu situación actual</p>
+            </div>
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
+              <div className="text-2xl mb-2">🎨</div>
+              <p className="text-white font-semibold text-sm">Diseño a medida</p>
+              <p className="text-gray-400 text-xs">Te mostramos ejemplos para tu sector</p>
+            </div>
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
+              <div className="text-2xl mb-2">💰</div>
+              <p className="text-white font-semibold text-sm">Presupuesto cerrado</p>
+              <p className="text-gray-400 text-xs">Sin sorpresas ni costes ocultos</p>
+            </div>
+          </div>
+          
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <CTAButton href="https://calendly.com/neuriax/30min" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 text-lg px-8 py-4">
+              Reservar mi llamada gratuita →
             </CTAButton>
-            <CTAButton href="/webs" variant="secondary" size="lg">
-              Volver a Webs
-            </CTAButton>
+          </div>
+          
+          {/* Trust elements */}
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-400 mb-8">
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Sin compromiso
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Garantía 30 días
+            </span>
+            <span className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+              Propuesta en 24h
+            </span>
+          </div>
+          
+          {/* Contacto directo */}
+          <div className="border-t border-gray-800 pt-8">
+            <p className="text-gray-500 text-sm mb-3">¿Prefieres hablar directamente?</p>
+            <a href="tel:+34640791041" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium transition-colors">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              +34 640 791 041
+            </a>
           </div>
         </div>
       </section>
