@@ -146,11 +146,13 @@ export async function POST(request: NextRequest) {
       // ========== ENVIAR EMAIL DE AGRADECIMIENTO AL CLIENTE ==========
       const discountCode = 'BIENVENIDO10';
       
-      await resend.emails.send({
-        from: 'Neuriax <onboarding@resend.dev>',
-        to: email,
-        subject: '🎉 ¡Gracias por contactar con Neuriax! Tu código de descuento',
-        html: `
+      // Intentar enviar email al cliente (puede fallar si el dominio no está verificado)
+      try {
+        const { data: clientEmailData, error: clientEmailError } = await resend.emails.send({
+          from: 'Mateo de Neuriax <onboarding@resend.dev>',
+          to: email,
+          subject: '🎉 ¡Gracias por contactar con Neuriax! Tu código de descuento',
+          html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
             <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
               <h1 style="color: white; margin: 0; font-size: 28px;">¡Hola ${nombre}! 👋</h1>
@@ -213,7 +215,18 @@ export async function POST(request: NextRequest) {
             </p>
           </div>
         `
-      });
+        });
+
+        if (clientEmailError) {
+          console.error('Error enviando email al cliente:', clientEmailError);
+          // No fallamos la request, el email a Mateo ya se envió correctamente
+        } else {
+          console.log('Email de confirmación enviado al cliente:', clientEmailData?.id);
+        }
+      } catch (clientError) {
+        console.error('Error inesperado enviando email al cliente:', clientError);
+        // Continuamos, el email principal a Mateo ya se envió
+      }
 
       return NextResponse.json(
         { message: 'Contacto enviado correctamente', emailId: emailData?.id },
