@@ -96,6 +96,11 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
+        {/* Google Analytics 4 - DEBE cargarse PRIMERO */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
+        />
         {/* Google Consent Mode v2 - Default denied until user consents */}
         <script
           dangerouslySetInnerHTML={{
@@ -118,11 +123,6 @@ export default function RootLayout({
               });
             `,
           }}
-        />
-        {/* Google Analytics 4 */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
         />
         <script
           type="application/ld+json"

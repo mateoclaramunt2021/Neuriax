@@ -42,25 +42,43 @@ export default function CookieBanner() {
   const loadConsentedScripts = (consent: CookieConsent) => {
     // Update Google Consent Mode v2
     if (typeof window !== 'undefined') {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const gtag = (window as any).gtag;
-      
-      if (typeof gtag === 'function') {
-        if (consent.analytics) {
-          gtag('consent', 'update', {
-            'analytics_storage': 'granted'
-          });
-          console.log('[COOKIES] Analytics consent granted');
-        }
+      // Función para actualizar el consentimiento
+      const updateConsent = () => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const gtag = (window as any).gtag;
         
-        if (consent.marketing) {
-          gtag('consent', 'update', {
-            'ad_storage': 'granted',
-            'ad_user_data': 'granted',
-            'ad_personalization': 'granted'
-          });
-          console.log('[COOKIES] Marketing consent granted');
+        if (typeof gtag === 'function') {
+          if (consent.analytics) {
+            gtag('consent', 'update', {
+              'analytics_storage': 'granted'
+            });
+            console.log('[COOKIES] Analytics consent granted');
+          }
+          
+          if (consent.marketing) {
+            gtag('consent', 'update', {
+              'ad_storage': 'granted',
+              'ad_user_data': 'granted',
+              'ad_personalization': 'granted'
+            });
+            console.log('[COOKIES] Marketing consent granted');
+          }
+          return true;
         }
+        return false;
+      };
+
+      // Intentar actualizar inmediatamente
+      if (!updateConsent()) {
+        // Si gtag no está disponible, esperar y reintentar
+        const interval = setInterval(() => {
+          if (updateConsent()) {
+            clearInterval(interval);
+          }
+        }, 100);
+        
+        // Limpiar después de 5 segundos
+        setTimeout(() => clearInterval(interval), 5000);
       }
     }
   };
