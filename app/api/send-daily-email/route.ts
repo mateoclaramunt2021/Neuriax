@@ -85,7 +85,7 @@ export async function GET() {
 
     // Enviar email con Resend
     const { error } = await resend.emails.send({
-      from: 'Mateo de Neuriax <hola@neuriax.com>',
+      from: 'Mateo de Neuriax <mateo@send.neuriax.com>',
       to: 'mateoclaramunt2021@gmail.com',
       subject: `📊 Reporte Diario de Visitantes - ${today.toLocaleDateString('es-ES')}`,
       html: htmlContent,
