@@ -42,7 +42,7 @@ export default function FormularioContacto() {
       });
 
       if (response.ok) {
-        window.location.href = 'https://calendly.com/neuriax/15min';
+        window.location.href = 'https://calendly.com/neuriax/30min';
       } else {
         alert('Hubo un error. Por favor intenta de nuevo.');
       }
