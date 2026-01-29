@@ -47,15 +47,15 @@ export default function Contacto() {
 
             {/* Main Title - HONESTO */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight tracking-tight">
-              <span className="block text-white drop-shadow-lg mb-2">Hablemos sin rodeos.</span>
+              <span className="block text-white drop-shadow-lg mb-2">¿Tu negocio está estancado?</span>
               <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent drop-shadow-xl text-glow-cyan text-3xl md:text-4xl lg:text-5xl mt-4">
-                ¿Te puedo ayudar? Te lo digo ya.
+                Tengo la solución que buscas.
               </span>
             </h1>
 
             {/* Propuesta de valor directa */}
             <p className="text-xl md:text-2xl text-white mb-4 font-semibold max-w-3xl mx-auto">
-              En <span className="text-cyan-300">15 minutos</span> te digo si puedo ayudarte y cuánto costaría
+              En <span className="text-cyan-300">15 minutos</span> descubrirás exactamente qué necesitas para crecer
             </p>
             
             {/* Subtítulo honesto */}
