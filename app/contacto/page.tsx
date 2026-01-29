@@ -55,7 +55,7 @@ export default function Contacto() {
 
             {/* Propuesta de valor directa */}
             <p className="text-xl md:text-2xl text-white mb-4 font-semibold max-w-3xl mx-auto">
-              En <span className="text-cyan-300">15 minutos</span> descubrirás exactamente qué necesitas para crecer
+              En <span className="text-cyan-300">20-30 minutos</span> descubrirás exactamente qué necesitas para crecer
             </p>
             
             {/* Subtítulo honesto */}
