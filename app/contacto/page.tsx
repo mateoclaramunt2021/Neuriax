@@ -91,7 +91,7 @@ export default function Contacto() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-xs sm:text-sm text-slate-300 mb-8">
               <span>✓ Sin letra pequeña</span>
               <span className="hidden sm:block text-slate-600">•</span>
-              <span>✓ Respuesta en 24h</span>
+              <span>✓ Respuesta inmediata</span>
               <span className="hidden sm:block text-slate-600">•</span>
               <span>✓ Garantía de 30 días</span>
             </div>
