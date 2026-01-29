@@ -74,7 +74,7 @@ export default function FormularioContacto() {
   useEffect(() => {
     setTimeout(() => {
       addBotMessage(
-        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
+        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\n**Rellena este formulario para obtener un descuento especial** en nuestros servicios.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
         ['Sí, empecemos']
       );
     }, 500);
@@ -511,7 +511,7 @@ export default function FormularioContacto() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <span>Respuesta en 24h</span>
+                <span>Respuesta inmediata</span>
               </span>
               <span className="flex items-center gap-2 group">
                 <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
