@@ -127,8 +127,14 @@ export default function QuienSomos() {
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-600/20 rounded-3xl blur-2xl"></div>
               <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 border border-slate-700">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full flex items-center justify-center text-2xl font-bold text-white">
-                    M
+                  <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-cyan-500/50">
+                    <Image
+                      src="/assets/images/mateo-ceo.jpg"
+                      alt="Mateo - Fundador"
+                      fill
+                      className="object-cover object-center"
+                      priority
+                    />
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-white">Mateo</h3>
