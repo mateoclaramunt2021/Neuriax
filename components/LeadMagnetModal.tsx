@@ -42,11 +42,20 @@ export default function LeadMagnetModal() {
     setIsLoading(true);
 
     try {
-      // Aquí iría la lógica para guardar el email en tu base de datos o Supabase
-      console.log('Email capturado:', email);
-      
-      // Simulamos el envío
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/lead-magnet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error capturando email');
+      }
+
+      const data = await response.json();
+      console.log('Email capturado exitosamente:', data);
       
       setIsSubmitted(true);
       localStorage.setItem('lead_magnet_dismissed', 'true');
@@ -57,6 +66,7 @@ export default function LeadMagnetModal() {
       }, 3000);
     } catch (error) {
       console.error('Error:', error);
+      alert('Error al procesar tu solicitud. Intenta de nuevo.');
     } finally {
       setIsLoading(false);
     }

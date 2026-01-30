@@ -27,3 +27,11 @@ export interface VisitorEvent {
   datos_adicionales: Record<string, any> | null
   timestamp: string
 }
+
+export interface LeadMagnet {
+  id: number
+  email: string
+  source: string
+  created_at: string
+  updated_at: string
+}
