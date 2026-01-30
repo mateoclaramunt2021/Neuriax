@@ -74,7 +74,7 @@ export default function WebsPage() {
           </div>
 
           {/* Diferenciadores honestos */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto px-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto px-4">
             <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
               <div className="text-xl font-bold text-cyan-400">Desde 790€</div>
               <div className="text-sm text-slate-400">Precio cerrado, sin sorpresas</div>
@@ -82,10 +82,6 @@ export default function WebsPage() {
             <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
               <div className="text-xl font-bold text-cyan-400">15 días</div>
               <div className="text-sm text-slate-400">De brief a web publicada</div>
-            </div>
-            <div className="text-center p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10">
-              <div className="text-xl font-bold text-cyan-400">Soporte real</div>
-              <div className="text-sm text-slate-400">No desaparezco después</div>
             </div>
           </div>
         </div>
