@@ -115,44 +115,7 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* Google Consent Mode v2 - DEBE ir ANTES de gtag.js */}
-        <Script id="google-consent-mode" strategy="beforeInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            
-            // Cargar preferencias guardadas ANTES de configurar consent
-            var analyticsGranted = false;
-            var marketingGranted = false;
-            try {
-              var saved = localStorage.getItem('cookie_consent_v1');
-              if (saved) {
-                var prefs = JSON.parse(saved);
-                analyticsGranted = prefs.analytics === true;
-                marketingGranted = prefs.marketing === true;
-              }
-            } catch(e) {}
-            
-            // Configuración inicial de Consent Mode v2
-            gtag('consent', 'default', {
-              'ad_storage': marketingGranted ? 'granted' : 'denied',
-              'ad_user_data': marketingGranted ? 'granted' : 'denied',
-              'ad_personalization': marketingGranted ? 'granted' : 'denied',
-              'analytics_storage': analyticsGranted ? 'granted' : 'denied'
-            });
-          `}
-        </Script>
-        {/* Google Analytics gtag.js */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-JK6XH4LZ3C"
-          strategy="beforeInteractive"
-        />
-        <Script id="google-analytics" strategy="beforeInteractive">
-          {`
-            gtag('js', new Date());
-            gtag('config', 'G-JK6XH4LZ3C');
-          `}
-        </Script>
+
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -169,8 +132,9 @@ export default function RootLayout({
         <Chatbot />
         <ScheduleCallButton />
         <VisitorForm />
-        {/* Vercel Analytics - Works independently from consent preferences */}
-        <Analytics mode="production" />{/* Supabase PageTracker depends on cookie consent */}
+        {/* Vercel Analytics - Recopila datos de rendimiento y visitas */}
+        <Analytics mode="production" />
+        {/* Supabase PageTracker depends on cookie consent */}
       </body>
     </html>
   );
