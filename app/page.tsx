@@ -1,6 +1,7 @@
 import CTAButton from "../components/CTAButton";
 import VideoSection from "../components/VideoSection";
 import ProblemCard from "../components/ProblemCard";
+import NeuroWelcomeModal from "../components/NeuroWelcomeModal";
 import Image from "next/image";
 import { Metadata } from "next";
 
@@ -47,6 +48,8 @@ export default function Home() {
   ];
 
   return (
+    <>
+      <NeuroWelcomeModal />
     <div className="min-h-screen bg-black text-white">
       {/* Schema para FAQ */}
       <script
@@ -700,5 +703,6 @@ export default function Home() {
         </div>
       </section>
     </div>
+    </>
   );
 }
