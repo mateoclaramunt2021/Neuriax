@@ -10,6 +10,7 @@ import ScheduleCallButton from "../components/ScheduleCallButton";
 import { PageTracker } from "../components/PageTracker";
 import VisitorForm from "../components/VisitorForm";
 import CookieBanner from "../components/CookieBanner";
+import LeadMagnetModal from "../components/LeadMagnetModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -134,6 +135,8 @@ export default function RootLayout({
         <VisitorForm />
         {/* Vercel Analytics - Recopila datos de rendimiento y visitas */}
         <Analytics mode="production" />
+        {/* Lead Magnet Modal para captar emails */}
+        <LeadMagnetModal />
         {/* Supabase PageTracker depends on cookie consent */}
       </body>
     </html>

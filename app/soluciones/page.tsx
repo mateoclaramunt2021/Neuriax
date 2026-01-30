@@ -51,13 +51,13 @@ export default function Soluciones() {
             No prometo resultados mágicos. Sí puedo <span className="text-cyan-400 font-semibold">analizar tus procesos</span>, encontrar dónde pierdes tiempo, y automatizar lo que tiene sentido automatizar.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons - MEJORADO CON URGENCIA */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 md:mb-16 px-4">
             <a
               href="/contacto/formulario"
               className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-xl overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/30"
             >
-              <span className="relative z-10">Analizar mi negocio gratis</span>
+              <span className="relative z-10">🚀 Descubrir Ahorros Reales (Auditoría Gratis)</span>
               <svg className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -66,7 +66,7 @@ export default function Soluciones() {
               href="#soluciones"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 backdrop-blur-sm text-white font-semibold rounded-xl border border-white/10 hover:bg-white/10 transition-all"
             >
-              Ver soluciones
+              ✓ Ver soluciones específicas
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>

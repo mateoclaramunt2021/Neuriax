@@ -14,15 +14,35 @@ export default function Home() {
   const faqs = [
     {
       question: "¿Cómo sé si la automatización con IA me conviene?",
-      answer: "Te lo digo yo directamente en la llamada. Si tu negocio tiene procesos repetitivos (responder emails, gestionar citas, seguimiento de clientes), probablemente sí. Si no, te lo digo sin problema."
+      answer: "Pasas más de 5 horas a la semana en emails, seguimiento o tareas repetitivas. Si es tu caso, probablemente sí. En la llamada te lo confirmo sin compromiso. Si no tiene sentido, te lo digo directamente."
+    },
+    {
+      question: "¿Cuánto cuesta realmente?",
+      answer: "Webs profesionales: desde 790€ (lista en 15 días, incluye dominio, hosting y soporte 1 año). Automatizaciones: depende de complejidad, pero te doy precio exacto ANTES de empezar, sin sorpresas ni letra pequeña."
+    },
+    {
+      question: "¿Cuánto tiempo tarda ver resultados?",
+      answer: "Webs: en 15 días tienes tu sitio online. SEO local real toma 30-60 días para ver cambios. Automatizaciones: si están bien diseñadas, funcionan desde el primer día."
+    },
+    {
+      question: "¿Qué pasa si no funciona?",
+      answer: "Garantía 30 días. Si después de implementado no te da los resultados que esperas, devolvemos tu dinero. Sin preguntas. Pero lo normal es que funcione porque está medido antes de empezar."
     },
     {
       question: "¿Por qué no usas WordPress?",
-      answer: "WordPress está bien para blogs, pero para webs de negocio que necesitan velocidad, SEO real y mantenimiento mínimo, uso tecnología moderna (Next.js). Carga más rápido, posiciona mejor y no necesitas actualizaciones constantes."
+      answer: "WordPress está bien para blogs, pero para webs que necesitan velocidad, SEO real y mantenimiento cero, uso tecnología moderna (Next.js). Carga 10x más rápido, posiciona mejor en Google y no necesita actualizaciones constantes que la rompan."
     },
     {
-      question: "¿Cuánto cuesta y cuánto tardas?",
-      answer: "Webs desde 790€, lista en 15 días. Automatizaciones dependen de la complejidad. En la llamada te doy precio exacto antes de empezar, sin sorpresas ni letra pequeña."
+      question: "¿Necesito experiencia técnica?",
+      answer: "No. Te enseño a usar todo lo que construimos. Además, si tienes dudas después, estoy disponible para ayudarte o resolverlo yo mismo. No te abandono después del pago."
+    },
+    {
+      question: "¿Cuáles son los pasos para empezar?",
+      answer: "Paso 1: Llamada de 15-30 min (gratis, sin compromiso). Paso 2: Te muestro opciones y presupuesto exacto. Paso 3: Si continúas, empezamos. Fácil, sin sorpresas."
+    },
+    {
+      question: "¿Qué empresas puedo automatizar?",
+      answer: "Cualquier empresa con procesos repetitivos: desde peluquerías (reservas automáticas) hasta consultoría (propuestas y seguimiento). Restaurantes, clínicas, reformas, abogados... Habla conmigo tu caso específico."
     },
   ];
 
@@ -124,13 +144,13 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* CTA Buttons */}
+              {/* CTA Buttons - CON URGENCIA */}
               <div className="flex flex-col sm:flex-row gap-3 mb-6 fade-in-up" style={{ animationDelay: '0.6s' }}>
                 <a 
                   href="/contacto/formulario" 
                   className="btn-shimmer group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700 shadow-lg shadow-cyan-500/15 hover:shadow-cyan-500/25 hover:scale-[1.02]"
                 >
-                  <span>Agenda tu Consulta Gratuita</span>
+                  <span>🎯 Ver mi Potencial en 15 Minutos</span>
                   <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -139,11 +159,17 @@ export default function Home() {
                   href="#problemas" 
                   className="group inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/[0.03] border border-white/10 hover:border-white/20 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700"
                 >
-                  <span>Ver Soluciones</span>
+                  <span>Soluciones que funcionan</span>
                   <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </a>
+              </div>
+              
+              {/* Indicator de urgencia - Solo 2 slots */}
+              <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-2 mb-6 fade-in-up" style={{ animationDelay: '0.75s' }}>
+                <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                <span className="text-red-300 text-sm font-medium">⏰ Últimos 2 slots disponibles este mes</span>
               </div>
 
               {/* Trust indicators */}
@@ -557,8 +583,59 @@ export default function Home() {
         </div>
       </section>
 
+      {/* GARANTÍA Y CONFIANZA - Nueva sección */}
+      <section className="py-16 px-6 bg-slate-900/50 border-t border-b border-slate-800">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-6">
+            {/* Garantía */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-500/20 rounded-lg mb-4">
+                <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m7 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-white mb-2">Garantía 30 días</h3>
+              <p className="text-gray-400 text-sm">Si no ves resultados, devolvemos tu dinero. Sin preguntas.</p>
+            </div>
+            
+            {/* Precios claros */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-lg mb-4">
+                <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-white mb-2">Precios Transparentes</h3>
+              <p className="text-gray-400 text-sm">Webs desde 790€. Automatizaciones a medida. Sin sorpresas.</p>
+            </div>
+            
+            {/* Soporte directo */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-cyan-500/20 rounded-lg mb-4">
+                <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-white mb-2">Hablas Directamente Conmigo</h3>
+              <p className="text-gray-400 text-sm">Sin intermediarios, sin equipos de ventas. Yo respondo.</p>
+            </div>
+            
+            {/* Resultados medibles */}
+            <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-500/20 rounded-lg mb-4">
+                <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="font-semibold text-white mb-2">Resultados Medibles</h3>
+              <p className="text-gray-400 text-sm">Métricas claras, entrega documentada, sin humo.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA Final */}
-      <section className="relative py-20 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
+      <section className="relative py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
@@ -567,22 +644,58 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-4xl mx-auto text-center text-white">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            ¿Tiene sentido automatizar tu negocio?
+          <div className="inline-flex items-center gap-2 bg-green-500/10 border border-green-500/30 rounded-full px-4 py-2 mb-6">
+            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            <span className="text-green-300 text-sm font-medium">✓ Garantía 30 días • Sin compromiso</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-6xl font-black mb-6">
+            ¿Listo para crecer de verdad?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            Si encaja, te lo diremos. Y si no, también.
+          
+          <p className="text-xl mb-4 text-gray-300">
+            15 minutos de llamada te muestran si tiene sentido. Si no, no gastamos más tiempo.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          
+          <p className="text-lg mb-10 font-semibold text-cyan-300">
+            Últimos 2 slots disponibles este mes.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white border-0 shadow-xl">
-              Mantener una llamada clara
+              🎯 Agendar Auditoría Gratuita
             </CTAButton>
             <CTAButton href="/webs" variant="secondary" size="lg">
-              Ver opciones de web
+              👁️ Ver planes de web
             </CTAButton>
           </div>
-          <p className="text-sm opacity-75">
-            Sin compromiso • Análisis personalizado • Soluciones a medida
+          
+          <div className="grid md:grid-cols-3 gap-6 text-left max-w-2xl mx-auto mb-8">
+            <div className="flex gap-3">
+              <span className="text-cyan-400 font-bold text-lg flex-shrink-0">✓</span>
+              <div>
+                <p className="text-white font-semibold">Sin compromiso</p>
+                <p className="text-gray-400 text-sm">Hablas, ves opciones y decides</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-cyan-400 font-bold text-lg flex-shrink-0">✓</span>
+              <div>
+                <p className="text-white font-semibold">15-30 minutos</p>
+                <p className="text-gray-400 text-sm">Llamada enfocada y clara</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <span className="text-cyan-400 font-bold text-lg flex-shrink-0">✓</span>
+              <div>
+                <p className="text-white font-semibold">Hablamos directo</p>
+                <p className="text-gray-400 text-sm">Yo respondo, sin intermediarios</p>
+              </div>
+            </div>
+          </div>
+          
+          <p className="text-xs text-gray-500 font-medium">
+            Casos de éxito reales • Precios transparentes • Garantía de 30 días
           </p>
         </div>
       </section>
