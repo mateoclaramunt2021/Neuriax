@@ -8,14 +8,14 @@ export default function LeadMagnetModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mostrar modal después de 45 segundos o cuando intenten salir
+  // Mostrar modal después de 2 segundos (casi inmediatamente) o cuando intenten salir
   useEffect(() => {
     // Mostrar después de tiempo
     const timer = setTimeout(() => {
       if (!localStorage.getItem('lead_magnet_dismissed')) {
         setShowModal(true);
       }
-    }, 45000);
+    }, 2000);
 
     // Mostrar si intenta salir (mouse sale de la ventana)
     const handleMouseLeave = () => {
