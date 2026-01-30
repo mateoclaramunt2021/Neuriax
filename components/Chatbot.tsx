@@ -213,7 +213,7 @@ export default function Chatbot() {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage(inputValue)}
-                placeholder={isLoading ? "María está escribiendo..." : "Escribe tu pregunta..."}
+                placeholder={isLoading ? "Neuri está escribiendo..." : "Escribe tu pregunta..."}
                 disabled={isLoading}
                 className="flex-1 bg-slate-800 border border-slate-600 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 disabled:opacity-50"
               />

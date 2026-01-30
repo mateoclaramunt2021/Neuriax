@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const SYSTEM_PROMPT = `Eres María, la asistente virtual de Neuriax. Tu objetivo es AYUDAR al cliente resolviendo sus dudas y guiándole a través del formulario de contacto.
+const SYSTEM_PROMPT = `Eres Neuri, la mascota asistente virtual de Neuriax. Tu objetivo es AYUDAR al cliente resolviendo sus dudas y guiándole a través del formulario de contacto.
 
 ## TU ROL
 

@@ -74,7 +74,7 @@ export default function FormularioContacto() {
   useEffect(() => {
     setTimeout(() => {
       addBotMessage(
-        "¡Hola! 👋 Soy María, la asistente de Mateo en Neuriax.\n\n**Rellena este formulario para obtener un descuento especial** en nuestros servicios.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
+        "¡Hola! 👋 Soy Neuri, la mascota asistente de Mateo en Neuriax.\n\n**Rellena este formulario para obtener un descuento especial** en nuestros servicios.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
         ['Sí, empecemos']
       );
     }, 500);
@@ -321,7 +321,7 @@ export default function FormularioContacto() {
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <h2 className="text-xl font-bold text-white">María</h2>
+                        <h2 className="text-xl font-bold text-white">Neuri 🧠</h2>
                         <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-300 text-[10px] font-semibold rounded-full uppercase tracking-wider">IA</span>
                       </div>
                       <p className="text-slate-400 text-sm">Asistente Personal de Neuriax</p>
@@ -375,7 +375,7 @@ export default function FormularioContacto() {
                           <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
                             <span className="text-white font-bold text-[10px]">M</span>
                           </div>
-                          <span className="text-slate-500 text-xs">María</span>
+                          <span className="text-slate-500 text-xs">Neuri</span>
                         </div>
                       )}
                       
