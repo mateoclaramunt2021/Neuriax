@@ -98,21 +98,31 @@ export default function LeadMagnetModal() {
       />
 
       {/* Modal */}
-      <div className="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-2xl p-8 md:p-12 max-w-md w-full border border-cyan-500/30 shadow-2xl shadow-cyan-500/20 animate-in fade-in zoom-in-95">
-        {/* Close button */}
-        <button
-          onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-300 transition-colors"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+      <div className="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-2xl overflow-hidden max-w-md w-full border border-cyan-500/30 shadow-2xl shadow-cyan-500/20 animate-in fade-in zoom-in-95">
+        {/* Top Banner - Oferta una sola vez */}
+        <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 px-6 py-3 text-center border-b border-red-500/50">
+          <p className="text-white font-bold text-sm flex items-center justify-center gap-2">
+            <span className="text-lg">⏰</span>
+            Esta oferta solo aparece <span className="text-yellow-300 underline">UNA VEZ</span>
+          </p>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-8 md:p-12">
+          {/* Close button */}
+          <button
+            onClick={handleClose}
+            className="absolute top-6 right-6 text-gray-500 hover:text-gray-300 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
 
         {!isSubmitted ? (
           <>
@@ -191,6 +201,7 @@ export default function LeadMagnetModal() {
             </div>
           </>
         )}
+        </div>
       </div>
     </div>
   );
