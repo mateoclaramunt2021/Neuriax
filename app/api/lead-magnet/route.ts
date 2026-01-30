@@ -82,12 +82,12 @@ export async function POST(request: NextRequest) {
                     </div>
 
                     <p style="text-align: center;">
-                      <a href="https://neuriax.com/guias/7-secretos-automatizacion.pdf" class="cta">📥 Descargar Guía (PDF)</a>
+                      <a href="https://neuriax.com/guias/7-secretos-automatizacion.html" class="cta">📥 Descargar Guía</a>
                     </p>
 
                     <p><strong>¿No ves el enlace?</strong> Copia y pega en tu navegador:</p>
                     <p style="background: #e5e7eb; padding: 10px; border-radius: 4px; word-break: break-all; font-size: 12px;">
-                      https://neuriax.com/guias/7-secretos-automatizacion.pdf
+                      https://neuriax.com/guias/7-secretos-automatizacion.html
                     </p>
 
                     <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
