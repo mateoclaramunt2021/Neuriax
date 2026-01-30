@@ -27,6 +27,18 @@ export default function NeuroWelcomeModal() {
     setTimeout(() => setIsOpen(false), 300);
   };
 
+  // Cerrar modal al hacer scroll
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleScroll = () => {
+      handleClose();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -41,7 +53,7 @@ export default function NeuroWelcomeModal() {
 
       {/* Modal container */}
       <div
-        className={`relative z-50 w-full max-w-5xl transition-all duration-300 ${
+        className={`relative z-50 w-full max-w-5xl transition-all duration-300 max-h-[90vh] overflow-y-auto ${
           isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
         }`}
         onClick={(e) => e.stopPropagation()}
