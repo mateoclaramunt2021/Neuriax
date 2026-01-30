@@ -2,15 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sparkles, PerspectiveCamera } from '@react-three/drei';
-import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { Sparkles, PerspectiveCamera, MeshTransmissionMaterial } from '@react-three/drei';
+import { Bloom, EffectComposer, ChromaticAberration } from '@react-three/postprocessing';
 import * as THREE from 'three';
 
-// Componente realista de Neuri - Humanoide 3D
-function RealisticNeuri() {
+// Robot realista y perfecto
+function RealisticRobotNeuri() {
   const groupRef = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Mesh>(null);
-  const bodyRef = useRef<THREE.Mesh>(null);
+  const leftArmRef = useRef<THREE.Group>(null);
+  const rightArmRef = useRef<THREE.Group>(null);
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
 
@@ -24,371 +25,548 @@ function RealisticNeuri() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  useFrame(() => {
+  useFrame(({ clock }) => {
     if (groupRef.current) {
-      // Seguimiento suave del mouse
-      groupRef.current.rotation.y += (mouseX * 0.6 - groupRef.current.rotation.y) * 0.08;
-      groupRef.current.rotation.x += (mouseY * 0.2 - groupRef.current.rotation.x) * 0.08;
+      // Rotación suave controlada por mouse
+      groupRef.current.rotation.y += (mouseX * 0.8 - groupRef.current.rotation.y) * 0.1;
+      groupRef.current.rotation.x += (mouseY * 0.3 - groupRef.current.rotation.x) * 0.1;
 
-      // Movimiento flotante más natural
-      groupRef.current.position.y = Math.sin(Date.now() * 0.0003) * 0.15;
+      // Movimiento flotante sutil
+      groupRef.current.position.y = Math.sin(clock.getElapsedTime() * 0.5) * 0.12;
 
-      // Ligero balanceo
+      // Rotación de cabeza independiente
       if (headRef.current) {
-        headRef.current.rotation.z = Math.sin(Date.now() * 0.0004) * 0.1;
+        headRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.6) * 0.08;
+        headRef.current.rotation.y = Math.cos(clock.getElapsedTime() * 0.7) * 0.12;
+      }
+
+      // Movimiento de brazos coordinado
+      if (leftArmRef.current) {
+        leftArmRef.current.rotation.z = Math.sin(clock.getElapsedTime() * 0.8) * 0.25;
+      }
+      if (rightArmRef.current) {
+        rightArmRef.current.rotation.z = Math.cos(clock.getElapsedTime() * 0.8) * 0.25;
       }
     }
   });
 
-  // Materiales realistas
-  const skinMaterial = new THREE.MeshStandardMaterial({
-    color: '#e8d4c4',
-    emissive: '#d4b5a0',
-    emissiveIntensity: 0.1,
-    metalness: 0,
-    roughness: 0.8,
-    map: undefined,
+  // Materiales metallic premium
+  const metalBlack = new THREE.MeshStandardMaterial({
+    color: '#0a0a0a',
+    metalness: 0.95,
+    roughness: 0.1,
+    envMapIntensity: 1.2,
   });
 
-  const cyberMaterial = new THREE.MeshStandardMaterial({
-    color: '#00d9ff',
-    emissive: '#0088ff',
-    emissiveIntensity: 0.6,
-    metalness: 0.8,
-    roughness: 0.2,
-  });
-
-  const eyeMaterial = new THREE.MeshStandardMaterial({
+  const metalCyan = new THREE.MeshStandardMaterial({
     color: '#00ffff',
     emissive: '#00bfff',
-    emissiveIntensity: 1,
+    emissiveIntensity: 0.8,
     metalness: 0.9,
-    roughness: 0.05,
+    roughness: 0.1,
   });
 
-  const clothMaterial = new THREE.MeshStandardMaterial({
-    color: '#1a2a4a',
-    emissive: '#0055aa',
-    emissiveIntensity: 0.2,
+  const glassBlue = new THREE.MeshStandardMaterial({
+    color: '#0044ff',
+    emissive: '#0066ff',
+    emissiveIntensity: 1,
     metalness: 0.3,
-    roughness: 0.7,
+    roughness: 0.1,
+    transparent: true,
+    opacity: 0.8,
+  });
+
+  const plasticWhite = new THREE.MeshStandardMaterial({
+    color: '#f5f5f5',
+    metalness: 0.2,
+    roughness: 0.5,
   });
 
   return (
-    <group ref={groupRef} position={[0, -0.3, 0]}>
-      {/* CUERPO PRINCIPAL */}
+    <group ref={groupRef} position={[0, -0.2, 0]} scale={1.1}>
+      {/* ========== TORSO PRINCIPAL ========== */}
       
-      {/* Torso - Cápsula redondeada */}
-      <mesh ref={bodyRef} position={[0, 0, 0]}>
-        <capsuleGeometry args={[0.35, 1, 8, 16]} />
-        <primitive object={clothMaterial} attach="material" />
+      {/* Cuerpo principal - Forma cilíndrica mejorada */}
+      <mesh position={[0, 0.2, 0]}>
+        <capsuleGeometry args={[0.32, 0.95, 8, 20]} />
+        <primitive object={metalBlack} attach="material" />
       </mesh>
 
-      {/* Pecho con detalles cyber */}
-      <mesh position={[0, 0.15, 0.36]}>
-        <boxGeometry args={[0.4, 0.5, 0.05]} />
-        <primitive object={cyberMaterial} attach="material" />
+      {/* Placa frontal del torso */}
+      <mesh position={[0, 0.2, 0.35]}>
+        <boxGeometry args={[0.38, 0.9, 0.08]} />
+        <meshStandardMaterial
+          color="#1a1a2e"
+          metalness={0.6}
+          roughness={0.2}
+          emissive="#001a33"
+          emissiveIntensity={0.3}
+        />
       </mesh>
 
-      {/* Panel cyber en pecho */}
-      <mesh position={[0, 0.15, 0.38]}>
-        <boxGeometry args={[0.25, 0.3, 0.02]} />
+      {/* Panel LED frontal grande - CORAZÓN DEL ROBOT */}
+      <mesh position={[0, 0.25, 0.38]}>
+        <boxGeometry args={[0.22, 0.35, 0.02]} />
+        <meshStandardMaterial
+          color="#0055ff"
+          emissive="#00aaff"
+          emissiveIntensity={1.2}
+          metalness={0.8}
+          roughness={0.05}
+        />
+      </mesh>
+
+      {/* Líneas de código/LED en el panel */}
+      {[0, 0.08, 0.16].map((y) => (
+        <mesh key={`led-line-${y}`} position={[0, 0.25 + y - 0.12, 0.39]}>
+          <boxGeometry args={[0.18, 0.04, 0.01]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#00ffff"
+            emissiveIntensity={0.9}
+          />
+        </mesh>
+      ))}
+
+      {/* Divisiones laterales del torso */}
+      {[-0.16, 0.16].map((x) => (
+        <mesh key={`torso-line-${x}`} position={[x, 0.2, 0.36]}>
+          <boxGeometry args={[0.03, 0.9, 0.1]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0088ff"
+            emissiveIntensity={0.6}
+          />
+        </mesh>
+      ))}
+
+      {/* ========== CABEZA ========== */}
+
+      {/* Base de cabeza - Cubo redondeado */}
+      <mesh ref={headRef} position={[0, 1.15, 0]}>
+        <boxGeometry args={[0.38, 0.42, 0.38]} />
+        <primitive object={metalBlack} attach="material" />
+      </mesh>
+
+      {/* Visera/pantalla frontal - Vidrio azul */}
+      <mesh position={[0, 1.15, 0.22]}>
+        <boxGeometry args={[0.42, 0.38, 0.04]} />
+        <primitive object={glassBlue} attach="material" />
+      </mesh>
+
+      {/* Display de ojos - Panel LED */}
+      <mesh position={[0, 1.15, 0.24]}>
+        <boxGeometry args={[0.36, 0.32, 0.02]} />
+        <meshStandardMaterial
+          color="#0033ff"
+          emissive="#0088ff"
+          emissiveIntensity={1}
+          metalness={0.9}
+          roughness={0.05}
+        />
+      </mesh>
+
+      {/* Ojo izquierdo - Pantalla digital */}
+      <mesh position={[-0.12, 1.15, 0.25]}>
+        <circleGeometry args={[0.1, 32]} />
         <meshStandardMaterial
           color="#00ffff"
           emissive="#00ffff"
-          emissiveIntensity={0.8}
+          emissiveIntensity={1.3}
+          metalness={0.95}
+          roughness={0}
+        />
+      </mesh>
+
+      {/* Pupila izquierda dinámica */}
+      <mesh position={[-0.12, 1.15, 0.26]} rotation={[0, 0, Math.PI / 4]}>
+        <boxGeometry args={[0.035, 0.08, 0.02]} />
+        <meshStandardMaterial
+          color="#000000"
           metalness={1}
           roughness={0}
         />
       </mesh>
 
-      {/* CABEZA */}
-      
-      {/* Estructura de cabeza */}
-      <mesh ref={headRef} position={[0, 1.1, 0]}>
-        <sphereGeometry args={[0.38, 32, 32]} />
-        <primitive object={skinMaterial} attach="material" />
-      </mesh>
-
-      {/* Órbita de ojo izquierdo */}
-      <mesh position={[-0.15, 1.2, 0.35]}>
-        <sphereGeometry args={[0.12, 32, 32]} />
-        <meshStandardMaterial color="#0a1a2a" metalness={0.2} roughness={0.8} />
-      </mesh>
-
-      {/* Ojo izquierdo - Blanco */}
-      <mesh position={[-0.15, 1.2, 0.38]}>
-        <sphereGeometry args={[0.1, 32, 32]} />
-        <meshStandardMaterial
-          color="#ffffff"
-          metalness={0.1}
-          roughness={0.3}
-        />
-      </mesh>
-
-      {/* Iris izquierdo */}
-      <mesh position={[-0.15, 1.2, 0.42]}>
-        <sphereGeometry args={[0.065, 32, 32]} />
-        <primitive object={eyeMaterial} attach="material" />
-      </mesh>
-
-      {/* Pupila izquierda */}
-      <mesh position={[-0.15, 1.2, 0.45]}>
-        <sphereGeometry args={[0.035, 32, 32]} />
-        <meshStandardMaterial color="#000000" metalness={1} roughness={0} />
-      </mesh>
-
-      {/* Órbita de ojo derecho */}
-      <mesh position={[0.15, 1.2, 0.35]}>
-        <sphereGeometry args={[0.12, 32, 32]} />
-        <meshStandardMaterial color="#0a1a2a" metalness={0.2} roughness={0.8} />
-      </mesh>
-
-      {/* Ojo derecho - Blanco */}
-      <mesh position={[0.15, 1.2, 0.38]}>
-        <sphereGeometry args={[0.1, 32, 32]} />
-        <meshStandardMaterial
-          color="#ffffff"
-          metalness={0.1}
-          roughness={0.3}
-        />
-      </mesh>
-
-      {/* Iris derecho */}
-      <mesh position={[0.15, 1.2, 0.42]}>
-        <sphereGeometry args={[0.065, 32, 32]} />
-        <primitive object={eyeMaterial} attach="material" />
-      </mesh>
-
-      {/* Pupila derecha */}
-      <mesh position={[0.15, 1.2, 0.45]}>
-        <sphereGeometry args={[0.035, 32, 32]} />
-        <meshStandardMaterial color="#000000" metalness={1} roughness={0} />
-      </mesh>
-
-      {/* Boca - Línea elegante */}
-      <mesh position={[0, 0.85, 0.37]}>
-        <boxGeometry args={[0.15, 0.02, 0.02]} />
+      {/* Ojo derecho - Pantalla digital */}
+      <mesh position={[0.12, 1.15, 0.25]}>
+        <circleGeometry args={[0.1, 32]} />
         <meshStandardMaterial
           color="#00ffff"
           emissive="#00ffff"
-          emissiveIntensity={0.5}
+          emissiveIntensity={1.3}
+          metalness={0.95}
+          roughness={0}
         />
       </mesh>
 
-      {/* BRAZOS */}
-
-      {/* Brazo izquierdo */}
-      <mesh position={[-0.6, 0.4, 0]} rotation={[0, 0, 0.3]}>
-        <capsuleGeometry args={[0.15, 0.8, 6, 12]} />
-        <primitive object={clothMaterial} attach="material" />
-      </mesh>
-
-      {/* Antebrazo izquierdo - Cyber */}
-      <mesh position={[-0.95, -0.05, 0]}>
-        <capsuleGeometry args={[0.14, 0.7, 6, 12]} />
-        <primitive object={cyberMaterial} attach="material" />
-      </mesh>
-
-      {/* Mano izquierda */}
-      <mesh position={[-1.2, -0.4, 0]}>
-        <sphereGeometry args={[0.18, 32, 32]} />
+      {/* Pupila derecha dinámica */}
+      <mesh position={[0.12, 1.15, 0.26]} rotation={[0, 0, Math.PI / 4]}>
+        <boxGeometry args={[0.035, 0.08, 0.02]} />
         <meshStandardMaterial
-          color="#d4a574"
-          emissive="#b8935a"
-          emissiveIntensity={0.1}
-          metalness={0}
-          roughness={0.7}
+          color="#000000"
+          metalness={1}
+          roughness={0}
         />
       </mesh>
 
-      {/* Dedos izquierdos - Líneas cyber */}
-      {[0, 1, 2].map((i) => (
-        <mesh key={`finger-left-${i}`} position={[-1.3, -0.5 - i * 0.12, -0.15 + i * 0.08]}>
-          <boxGeometry args={[0.08, 0.25, 0.06]} />
-          <primitive object={cyberMaterial} attach="material" />
+      {/* Antena/sensor en la cabeza */}
+      <mesh position={[0, 1.35, 0]}>
+        <cylinderGeometry args={[0.03, 0.02, 0.25, 16]} />
+        <primitive object={metalCyan} attach="material" />
+      </mesh>
+
+      {/* Bola sensor */}
+      <mesh position={[0, 1.48, 0]}>
+        <sphereGeometry args={[0.05, 32, 32]} />
+        <meshStandardMaterial
+          color="#00ffff"
+          emissive="#00ffff"
+          emissiveIntensity={1.2}
+          metalness={1}
+          roughness={0.05}
+        />
+      </mesh>
+
+      {/* ========== BRAZOS ========== */}
+
+      {/* Brazo izquierdo completo */}
+      <group ref={leftArmRef} position={[-0.45, 0.5, 0]}>
+        {/* Hombro articulado */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[0.12, 32, 32]} />
+          <primitive object={metalBlack} attach="material" />
         </mesh>
-      ))}
 
-      {/* Brazo derecho */}
-      <mesh position={[0.6, 0.4, 0]} rotation={[0, 0, -0.3]}>
-        <capsuleGeometry args={[0.15, 0.8, 6, 12]} />
-        <primitive object={clothMaterial} attach="material" />
-      </mesh>
-
-      {/* Antebrazo derecho - Cyber */}
-      <mesh position={[0.95, -0.05, 0]}>
-        <capsuleGeometry args={[0.14, 0.7, 6, 12]} />
-        <primitive object={cyberMaterial} attach="material" />
-      </mesh>
-
-      {/* Mano derecha */}
-      <mesh position={[1.2, -0.4, 0]}>
-        <sphereGeometry args={[0.18, 32, 32]} />
-        <meshStandardMaterial
-          color="#d4a574"
-          emissive="#b8935a"
-          emissiveIntensity={0.1}
-          metalness={0}
-          roughness={0.7}
-        />
-      </mesh>
-
-      {/* Dedos derechos - Líneas cyber */}
-      {[0, 1, 2].map((i) => (
-        <mesh key={`finger-right-${i}`} position={[1.3, -0.5 - i * 0.12, -0.15 + i * 0.08]}>
-          <boxGeometry args={[0.08, 0.25, 0.06]} />
-          <primitive object={cyberMaterial} attach="material" />
+        {/* Articulación visible */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[0.14, 32, 32]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0088ff"
+            emissiveIntensity={0.5}
+            metalness={0.8}
+            roughness={0.15}
+          />
         </mesh>
-      ))}
 
-      {/* PIERNAS */}
+        {/* Brazo superior */}
+        <mesh position={[-0.2, -0.25, 0]}>
+          <capsuleGeometry args={[0.1, 0.5, 6, 12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
 
-      {/* Muslo izquierdo */}
-      <mesh position={[-0.2, -0.6, 0]}>
-        <capsuleGeometry args={[0.16, 0.7, 7, 12]} />
-        <primitive object={clothMaterial} attach="material" />
+        {/* Detalle de brazo */}
+        <mesh position={[-0.2, -0.25, 0.1]}>
+          <boxGeometry args={[0.15, 0.5, 0.03]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0066ff"
+            emissiveIntensity={0.4}
+          />
+        </mesh>
+
+        {/* Codo articulado */}
+        <mesh position={[-0.3, -0.55, 0]}>
+          <sphereGeometry args={[0.11, 32, 32]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0088ff"
+            emissiveIntensity={0.6}
+            metalness={0.8}
+            roughness={0.1}
+          />
+        </mesh>
+
+        {/* Antebrazo */}
+        <mesh position={[-0.38, -0.85, 0]}>
+          <capsuleGeometry args={[0.09, 0.6, 6, 12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Detalle antebrazo cyber */}
+        <mesh position={[-0.38, -0.85, 0.09]}>
+          <boxGeometry args={[0.14, 0.6, 0.03]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0055ff"
+            emissiveIntensity={0.5}
+          />
+        </mesh>
+
+        {/* Mano - Estructura robótica */}
+        <mesh position={[-0.44, -1.15, 0]}>
+          <boxGeometry args={[0.14, 0.16, 0.12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Dedos derechos */}
+        {[0, 0.08, -0.08].map((z, i) => (
+          <mesh key={`left-finger-${i}`} position={[-0.5, -1.15, z]}>
+            <boxGeometry args={[0.08, 0.12, 0.05]} />
+            <meshStandardMaterial
+              color="#00ffff"
+              emissive="#0077ff"
+              emissiveIntensity={0.4}
+              metalness={0.7}
+              roughness={0.2}
+            />
+          </mesh>
+        ))}
+      </group>
+
+      {/* Brazo derecho completo */}
+      <group ref={rightArmRef} position={[0.45, 0.5, 0]}>
+        {/* Hombro articulado */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[0.12, 32, 32]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Articulación visible */}
+        <mesh position={[0, 0, 0]}>
+          <sphereGeometry args={[0.14, 32, 32]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0088ff"
+            emissiveIntensity={0.5}
+            metalness={0.8}
+            roughness={0.15}
+          />
+        </mesh>
+
+        {/* Brazo superior */}
+        <mesh position={[0.2, -0.25, 0]}>
+          <capsuleGeometry args={[0.1, 0.5, 6, 12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Detalle de brazo */}
+        <mesh position={[0.2, -0.25, 0.1]}>
+          <boxGeometry args={[0.15, 0.5, 0.03]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0066ff"
+            emissiveIntensity={0.4}
+          />
+        </mesh>
+
+        {/* Codo articulado */}
+        <mesh position={[0.3, -0.55, 0]}>
+          <sphereGeometry args={[0.11, 32, 32]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0088ff"
+            emissiveIntensity={0.6}
+            metalness={0.8}
+            roughness={0.1}
+          />
+        </mesh>
+
+        {/* Antebrazo */}
+        <mesh position={[0.38, -0.85, 0]}>
+          <capsuleGeometry args={[0.09, 0.6, 6, 12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Detalle antebrazo cyber */}
+        <mesh position={[0.38, -0.85, 0.09]}>
+          <boxGeometry args={[0.14, 0.6, 0.03]} />
+          <meshStandardMaterial
+            color="#00ffff"
+            emissive="#0055ff"
+            emissiveIntensity={0.5}
+          />
+        </mesh>
+
+        {/* Mano */}
+        <mesh position={[0.44, -1.15, 0]}>
+          <boxGeometry args={[0.14, 0.16, 0.12]} />
+          <primitive object={metalBlack} attach="material" />
+        </mesh>
+
+        {/* Dedos derechos */}
+        {[0, 0.08, -0.08].map((z, i) => (
+          <mesh key={`right-finger-${i}`} position={[0.5, -1.15, z]}>
+            <boxGeometry args={[0.08, 0.12, 0.05]} />
+            <meshStandardMaterial
+              color="#00ffff"
+              emissive="#0077ff"
+              emissiveIntensity={0.4}
+              metalness={0.7}
+              roughness={0.2}
+            />
+          </mesh>
+        ))}
+      </group>
+
+      {/* ========== PIERNAS ========== */}
+
+      {/* Pierna izquierda */}
+      <mesh position={[-0.18, -0.55, 0]}>
+        <capsuleGeometry args={[0.12, 0.85, 7, 14]} />
+        <primitive object={metalBlack} attach="material" />
       </mesh>
 
-      {/* Pantorrilla izquierda */}
-      <mesh position={[-0.2, -1.25, 0]}>
-        <capsuleGeometry args={[0.15, 0.7, 7, 12]} />
+      {/* Detalle pierna izquierda */}
+      <mesh position={[-0.18, -0.55, 0.12]}>
+        <boxGeometry args={[0.18, 0.85, 0.04]} />
         <meshStandardMaterial
-          color="#00b8ff"
-          emissive="#0088ff"
+          color="#00ffff"
+          emissive="#0055ff"
           emissiveIntensity={0.3}
-          metalness={0.5}
-          roughness={0.4}
         />
       </mesh>
 
       {/* Pie izquierdo */}
-      <mesh position={[-0.2, -1.8, 0.1]} rotation={[0.2, 0, 0]}>
-        <boxGeometry args={[0.18, 0.15, 0.28]} />
-        <primitive object={cyberMaterial} attach="material" />
-      </mesh>
-
-      {/* Muslo derecho */}
-      <mesh position={[0.2, -0.6, 0]}>
-        <capsuleGeometry args={[0.16, 0.7, 7, 12]} />
-        <primitive object={clothMaterial} attach="material" />
-      </mesh>
-
-      {/* Pantorrilla derecha */}
-      <mesh position={[0.2, -1.25, 0]}>
-        <capsuleGeometry args={[0.15, 0.7, 7, 12]} />
+      <mesh position={[-0.18, -1.25, 0.15]}>
+        <boxGeometry args={[0.18, 0.12, 0.28]} />
         <meshStandardMaterial
-          color="#00b8ff"
+          color="#00ffff"
           emissive="#0088ff"
+          emissiveIntensity={0.7}
+          metalness={0.8}
+          roughness={0.15}
+        />
+      </mesh>
+
+      {/* Pierna derecha */}
+      <mesh position={[0.18, -0.55, 0]}>
+        <capsuleGeometry args={[0.12, 0.85, 7, 14]} />
+        <primitive object={metalBlack} attach="material" />
+      </mesh>
+
+      {/* Detalle pierna derecha */}
+      <mesh position={[0.18, -0.55, 0.12]}>
+        <boxGeometry args={[0.18, 0.85, 0.04]} />
+        <meshStandardMaterial
+          color="#00ffff"
+          emissive="#0055ff"
           emissiveIntensity={0.3}
-          metalness={0.5}
-          roughness={0.4}
         />
       </mesh>
 
       {/* Pie derecho */}
-      <mesh position={[0.2, -1.8, 0.1]} rotation={[0.2, 0, 0]}>
-        <boxGeometry args={[0.18, 0.15, 0.28]} />
-        <primitive object={cyberMaterial} attach="material" />
-      </mesh>
-
-      {/* EFECTOS */}
-
-      {/* Aura alrededor */}
-      <mesh>
-        <sphereGeometry args={[2, 32, 32]} />
+      <mesh position={[0.18, -1.25, 0.15]}>
+        <boxGeometry args={[0.18, 0.12, 0.28]} />
         <meshStandardMaterial
-          color="#00d9ff"
-          emissive="#0077ff"
-          emissiveIntensity={0.1}
-          metalness={0}
-          roughness={1}
-          transparent
-          opacity={0.08}
+          color="#00ffff"
+          emissive="#0088ff"
+          emissiveIntensity={0.7}
+          metalness={0.8}
+          roughness={0.15}
         />
       </mesh>
 
-      {/* Sparkles */}
-      <Sparkles count={100} scale={4} size={2.5} speed={0.6} />
+      {/* ========== EFECTOS VISUALES ========== */}
+
+      {/* Aura de energía */}
+      <mesh>
+        <sphereGeometry args={[2.2, 32, 32]} />
+        <meshStandardMaterial
+          color="#0077ff"
+          emissive="#0055ff"
+          emissiveIntensity={0.15}
+          metalness={0}
+          roughness={1}
+          transparent
+          opacity={0.06}
+        />
+      </mesh>
+
+      {/* Sparkles de energía */}
+      <Sparkles count={120} scale={4.5} size={2} speed={0.7} />
     </group>
   );
 }
 
-// Luces cinematográficas profesionales
+// Luces cinematográficas ultra profesionales
 function CinematicLights() {
   return (
     <>
-      {/* Luz ambiental suave para relleno general */}
-      <ambientLight intensity={0.5} color="#e8f4f8" />
+      {/* Luz ambiental de relleno */}
+      <ambientLight intensity={0.45} color="#e8f4ff" />
 
-      {/* Key Light - Luz principal (frontal-arriba-derecha) */}
+      {/* Key Light principal - Blanca fría */}
       <pointLight 
-        position={[8, 8, 6]} 
-        intensity={1.5} 
+        position={[10, 8, 8]} 
+        intensity={2}
         color="#ffffff"
+        distance={30}
+        decay={2}
+        castShadow
+      />
+
+      {/* Fill Light izquierda - Cyan */}
+      <pointLight 
+        position={[-8, 5, 4]} 
+        intensity={1.2}
+        color="#00bfff"
         distance={25}
         decay={2}
       />
 
-      {/* Fill Light - Luz secundaria (izquierda) */}
+      {/* Back Light trasera - Azul profundo */}
       <pointLight 
-        position={[-6, 4, 4]} 
-        intensity={0.8} 
-        color="#00bfff"
+        position={[0, 1, -10]} 
+        intensity={0.8}
+        color="#0055ff"
         distance={20}
         decay={2}
       />
 
-      {/* Back Light - Luz trasera para silueta */}
+      {/* Rim Light - Cyan dorado */}
       <pointLight 
-        position={[0, 2, -8]} 
-        intensity={0.6} 
-        color="#0066ff"
-        distance={15}
+        position={[0, 0, 12]} 
+        intensity={0.9}
+        color="#00ffff"
+        distance={25}
         decay={2}
       />
 
-      {/* Luz dirigida suave */}
+      {/* Accent Light derecha - Azul */}
+      <pointLight 
+        position={[12, 3, 2]} 
+        intensity={0.7}
+        color="#0077ff"
+        distance={20}
+        decay={2}
+      />
+
+      {/* Luz direccional para sombras suaves */}
       <directionalLight 
-        position={[5, 8, 5]} 
-        intensity={0.8} 
+        position={[6, 10, 6]} 
+        intensity={0.6}
         color="#ffffff"
         castShadow
-      />
-
-      {/* Rim Light para detalles cyber */}
-      <pointLight 
-        position={[0, 0, 10]} 
-        intensity={0.5} 
-        color="#00ffff"
-        distance={20}
-        decay={2}
       />
     </>
   );
 }
 
-// Componente principal del canvas
+// Canvas principal
 export default function Neuri3DProfessional() {
   return (
     <div className="w-full h-full">
       <Canvas 
-        camera={{ position: [0, 0.3, 3.5], fov: 45 }}
+        camera={{ position: [0, 0.2, 4], fov: 50 }}
         style={{ background: 'transparent' }}
         dpr={[1, 2]}
+        shadows
       >
-        <PerspectiveCamera makeDefault position={[0, 0.3, 3.5]} fov={45} />
+        <PerspectiveCamera makeDefault position={[0, 0.2, 4]} fov={50} />
         <CinematicLights />
-        <RealisticNeuri />
+        <RealisticRobotNeuri />
 
-        {/* Post-processing effects */}
+        {/* Post-processing ultra profesional */}
         <EffectComposer>
           <Bloom 
-            intensity={0.8}
-            luminanceThreshold={0.3}
-            luminanceSmoothing={0.9}
+            intensity={1.2}
+            luminanceThreshold={0.2}
+            luminanceSmoothing={0.95}
             mipmapBlur
           />
+          <ChromaticAberration offset={[0.001, 0.0008]} />
         </EffectComposer>
       </Canvas>
     </div>
