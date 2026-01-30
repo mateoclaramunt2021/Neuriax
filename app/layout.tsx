@@ -169,7 +169,8 @@ export default function RootLayout({
         <Chatbot />
         <ScheduleCallButton />
         <VisitorForm />
-        <Analytics />
+        {/* Vercel Analytics - Works independently from consent preferences */}
+        <Analytics mode="production" />{/* Supabase PageTracker depends on cookie consent */}
       </body>
     </html>
   );
