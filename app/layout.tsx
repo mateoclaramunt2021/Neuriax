@@ -9,6 +9,7 @@ import ScheduleCallButton from "../components/ScheduleCallButton";
 import { PageTracker } from "../components/PageTracker";
 import VisitorForm from "../components/VisitorForm";
 import CookieBanner from "../components/CookieBanner";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -168,6 +169,7 @@ export default function RootLayout({
         <Chatbot />
         <ScheduleCallButton />
         <VisitorForm />
+        <Analytics />
       </body>
     </html>
   );
