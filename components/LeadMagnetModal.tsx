@@ -24,11 +24,26 @@ export default function LeadMagnetModal() {
       }
     };
 
+    // Para móviles: detectar intención de salir (scroll hacia arriba rápido)
+    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    const handleScroll = () => {
+      if (typeof window !== 'undefined') {
+        const currentScrollY = window.scrollY;
+        // Si hace scroll muy rápido hacia arriba, probablemente intenta salir
+        if (currentScrollY < lastScrollY - 50 && !localStorage.getItem('lead_magnet_dismissed') && !showModal) {
+          setShowModal(true);
+        }
+        lastScrollY = currentScrollY;
+      }
+    };
+
     document.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       clearTimeout(timer);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, [showModal]);
 
