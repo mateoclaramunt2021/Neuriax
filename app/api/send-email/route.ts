@@ -26,6 +26,219 @@ export async function POST(request: NextRequest) {
     // ========== FORMULARIO DE CONTACTO (JSON) ==========
     if (contentType.includes('application/json')) {
       const jsonData = await request.json();
+      
+      // ========== FORMULARIO DE DEMO LANDING ==========
+      if (jsonData.tipo === 'demo-landing') {
+        const { 
+          nombre, email, telefono, 
+          nombreEmpresa, sector, urlActual,
+          objetivo, servicioDestacado, colorPreferido, competencia, comentarios 
+        } = jsonData;
+
+        // Validar datos del formulario
+        if (!nombre || !email || !nombreEmpresa || !sector || !objetivo || !servicioDestacado) {
+          return NextResponse.json(
+            { error: 'Faltan campos requeridos' },
+            { status: 400 }
+          );
+        }
+
+        // Guardar en Supabase (tabla contacts)
+        const { error: dbError } = await supabase.from('contacts').insert({
+          nombre,
+          email,
+          telefono: telefono || null,
+          empresa: nombreEmpresa,
+          sector: sector,
+          mensaje: `DEMO LANDING REQUEST\n\nObjetivo: ${objetivo}\nServicio destacado: ${servicioDestacado}\nColor preferido: ${colorPreferido || 'No especificado'}\nWeb actual: ${urlActual || 'No tiene'}\nCompetencia: ${competencia || 'No especificada'}\nComentarios: ${comentarios || 'Sin comentarios'}`,
+          tipo: 'demo-landing',
+          leido: false
+        });
+
+        if (dbError) {
+          console.error('Error guardando solicitud demo landing:', dbError);
+        }
+
+        // Enviar email de notificación a Mateo
+        const { data: emailData, error: emailError } = await resend.emails.send({
+          from: 'Neuriax <hola@neuriax.com>',
+          to: 'mateoclaramunt2021@gmail.com',
+          subject: `🎨 NUEVA DEMO LANDING: ${nombreEmpresa} (${sector})`,
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
+              <div style="background: linear-gradient(135deg, #f59e0b, #ef4444); padding: 30px; border-radius: 12px 12px 0 0;">
+                <h1 style="color: white; margin: 0; font-size: 24px;">🎨 Nueva Solicitud de Demo Landing</h1>
+                <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">¡Tienes 48h para crear la demo!</p>
+              </div>
+              
+              <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+                <div style="background: #fef3c7; border: 1px solid #f59e0b; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                  <p style="margin: 0; color: #92400e; font-weight: bold;">⏰ Recuerda: Demo prometida en 48 horas</p>
+                </div>
+                
+                <h3 style="color: #374151; margin-top: 0;">📋 Datos del cliente</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>👤 Nombre:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${nombre}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>📧 Email:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><a href="mailto:${email}">${email}</a></td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>📞 Teléfono:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${telefono || 'No proporcionado'}</td>
+                  </tr>
+                </table>
+                
+                <h3 style="color: #374151; margin-top: 25px;">🏢 Datos de la empresa</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Empresa:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${nombreEmpresa}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Sector:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${sector}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Web actual:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${urlActual ? `<a href="${urlActual}">${urlActual}</a>` : 'No tiene'}</td>
+                  </tr>
+                </table>
+                
+                <h3 style="color: #374151; margin-top: 25px;">🎯 Detalles del proyecto</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Objetivo:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${objetivo}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Servicio destacado:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${servicioDestacado}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Color preferido:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${colorPreferido || 'A elegir'}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;"><strong>Competencia:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #f3f4f6;">${competencia || 'No especificada'}</td>
+                  </tr>
+                </table>
+                
+                ${comentarios ? `
+                <h3 style="color: #374151; margin-top: 25px;">💬 Comentarios adicionales</h3>
+                <div style="background: #f3f4f6; padding: 15px; border-radius: 8px;">
+                  ${comentarios}
+                </div>
+                ` : ''}
+              </div>
+            </div>
+          `
+        });
+
+        if (emailError) {
+          console.error('Error enviando email demo landing:', emailError);
+          return NextResponse.json(
+            { error: 'Error al enviar el email', details: emailError.message },
+            { status: 500 }
+          );
+        }
+
+        // ========== ENVIAR EMAIL DE AGRADECIMIENTO AL CLIENTE ==========
+        try {
+          await resend.emails.send({
+            from: 'Neuriax <hola@neuriax.com>',
+            to: email,
+            subject: '🎨 ¡Tu demo de landing page está en camino! - Neuriax',
+            html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
+              <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
+                <h1 style="color: white; margin: 0; font-size: 28px;">¡Hola ${nombre}! 👋</h1>
+                <p style="color: rgba(255,255,255,0.9); margin: 15px 0 0 0; font-size: 18px;">Tu solicitud de demo ha sido recibida</p>
+              </div>
+              
+              <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
+                
+                <!-- Countdown box -->
+                <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius: 12px; padding: 25px; text-align: center; margin-bottom: 25px;">
+                  <p style="color: #92400e; font-size: 14px; margin: 0 0 8px 0; font-weight: 500;">⏱️ Tu demo personalizada estará lista en</p>
+                  <p style="color: #78350f; font-size: 42px; font-weight: bold; margin: 0;">48 HORAS</p>
+                  <p style="color: #92400e; font-size: 14px; margin: 8px 0 0 0;">La recibirás directamente en este email</p>
+                </div>
+                
+                <h3 style="color: #374151; margin-top: 0;">📋 Resumen de tu solicitud:</h3>
+                <div style="background: #f9fafb; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                  <p style="margin: 5px 0; color: #4b5563;"><strong>Empresa:</strong> ${nombreEmpresa}</p>
+                  <p style="margin: 5px 0; color: #4b5563;"><strong>Sector:</strong> ${sector}</p>
+                  <p style="margin: 5px 0; color: #4b5563;"><strong>Objetivo:</strong> ${objetivo}</p>
+                  <p style="margin: 5px 0; color: #4b5563;"><strong>Servicio a destacar:</strong> ${servicioDestacado}</p>
+                </div>
+                
+                <h3 style="color: #374151;">🚀 ¿Qué pasa ahora?</h3>
+                <div style="margin-bottom: 25px;">
+                  <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <div style="background: #06b6d4; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; flex-shrink: 0;">1</div>
+                    <p style="margin: 0; color: #4b5563; line-height: 1.5;">Analizamos tu negocio y tu competencia</p>
+                  </div>
+                  <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <div style="background: #06b6d4; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; flex-shrink: 0;">2</div>
+                    <p style="margin: 0; color: #4b5563; line-height: 1.5;">Diseñamos una landing page personalizada para ti</p>
+                  </div>
+                  <div style="display: flex; align-items: flex-start; margin-bottom: 15px;">
+                    <div style="background: #06b6d4; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; flex-shrink: 0;">3</div>
+                    <p style="margin: 0; color: #4b5563; line-height: 1.5;">Te enviamos el enlace a la demo en 48 horas</p>
+                  </div>
+                  <div style="display: flex; align-items: flex-start;">
+                    <div style="background: #10b981; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; flex-shrink: 0;">4</div>
+                    <p style="margin: 0; color: #4b5563; line-height: 1.5;"><strong>Solo pagas si te gusta</strong> - Sin compromiso alguno</p>
+                  </div>
+                </div>
+                
+                <!-- Reminder box -->
+                <div style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 1px solid #10b981; border-radius: 8px; padding: 20px; margin-bottom: 25px;">
+                  <p style="margin: 0; color: #065f46; font-weight: 600;">💰 Oferta especial hasta el 25 de febrero</p>
+                  <p style="margin: 8px 0 0 0; color: #047857; font-size: 14px;">
+                    Landing page profesional por solo <strong style="font-size: 18px;">350€</strong> <span style="text-decoration: line-through; color: #6b7280;">790€</span>
+                  </p>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 25px 0;">
+                
+                <p style="color: #6b7280; font-size: 14px; margin-bottom: 5px;">
+                  ¿Tienes alguna duda mientras tanto?
+                </p>
+                <p style="color: #6b7280; font-size: 14px; margin-top: 0;">
+                  📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
+                  📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
+                </p>
+                
+                <p style="color: #374151; font-size: 16px; margin-top: 25px;">
+                  ¡Nos ponemos manos a la obra!<br>
+                  <strong>El equipo de Neuriax</strong>
+                </p>
+              </div>
+              
+              <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
+                Recibes este email porque solicitaste una demo en neuriax.com
+              </p>
+            </div>
+          `
+          });
+          console.log('Email de confirmación demo landing enviado a:', email);
+        } catch (clientError) {
+          console.error('Error enviando email de confirmación al cliente:', clientError);
+        }
+
+        return NextResponse.json(
+          { message: 'Solicitud de demo enviada correctamente', emailId: emailData?.id },
+          { status: 200 }
+        );
+      }
+
+      // ========== FORMULARIO DE CONTACTO NORMAL ==========
       const { nombre, email, telefono, empresa, sector, mensaje, type } = jsonData;
 
       // Validar datos del formulario de contacto
