@@ -138,8 +138,8 @@ export default function PortfolioPage() {
                     <p className="text-gray-300 text-sm">Diseño + Copywriting + Hosting 1 año</p>
                   </div>
                 </div>
-                <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 shadow-lg shadow-orange-500/30 text-black font-bold whitespace-nowrap">
-                  ¡Quiero mi landing! →
+                <CTAButton href="/contacto/demo-landing" size="lg" className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 shadow-lg shadow-orange-500/30 text-black font-bold whitespace-nowrap">
+                  ¡Quiero mi demo GRATIS! →
                 </CTAButton>
               </div>
               <div className="mt-4 flex flex-wrap justify-center gap-4 text-xs text-gray-300">
@@ -184,8 +184,8 @@ export default function PortfolioPage() {
           
           {/* CTA Hero */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
-              Ver cómo sería la tuya →
+            <CTAButton href="/contacto/demo-landing" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25">
+              Solicitar demo GRATIS →
             </CTAButton>
           </div>
           
@@ -294,8 +294,8 @@ export default function PortfolioPage() {
                   
                   {/* Overlay con CTA */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/formulario" : "/contacto/formulario"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
-                      {idx === 5 ? "Agendar llamada" : "Ver en detalle"}
+                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                      {idx === 5 ? "Solicitar demo GRATIS" : "Ver en detalle"}
                     </CTAButton>
                   </div>
                 </div>
@@ -318,8 +318,8 @@ export default function PortfolioPage() {
                     ))}
                   </ul>
 
-                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/formulario" : "/contacto/formulario"} variant="secondary" className="w-full text-center justify-center">
-                    {idx === 5 ? "Agendar llamada" : "Quiero una igual"}
+                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} variant="secondary" className="w-full text-center justify-center">
+                    {idx === 5 ? "Solicitar demo GRATIS" : "Quiero una igual"}
                   </CTAButton>
                 </div>
               </div>
@@ -451,38 +451,38 @@ export default function PortfolioPage() {
           </div>
           
           <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">
-            Tu competencia ya tiene web.
+            Tu competencia ya tiene landing.
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">¿Cuánto más vas a esperar?</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Consigue la tuya en 48 horas</span>
           </h2>
           
           <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto">
-            En 15-20 minutos te muestro exactamente cómo sería tu web y qué resultados puedes esperar.
+            Rellena el formulario y recibe una demo personalizada. <strong>Solo pagas si te gusta.</strong>
           </p>
           
           {/* Qué incluye la llamada */}
           <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10">
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
               <div className="text-2xl mb-2">📋</div>
-              <p className="text-white font-semibold text-sm">Diagnóstico gratis</p>
-              <p className="text-gray-400 text-xs">Analizamos tu situación actual</p>
+              <p className="text-white font-semibold text-sm">Rellenas el formulario</p>
+              <p className="text-gray-400 text-xs">Cuéntanos sobre tu negocio</p>
             </div>
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
               <div className="text-2xl mb-2">🎨</div>
-              <p className="text-white font-semibold text-sm">Diseño a medida</p>
-              <p className="text-gray-400 text-xs">Te mostramos ejemplos para tu sector</p>
+              <p className="text-white font-semibold text-sm">Demo en 48h</p>
+              <p className="text-gray-400 text-xs">Diseño personalizado para ti</p>
             </div>
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/50">
               <div className="text-2xl mb-2">💰</div>
-              <p className="text-white font-semibold text-sm">Presupuesto cerrado</p>
-              <p className="text-gray-400 text-xs">Sin sorpresas ni costes ocultos</p>
+              <p className="text-white font-semibold text-sm">Solo pagas si te gusta</p>
+              <p className="text-gray-400 text-xs">Sin riesgo, sin compromiso</p>
             </div>
           </div>
           
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <CTAButton href="/contacto/formulario" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 text-lg px-8 py-4">
-              Reservar mi llamada gratuita →
+            <CTAButton href="/contacto/demo-landing" size="lg" className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 shadow-lg shadow-cyan-500/25 text-lg px-8 py-4">
+              Solicitar mi demo GRATIS →
             </CTAButton>
           </div>
           
@@ -492,19 +492,19 @@ export default function PortfolioPage() {
               <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Sin compromiso
+              Sin pago por adelantado
             </span>
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Garantía 30 días
+              Demo en 48 horas
             </span>
             <span className="flex items-center gap-2">
               <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
-              Propuesta en 24h
+              350€ hasta el 25 feb
             </span>
           </div>
           
