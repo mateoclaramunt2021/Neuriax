@@ -10,9 +10,9 @@ export const BreadcrumbSchema = (path: string) => {
       { name: 'Inicio', url: 'https://www.neuriax.com/' },
       { name: 'Páginas Web', url: 'https://www.neuriax.com/webs' },
     ],
-    '/portfolio': [
+    '/landings': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },
-      { name: 'Portfolio', url: 'https://www.neuriax.com/portfolio' },
+      { name: 'Landings', url: 'https://www.neuriax.com/landings' },
     ],
     '/contacto': [
       { name: 'Inicio', url: 'https://www.neuriax.com/' },

@@ -100,7 +100,7 @@ export default function Footer() {
                     { label: 'Soluciones', href: '/soluciones' },
                     { label: 'Páginas Web', href: '/webs' },
                     { label: 'Precios', href: '/precios' },
-                    { label: 'Portfolio', href: '/portfolio' },
+                    { label: 'Landings', href: '/landings' },
                   ].map((link) => (
                     <Link
                       key={link.href}

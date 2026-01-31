@@ -9,10 +9,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Landing Pages de Alta Conversión - Neuriax",
     description: "Portfolio de landing pages premium optimizadas para convertir. Diseño estratégico + Copywriting + Velocidad.",
-    url: "https://www.neuriax.com/portfolio",
+    url: "https://www.neuriax.com/landings",
   },
   alternates: {
-    canonical: 'https://www.neuriax.com/portfolio',
+    canonical: 'https://www.neuriax.com/landings',
   },
 };
 
@@ -294,7 +294,7 @@ export default function PortfolioPage() {
                   
                   {/* Overlay con CTA */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
+                    <CTAButton href={idx === 0 ? "/landings/peluqueria" : idx === 1 ? "/landings/restaurante" : idx === 2 ? "/landings/clinica" : idx === 3 ? "/landings/consultoria" : idx === 4 ? "/landings/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} className="bg-cyan-500 hover:bg-cyan-600 text-white">
                       {idx === 5 ? "Solicitar demo GRATIS" : "Ver en detalle"}
                     </CTAButton>
                   </div>
@@ -318,7 +318,7 @@ export default function PortfolioPage() {
                     ))}
                   </ul>
 
-                  <CTAButton href={idx === 0 ? "/portfolio/peluqueria" : idx === 1 ? "/portfolio/restaurante" : idx === 2 ? "/portfolio/clinica" : idx === 3 ? "/portfolio/consultoria" : idx === 4 ? "/portfolio/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} variant="secondary" className="w-full text-center justify-center">
+                  <CTAButton href={idx === 0 ? "/landings/peluqueria" : idx === 1 ? "/landings/restaurante" : idx === 2 ? "/landings/clinica" : idx === 3 ? "/landings/consultoria" : idx === 4 ? "/landings/reformas" : idx === 5 ? "/contacto/demo-landing" : "/contacto/demo-landing"} variant="secondary" className="w-full text-center justify-center">
                     {idx === 5 ? "Solicitar demo GRATIS" : "Quiero una igual"}
                   </CTAButton>
                 </div>

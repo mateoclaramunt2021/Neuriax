@@ -12,13 +12,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/webs", priority: 0.95, changeFrequency: "weekly" as const },
     { path: "/contacto", priority: 0.95, changeFrequency: "weekly" as const },
     
-    // Portfolio y casos de éxito
-    { path: "/portfolio", priority: 0.9, changeFrequency: "monthly" as const },
-    { path: "/portfolio/clinica", priority: 0.85, changeFrequency: "monthly" as const },
-    { path: "/portfolio/consultoria", priority: 0.85, changeFrequency: "monthly" as const },
-    { path: "/portfolio/peluqueria", priority: 0.85, changeFrequency: "monthly" as const },
-    { path: "/portfolio/reformas", priority: 0.85, changeFrequency: "monthly" as const },
-    { path: "/portfolio/restaurante", priority: 0.85, changeFrequency: "monthly" as const },
+    // Landings y casos de éxito
+    { path: "/landings", priority: 0.9, changeFrequency: "monthly" as const },
+    { path: "/landings/clinica", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/landings/consultoria", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/landings/peluqueria", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/landings/reformas", priority: 0.85, changeFrequency: "monthly" as const },
+    { path: "/landings/restaurante", priority: 0.85, changeFrequency: "monthly" as const },
     
     // Blog
     { path: "/blog", priority: 0.9, changeFrequency: "daily" as const },

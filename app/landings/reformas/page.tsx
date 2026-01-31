@@ -189,7 +189,7 @@ export default function ReformasDemo() {
             🧠 Neuriax
           </Link>
           <nav className="flex gap-6 text-sm">
-            <Link href="/portfolio" className="hover:text-gray-300 transition-colors">Portfolio</Link>
+            <Link href="/landings" className="hover:text-gray-300 transition-colors">Landings</Link>
             <Link href="/" className="hover:text-gray-300 transition-colors">Inicio</Link>
           </nav>
         </div>
