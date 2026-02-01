@@ -369,7 +369,7 @@ export default function PortfolioPage() {
             <div className="bg-gray-900 rounded-lg p-8 border border-gray-700">
               <div className="w-12 h-12 bg-cyan-500/20 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Móvil first</h3>
@@ -394,6 +394,134 @@ export default function PortfolioPage() {
               </div>
               <h3 className="text-lg font-semibold text-white mb-2">Fácil de mantener</h3>
               <p className="text-gray-300">Cambias fotos, textos y precios sin saber de código. O con mi soporte mensual por 49€.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Precios Landing Pages */}
+      <section className="py-20 px-6 bg-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Precios Landing Pages</h2>
+            <p className="text-gray-400">Elige el plan que mejor se adapta a tu negocio</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* LANDING ESENCIAL */}
+            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
+              <h3 className="text-2xl font-bold text-white mb-2">Esencial</h3>
+              <p className="text-gray-400 text-sm mb-6">Landing simple y efectiva</p>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-white">350€</span>
+                <p className="text-gray-400 text-sm mt-2">Todo incluido</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Diseño responsive profesional</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Hosting 1 año incluido</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Botón CTA WhatsApp</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Botón CTA Instagram</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Optimización de velocidad</span>
+                </li>
+              </ul>
+              <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                Solicitar landing esencial
+              </CTAButton>
+            </div>
+
+            {/* LANDING PROFESIONAL */}
+            <div className="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 rounded-lg p-8 border-2 border-cyan-500 relative flex flex-col">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
+                Recomendada
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">Profesional</h3>
+              <p className="text-gray-300 text-sm mb-6">Landing optimizada para conversión</p>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-cyan-400">600€</span>
+                <p className="text-cyan-300 text-sm mt-2">Mayor conversión</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Todo lo de Esencial</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Diseño a medida</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Formulario de contacto</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Textos orientados a ventas</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Sección de testimonios</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Dominio + Hosting 1 año</span>
+                </li>
+              </ul>
+              <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                Solicitar landing profesional
+              </CTAButton>
+            </div>
+
+            {/* LANDING PREMIUM */}
+            <div className="bg-gray-800 rounded-lg p-8 border border-gray-700 flex flex-col">
+              <h3 className="text-2xl font-bold text-white mb-2">Premium</h3>
+              <p className="text-gray-400 text-sm mb-6">Landing de alto rendimiento</p>
+              <div className="mb-6">
+                <span className="text-4xl font-bold text-white">1.200€</span>
+                <p className="text-gray-400 text-sm mt-2">Máxima conversión</p>
+              </div>
+              <ul className="space-y-3 text-gray-300 mb-8 flex-grow">
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Todo lo de Profesional</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Animaciones y efectos premium</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Integración con CRM/email</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Analítica avanzada</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>A/B testing básico</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Soporte prioritario</span>
+                </li>
+              </ul>
+              <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
+                Solicitar landing premium
+              </CTAButton>
             </div>
           </div>
         </div>
