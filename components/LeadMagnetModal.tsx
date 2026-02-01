@@ -12,15 +12,22 @@ export default function LeadMagnetModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mostrar modal después de 2 segundos cada vez que se entra a la web
+  // Mostrar modal solo una vez al día
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowModal(true);
-    }, 2000);
+    const today = new Date().toDateString();
+    const lastShown = localStorage.getItem('leadMagnetLastShown');
+    
+    // Solo mostrar si no se ha mostrado hoy
+    if (lastShown !== today) {
+      const timer = setTimeout(() => {
+        setShowModal(true);
+        localStorage.setItem('leadMagnetLastShown', today);
+      }, 2000);
 
-    return () => {
-      clearTimeout(timer);
-    };
+      return () => {
+        clearTimeout(timer);
+      };
+    }
   }, []);
 
   const handleClose = () => {

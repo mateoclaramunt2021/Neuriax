@@ -187,12 +187,6 @@ export default function Home() {
                     <div className="text-[10px] md:text-xs text-slate-400">30 días o te devolvemos el dinero</div>
                   </div>
                 </div>
-
-                {/* Disponibilidad */}
-                <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2">
-                  <span className="w-2 h-2 bg-emerald-400 rounded-full"></span>
-                  <span className="text-emerald-300 text-xs md:text-sm font-medium">Disponible esta semana</span>
-                </div>
               </div>
 
               {/* Trust indicators - Más visibles */}
