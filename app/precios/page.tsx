@@ -17,38 +17,70 @@ export const metadata: Metadata = {
 export default function PreciosPage() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Hero */}
-      <section className="relative py-24 px-6 bg-gradient-to-br from-black via-slate-950 to-slate-900 overflow-hidden">
+      {/* Hero Premium */}
+      <section className="relative py-32 px-6 bg-gradient-to-b from-black via-slate-950 to-gray-900 overflow-hidden">
         {/* Background effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/3 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/3 w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-cyan-500/15 to-transparent rounded-full blur-[100px]"></div>
+          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-blue-600/8 rounded-full blur-[100px]"></div>
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
         </div>
         
-        <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 bg-cyan-500/10 border border-cyan-500/40 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
-            <span className="text-cyan-400 text-sm font-medium">PRECIOS TRANSPARENTES</span>
+        <div className="relative max-w-5xl mx-auto text-center">
+          {/* Badge premium */}
+          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-full px-6 py-3 mb-8 backdrop-blur-sm shadow-lg shadow-cyan-500/5">
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+            <span className="text-cyan-300 text-sm font-semibold tracking-wide">PRECIOS TRANSPARENTES</span>
+            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
           </div>
-          <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">
+          
+          <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[1.1]">
             Sin letra pequeña.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Sin sorpresas.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300">Sin sorpresas.</span>
           </h1>
-          <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-8">
-            Te digo exactamente qué incluye cada plan, qué cuesta y qué no está incluido. Así tomas decisiones con claridad.
+          
+          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+            Te digo exactamente qué incluye cada plan, qué cuesta y qué no está incluido. <span className="text-white font-medium">Así tomas decisiones con claridad.</span>
           </p>
-          <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Dominio + Hosting 1 año incluido
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Soporte técnico incluido
-            </span>
-            <span className="flex items-center gap-2">
-              <svg className="w-4 h-4 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-              Presupuesto antes de empezar
-            </span>
+          
+          {/* Feature pills */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 border border-emerald-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
+              <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+              </div>
+              <span className="text-emerald-300 font-medium">Dominio + Hosting 1 año incluido</span>
+            </div>
+            
+            <div className="flex items-center gap-3 bg-gradient-to-r from-violet-500/10 to-violet-500/5 border border-violet-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
+              <div className="w-8 h-8 bg-violet-500/20 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <span className="text-violet-300 font-medium">Soporte técnico incluido</span>
+            </div>
+            
+            <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500/10 to-amber-500/5 border border-amber-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
+              <div className="w-8 h-8 bg-amber-500/20 rounded-full flex items-center justify-center">
+                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <span className="text-amber-300 font-medium">Presupuesto antes de empezar</span>
+            </div>
+          </div>
+          
+          {/* Scroll indicator */}
+          <div className="flex flex-col items-center gap-2 text-slate-500">
+            <span className="text-sm">Desliza para ver planes</span>
+            <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
           </div>
         </div>
       </section>
