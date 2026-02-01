@@ -1,540 +1,722 @@
 'use client';
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 
-interface Message {
-  id: string;
-  type: 'bot' | 'user';
-  content: string;
-  options?: string[];
-}
-
-interface LeadData {
+interface FormData {
   nombre: string;
   email: string;
   telefono: string;
   empresa: string;
+  web: string;
   sector: string;
-  problema: string;
+  empleados: string;
+  necesidad: string;
   presupuesto: string;
   urgencia: string;
-  conversacion: string[];
+  comoNosConocio: string;
+  mensaje: string;
+  acepta: boolean;
 }
 
-type ConversationStep = 
-  | 'welcome'
-  | 'nombre'
-  | 'email'
-  | 'telefono'
-  | 'empresa'
-  | 'necesidad'
-  | 'recomendacion'
-  | 'final';
-
 export default function FormularioContacto() {
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputValue, setInputValue] = useState('');
-  const [currentStep, setCurrentStep] = useState<ConversationStep>('welcome');
-  const [isTyping, setIsTyping] = useState(false);
-  const [leadData, setLeadData] = useState<LeadData>({
+  const [formData, setFormData] = useState<FormData>({
     nombre: '',
     email: '',
     telefono: '',
     empresa: '',
+    web: '',
     sector: '',
-    problema: '',
+    empleados: '',
+    necesidad: '',
     presupuesto: '',
     urgencia: '',
-    conversacion: []
+    comoNosConocio: '',
+    mensaje: '',
+    acepta: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showCalendly, setShowCalendly] = useState(false);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [currentStep, setCurrentStep] = useState(1);
 
-  // Scroll dentro del contenedor de mensajes, no de la página
-  const scrollToBottom = useCallback(() => {
-    if (messagesContainerRef.current) {
-      messagesContainerRef.current.scrollTo({
-        top: messagesContainerRef.current.scrollHeight,
-        behavior: 'smooth'
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    // Pequeño delay para asegurar que el DOM se actualizó
-    const timer = setTimeout(scrollToBottom, 150);
-    return () => clearTimeout(timer);
-  }, [messages, scrollToBottom]);
-
-  // Mensaje inicial
-  useEffect(() => {
-    setTimeout(() => {
-      addBotMessage(
-        "¡Hola! 👋 Soy Neuri, la mascota asistente de Mateo en Neuriax.\n\n**Rellena este formulario para obtener un descuento especial** en nuestros servicios.\n\nPara poder ayudarte de la mejor manera, necesito hacerte 5 preguntas rápidas. Después podrás agendar una llamada gratuita con Mateo donde resolverás todas tus dudas.\n\n**¿Empezamos?**",
-        ['Sí, empecemos']
-      );
-    }, 500);
-  }, []);
-
-  const addBotMessage = (content: string, options?: string[]) => {
-    setIsTyping(true);
-    
-    setTimeout(() => {
-      setIsTyping(false);
-      setMessages(prev => [...prev, {
-        id: Date.now().toString(),
-        type: 'bot',
-        content,
-        options
-      }]);
-    }, 600 + Math.random() * 300);
-  };
-
-  const addUserMessage = (content: string) => {
-    setMessages(prev => [...prev, {
-      id: Date.now().toString(),
-      type: 'user',
-      content
-    }]);
-    setLeadData(prev => ({
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
       ...prev,
-      conversacion: [...prev.conversacion, `Usuario: ${content}`]
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
     }));
-  };
-
-  const handleOptionClick = (option: string) => {
-    addUserMessage(option);
-    processResponse(option);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    e.stopPropagation();
-    if (!inputValue.trim() || isTyping) return;
-    
-    const userInput = inputValue;
-    setInputValue('');
-    addUserMessage(userInput);
-    
-    // Mantener el foco en el input sin causar scroll
-    setTimeout(() => {
-      inputRef.current?.focus({ preventScroll: true });
-    }, 100);
-    
-    await processResponse(userInput);
-  };
-
-  const processResponse = async (response: string) => {
-    const lowerResponse = response.toLowerCase();
-
-    // Flujo principal de recopilación - FORMULARIO ESTRUCTURADO (sin desviaciones)
-    switch (currentStep) {
-      case 'welcome':
-        // Cualquier respuesta inicia el formulario
-        setCurrentStep('nombre');
-        setTimeout(() => {
-          addBotMessage("¡Perfecto! 😊\n\n**Pregunta 1 de 5**\n\n¿Cómo te llamas?");
-        }, 300);
-        break;
-
-      case 'nombre':
-        setLeadData(prev => ({ ...prev, nombre: response }));
-        setCurrentStep('email');
-        setTimeout(() => {
-          addBotMessage(
-            `¡Encantada, ${response}! 👋\n\n**Pregunta 2 de 5**\n\n¿Cuál es tu correo electrónico?\n\n_(Para enviarte la confirmación de la llamada)_`
-          );
-        }, 300);
-        break;
-
-      case 'email':
-        // Validar email básico
-        if (!response.includes('@') || !response.includes('.')) {
-          setTimeout(() => {
-            addBotMessage("Hmm, ese email no parece válido. ¿Puedes escribirlo de nuevo? 📧");
-          }, 300);
-          return;
-        }
-        setLeadData(prev => ({ ...prev, email: response }));
-        setCurrentStep('telefono');
-        setTimeout(() => {
-          addBotMessage(`Perfecto. ✉️\n\n**Pregunta 3 de 5**\n\n¿Tu número de teléfono?\n\n_(Por si hay algún cambio de última hora)_`);
-        }, 300);
-        break;
-
-      case 'telefono':
-        setLeadData(prev => ({ ...prev, telefono: response }));
-        setCurrentStep('empresa');
-        setTimeout(() => {
-          addBotMessage("Genial. 📱\n\n**Pregunta 4 de 5**\n\n¿Cuál es el nombre de tu empresa o negocio?");
-        }, 300);
-        break;
-
-      case 'empresa':
-        setLeadData(prev => ({ ...prev, empresa: response }));
-        setCurrentStep('necesidad');
-        setTimeout(() => {
-          addBotMessage(
-            `${response}, anotado. 🏢\n\n**Pregunta 5 de 5** (última)\n\n¿Qué te gustaría conseguir? (web, automatización, chatbot, etc.)`,
-            ['Necesito una web profesional', 'Quiero automatizar procesos', 'Chatbot para mi negocio', 'No tengo claro, quiero explorar']
-          );
-        }, 300);
-        break;
-
-      case 'necesidad':
-        setLeadData(prev => ({ ...prev, problema: response }));
-        setCurrentStep('recomendacion');
-        
-        // Mostrar directamente la opción de agendar
-        setTimeout(() => {
-          addBotMessage(
-            `¡Perfecto, ${leadData.nombre}! ✅\n\n**Ya tengo toda la información.**\n\nAhora el siguiente paso es agendar una llamada gratuita de 15-20 minutos con Mateo, donde:\n\n📞 Analizará tu caso específico\n💡 Te dará una propuesta personalizada\n🤝 Resolverá todas tus dudas\n✨ Sin compromiso\n\n**¿Agendamos la llamada?**`,
-            ['Sí, agendar llamada ahora']
-          );
-        }, 500);
-        break;
-
-      case 'recomendacion':
-        // Cualquier respuesta lleva a agendar
-        submitLeadAndShowCalendly();
-        break;
-
-      case 'final':
-        // Si ya está en final, mostrar calendly
-        submitLeadAndShowCalendly();
-        break;
-
-      default:
-        // Si se pierde, reiniciar al paso actual o siguiente lógico
-        setTimeout(() => {
-          addBotMessage(
-            "¿Continuamos con el formulario?",
-            ['Sí, continuar']
-          );
-        }, 300);
-    }
-  };
-
-  const submitLeadAndShowCalendly = async () => {
     setIsSubmitting(true);
-    
+    setError('');
+
     try {
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          nombre: leadData.nombre,
-          email: leadData.email,
-          telefono: leadData.telefono,
-          empresa: leadData.empresa,
-          sector: leadData.sector,
-          mensaje: `PROBLEMA: ${leadData.problema}\n\nURGENCIA: ${leadData.urgencia}\n\nPRESUPUESTO: ${leadData.presupuesto}\n\nCONVERSACIÓN:\n${leadData.conversacion.join('\n')}`,
+          nombre: formData.nombre,
+          email: formData.email,
+          telefono: formData.telefono,
+          empresa: formData.empresa,
+          sector: formData.sector,
+          mensaje: `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 FORMULARIO DE CONTACTO PREMIUM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 DATOS PERSONALES
+• Nombre: ${formData.nombre}
+• Email: ${formData.email}
+• Teléfono: ${formData.telefono}
+
+🏢 DATOS DE LA EMPRESA
+• Empresa: ${formData.empresa || 'No especificado'}
+• Web actual: ${formData.web || 'No tiene'}
+• Sector: ${formData.sector || 'No especificado'}
+• Tamaño: ${formData.empleados || 'No especificado'}
+
+📌 PROYECTO
+• Necesidad: ${formData.necesidad}
+• Presupuesto: ${formData.presupuesto || 'No especificado'}
+• Urgencia: ${formData.urgencia || 'No especificado'}
+
+📣 ¿Cómo nos conoció?: ${formData.comoNosConocio || 'No especificado'}
+
+💬 MENSAJE:
+${formData.mensaje}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+          `,
           type: 'contact_form'
         })
       });
 
       if (response.ok) {
-        setCurrentStep('final');
-        addBotMessage(
-          `¡Perfecto, ${leadData.nombre}! 🎉\n\nHe guardado toda tu información y Mateo la revisará antes de la llamada.\n\n📧 **Te he enviado un email** con un código de descuento del 10% para tu primer proyecto.\n\n**Ahora haz clic en el botón de abajo** para elegir el día y hora que mejor te venga.\n\n👇`
-        );
-        setShowCalendly(true);
+        setIsSubmitted(true);
       } else {
-        addBotMessage("Ups, hubo un problema guardando tus datos. ¿Puedes intentarlo de nuevo?");
+        setError('Hubo un problema al enviar el formulario. Por favor, inténtalo de nuevo.');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      addBotMessage("Ups, hubo un problema. Pero no te preocupes, puedes agendar directamente aquí: https://calendly.com/neuriax/30min");
-      setShowCalendly(true);
+    } catch (err) {
+      console.error('Error:', err);
+      setError('Error de conexión. Por favor, inténtalo de nuevo.');
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const getStepProgress = (): number => {
-    const steps: ConversationStep[] = ['welcome', 'nombre', 'email', 'telefono', 'empresa', 'necesidad', 'recomendacion', 'final'];
-    const currentIndex = steps.indexOf(currentStep);
-    if (currentIndex === -1) return 100;
-    return Math.round((currentIndex / (steps.length - 1)) * 100);
+  const nextStep = () => {
+    if (currentStep < 3) setCurrentStep(currentStep + 1);
   };
 
+  const prevStep = () => {
+    if (currentStep > 1) setCurrentStep(currentStep - 1);
+  };
+
+  const canProceedStep1 = formData.nombre && formData.email && formData.telefono;
+  const canProceedStep2 = formData.necesidad;
+
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-hidden">
-      {/* Animated Background - Ultra Premium */}
-      <div className="fixed inset-0 pointer-events-none">
-        {/* Gradient orbs */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-500/5 rounded-full blur-[150px]"></div>
+    <div className="min-h-screen bg-[#050508] text-white">
+      {/* Ultra Premium Animated Background */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {/* Main gradient orbs */}
+        <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-cyan-500/8 rounded-full blur-[150px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-600/8 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-purple-500/5 rounded-full blur-[180px]"></div>
         
-        {/* Grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `linear-gradient(rgba(34, 211, 238, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.3) 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
+        {/* Subtle grid */}
+        <div className="absolute inset-0 opacity-[0.02]" style={{
+          backgroundImage: `linear-gradient(rgba(34, 211, 238, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(34, 211, 238, 0.5) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px'
         }}></div>
-        
+
         {/* Floating particles */}
-        <div className="absolute top-20 left-20 w-2 h-2 bg-cyan-400/60 rounded-full animate-float"></div>
-        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-cyan-300/60 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/3 right-20 w-2 h-2 bg-purple-400/40 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute top-20 left-20 w-1 h-1 bg-cyan-400/40 rounded-full animate-float"></div>
+        <div className="absolute top-40 right-32 w-1.5 h-1.5 bg-blue-400/30 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-32 left-1/4 w-1 h-1 bg-cyan-300/40 rounded-full animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/3 right-20 w-2 h-2 bg-purple-400/20 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-1/4 right-1/3 w-1 h-1 bg-emerald-400/30 rounded-full animate-float" style={{ animationDelay: '1.5s' }}></div>
       </div>
       
-      <div className="h-16"></div>
+      <div className="h-20"></div>
 
-      <section className="relative py-6 md:py-10 px-4 md:px-6">
+      <section className="relative py-8 md:py-12 px-4 md:px-6">
         <div className="max-w-3xl mx-auto">
-          {/* Back Link - Minimal */}
-          <Link href="/contacto" className="inline-flex items-center gap-2 text-slate-500 hover:text-cyan-400 mb-6 transition-all text-sm group">
+          {/* Back Link */}
+          <Link href="/contacto" className="inline-flex items-center gap-2 text-slate-600 hover:text-cyan-400 mb-10 transition-all text-sm group">
             <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity">Volver</span>
+            <span className="opacity-70 group-hover:opacity-100 transition-opacity">Volver a contacto</span>
           </Link>
 
-          {/* Main Card - Ultra Premium Glass */}
+          {/* Main Card */}
           <div className="relative">
-            {/* Glow effect behind card */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-purple-500/20 rounded-[2rem] blur-xl opacity-50"></div>
+            {/* Outer glow */}
+            <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500/10 via-blue-500/10 to-purple-500/10 rounded-[2.5rem] blur-2xl opacity-60"></div>
             
-            <div className="relative bg-gradient-to-br from-slate-900/98 via-slate-900/95 to-slate-800/98 rounded-[2rem] shadow-2xl border border-white/10 overflow-hidden backdrop-blur-2xl">
+            <div className="relative bg-gradient-to-br from-slate-900/95 via-slate-950/98 to-slate-900/95 rounded-[2rem] shadow-2xl border border-white/[0.08] overflow-hidden backdrop-blur-3xl">
               
-              {/* Info Banner - Explica el proceso */}
-              <div className="relative px-6 md:px-8 py-5 bg-gradient-to-r from-cyan-500/10 via-blue-500/5 to-transparent border-b border-white/5">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h1 className="text-lg font-semibold text-white mb-1">Responde 5 preguntas y agenda tu llamada</h1>
-                    <p className="text-sm text-slate-400">Nuestro asistente IA te guiará paso a paso. Solo tardas 2 minutos.</p>
-                  </div>
+              {/* Exclusive Banner */}
+              <div className="relative px-6 py-4 bg-gradient-to-r from-amber-500/10 via-yellow-500/5 to-amber-500/10 border-b border-amber-500/20">
+                <div className="flex items-center justify-center gap-3 text-center">
+                  <span className="text-xl">👑</span>
+                  <p className="text-sm md:text-base">
+                    <span className="text-amber-300 font-semibold">Solo para empresas que buscan resultados reales</span>
+                    <span className="text-slate-400 hidden md:inline"> — No trabajamos con todos, trabajamos con los mejores</span>
+                  </p>
                 </div>
               </div>
 
-              {/* Header Section */}
-              <div className="relative px-8 py-8 border-b border-white/5">
-                {/* Background decoration */}
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-blue-500/5"></div>
+              {/* Header Premium */}
+              <div className="relative px-8 md:px-12 py-10 border-b border-white/[0.06] overflow-hidden">
+                {/* Header background effects */}
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/[0.03] via-transparent to-blue-500/[0.03]"></div>
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
                 
                 <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                  {/* Left - Avatar & Info */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-5">
                     <div className="relative">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-xl shadow-cyan-500/30 rotate-3 hover:rotate-0 transition-transform duration-500">
-                        <span className="text-white font-bold text-2xl">M</span>
+                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-400 via-cyan-500 to-blue-600 flex items-center justify-center shadow-2xl shadow-cyan-500/30 rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
                       </div>
-                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-400 rounded-lg border-3 border-slate-900 flex items-center justify-center">
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <h2 className="text-xl font-bold text-white">Neuri 🧠</h2>
-                        <span className="px-2 py-0.5 bg-cyan-500/20 text-cyan-300 text-[10px] font-semibold rounded-full uppercase tracking-wider">IA</span>
-                      </div>
-                      <p className="text-slate-400 text-sm">Asistente Personal de Neuriax</p>
-                    </div>
-                  </div>
-                  
-                  {/* Right - Progress */}
-                  <div className="flex-shrink-0">
-                    <div className="flex items-center gap-4">
-                      <div className="text-right">
-                        <p className="text-slate-500 text-xs uppercase tracking-wider mb-1">Progreso</p>
-                        <p className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">{getStepProgress()}%</p>
-                      </div>
-                      <div className="w-16 h-16 relative">
-                        <svg className="w-16 h-16 -rotate-90" viewBox="0 0 64 64">
-                          <circle cx="32" cy="32" r="28" fill="none" stroke="currentColor" strokeWidth="4" className="text-slate-800" />
-                          <circle 
-                            cx="32" cy="32" r="28" fill="none" stroke="url(#progressGradient)" strokeWidth="4" 
-                            strokeDasharray={`${getStepProgress() * 1.76} 176`}
-                            strokeLinecap="round"
-                            className="transition-all duration-700"
-                          />
-                          <defs>
-                            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                              <stop offset="0%" stopColor="#22d3ee" />
-                              <stop offset="100%" stopColor="#3b82f6" />
-                            </linearGradient>
-                          </defs>
+                      <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-400 rounded-lg border-2 border-slate-900 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       </div>
                     </div>
+                    <div>
+                      <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Demuestra que tu negocio está listo para crecer</h1>
+                      <p className="text-slate-400 text-sm md:text-base">Rellena el formulario completo y recibe una propuesta personalizada en 24h</p>
+                    </div>
+                  </div>
+                  
+                  {/* Step indicator */}
+                  <div className="flex items-center gap-2">
+                    {[1, 2, 3].map((step) => (
+                      <div key={step} className="flex items-center">
+                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                          currentStep === step 
+                            ? 'bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/30' 
+                            : currentStep > step 
+                              ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                              : 'bg-white/5 text-slate-500 border border-white/10'
+                        }`}>
+                          {currentStep > step ? (
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          ) : step}
+                        </div>
+                        {step < 3 && (
+                          <div className={`w-6 h-0.5 mx-1 transition-all duration-300 ${currentStep > step ? 'bg-emerald-500/50' : 'bg-white/10'}`}></div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
-              
-              {/* Messages Area */}
-              <div 
-                ref={messagesContainerRef}
-                className="h-[400px] md:h-[450px] overflow-y-auto p-6 md:p-8 space-y-6 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-transparent"
-              >
-                {messages.map((message, idx) => (
-                  <div
-                    key={message.id}
-                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} animate-fade-in-up`}
-                    style={{ animationDelay: `${idx * 50}ms` }}
-                  >
-                    <div className={`max-w-[85%] ${message.type === 'user' ? 'order-2' : 'order-1'}`}>
-                      {/* Bot avatar */}
-                      {message.type === 'bot' && (
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
-                            <span className="text-white font-bold text-[10px]">M</span>
+
+              {/* Form Content */}
+              <div className="p-8 md:p-12">
+                {!isSubmitted ? (
+                  <form onSubmit={handleSubmit}>
+                    
+                    {/* STEP 1: Datos personales */}
+                    <div className={`space-y-6 ${currentStep === 1 ? 'block' : 'hidden'}`}>
+                      <div className="mb-8">
+                        <h2 className="text-lg font-semibold text-white flex items-center gap-3 mb-2">
+                          <span className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                          </span>
+                          Tus datos de contacto
+                        </h2>
+                        <p className="text-slate-500 text-sm ml-11">Para poder contactarte y enviarte la propuesta</p>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Nombre */}
+                        <div className="md:col-span-2">
+                          <label htmlFor="nombre" className="block text-sm font-medium text-slate-300 mb-2">
+                            Nombre completo <span className="text-cyan-400">*</span>
+                          </label>
+                          <div className="relative group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+                            <input
+                              type="text"
+                              id="nombre"
+                              name="nombre"
+                              value={formData.nombre}
+                              onChange={handleChange}
+                              required
+                              placeholder="Tu nombre completo"
+                              className="relative w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                            />
                           </div>
-                          <span className="text-slate-500 text-xs">Neuri</span>
                         </div>
-                      )}
-                      
-                      <div
-                        className={`rounded-2xl px-5 py-4 ${
-                          message.type === 'user'
-                            ? 'bg-gradient-to-br from-cyan-500 via-cyan-500 to-blue-600 text-white shadow-xl shadow-cyan-500/25'
-                            : 'bg-white/[0.03] text-slate-100 border border-white/10 backdrop-blur-sm'
-                        }`}
-                      >
-                        <p className="whitespace-pre-line text-[15px] leading-relaxed">{message.content}</p>
+
+                        {/* Email */}
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                            Email profesional <span className="text-cyan-400">*</span>
+                          </label>
+                          <div className="relative group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+                            <input
+                              type="email"
+                              id="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleChange}
+                              required
+                              placeholder="tu@email.com"
+                              className="relative w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                            />
+                          </div>
+                        </div>
+
+                        {/* Teléfono */}
+                        <div>
+                          <label htmlFor="telefono" className="block text-sm font-medium text-slate-300 mb-2">
+                            Teléfono / WhatsApp <span className="text-cyan-400">*</span>
+                          </label>
+                          <div className="relative group">
+                            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl blur-lg opacity-0 group-focus-within:opacity-100 transition-opacity"></div>
+                            <input
+                              type="tel"
+                              id="telefono"
+                              name="telefono"
+                              value={formData.telefono}
+                              onChange={handleChange}
+                              required
+                              placeholder="+34 600 000 000"
+                              className="relative w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                            />
+                          </div>
+                        </div>
                       </div>
-                      
-                      {/* Options - Premium Pill Buttons */}
-                      {message.options && message.type === 'bot' && (
-                        <div className="flex flex-wrap gap-2 mt-4">
-                          {message.options.map((option, index) => (
-                            <button
-                              key={index}
-                              onClick={() => handleOptionClick(option)}
-                              className="group relative px-5 py-3 text-sm font-medium overflow-hidden rounded-xl transition-all duration-300"
-                            >
-                              <div className="absolute inset-0 bg-gradient-to-r from-slate-800 to-slate-700 group-hover:from-cyan-500/20 group-hover:to-blue-500/20 transition-all duration-300"></div>
-                              <div className="absolute inset-0 border border-white/10 group-hover:border-cyan-500/50 rounded-xl transition-all duration-300"></div>
-                              <span className="relative text-slate-300 group-hover:text-white transition-colors">{option}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+
+                      {/* Navigation */}
+                      <div className="flex justify-end pt-6">
+                        <button
+                          type="button"
+                          onClick={nextStep}
+                          disabled={!canProceedStep1}
+                          className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-cyan-500/25 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+                        >
+                          Siguiente
+                          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
-                
-                {/* Typing Indicator - Premium */}
-                {isTyping && (
-                  <div className="flex justify-start animate-fade-in">
-                    <div className="flex items-center gap-3 bg-white/[0.03] rounded-2xl px-5 py-4 border border-white/10">
-                      <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center">
-                        <span className="text-white font-bold text-[10px]">M</span>
+
+                    {/* STEP 2: Empresa y necesidad */}
+                    <div className={`space-y-6 ${currentStep === 2 ? 'block' : 'hidden'}`}>
+                      <div className="mb-8">
+                        <h2 className="text-lg font-semibold text-white flex items-center gap-3 mb-2">
+                          <span className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                          </span>
+                          Sobre tu empresa
+                        </h2>
+                        <p className="text-slate-500 text-sm ml-11">Cuéntanos sobre tu negocio para personalizar la propuesta</p>
                       </div>
-                      <div className="flex gap-1.5">
-                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
-                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
-                        <div className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Empresa */}
+                        <div>
+                          <label htmlFor="empresa" className="block text-sm font-medium text-slate-300 mb-2">
+                            Nombre de la empresa
+                          </label>
+                          <input
+                            type="text"
+                            id="empresa"
+                            name="empresa"
+                            value={formData.empresa}
+                            onChange={handleChange}
+                            placeholder="Tu empresa o negocio"
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                          />
+                        </div>
+
+                        {/* Web */}
+                        <div>
+                          <label htmlFor="web" className="block text-sm font-medium text-slate-300 mb-2">
+                            Web actual (si tienes)
+                          </label>
+                          <input
+                            type="url"
+                            id="web"
+                            name="web"
+                            value={formData.web}
+                            onChange={handleChange}
+                            placeholder="https://tuempresa.com"
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all"
+                          />
+                        </div>
+
+                        {/* Sector */}
+                        <div>
+                          <label htmlFor="sector" className="block text-sm font-medium text-slate-300 mb-2">
+                            Sector
+                          </label>
+                          <select
+                            id="sector"
+                            name="sector"
+                            value={formData.sector}
+                            onChange={handleChange}
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                          >
+                            <option value="" className="bg-slate-900">Selecciona tu sector</option>
+                            <option value="tecnologia" className="bg-slate-900">Tecnología / SaaS</option>
+                            <option value="ecommerce" className="bg-slate-900">E-commerce / Retail</option>
+                            <option value="servicios" className="bg-slate-900">Servicios profesionales</option>
+                            <option value="salud" className="bg-slate-900">Salud / Bienestar</option>
+                            <option value="hosteleria" className="bg-slate-900">Hostelería / Restauración</option>
+                            <option value="inmobiliaria" className="bg-slate-900">Inmobiliaria</option>
+                            <option value="educacion" className="bg-slate-900">Educación / Formación</option>
+                            <option value="finanzas" className="bg-slate-900">Finanzas / Seguros</option>
+                            <option value="industrial" className="bg-slate-900">Industrial / Manufactura</option>
+                            <option value="otro" className="bg-slate-900">Otro</option>
+                          </select>
+                        </div>
+
+                        {/* Empleados */}
+                        <div>
+                          <label htmlFor="empleados" className="block text-sm font-medium text-slate-300 mb-2">
+                            Tamaño de la empresa
+                          </label>
+                          <select
+                            id="empleados"
+                            name="empleados"
+                            value={formData.empleados}
+                            onChange={handleChange}
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                          >
+                            <option value="" className="bg-slate-900">Selecciona</option>
+                            <option value="solo" className="bg-slate-900">Solo yo / Freelance</option>
+                            <option value="1-5" className="bg-slate-900">1-5 empleados</option>
+                            <option value="6-20" className="bg-slate-900">6-20 empleados</option>
+                            <option value="21-50" className="bg-slate-900">21-50 empleados</option>
+                            <option value="50+" className="bg-slate-900">Más de 50 empleados</option>
+                          </select>
+                        </div>
                       </div>
+
+                      {/* Necesidad - Full width */}
+                      <div>
+                        <label htmlFor="necesidad" className="block text-sm font-medium text-slate-300 mb-2">
+                          ¿Qué necesitas? <span className="text-cyan-400">*</span>
+                        </label>
+                        <select
+                          id="necesidad"
+                          name="necesidad"
+                          value={formData.necesidad}
+                          onChange={handleChange}
+                          required
+                          className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                        >
+                          <option value="" className="bg-slate-900">¿Qué te gustaría conseguir?</option>
+                          <option value="web-corporativa" className="bg-slate-900">🌐 Web corporativa profesional</option>
+                          <option value="landing-page" className="bg-slate-900">🎯 Landing page de ventas</option>
+                          <option value="ecommerce" className="bg-slate-900">🛒 Tienda online / E-commerce</option>
+                          <option value="automatizacion" className="bg-slate-900">⚡ Automatización de procesos</option>
+                          <option value="chatbot" className="bg-slate-900">🤖 Chatbot / Asistente IA</option>
+                          <option value="seo" className="bg-slate-900">📈 Posicionamiento SEO</option>
+                          <option value="rediseno" className="bg-slate-900">✨ Rediseño web existente</option>
+                          <option value="consultoria" className="bg-slate-900">💡 Consultoría digital</option>
+                          <option value="otro" className="bg-slate-900">🔧 Otro / Varios servicios</option>
+                        </select>
+                      </div>
+
+                      {/* Navigation */}
+                      <div className="flex justify-between pt-6">
+                        <button
+                          type="button"
+                          onClick={prevStep}
+                          className="px-6 py-4 bg-white/5 hover:bg-white/10 text-slate-300 font-medium rounded-xl border border-white/10 hover:border-white/20 transition-all flex items-center gap-2"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                          </svg>
+                          Anterior
+                        </button>
+                        <button
+                          type="button"
+                          onClick={nextStep}
+                          disabled={!canProceedStep2}
+                          className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-cyan-500/25 transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+                        >
+                          Siguiente
+                          <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* STEP 3: Detalles del proyecto */}
+                    <div className={`space-y-6 ${currentStep === 3 ? 'block' : 'hidden'}`}>
+                      <div className="mb-8">
+                        <h2 className="text-lg font-semibold text-white flex items-center gap-3 mb-2">
+                          <span className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                            <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                          </span>
+                          Detalles finales
+                        </h2>
+                        <p className="text-slate-500 text-sm ml-11">Última información para preparar tu propuesta personalizada</p>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        {/* Presupuesto */}
+                        <div>
+                          <label htmlFor="presupuesto" className="block text-sm font-medium text-slate-300 mb-2">
+                            Presupuesto aproximado
+                          </label>
+                          <select
+                            id="presupuesto"
+                            name="presupuesto"
+                            value={formData.presupuesto}
+                            onChange={handleChange}
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                          >
+                            <option value="" className="bg-slate-900">Selecciona un rango</option>
+                            <option value="500-1500" className="bg-slate-900">500€ - 1.500€</option>
+                            <option value="1500-3000" className="bg-slate-900">1.500€ - 3.000€</option>
+                            <option value="3000-6000" className="bg-slate-900">3.000€ - 6.000€</option>
+                            <option value="6000-10000" className="bg-slate-900">6.000€ - 10.000€</option>
+                            <option value="10000+" className="bg-slate-900">Más de 10.000€</option>
+                            <option value="flexible" className="bg-slate-900">Flexible / A consultar</option>
+                          </select>
+                        </div>
+
+                        {/* Urgencia */}
+                        <div>
+                          <label htmlFor="urgencia" className="block text-sm font-medium text-slate-300 mb-2">
+                            ¿Cuándo lo necesitas?
+                          </label>
+                          <select
+                            id="urgencia"
+                            name="urgencia"
+                            value={formData.urgencia}
+                            onChange={handleChange}
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                          >
+                            <option value="" className="bg-slate-900">Selecciona</option>
+                            <option value="urgente" className="bg-slate-900">🔴 Lo antes posible (urgente)</option>
+                            <option value="1mes" className="bg-slate-900">🟡 En el próximo mes</option>
+                            <option value="2-3meses" className="bg-slate-900">🟢 En 2-3 meses</option>
+                            <option value="explorando" className="bg-slate-900">🔵 Solo estoy explorando opciones</option>
+                          </select>
+                        </div>
+
+                        {/* Cómo nos conoció */}
+                        <div className="md:col-span-2">
+                          <label htmlFor="comoNosConocio" className="block text-sm font-medium text-slate-300 mb-2">
+                            ¿Cómo nos conociste?
+                          </label>
+                          <select
+                            id="comoNosConocio"
+                            name="comoNosConocio"
+                            value={formData.comoNosConocio}
+                            onChange={handleChange}
+                            className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white focus:outline-none focus:border-cyan-500/50 transition-all appearance-none cursor-pointer"
+                            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+                          >
+                            <option value="" className="bg-slate-900">Selecciona</option>
+                            <option value="google" className="bg-slate-900">Google / Buscador</option>
+                            <option value="redes" className="bg-slate-900">Redes sociales</option>
+                            <option value="recomendacion" className="bg-slate-900">Recomendación</option>
+                            <option value="linkedin" className="bg-slate-900">LinkedIn</option>
+                            <option value="publicidad" className="bg-slate-900">Publicidad online</option>
+                            <option value="otro" className="bg-slate-900">Otro</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* Mensaje */}
+                      <div>
+                        <label htmlFor="mensaje" className="block text-sm font-medium text-slate-300 mb-2">
+                          Cuéntanos más sobre tu proyecto <span className="text-cyan-400">*</span>
+                        </label>
+                        <textarea
+                          id="mensaje"
+                          name="mensaje"
+                          value={formData.mensaje}
+                          onChange={handleChange}
+                          required
+                          rows={5}
+                          placeholder="Describe tu situación actual, qué te gustaría conseguir, cualquier detalle que nos ayude a preparar una propuesta personalizada..."
+                          className="w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/50 focus:bg-white/[0.05] transition-all resize-none"
+                        />
+                      </div>
+
+                      {/* Checkbox RGPD */}
+                      <div className="p-5 bg-white/[0.02] rounded-xl border border-white/5">
+                        <label className="flex items-start gap-4 cursor-pointer group">
+                          <input
+                            type="checkbox"
+                            name="acepta"
+                            checked={formData.acepta}
+                            onChange={handleChange}
+                            required
+                            className="mt-0.5 w-5 h-5 rounded border-slate-600 bg-white/5 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+                          />
+                          <span className="text-sm text-slate-400 leading-relaxed">
+                            He leído y acepto la{' '}
+                            <a href="/politica-de-privacidad" target="_blank" className="text-cyan-400 hover:underline">
+                              política de privacidad
+                            </a>{' '}
+                            y consiento el tratamiento de mis datos personales para recibir información sobre los servicios solicitados y comunicaciones comerciales relacionadas. <span className="text-cyan-400">*</span>
+                          </span>
+                        </label>
+                      </div>
+
+                      {/* Error Message */}
+                      {error && (
+                        <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 text-sm flex items-center gap-3">
+                          <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          {error}
+                        </div>
+                      )}
+
+                      {/* Navigation */}
+                      <div className="flex justify-between pt-6">
+                        <button
+                          type="button"
+                          onClick={prevStep}
+                          className="px-6 py-4 bg-white/5 hover:bg-white/10 text-slate-300 font-medium rounded-xl border border-white/10 hover:border-white/20 transition-all flex items-center gap-2"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                          </svg>
+                          Anterior
+                        </button>
+                        <button
+                          type="submit"
+                          disabled={isSubmitting || !formData.acepta || !formData.mensaje}
+                          className="group relative px-10 py-4 overflow-hidden rounded-xl font-semibold transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:from-cyan-400 group-hover:to-blue-500 transition-all"></div>
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                          </div>
+                          <span className="relative flex items-center gap-2 text-white">
+                            {isSubmitting ? (
+                              <>
+                                <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Enviando...
+                              </>
+                            ) : (
+                              <>
+                                Enviar solicitud
+                                <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                </svg>
+                              </>
+                            )}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+
+                  </form>
+                ) : (
+                  /* Success State */
+                  <div className="text-center py-12">
+                    <div className="relative inline-block mb-8">
+                      <div className="absolute inset-0 bg-emerald-500/30 rounded-full blur-2xl animate-pulse"></div>
+                      <div className="relative w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-green-600 flex items-center justify-center shadow-2xl shadow-emerald-500/40">
+                        <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <h2 className="text-3xl font-bold text-white mb-4">¡Solicitud enviada!</h2>
+                    <p className="text-slate-400 mb-8 max-w-lg mx-auto text-lg">
+                      Hemos recibido tu información. Te contactaremos en las próximas <strong className="text-white">24 horas</strong> con una propuesta personalizada.
+                    </p>
+                    
+                    <div className="inline-flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl px-6 py-4 mb-10">
+                      <span className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></span>
+                      <span className="text-emerald-300 font-medium">Revisa tu bandeja de entrada (y spam)</span>
+                    </div>
+                    
+                    <div className="pt-8 border-t border-white/10">
+                      <p className="text-slate-500 mb-6">¿Prefieres hablar directamente?</p>
+                      <a
+                        href="https://calendly.com/neuriax/30min"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-cyan-500/50 text-white font-medium rounded-xl transition-all group"
+                      >
+                        <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        <span>Agendar videollamada gratuita</span>
+                        <svg className="w-4 h-4 text-slate-500 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
                     </div>
                   </div>
                 )}
-                
-                <div ref={messagesEndRef} />
-              </div>
-
-              {/* Input Area - Ultra Premium */}
-              <div className="border-t border-white/5 p-5 md:p-6 bg-gradient-to-t from-slate-900/50 to-transparent">
-                <form onSubmit={handleSubmit} className="flex gap-3">
-                  <div className="flex-1 relative group">
-                    <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-30 blur transition-opacity duration-300"></div>
-                    <input
-                      ref={inputRef}
-                      type="text"
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      placeholder="Escribe tu respuesta..."
-                      className="relative w-full px-5 py-4 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 transition-all text-[15px]"
-                      disabled={isSubmitting}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    disabled={!inputValue.trim() || isSubmitting}
-                    className="group relative px-6 py-4 rounded-xl overflow-hidden transition-all duration-300 disabled:opacity-40 disabled:cursor-not-allowed"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:from-cyan-400 group-hover:to-blue-500 transition-all duration-300"></div>
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                    </div>
-                    <svg className="relative w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                    </svg>
-                  </button>
-                </form>
               </div>
             </div>
           </div>
 
-          {/* Calendly Button - Ultra Premium */}
-          {showCalendly && (
-            <div className="mt-10 text-center animate-fade-in-up">
-              <div className="relative inline-block">
-                <div className="absolute -inset-2 bg-gradient-to-r from-green-500 via-emerald-500 to-green-500 rounded-2xl blur-lg opacity-50 animate-pulse"></div>
-                <a
-                  href="https://calendly.com/neuriax/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative inline-flex items-center justify-center gap-3 px-12 py-6 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white font-bold rounded-2xl shadow-2xl transition-all duration-300 hover:scale-105 text-lg"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  Agendar mi llamada ahora
-                </a>
-              </div>
-              <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-400">
-                <span className="flex items-center gap-2">
-                  <span className="text-lg">📞</span> 15-20 min
-                </span>
-                <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
-                <span className="flex items-center gap-2">
-                  <span className="text-lg">✅</span> Sin compromiso
-                </span>
-                <span className="w-1 h-1 bg-slate-600 rounded-full"></span>
-                <span className="flex items-center gap-2">
-                  <span className="text-lg">🎁</span> Gratis
-                </span>
-              </div>
-            </div>
-          )}
-
-          {/* Trust Indicators - Minimal Premium */}
-          <div className="mt-16 mb-8">
-            <div className="flex flex-wrap justify-center gap-x-10 gap-y-4 text-sm text-slate-500">
-              <span className="flex items-center gap-2 group">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+          {/* Trust Indicators */}
+          <div className="mt-16">
+            <div className="flex flex-wrap justify-center gap-8 text-sm text-slate-600">
+              <span className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500/10 to-emerald-500/10 border border-green-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
-                <span>Datos protegidos</span>
+                <span>Datos 100% seguros</span>
               </span>
-              <span className="flex items-center gap-2 group">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <span className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <span>Respuesta inmediata</span>
+                <span>Respuesta en 24h</span>
               </span>
-              <span className="flex items-center gap-2 group">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              <span className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/10 to-pink-500/10 border border-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
-                <span>100% honestidad</span>
+                <span>Sin compromiso</span>
               </span>
             </div>
           </div>
