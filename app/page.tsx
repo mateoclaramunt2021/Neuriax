@@ -18,11 +18,11 @@ export default function Home() {
     },
     {
       question: "¿Cuánto cuesta realmente?",
-      answer: "Webs profesionales: desde 790€ (lista en 15 días, incluye dominio, hosting y soporte 1 año). Automatizaciones: depende de complejidad, pero te doy precio exacto ANTES de empezar, sin sorpresas ni letra pequeña."
+      answer: "Webs profesionales: desde 790€ (lista en menos de 10 días, desarrollada sin plantillas genéricas, incluye dominio, hosting y soporte 1 año). Automatizaciones: depende de complejidad, pero te doy precio exacto ANTES de empezar, sin sorpresas ni letra pequeña."
     },
     {
       question: "¿Cuánto tiempo tarda ver resultados?",
-      answer: "Webs: en 15 días tienes tu sitio online. SEO local real toma 30-60 días para ver cambios. Automatizaciones: si están bien diseñadas, funcionan desde el primer día."
+      answer: "Webs: en menos de 10 días tienes tu sitio online, desarrollado a medida sin plantillas. SEO local real toma 30-60 días para ver cambios. Automatizaciones: si están bien diseñadas, funcionan desde el primer día."
     },
     {
       question: "¿Qué pasa si no funciona?",
@@ -121,7 +121,7 @@ export default function Home() {
                   <svg className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-xs md:text-sm text-white font-medium">Webs en 15 días</span>
+                  <span className="text-xs md:text-sm text-white font-medium">Web en -10 días sin plantillas</span>
                 </div>
                 <div className="flex items-center gap-2 bg-gradient-to-r from-blue-500/15 to-blue-500/5 backdrop-blur-sm rounded-full px-3 md:px-4 py-2 border border-blue-500/20">
                   <svg className="w-4 h-4 md:w-5 md:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -371,7 +371,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-3 text-gray-300">
                   <svg className="w-4 h-4 text-cyan-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                  <span>Desde 790€ • Lista en 15 días</span>
+                  <span>Desde 790€ • Lista en -10 días</span>
                 </li>
               </ul>
               <CTAButton href="/webs" className="w-full text-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
