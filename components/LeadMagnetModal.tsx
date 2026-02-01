@@ -12,48 +12,19 @@ export default function LeadMagnetModal() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mostrar modal después de 2 segundos (casi inmediatamente) o cuando intenten salir
+  // Mostrar modal después de 2 segundos cada vez que se entra a la web
   useEffect(() => {
-    // Mostrar después de tiempo
     const timer = setTimeout(() => {
-      if (!localStorage.getItem('lead_magnet_dismissed')) {
-        setShowModal(true);
-      }
+      setShowModal(true);
     }, 2000);
-
-    // Mostrar si intenta salir (mouse sale de la ventana)
-    const handleMouseLeave = () => {
-      if (!localStorage.getItem('lead_magnet_dismissed') && !showModal) {
-        setShowModal(true);
-      }
-    };
-
-    // Para móviles: detectar intención de salir (scroll hacia arriba rápido)
-    let lastScrollY = typeof window !== 'undefined' ? window.scrollY : 0;
-    const handleScroll = () => {
-      if (typeof window !== 'undefined') {
-        const currentScrollY = window.scrollY;
-        // Si hace scroll muy rápido hacia arriba, probablemente intenta salir
-        if (currentScrollY < lastScrollY - 50 && !localStorage.getItem('lead_magnet_dismissed') && !showModal) {
-          setShowModal(true);
-        }
-        lastScrollY = currentScrollY;
-      }
-    };
-
-    document.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('scroll', handleScroll);
 
     return () => {
       clearTimeout(timer);
-      document.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('scroll', handleScroll);
     };
-  }, [showModal]);
+  }, []);
 
   const handleClose = () => {
     setShowModal(false);
-    localStorage.setItem('lead_magnet_dismissed', 'true');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -77,7 +48,6 @@ export default function LeadMagnetModal() {
       console.log('Email capturado exitosamente:', data);
       
       setIsSubmitted(true);
-      localStorage.setItem('lead_magnet_dismissed', 'true');
       
       // Cerrar después de 3 segundos
       setTimeout(() => {
