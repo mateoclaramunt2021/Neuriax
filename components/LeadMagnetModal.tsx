@@ -64,25 +64,25 @@ export default function LeadMagnetModal() {
   if (!showModal) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
         onClick={handleClose}
       />
 
       {/* Modal */}
-      <div className="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-2xl overflow-hidden max-w-md w-full border border-cyan-500/30 shadow-2xl shadow-cyan-500/20 animate-in fade-in zoom-in-95">
+      <div className="relative bg-gradient-to-br from-slate-900 via-slate-950 to-black rounded-2xl max-w-md w-full border border-cyan-500/30 shadow-2xl shadow-cyan-500/20 animate-in fade-in zoom-in-95 my-8 max-h-[90vh] flex flex-col">
         {/* Top Banner - Oferta una sola vez */}
-        <div className="bg-gradient-to-r from-red-600 via-orange-600 to-red-600 px-6 py-3 text-center border-b border-red-500/50">
+        <div className="flex-shrink-0 bg-gradient-to-r from-red-600 via-orange-600 to-red-600 px-6 py-3 text-center border-b border-red-500/50">
           <p className="text-white font-bold text-sm flex items-center justify-center gap-2">
             <span className="text-lg">⏰</span>
             Esta oferta solo aparece <span className="text-yellow-300 underline">UNA VEZ</span>
           </p>
         </div>
 
-        {/* Modal Content */}
-        <div className="p-8 md:p-12">
+        {/* Modal Content - Scrollable */}
+        <div className="p-8 md:p-12 overflow-y-auto flex-1">
           {/* Close button */}
           <button
             onClick={handleClose}
