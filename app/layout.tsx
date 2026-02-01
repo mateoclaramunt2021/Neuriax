@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Chatbot from "../components/Chatbot";
 import ScheduleCallButton from "../components/ScheduleCallButton";
+import MobileCTA from "../components/MobileCTA";
 import { PageTracker } from "../components/PageTracker";
 import VisitorForm from "../components/VisitorForm";
 import CookieBanner from "../components/CookieBanner";
@@ -132,6 +133,7 @@ export default function RootLayout({
         <Footer />
         <Chatbot />
         <ScheduleCallButton />
+        <MobileCTA />
         <VisitorForm />
         <LeadMagnetModal />
         {/* Vercel Analytics - Recopila datos de rendimiento y visitas */}
