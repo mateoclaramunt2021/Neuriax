@@ -206,32 +206,6 @@ export default function QuienSomos() {
               </p>
             </div>
           </div>
-
-          {/* Lo que NO hacemos */}
-          <div className="bg-gradient-to-r from-red-500/10 to-orange-500/10 border border-red-500/20 rounded-2xl p-8 md:p-12">
-            <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-              <span className="text-3xl">🚫</span>
-              Lo que NO hacemos
-            </h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4">
-                <span className="text-red-400 text-xl">✕</span>
-                <p className="text-slate-300">Prometer resultados mágicos en 30 días</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-red-400 text-xl">✕</span>
-                <p className="text-slate-300">Usar plantillas genéricas para todos</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-red-400 text-xl">✕</span>
-                <p className="text-slate-300">Desaparecer después del pago</p>
-              </div>
-              <div className="flex items-start gap-4">
-                <span className="text-red-400 text-xl">✕</span>
-                <p className="text-slate-300">Cobrar por cosas que no necesitas</p>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
