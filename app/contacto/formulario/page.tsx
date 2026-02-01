@@ -303,6 +303,21 @@ export default function FormularioContacto() {
             
             <div className="relative bg-gradient-to-br from-slate-900/98 via-slate-900/95 to-slate-800/98 rounded-[2rem] shadow-2xl border border-white/10 overflow-hidden backdrop-blur-2xl">
               
+              {/* Info Banner - Explica el proceso */}
+              <div className="relative px-6 md:px-8 py-5 bg-gradient-to-r from-cyan-500/10 via-blue-500/5 to-transparent border-b border-white/5">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h1 className="text-lg font-semibold text-white mb-1">Responde 5 preguntas y agenda tu llamada</h1>
+                    <p className="text-sm text-slate-400">Nuestro asistente IA te guiará paso a paso. Solo tardas 2 minutos.</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Header Section */}
               <div className="relative px-8 py-8 border-b border-white/5">
                 {/* Background decoration */}
