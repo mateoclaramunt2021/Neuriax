@@ -229,6 +229,26 @@ body {
   transform: translateY(-4px);
 }
 
+/* Slow bounce animation */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0) translateX(-50%); }
+  50% { transform: translateY(-10px) translateX(-50%); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 2s ease-in-out infinite;
+}
+
+/* Slow pulse animation */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s ease-in-out infinite;
+}
+
 /* Ultra smooth transitions */
 .smooth-transition {
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);

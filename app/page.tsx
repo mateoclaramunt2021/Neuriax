@@ -67,173 +67,233 @@ export default function Home() {
         }}
       />
       
-      {/* Hero Section - ULTRA FLUIDO PROFESIONAL */}
-      <section className="relative hero-futuristic text-white pt-20 pb-24 px-6 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
+      {/* Hero Section - ULTRA LLAMATIVO Y PROFESIONAL */}
+      <section className="relative hero-futuristic text-white pt-16 md:pt-20 pb-12 md:pb-20 px-4 md:px-6 overflow-hidden min-h-[100vh] md:min-h-[calc(100vh-80px)] flex items-center">
         {/* Professional Grid Background */}
         <div className="absolute inset-0 grid-pattern"></div>
         
         {/* Subtle Floating Particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(15)].map((_, i) => (
+          {[...Array(20)].map((_, i) => (
             <div
               key={i}
               className="particle"
               style={{
-                left: `${3 + i * 6.5}%`,
-                animationDuration: `${20 + i * 3}s`,
-                animationDelay: `${i * 2}s`,
+                left: `${2 + i * 5}%`,
+                animationDuration: `${15 + i * 2}s`,
+                animationDelay: `${i * 1.5}s`,
               }}
             />
           ))}
         </div>
 
-        {/* Elegant Glowing Orbs - More diffuse */}
-        <div className="absolute top-0 left-0 w-[700px] h-[700px] bg-cyan-500/8 rounded-full blur-[200px] orb-glow"></div>
-        <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-blue-600/6 rounded-full blur-[250px] orb-glow" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-purple-500/4 rounded-full blur-[300px] orb-float"></div>
+        {/* Glowing Orbs - Más intensos */}
+        <div className="absolute top-0 left-0 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-cyan-500/10 rounded-full blur-[150px] md:blur-[200px] orb-glow"></div>
+        <div className="absolute bottom-0 right-0 w-[600px] md:w-[900px] h-[600px] md:h-[900px] bg-blue-600/8 rounded-full blur-[200px] md:blur-[250px] orb-glow" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] md:w-[1200px] h-[800px] md:h-[1200px] bg-purple-500/5 rounded-full blur-[250px] md:blur-[300px] orb-float"></div>
 
         <div className="relative max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="relative z-10">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-3 bg-white/[0.03] border border-white/[0.08] rounded-full px-6 py-2.5 mb-8 backdrop-blur-md fade-in-up" style={{ animationDelay: '0s' }}>
-                <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-                <span className="text-slate-400 text-sm font-medium tracking-wider">Trato Directo • Sin Intermediarios</span>
+            <div className="relative z-10 text-center lg:text-left">
+              {/* Badge Premium */}
+              <div className="inline-flex items-center gap-2 md:gap-3 bg-white/5 border border-white/10 rounded-full px-4 md:px-6 py-2 md:py-2.5 mb-6 md:mb-8 backdrop-blur-md fade-in-up" style={{ animationDelay: '0s' }}>
+                <span className="w-2 h-2 bg-cyan-400 rounded-full"></span>
+                <span className="text-slate-300 text-xs md:text-sm font-medium tracking-wide">Soluciones IA Personalizadas</span>
               </div>
 
-              {/* Main Title - NUEVO */}
-              <h1 className="text-4xl md:text-6xl font-semibold mb-6 leading-[1.1] tracking-tight fade-in-up" style={{ animationDelay: '0.15s' }}>
-                <span className="block text-white mb-2">Tu negocio merece</span>
-                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 text-glow-cyan">
-                  tecnología que funcione
+              {/* Main Title */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 leading-[1.1] tracking-tight fade-in-up" style={{ animationDelay: '0.15s' }}>
+                <span className="block text-white mb-1 md:mb-2">Duplica tus ventas</span>
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-cyan-400">
+                  con IA que trabaja 24/7
                 </span>
-                <span className="block text-white/90 text-3xl md:text-4xl mt-3 font-normal">No promesas, resultados.</span>
               </h1>
 
-              {/* Subtitle */}
-              <p className="text-base md:text-lg text-slate-400 mb-8 max-w-lg leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
-                Webs profesionales y automatizaciones con IA. Hablas directamente conmigo, sin equipos de ventas ni intermediarios.
+              {/* Subtitle - Más directo */}
+              <p className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed fade-in-up" style={{ animationDelay: '0.3s' }}>
+                Webs profesionales + automatizaciones inteligentes que <span className="text-cyan-400 font-semibold">convierten visitantes en clientes</span> mientras tú te centras en lo importante.
               </p>
 
-              {/* Features - Elegant pills */}
-              <div className="flex flex-wrap gap-2.5 mb-10 fade-in-up" style={{ animationDelay: '0.45s' }}>
-                <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
-                  <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              {/* Value Props - Pills más visibles */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 md:gap-3 mb-6 md:mb-8 fade-in-up" style={{ animationDelay: '0.4s' }}>
+                <div className="flex items-center gap-2 bg-gradient-to-r from-cyan-500/15 to-cyan-500/5 backdrop-blur-sm rounded-full px-3 md:px-4 py-2 border border-cyan-500/20">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
-                  <span className="text-sm text-slate-300">Diseño Web Premium</span>
+                  <span className="text-xs md:text-sm text-white font-medium">Webs en 15 días</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
-                  <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-blue-500/15 to-blue-500/5 backdrop-blur-sm rounded-full px-3 md:px-4 py-2 border border-blue-500/20">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  <span className="text-sm text-slate-300">Automatización IA</span>
+                  <span className="text-xs md:text-sm text-white font-medium">IA Automatizada</span>
                 </div>
-                <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
-                  <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                <div className="flex items-center gap-2 bg-gradient-to-r from-purple-500/15 to-purple-500/5 backdrop-blur-sm rounded-full px-3 md:px-4 py-2 border border-purple-500/20">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
-                  <span className="text-sm text-slate-300">SEO Optimizado</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/[0.03] backdrop-blur-sm rounded-full px-4 py-2 border border-white/[0.06]">
-                  <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-sm text-slate-300">Soporte 24/7</span>
+                  <span className="text-xs md:text-sm text-white font-medium">Garantía 30 días</span>
                 </div>
               </div>
 
-              {/* CTA Buttons - CON URGENCIA */}
-              <div className="flex flex-col sm:flex-row gap-3 mb-6 fade-in-up" style={{ animationDelay: '0.6s' }}>
+              {/* CTA Buttons */}
+              <div className="flex flex-col gap-3 md:gap-4 mb-6 fade-in-up" style={{ animationDelay: '0.5s' }}>
+                {/* CTA Principal */}
                 <a 
                   href="/contacto/formulario" 
-                  className="btn-shimmer group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700 shadow-lg shadow-cyan-500/15 hover:shadow-cyan-500/25 hover:scale-[1.02]"
+                  className="group inline-flex items-center justify-center gap-2 md:gap-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-4 md:py-5 px-6 md:px-10 rounded-full transition-all duration-300 shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/30 hover:brightness-110 text-base md:text-lg"
                 >
-                  <span>🎯 Ver mi Potencial en 15 Minutos</span>
-                  <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  <span>Habla con un Experto</span>
+                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
-                <a 
-                  href="#problemas" 
-                  className="group inline-flex items-center justify-center gap-2 bg-transparent hover:bg-white/[0.03] border border-white/10 hover:border-white/20 text-white font-medium py-3.5 px-7 rounded-full transition-all duration-700"
-                >
-                  <span>Soluciones que funcionan</span>
-                  <svg className="w-5 h-5 transition-transform duration-500 group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </a>
+                
+                {/* CTAs Secundarios */}
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <a 
+                    href="/precios" 
+                    className="group inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-white/30 text-white font-medium py-3 md:py-3.5 px-5 md:px-6 rounded-full transition-all duration-300 text-sm md:text-base"
+                  >
+                    <span>Ver Planes y Precios</span>
+                  </a>
+                  <a 
+                    href="#problemas" 
+                    className="group inline-flex items-center justify-center gap-2 text-slate-400 hover:text-white font-medium py-3 md:py-3.5 px-5 md:px-6 rounded-full transition-all duration-300 text-sm md:text-base"
+                  >
+                    <span>Ver Soluciones</span>
+                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </a>
+                </div>
               </div>
               
-              {/* Indicator de urgencia - Solo 2 slots */}
-              <div className="inline-flex items-center gap-2 bg-red-500/10 border border-red-500/30 rounded-full px-4 py-2 mb-6 fade-in-up" style={{ animationDelay: '0.75s' }}>
-                <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
-                <span className="text-red-300 text-sm font-medium">⏰ Últimos 2 slots disponibles este mes</span>
+              {/* Social Proof */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6 fade-in-up" style={{ animationDelay: '0.6s' }}>
+                {/* Badge Clientes */}
+                <div className="flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5">
+                  <div className="text-2xl md:text-3xl font-bold text-white">+850</div>
+                  <div className="text-left">
+                    <div className="flex gap-0.5">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className="w-3 h-3 md:w-3.5 md:h-3.5 text-amber-400 fill-current" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                    </div>
+                    <div className="text-[10px] md:text-xs text-slate-400">Clientes Satisfechos</div>
+                  </div>
+                </div>
+
+                {/* Disponibilidad */}
+                <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2">
+                  <span className="w-2 h-2 bg-emerald-400 rounded-full"></span>
+                  <span className="text-emerald-300 text-xs md:text-sm font-medium">Disponible esta semana</span>
+                </div>
               </div>
 
-              {/* Trust indicators */}
-              <div className="flex items-center gap-6 text-xs text-slate-500 fade-in-up" style={{ animationDelay: '0.75s' }}>
+              {/* Trust indicators - Más visibles */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 mt-6 md:mt-8 text-xs md:text-sm text-slate-400 fade-in-up" style={{ animationDelay: '0.7s' }}>
                 <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-emerald-500/70" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  Sin compromiso
+                  <span>Sin compromiso</span>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-emerald-500/70" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  30 minutos
+                  <span>Respuesta en 24h</span>
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-emerald-500/70" fill="currentColor" viewBox="0 0 20 20">
+                  <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  Análisis gratuito
+                  <span>Trato directo</span>
                 </span>
               </div>
             </div>
 
-            {/* Right Side - Ultra Clean Visual */}
+            {/* Right Side - Visual Limpio */}
             <div className="relative hidden lg:flex items-center justify-center fade-in-scale" style={{ animationDelay: '0.3s' }}>
               <div className="relative w-full max-w-sm">
-                {/* Elegant rotating rings - slower */}
+                {/* Glow sutil */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-600/10 rounded-full blur-3xl"></div>
+                
+                {/* Anillos orbitales - más sutiles */}
                 <div className="absolute inset-0 aspect-square">
-                  <div className="absolute inset-0 border border-cyan-500/[0.08] rounded-full smooth-spin" style={{ animationDuration: '45s' }}></div>
-                  <div className="absolute inset-12 border border-blue-500/[0.12] rounded-full smooth-spin" style={{ animationDuration: '35s', animationDirection: 'reverse' }}></div>
-                  <div className="absolute inset-24 border border-purple-500/[0.08] rounded-full smooth-spin" style={{ animationDuration: '55s' }}></div>
+                  <div className="absolute inset-0 border border-white/5 rounded-full smooth-spin" style={{ animationDuration: '60s' }}></div>
+                  <div className="absolute inset-12 border border-cyan-500/10 rounded-full smooth-spin" style={{ animationDuration: '45s', animationDirection: 'reverse' }}></div>
                 </div>
                 
-                {/* Central glass card */}
+                {/* Card central IA */}
                 <div className="relative aspect-square flex items-center justify-center">
-                  <div className="glass-card rounded-3xl p-10 text-center float-smooth">
-                    <div className="text-7xl font-light text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 via-blue-400 to-purple-400 mb-3">IA</div>
-                    <div className="text-xs text-slate-500 tracking-[0.4em] uppercase">Powered</div>
+                  <div className="glass-card rounded-3xl p-10 md:p-14 text-center">
+                    <div className="text-7xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 via-blue-500 to-cyan-400 mb-3">IA</div>
+                    <div className="text-xs text-slate-500 tracking-[0.3em] uppercase">Powered</div>
                     <div className="mt-6 flex justify-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-cyan-400/60 rounded-full animate-pulse"></span>
-                      <span className="w-1.5 h-1.5 bg-blue-400/60 rounded-full animate-pulse" style={{ animationDelay: '0.3s' }}></span>
-                      <span className="w-1.5 h-1.5 bg-purple-400/60 rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></span>
+                      <span className="w-1.5 h-1.5 bg-cyan-400/60 rounded-full"></span>
+                      <span className="w-1.5 h-1.5 bg-blue-400/60 rounded-full"></span>
+                      <span className="w-1.5 h-1.5 bg-cyan-400/60 rounded-full"></span>
                     </div>
                   </div>
 
-                  {/* Floating accent cards */}
-                  <div className="absolute -top-4 -right-4 glass-card rounded-xl px-4 py-3 float-smooth" style={{ animationDelay: '2s' }}>
-                    <div className="text-xl font-semibold text-cyan-400/90">24/7</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">Asistente</div>
+                  {/* Cards flotantes - sin animación */}
+                  <div className="absolute -top-4 -right-4 glass-card rounded-xl px-4 py-3">
+                    <div className="text-lg font-semibold text-cyan-400">24/7</div>
+                    <div className="text-[10px] text-slate-500">Soporte</div>
                   </div>
-                  <div className="absolute -bottom-4 -left-4 glass-card rounded-xl px-4 py-3 float-smooth" style={{ animationDelay: '3.5s' }}>
-                    <div className="text-xl font-semibold text-purple-400/90">+SEO</div>
-                    <div className="text-[10px] text-slate-500 mt-0.5">Optimizado</div>
+                  <div className="absolute -bottom-4 -left-4 glass-card rounded-xl px-4 py-3">
+                    <div className="text-lg font-semibold text-blue-400">+SEO</div>
+                    <div className="text-[10px] text-slate-500">Incluido</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Cards de servicios */}
+          <div className="grid grid-cols-3 gap-3 md:gap-6 mt-10 md:mt-16 fade-in-up" style={{ animationDelay: '0.8s' }}>
+            <div className="glass-card rounded-xl md:rounded-2xl p-3 md:p-6 text-center transition-all duration-300 hover:bg-white/[0.04]">
+              <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 md:mb-4 rounded-lg bg-cyan-500/10 flex items-center justify-center">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xs md:text-base font-semibold text-white">Diseño Web</h3>
+              <p className="text-[10px] md:text-sm text-slate-500 hidden md:block mt-1">Webs que convierten</p>
+            </div>
+            
+            <div className="glass-card rounded-xl md:rounded-2xl p-3 md:p-6 text-center transition-all duration-300 hover:bg-white/[0.04]">
+              <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 md:mb-4 rounded-lg bg-blue-500/10 flex items-center justify-center">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <h3 className="text-xs md:text-base font-semibold text-white">Automatización IA</h3>
+              <p className="text-[10px] md:text-sm text-slate-500 hidden md:block mt-1">Trabaja mientras duermes</p>
+            </div>
+            
+            <div className="glass-card rounded-xl md:rounded-2xl p-3 md:p-6 text-center transition-all duration-300 hover:bg-white/[0.04]">
+              <div className="w-10 h-10 md:w-12 md:h-12 mx-auto mb-2 md:mb-4 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xs md:text-base font-semibold text-white">Soporte 24/7</h3>
+              <p className="text-[10px] md:text-sm text-slate-500 hidden md:block mt-1">Siempre disponible</p>
+            </div>
+          </div>
         </div>
 
-        {/* Subtle bottom gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
+        {/* Gradiente inferior */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent pointer-events-none"></div>
       </section>
 
       {/* Servicios principales */}
