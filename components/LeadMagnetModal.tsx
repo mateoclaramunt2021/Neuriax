@@ -8,6 +8,7 @@ export default function LeadMagnetModal() {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [telefono, setTelefono] = useState('');
+  const [acepta, setAcepta] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -190,9 +191,26 @@ export default function LeadMagnetModal() {
                 required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all"
               />
+              
+              {/* Checkbox de consentimiento RGPD */}
+              <label className="flex items-start gap-3 cursor-pointer group">
+                <input
+                  type="checkbox"
+                  checked={acepta}
+                  onChange={(e) => setAcepta(e.target.checked)}
+                  required
+                  className="mt-1 w-4 h-4 rounded border-gray-600 bg-white/5 text-cyan-500 focus:ring-cyan-500 focus:ring-offset-0 cursor-pointer"
+                />
+                <span className="text-xs text-gray-400 leading-relaxed">
+                  Acepto la{' '}
+                  <a href="/politica-de-privacidad" target="_blank" className="text-cyan-400 hover:underline">política de privacidad</a>
+                  {' '}y consiento el tratamiento de mis datos para recibir información comercial.
+                </span>
+              </label>
+
               <button
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || !acepta}
                 className="w-full px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:from-cyan-600 hover:to-blue-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? 'Enviando...' : '🎁 Descargar Guía Gratis'}
