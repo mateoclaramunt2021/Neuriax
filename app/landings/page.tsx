@@ -437,6 +437,10 @@ export default function PortfolioPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Optimización de velocidad</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar landing esencial
@@ -479,6 +483,10 @@ export default function PortfolioPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Dominio + Hosting 1 año</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar landing profesional
@@ -517,6 +525,10 @@ export default function PortfolioPage() {
                 <li className="flex items-start">
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Soporte prioritario</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
                 </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">

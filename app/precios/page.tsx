@@ -95,6 +95,10 @@ export default function PreciosPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Optimización de velocidad</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Empezar con web básica
@@ -137,6 +141,10 @@ export default function PreciosPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Dominio + Hosting 1 año</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar propuesta
@@ -175,6 +183,10 @@ export default function PreciosPage() {
                 <li className="flex items-start">
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Soporte prioritario</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
                 </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
@@ -223,6 +235,10 @@ export default function PreciosPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Optimización de velocidad</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar landing esencial
@@ -265,6 +281,10 @@ export default function PreciosPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Dominio + Hosting 1 año</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Solicitar landing profesional
@@ -303,6 +323,10 @@ export default function PreciosPage() {
                 <li className="flex items-start">
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Soporte prioritario</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
                 </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
@@ -347,6 +371,10 @@ export default function PreciosPage() {
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Configuración incluida</span>
                 </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
+                </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
                 Empezar automatización
@@ -384,6 +412,10 @@ export default function PreciosPage() {
                 <li className="flex items-start">
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Seguimiento automático</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
                 </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
@@ -423,6 +455,10 @@ export default function PreciosPage() {
                 <li className="flex items-start">
                   <span className="text-cyan-400 mr-3 font-bold">✓</span>
                   <span>Soporte prioritario</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-cyan-400 mr-3 font-bold">✓</span>
+                  <span>Mantenimiento 24/7 desde 25€/mes</span>
                 </li>
               </ul>
               <CTAButton href="/contacto/formulario" size="lg" className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700">
