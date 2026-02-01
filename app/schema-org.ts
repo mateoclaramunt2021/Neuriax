@@ -32,6 +32,7 @@ export const organizationSchema = {
   'sameAs': [
     'https://www.instagram.com/neuriax.ia_',
     'https://www.linkedin.com/company/neuriax',
+    'https://www.tiktok.com/@neuriaxx',
   ],
   'contactPoint': {
     '@type': 'ContactPoint',

@@ -548,6 +548,7 @@ ${formData.mensaje}
                             <option value="redes" className="bg-slate-900">Redes sociales</option>
                             <option value="recomendacion" className="bg-slate-900">Recomendación</option>
                             <option value="linkedin" className="bg-slate-900">LinkedIn</option>
+                            <option value="tiktok" className="bg-slate-900">TikTok</option>
                             <option value="publicidad" className="bg-slate-900">Publicidad online</option>
                             <option value="otro" className="bg-slate-900">Otro</option>
                           </select>
