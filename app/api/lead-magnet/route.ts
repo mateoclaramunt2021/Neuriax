@@ -10,12 +10,19 @@ if (process.env.RESEND_API_KEY) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
+    const { nombre, email, telefono } = await request.json();
 
     // Validación básica
     if (!email || !email.includes('@')) {
       return NextResponse.json(
         { error: 'Email inválido' },
+        { status: 400 }
+      );
+    }
+
+    if (!nombre || nombre.trim().length < 2) {
+      return NextResponse.json(
+        { error: 'Nombre inválido' },
         { status: 400 }
       );
     }
@@ -26,6 +33,8 @@ export async function POST(request: NextRequest) {
       .insert([
         {
           email,
+          nombre: nombre?.trim() || '',
+          telefono: telefono?.trim() || '',
           created_at: new Date().toISOString(),
           source: 'lead_magnet_popup'
         }
@@ -41,6 +50,7 @@ export async function POST(request: NextRequest) {
     // 2. Enviar email con Resend (si está configurado)
     if (resend) {
       try {
+        // Email al lead con la guía
         const emailResult = await resend.emails.send({
           from: 'Neuriax <noreply@neuriax.com>',
           to: email,
@@ -110,6 +120,67 @@ export async function POST(request: NextRequest) {
 
         if (emailResult.error) {
           console.error('Error enviando email con Resend:', emailResult.error);
+        }
+
+        // Email de notificación a Mateo - LEAD CALIENTE
+        const notificationResult = await resend.emails.send({
+          from: 'Neuriax Leads <noreply@neuriax.com>',
+          to: 'mateoclaramunt2021@gmail.com',
+          subject: '🔥 LEAD CALIENTE - Descarga Guía 7 Secretos',
+          html: `
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <meta charset="utf-8">
+                <style>
+                  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; padding: 20px; }
+                  .container { max-width: 500px; margin: 0 auto; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+                  .header { background: linear-gradient(135deg, #ef4444 0%, #f97316 100%); color: white; padding: 25px; text-align: center; }
+                  .header h1 { margin: 0; font-size: 24px; }
+                  .content { padding: 30px; }
+                  .field { margin-bottom: 20px; padding: 15px; background: #f9fafb; border-radius: 8px; border-left: 4px solid #06b6d4; }
+                  .field-label { font-size: 12px; text-transform: uppercase; color: #6b7280; margin-bottom: 5px; }
+                  .field-value { font-size: 18px; font-weight: 600; color: #111827; }
+                  .cta { display: block; text-align: center; background: #25d366; color: white; padding: 15px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+                  .cta:hover { background: #128c7e; }
+                  .footer { padding: 20px; text-align: center; font-size: 12px; color: #6b7280; background: #f9fafb; }
+                </style>
+              </head>
+              <body>
+                <div class="container">
+                  <div class="header">
+                    <h1>🔥 Nuevo Lead Caliente</h1>
+                    <p style="margin: 10px 0 0 0; opacity: 0.9;">Descargó la guía de 7 secretos</p>
+                  </div>
+                  <div class="content">
+                    <div class="field">
+                      <div class="field-label">Nombre</div>
+                      <div class="field-value">${nombre || 'No proporcionado'}</div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Email</div>
+                      <div class="field-value">${email}</div>
+                    </div>
+                    <div class="field">
+                      <div class="field-label">Teléfono</div>
+                      <div class="field-value">${telefono || 'No proporcionado'}</div>
+                    </div>
+                    <a href="https://wa.me/${(telefono || '').replace(/\D/g, '')}?text=Hola%20${encodeURIComponent(nombre || '')},%20vi%20que%20descargaste%20la%20guía%20de%20automatización.%20¿Te%20gustaría%20agendar%20una%20llamada%20gratuita?" class="cta">
+                      💬 Contactar por WhatsApp
+                    </a>
+                  </div>
+                  <div class="footer">
+                    <p>Lead capturado el ${new Date().toLocaleString('es-ES', { timeZone: 'Europe/Madrid' })}</p>
+                    <p>Fuente: Lead Magnet Popup - 7 Secretos de Automatización</p>
+                  </div>
+                </div>
+              </body>
+            </html>
+          `
+        });
+
+        if (notificationResult.error) {
+          console.error('Error enviando notificación a Mateo:', notificationResult.error);
         }
       } catch (emailError) {
         console.error('Error en envío de email:', emailError);
