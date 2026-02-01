@@ -18,66 +18,66 @@ export default function PreciosPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Hero Premium */}
-      <section className="relative py-32 px-6 bg-gradient-to-b from-black via-slate-950 to-gray-900 overflow-hidden">
+      <section className="relative py-20 md:py-32 px-4 md:px-6 bg-gradient-to-b from-black via-slate-950 to-gray-900 overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-cyan-500/15 to-transparent rounded-full blur-[100px]"></div>
-          <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-cyan-500/8 rounded-full blur-[120px]"></div>
-          <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] bg-blue-600/8 rounded-full blur-[100px]"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] md:w-[800px] h-[250px] md:h-[400px] bg-gradient-to-b from-cyan-500/20 to-transparent rounded-full blur-[80px] md:blur-[100px]"></div>
+          <div className="absolute top-1/3 left-0 md:left-1/4 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bg-cyan-500/10 rounded-full blur-[80px] md:blur-[120px]"></div>
+          <div className="absolute bottom-0 right-0 md:right-1/4 w-[200px] md:w-[350px] h-[200px] md:h-[350px] bg-blue-600/10 rounded-full blur-[80px] md:blur-[100px]"></div>
           {/* Grid pattern overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:30px_30px] md:bg-[size:50px_50px]"></div>
         </div>
         
         <div className="relative max-w-5xl mx-auto text-center">
           {/* Badge premium */}
-          <div className="inline-flex items-center gap-3 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-full px-6 py-3 mb-8 backdrop-blur-sm shadow-lg shadow-cyan-500/5">
+          <div className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-cyan-500/15 to-blue-500/15 border border-cyan-500/40 rounded-full px-4 md:px-6 py-2 md:py-3 mb-6 md:mb-8 backdrop-blur-sm shadow-lg shadow-cyan-500/10">
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-            <span className="text-cyan-300 text-sm font-semibold tracking-wide">PRECIOS TRANSPARENTES</span>
+            <span className="text-cyan-300 text-xs md:text-sm font-semibold tracking-wide">PRECIOS TRANSPARENTES</span>
             <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-black mb-8 leading-[1.1]">
+          <h1 className="text-4xl md:text-7xl font-black mb-6 md:mb-8 leading-[1.1]">
             Sin letra pequeña.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300">Sin sorpresas.</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8 md:mb-12 leading-relaxed px-2">
             Te digo exactamente qué incluye cada plan, qué cuesta y qué no está incluido. <span className="text-white font-medium">Así tomas decisiones con claridad.</span>
           </p>
           
-          {/* Feature pills */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-500/10 to-emerald-500/5 border border-emerald-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
-              <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          {/* Feature pills - Vertical en móvil, horizontal en desktop */}
+          <div className="flex flex-col md:flex-row md:flex-wrap justify-center gap-3 md:gap-4 mb-10 md:mb-12 px-2">
+            <div className="flex items-center gap-3 bg-gradient-to-r from-emerald-500/15 to-emerald-500/5 border border-emerald-500/40 rounded-full px-4 md:px-5 py-2.5 md:py-3 backdrop-blur-sm">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-emerald-500/25 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                 </svg>
               </div>
-              <span className="text-emerald-300 font-medium">Dominio + Hosting 1 año incluido</span>
+              <span className="text-emerald-300 font-medium text-sm md:text-base">Dominio + Hosting 1 año incluido</span>
             </div>
             
-            <div className="flex items-center gap-3 bg-gradient-to-r from-violet-500/10 to-violet-500/5 border border-violet-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
-              <div className="w-8 h-8 bg-violet-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3 bg-gradient-to-r from-violet-500/15 to-violet-500/5 border border-violet-500/40 rounded-full px-4 md:px-5 py-2.5 md:py-3 backdrop-blur-sm">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-violet-500/25 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <span className="text-violet-300 font-medium">Soporte técnico incluido</span>
+              <span className="text-violet-300 font-medium text-sm md:text-base">Soporte técnico incluido</span>
             </div>
             
-            <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500/10 to-amber-500/5 border border-amber-500/30 rounded-full px-5 py-3 backdrop-blur-sm">
-              <div className="w-8 h-8 bg-amber-500/20 rounded-full flex items-center justify-center">
-                <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3 bg-gradient-to-r from-amber-500/15 to-amber-500/5 border border-amber-500/40 rounded-full px-4 md:px-5 py-2.5 md:py-3 backdrop-blur-sm">
+              <div className="w-7 h-7 md:w-8 md:h-8 bg-amber-500/25 rounded-full flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 md:w-5 md:h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <span className="text-amber-300 font-medium">Presupuesto antes de empezar</span>
+              <span className="text-amber-300 font-medium text-sm md:text-base">Presupuesto antes de empezar</span>
             </div>
           </div>
           
           {/* Scroll indicator */}
-          <div className="flex flex-col items-center gap-2 text-slate-500">
-            <span className="text-sm">Desliza para ver planes</span>
+          <div className="flex flex-col items-center gap-2 text-slate-400">
+            <span className="text-xs md:text-sm">Desliza para ver planes</span>
             <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
