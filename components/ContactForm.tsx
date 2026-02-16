@@ -5,12 +5,7 @@ import { useState, FormEvent } from "react";
 const CALENDLY_URL = "https://calendly.com/neuriax/llamada";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    email: "",
-    telefono: "",
-    servicio: "",
-  });
+  const [formData, setFormData] = useState({ nombre: "", telefono: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleSubmit = async (e: FormEvent) => {
@@ -23,18 +18,16 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: formData.nombre,
-          email: formData.email,
+          email: "",
           telefono: formData.telefono,
-          mensaje: `Servicio interesado: ${formData.servicio || "No especificado"}`,
+          mensaje: "Solicitud de llamada desde landing",
           type: "landing_contact",
         }),
       });
 
       if (!res.ok) throw new Error("Error enviando");
-
       setStatus("success");
-      
-      // Redirect to Calendly after 1.5s
+
       setTimeout(() => {
         window.open(CALENDLY_URL, "_blank");
       }, 1500);
@@ -45,19 +38,19 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="bg-slate-900/50 border border-emerald-500/30 rounded-2xl p-8 max-w-md mx-auto text-center">
-        <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div className="bg-white/[0.03] border border-emerald-500/20 rounded-2xl p-8 text-center">
+        <div className="w-14 h-14 bg-emerald-500/15 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <svg className="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <h3 className="text-xl font-bold text-white mb-2">¡Recibido!</h3>
-        <p className="text-gray-300 mb-4">Te estoy redirigiendo a Calendly para que elijas tu horario ideal...</p>
+        <p className="text-gray-400 text-sm mb-4">Redirigiendo a Calendly para elegir tu horario...</p>
         <a
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors"
+          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-sm transition-colors"
         >
           Abrir Calendly ahora
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -69,45 +62,35 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-8 max-w-md mx-auto">
+    <div className="bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8">
+      <h3 className="text-lg font-bold text-white mb-1">Agenda tu llamada gratuita</h3>
+      <p className="text-sm text-gray-500 mb-6">Solo necesito tu nombre y teléfono. Te llamo yo.</p>
+
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Tu nombre"
-          required
-          value={formData.nombre}
-          onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
-          className="w-full px-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 transition-all"
-        />
-        <input
-          type="email"
-          placeholder="Tu email"
-          required
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          className="w-full px-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 transition-all"
-        />
-        <input
-          type="tel"
-          placeholder="Tu teléfono"
-          value={formData.telefono}
-          onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-          className="w-full px-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 transition-all"
-        />
-        <select
-          value={formData.servicio}
-          onChange={(e) => setFormData({ ...formData, servicio: e.target.value })}
-          className="w-full px-4 py-3.5 bg-slate-800/80 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 transition-all"
-        >
-          <option value="">¿Qué te interesa?</option>
-          <option value="agentes-voz">Agentes de Voz IA</option>
-          <option value="automatizacion">Automatización IA</option>
-          <option value="ambos">Ambos servicios</option>
-        </select>
+        <div>
+          <input
+            type="text"
+            placeholder="Tu nombre"
+            required
+            value={formData.nombre}
+            onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+            className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all text-sm"
+          />
+        </div>
+        <div>
+          <input
+            type="tel"
+            placeholder="Tu teléfono"
+            required
+            value={formData.telefono}
+            onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+            className="w-full px-4 py-3.5 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all text-sm"
+          />
+        </div>
         <button
           type="submit"
           disabled={status === "sending"}
-          className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold py-4 px-6 rounded-xl text-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-cyan-500/25 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full bg-white text-black font-bold py-4 px-6 rounded-xl text-base transition-all duration-300 hover:bg-gray-100 hover:scale-[1.01] hover:shadow-xl hover:shadow-white/10 disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {status === "sending" ? (
             <span className="flex items-center justify-center gap-2">
@@ -118,17 +101,22 @@ export default function ContactForm() {
               Enviando...
             </span>
           ) : (
-            "Solicitar llamada gratuita"
+            <span className="flex items-center justify-center gap-2">
+              Solicitar llamada gratuita
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </span>
           )}
         </button>
       </form>
       {status === "error" && (
-        <p className="text-red-400 text-sm mt-3 text-center">
+        <p className="text-red-400 text-xs mt-3 text-center">
           Error al enviar. Intenta de nuevo o llámanos directamente.
         </p>
       )}
-      <p className="text-xs text-gray-500 mt-4 text-center">
-        Sin spam. Sin compromiso. Respuesta en menos de 24h.
+      <p className="text-[11px] text-gray-600 mt-4 text-center">
+        Sin spam · Sin compromiso · Respuesta en menos de 24h
       </p>
     </div>
   );

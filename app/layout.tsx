@@ -7,6 +7,10 @@ import Footer from "../components/Footer";
 import { PageTracker } from "../components/PageTracker";
 import CookieBanner from "../components/CookieBanner";
 import LeadMagnetModal from "../components/LeadMagnetModal";
+import WhatsAppButton from "../components/WhatsAppButton";
+import StickyCTA from "../components/StickyCTA";
+import SocialProofToast from "../components/SocialProofToast";
+import ExitIntentPopup from "../components/ExitIntentPopup";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -125,6 +129,10 @@ export default function RootLayout({
         </main>
         <Footer />
         <LeadMagnetModal />
+        <WhatsAppButton />
+        <StickyCTA />
+        <SocialProofToast />
+        <ExitIntentPopup />
         <Analytics mode="production" />
         {/* Supabase PageTracker depends on cookie consent */}
       </body>
