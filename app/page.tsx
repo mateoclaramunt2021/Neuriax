@@ -26,6 +26,33 @@ const INTEGRATIONS = [
   "Notion",
   "Gmail",
   "Stripe",
+  "Twilio",
+  "Microsoft Teams",
+  "Salesforce",
+  "Shopify",
+  "WordPress",
+  "Airtable",
+  "Typeform",
+  "Google Sheets",
+  "Mailchimp",
+  "ActiveCampaign",
+  "Zoho CRM",
+  "Monday.com",
+  "Trello",
+  "Intercom",
+  "Freshdesk",
+  "GoHighLevel",
+  "n8n",
+  "Claude AI",
+  "ElevenLabs",
+  "Telegram",
+  "Instagram",
+  "Facebook Messenger",
+  "Pipedrive",
+  "Google Meet",
+  "Zoom",
+  "Webhook",
+  "REST API",
 ];
 
 /* ───────────────────────────────────────────────────── */
@@ -194,83 +221,94 @@ export default function Home() {
                     <span className="text-xs text-gray-600 font-mono">00:34</span>
                   </div>
 
-                  {/* Chat bubbles */}
-                  <div className="space-y-3">
-                    <div className="flex gap-3">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">
-                        👤
-                      </div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-4 py-2.5 max-w-[260px]">
-                        <p className="text-[13px] text-gray-300 leading-relaxed">
-                          Hola, quería pedir cita para esta semana.
-                        </p>
+                  {/* Chat bubbles — conversación realista */}
+                  <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1 scrollbar-thin">
+                    {/* 1 — Paciente llama */}
+                    <div className="flex gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
+                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
+                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Hola, buenos días, llamaba porque me duele bastante una muela desde ayer y quería ver si podéis atenderme.</p>
                       </div>
                     </div>
-                    <div className="flex gap-3 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-4 py-2.5 max-w-[280px]">
-                        <p className="text-[13px] text-cyan-50 leading-relaxed">
-                          ¡Por supuesto! Tenemos hueco el jueves a las 10:00 y el viernes
-                          a las 16:00. ¿Cuál te viene mejor?
-                        </p>
+                    {/* 2 — Agente IA saluda y pregunta */}
+                    <div className="flex gap-2.5 justify-end">
+                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Buenos días, siento que estés con molestias. Para poder ayudarte mejor, ¿podrías decirme si el dolor es constante o solo cuando muerdes algo?</p>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">
-                        🤖
+                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
+                    </div>
+                    {/* 3 — Paciente describe */}
+                    <div className="flex gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
+                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
+                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Es constante, sobre todo por la noche. He tomado ibuprofeno pero no se me pasa del todo.</p>
                       </div>
                     </div>
-                    <div className="flex gap-3">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">
-                        👤
+                    {/* 4 — Agente IA empatiza y propone cita */}
+                    <div className="flex gap-2.5 justify-end">
+                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Entiendo, eso puede ser muy incómodo. Lo mejor es que te vea el doctor cuanto antes. ¿Cuándo te vendría bien venir, esta semana?</p>
                       </div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-4 py-2.5">
-                        <p className="text-[13px] text-gray-300">
-                          El jueves a las 10 perfecto.
-                        </p>
+                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
+                    </div>
+                    {/* 5 — Paciente dice disponibilidad */}
+                    <div className="flex gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
+                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
+                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Si pudiera ser mañana o pasado, mejor. Por la mañana me viene bien.</p>
                       </div>
                     </div>
-                    <div className="flex gap-3 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-4 py-2.5 max-w-[280px]">
-                        <p className="text-[13px] text-cyan-50 leading-relaxed">
-                          Perfecto, cita confirmada para el jueves a las 10:00. Te envío
-                          confirmación por SMS. ¿Algo más?
-                        </p>
+                    {/* 6 — Agente consulta agenda y ofrece huecos */}
+                    <div className="flex gap-2.5 justify-end">
+                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Perfecto, déjame comprobar la disponibilidad del doctor…</p>
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed mt-1.5">Tenemos un hueco mañana miércoles a las 9:30 y otro el jueves a las 10:15. ¿Cuál prefieres?</p>
                       </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">
-                        🤖
+                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
+                    </div>
+                    {/* 7 — Paciente elige */}
+                    <div className="flex gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
+                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2">
+                        <p className="text-[12.5px] text-gray-300">Mañana a las 9:30 me viene genial.</p>
                       </div>
+                    </div>
+                    {/* 8 — Agente confirma, pide nombre, envía SMS */}
+                    <div className="flex gap-2.5 justify-end">
+                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Listo, te reservo mañana miércoles a las 9:30 con el Dr. García. ¿A nombre de quién la pongo?</p>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
+                    </div>
+                    {/* 9 — Paciente da nombre */}
+                    <div className="flex gap-2.5">
+                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
+                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2">
+                        <p className="text-[12.5px] text-gray-300">A nombre de Laura Martínez.</p>
+                      </div>
+                    </div>
+                    {/* 10 — Agente cierra con confirmación completa */}
+                    <div className="flex gap-2.5 justify-end">
+                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
+                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Perfecto, Laura. Cita confirmada: mañana miércoles a las 9:30 con el Dr. García. Ahora mismo te envío un SMS de confirmación con los datos. Si necesitas cambiar algo, puedes llamar cuando quieras. ¡Que te mejores!</p>
+                      </div>
+                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
                     </div>
                   </div>
 
                   {/* Bottom bar */}
                   <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
                     <div className="flex items-center gap-2 text-[11px] text-gray-600">
-                      <svg
-                        className="w-3.5 h-3.5"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M12 8v4l3 3"
-                        />
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3" />
                       </svg>
-                      Duración: 47s
+                      Duración: 1m 23s
                     </div>
                     <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
-                      <svg
-                        className="w-3 h-3"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                          clipRule="evenodd"
-                        />
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
-                      Cita agendada
+                      Cita agendada + SMS enviado
                     </span>
                   </div>
                 </div>
