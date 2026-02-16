@@ -63,25 +63,20 @@ export default function Navbar() {
           <div className="flex justify-between items-center h-16 sm:h-[68px]">
 
             {/* ─── Logo ─── */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative h-9 w-9 transition-transform duration-300 group-hover:scale-105">
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative h-11 w-11 sm:h-12 sm:w-12 transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/assets/images/ChatGPT_Image_10_ene_2026__17_49_11-removebg-preview.png"
                   alt="Neuriax"
                   fill
                   className="object-contain"
                   priority
-                  sizes="36px"
+                  sizes="48px"
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="text-[15px] font-bold text-white tracking-tight leading-none">
-                  Neuriax
-                </span>
-                <span className="text-[10px] font-medium text-gray-600 tracking-[0.15em] uppercase leading-none mt-0.5">
-                  AI Automation
-                </span>
-              </div>
+              <span className="text-[17px] sm:text-lg font-bold text-white tracking-tight">
+                Neuriax
+              </span>
             </Link>
 
             {/* ─── Desktop nav ─── */}
