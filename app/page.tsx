@@ -39,35 +39,35 @@ const RESTAURANT_RESERVATIONS = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#F1F5F9] text-slate-900 overflow-x-hidden">
 
       {/* ════════════════════════════════════════════════
           HERO
           ════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center px-4 overflow-hidden">
         {/* BG */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#0f0a1a] to-[#0a0a0f]" />
-        <div className="absolute inset-0 grid-pattern opacity-[0.08]" />
-        <div className="absolute top-[5%] left-[10%] w-[700px] h-[700px] bg-violet-600/[0.07] rounded-full blur-[200px] animate-pulse-slow" />
-        <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/[0.06] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/[0.03] rounded-full blur-[250px]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
+        <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
+        <div className="absolute top-[5%] left-[10%] w-[700px] h-[700px] bg-violet-400/[0.12] rounded-full blur-[200px] animate-pulse-slow" />
+        <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-400/[0.10] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-400/[0.06] rounded-full blur-[250px]" />
 
         <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-28 lg:py-36">
           {/* CENTERED HERO CONTENT */}
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-5 py-2.5 mb-6 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2.5 bg-violet-100 border border-violet-200 rounded-full px-5 py-2.5 mb-6 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
               </span>
-              <span className="text-[13px] text-gray-300 font-medium tracking-wide">
+              <span className="text-[13px] text-violet-700 font-medium tracking-wide">
                 La IA que compite con las mayores marcas del sector
               </span>
             </div>
 
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6">
-              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Tu negocio lleno.</span>
+              <span className="block text-slate-900 drop-shadow-[0_0_40px_rgba(0,0,0,0.04)]">Tu negocio lleno.</span>
               <span className="relative inline-block mt-1">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-violet-400 animate-gradient-x drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]">
                   Sin llamadas.
@@ -76,9 +76,9 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-[1.35rem] text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl md:text-[1.35rem] text-slate-500 leading-relaxed mb-10 max-w-2xl mx-auto">
               El sistema todo-en-uno que gestiona las reservas de tu{" "}
-              <span className="text-white font-semibold">restaurante o barbería</span>:
+              <span className="text-slate-900 font-semibold">restaurante o barbería</span>:
               panel inteligente, web de reservas con tu marca y recordatorios automáticos por WhatsApp.
             </p>
 
@@ -95,14 +95,14 @@ export default function Home() {
               </a>
               <a
                 href="#contacto"
-                className="inline-flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-white font-semibold py-4 px-8 rounded-full text-base transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold py-4 px-8 rounded-full text-base transition-all duration-300"
               >
                 Hablar con un humano →
               </a>
             </div>
 
             {/* Trust */}
-            <div className="flex flex-wrap justify-center gap-6 text-[13px] text-gray-500">
+            <div className="flex flex-wrap justify-center gap-6 text-[13px] text-slate-500">
               {["Sin permanencia", "Listo en 5 días", "Garantía 30 días"].map((t) => (
                 <span key={t} className="flex items-center gap-1.5">
                   <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
@@ -293,8 +293,8 @@ export default function Home() {
         </div>
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-5 h-9 border-2 border-gray-700 rounded-full flex justify-center">
-            <div className="w-1 h-2.5 bg-gray-600 rounded-full mt-2 animate-scroll-indicator" />
+          <div className="w-5 h-9 border-2 border-slate-300 rounded-full flex justify-center">
+            <div className="w-1 h-2.5 bg-slate-400 rounded-full mt-2 animate-scroll-indicator" />
           </div>
         </div>
       </section>
@@ -302,20 +302,20 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           SOCIAL PROOF BAR
           ════════════════════════════════════════════════ */}
-      <section className="py-12 px-4 bg-[#0a0a0f] border-t border-b border-white/[0.04]">
+      <section className="py-12 px-4 bg-white border-t border-b border-slate-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 text-center items-end">
             {[
               { value: "−95%", label: "no-shows", color: "text-emerald-400" },
               { value: "+60%", label: "reservas online", color: "text-violet-400" },
               { value: "24/7", label: "reservas activas", color: "text-amber-400" },
-              { value: "50+", label: "negocios activos", color: "text-white" },
-              { value: "2.400+", label: "reservas/mes", color: "text-white" },
-              { value: "4.9★", label: "satisfacción", color: "text-white" },
+              { value: "50+", label: "negocios activos", color: "text-slate-900" },
+              { value: "2.400+", label: "reservas/mes", color: "text-slate-900" },
+              { value: "4.9★", label: "satisfacción", color: "text-slate-900" },
             ].map((s) => (
               <div key={s.label}>
                 <div className={`text-2xl sm:text-3xl font-extrabold ${s.color}`}>{s.value}</div>
-                <div className="text-[10px] sm:text-xs text-gray-500 mt-1">{s.label}</div>
+                <div className="text-[10px] sm:text-xs text-slate-500 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -325,15 +325,15 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           DASHBOARD EXAMPLE
           ════════════════════════════════════════════════ */}
-      <section id="dashboard" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0d0d15] to-[#0d0d15]">
+      <section id="dashboard" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Panel de control</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 Un panel que lo controla todo
               </h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
                 Desde las reservas de hoy hasta el historial de cada cliente. Todo en una pantalla.
               </p>
             </div>
@@ -512,15 +512,15 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           LANDING PAGE EXAMPLES — Scrollable previews
           ════════════════════════════════════════════════ */}
-      <section id="ejemplos" className="py-24 px-4 bg-[#0d0d15]">
+      <section id="ejemplos" className="py-24 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <span className="text-indigo-400 text-xs font-semibold tracking-[0.2em] uppercase">Tu web de reservas</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 Tu propia web de reservas. Con tu marca.
               </h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
                 Tus clientes entran, eligen día y hora, y reservan en 30 segundos. Sin llamar. Sin esperar.
               </p>
             </div>
@@ -844,15 +844,15 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           REMINDERS TIMELINE
           ════════════════════════════════════════════════ */}
-      <section className="py-24 px-4 bg-gradient-to-b from-[#0d0d15] to-[#0a0a0f]">
+      <section className="py-24 px-4 bg-gradient-to-b from-[#EFF6FF] to-[#F1F5F9]">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-6">
               <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Recordatorios automáticos</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 Tus clientes nunca más se olvidan
               </h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-2">
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-2">
                 Recordatorios por WhatsApp que eliminan los no-shows de tu negocio.
               </p>
             </div>
@@ -862,7 +862,7 @@ export default function Home() {
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-3 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-2xl px-6 py-4">
                 <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400">35% → 3%</span>
-                <span className="text-sm text-gray-400 text-left">de no-shows<br />con recordatorios</span>
+                <span className="text-sm text-slate-500 text-left">de no-shows<br />con recordatorios</span>
               </div>
             </div>
           </ScrollReveal>
@@ -905,8 +905,8 @@ export default function Home() {
                   </div>
                   <div className="flex-1 pt-1">
                     <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-3">
-                      <h3 className="text-base sm:text-lg font-bold text-white">{step.label}</h3>
-                      <span className="text-[11px] text-gray-500 font-mono">{step.time}</span>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900">{step.label}</h3>
+                      <span className="text-[11px] text-slate-500 font-mono">{step.time}</span>
                     </div>
                     {/* iPhone-style WhatsApp frame */}
                     <div className="max-w-sm">
@@ -974,12 +974,12 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           BEFORE vs AFTER
           ════════════════════════════════════════════════ */}
-      <section className="py-24 px-4 bg-[#0a0a0f]">
+      <section className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <span className="text-rose-400 text-xs font-semibold tracking-[0.2em] uppercase">La diferencia</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 La diferencia es brutal
               </h2>
             </div>
@@ -987,12 +987,12 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <ScrollReveal>
-              <div className="bg-red-950/20 border border-red-500/15 rounded-2xl p-6 sm:p-8 h-full">
+              <div className="bg-red-50 border border-red-200 rounded-2xl p-6 sm:p-8 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-red-500/15 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                  <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                   </div>
-                  <h3 className="text-xl font-bold text-red-300">Sin Neuriax</h3>
+                  <h3 className="text-xl font-bold text-red-600">Sin Neuriax</h3>
                 </div>
                 <ul className="space-y-4">
                   {[
@@ -1005,7 +1005,7 @@ export default function Home() {
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
-                      <span className="text-sm text-gray-400 leading-relaxed">{item.text}</span>
+                      <span className="text-sm text-slate-500 leading-relaxed">{item.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -1013,12 +1013,12 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <div className="bg-emerald-950/20 border border-emerald-500/15 rounded-2xl p-6 sm:p-8 h-full">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-6 sm:p-8 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-emerald-500/15 rounded-lg flex items-center justify-center">
-                    <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  <div className="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                   </div>
-                  <h3 className="text-xl font-bold text-emerald-300">Con Neuriax</h3>
+                  <h3 className="text-xl font-bold text-emerald-600">Con Neuriax</h3>
                 </div>
                 <ul className="space-y-4">
                   {[
@@ -1031,7 +1031,7 @@ export default function Home() {
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
-                      <span className="text-sm text-gray-300 leading-relaxed">{item.text}</span>
+                      <span className="text-sm text-slate-600 leading-relaxed">{item.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -1044,12 +1044,12 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           SECTORS
           ════════════════════════════════════════════════ */}
-      <section id="sectores" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] to-[#0d0d15]">
+      <section id="sectores" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] to-[#EFF6FF]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <span className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">Sectores</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 Diseñado para tu tipo de negocio
               </h2>
             </div>
@@ -1057,12 +1057,12 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <ScrollReveal>
-              <div className="group bg-gradient-to-br from-amber-500/[0.04] to-transparent border border-amber-500/[0.1] rounded-2xl p-6 sm:p-8 hover:border-amber-500/25 transition-all duration-500 h-full">
+              <div className="group bg-gradient-to-br from-amber-50 to-white border border-amber-200/60 rounded-2xl p-6 sm:p-8 hover:border-amber-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-amber-500/15 rounded-xl flex items-center justify-center text-2xl">🍽</div>
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🍽</div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">Restaurantes</h3>
-                    <p className="text-xs text-gray-500">Llena tus mesas cada servicio</p>
+                    <h3 className="text-xl font-bold text-slate-900">Restaurantes</h3>
+                    <p className="text-xs text-slate-500">Llena tus mesas cada servicio</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -1074,23 +1074,23 @@ export default function Home() {
                     "Recordatorios automáticos por WhatsApp",
                     "Panel de estadísticas: ocupación, ingresos, no-shows",
                   ].map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-gray-400">
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       {f}
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-gray-600 italic">Ideal para: restaurantes, bares, cafeterías, gastrobares, brunch spots</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, bares, cafeterías, gastrobares, brunch spots</p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <div className="group bg-gradient-to-br from-indigo-500/[0.04] to-transparent border border-indigo-500/[0.1] rounded-2xl p-6 sm:p-8 hover:border-indigo-500/25 transition-all duration-500 h-full">
+              <div className="group bg-gradient-to-br from-indigo-50 to-white border border-indigo-200/60 rounded-2xl p-6 sm:p-8 hover:border-indigo-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-indigo-500/15 rounded-xl flex items-center justify-center text-2xl">💈</div>
+                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl">💈</div>
                   <div>
-                    <h3 className="text-xl font-bold text-white">Barberías</h3>
-                    <p className="text-xs text-gray-500">Agenda siempre llena sin esfuerzo</p>
+                    <h3 className="text-xl font-bold text-slate-900">Barberías</h3>
+                    <p className="text-xs text-slate-500">Agenda siempre llena sin esfuerzo</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -1102,13 +1102,13 @@ export default function Home() {
                     "Recordatorios de cita por WhatsApp",
                     "Estadísticas por barbero: agenda, clientes, ingresos",
                   ].map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-gray-400">
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       {f}
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-gray-600 italic">Ideal para: barberías, peluquerías, centros de estética, nail bars</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: barberías, peluquerías, centros de estética, nail bars</p>
               </div>
             </ScrollReveal>
           </div>
@@ -1118,14 +1118,14 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           INTEGRATIONS MARQUEE
           ════════════════════════════════════════════════ */}
-      <section className="py-14 bg-[#0d0d15] border-t border-b border-white/[0.04] overflow-hidden">
-        <p className="text-center text-xs text-gray-600 uppercase tracking-[0.2em] mb-8">
+      <section className="py-14 bg-white border-t border-b border-slate-200 overflow-hidden">
+        <p className="text-center text-xs text-slate-400 uppercase tracking-[0.2em] mb-8">
           Integramos con las herramientas que ya usas
         </p>
         <div className="marquee-container">
           <div className="marquee-track">
             {[...INTEGRATIONS, ...INTEGRATIONS].map((tool, i) => (
-              <span key={`${tool}-${i}`} className="inline-flex items-center gap-2 px-6 py-2 text-sm text-gray-500 font-medium whitespace-nowrap hover:text-white transition-colors">
+              <span key={`${tool}-${i}`} className="inline-flex items-center gap-2 px-6 py-2 text-sm text-slate-500 font-medium whitespace-nowrap hover:text-slate-900 transition-colors">
                 <span className="w-1.5 h-1.5 bg-violet-500/40 rounded-full" />
                 {tool}
               </span>
@@ -1137,13 +1137,13 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           PROCESS — 4 steps
           ════════════════════════════════════════════════ */}
-      <section id="proceso" className="py-24 px-4 bg-[#0a0a0f]">
+      <section id="proceso" className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Proceso</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">En 5 días, funcionando</h2>
-              <p className="text-lg text-gray-500">Simple, rápido, sin complicaciones.</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">En 5 días, funcionando</h2>
+              <p className="text-lg text-slate-500">Simple, rápido, sin complicaciones.</p>
             </div>
           </ScrollReveal>
 
@@ -1161,8 +1161,8 @@ export default function Home() {
                   <div className={`w-16 h-16 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 text-lg font-bold shadow-lg relative z-10 rotate-3 hover:rotate-0 transition-transform duration-300 ${step.num === "04" ? "text-black" : "text-white"}`}>
                     {step.num}
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-3">{step.title}</h3>
-                  <p className="text-sm text-gray-400 leading-relaxed">{step.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">{step.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{step.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -1182,17 +1182,17 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           VOICE AGENTS — Premium add-on
           ════════════════════════════════════════════════ */}
-      <section id="agentes" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0f0a1a] to-[#0a0a0f]">
+      <section id="agentes" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-2 bg-cyan-500/[0.08] border border-cyan-500/20 rounded-full px-4 py-2 mb-5">
                 <span className="text-[13px] text-cyan-300 font-semibold">⚡ Complemento Premium</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
                 ¿Y si además tu teléfono<br className="hidden sm:block" /> se contesta solo?
               </h2>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
                 Añade un agente de voz con IA a tu sistema de reservas. Contesta llamadas,
                 gestiona reservas y responde preguntas — con voz natural, 24 horas del día.
               </p>
@@ -1209,17 +1209,17 @@ export default function Home() {
                     { title: "Conectado a tu panel", desc: "Las reservas que gestiona el agente aparecen directamente en tu panel. Todo sincronizado en tiempo real.", color: "text-amber-400" },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">
-                      <div className="w-10 h-10 bg-white/[0.04] border border-white/[0.08] rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-10 h-10 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
                         <svg className={`w-5 h-5 ${item.color}`} fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       </div>
                       <div>
-                        <h4 className="text-base font-bold text-white mb-1">{item.title}</h4>
-                        <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                        <h4 className="text-base font-bold text-slate-900 mb-1">{item.title}</h4>
+                        <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
                       </div>
                     </li>
                   ))}
                 </ul>
-                <a href="#contacto" className="inline-flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-white font-semibold py-3 px-6 rounded-full text-sm transition-all duration-300">
+                <a href="#contacto" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-full text-sm transition-all duration-300">
                   Añadir agente de voz a mi plan
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </a>
@@ -1378,7 +1378,7 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           RESULTS — Big numbers
           ════════════════════════════════════════════════ */}
-      <section className="py-20 px-4 bg-[#0a0a0f]">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
@@ -1388,9 +1388,9 @@ export default function Home() {
                 { value: "−80%", label: "llamadas teléfono", color: "text-indigo-400", bg: "from-indigo-500/[0.06] to-transparent" },
                 { value: "4.9★", label: "satisfacción media", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
               ].map((r) => (
-                <div key={r.label} className={`bg-gradient-to-b ${r.bg} border border-white/[0.05] rounded-2xl p-6 text-center`}>
+                <div key={r.label} className={`bg-gradient-to-b ${r.bg} border border-slate-200 rounded-2xl p-6 text-center`}>
                   <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${r.color} mb-2`}>{r.value}</div>
-                  <div className="text-xs text-gray-500">{r.label}</div>
+                  <div className="text-xs text-slate-500">{r.label}</div>
                 </div>
               ))}
             </div>
@@ -1401,7 +1401,7 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           GUARANTEES
           ════════════════════════════════════════════════ */}
-      <section className="py-16 px-4 bg-[#0d0d15] border-t border-b border-white/[0.04]">
+      <section className="py-16 px-4 bg-slate-50 border-t border-b border-slate-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
@@ -1417,8 +1417,8 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                     </svg>
                   </div>
-                  <h3 className="font-bold text-white text-sm mb-1">{item.title}</h3>
-                  <p className="text-xs text-gray-500">{item.desc}</p>
+                  <h3 className="font-bold text-slate-900 text-sm mb-1">{item.title}</h3>
+                  <p className="text-xs text-slate-500">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}
@@ -1429,11 +1429,11 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           FAQ
           ════════════════════════════════════════════════ */}
-      <section id="faq" className="py-24 px-4 bg-[#0a0a0f]">
+      <section id="faq" className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white">Preguntas frecuentes</h2>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900">Preguntas frecuentes</h2>
             </div>
           </ScrollReveal>
 
@@ -1448,14 +1448,14 @@ export default function Home() {
                 { q: "¿Cuánto tarda en estar funcionando?", a: "5 días laborables desde que empezamos. Incluye diseño, configuración, personalización con tu marca y formación." },
                 { q: "¿Qué pasa con el agente de voz?", a: "Es un complemento opcional. Si además de las reservas online quieres que alguien conteste el teléfono 24/7, añadimos el agente de voz IA a tu sistema." },
               ].map((faq, i) => (
-                <details key={i} className="group bg-white/[0.02] border border-white/[0.06] rounded-xl overflow-hidden hover:border-violet-500/20 transition-colors">
+                <details key={i} className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-violet-500/20 transition-colors">
                   <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                    <span className="text-white font-medium text-[15px] pr-4">{faq.q}</span>
-                    <svg className="w-4 h-4 text-gray-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span className="text-slate-900 font-medium text-[15px] pr-4">{faq.q}</span>
+                    <svg className="w-4 h-4 text-slate-400 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </summary>
-                  <div className="px-5 pb-5 text-sm text-gray-400 leading-relaxed">{faq.a}</div>
+                  <div className="px-5 pb-5 text-sm text-slate-500 leading-relaxed">{faq.a}</div>
                 </details>
               ))}
             </div>
@@ -1466,7 +1466,7 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           CONTACT / CTA FINAL
           ════════════════════════════════════════════════ */}
-      <section id="contacto" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0d0d15] to-[#0d0d15]">
+      <section id="contacto" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal>
@@ -1481,17 +1481,17 @@ export default function Home() {
                   </span>
                 </div>
 
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-5">
                   ¿Listo para llenar<br />tu agenda?
                 </h2>
-                <p className="text-lg text-gray-400 mb-8 leading-relaxed">
+                <p className="text-lg text-slate-500 mb-8 leading-relaxed">
                   Rellena el formulario y elige tu horario en Calendly.{" "}
-                  <span className="text-white font-medium">15 minutos. Sin compromiso.</span> Te enseño una demo personalizada para tu negocio.
+                  <span className="text-slate-900 font-medium">15 minutos. Sin compromiso.</span> Te enseño una demo personalizada para tu negocio.
                 </p>
 
                 <ul className="space-y-4 mb-8">
                   {["Demo personalizada con datos de tu negocio", "Presupuesto cerrado sin sorpresas", "Garantía 30 días o te devuelvo el dinero"].map((b) => (
-                    <li key={b} className="flex items-center gap-3 text-gray-300 text-sm">
+                    <li key={b} className="flex items-center gap-3 text-slate-600 text-sm">
                       <div className="w-6 h-6 bg-violet-500/10 rounded-md flex items-center justify-center flex-shrink-0">
                         <svg className="w-3.5 h-3.5 text-violet-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       </div>
@@ -1500,12 +1500,12 @@ export default function Home() {
                   ))}
                 </ul>
 
-                <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-500">
-                  <a href="tel:+34640791041" className="flex items-center gap-2 hover:text-white transition-colors">
+                <div className="flex flex-col sm:flex-row gap-4 text-sm text-slate-500">
+                  <a href="tel:+34640791041" className="flex items-center gap-2 hover:text-slate-900 transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
                     +34 640 791 041
                   </a>
-                  <a href="mailto:hola@neuriax.com" className="flex items-center gap-2 hover:text-white transition-colors">
+                  <a href="mailto:hola@neuriax.com" className="flex items-center gap-2 hover:text-slate-900 transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
                     hola@neuriax.com
                   </a>

@@ -43,7 +43,7 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-slate-950 border-t border-slate-800">
+      <footer className="bg-white border-t border-slate-200">
         <div className="max-w-5xl mx-auto px-4 py-12">
           {/* Logo + Tagline */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mb-10">
@@ -57,13 +57,13 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="text-lg font-bold text-white">Neuriax</span>
-                <p className="text-xs text-gray-500">Automatización IA & Agentes de Voz</p>
+                <span className="text-lg font-bold text-slate-900">Neuriax</span>
+                <p className="text-xs text-slate-500">Automatización IA & Agentes de Voz</p>
               </div>
             </div>
 
             {/* Contacto rápido */}
-            <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-400">
+            <div className="flex flex-col sm:flex-row gap-4 text-sm text-slate-500">
               <a href="tel:+34640791041" className="hover:text-cyan-400 transition-colors">
                 +34 640 791 041
               </a>
@@ -74,27 +74,27 @@ export default function Footer() {
           </div>
 
           {/* Divider */}
-          <div className="border-t border-slate-800 pt-8">
+          <div className="border-t border-slate-200 pt-8">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
               {/* Copyright */}
-              <p className="text-xs text-gray-500">
+              <p className="text-xs text-slate-500">
                 © {new Date().getFullYear()} Neuriax. Todos los derechos reservados.
               </p>
 
               {/* Legal links */}
-              <div className="flex flex-wrap justify-center gap-4 text-xs text-gray-500">
-                <Link href="/aviso-legal" className="hover:text-white transition-colors">
+              <div className="flex flex-wrap justify-center gap-4 text-xs text-slate-500">
+                <Link href="/aviso-legal" className="hover:text-slate-900 transition-colors">
                   Aviso Legal
                 </Link>
-                <Link href="/politica-de-privacidad" className="hover:text-white transition-colors">
+                <Link href="/politica-de-privacidad" className="hover:text-slate-900 transition-colors">
                   Privacidad
                 </Link>
-                <Link href="/politica-de-cookies" className="hover:text-white transition-colors">
+                <Link href="/politica-de-cookies" className="hover:text-slate-900 transition-colors">
                   Cookies
                 </Link>
                 <button 
                   onClick={handleConfigureCookies}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-slate-900 transition-colors"
                 >
                   Configurar Cookies
                 </button>
