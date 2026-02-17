@@ -3,121 +3,92 @@ import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Neuriax | Automatización IA & Agentes de Voz para Empresas",
+  title: "Neuriax | Sistema de Reservas Inteligente para Restaurantes y Barberías",
   description:
-    "Agentes de voz IA que responden llamadas 24/7, agendan citas y cierran ventas. Automatizaciones inteligentes para empresas. Garantía 30 días.",
+    "Panel de reservas + web personalizada + recordatorios automáticos por WhatsApp. Elimina no-shows, llena tu agenda 24/7. Garantía 30 días.",
   keywords:
-    "automatización IA, agentes de voz IA, inteligencia artificial empresas, asistentes virtuales telefónicos, automatización ventas",
+    "sistema reservas restaurante, reservas barbería, panel reservas online, recordatorios WhatsApp, gestión reservas, agenda digital negocio",
 };
 
 /* ─────────────────────────────────────────────────────
-   INTEGRATIONS DATA (used in marquee)
+   INTEGRATIONS DATA
    ───────────────────────────────────────────────────── */
 const INTEGRATIONS = [
-  "WhatsApp",
-  "Google Calendar",
-  "Make",
-  "Vapi",
-  "OpenAI",
-  "Zapier",
-  "HubSpot",
-  "Slack",
-  "Calendly",
-  "Notion",
-  "Gmail",
-  "Stripe",
-  "Twilio",
-  "Microsoft Teams",
-  "Salesforce",
-  "Shopify",
-  "WordPress",
-  "Airtable",
-  "Typeform",
-  "Google Sheets",
-  "Mailchimp",
-  "ActiveCampaign",
-  "Zoho CRM",
-  "Monday.com",
-  "Trello",
-  "Intercom",
-  "Freshdesk",
-  "GoHighLevel",
-  "n8n",
-  "Claude AI",
-  "ElevenLabs",
-  "Telegram",
-  "Instagram",
-  "Facebook Messenger",
-  "Pipedrive",
-  "Google Meet",
-  "Zoom",
-  "Webhook",
-  "REST API",
+  "WhatsApp Business", "Google Calendar", "Google Maps", "Google Reviews",
+  "Instagram", "Stripe", "Bizum", "Redsys", "Make", "Zapier",
+  "Calendly", "Notion", "Gmail", "Slack", "Twilio",
+  "HubSpot", "Mailchimp", "Google Sheets", "Telegram",
+  "n8n", "OpenAI", "ElevenLabs", "Vapi", "REST API", "Webhook",
+];
+
+/* ─────────────────────────────────────────────────────
+   DASHBOARD DATA
+   ───────────────────────────────────────────────────── */
+const RESTAURANT_RESERVATIONS = [
+  { time: "13:00", name: "María García", guests: 4, table: "Mesa 3", status: "confirmed" },
+  { time: "13:30", name: "Carlos López", guests: 2, table: "Mesa 7", status: "confirmed" },
+  { time: "14:00", name: "Ana Martínez", guests: 6, table: "Mesa 1", status: "pending" },
+  { time: "14:00", name: "Pedro Sánchez", guests: 3, table: "Mesa 5", status: "confirmed" },
+  { time: "14:30", name: "Laura Fernández", guests: 2, table: "Mesa 8", status: "confirmed" },
+  { time: "20:30", name: "Roberto Díaz", guests: 5, table: "Mesa 2", status: "confirmed" },
+  { time: "21:00", name: "Sofía Ruiz", guests: 4, table: "Mesa 4", status: "pending" },
+  { time: "21:30", name: "Javier Moreno", guests: 2, table: "Mesa 6", status: "confirmed" },
 ];
 
 /* ───────────────────────────────────────────────────── */
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden">
+
       {/* ════════════════════════════════════════════════
-          HERO  —  Full viewport, split layout
+          HERO
           ════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center px-4 overflow-hidden">
-        {/* --- BG layers --- */}
-        <div className="absolute inset-0 hero-futuristic" />
-        <div className="absolute inset-0 grid-pattern opacity-20" />
-        {/* Large animated orbs */}
-        <div className="absolute top-[10%] left-[15%] w-[600px] h-[600px] bg-cyan-500/[0.07] rounded-full blur-[170px] animate-pulse-slow" />
-        <div
-          className="absolute bottom-[15%] right-[10%] w-[500px] h-[500px] bg-blue-600/[0.07] rounded-full blur-[150px] animate-pulse-slow"
-          style={{ animationDelay: "3s" }}
-        />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-purple-500/[0.04] rounded-full blur-[200px]" />
+        {/* BG */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0f] via-[#0f0a1a] to-[#0a0a0f]" />
+        <div className="absolute inset-0 grid-pattern opacity-[0.08]" />
+        <div className="absolute top-[5%] left-[10%] w-[700px] h-[700px] bg-violet-600/[0.07] rounded-full blur-[200px] animate-pulse-slow" />
+        <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/[0.06] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/[0.03] rounded-full blur-[250px]" />
 
-        {/* --- Content grid --- */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center py-20 sm:py-28 lg:py-32">
-          {/* LEFT — Copy */}
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center py-20 sm:py-28 lg:py-32">
+          {/* LEFT */}
           <div>
             {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-white/[0.05] border border-white/[0.08] rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
               </span>
               <span className="text-[13px] text-gray-300 font-medium">
-                Agentes IA disponibles 24/7
+                +2.400 reservas gestionadas este mes
               </span>
             </div>
 
-            {/* Title */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-extrabold leading-[1.08] tracking-tight mb-6">
-              <span className="block text-white">Tu negocio en</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 animate-gradient-x">
-                piloto automático
+              <span className="block text-white">Reservas automáticas.</span>
+              <span className="block text-white">Clientes que vuelven.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-400 animate-gradient-x">
+                Cero no-shows.
               </span>
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-8 max-w-xl">
-              Agentes de voz con IA que{" "}
-              <span className="text-white font-medium">
-                responden llamadas, agendan citas y cierran ventas
-              </span>{" "}
-              por ti. Automatizaciones que convierten leads en clientes sin intervención
-              manual.
+              El sistema todo-en-uno que gestiona las reservas de tu{" "}
+              <span className="text-white font-medium">restaurante o barbería</span>:
+              panel inteligente, web de reservas con tu marca y recordatorios automáticos por WhatsApp.
             </p>
 
-            {/* Metrics row */}
+            {/* Metrics */}
             <div className="flex flex-wrap gap-8 mb-10">
               {[
-                { value: "0", label: "llamadas perdidas", color: "text-cyan-400" },
-                { value: "24/7", label: "disponibilidad", color: "text-blue-400" },
-                { value: "30d", label: "garantía total", color: "text-purple-400" },
+                { value: "−95%", label: "no-shows", color: "text-emerald-400" },
+                { value: "+60%", label: "reservas online", color: "text-violet-400" },
+                { value: "24/7", label: "reservas activas", color: "text-amber-400" },
               ].map((m) => (
                 <div key={m.label}>
-                  <div className={`text-3xl sm:text-4xl font-extrabold ${m.color}`}>
-                    {m.value}
-                  </div>
+                  <div className={`text-3xl sm:text-4xl font-extrabold ${m.color}`}>{m.value}</div>
                   <div className="text-xs text-gray-500 mt-1">{m.label}</div>
                 </div>
               ))}
@@ -127,218 +98,78 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <a
                 href="#contacto"
-                className="group inline-flex items-center justify-center gap-3 bg-white text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-white/10"
+                className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-amber-500/20"
               >
-                Agendar llamada gratis
-                <svg
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2.5}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
+                Solicitar demo gratis
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
               <a
-                href="#servicios"
+                href="#dashboard"
                 className="inline-flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-white font-semibold py-4 px-8 rounded-full text-base transition-all duration-300"
               >
-                <svg
-                  className="w-5 h-5 text-cyan-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
+                <svg className="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-                Ver servicios
+                Ver ejemplos reales
               </a>
             </div>
 
-            {/* Trust signals */}
+            {/* Trust */}
             <div className="flex flex-wrap gap-6 mt-8 text-[13px] text-gray-500">
-              {["Garantía 30 días", "Sin compromiso", "Respuesta en 24h"].map(
-                (t) => (
-                  <span key={t} className="flex items-center gap-1.5">
-                    <svg
-                      className="w-3.5 h-3.5 text-emerald-500"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    {t}
-                  </span>
-                )
-              )}
+              {["Sin permanencia", "Listo en 5 días", "Garantía 30 días"].map((t) => (
+                <span key={t} className="flex items-center gap-1.5">
+                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  {t}
+                </span>
+              ))}
             </div>
           </div>
 
-          {/* RIGHT — Floating UI Mockup (Agent call simulation) */}
+          {/* RIGHT — Mini Dashboard Preview */}
           <div className="block">
-            <div className="relative lg:float-smooth">
-              {/* Glow behind card */}
-              <div className="absolute -inset-6 bg-cyan-500/[0.06] rounded-3xl blur-3xl hidden lg:block" />
-              {/* Main card */}
+            <div className="relative">
+              <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl hidden lg:block" />
               <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
-                {/* Window chrome */}
-                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
+                {/* Chrome */}
+                <div className="flex items-center gap-2 px-4 sm:px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
                   <span className="w-3 h-3 rounded-full bg-red-500/80" />
                   <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-3 text-xs text-gray-500 font-mono">
-                    neuriax-agent — llamada activa
-                  </span>
+                  <span className="ml-3 text-[11px] text-gray-500 font-mono">panel.neuriax.com — Reservas hoy</span>
                 </div>
-
-                {/* Fake call UI */}
-                <div className="p-6 space-y-4">
-                  {/* Status bar */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="relative flex h-2.5 w-2.5">
-                        <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                        <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                      </span>
-                      <span className="text-xs text-emerald-400 font-medium">
-                        En curso · Clínica Dental Sol
-                      </span>
-                    </div>
-                    <span className="text-xs text-gray-600 font-mono">00:34</span>
+                {/* Content */}
+                <div className="p-4 sm:p-5">
+                  {/* Stats row */}
+                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
+                    {[
+                      { label: "Hoy", value: "14", sub: "reservas", color: "text-violet-400" },
+                      { label: "Ocupación", value: "87%", sub: "mesas", color: "text-emerald-400" },
+                      { label: "No-shows", value: "0", sub: "este mes", color: "text-amber-400" },
+                    ].map((s) => (
+                      <div key={s.label} className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-2.5 sm:p-3 text-center">
+                        <div className={`text-lg sm:text-xl font-bold ${s.color}`}>{s.value}</div>
+                        <div className="text-[9px] sm:text-[10px] text-gray-500">{s.sub}</div>
+                      </div>
+                    ))}
                   </div>
-
-                  {/* Chat bubbles — conversación realista */}
-                  <div className="space-y-3 max-h-[220px] lg:max-h-[340px] overflow-y-auto pr-1 scrollbar-thin">
-                    {/* 1 — Paciente llama */}
-                    <div className="flex gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
-                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Hola, buenos días, llamaba porque me duele bastante una muela desde ayer y quería ver si podéis atenderme.</p>
+                  {/* Reservation list */}
+                  <div className="space-y-1.5 max-h-[200px] lg:max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
+                    {RESTAURANT_RESERVATIONS.slice(0, 6).map((r, i) => (
+                      <div key={i} className="flex items-center justify-between bg-slate-800/30 border border-slate-700/20 rounded-lg px-3 py-2">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="text-[11px] text-gray-500 font-mono w-10 flex-shrink-0">{r.time}</span>
+                          <span className="text-[12px] text-white font-medium truncate">{r.name}</span>
+                        </div>
+                        <div className="flex items-center gap-2 flex-shrink-0">
+                          <span className="text-[10px] text-gray-500">{r.guests}p · {r.table}</span>
+                          <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${r.status === "confirmed" ? "bg-emerald-400" : "bg-amber-400"}`} />
+                        </div>
                       </div>
-                    </div>
-                    {/* 2 — Agente IA saluda y pregunta */}
-                    <div className="flex gap-2.5 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Buenos días, siento que estés con molestias. Para poder ayudarte mejor, ¿podrías decirme si el dolor es constante o solo cuando muerdes algo?</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
-                    </div>
-                    {/* 3 — Paciente describe */}
-                    <div className="flex gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
-                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Es constante, sobre todo por la noche. He tomado ibuprofeno pero no se me pasa del todo.</p>
-                      </div>
-                    </div>
-                    {/* 4 — Agente IA empatiza y propone cita */}
-                    <div className="flex gap-2.5 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Entiendo, eso puede ser muy incómodo. Lo mejor es que te vea el doctor cuanto antes. ¿Cuándo te vendría bien venir, esta semana?</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
-                    </div>
-                    {/* 5 — Paciente dice disponibilidad */}
-                    <div className="flex gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2 max-w-[260px]">
-                        <p className="text-[12.5px] text-gray-300 leading-relaxed">Si pudiera ser mañana o pasado, mejor. Por la mañana me viene bien.</p>
-                      </div>
-                    </div>
-                    {/* 6 — Agente consulta agenda y ofrece huecos */}
-                    <div className="flex gap-2.5 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Perfecto, déjame comprobar la disponibilidad del doctor…</p>
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed mt-1.5">Tenemos un hueco mañana miércoles a las 9:30 y otro el jueves a las 10:15. ¿Cuál prefieres?</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
-                    </div>
-                    {/* 7 — Paciente elige */}
-                    <div className="flex gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2">
-                        <p className="text-[12.5px] text-gray-300">Mañana a las 9:30 me viene genial.</p>
-                      </div>
-                    </div>
-                    {/* 8 — Agente confirma, pide nombre, envía SMS */}
-                    <div className="flex gap-2.5 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Listo, te reservo mañana miércoles a las 9:30 con el Dr. García. ¿A nombre de quién la pongo?</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
-                    </div>
-                    {/* 9 — Paciente da nombre */}
-                    <div className="flex gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
-                      <div className="bg-slate-800/80 rounded-xl rounded-tl-sm px-3.5 py-2">
-                        <p className="text-[12.5px] text-gray-300">A nombre de Laura Martínez.</p>
-                      </div>
-                    </div>
-                    {/* 10 — Agente cierra con confirmación completa */}
-                    <div className="flex gap-2.5 justify-end">
-                      <div className="bg-cyan-500/[0.12] border border-cyan-500/20 rounded-xl rounded-tr-sm px-3.5 py-2 max-w-[275px]">
-                        <p className="text-[12.5px] text-cyan-50 leading-relaxed">Perfecto, Laura. Cita confirmada: mañana miércoles a las 9:30 con el Dr. García. Ahora mismo te envío un SMS de confirmación con los datos. Si necesitas cambiar algo, puedes llamar cuando quieras. ¡Que te mejores!</p>
-                      </div>
-                      <div className="w-7 h-7 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[10px]">🤖</div>
-                    </div>
-                  </div>
-
-                  {/* Bottom bar */}
-                  <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-                    <div className="flex items-center gap-2 text-[11px] text-gray-600">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3" />
-                      </svg>
-                      Duración: 1m 23s
-                    </div>
-                    <span className="text-[11px] text-emerald-400 font-medium flex items-center gap-1">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      Cita agendada + SMS enviado
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating mini-cards */}
-              <div className="absolute -left-8 top-16 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth hidden lg:flex" style={{ animationDelay: "1s" }}>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-white">+142</p>
-                    <p className="text-[10px] text-gray-500">citas este mes</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-6 bottom-20 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth hidden lg:flex" style={{ animationDelay: "2s" }}>
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-white">0 perdidas</p>
-                    <p className="text-[10px] text-gray-500">llamadas hoy</p>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -355,27 +186,448 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          PROBLEM → SOLUTION
+          SOCIAL PROOF BAR
           ════════════════════════════════════════════════ */}
-      <section className="py-24 px-4 bg-gradient-to-b from-black via-slate-950 to-slate-950">
+      <section className="py-10 px-4 bg-[#0a0a0f] border-t border-b border-white/[0.04]">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { value: "50+", label: "negocios activos" },
+              { value: "2.400+", label: "reservas/mes" },
+              { value: "4.9★", label: "satisfacción" },
+              { value: "12", label: "ciudades en España" },
+            ].map((s) => (
+              <div key={s.label}>
+                <div className="text-2xl sm:text-3xl font-extrabold text-white">{s.value}</div>
+                <div className="text-xs text-gray-500 mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
+          DASHBOARD EXAMPLE
+          ════════════════════════════════════════════════ */}
+      <section id="dashboard" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0d0d15] to-[#0d0d15]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <span className="text-cyan-400 text-xs font-semibold tracking-[0.2em] uppercase">
-                El problema
-              </span>
+            <div className="text-center mb-14">
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Panel de control</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
-                ¿Cuántos clientes pierdes cada día?
+                Un panel que lo controla todo
               </h2>
               <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                Mientras no contestas el teléfono, tu competencia sí lo hace.
+                Desde las reservas de hoy hasta el historial de cada cliente. Todo en una pantalla.
               </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div className="relative">
+              <div className="absolute -inset-8 bg-violet-500/[0.04] rounded-3xl blur-3xl" />
+              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+                {/* Browser chrome */}
+                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
+                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                  <span className="ml-4 text-[11px] text-gray-500 font-mono bg-slate-800/50 px-4 py-1 rounded-md">panel.neuriax.com/reservas</span>
+                </div>
+
+                <div className="flex">
+                  {/* Sidebar - hidden on mobile */}
+                  <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-4 min-h-[450px]">
+                    <div className="flex items-center gap-2 mb-8">
+                      <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold">N</div>
+                      <span className="text-sm font-bold text-white">Neuriax</span>
+                    </div>
+                    {[
+                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Inicio", active: false },
+                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Reservas", active: true },
+                      { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Clientes", active: false },
+                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Mensajes", active: false },
+                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Estadísticas", active: false },
+                    ].map((item) => (
+                      <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm cursor-pointer transition-colors ${item.active ? "bg-violet-500/[0.12] text-violet-300 font-medium" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
+                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
+                        </svg>
+                        {item.label}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Main content */}
+                  <div className="flex-1 p-4 sm:p-6">
+                    {/* Header */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                      <div>
+                        <h3 className="text-base sm:text-lg font-bold text-white">Reservas — Hoy, Lunes 17 Feb</h3>
+                        <p className="text-[11px] text-gray-500">Trattoria La Nonna · 8 mesas disponibles</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] bg-emerald-500/[0.12] text-emerald-400 px-3 py-1 rounded-full font-medium">14 reservas hoy</span>
+                        <span className="text-[11px] bg-violet-500/[0.12] text-violet-400 px-3 py-1 rounded-full font-medium">87% ocupación</span>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+                      {[
+                        { label: "Confirmadas", value: "11", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]" },
+                        { label: "Pendientes", value: "3", color: "text-amber-400", bg: "bg-amber-500/[0.08]" },
+                        { label: "Comensales", value: "42", color: "text-violet-400", bg: "bg-violet-500/[0.08]" },
+                        { label: "No-shows", value: "0", color: "text-gray-400", bg: "bg-white/[0.03]" },
+                      ].map((s) => (
+                        <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-xl p-3 text-center`}>
+                          <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
+                          <div className="text-[10px] text-gray-500 mt-0.5">{s.label}</div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Table */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="border-b border-white/[0.06]">
+                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4">Hora</th>
+                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4">Cliente</th>
+                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4 hidden sm:table-cell">Personas</th>
+                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4 hidden sm:table-cell">Mesa</th>
+                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2">Estado</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {RESTAURANT_RESERVATIONS.map((r, i) => (
+                            <tr key={i} className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors">
+                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 font-mono">{r.time}</td>
+                              <td className="py-2.5 pr-4 text-[12px] text-white font-medium">{r.name}</td>
+                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 hidden sm:table-cell">{r.guests} pers.</td>
+                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 hidden sm:table-cell">{r.table}</td>
+                              <td className="py-2.5">
+                                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
+                                  {r.status === "confirmed" ? "✓ Confirmada" : "⏳ Pendiente"}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
+          LANDING PAGE EXAMPLES — Scrollable previews
+          ════════════════════════════════════════════════ */}
+      <section id="ejemplos" className="py-24 px-4 bg-[#0d0d15]">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <span className="text-indigo-400 text-xs font-semibold tracking-[0.2em] uppercase">Tu web de reservas</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+                Tu propia web de reservas. Con tu marca.
+              </h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                Tus clientes entran, eligen día y hora, y reservan en 30 segundos. Sin llamar. Sin esperar.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {/* Landing 1 — Restaurant */}
+            <ScrollReveal>
+              <div className="relative">
+                <div className="absolute -inset-3 bg-amber-500/[0.04] rounded-3xl blur-2xl" />
+                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+                  {/* Browser chrome */}
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    <span className="ml-3 text-[10px] text-gray-500 font-mono">reservas.trattorialanonna.es</span>
+                  </div>
+                  {/* Scrollable landing */}
+                  <div className="max-h-[420px] overflow-y-auto scrollbar-thin">
+                    {/* Restaurant hero */}
+                    <div className="relative bg-gradient-to-br from-amber-900/40 via-orange-900/30 to-stone-900 p-6 sm:p-8">
+                      <div className="text-center">
+                        <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 mb-4">
+                          <span className="text-amber-400 text-lg">🍝</span>
+                          <span className="text-xs text-white font-semibold">Trattoria La Nonna</span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Reserva tu mesa</h3>
+                        <p className="text-sm text-gray-300">Cocina italiana auténtica en el corazón de Madrid</p>
+                        <div className="flex items-center justify-center gap-1 mt-2">
+                          {[1,2,3,4,5].map((s) => (
+                            <svg key={s} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                          <span className="text-[11px] text-gray-400 ml-1">4.8 (324 reseñas)</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Booking form */}
+                    <div className="p-5 sm:p-6 space-y-4">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Personas</label>
+                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center justify-between">
+                            <span>4 personas</span>
+                            <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Fecha</label>
+                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center justify-between">
+                            <span>Vie, 21 Feb</span>
+                            <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Hora disponible</label>
+                        <div className="grid grid-cols-4 gap-2">
+                          {["13:00", "13:30", "14:00", "14:30", "20:30", "21:00", "21:30", "22:00"].map((h, i) => (
+                            <div key={h} className={`text-center text-[11px] py-2 rounded-lg cursor-pointer transition-colors ${i === 4 ? "bg-amber-500 text-black font-bold" : "bg-slate-800/50 border border-slate-700/40 text-gray-300 hover:border-amber-500/40"}`}>
+                              {h}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-3 rounded-xl text-sm hover:shadow-lg hover:shadow-amber-500/20 transition-all">
+                        Reservar mesa →
+                      </button>
+                      {/* Reviews */}
+                      <div className="pt-4 border-t border-white/[0.06] space-y-3">
+                        <p className="text-[10px] text-gray-500 uppercase tracking-wider">Últimas reseñas</p>
+                        {[
+                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online y fue super fácil.", stars: 5 },
+                          { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5 },
+                        ].map((rev) => (
+                          <div key={rev.name} className="bg-slate-800/30 rounded-lg p-3">
+                            <div className="flex items-center gap-2 mb-1">
+                              <div className="w-5 h-5 bg-amber-500/20 rounded-full flex items-center justify-center text-[8px]">👤</div>
+                              <span className="text-[11px] text-white font-medium">{rev.name}</span>
+                              <div className="flex gap-0.5">
+                                {Array.from({length: rev.stars}).map((_, i) => (
+                                  <svg key={i} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                ))}
+                              </div>
+                            </div>
+                            <p className="text-[11px] text-gray-400 leading-relaxed">{rev.text}</p>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Powered by */}
+                      <div className="text-center pt-3 border-t border-white/[0.04]">
+                        <span className="text-[9px] text-gray-600">Powered by <span className="text-violet-400 font-semibold">Neuriax</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Landing 2 — Barbershop */}
+            <ScrollReveal delay={150}>
+              <div className="relative">
+                <div className="absolute -inset-3 bg-indigo-500/[0.04] rounded-3xl blur-2xl" />
+                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    <span className="ml-3 text-[10px] text-gray-500 font-mono">reservas.urbancutbarberia.es</span>
+                  </div>
+                  <div className="max-h-[420px] overflow-y-auto scrollbar-thin">
+                    {/* Barber hero */}
+                    <div className="relative bg-gradient-to-br from-slate-800 via-zinc-900 to-slate-900 p-6 sm:p-8">
+                      <div className="text-center">
+                        <div className="inline-flex items-center gap-2 bg-white/10 rounded-full px-3 py-1 mb-4">
+                          <span className="text-indigo-400 text-lg">💈</span>
+                          <span className="text-xs text-white font-semibold">Urban Cut Barbería</span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Reserva tu cita</h3>
+                        <p className="text-sm text-gray-300">Estilo y precisión en cada corte</p>
+                        <div className="flex items-center justify-center gap-1 mt-2">
+                          {[1,2,3,4,5].map((s) => (
+                            <svg key={s} className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                            </svg>
+                          ))}
+                          <span className="text-[11px] text-gray-400 ml-1">4.9 (187 reseñas)</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Booking form */}
+                    <div className="p-5 sm:p-6 space-y-4">
+                      <div>
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1.5 block">Elige barbero</label>
+                        <div className="grid grid-cols-2 gap-2">
+                          {[
+                            { name: "Carlos", specialty: "Degradados", selected: true },
+                            { name: "Alex", specialty: "Clásico & Barba", selected: false },
+                          ].map((b) => (
+                            <div key={b.name} className={`text-center p-3 rounded-xl cursor-pointer transition-all ${b.selected ? "bg-indigo-500/[0.15] border-2 border-indigo-500/40" : "bg-slate-800/50 border border-slate-700/40"}`}>
+                              <div className="w-10 h-10 bg-slate-700 rounded-full mx-auto mb-1.5 flex items-center justify-center text-sm">✂️</div>
+                              <p className="text-[12px] text-white font-semibold">{b.name}</p>
+                              <p className="text-[9px] text-gray-500">{b.specialty}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1.5 block">Servicio</label>
+                        <div className="space-y-2">
+                          {[
+                            { name: "Corte Degradado", price: "15€", duration: "30 min", selected: false },
+                            { name: "Corte + Barba", price: "22€", duration: "45 min", selected: true },
+                            { name: "Corte Premium", price: "28€", duration: "40 min", selected: false },
+                            { name: "Tratamiento Capilar", price: "35€", duration: "50 min", selected: false },
+                          ].map((s) => (
+                            <div key={s.name} className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-all ${s.selected ? "bg-indigo-500/[0.12] border border-indigo-500/30" : "bg-slate-800/30 border border-slate-700/30 hover:border-indigo-500/20"}`}>
+                              <div className="flex items-center gap-2">
+                                <div className={`w-3 h-3 rounded-full border-2 ${s.selected ? "border-indigo-400 bg-indigo-400" : "border-gray-600"}`} />
+                                <span className="text-[12px] text-white">{s.name}</span>
+                              </div>
+                              <div className="text-right">
+                                <span className="text-[12px] text-white font-semibold">{s.price}</span>
+                                <span className="text-[10px] text-gray-500 ml-2">{s.duration}</span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Fecha</label>
+                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white">Mar, 18 Feb</div>
+                        </div>
+                        <div>
+                          <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Hora</label>
+                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white">10:30</div>
+                        </div>
+                      </div>
+                      <button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl text-sm hover:shadow-lg hover:shadow-indigo-500/20 transition-all">
+                        Reservar cita →
+                      </button>
+                      <div className="text-center pt-3 border-t border-white/[0.04]">
+                        <span className="text-[9px] text-gray-600">Powered by <span className="text-violet-400 font-semibold">Neuriax</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
+          REMINDERS TIMELINE
+          ════════════════════════════════════════════════ */}
+      <section className="py-24 px-4 bg-gradient-to-b from-[#0d0d15] to-[#0a0a0f]">
+        <div className="max-w-4xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-6">
+              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Recordatorios automáticos</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+                Tus clientes nunca más se olvidan
+              </h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto mb-2">
+                Recordatorios por WhatsApp que eliminan los no-shows de tu negocio.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-3 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-2xl px-6 py-4">
+                <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400">35% → 3%</span>
+                <span className="text-sm text-gray-400 text-left">de no-shows<br />con recordatorios</span>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Timeline */}
+          <div className="relative">
+            <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/40 via-violet-500/30 to-amber-500/30" />
+
+            {[
+              {
+                icon: "✅", color: "bg-emerald-500", label: "Reserva confirmada", time: "Al instante",
+                message: "¡Hola María! 🎉 Tu mesa para 4 en Trattoria La Nonna está confirmada:\n📅 Viernes 21 Feb — 20:30\n📍 C/ Gran Vía 45, Madrid\n\nSi necesitas cambiar algo, responde a este mensaje.",
+              },
+              {
+                icon: "⏰", color: "bg-violet-500", label: "Recordatorio 24h antes", time: "Jueves 20:30",
+                message: "Hola María 👋 Te recordamos tu reserva mañana viernes a las 20:30 en Trattoria La Nonna.\n\n¿Sigues viniendo?\n✅ SÍ — confirmar\n❌ NO — cancelar\n\nResponde para confirmar 🙏",
+              },
+              {
+                icon: "📍", color: "bg-indigo-500", label: "Último aviso + ubicación", time: "Viernes 19:30",
+                message: "¡María, te esperamos en 1 hora! 🍝\n\n📍 Cómo llegar: maps.google.com/trattoria\n🅿️ Parking: Parking Centro (2 min)\n\n¡Buen provecho!",
+              },
+              {
+                icon: "⭐", color: "bg-amber-500", label: "Post-visita", time: "Sábado 10:00",
+                message: "¡Hola María! Esperamos que disfrutaras de tu cena 😊\n\n¿Nos dejas tu opinión? Nos ayuda muchísimo:\n⭐ Dejar reseña en Google\n\n¡Gracias y hasta pronto!",
+              },
+            ].map((step, i) => (
+              <ScrollReveal key={i} delay={i * 100}>
+                <div className="relative flex gap-4 sm:gap-6 mb-10 last:mb-0">
+                  <div className={`relative z-10 w-12 h-12 sm:w-16 sm:h-16 ${step.color} rounded-2xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0 shadow-lg`}>
+                    {step.icon}
+                  </div>
+                  <div className="flex-1 pt-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mb-3">
+                      <h3 className="text-base sm:text-lg font-bold text-white">{step.label}</h3>
+                      <span className="text-[11px] text-gray-500 font-mono">{step.time}</span>
+                    </div>
+                    <div className="bg-[#1a2e1a] border border-emerald-900/40 rounded-2xl rounded-tl-sm p-4 max-w-md shadow-lg">
+                      <div className="flex items-center gap-2 mb-2">
+                        <svg className="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.607-.798-6.384-2.147l-.108-.084-3.253 1.091 1.091-3.253-.084-.108A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+                        </svg>
+                        <span className="text-[10px] text-emerald-400 font-medium">WhatsApp Business</span>
+                      </div>
+                      <p className="text-[12px] text-emerald-100/90 leading-relaxed whitespace-pre-line">{step.message}</p>
+                      <div className="text-right mt-2">
+                        <span className="text-[9px] text-emerald-700">✓✓</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
+          BEFORE vs AFTER
+          ════════════════════════════════════════════════ */}
+      <section className="py-24 px-4 bg-[#0a0a0f]">
+        <div className="max-w-6xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-14">
+              <span className="text-rose-400 text-xs font-semibold tracking-[0.2em] uppercase">La diferencia</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+                La diferencia es brutal
+              </h2>
             </div>
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <ScrollReveal>
-              <div className="bg-red-950/20 border border-red-500/15 rounded-2xl p-8 h-full">
+              <div className="bg-red-950/20 border border-red-500/15 rounded-2xl p-6 sm:p-8 h-full">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-red-500/15 rounded-lg flex items-center justify-center">
                     <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
@@ -384,14 +636,16 @@ export default function Home() {
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { metric: "52+", text: "llamadas perdidas al mes" },
-                    { metric: "68%", text: "de leads sin seguimiento" },
-                    { metric: "5h+", text: "semanales en tareas repetitivas" },
-                    { metric: "0€", text: "generados fuera de horario" },
+                    { icon: "📓", text: "Libreta de papel con tachones y reservas perdidas" },
+                    { icon: "📱", text: "52+ mensajes de WhatsApp sin contestar al día" },
+                    { icon: "🚫", text: "35% de no-shows cada mes — mesas vacías, dinero perdido" },
+                    { icon: "📞", text: "Llamadas a las 23:00 para reservar — imposible descansar" },
+                    { icon: "💸", text: "Miles de euros perdidos en sillas y mesas vacías" },
+                    { icon: "😤", text: "Clientes frustrados que no vuelven" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-4">
-                      <span className="text-2xl font-extrabold text-red-400/90 w-14 text-right flex-shrink-0">{item.metric}</span>
-                      <span className="text-gray-400 text-sm">{item.text}</span>
+                    <li key={item.text} className="flex items-start gap-3">
+                      <span className="text-base flex-shrink-0">{item.icon}</span>
+                      <span className="text-sm text-gray-400 leading-relaxed">{item.text}</span>
                     </li>
                   ))}
                 </ul>
@@ -399,7 +653,7 @@ export default function Home() {
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
-              <div className="bg-emerald-950/20 border border-emerald-500/15 rounded-2xl p-8 h-full">
+              <div className="bg-emerald-950/20 border border-emerald-500/15 rounded-2xl p-6 sm:p-8 h-full">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-10 h-10 bg-emerald-500/15 rounded-lg flex items-center justify-center">
                     <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
@@ -408,204 +662,93 @@ export default function Home() {
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { metric: "0", text: "llamadas sin responder" },
-                    { metric: "100%", text: "leads con seguimiento automático" },
-                    { metric: "0h", text: "trabajo manual repetitivo" },
-                    { metric: "24/7", text: "vendiendo mientras duermes" },
+                    { icon: "📊", text: "Panel digital con todas las reservas organizadas" },
+                    { icon: "✅", text: "Reservas automáticas 24/7, sin intervención tuya" },
+                    { icon: "📉", text: "Menos del 3% de no-shows con recordatorios WhatsApp" },
+                    { icon: "🔕", text: "0 llamadas para reservar — todo online automático" },
+                    { icon: "💰", text: "Agenda siempre llena, ingresos predecibles cada semana" },
+                    { icon: "🔄", text: "Clientes que vuelven gracias al seguimiento automático" },
                   ].map((item) => (
-                    <li key={item.text} className="flex items-center gap-4">
-                      <span className="text-2xl font-extrabold text-emerald-400/90 w-14 text-right flex-shrink-0">{item.metric}</span>
-                      <span className="text-gray-300 text-sm">{item.text}</span>
+                    <li key={item.text} className="flex items-start gap-3">
+                      <span className="text-base flex-shrink-0">{item.icon}</span>
+                      <span className="text-sm text-gray-300 leading-relaxed">{item.text}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </ScrollReveal>
           </div>
-
-          <ScrollReveal>
-            <div className="text-center mt-12">
-              <a href="#contacto" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold transition-colors text-sm">
-                Quiero pasar al lado verde
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-              </a>
-            </div>
-          </ScrollReveal>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════
-          SERVICES
+          SECTORS
           ════════════════════════════════════════════════ */}
-      <section id="servicios" className="py-24 px-4 bg-slate-950">
+      <section id="sectores" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] to-[#0d0d15]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-20">
-              <span className="text-blue-400 text-xs font-semibold tracking-[0.2em] uppercase">
-                Servicios
-              </span>
+            <div className="text-center mb-14">
+              <span className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">Sectores</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
-                Dos soluciones. Un objetivo.
+                Diseñado para tu tipo de negocio
               </h2>
-              <p className="text-lg text-gray-500">Más clientes, menos trabajo manual.</p>
             </div>
           </ScrollReveal>
 
-          {/* Service 1 — Voice Agents */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-28">
+          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <ScrollReveal>
-              <div>
-                <div className="inline-flex items-center gap-2 bg-cyan-500/[0.08] border border-cyan-500/15 rounded-full px-4 py-1.5 mb-6">
-                  <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
-                  <span className="text-cyan-300 text-xs font-medium">Servicio estrella</span>
+              <div className="group bg-gradient-to-br from-amber-500/[0.04] to-transparent border border-amber-500/[0.1] rounded-2xl p-6 sm:p-8 hover:border-amber-500/25 transition-all duration-500 h-full">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-amber-500/15 rounded-xl flex items-center justify-center text-2xl">🍽</div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Restaurantes</h3>
+                    <p className="text-xs text-gray-500">Llena tus mesas cada servicio</p>
+                  </div>
                 </div>
-                <h3 className="text-3xl sm:text-4xl font-bold text-white mb-5">Agentes de Voz IA</h3>
-                <p className="text-base text-gray-400 mb-6 leading-relaxed">
-                  Un asistente telefónico con inteligencia artificial que{" "}
-                  <strong className="text-white">habla como una persona real</strong>.
-                  Contesta llamadas de tus clientes, responde preguntas, agenda citas en tu
-                  calendario y cualifica leads. Todo automáticamente, 24 horas del día.
-                </p>
-                <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 mb-8">
-                  <p className="text-sm text-gray-400">
-                    <span className="text-cyan-400 font-semibold">Ejemplo:</span> Un cliente
-                    llama a tu clínica a las 23:00. El agente contesta, explica servicios,
-                    agenda cita para mañana y te envía resumen por email. Tú ni te enteras
-                    hasta la mañana siguiente.
-                  </p>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {["Voz natural, indistinguible de una persona", "Llamadas entrantes y salientes", "Conectado a tu calendario", "Responde preguntas de tu negocio", "Resumen de cada conversación por email"].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-gray-300 text-sm">
-                      <svg className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                      {item}
+                <ul className="space-y-3 mb-6">
+                  {[
+                    "Gestión de mesas y turnos (comida/cena)",
+                    "Menú del día visible en la web de reservas",
+                    "Reservas para grupos y eventos especiales",
+                    "Integración con Google Reviews y Google Maps",
+                    "Recordatorios automáticos por WhatsApp",
+                    "Panel de estadísticas: ocupación, ingresos, no-shows",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-gray-400">
+                      <svg className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      {f}
                     </li>
                   ))}
                 </ul>
-                <a href="#contacto" className="inline-flex items-center gap-2 bg-white text-black font-bold py-3 px-6 rounded-full text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-white/10">
-                  Quiero un agente de voz
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </a>
+                <p className="text-[11px] text-gray-600 italic">Ideal para: restaurantes, bares, cafeterías, gastrobares, brunch spots</p>
               </div>
             </ScrollReveal>
 
-            {/* Visual — Automations Dashboard mockup */}
-            <ScrollReveal delay={150}>
-              <div className="relative">
-                <div className="absolute -inset-4 bg-cyan-500/[0.04] rounded-3xl blur-2xl" />
-                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
-                  <div className="flex items-center gap-2 px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[11px] text-gray-600 font-mono">dashboard — agentes activos</span>
-                  </div>
-                  <div className="p-5 space-y-3">
-                    {[
-                      { name: "Clínica Dental Sol", calls: "34 llamadas", status: "Activo", pct: 92 },
-                      { name: "Reformas García", calls: "21 llamadas", status: "Activo", pct: 78 },
-                      { name: "Rest. La Marina", calls: "48 llamadas", status: "Activo", pct: 95 },
-                    ].map((agent) => (
-                      <div key={agent.name} className="bg-slate-800/40 border border-slate-700/40 rounded-lg p-4">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 bg-emerald-400 rounded-full" />
-                            <span className="text-sm text-white font-medium">{agent.name}</span>
-                          </div>
-                          <span className="text-[11px] text-gray-500">{agent.calls}</span>
-                        </div>
-                        <div className="w-full h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
-                          <div
-                            className="h-full bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
-                            style={{ width: `${agent.pct}%` }}
-                          />
-                        </div>
-                        <div className="flex justify-between mt-1.5">
-                          <span className="text-[10px] text-gray-600">Satisfacción</span>
-                          <span className="text-[10px] text-cyan-400 font-medium">{agent.pct}%</span>
-                        </div>
-                      </div>
-                    ))}
-                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.04] text-[11px] text-gray-600">
-                      <span>Total este mes: 103 llamadas</span>
-                      <span className="text-emerald-400">0 perdidas</span>
-                    </div>
+            <ScrollReveal delay={100}>
+              <div className="group bg-gradient-to-br from-indigo-500/[0.04] to-transparent border border-indigo-500/[0.1] rounded-2xl p-6 sm:p-8 hover:border-indigo-500/25 transition-all duration-500 h-full">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 bg-indigo-500/15 rounded-xl flex items-center justify-center text-2xl">💈</div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white">Barberías</h3>
+                    <p className="text-xs text-gray-500">Agenda siempre llena sin esfuerzo</p>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Service 2 — Automation */}
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <ScrollReveal className="order-2 lg:order-1">
-              <div className="relative">
-                <div className="absolute -inset-4 bg-blue-500/[0.04] rounded-3xl blur-2xl" />
-                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl shadow-black/40">
-                  <div className="flex items-center gap-2 px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[11px] text-gray-600 font-mono">automatizaciones — 5 activas</span>
-                  </div>
-                  <div className="p-5 space-y-2.5">
-                    {[
-                      { name: "Nuevo lead → WhatsApp + Email", count: "142", active: true },
-                      { name: "Sin respuesta 48h → Recordatorio", count: "38", active: true },
-                      { name: "Cita agendada → Confirmación SMS", count: "89", active: true },
-                      { name: "Lead caliente → Notificación urgente", count: "23", active: true },
-                      { name: "Resumen semanal → Email al equipo", count: "12", active: true },
-                    ].map((auto) => (
-                      <div key={auto.name} className="flex items-center justify-between bg-slate-800/40 border border-slate-700/40 rounded-lg px-4 py-3">
-                        <div className="flex items-center gap-3 min-w-0">
-                          <span className="w-2 h-2 bg-emerald-400 rounded-full flex-shrink-0" />
-                          <span className="text-[13px] text-gray-300 truncate">{auto.name}</span>
-                        </div>
-                        <span className="text-[11px] text-gray-500 flex-shrink-0 ml-3">{auto.count} ejecuciones</span>
-                      </div>
-                    ))}
-                    <div className="flex items-center justify-between pt-2 border-t border-white/[0.04] text-[11px] text-gray-600">
-                      <span>304 tareas automatizadas</span>
-                      <span className="text-blue-400">~127h ahorradas</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal delay={150} className="order-1 lg:order-2">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-blue-500/[0.08] border border-blue-500/15 rounded-full px-4 py-1.5 mb-6">
-                  <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                  <span className="text-blue-300 text-xs font-medium">Máxima eficiencia</span>
-                </div>
-                <h3 className="text-3xl sm:text-4xl font-bold text-white mb-5">Automatización IA</h3>
-                <p className="text-base text-gray-400 mb-6 leading-relaxed">
-                  Flujos de trabajo inteligentes que{" "}
-                  <strong className="text-white">conectan todas tus herramientas</strong> y
-                  ejecutan acciones automáticamente. Cuando llega un lead, se dispara toda la
-                  cadena: WhatsApp, email, CRM, recordatorio.
-                </p>
-                <div className="bg-slate-900/60 border border-slate-800/80 rounded-xl p-4 mb-8">
-                  <p className="text-sm text-gray-400">
-                    <span className="text-blue-400 font-semibold">Ejemplo:</span> Alguien
-                    rellena tu formulario. En 30 segundos recibe un WhatsApp personalizado, tú
-                    recibes una notificación, el lead se guarda en tu CRM y se programa un
-                    seguimiento automático.
-                  </p>
-                </div>
-                <ul className="space-y-3 mb-8">
-                  {["WhatsApp, Email, CRM, Calendar integrados", "Seguimiento automático de leads", "Notificaciones inteligentes por prioridad", "Informes y resúmenes automáticos", "Lo configuramos todo por ti"].map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-gray-300 text-sm">
-                      <svg className="w-4 h-4 text-blue-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                      {item}
+                <ul className="space-y-3 mb-6">
+                  {[
+                    "Gestión por barbero/estilista individual",
+                    "Servicios con duración y precio automático",
+                    "Galería de trabajos y estilos en la web",
+                    "Programa de fidelización integrado",
+                    "Recordatorios de cita por WhatsApp",
+                    "Estadísticas por barbero: agenda, clientes, ingresos",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-gray-400">
+                      <svg className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      {f}
                     </li>
                   ))}
                 </ul>
-                <a href="#contacto" className="inline-flex items-center gap-2 bg-white text-black font-bold py-3 px-6 rounded-full text-sm transition-all duration-300 hover:scale-[1.03] hover:shadow-lg hover:shadow-white/10">
-                  Quiero automatizar
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </a>
+                <p className="text-[11px] text-gray-600 italic">Ideal para: barberías, peluquerías, centros de estética, nail bars</p>
               </div>
             </ScrollReveal>
           </div>
@@ -615,18 +758,15 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           INTEGRATIONS MARQUEE
           ════════════════════════════════════════════════ */}
-      <section className="py-14 bg-black border-t border-b border-white/[0.04] overflow-hidden">
+      <section className="py-14 bg-[#0d0d15] border-t border-b border-white/[0.04] overflow-hidden">
         <p className="text-center text-xs text-gray-600 uppercase tracking-[0.2em] mb-8">
           Integramos con las herramientas que ya usas
         </p>
         <div className="marquee-container">
           <div className="marquee-track">
             {[...INTEGRATIONS, ...INTEGRATIONS].map((tool, i) => (
-              <span
-                key={`${tool}-${i}`}
-                className="inline-flex items-center gap-2 px-6 py-2 text-sm text-gray-500 font-medium whitespace-nowrap hover:text-white transition-colors"
-              >
-                <span className="w-1.5 h-1.5 bg-cyan-500/40 rounded-full" />
+              <span key={`${tool}-${i}`} className="inline-flex items-center gap-2 px-6 py-2 text-sm text-gray-500 font-medium whitespace-nowrap hover:text-white transition-colors">
+                <span className="w-1.5 h-1.5 bg-violet-500/40 rounded-full" />
                 {tool}
               </span>
             ))}
@@ -635,32 +775,33 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          PROCESS — 3 steps
+          PROCESS — 4 steps
           ════════════════════════════════════════════════ */}
-      <section id="proceso" className="py-24 px-4 bg-slate-950">
+      <section id="proceso" className="py-24 px-4 bg-[#0a0a0f]">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="text-purple-400 text-xs font-semibold tracking-[0.2em] uppercase">Proceso</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">Cómo funciona</h2>
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Proceso</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">En 5 días, funcionando</h2>
               <p className="text-lg text-gray-500">Simple, rápido, sin complicaciones.</p>
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            <div className="hidden md:block absolute top-12 left-[16.66%] right-[16.66%] h-px bg-gradient-to-r from-cyan-500/30 via-blue-500/30 to-purple-500/30" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-violet-500/30 via-indigo-500/30 to-amber-500/30" />
 
             {[
-              { num: "01", title: "Hablamos", desc: "Llamada de 15 min. Me cuentas tu negocio, te digo exactamente qué puedo automatizar y cuánto te va a costar. Sin rodeos.", gradient: "from-cyan-500 to-cyan-600" },
-              { num: "02", title: "Construyo", desc: "Diseño e implemento tu sistema a medida. Agentes de voz, automatizaciones, integraciones. Tú sigues con tu día a día.", gradient: "from-blue-500 to-blue-600" },
-              { num: "03", title: "Funciona", desc: "Tu negocio en piloto automático. Agentes respondiendo, leads llegando, seguimiento funcionando. Resultados desde el día 1.", gradient: "from-purple-500 to-purple-600" },
+              { num: "01", title: "Hablamos", desc: "15 min por teléfono. Me cuentas tu negocio, te enseño una demo personalizada. Sin compromiso.", gradient: "from-violet-500 to-violet-600" },
+              { num: "02", title: "Diseñamos", desc: "Creo tu panel de reservas + web personalizada con tu marca, colores, logo y servicios.", gradient: "from-indigo-500 to-indigo-600" },
+              { num: "03", title: "Lanzamos", desc: "Te formo en 30 minutos. Empiezas a recibir reservas automáticas desde el día 1.", gradient: "from-blue-500 to-blue-600" },
+              { num: "04", title: "Crecemos", desc: "Soporte continuo + optimización mensual. Tu sistema mejora cada semana.", gradient: "from-amber-500 to-orange-500" },
             ].map((step, i) => (
               <ScrollReveal key={step.num} delay={i * 100}>
                 <div className="text-center relative">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 text-lg font-bold shadow-lg relative z-10 rotate-3 hover:rotate-0 transition-transform duration-300`}>
+                  <div className={`w-16 h-16 bg-gradient-to-br ${step.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 text-lg font-bold shadow-lg relative z-10 rotate-3 hover:rotate-0 transition-transform duration-300 ${step.num === "04" ? "text-black" : "text-white"}`}>
                     {step.num}
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <h3 className="text-lg font-bold text-white mb-3">{step.title}</h3>
                   <p className="text-sm text-gray-400 leading-relaxed">{step.desc}</p>
                 </div>
               </ScrollReveal>
@@ -669,8 +810,8 @@ export default function Home() {
 
           <ScrollReveal>
             <div className="text-center mt-16">
-              <a href="#contacto" className="inline-flex items-center gap-3 bg-white text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-white/10">
-                Empezar ahora
+              <a href="#contacto" className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-amber-500/20">
+                Quiero mi sistema de reservas
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </div>
@@ -679,54 +820,143 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          RESULTS / USE CASES
+          VOICE AGENTS — Premium add-on
           ════════════════════════════════════════════════ */}
-      <section id="resultados" className="py-24 px-4 bg-gradient-to-b from-slate-950 to-black">
+      <section id="agentes" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0f0a1a] to-[#0a0a0f]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-16">
-              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Resultados</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white mt-3 mb-4">Resultados en sectores reales</h2>
+            <div className="text-center mb-14">
+              <div className="inline-flex items-center gap-2 bg-cyan-500/[0.08] border border-cyan-500/20 rounded-full px-4 py-2 mb-5">
+                <span className="text-[13px] text-cyan-300 font-semibold">⚡ Complemento Premium</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-4">
+                ¿Y si además tu teléfono<br className="hidden sm:block" /> se contesta solo?
+              </h2>
+              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                Añade un agente de voz con IA a tu sistema de reservas. Contesta llamadas,
+                gestiona reservas y responde preguntas — con voz natural, 24 horas del día.
+              </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { sector: "Clínicas dentales", result: "De 15 a 0 llamadas perdidas/semana", detail: "Agente de voz + reservas automáticas", icon: "M4.26 10.147a60.438 60.438 0 00-.491 6.347A48.62 48.62 0 0112 20.904a48.62 48.62 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.636 50.636 0 00-2.658-.813A59.906 59.906 0 0112 3.493a59.903 59.903 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" },
-              { sector: "Empresas de reformas", result: "3x más presupuestos enviados", detail: "Cualificación automática de leads", icon: "M11.42 15.17l-5.1-5.1m0 0L3.29 13.1m3.03-3.03l-3.03 3.03M20.71 7.04c.39.39.39 1.02 0 1.41l-3.54 3.54M15.17 11.42l5.1 5.1m0 0l3.03-3.03m-3.03 3.03l3.03 3.03" },
-              { sector: "Consultoría", result: "12h/semana de tiempo recuperado", detail: "Automatización de seguimiento", icon: "M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" },
-              { sector: "Restaurantes", result: "40% más reservas fuera de horario", detail: "Agente de voz para reservas 24/7", icon: "M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.871c1.355 0 2.697.056 4.024.166C17.155 8.51 18 9.473 18 10.608v2.513M15 8.25v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.379a48.474 48.474 0 00-6-.371c-2.032 0-4.034.126-6 .371m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.169c0 .621-.504 1.125-1.125 1.125H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M16.5 3.75V4.875c0 .621-.504 1.125-1.125 1.125H8.625A1.125 1.125 0 017.5 4.875V3.75m9 0H7.5m9 0h1.875c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125H5.625A1.125 1.125 0 014.5 6.375v-1.5c0-.621.504-1.125 1.125-1.125H7.5" },
-              { sector: "Peluquerías", result: "Agenda siempre llena sin llamar", detail: "Reservas por voz + recordatorios SMS", icon: "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" },
-              { sector: "Despachos de abogados", result: "100% leads contactados en <5min", detail: "Respuesta automática + cualificación IA", icon: "M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" },
-            ].map((caso, i) => (
-              <ScrollReveal key={caso.sector} delay={i * 80}>
-                <div className="group bg-white/[0.02] border border-white/[0.06] rounded-xl p-6 hover:border-cyan-500/20 hover:bg-white/[0.04] transition-all duration-500 h-full">
-                  <div className="w-10 h-10 bg-cyan-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-cyan-500/15 transition-colors">
-                    <svg className="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d={caso.icon} />
-                    </svg>
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <ScrollReveal>
+              <div>
+                <ul className="space-y-5 mb-8">
+                  {[
+                    { title: "Responde llamadas 24/7", desc: "Un cliente llama a las 23:00 para reservar. El agente contesta, busca disponibilidad y confirma la reserva.", color: "text-cyan-400" },
+                    { title: "Habla como una persona real", desc: "Voz natural con IA avanzada. Tus clientes no notarán la diferencia. Trato amable y profesional.", color: "text-violet-400" },
+                    { title: "Conectado a tu panel", desc: "Las reservas que gestiona el agente aparecen directamente en tu panel. Todo sincronizado en tiempo real.", color: "text-amber-400" },
+                  ].map((item) => (
+                    <li key={item.title} className="flex gap-4">
+                      <div className="w-10 h-10 bg-white/[0.04] border border-white/[0.08] rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className={`w-5 h-5 ${item.color}`} fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      </div>
+                      <div>
+                        <h4 className="text-base font-bold text-white mb-1">{item.title}</h4>
+                        <p className="text-sm text-gray-400 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <a href="#contacto" className="inline-flex items-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-white font-semibold py-3 px-6 rounded-full text-sm transition-all duration-300">
+                  Añadir agente de voz a mi plan
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                </a>
+              </div>
+            </ScrollReveal>
+
+            {/* Agent Mockup */}
+            <ScrollReveal delay={150}>
+              <div className="relative">
+                <div className="absolute -inset-4 bg-cyan-500/[0.04] rounded-3xl blur-2xl" />
+                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                    <span className="ml-3 text-[11px] text-gray-500 font-mono">agente-voz — llamada activa</span>
                   </div>
-                  <h3 className="text-xs font-semibold text-cyan-400 mb-2 uppercase tracking-wider">{caso.sector}</h3>
-                  <p className="text-base font-bold text-white mb-2">{caso.result}</p>
-                  <p className="text-xs text-gray-500">{caso.detail}</p>
+                  <div className="p-5 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="relative flex h-2.5 w-2.5">
+                          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                        </span>
+                        <span className="text-xs text-emerald-400 font-medium">En curso · Trattoria La Nonna</span>
+                      </div>
+                      <span className="text-xs text-gray-600 font-mono">00:42</span>
+                    </div>
+
+                    <div className="space-y-2.5 max-h-[220px] lg:max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
+                      {[
+                        { role: "user", text: "Hola buenas, quería reservar mesa para el viernes para 4 personas." },
+                        { role: "agent", text: "¡Buenas tardes! Encantado de ayudarte. Para 4 personas el viernes, ¿tienes preferencia de horario? Tenemos disponibilidad a las 14:00, 21:00 y 21:30." },
+                        { role: "user", text: "A las 21:00 perfecto." },
+                        { role: "agent", text: "Genial, mesa para 4 el viernes a las 21:00. ¿A nombre de quién la reservo?" },
+                        { role: "user", text: "A nombre de Roberto Díaz." },
+                        { role: "agent", text: "Perfecto Roberto. Reserva confirmada: viernes a las 21:00, mesa para 4. Te envío confirmación por WhatsApp ahora mismo. ¡Le esperamos!" },
+                      ].map((msg, i) => (
+                        <div key={i} className={`flex gap-2 ${msg.role === "agent" ? "justify-end" : ""}`}>
+                          {msg.role === "user" && <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[9px]">👤</div>}
+                          <div className={`rounded-xl px-3 py-2 max-w-[240px] ${msg.role === "agent" ? "bg-cyan-500/[0.1] border border-cyan-500/20 rounded-tr-sm" : "bg-slate-800/80 rounded-tl-sm"}`}>
+                            <p className={`text-[11px] leading-relaxed ${msg.role === "agent" ? "text-cyan-50" : "text-gray-300"}`}>{msg.text}</p>
+                          </div>
+                          {msg.role === "agent" && <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[9px]">🤖</div>}
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
+                      <span className="text-[10px] text-gray-600">Duración: 0:42</span>
+                      <span className="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
+                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                        Reserva creada + WhatsApp enviado
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </ScrollReveal>
-            ))}
+              </div>
+            </ScrollReveal>
           </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════
+          RESULTS — Big numbers
+          ════════════════════════════════════════════════ */}
+      <section className="py-20 px-4 bg-[#0a0a0f]">
+        <div className="max-w-5xl mx-auto">
+          <ScrollReveal>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
+              {[
+                { value: "−95%", label: "no-shows", color: "text-emerald-400", bg: "from-emerald-500/[0.06] to-transparent" },
+                { value: "+60%", label: "reservas online", color: "text-violet-400", bg: "from-violet-500/[0.06] to-transparent" },
+                { value: "−80%", label: "llamadas teléfono", color: "text-indigo-400", bg: "from-indigo-500/[0.06] to-transparent" },
+                { value: "4.9★", label: "satisfacción media", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
+              ].map((r) => (
+                <div key={r.label} className={`bg-gradient-to-b ${r.bg} border border-white/[0.05] rounded-2xl p-6 text-center`}>
+                  <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${r.color} mb-2`}>{r.value}</div>
+                  <div className="text-xs text-gray-500">{r.label}</div>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* ════════════════════════════════════════════════
           GUARANTEES
           ════════════════════════════════════════════════ */}
-      <section className="py-16 px-4 bg-slate-950/50 border-t border-b border-white/[0.04]">
+      <section className="py-16 px-4 bg-[#0d0d15] border-t border-b border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "Garantía 30 días", desc: "No funciona = devuelvo el dinero", bgClass: "bg-emerald-500/10", iconClass: "text-emerald-400" },
-              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Respuesta 24h", desc: "Siempre disponible para ti", bgClass: "bg-cyan-500/10", iconClass: "text-cyan-400" },
-              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z", title: "Trato directo", desc: "Hablas conmigo, no con vendedores", bgClass: "bg-blue-500/10", iconClass: "text-blue-400" },
-              { icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", title: "Resultados medibles", desc: "Métricas claras, sin humo", bgClass: "bg-purple-500/10", iconClass: "text-purple-400" },
+              { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "Garantía 30 días", desc: "No funciona = te devuelvo el dinero", bgClass: "bg-emerald-500/10", iconClass: "text-emerald-400" },
+              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Listo en 5 días", desc: "Panel + web funcionando", bgClass: "bg-violet-500/10", iconClass: "text-violet-400" },
+              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", title: "Trato directo", desc: "Hablas conmigo, no con vendedores", bgClass: "bg-indigo-500/10", iconClass: "text-indigo-400" },
+              { icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", title: "Sin permanencia", desc: "Cancela cuando quieras", bgClass: "bg-amber-500/10", iconClass: "text-amber-400" },
             ].map((item) => (
               <ScrollReveal key={item.title}>
                 <div>
@@ -747,7 +977,7 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           FAQ
           ════════════════════════════════════════════════ */}
-      <section id="faq" className="py-24 px-4 bg-black">
+      <section id="faq" className="py-24 px-4 bg-[#0a0a0f]">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
@@ -758,14 +988,15 @@ export default function Home() {
           <ScrollReveal>
             <div className="space-y-3">
               {[
-                { q: "¿Qué es exactamente un agente de voz IA?", a: "Es un asistente telefónico con inteligencia artificial. Contesta llamadas de tus clientes con voz natural, responde preguntas sobre tu negocio, agenda citas y cualifica leads. Funciona 24/7 sin descanso." },
-                { q: "¿Cuánto cuesta?", a: "Depende de la complejidad. Desde 297€/mes para agentes de voz básicos. En la llamada te doy precio exacto para tu caso, sin sorpresas ni letra pequeña." },
-                { q: "¿Cuánto tarda en estar funcionando?", a: "Agentes de voz: 3-5 días. Automatizaciones: 1-2 semanas dependiendo de complejidad. En la llamada te doy fecha exacta." },
-                { q: "¿Y si no funciona?", a: "Garantía 30 días. Si no ves resultados, devuelvo el dinero. Sin preguntas. Pero funciona, porque lo medimos antes de empezar." },
-                { q: "¿Funciona para mi sector?", a: "Si tienes clientes que te llaman o necesitas seguimiento de leads, sí. Clínicas, reformas, restaurantes, abogados, consultoría, peluquerías... Háblame de tu caso específico en la llamada." },
-                { q: "¿Necesito conocimientos técnicos?", a: "Cero. Lo diseño, configuro e implemento todo yo. Tú solo ves los resultados en tu email o tu CRM." },
+                { q: "¿Cuánto cuesta el sistema de reservas?", a: "Depende de las funcionalidades que necesites. En la llamada de 15 min te doy precio exacto para tu caso, sin sorpresas. Incluye panel, web personalizada y recordatorios." },
+                { q: "¿Funciona para mi tipo de negocio?", a: "Si tienes un restaurante, bar, barbería, peluquería o centro de estética, sí. El sistema se adapta a tu tipo de negocio con funcionalidades específicas." },
+                { q: "¿Mis clientes sabrán usar la web de reservas?", a: "Es más fácil que pedir un Uber. Eligen día, hora, confirman y listo. 30 segundos. Hemos probado con personas de todas las edades." },
+                { q: "¿Cómo se reducen los no-shows?", a: "Con recordatorios automáticos por WhatsApp: confirmación al reservar, aviso 24h antes con botón de confirmar/cancelar, y último recordatorio 1h antes. De un 35% a menos del 3%." },
+                { q: "¿Puedo probarlo antes de pagar?", a: "Sí. En la llamada te enseño una demo con datos reales de tu negocio. Además, tienes garantía de 30 días: si no funciona, devuelvo tu dinero." },
+                { q: "¿Cuánto tarda en estar funcionando?", a: "5 días laborables desde que empezamos. Incluye diseño, configuración, personalización con tu marca y formación." },
+                { q: "¿Qué pasa con el agente de voz?", a: "Es un complemento opcional. Si además de las reservas online quieres que alguien conteste el teléfono 24/7, añadimos el agente de voz IA a tu sistema." },
               ].map((faq, i) => (
-                <details key={i} className="group bg-white/[0.02] border border-white/[0.06] rounded-xl overflow-hidden hover:border-white/[0.1] transition-colors">
+                <details key={i} className="group bg-white/[0.02] border border-white/[0.06] rounded-xl overflow-hidden hover:border-violet-500/20 transition-colors">
                   <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
                     <span className="text-white font-medium text-[15px] pr-4">{faq.q}</span>
                     <svg className="w-4 h-4 text-gray-600 flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -783,43 +1014,40 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           CONTACT / CTA FINAL
           ════════════════════════════════════════════════ */}
-      <section id="contacto" className="py-24 px-4 bg-gradient-to-b from-black via-slate-950 to-slate-950">
+      <section id="contacto" className="py-24 px-4 bg-gradient-to-b from-[#0a0a0f] via-[#0d0d15] to-[#0d0d15]">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left — Copy */}
             <ScrollReveal>
               <div>
-                <div className="inline-flex items-center gap-2 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-full px-4 py-2 mb-6">
+                <div className="inline-flex items-center gap-2 bg-amber-500/[0.08] border border-amber-500/20 rounded-full px-4 py-2 mb-6">
                   <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
                   </span>
-                  <span className="text-emerald-300 text-xs font-medium">
-                    Solo 5 clientes nuevos al mes
+                  <span className="text-amber-300 text-xs font-medium">
+                    Solo 5 negocios nuevos al mes
                   </span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5">
-                  ¿Listo para<br />automatizar?
+                  ¿Listo para llenar<br />tu agenda?
                 </h2>
                 <p className="text-lg text-gray-400 mb-8 leading-relaxed">
-                  Rellena el formulario y te redirigimos a Calendly para elegir tu horario.{" "}
-                  <span className="text-white font-medium">15 minutos. Sin compromiso.</span> Si no puedo ayudarte, te lo digo directamente.
+                  Rellena el formulario y elige tu horario en Calendly.{" "}
+                  <span className="text-white font-medium">15 minutos. Sin compromiso.</span> Te enseño una demo personalizada para tu negocio.
                 </p>
 
-                {/* Benefits */}
                 <ul className="space-y-4 mb-8">
-                  {["Análisis gratuito de tu negocio", "Propuesta personalizada sin compromiso", "Precio cerrado en la primera llamada"].map((b) => (
+                  {["Demo personalizada con datos de tu negocio", "Presupuesto cerrado sin sorpresas", "Garantía 30 días o te devuelvo el dinero"].map((b) => (
                     <li key={b} className="flex items-center gap-3 text-gray-300 text-sm">
-                      <div className="w-6 h-6 bg-cyan-500/10 rounded-md flex items-center justify-center flex-shrink-0">
-                        <svg className="w-3.5 h-3.5 text-cyan-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      <div className="w-6 h-6 bg-violet-500/10 rounded-md flex items-center justify-center flex-shrink-0">
+                        <svg className="w-3.5 h-3.5 text-violet-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                       </div>
                       {b}
                     </li>
                   ))}
                 </ul>
 
-                {/* Contact info */}
                 <div className="flex flex-col sm:flex-row gap-4 text-sm text-gray-500">
                   <a href="tel:+34640791041" className="flex items-center gap-2 hover:text-white transition-colors">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" /></svg>
@@ -833,7 +1061,6 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Right — Form */}
             <ScrollReveal delay={100}>
               <ContactForm />
             </ScrollReveal>
