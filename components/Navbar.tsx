@@ -60,21 +60,21 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-          <div className="flex justify-between items-center h-16 sm:h-[68px]">
+<div className="flex justify-between items-center h-36 sm:h-40">
 
             {/* ─── Logo ─── */}
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="relative h-11 w-11 sm:h-12 sm:w-12 transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-[132px] w-[132px] sm:h-36 sm:w-36 transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/assets/images/ChatGPT_Image_10_ene_2026__17_49_11-removebg-preview.png"
                   alt="Neuriax"
                   fill
                   className="object-contain"
                   priority
-                  sizes="48px"
+                  sizes="144px"
                 />
               </div>
-              <span className="text-[17px] sm:text-lg font-bold text-slate-900 tracking-tight">
+              <span className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
                 Neuriax
               </span>
             </Link>

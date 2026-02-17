@@ -52,9 +52,9 @@ export default function Home() {
         <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-400/[0.10] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-400/[0.06] rounded-full blur-[250px]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-28 lg:py-36">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-28 sm:py-36 lg:py-44">
           {/* CENTERED HERO CONTENT */}
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
             {/* Badge */}
             <div className="inline-flex items-center gap-2.5 bg-violet-100 border border-violet-200 rounded-full px-5 py-2.5 mb-6 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
@@ -66,7 +66,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6 text-center w-full">
               <span className="block text-slate-900 drop-shadow-[0_0_40px_rgba(0,0,0,0.04)]">Tu negocio lleno.</span>
               <span className="relative inline-block mt-1">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-violet-400 animate-gradient-x drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]">
