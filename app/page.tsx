@@ -52,53 +52,56 @@ export default function Home() {
         <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/[0.06] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/[0.03] rounded-full blur-[250px]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center py-20 sm:py-28 lg:py-32">
-          {/* LEFT */}
-          <div>
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-28 lg:py-32">
+          {/* CENTERED HERO CONTENT */}
+          <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-4 py-2 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-5 py-2.5 mb-10 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
               </span>
-              <span className="text-[13px] text-gray-300 font-medium">
+              <span className="text-[13px] text-gray-300 font-medium tracking-wide">
                 +2.400 reservas gestionadas este mes
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-extrabold leading-[1.08] tracking-tight mb-6">
-              <span className="block text-white">Reservas automáticas.</span>
-              <span className="block text-white">Clientes que vuelven.</span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-violet-400 animate-gradient-x">
-                Cero no-shows.
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-7">
+              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Reservas automáticas.</span>
+              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Clientes que vuelven.</span>
+              <span className="relative inline-block mt-1">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-violet-400 animate-gradient-x drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]">
+                  Cero no-shows.
+                </span>
+                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-violet-500/60 to-transparent rounded-full" />
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl text-gray-400 leading-relaxed mb-8 max-w-xl">
+            <p className="text-lg sm:text-xl md:text-[1.35rem] text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
               El sistema todo-en-uno que gestiona las reservas de tu{" "}
-              <span className="text-white font-medium">restaurante o barbería</span>:
+              <span className="text-white font-semibold">restaurante o barbería</span>:
               panel inteligente, web de reservas con tu marca y recordatorios automáticos por WhatsApp.
             </p>
 
             {/* Metrics */}
-            <div className="flex flex-wrap gap-8 mb-10">
+            <div className="flex flex-wrap justify-center gap-10 sm:gap-14 mb-12">
               {[
                 { value: "−95%", label: "no-shows", color: "text-emerald-400" },
                 { value: "+60%", label: "reservas online", color: "text-violet-400" },
                 { value: "24/7", label: "reservas activas", color: "text-amber-400" },
               ].map((m) => (
                 <div key={m.label}>
-                  <div className={`text-3xl sm:text-4xl font-extrabold ${m.color}`}>{m.value}</div>
-                  <div className="text-xs text-gray-500 mt-1">{m.label}</div>
+                  <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${m.color}`}>{m.value}</div>
+                  <div className="text-xs text-gray-500 mt-1.5 tracking-wide">{m.label}</div>
                 </div>
               ))}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
               <a
                 href="#contacto"
-                className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-amber-500/20"
+                className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-10 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl hover:shadow-amber-500/25 shadow-lg shadow-amber-500/10"
               >
                 Solicitar demo gratis
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +120,7 @@ export default function Home() {
             </div>
 
             {/* Trust */}
-            <div className="flex flex-wrap gap-6 mt-8 text-[13px] text-gray-500">
+            <div className="flex flex-wrap justify-center gap-6 text-[13px] text-gray-500">
               {["Sin permanencia", "Listo en 5 días", "Garantía 30 días"].map((t) => (
                 <span key={t} className="flex items-center gap-1.5">
                   <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
@@ -129,10 +132,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT — Mini Dashboard Preview */}
-          <div className="block">
+          {/* DASHBOARD PREVIEW — below hero text */}
+          <div className="w-full max-w-3xl mx-auto mt-16 lg:mt-20">
             <div className="relative">
-              <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl hidden lg:block" />
+              <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl" />
               <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
                 {/* Chrome */}
                 <div className="flex items-center gap-2 px-4 sm:px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
@@ -176,7 +179,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <div className="w-5 h-9 border-2 border-gray-700 rounded-full flex justify-center">
@@ -190,12 +192,11 @@ export default function Home() {
           ════════════════════════════════════════════════ */}
       <section className="py-10 px-4 bg-[#0a0a0f] border-t border-b border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-3 gap-8 text-center">
             {[
               { value: "50+", label: "negocios activos" },
               { value: "2.400+", label: "reservas/mes" },
               { value: "4.9★", label: "satisfacción" },
-              { value: "12", label: "ciudades en España" },
             ].map((s) => (
               <div key={s.label}>
                 <div className="text-2xl sm:text-3xl font-extrabold text-white">{s.value}</div>
