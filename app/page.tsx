@@ -114,8 +114,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* DASHBOARD PREVIEW — with staggered animation */}
-          <div className="w-full max-w-3xl mx-auto mt-16 lg:mt-20">
+          {/* DASHBOARD PREVIEW — Enterprise SaaS mockup */}
+          <div className="w-full max-w-4xl mx-auto mt-16 lg:mt-20">
             <div className="relative">
               <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl" />
               <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
@@ -124,37 +124,167 @@ export default function Home() {
                   <span className="w-3 h-3 rounded-full bg-red-500/80" />
                   <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-3 text-[11px] text-gray-500 font-mono">panel.neuriax.com — Reservas hoy</span>
+                  <span className="ml-3 text-[11px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md">panel.neuriax.com/reservas</span>
                 </div>
-                {/* Content */}
-                <div className="p-4 sm:p-5">
-                  {/* Stats row */}
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-4">
+
+                <div className="flex">
+                  {/* Mini Icon Sidebar */}
+                  <div className="hidden sm:flex flex-col items-center w-12 md:w-14 border-r border-white/[0.06] bg-[#0b0f14] py-4 gap-4">
+                    <div className="w-7 h-7 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[8px] font-bold text-white">N</div>
+                    <div className="w-full h-px bg-white/[0.06]" />
                     {[
-                      { label: "Hoy", value: "14", sub: "reservas", color: "text-violet-400" },
-                      { label: "Ocupación", value: "87%", sub: "mesas", color: "text-emerald-400" },
-                      { label: "No-shows", value: "0", sub: "este mes", color: "text-amber-400" },
-                    ].map((s) => (
-                      <div key={s.label} className="bg-slate-800/40 border border-slate-700/30 rounded-lg p-2.5 sm:p-3 text-center">
-                        <div className={`text-lg sm:text-xl font-bold ${s.color}`}>{s.value}</div>
-                        <div className="text-[9px] sm:text-[10px] text-gray-500">{s.sub}</div>
+                      { d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", active: false },
+                      { d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", active: true },
+                      { d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", active: false },
+                      { d: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", active: false },
+                      { d: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", active: false },
+                    ].map((icon, idx) => (
+                      <div key={idx} className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${icon.active ? "bg-violet-500/20 text-violet-400" : "text-gray-600 hover:text-gray-400 hover:bg-white/[0.04]"}`}>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={icon.d} /></svg>
                       </div>
                     ))}
                   </div>
-                  {/* Reservation list — staggered fade-in */}
-                  <div className="space-y-1.5 max-h-[200px] lg:max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
-                    {RESTAURANT_RESERVATIONS.slice(0, 6).map((r, i) => (
-                      <div key={i} className="flex items-center justify-between bg-slate-800/30 border border-slate-700/20 rounded-lg px-3 py-2 animate-fade-in-up" style={{ animationDelay: `${i * 150}ms`, animationFillMode: 'both' }}>
-                        <div className="flex items-center gap-2.5 min-w-0">
-                          <span className="text-[11px] text-gray-500 font-mono w-10 flex-shrink-0">{r.time}</span>
-                          <span className="text-[12px] text-white font-medium truncate">{r.name}</span>
+
+                  {/* Main Panel */}
+                  <div className="flex-1 min-w-0">
+                    {/* Header with search + avatar */}
+                    <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-white/[0.06]">
+                      <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-3 py-1.5 flex-1 max-w-[200px]">
+                        <svg className="w-3 h-3 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                        <span className="text-[10px] text-gray-500">Buscar cliente o reserva...</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="relative">
+                          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-500 rounded-full border border-[#0d1117]" />
                         </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          <span className="text-[10px] text-gray-500">{r.guests}p · {r.table}</span>
-                          <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${r.status === "confirmed" ? "bg-emerald-400" : "bg-amber-400"}`} />
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[8px] font-bold text-white">MR</div>
+                          <span className="text-[10px] text-gray-400 hidden md:block">Marco R.</span>
                         </div>
                       </div>
-                    ))}
+                    </div>
+
+                    <div className="p-4 sm:p-5">
+                      {/* Stats with mini progress bars */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-5">
+                        {[
+                          { label: "Reservas hoy", value: "14", sub: "+3 vs ayer", color: "text-violet-400", barColor: "bg-violet-500", barWidth: "w-[70%]" },
+                          { label: "Ocupación", value: "87%", sub: "mesas", color: "text-emerald-400", barColor: "bg-emerald-500", barWidth: "w-[87%]" },
+                          { label: "No-shows", value: "0", sub: "este mes", color: "text-amber-400", barColor: "bg-amber-500", barWidth: "w-[3%]" },
+                          { label: "Ingresos hoy", value: "€1.2k", sub: "+12%", color: "text-cyan-400", barColor: "bg-cyan-500", barWidth: "w-[62%]" },
+                        ].map((s) => (
+                          <div key={s.label} className="bg-slate-800/30 border border-slate-700/20 rounded-xl p-3">
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
+                            </div>
+                            <div className={`text-lg sm:text-xl font-bold ${s.color}`}>{s.value}</div>
+                            <div className="w-full h-1 bg-slate-700/40 rounded-full mt-2 overflow-hidden">
+                              <div className={`h-full ${s.barColor}/60 rounded-full`} style={{ width: s.barWidth.replace('w-[', '').replace(']', '') }} />
+                            </div>
+                            <span className="text-[8px] text-gray-600 mt-1 block">{s.sub}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Occupancy by timeslot */}
+                      <div className="mb-5">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[10px] text-gray-500 font-medium">Ocupación por franja</span>
+                          <span className="text-[9px] text-gray-600">Lun 17 Feb</span>
+                        </div>
+                        <div className="flex gap-1">
+                          {[
+                            { time: "13:00", pct: 100 }, { time: "13:30", pct: 85 }, { time: "14:00", pct: 100 },
+                            { time: "14:30", pct: 60 }, { time: "15:00", pct: 20 }, { time: "20:00", pct: 40 },
+                            { time: "20:30", pct: 90 }, { time: "21:00", pct: 100 }, { time: "21:30", pct: 75 }, { time: "22:00", pct: 30 },
+                          ].map((slot) => (
+                            <div key={slot.time} className="flex-1 group relative">
+                              <div className="h-8 bg-slate-800/40 rounded-sm overflow-hidden flex items-end">
+                                <div
+                                  className={`w-full rounded-sm transition-all ${slot.pct === 100 ? "bg-emerald-500/70" : slot.pct >= 80 ? "bg-violet-500/60" : slot.pct >= 50 ? "bg-indigo-500/50" : "bg-slate-600/40"}`}
+                                  style={{ height: `${slot.pct}%` }}
+                                />
+                              </div>
+                              <span className="text-[7px] text-gray-600 block text-center mt-1 hidden sm:block">{slot.time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Pro Table */}
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left">
+                          <thead>
+                            <tr className="border-b border-white/[0.06]">
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Hora</th>
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Cliente</th>
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Pax</th>
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden md:table-cell">Canal</th>
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Estado</th>
+                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 hidden sm:table-cell">Acciones</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {RESTAURANT_RESERVATIONS.map((r, i) => (
+                              <tr key={i} className={`border-b border-white/[0.03] transition-colors animate-fade-in-up ${i === 2 ? "bg-violet-500/[0.06] border-l-2 border-l-violet-500" : "hover:bg-white/[0.02]"}`} style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'both' }}>
+                                <td className="py-2 pr-3 text-[11px] text-gray-400 font-mono">{r.time}</td>
+                                <td className="py-2 pr-3">
+                                  <div className="flex items-center gap-2">
+                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0 ${i === 2 ? "bg-violet-500/30 text-violet-300" : "bg-slate-700/60 text-gray-400"}`}>
+                                      {r.name.split(' ').map(n => n[0]).join('')}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <span className="text-[11px] text-white font-medium block truncate">{r.name}</span>
+                                      <span className="text-[8px] text-gray-600">3 visitas</span>
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="py-2 pr-3 text-[11px] text-gray-400 hidden sm:table-cell">{r.guests}</td>
+                                <td className="py-2 pr-3 hidden md:table-cell">
+                                  {i % 3 === 0 ? (
+                                    <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-medium">WhatsApp</span>
+                                  ) : i % 3 === 1 ? (
+                                    <span className="text-[9px] bg-violet-500/10 text-violet-400 px-1.5 py-0.5 rounded font-medium">Web</span>
+                                  ) : (
+                                    <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-medium">Teléfono</span>
+                                  )}
+                                </td>
+                                <td className="py-2 pr-3">
+                                  <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
+                                    {r.status === "confirmed" ? "✓ Confirmada" : "⏳ Pendiente"}
+                                  </span>
+                                </td>
+                                <td className="py-2 hidden sm:table-cell">
+                                  <div className="flex items-center gap-1.5">
+                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-emerald-500/20 transition-colors" title="Confirmar">
+                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                    </div>
+                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-violet-500/20 transition-colors" title="Llamar">
+                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                                    </div>
+                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-slate-600/40 transition-colors" title="Más">
+                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Pagination */}
+                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.04]">
+                        <span className="text-[9px] text-gray-600">Mostrando 8 de 14 reservas</span>
+                        <div className="flex items-center gap-1">
+                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">←</div>
+                          <div className="w-5 h-5 rounded bg-violet-500/20 flex items-center justify-center text-[9px] text-violet-400 font-medium">1</div>
+                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">2</div>
+                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">→</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -245,62 +375,131 @@ export default function Home() {
                   </div>
 
                   {/* Main content */}
-                  <div className="flex-1 p-4 sm:p-6">
-                    {/* Header */}
+                  <div className="flex-1 p-4 sm:p-6 min-w-0">
+                    {/* Header with search */}
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
                       <div>
                         <h3 className="text-base sm:text-lg font-bold text-white">Reservas — Hoy, Lunes 17 Feb</h3>
-                        <p className="text-[11px] text-gray-500">Trattoria La Nonna · 8 mesas disponibles</p>
+                        <p className="text-[11px] text-gray-500">Mi Restaurante · 8 mesas disponibles</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-[11px] bg-emerald-500/[0.12] text-emerald-400 px-3 py-1 rounded-full font-medium">14 reservas hoy</span>
-                        <span className="text-[11px] bg-violet-500/[0.12] text-violet-400 px-3 py-1 rounded-full font-medium">87% ocupación</span>
+                        <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-3 py-1.5">
+                          <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+                          <span className="text-[10px] text-gray-500">Buscar...</span>
+                        </div>
+                        <div className="relative">
+                          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+                          <span className="absolute -top-1 -right-1 w-2 h-2 bg-amber-500 rounded-full" />
+                        </div>
+                        <div className="w-7 h-7 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[9px] font-bold text-white">MR</div>
                       </div>
                     </div>
 
-                    {/* Stats */}
+                    {/* Stats with sparklines */}
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
                       {[
-                        { label: "Confirmadas", value: "11", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]" },
-                        { label: "Pendientes", value: "3", color: "text-amber-400", bg: "bg-amber-500/[0.08]" },
-                        { label: "Comensales", value: "42", color: "text-violet-400", bg: "bg-violet-500/[0.08]" },
-                        { label: "No-shows", value: "0", color: "text-gray-400", bg: "bg-white/[0.03]" },
+                        { label: "Confirmadas", value: "11", change: "+2", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", barColor: "bg-emerald-500", bars: [40, 55, 35, 60, 50, 75, 90] },
+                        { label: "Pendientes", value: "3", change: "-1", color: "text-amber-400", bg: "bg-amber-500/[0.08]", barColor: "bg-amber-500", bars: [80, 60, 45, 50, 30, 25, 20] },
+                        { label: "Comensales", value: "42", change: "+8", color: "text-violet-400", bg: "bg-violet-500/[0.08]", barColor: "bg-violet-500", bars: [30, 40, 55, 45, 65, 70, 85] },
+                        { label: "No-shows", value: "0", change: "0", color: "text-gray-400", bg: "bg-white/[0.03]", barColor: "bg-gray-500", bars: [20, 15, 10, 8, 5, 3, 2] },
                       ].map((s) => (
-                        <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-xl p-3 text-center`}>
-                          <div className={`text-xl sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
-                          <div className="text-[10px] text-gray-500 mt-0.5">{s.label}</div>
+                        <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-xl p-3`}>
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
+                            <span className={`text-[9px] font-medium ${s.change.startsWith('+') ? 'text-emerald-400' : s.change.startsWith('-') ? 'text-red-400' : 'text-gray-500'}`}>{s.change}</span>
+                          </div>
+                          <div className={`text-xl sm:text-2xl font-bold ${s.color} mb-2`}>{s.value}</div>
+                          {/* Mini sparkline */}
+                          <div className="flex items-end gap-0.5 h-4">
+                            {s.bars.map((h, bi) => (
+                              <div key={bi} className={`flex-1 ${s.barColor}/40 rounded-sm`} style={{ height: `${h}%` }} />
+                            ))}
+                          </div>
                         </div>
                       ))}
                     </div>
 
-                    {/* Table */}
+                    {/* Filters */}
+                    <div className="flex items-center gap-2 mb-4">
+                      {["Todos", "Confirmadas", "Pendientes"].map((f, i) => (
+                        <span key={f} className={`text-[10px] px-3 py-1 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-violet-500/20 text-violet-300 font-medium" : "bg-slate-800/40 text-gray-500 hover:text-gray-300"}`}>{f}</span>
+                      ))}
+                      <span className="text-[10px] text-gray-600 ml-auto">14 total</span>
+                    </div>
+
+                    {/* Enterprise Table */}
                     <div className="overflow-x-auto">
                       <table className="w-full text-left">
                         <thead>
                           <tr className="border-b border-white/[0.06]">
-                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4">Hora</th>
-                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4">Cliente</th>
-                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4 hidden sm:table-cell">Personas</th>
-                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-4 hidden sm:table-cell">Mesa</th>
-                            <th className="text-[10px] text-gray-500 font-medium uppercase tracking-wider pb-2">Estado</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Hora</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Cliente</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Pax</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Mesa</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden md:table-cell">Canal</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Estado</th>
+                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 hidden sm:table-cell">Acciones</th>
                           </tr>
                         </thead>
                         <tbody>
                           {RESTAURANT_RESERVATIONS.map((r, i) => (
-                            <tr key={i} className="border-b border-white/[0.03] hover:bg-white/[0.02] transition-colors">
-                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 font-mono">{r.time}</td>
-                              <td className="py-2.5 pr-4 text-[12px] text-white font-medium">{r.name}</td>
-                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 hidden sm:table-cell">{r.guests} pers.</td>
-                              <td className="py-2.5 pr-4 text-[12px] text-gray-400 hidden sm:table-cell">{r.table}</td>
-                              <td className="py-2.5">
+                            <tr key={i} className={`border-b border-white/[0.03] transition-colors ${i === 1 ? "bg-violet-500/[0.05]" : "hover:bg-white/[0.02]"}`}>
+                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 font-mono">{r.time}</td>
+                              <td className="py-2.5 pr-3">
+                                <div className="flex items-center gap-2">
+                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0 ${i % 3 === 0 ? "bg-violet-500/20 text-violet-300" : i % 3 === 1 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
+                                    {r.name.split(' ').map(n => n[0]).join('')}
+                                  </div>
+                                  <div className="min-w-0">
+                                    <span className="text-[12px] text-white font-medium block truncate">{r.name}</span>
+                                    <span className="text-[8px] text-gray-600">{i % 2 === 0 ? "Cliente habitual" : "Primera visita"}</span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 hidden sm:table-cell">{r.guests}</td>
+                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 hidden sm:table-cell">{r.table}</td>
+                              <td className="py-2.5 pr-3 hidden md:table-cell">
+                                {i % 3 === 0 ? (
+                                  <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-medium">WhatsApp</span>
+                                ) : i % 3 === 1 ? (
+                                  <span className="text-[9px] bg-violet-500/10 text-violet-400 px-1.5 py-0.5 rounded font-medium">Web</span>
+                                ) : (
+                                  <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-medium">Bot IA</span>
+                                )}
+                              </td>
+                              <td className="py-2.5 pr-3">
                                 <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
                                   {r.status === "confirmed" ? "✓ Confirmada" : "⏳ Pendiente"}
                                 </span>
+                              </td>
+                              <td className="py-2.5 hidden sm:table-cell">
+                                <div className="flex items-center gap-1">
+                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-emerald-500/20 transition-colors">
+                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                  </div>
+                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-violet-500/20 transition-colors">
+                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                                  </div>
+                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-slate-600/40 transition-colors">
+                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
+                                  </div>
+                                </div>
                               </td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
+                    </div>
+
+                    {/* Pagination */}
+                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.04]">
+                      <span className="text-[10px] text-gray-600">Mostrando 8 de 14 reservas</span>
+                      <div className="flex items-center gap-1">
+                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">←</div>
+                        <div className="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-[10px] text-violet-400 font-medium">1</div>
+                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">2</div>
+                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">→</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -338,10 +537,24 @@ export default function Home() {
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[10px] text-gray-500 font-mono">reservas.trattorialanonna.es</span>
+                    <span className="ml-3 text-[10px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md">reservas.trattorialanonna.es</span>
+                    <svg className="w-3 h-3 text-gray-600 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
                   </div>
                   {/* Scrollable landing */}
-                  <div className="max-h-[420px] overflow-y-auto scrollbar-thin">
+                  <div className="max-h-[480px] overflow-y-auto scrollbar-thin">
+                    {/* Navbar */}
+                    <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.04] bg-[#0c1015]">
+                      <div className="flex items-center gap-2">
+                        <span className="text-amber-400 text-sm">🍝</span>
+                        <span className="text-[11px] text-white font-bold">Trattoria La Nonna</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-[9px] text-gray-500 hidden sm:block">Menú</span>
+                        <span className="text-[9px] text-gray-500 hidden sm:block">Horarios</span>
+                        <span className="text-[9px] text-gray-500 hidden sm:block">Contacto</span>
+                        <span className="text-[9px] bg-amber-500 text-black font-bold px-2 py-0.5 rounded">Reservar</span>
+                      </div>
+                    </div>
                     {/* Restaurant hero */}
                     <div className="relative bg-gradient-to-br from-amber-900/40 via-orange-900/30 to-stone-900 p-6 sm:p-8">
                       <div className="text-center">
@@ -360,6 +573,14 @@ export default function Home() {
                           <span className="text-[11px] text-gray-400 ml-1">4.8 (324 reseñas)</span>
                         </div>
                       </div>
+                    </div>
+                    {/* Photo gallery strip */}
+                    <div className="flex gap-1 px-1 py-1 bg-black/30">
+                      {["Interior acogedor", "Pasta fresca", "Terraza", "Postres"].map((alt, i) => (
+                        <div key={i} className="flex-1 h-14 bg-gradient-to-br from-amber-900/30 to-stone-800/40 rounded flex items-center justify-center">
+                          <span className="text-[8px] text-gray-500">{alt}</span>
+                        </div>
+                      ))}
                     </div>
                     {/* Booking form */}
                     <div className="p-5 sm:p-6 space-y-4">
@@ -389,31 +610,78 @@ export default function Home() {
                           ))}
                         </div>
                       </div>
+                      <div>
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1 block">Notas especiales</label>
+                        <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2 text-[11px] text-gray-500">Alergias, cumpleaños, silla de bebé...</div>
+                      </div>
                       <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-3 rounded-xl text-sm hover:shadow-lg hover:shadow-amber-500/20 transition-all">
                         Reservar mesa →
                       </button>
+                      {/* Map mockup */}
+                      <div className="bg-slate-800/30 border border-slate-700/20 rounded-xl p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <svg className="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                          <span className="text-[10px] text-white font-medium">C/ Gran Vía 45, Madrid</span>
+                        </div>
+                        <div className="h-16 bg-slate-700/30 rounded-lg flex items-center justify-center relative overflow-hidden">
+                          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)", backgroundSize: "20px 20px" }} />
+                          <div className="relative flex items-center gap-1 text-[9px] text-amber-400">
+                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
+                            Ver en Google Maps
+                          </div>
+                        </div>
+                      </div>
                       {/* Reviews */}
                       <div className="pt-4 border-t border-white/[0.06] space-y-3">
-                        <p className="text-[10px] text-gray-500 uppercase tracking-wider">Últimas reseñas</p>
+                        <div className="flex items-center justify-between">
+                          <p className="text-[10px] text-gray-500 uppercase tracking-wider">Últimas reseñas</p>
+                          <div className="flex items-center gap-1">
+                            <span className="text-[9px] text-amber-400 font-bold">4.8</span>
+                            <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-2 h-2 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
+                          </div>
+                        </div>
                         {[
-                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online y fue super fácil.", stars: 5 },
-                          { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5 },
+                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online y fue super fácil.", stars: 5, time: "hace 2 días" },
+                          { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5, time: "hace 1 semana" },
                         ].map((rev) => (
                           <div key={rev.name} className="bg-slate-800/30 rounded-lg p-3">
-                            <div className="flex items-center gap-2 mb-1">
-                              <div className="w-5 h-5 bg-amber-500/20 rounded-full flex items-center justify-center text-[8px]">👤</div>
-                              <span className="text-[11px] text-white font-medium">{rev.name}</span>
-                              <div className="flex gap-0.5">
-                                {Array.from({length: rev.stars}).map((_, i) => (
-                                  <svg key={i} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                                ))}
+                            <div className="flex items-center justify-between mb-1">
+                              <div className="flex items-center gap-2">
+                                <div className="w-5 h-5 bg-amber-500/20 rounded-full flex items-center justify-center text-[7px] font-bold text-amber-300">{rev.name.split(' ').map(n => n[0]).join('')}</div>
+                                <span className="text-[11px] text-white font-medium">{rev.name}</span>
+                                <div className="flex gap-0.5">
+                                  {Array.from({length: rev.stars}).map((_, i) => (
+                                    <svg key={i} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                  ))}
+                                </div>
                               </div>
+                              <span className="text-[8px] text-gray-600">{rev.time}</span>
                             </div>
                             <p className="text-[11px] text-gray-400 leading-relaxed">{rev.text}</p>
                           </div>
                         ))}
                       </div>
-                      {/* Powered by */}
+                      {/* Footer */}
+                      <div className="pt-4 border-t border-white/[0.04] grid grid-cols-3 gap-3">
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Horario</p>
+                          <p className="text-[9px] text-gray-400">L-J: 13-16, 20-23</p>
+                          <p className="text-[9px] text-gray-400">V-S: 13-16, 20-00</p>
+                        </div>
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Contacto</p>
+                          <p className="text-[9px] text-gray-400">info@trattoria.es</p>
+                          <p className="text-[9px] text-gray-400">Madrid, España</p>
+                        </div>
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Social</p>
+                          <div className="flex gap-1.5">
+                            {["IG", "FB", "G"].map(s => (
+                              <div key={s} className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center text-[7px] text-gray-500">{s}</div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                       <div className="text-center pt-3 border-t border-white/[0.04]">
                         <span className="text-[9px] text-gray-600">Powered by <span className="text-violet-400 font-semibold">Neuriax</span></span>
                       </div>
@@ -432,9 +700,22 @@ export default function Home() {
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[10px] text-gray-500 font-mono">reservas.urbancutbarberia.es</span>
+                    <span className="ml-3 text-[10px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md">reservas.urbancutbarberia.es</span>
+                    <svg className="w-3 h-3 text-gray-600 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" /></svg>
                   </div>
-                  <div className="max-h-[420px] overflow-y-auto scrollbar-thin">
+                  <div className="max-h-[480px] overflow-y-auto scrollbar-thin">
+                    {/* Navbar */}
+                    <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.04] bg-[#0c1015]">
+                      <div className="flex items-center gap-2">
+                        <span className="text-indigo-400 text-sm">💈</span>
+                        <span className="text-[11px] text-white font-bold">Urban Cut Barbería</span>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-[9px] text-gray-500 hidden sm:block">Servicios</span>
+                        <span className="text-[9px] text-gray-500 hidden sm:block">Equipo</span>
+                        <span className="text-[9px] bg-indigo-500 text-white font-bold px-2 py-0.5 rounded">Reservar</span>
+                      </div>
+                    </div>
                     {/* Barber hero */}
                     <div className="relative bg-gradient-to-br from-slate-800 via-zinc-900 to-slate-900 p-6 sm:p-8">
                       <div className="text-center">
@@ -454,19 +735,29 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
+                    {/* Gallery of cuts */}
+                    <div className="flex gap-1 px-1 py-1 bg-black/30">
+                      {["Degradado", "Clásico", "Barba", "Premium"].map((alt, i) => (
+                        <div key={i} className="flex-1 h-14 bg-gradient-to-br from-indigo-900/30 to-slate-800/40 rounded flex items-center justify-center">
+                          <span className="text-[8px] text-gray-500">{alt}</span>
+                        </div>
+                      ))}
+                    </div>
                     {/* Booking form */}
                     <div className="p-5 sm:p-6 space-y-4">
+                      {/* Team section */}
                       <div>
                         <label className="text-[10px] text-gray-400 uppercase tracking-wider mb-1.5 block">Elige barbero</label>
-                        <div className="grid grid-cols-2 gap-2">
+                        <div className="grid grid-cols-3 gap-2">
                           {[
                             { name: "Carlos", specialty: "Degradados", selected: true },
                             { name: "Alex", specialty: "Clásico & Barba", selected: false },
+                            { name: "David", specialty: "Diseño", selected: false },
                           ].map((b) => (
-                            <div key={b.name} className={`text-center p-3 rounded-xl cursor-pointer transition-all ${b.selected ? "bg-indigo-500/[0.15] border-2 border-indigo-500/40" : "bg-slate-800/50 border border-slate-700/40"}`}>
-                              <div className="w-10 h-10 bg-slate-700 rounded-full mx-auto mb-1.5 flex items-center justify-center text-sm">✂️</div>
-                              <p className="text-[12px] text-white font-semibold">{b.name}</p>
-                              <p className="text-[9px] text-gray-500">{b.specialty}</p>
+                            <div key={b.name} className={`text-center p-2.5 rounded-xl cursor-pointer transition-all ${b.selected ? "bg-indigo-500/[0.15] border-2 border-indigo-500/40" : "bg-slate-800/50 border border-slate-700/40"}`}>
+                              <div className={`w-8 h-8 rounded-full mx-auto mb-1 flex items-center justify-center text-[8px] font-bold ${b.selected ? "bg-indigo-500/30 text-indigo-300" : "bg-slate-700 text-gray-400"}`}>{b.name[0]}</div>
+                              <p className="text-[11px] text-white font-semibold">{b.name}</p>
+                              <p className="text-[8px] text-gray-500">{b.specialty}</p>
                             </div>
                           ))}
                         </div>
@@ -503,9 +794,41 @@ export default function Home() {
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white">10:30</div>
                         </div>
                       </div>
+                      {/* Loyalty Points */}
+                      <div className="bg-indigo-500/[0.06] border border-indigo-500/15 rounded-xl p-3">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] text-indigo-300 font-semibold">⭐ Puntos de fidelidad</span>
+                          <span className="text-[10px] text-indigo-400 font-bold">340 pts</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-700/40 rounded-full overflow-hidden">
+                          <div className="h-full bg-indigo-500/60 rounded-full" style={{ width: "68%" }} />
+                        </div>
+                        <span className="text-[8px] text-gray-500 mt-1 block">160 pts más para un corte gratis</span>
+                      </div>
                       <button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl text-sm hover:shadow-lg hover:shadow-indigo-500/20 transition-all">
                         Reservar cita →
                       </button>
+                      {/* Footer */}
+                      <div className="pt-4 border-t border-white/[0.04] grid grid-cols-3 gap-3">
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Horario</p>
+                          <p className="text-[9px] text-gray-400">L-V: 10-20</p>
+                          <p className="text-[9px] text-gray-400">S: 10-15</p>
+                        </div>
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Contacto</p>
+                          <p className="text-[9px] text-gray-400">WhatsApp</p>
+                          <p className="text-[9px] text-gray-400">Barcelona</p>
+                        </div>
+                        <div>
+                          <p className="text-[8px] text-gray-600 uppercase tracking-wider mb-1">Social</p>
+                          <div className="flex gap-1.5">
+                            {["IG", "TK"].map(s => (
+                              <div key={s} className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center text-[7px] text-gray-500">{s}</div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                       <div className="text-center pt-3 border-t border-white/[0.04]">
                         <span className="text-[9px] text-gray-600">Powered by <span className="text-violet-400 font-semibold">Neuriax</span></span>
                       </div>
@@ -544,7 +867,7 @@ export default function Home() {
             </div>
           </ScrollReveal>
 
-          {/* Timeline */}
+          {/* Timeline with iPhone-style chat frames */}
           <div className="relative">
             <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500/40 via-violet-500/30 to-amber-500/30" />
 
@@ -552,18 +875,27 @@ export default function Home() {
               {
                 icon: "✅", color: "bg-emerald-500", label: "Reserva confirmada", time: "Al instante",
                 message: "¡Hola María! 🎉 Tu mesa para 4 en Trattoria La Nonna está confirmada:\n📅 Viernes 21 Feb — 20:30\n📍 C/ Gran Vía 45, Madrid\n\nSi necesitas cambiar algo, responde a este mensaje.",
+                quickReplies: ["👍 Perfecto", "📝 Modificar"],
+                timestamp: "14:23",
               },
               {
                 icon: "⏰", color: "bg-violet-500", label: "Recordatorio 24h antes", time: "Jueves 20:30",
-                message: "Hola María 👋 Te recordamos tu reserva mañana viernes a las 20:30 en Trattoria La Nonna.\n\n¿Sigues viniendo?\n✅ SÍ — confirmar\n❌ NO — cancelar\n\nResponde para confirmar 🙏",
+                message: "Hola María 👋 Te recordamos tu reserva mañana viernes a las 20:30 en Trattoria La Nonna.\n\n¿Sigues viniendo?",
+                quickReplies: ["✅ Confirmo", "❌ Cancelar", "🔄 Cambiar hora"],
+                timestamp: "20:30",
               },
               {
                 icon: "📍", color: "bg-indigo-500", label: "Último aviso + ubicación", time: "Viernes 19:30",
                 message: "¡María, te esperamos en 1 hora! 🍝\n\n📍 Cómo llegar: maps.google.com/trattoria\n🅿️ Parking: Parking Centro (2 min)\n\n¡Buen provecho!",
+                hasMap: true,
+                quickReplies: ["🚗 Abrir mapa"],
+                timestamp: "19:30",
               },
               {
                 icon: "⭐", color: "bg-amber-500", label: "Post-visita", time: "Sábado 10:00",
-                message: "¡Hola María! Esperamos que disfrutaras de tu cena 😊\n\n¿Nos dejas tu opinión? Nos ayuda muchísimo:\n⭐ Dejar reseña en Google\n\n¡Gracias y hasta pronto!",
+                message: "¡Hola María! Esperamos que disfrutaras de tu cena 😊\n\n¿Nos dejas tu opinión? Nos ayuda muchísimo:",
+                quickReplies: ["⭐ Dejar reseña", "📅 Reservar otra vez"],
+                timestamp: "10:00",
               },
             ].map((step, i) => (
               <ScrollReveal key={i} delay={i * 100}>
@@ -576,17 +908,59 @@ export default function Home() {
                       <h3 className="text-base sm:text-lg font-bold text-white">{step.label}</h3>
                       <span className="text-[11px] text-gray-500 font-mono">{step.time}</span>
                     </div>
-                    <div className="bg-[#1a2e1a] border border-emerald-900/40 rounded-2xl rounded-tl-sm p-4 max-w-md shadow-lg">
-                      <div className="flex items-center gap-2 mb-2">
-                        <svg className="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.387 0-4.607-.798-6.384-2.147l-.108-.084-3.253 1.091 1.091-3.253-.084-.108A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
-                        </svg>
-                        <span className="text-[10px] text-emerald-400 font-medium">WhatsApp Business</span>
-                      </div>
-                      <p className="text-[12px] text-emerald-100/90 leading-relaxed whitespace-pre-line">{step.message}</p>
-                      <div className="text-right mt-2">
-                        <span className="text-[9px] text-emerald-700">✓✓</span>
+                    {/* iPhone-style WhatsApp frame */}
+                    <div className="max-w-sm">
+                      <div className="bg-[#111b21] border border-emerald-900/30 rounded-2xl overflow-hidden shadow-xl">
+                        {/* WhatsApp header */}
+                        <div className="flex items-center gap-2 px-3 py-2 bg-[#1f2c34] border-b border-white/[0.04]">
+                          <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                          <div className="w-7 h-7 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                            <span className="text-[9px]">🍝</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-[11px] text-white font-medium block">Trattoria La Nonna</span>
+                            <span className="text-[8px] text-emerald-400">en línea</span>
+                          </div>
+                          <svg className="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                          <svg className="w-3.5 h-3.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
+                        </div>
+                        {/* Chat body */}
+                        <div className="p-3 min-h-[100px]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")" }}>
+                          {/* Message bubble */}
+                          <div className="bg-[#1a2e1a] rounded-xl rounded-tl-sm p-3 max-w-[280px] mb-2 relative">
+                            <p className="text-[11px] text-emerald-100/90 leading-relaxed whitespace-pre-line">{step.message}</p>
+                            {/* Map preview for location step */}
+                            {step.hasMap && (
+                              <div className="mt-2 h-14 bg-[#0f1f15] rounded-lg flex items-center justify-center relative overflow-hidden border border-emerald-900/20">
+                                <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(#1a4731 1px, transparent 1px), linear-gradient(90deg, #1a4731 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
+                                <div className="relative flex items-center gap-1 text-[9px] text-emerald-400">
+                                  <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
+                                  Ver ubicación
+                                </div>
+                              </div>
+                            )}
+                            <div className="flex items-center justify-end gap-1 mt-1">
+                              <span className="text-[8px] text-emerald-700">{step.timestamp}</span>
+                              <span className="text-[8px] text-blue-400">✓✓</span>
+                            </div>
+                          </div>
+                          {/* Quick reply buttons */}
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {step.quickReplies.map((reply: string) => (
+                              <div key={reply} className="bg-[#1f2c34] border border-emerald-800/30 rounded-full px-3 py-1 text-[10px] text-emerald-400 cursor-pointer hover:bg-emerald-900/20 transition-colors">
+                                {reply}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        {/* Input bar */}
+                        <div className="flex items-center gap-2 px-3 py-2 bg-[#1f2c34] border-t border-white/[0.04]">
+                          <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                          <div className="flex-1 bg-[#2a3942] rounded-full px-3 py-1">
+                            <span className="text-[10px] text-gray-500">Escribe un mensaje</span>
+                          </div>
+                          <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -852,54 +1226,146 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Agent Mockup */}
+            {/* Agent Mockup — Enterprise */}
             <ScrollReveal delay={150}>
               <div className="relative">
                 <div className="absolute -inset-4 bg-cyan-500/[0.04] rounded-3xl blur-2xl" />
                 <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+                  {/* Chrome bar */}
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[11px] text-gray-500 font-mono">agente-voz — llamada activa</span>
+                    <span className="ml-3 text-[11px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md">panel.neuriax.com/agente-voz</span>
                   </div>
-                  <div className="p-5 space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <span className="relative flex h-2.5 w-2.5">
-                          <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                          <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-                        </span>
-                        <span className="text-xs text-emerald-400 font-medium">En curso · Trattoria La Nonna</span>
-                      </div>
-                      <span className="text-xs text-gray-600 font-mono">00:42</span>
-                    </div>
-
-                    <div className="space-y-2.5 max-h-[220px] lg:max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
-                      {[
-                        { role: "user", text: "Hola buenas, quería reservar mesa para el viernes para 4 personas." },
-                        { role: "agent", text: "¡Buenas tardes! Encantado de ayudarte. Para 4 personas el viernes, ¿tienes preferencia de horario? Tenemos disponibilidad a las 14:00, 21:00 y 21:30." },
-                        { role: "user", text: "A las 21:00 perfecto." },
-                        { role: "agent", text: "Genial, mesa para 4 el viernes a las 21:00. ¿A nombre de quién la reservo?" },
-                        { role: "user", text: "A nombre de Roberto Díaz." },
-                        { role: "agent", text: "Perfecto Roberto. Reserva confirmada: viernes a las 21:00, mesa para 4. Te envío confirmación por WhatsApp ahora mismo. ¡Le esperamos!" },
-                      ].map((msg, i) => (
-                        <div key={i} className={`flex gap-2 ${msg.role === "agent" ? "justify-end" : ""}`}>
-                          {msg.role === "user" && <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[9px]">👤</div>}
-                          <div className={`rounded-xl px-3 py-2 max-w-[240px] ${msg.role === "agent" ? "bg-cyan-500/[0.1] border border-cyan-500/20 rounded-tr-sm" : "bg-slate-800/80 rounded-tl-sm"}`}>
-                            <p className={`text-[11px] leading-relaxed ${msg.role === "agent" ? "text-cyan-50" : "text-gray-300"}`}>{msg.text}</p>
+                  
+                  <div className="flex">
+                    {/* Main chat area */}
+                    <div className="flex-1 min-w-0">
+                      {/* Status bar */}
+                      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/[0.06] bg-cyan-500/[0.03]">
+                        <div className="flex items-center gap-3">
+                          <div className="flex items-center gap-1.5">
+                            <span className="relative flex h-2.5 w-2.5">
+                              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+                            </span>
+                            <span className="text-[10px] text-emerald-400 font-medium">Llamada en curso</span>
                           </div>
-                          {msg.role === "agent" && <div className="w-6 h-6 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0 text-[9px]">🤖</div>}
+                          <span className="text-[10px] text-gray-600 font-mono">00:42</span>
                         </div>
-                      ))}
+                        <div className="flex items-center gap-2">
+                          <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-2 py-0.5 rounded font-medium">IA activa</span>
+                          <div className="w-5 h-5 rounded bg-red-500/20 flex items-center justify-center cursor-pointer">
+                            <svg className="w-2.5 h-2.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Audio waveform visualization */}
+                      <div className="px-4 py-3 border-b border-white/[0.04]">
+                        <div className="flex items-center gap-1 h-6 justify-center">
+                          {[3, 5, 8, 12, 6, 14, 10, 7, 11, 15, 9, 4, 13, 8, 6, 11, 14, 5, 9, 12, 7, 10, 4, 8, 6].map((h, i) => (
+                            <div key={i} className="w-0.5 bg-cyan-500/50 rounded-full animate-pulse" style={{ height: `${h * 1.5}px`, animationDelay: `${i * 80}ms`, animationDuration: '1.2s' }} />
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-center gap-4 mt-1">
+                          <span className="text-[8px] text-gray-600">Escuchando</span>
+                          <span className="text-[8px] text-cyan-500/60">⬤ Grabando</span>
+                        </div>
+                      </div>
+
+                      {/* Chat messages with timestamps */}
+                      <div className="p-4 space-y-3 max-h-[250px] overflow-y-auto scrollbar-thin">
+                        {[
+                          { role: "user", text: "Hola buenas, quería reservar mesa para el viernes para 4 personas.", ts: "00:03" },
+                          { role: "agent", text: "¡Buenas tardes! Encantado de ayudarte. Para 4 personas el viernes, ¿tienes preferencia de horario? Tenemos disponibilidad a las 14:00, 21:00 y 21:30.", ts: "00:08" },
+                          { role: "user", text: "A las 21:00 perfecto.", ts: "00:18" },
+                          { role: "agent", text: "Genial, mesa para 4 el viernes a las 21:00. ¿A nombre de quién la reservo?", ts: "00:22" },
+                          { role: "user", text: "A nombre de Roberto Díaz.", ts: "00:28" },
+                          { role: "agent", text: "Perfecto Roberto. Reserva confirmada: viernes a las 21:00, mesa para 4. Te envío confirmación por WhatsApp ahora mismo. ¡Le esperamos!", ts: "00:35" },
+                        ].map((msg, i) => (
+                          <div key={i} className={`flex gap-2.5 ${msg.role === "agent" ? "justify-end" : ""}`}>
+                            {msg.role === "user" && (
+                              <div className="w-7 h-7 rounded-full bg-slate-700/60 flex items-center justify-center flex-shrink-0 text-[9px] font-bold text-gray-400">RD</div>
+                            )}
+                            <div className="max-w-[220px]">
+                              <div className={`rounded-xl px-3 py-2 ${msg.role === "agent" ? "bg-cyan-500/[0.1] border border-cyan-500/20 rounded-tr-sm" : "bg-slate-800/80 rounded-tl-sm"}`}>
+                                <p className={`text-[11px] leading-relaxed ${msg.role === "agent" ? "text-cyan-50" : "text-gray-300"}`}>{msg.text}</p>
+                              </div>
+                              <span className="text-[7px] text-gray-600 mt-0.5 block px-1">{msg.ts}</span>
+                            </div>
+                            {msg.role === "agent" && (
+                              <div className="w-7 h-7 rounded-full bg-gradient-to-br from-cyan-500/30 to-violet-500/20 flex items-center justify-center flex-shrink-0">
+                                <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Footer status */}
+                      <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/[0.06] bg-white/[0.01]">
+                        <div className="flex items-center gap-3">
+                          <span className="text-[9px] text-emerald-400 font-medium flex items-center gap-1">
+                            <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                            Reserva creada
+                          </span>
+                          <span className="text-[9px] text-violet-400 font-medium flex items-center gap-1">
+                            <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                            WhatsApp enviado
+                          </span>
+                        </div>
+                        <span className="text-[9px] text-gray-600">Duración: 0:42</span>
+                      </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-3 border-t border-white/[0.06]">
-                      <span className="text-[10px] text-gray-600">Duración: 0:42</span>
-                      <span className="text-[10px] text-emerald-400 font-medium flex items-center gap-1">
-                        <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                        Reserva creada + WhatsApp enviado
-                      </span>
+                    {/* Side panel — client data */}
+                    <div className="hidden md:block w-44 border-l border-white/[0.06] bg-[#0b0f14] p-3">
+                      <div className="mb-4">
+                        <span className="text-[8px] text-gray-600 uppercase tracking-wider">Datos del cliente</span>
+                        <div className="mt-2 space-y-2">
+                          <div>
+                            <span className="text-[8px] text-gray-500 block">Nombre</span>
+                            <span className="text-[11px] text-white font-medium">Roberto Díaz</span>
+                          </div>
+                          <div>
+                            <span className="text-[8px] text-gray-500 block">Teléfono</span>
+                            <span className="text-[11px] text-gray-400">+34 *** *** 89</span>
+                          </div>
+                          <div>
+                            <span className="text-[8px] text-gray-500 block">Visitas</span>
+                            <span className="text-[11px] text-violet-400 font-medium">Primera vez</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mb-4 pt-3 border-t border-white/[0.06]">
+                        <span className="text-[8px] text-gray-600 uppercase tracking-wider">Reserva</span>
+                        <div className="mt-2 space-y-1.5">
+                          <div className="flex items-center gap-1.5">
+                            <svg className="w-2.5 h-2.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <span className="text-[10px] text-gray-300">Vie 21 Feb</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <svg className="w-2.5 h-2.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <span className="text-[10px] text-gray-300">21:00</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <svg className="w-2.5 h-2.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span className="text-[10px] text-gray-300">4 personas</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="pt-3 border-t border-white/[0.06]">
+                        <span className="text-[8px] text-gray-600 uppercase tracking-wider">Sentimiento</span>
+                        <div className="mt-2 flex items-center gap-1.5">
+                          <div className="flex-1 h-1.5 bg-slate-700/40 rounded-full overflow-hidden">
+                            <div className="h-full bg-emerald-500/60 rounded-full" style={{ width: "92%" }} />
+                          </div>
+                          <span className="text-[9px] text-emerald-400 font-medium">92%</span>
+                        </div>
+                        <span className="text-[8px] text-gray-600 mt-1 block">Positivo · Satisfecho</span>
+                      </div>
                     </div>
                   </div>
                 </div>
