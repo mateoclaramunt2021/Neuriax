@@ -76,7 +76,7 @@ export default function Home() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-purple-500/[0.04] rounded-full blur-[200px]" />
 
         {/* --- Content grid --- */}
-        <div className="relative z-10 max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center py-28 sm:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center py-20 sm:py-28 lg:py-32">
           {/* LEFT — Copy */}
           <div>
             {/* Badge */}
@@ -189,10 +189,10 @@ export default function Home() {
           </div>
 
           {/* RIGHT — Floating UI Mockup (Agent call simulation) */}
-          <div className="hidden lg:block">
-            <div className="relative float-smooth">
+          <div className="block">
+            <div className="relative lg:float-smooth">
               {/* Glow behind card */}
-              <div className="absolute -inset-6 bg-cyan-500/[0.06] rounded-3xl blur-3xl" />
+              <div className="absolute -inset-6 bg-cyan-500/[0.06] rounded-3xl blur-3xl hidden lg:block" />
               {/* Main card */}
               <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
                 {/* Window chrome */}
@@ -222,7 +222,7 @@ export default function Home() {
                   </div>
 
                   {/* Chat bubbles — conversación realista */}
-                  <div className="space-y-3 max-h-[340px] overflow-y-auto pr-1 scrollbar-thin">
+                  <div className="space-y-3 max-h-[220px] lg:max-h-[340px] overflow-y-auto pr-1 scrollbar-thin">
                     {/* 1 — Paciente llama */}
                     <div className="flex gap-2.5">
                       <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 text-[10px]">👤</div>
@@ -315,7 +315,7 @@ export default function Home() {
               </div>
 
               {/* Floating mini-cards */}
-              <div className="absolute -left-8 top-16 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth" style={{ animationDelay: "1s" }}>
+              <div className="absolute -left-8 top-16 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth hidden lg:flex" style={{ animationDelay: "1s" }}>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">
                     <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -329,7 +329,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="absolute -right-6 bottom-20 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth" style={{ animationDelay: "2s" }}>
+              <div className="absolute -right-6 bottom-20 bg-[#0d1117] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl float-smooth hidden lg:flex" style={{ animationDelay: "2s" }}>
                 <div className="flex items-center gap-2">
                   <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
                     <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
