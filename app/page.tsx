@@ -52,26 +52,25 @@ export default function Home() {
         <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-500/[0.06] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-600/[0.03] rounded-full blur-[250px]" />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-28 lg:py-32">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-28 lg:py-36">
           {/* CENTERED HERO CONTENT */}
           <div className="text-center max-w-4xl mx-auto">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-5 py-2.5 mb-10 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2.5 bg-violet-500/[0.08] border border-violet-500/[0.15] rounded-full px-5 py-2.5 mb-6 backdrop-blur-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
               </span>
               <span className="text-[13px] text-gray-300 font-medium tracking-wide">
-                +2.400 reservas gestionadas este mes
+                La IA que compite con las mayores marcas del sector
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-7">
-              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Reservas automáticas.</span>
-              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Clientes que vuelven.</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6">
+              <span className="block text-white drop-shadow-[0_0_40px_rgba(255,255,255,0.06)]">Tu negocio lleno.</span>
               <span className="relative inline-block mt-1">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-violet-400 animate-gradient-x drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]">
-                  Cero no-shows.
+                  Sin llamadas.
                 </span>
                 <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-violet-500/60 to-transparent rounded-full" />
               </span>
@@ -83,39 +82,22 @@ export default function Home() {
               panel inteligente, web de reservas con tu marca y recordatorios automáticos por WhatsApp.
             </p>
 
-            {/* Metrics */}
-            <div className="flex flex-wrap justify-center gap-10 sm:gap-14 mb-12">
-              {[
-                { value: "−95%", label: "no-shows", color: "text-emerald-400" },
-                { value: "+60%", label: "reservas online", color: "text-violet-400" },
-                { value: "24/7", label: "reservas activas", color: "text-amber-400" },
-              ].map((m) => (
-                <div key={m.label}>
-                  <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${m.color}`}>{m.value}</div>
-                  <div className="text-xs text-gray-500 mt-1.5 tracking-wide">{m.label}</div>
-                </div>
-              ))}
-            </div>
-
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
               <a
                 href="#contacto"
                 className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-10 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl hover:shadow-amber-500/25 shadow-lg shadow-amber-500/10"
               >
-                Solicitar demo gratis
+                Ver demo en 2 minutos
                 <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
               <a
-                href="#dashboard"
+                href="#contacto"
                 className="inline-flex items-center justify-center gap-2 bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.1] text-white font-semibold py-4 px-8 rounded-full text-base transition-all duration-300"
               >
-                <svg className="w-5 h-5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-                Ver ejemplos reales
+                Hablar con un humano →
               </a>
             </div>
 
@@ -132,7 +114,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* DASHBOARD PREVIEW — below hero text */}
+          {/* DASHBOARD PREVIEW — with staggered animation */}
           <div className="w-full max-w-3xl mx-auto mt-16 lg:mt-20">
             <div className="relative">
               <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl" />
@@ -159,10 +141,10 @@ export default function Home() {
                       </div>
                     ))}
                   </div>
-                  {/* Reservation list */}
+                  {/* Reservation list — staggered fade-in */}
                   <div className="space-y-1.5 max-h-[200px] lg:max-h-[280px] overflow-y-auto pr-1 scrollbar-thin">
                     {RESTAURANT_RESERVATIONS.slice(0, 6).map((r, i) => (
-                      <div key={i} className="flex items-center justify-between bg-slate-800/30 border border-slate-700/20 rounded-lg px-3 py-2">
+                      <div key={i} className="flex items-center justify-between bg-slate-800/30 border border-slate-700/20 rounded-lg px-3 py-2 animate-fade-in-up" style={{ animationDelay: `${i * 150}ms`, animationFillMode: 'both' }}>
                         <div className="flex items-center gap-2.5 min-w-0">
                           <span className="text-[11px] text-gray-500 font-mono w-10 flex-shrink-0">{r.time}</span>
                           <span className="text-[12px] text-white font-medium truncate">{r.name}</span>
@@ -190,17 +172,20 @@ export default function Home() {
       {/* ════════════════════════════════════════════════
           SOCIAL PROOF BAR
           ════════════════════════════════════════════════ */}
-      <section className="py-10 px-4 bg-[#0a0a0f] border-t border-b border-white/[0.04]">
+      <section className="py-12 px-4 bg-[#0a0a0f] border-t border-b border-white/[0.04]">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 text-center items-end">
             {[
-              { value: "50+", label: "negocios activos" },
-              { value: "2.400+", label: "reservas/mes" },
-              { value: "4.9★", label: "satisfacción" },
+              { value: "−95%", label: "no-shows", color: "text-emerald-400" },
+              { value: "+60%", label: "reservas online", color: "text-violet-400" },
+              { value: "24/7", label: "reservas activas", color: "text-amber-400" },
+              { value: "50+", label: "negocios activos", color: "text-white" },
+              { value: "2.400+", label: "reservas/mes", color: "text-white" },
+              { value: "4.9★", label: "satisfacción", color: "text-white" },
             ].map((s) => (
               <div key={s.label}>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">{s.value}</div>
-                <div className="text-xs text-gray-500 mt-1">{s.label}</div>
+                <div className={`text-2xl sm:text-3xl font-extrabold ${s.color}`}>{s.value}</div>
+                <div className="text-[10px] sm:text-xs text-gray-500 mt-1">{s.label}</div>
               </div>
             ))}
           </div>
