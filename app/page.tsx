@@ -42,259 +42,202 @@ export default function Home() {
     <div className="min-h-screen bg-[#F1F5F9] text-slate-900 overflow-x-hidden">
 
       {/* ════════════════════════════════════════════════
-          HERO
+          HERO — Mobile-first
           ════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center px-4 overflow-hidden">
-        {/* BG */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
-        <div className="absolute inset-0 grid-pattern opacity-[0.04]" />
-        <div className="absolute top-[5%] left-[10%] w-[700px] h-[700px] bg-violet-400/[0.12] rounded-full blur-[200px] animate-pulse-slow" />
-        <div className="absolute bottom-[10%] right-[5%] w-[500px] h-[500px] bg-indigo-400/[0.10] rounded-full blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-blue-400/[0.06] rounded-full blur-[250px]" />
+      <section className="relative min-h-[100svh] flex items-center px-4 overflow-hidden">
+        {/* Animated aurora BG */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
+        <div className="absolute inset-0 hero-aurora opacity-30" />
+        <div className="absolute top-[10%] right-[-10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-violet-400/[0.15] rounded-full blur-[120px] sm:blur-[200px] animate-pulse-slow" />
+        <div className="absolute bottom-[5%] left-[-5%] w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-indigo-400/[0.12] rounded-full blur-[100px] sm:blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-28 sm:py-36 lg:py-44">
-          {/* CENTERED HERO CONTENT */}
-          <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-violet-100 border border-violet-200 rounded-full px-5 py-2.5 mb-6 backdrop-blur-sm">
+        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-32 lg:py-40">
+          {/* MOBILE-FIRST HERO CONTENT */}
+          <div className="text-center w-full max-w-4xl mx-auto flex flex-col items-center">
+            {/* Badge — compact for mobile */}
+            <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-4 py-2 mb-5 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[13px] text-violet-700 font-medium tracking-wide">
-                La IA que compite con las mayores marcas del sector
+              <span className="text-[12px] sm:text-[13px] text-violet-700 font-semibold">
+                ⚡ +60% reservas en 30 días
               </span>
             </div>
 
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold leading-[1.05] tracking-[-0.03em] mb-6 text-center w-full">
-              <span className="block text-slate-900 drop-shadow-[0_0_40px_rgba(0,0,0,0.04)]">Tu negocio lleno.</span>
+            {/* H1 — BIG on mobile */}
+            <h1 className="text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.02] tracking-[-0.04em] mb-5 text-center w-full px-2">
+              <span className="block text-slate-900">Tu negocio</span>
+              <span className="block text-slate-900">lleno.</span>
               <span className="relative inline-block mt-1">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-300 to-violet-400 animate-gradient-x drop-shadow-[0_0_60px_rgba(124,58,237,0.3)]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500 animate-gradient-x hero-text-glow">
                   Sin llamadas.
                 </span>
-                <span className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-3/4 h-[3px] bg-gradient-to-r from-transparent via-violet-500/60 to-transparent rounded-full" />
+                <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2/3 h-[3px] bg-gradient-to-r from-transparent via-violet-500/70 to-transparent rounded-full" />
               </span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-[1.35rem] text-slate-500 leading-relaxed mb-10 max-w-2xl mx-auto">
-              El sistema todo-en-uno que gestiona las reservas de tu{" "}
-              <span className="text-slate-900 font-semibold">restaurante o barbería</span>:
-              panel inteligente, web de reservas con tu marca y recordatorios automáticos por WhatsApp.
+            {/* Subtitle — max 2 lines on mobile */}
+            <p className="text-base sm:text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-lg sm:max-w-2xl mx-auto px-2">
+              Reservas, web con tu marca y WhatsApp automático para{" "}
+              <span className="text-slate-900 font-semibold">restaurantes y barberías</span>.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+            {/* Live counter */}
+            <div className="flex items-center gap-2 mb-6">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </span>
+              <span className="text-sm sm:text-base text-slate-600 font-medium">
+                <span className="text-slate-900 font-bold">237</span> reservas gestionadas hoy
+              </span>
+            </div>
+
+            {/* CTA — full width on mobile, thumb-friendly */}
+            <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6 w-full px-2 sm:px-0">
               <a
                 href="#contacto"
-                className="group inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-10 rounded-full text-base sm:text-lg transition-all duration-300 hover:scale-[1.04] hover:shadow-2xl hover:shadow-amber-500/25 shadow-lg shadow-amber-500/10"
+                className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-[18px] sm:py-4 px-8 sm:px-10 rounded-2xl sm:rounded-full text-[17px] sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-amber-500/20 overflow-hidden w-full sm:w-auto"
               >
-                Ver demo en 2 minutos
-                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
+                <span className="relative z-10 flex items-center gap-3">
+                  Ver demo en 2 min
+                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </a>
               <a
                 href="#contacto"
-                className="inline-flex items-center justify-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold py-4 px-8 rounded-full text-base transition-all duration-300"
+                className="inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-white border border-slate-200 text-slate-700 font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl sm:rounded-full text-[15px] sm:text-base transition-all duration-300 backdrop-blur-sm w-full sm:w-auto"
               >
                 Hablar con un humano →
               </a>
             </div>
 
-            {/* Trust */}
-            <div className="flex flex-wrap justify-center gap-6 text-[13px] text-slate-500">
-              {["Sin permanencia", "Listo en 5 días", "Garantía 30 días"].map((t) => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  {t}
+            {/* Trust pills — horizontal scroll on mobile */}
+            <div className="flex items-center justify-center gap-3 sm:gap-5 text-[12px] sm:text-[13px] text-slate-500 overflow-x-auto no-scrollbar w-full px-2">
+              {[
+                { icon: "✓", text: "Sin permanencia" },
+                { icon: "⚡", text: "Listo en 5 días" },
+                { icon: "🛡️", text: "Garantía 30 días" },
+              ].map((t) => (
+                <span key={t.text} className="flex items-center gap-1.5 whitespace-nowrap bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-full px-3 py-1.5">
+                  <span className="text-[11px]">{t.icon}</span>
+                  <span className="font-medium">{t.text}</span>
                 </span>
               ))}
             </div>
           </div>
 
-          {/* DASHBOARD PREVIEW — Enterprise SaaS mockup */}
-          <div className="w-full max-w-4xl mx-auto mt-16 lg:mt-20">
+          {/* DASHBOARD PREVIEW — Compact on mobile, full on desktop */}
+          <div className="w-full max-w-4xl mx-auto mt-10 sm:mt-16 lg:mt-20 px-0 sm:px-0">
             <div className="relative">
-              <div className="absolute -inset-6 bg-violet-500/[0.05] rounded-3xl blur-3xl" />
-              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+              <div className="absolute -inset-4 sm:-inset-6 bg-violet-500/[0.06] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl" />
+              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-xl sm:rounded-2xl shadow-2xl shadow-black/60 overflow-hidden hero-dashboard-tilt">
                 {/* Chrome */}
-                <div className="flex items-center gap-2 px-4 sm:px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-3 text-[11px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md">panel.neuriax.com/reservas</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 border-b border-white/[0.06] bg-white/[0.02]">
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500/80" />
+                  <span className="ml-2 sm:ml-3 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-3 py-0.5 rounded-md truncate">panel.neuriax.com</span>
                 </div>
 
-                <div className="flex">
-                  {/* Mini Icon Sidebar */}
-                  <div className="hidden sm:flex flex-col items-center w-12 md:w-14 border-r border-white/[0.06] bg-[#0b0f14] py-4 gap-4">
-                    <div className="w-7 h-7 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[8px] font-bold text-white">N</div>
-                    <div className="w-full h-px bg-white/[0.06]" />
+                {/* Mobile: compact stats + 3 rows. Desktop: full view */}
+                <div className="p-3 sm:p-5">
+                  {/* Stats row */}
+                  <div className="grid grid-cols-4 gap-1.5 sm:gap-3 mb-3 sm:mb-5">
                     {[
-                      { d: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", active: false },
-                      { d: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", active: true },
-                      { d: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", active: false },
-                      { d: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", active: false },
-                      { d: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", active: false },
-                    ].map((icon, idx) => (
-                      <div key={idx} className={`w-8 h-8 rounded-lg flex items-center justify-center cursor-pointer transition-colors ${icon.active ? "bg-violet-500/20 text-violet-400" : "text-gray-600 hover:text-gray-400 hover:bg-white/[0.04]"}`}>
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={icon.d} /></svg>
+                      { label: "Reservas", value: "14", color: "text-violet-400", bg: "bg-violet-500/10" },
+                      { label: "Ocupación", value: "87%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
+                      { label: "No-shows", value: "0", color: "text-amber-400", bg: "bg-amber-500/10" },
+                      { label: "Ingresos", value: "€1.2k", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+                    ].map((s) => (
+                      <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2 sm:p-3`}>
+                        <span className="text-[7px] sm:text-[9px] text-gray-500 uppercase tracking-wider block">{s.label}</span>
+                        <div className={`text-sm sm:text-xl font-bold ${s.color} mt-0.5`}>{s.value}</div>
                       </div>
                     ))}
                   </div>
 
-                  {/* Main Panel */}
-                  <div className="flex-1 min-w-0">
-                    {/* Header with search + avatar */}
-                    <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-white/[0.06]">
-                      <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-3 py-1.5 flex-1 max-w-[200px]">
-                        <svg className="w-3 h-3 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                        <span className="text-[10px] text-gray-500">Buscar cliente o reserva...</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <div className="relative">
-                          <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-500 rounded-full border border-[#0d1117]" />
+                  {/* Floating notifications — desktop only */}
+                  <div className="hidden lg:block">
+                    {/* WhatsApp toast */}
+                    <div className="absolute top-16 -right-4 bg-[#1a1f2e] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl shadow-black/40 z-20 animate-float" style={{ animationDelay: "1s" }}>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[8px] font-bold text-white">MR</div>
-                          <span className="text-[10px] text-gray-400 hidden md:block">Marco R.</span>
+                        <div>
+                          <span className="text-[10px] text-gray-400 block">WhatsApp · ahora</span>
+                          <span className="text-[11px] text-white font-medium">María confirmó su reserva ✓</span>
                         </div>
                       </div>
                     </div>
-
-                    <div className="p-4 sm:p-5">
-                      {/* Stats with mini progress bars */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-5">
-                        {[
-                          { label: "Reservas hoy", value: "14", sub: "+3 vs ayer", color: "text-violet-400", barColor: "bg-violet-500", barWidth: "w-[70%]" },
-                          { label: "Ocupación", value: "87%", sub: "mesas", color: "text-emerald-400", barColor: "bg-emerald-500", barWidth: "w-[87%]" },
-                          { label: "No-shows", value: "0", sub: "este mes", color: "text-amber-400", barColor: "bg-amber-500", barWidth: "w-[3%]" },
-                          { label: "Ingresos hoy", value: "€1.2k", sub: "+12%", color: "text-cyan-400", barColor: "bg-cyan-500", barWidth: "w-[62%]" },
-                        ].map((s) => (
-                          <div key={s.label} className="bg-slate-800/30 border border-slate-700/20 rounded-xl p-3">
-                            <div className="flex items-center justify-between mb-1">
-                              <span className="text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
-                            </div>
-                            <div className={`text-lg sm:text-xl font-bold ${s.color}`}>{s.value}</div>
-                            <div className="w-full h-1 bg-slate-700/40 rounded-full mt-2 overflow-hidden">
-                              <div className={`h-full ${s.barColor}/60 rounded-full`} style={{ width: s.barWidth.replace('w-[', '').replace(']', '') }} />
-                            </div>
-                            <span className="text-[8px] text-gray-600 mt-1 block">{s.sub}</span>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Occupancy by timeslot */}
-                      <div className="mb-5">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[10px] text-gray-500 font-medium">Ocupación por franja</span>
-                          <span className="text-[9px] text-gray-600">Lun 17 Feb</span>
+                    {/* Alert toast */}
+                    <div className="absolute bottom-20 -left-4 bg-[#1a1f2e] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl shadow-black/40 z-20 animate-float" style={{ animationDelay: "2.5s" }}>
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-8 h-8 bg-violet-500/20 rounded-full flex items-center justify-center">
+                          <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         </div>
-                        <div className="flex gap-1">
-                          {[
-                            { time: "13:00", pct: 100 }, { time: "13:30", pct: 85 }, { time: "14:00", pct: 100 },
-                            { time: "14:30", pct: 60 }, { time: "15:00", pct: 20 }, { time: "20:00", pct: 40 },
-                            { time: "20:30", pct: 90 }, { time: "21:00", pct: 100 }, { time: "21:30", pct: 75 }, { time: "22:00", pct: 30 },
-                          ].map((slot) => (
-                            <div key={slot.time} className="flex-1 group relative">
-                              <div className="h-8 bg-slate-800/40 rounded-sm overflow-hidden flex items-end">
-                                <div
-                                  className={`w-full rounded-sm transition-all ${slot.pct === 100 ? "bg-emerald-500/70" : slot.pct >= 80 ? "bg-violet-500/60" : slot.pct >= 50 ? "bg-indigo-500/50" : "bg-slate-600/40"}`}
-                                  style={{ height: `${slot.pct}%` }}
-                                />
-                              </div>
-                              <span className="text-[7px] text-gray-600 block text-center mt-1 hidden sm:block">{slot.time}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Pro Table */}
-                      <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                          <thead>
-                            <tr className="border-b border-white/[0.06]">
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Hora</th>
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Cliente</th>
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Pax</th>
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden md:table-cell">Canal</th>
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Estado</th>
-                              <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 hidden sm:table-cell">Acciones</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {RESTAURANT_RESERVATIONS.map((r, i) => (
-                              <tr key={i} className={`border-b border-white/[0.03] transition-colors animate-fade-in-up ${i === 2 ? "bg-violet-500/[0.06] border-l-2 border-l-violet-500" : "hover:bg-white/[0.02]"}`} style={{ animationDelay: `${i * 120}ms`, animationFillMode: 'both' }}>
-                                <td className="py-2 pr-3 text-[11px] text-gray-400 font-mono">{r.time}</td>
-                                <td className="py-2 pr-3">
-                                  <div className="flex items-center gap-2">
-                                    <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0 ${i === 2 ? "bg-violet-500/30 text-violet-300" : "bg-slate-700/60 text-gray-400"}`}>
-                                      {r.name.split(' ').map(n => n[0]).join('')}
-                                    </div>
-                                    <div className="min-w-0">
-                                      <span className="text-[11px] text-white font-medium block truncate">{r.name}</span>
-                                      <span className="text-[8px] text-gray-600">3 visitas</span>
-                                    </div>
-                                  </div>
-                                </td>
-                                <td className="py-2 pr-3 text-[11px] text-gray-400 hidden sm:table-cell">{r.guests}</td>
-                                <td className="py-2 pr-3 hidden md:table-cell">
-                                  {i % 3 === 0 ? (
-                                    <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-medium">WhatsApp</span>
-                                  ) : i % 3 === 1 ? (
-                                    <span className="text-[9px] bg-violet-500/10 text-violet-400 px-1.5 py-0.5 rounded font-medium">Web</span>
-                                  ) : (
-                                    <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-medium">Teléfono</span>
-                                  )}
-                                </td>
-                                <td className="py-2 pr-3">
-                                  <span className={`text-[9px] font-medium px-2 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
-                                    {r.status === "confirmed" ? "✓ Confirmada" : "⏳ Pendiente"}
-                                  </span>
-                                </td>
-                                <td className="py-2 hidden sm:table-cell">
-                                  <div className="flex items-center gap-1.5">
-                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-emerald-500/20 transition-colors" title="Confirmar">
-                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                                    </div>
-                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-violet-500/20 transition-colors" title="Llamar">
-                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-                                    </div>
-                                    <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-slate-600/40 transition-colors" title="Más">
-                                      <svg className="w-2.5 h-2.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
-                                    </div>
-                                  </div>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-
-                      {/* Pagination */}
-                      <div className="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.04]">
-                        <span className="text-[9px] text-gray-600">Mostrando 8 de 14 reservas</span>
-                        <div className="flex items-center gap-1">
-                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">←</div>
-                          <div className="w-5 h-5 rounded bg-violet-500/20 flex items-center justify-center text-[9px] text-violet-400 font-medium">1</div>
-                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">2</div>
-                          <div className="w-5 h-5 rounded bg-slate-700/30 flex items-center justify-center text-[9px] text-gray-500 cursor-pointer">→</div>
+                        <div>
+                          <span className="text-[10px] text-gray-400 block">Bot IA · hace 2 min</span>
+                          <span className="text-[11px] text-white font-medium">3 reservas confirmadas auto.</span>
                         </div>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Mini reservation list — 3 rows on mobile, more on desktop */}
+                  <div className="space-y-1 sm:space-y-1.5">
+                    {RESTAURANT_RESERVATIONS.slice(0, 4).map((r, i) => (
+                      <div key={i} className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg transition-colors ${i === 0 ? "bg-violet-500/[0.08] border border-violet-500/20" : "bg-white/[0.02] hover:bg-white/[0.04]"}`}>
+                        <span className="text-[10px] sm:text-[12px] text-gray-400 font-mono w-10 sm:w-12 flex-shrink-0">{r.time}</span>
+                        <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[7px] sm:text-[8px] font-bold flex-shrink-0 ${i === 0 ? "bg-violet-500/30 text-violet-300" : i % 2 === 0 ? "bg-emerald-500/20 text-emerald-300" : "bg-slate-700/60 text-gray-400"}`}>
+                          {r.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[10px] sm:text-[12px] text-white font-medium block truncate">{r.name}</span>
+                        </div>
+                        <span className="text-[9px] sm:text-[10px] text-gray-500 hidden sm:block">{r.guests} pax</span>
+                        <span className={`text-[8px] sm:text-[9px] font-medium px-1.5 sm:px-2 py-0.5 rounded-full flex-shrink-0 ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
+                          {r.status === "confirmed" ? "✓" : "⏳"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Fade out overlay on mobile */}
+                  <div className="h-8 sm:h-12 bg-gradient-to-t from-[#0d1117] to-transparent -mx-3 sm:-mx-5 -mb-3 sm:-mb-5 mt-1 flex items-end justify-center pb-2">
+                    <span className="text-[9px] sm:text-[10px] text-gray-600">Ver todas las reservas →</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          {/* Social proof badges — mobile */}
+          <div className="flex items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
+            {[
+              { value: "−95%", label: "no-shows" },
+              { value: "50+", label: "negocios" },
+              { value: "4.9★", label: "valoración" },
+            ].map((s) => (
+              <div key={s.label} className="text-center">
+                <div className="text-lg sm:text-2xl font-extrabold text-slate-900">{s.value}</div>
+                <div className="text-[9px] sm:text-[11px] text-slate-500">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
+
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-5 h-9 border-2 border-slate-300 rounded-full flex justify-center">
-            <div className="w-1 h-2.5 bg-slate-400 rounded-full mt-2 animate-scroll-indicator" />
+        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2">
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase hidden sm:block">Descubre más</span>
+            <div className="w-5 h-9 border-2 border-slate-300/60 rounded-full flex justify-center">
+              <div className="w-1 h-2.5 bg-slate-400 rounded-full mt-2 animate-scroll-indicator" />
+            </div>
           </div>
         </div>
       </section>
@@ -323,182 +266,343 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          DASHBOARD EXAMPLE
+          DASHBOARD EXAMPLE — Ultra-Premium
           ════════════════════════════════════════════════ */}
-      <section id="dashboard" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
+      <section id="dashboard" className="py-16 sm:py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-14">
+            <div className="text-center mb-10 sm:mb-14">
               <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Panel de control</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Un panel que lo controla todo
+                Todo tu negocio en una pantalla
               </h2>
-              <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Desde las reservas de hoy hasta el historial de cada cliente. Todo en una pantalla.
+              <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">
+                Reservas, mensajes automáticos, IA y mapa de mesas. El panel que trabaja por ti.
               </p>
             </div>
           </ScrollReveal>
 
           <ScrollReveal>
             <div className="relative">
-              <div className="absolute -inset-8 bg-violet-500/[0.04] rounded-3xl blur-3xl" />
-              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
+              <div className="absolute -inset-6 sm:-inset-8 bg-violet-500/[0.05] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl" />
+              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-xl sm:rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
                 {/* Browser chrome */}
-                <div className="flex items-center gap-2 px-5 py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-4 text-[11px] text-gray-500 font-mono bg-slate-800/50 px-4 py-1 rounded-md">panel.neuriax.com/reservas</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3.5 border-b border-white/[0.06] bg-white/[0.02]">
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500/80" />
+                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500/80" />
+                  <span className="ml-2 sm:ml-4 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-4 py-0.5 sm:py-1 rounded-md truncate">panel.neuriax.com/reservas</span>
+                  <div className="ml-auto flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                    </span>
+                    <span className="text-[9px] text-emerald-400 font-medium hidden sm:inline">En vivo</span>
+                  </div>
                 </div>
 
                 <div className="flex">
                   {/* Sidebar - hidden on mobile */}
-                  <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-4 min-h-[450px]">
-                    <div className="flex items-center gap-2 mb-8">
-                      <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold">N</div>
+                  <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-4 min-h-[580px]">
+                    <div className="flex items-center gap-2 mb-6">
+                      <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold text-white">N</div>
                       <span className="text-sm font-bold text-white">Neuriax</span>
                     </div>
                     {[
-                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Inicio", active: false },
-                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Reservas", active: true },
-                      { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Clientes", active: false },
-                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Mensajes", active: false },
-                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Estadísticas", active: false },
+                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Inicio", active: false, badge: "" },
+                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Reservas", active: true, badge: "14" },
+                      { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Clientes", active: false, badge: "312" },
+                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Mensajes", active: false, badge: "3" },
+                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Estadísticas", active: false, badge: "" },
+                      { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z", label: "Ajustes", active: false, badge: "" },
                     ].map((item) => (
-                      <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm cursor-pointer transition-colors ${item.active ? "bg-violet-500/[0.12] text-violet-300 font-medium" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
+                      <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm cursor-pointer transition-colors ${item.active ? "bg-violet-500/[0.15] text-violet-300 font-medium border border-violet-500/20" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
                         <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
                         </svg>
                         {item.label}
+                        {item.badge && (
+                          <span className={`ml-auto text-[9px] font-medium px-1.5 py-0.5 rounded-full ${item.active ? "bg-violet-500/30 text-violet-300" : "bg-white/[0.06] text-gray-500"}`}>{item.badge}</span>
+                        )}
                       </div>
                     ))}
+
+                    {/* IA Assistant mini */}
+                    <div className="mt-auto pt-4 border-t border-white/[0.06]">
+                      <div className="bg-gradient-to-br from-violet-500/[0.1] to-indigo-500/[0.1] border border-violet-500/20 rounded-xl p-3">
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-5 h-5 bg-violet-500/30 rounded-lg flex items-center justify-center">
+                            <svg className="w-3 h-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                          </div>
+                          <span className="text-[10px] text-violet-300 font-semibold">Asistente IA</span>
+                        </div>
+                        <p className="text-[9px] text-gray-400 leading-relaxed">He confirmado <span className="text-emerald-400 font-medium">3 reservas</span> automáticamente hoy. 0 no-shows.</p>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Main content */}
-                  <div className="flex-1 p-4 sm:p-6 min-w-0">
-                    {/* Header with search */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+                  <div className="flex-1 min-w-0">
+                    {/* Header with alert */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 px-3 sm:px-6 py-3 sm:py-4 border-b border-white/[0.06]">
                       <div>
-                        <h3 className="text-base sm:text-lg font-bold text-white">Reservas — Hoy, Lunes 17 Feb</h3>
-                        <p className="text-[11px] text-gray-500">Mi Restaurante · 8 mesas disponibles</p>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-sm sm:text-lg font-bold text-white">Reservas — Hoy</h3>
+                          <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full font-medium">⚠️ 1 sin confirmar</span>
+                        </div>
+                        <p className="text-[10px] sm:text-[11px] text-gray-500">Lunes 17 Feb · La Trattoria Napoli · 8 mesas</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-3 py-1.5">
+                        <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
                           <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                          <span className="text-[10px] text-gray-500">Buscar...</span>
+                          <span className="text-[9px] sm:text-[10px] text-gray-500">Buscar...</span>
                         </div>
                         <div className="relative">
                           <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                          <span className="absolute -top-1 -right-1 w-2 h-2 bg-amber-500 rounded-full" />
+                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-[#0d1117] text-[6px] text-white flex items-center justify-center font-bold">2</span>
                         </div>
-                        <div className="w-7 h-7 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[9px] font-bold text-white">MR</div>
+                        <div className="w-6 sm:w-7 h-6 sm:h-7 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-white">MR</div>
                       </div>
                     </div>
 
-                    {/* Stats with sparklines */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                      {[
-                        { label: "Confirmadas", value: "11", change: "+2", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", barColor: "bg-emerald-500", bars: [40, 55, 35, 60, 50, 75, 90] },
-                        { label: "Pendientes", value: "3", change: "-1", color: "text-amber-400", bg: "bg-amber-500/[0.08]", barColor: "bg-amber-500", bars: [80, 60, 45, 50, 30, 25, 20] },
-                        { label: "Comensales", value: "42", change: "+8", color: "text-violet-400", bg: "bg-violet-500/[0.08]", barColor: "bg-violet-500", bars: [30, 40, 55, 45, 65, 70, 85] },
-                        { label: "No-shows", value: "0", change: "0", color: "text-gray-400", bg: "bg-white/[0.03]", barColor: "bg-gray-500", bars: [20, 15, 10, 8, 5, 3, 2] },
-                      ].map((s) => (
-                        <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-xl p-3`}>
-                          <div className="flex items-center justify-between mb-1">
-                            <span className="text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
-                            <span className={`text-[9px] font-medium ${s.change.startsWith('+') ? 'text-emerald-400' : s.change.startsWith('-') ? 'text-red-400' : 'text-gray-500'}`}>{s.change}</span>
+                    <div className="p-3 sm:p-5">
+                      {/* Stats with icons + trends */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
+                        {[
+                          { label: "Confirmadas", value: "11", change: "+2 vs ayer", icon: "✓", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", iconBg: "bg-emerald-500/20" },
+                          { label: "Pendientes", value: "3", change: "−1 vs ayer", icon: "⏳", color: "text-amber-400", bg: "bg-amber-500/[0.08]", iconBg: "bg-amber-500/20" },
+                          { label: "Comensales", value: "42", change: "+8 esta semana", icon: "👥", color: "text-violet-400", bg: "bg-violet-500/[0.08]", iconBg: "bg-violet-500/20" },
+                          { label: "Ingresos hoy", value: "€1.2k", change: "+12%", icon: "📈", color: "text-cyan-400", bg: "bg-cyan-500/[0.08]", iconBg: "bg-cyan-500/20" },
+                        ].map((s) => (
+                          <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2.5 sm:p-3`}>
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <span className={`w-5 h-5 sm:w-6 sm:h-6 ${s.iconBg} rounded-lg flex items-center justify-center text-[10px] sm:text-[12px]`}>{s.icon}</span>
+                              <span className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
+                            </div>
+                            <div className={`text-lg sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
+                            <span className="text-[8px] sm:text-[9px] text-emerald-400/70 font-medium">{s.change}</span>
                           </div>
-                          <div className={`text-xl sm:text-2xl font-bold ${s.color} mb-2`}>{s.value}</div>
-                          {/* Mini sparkline */}
-                          <div className="flex items-end gap-0.5 h-4">
-                            {s.bars.map((h, bi) => (
-                              <div key={bi} className={`flex-1 ${s.barColor}/40 rounded-sm`} style={{ height: `${h}%` }} />
+                        ))}
+                      </div>
+
+                      {/* Main grid: Table + Side panels */}
+                      <div className="flex flex-col lg:flex-row gap-4">
+                        {/* Left: Timeline + Table */}
+                        <div className="flex-1 min-w-0">
+                          {/* Visual day timeline */}
+                          <div className="mb-4">
+                            <div className="flex items-center justify-between mb-2">
+                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Timeline del día</span>
+                              <div className="flex items-center gap-2">
+                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-emerald-500/60" />Lleno</span>
+                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-violet-500/60" />Alto</span>
+                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-slate-600/60" />Libre</span>
+                              </div>
+                            </div>
+                            <div className="relative">
+                              {/* Timeline bar */}
+                              <div className="flex gap-0.5 sm:gap-1">
+                                {[
+                                  { time: "12:00", pct: 30 }, { time: "13:00", pct: 100 }, { time: "13:30", pct: 85 },
+                                  { time: "14:00", pct: 100 }, { time: "14:30", pct: 60 }, { time: "15:00", pct: 20 },
+                                  { time: "20:00", pct: 40 }, { time: "20:30", pct: 90 }, { time: "21:00", pct: 100 },
+                                  { time: "21:30", pct: 75 }, { time: "22:00", pct: 30 },
+                                ].map((slot) => (
+                                  <div key={slot.time} className="flex-1 group relative">
+                                    <div className="h-6 sm:h-8 bg-slate-800/40 rounded-sm overflow-hidden flex items-end">
+                                      <div
+                                        className={`w-full rounded-sm ${slot.pct === 100 ? "bg-emerald-500/70" : slot.pct >= 80 ? "bg-violet-500/60" : slot.pct >= 50 ? "bg-indigo-500/50" : "bg-slate-600/40"}`}
+                                        style={{ height: `${slot.pct}%` }}
+                                      />
+                                    </div>
+                                    <span className="text-[6px] sm:text-[7px] text-gray-600 block text-center mt-0.5 hidden sm:block">{slot.time}</span>
+                                  </div>
+                                ))}
+                              </div>
+                              {/* Current time indicator */}
+                              <div className="absolute top-0 bottom-0 left-[45%] w-0.5 bg-amber-400/60 rounded-full" />
+                              <div className="absolute -top-1 left-[45%] -translate-x-1/2 text-[7px] text-amber-400 font-bold bg-[#0d1117] px-1 rounded hidden sm:block">AHORA</div>
+                            </div>
+                          </div>
+
+                          {/* Compact reservation list */}
+                          <div className="space-y-1">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Próximas reservas</span>
+                              <div className="flex items-center gap-1 ml-auto">
+                                {["Todas", "Pendientes"].map((f, i) => (
+                                  <span key={f} className={`text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-violet-500/20 text-violet-300" : "bg-slate-800/40 text-gray-500"}`}>{f}</span>
+                                ))}
+                              </div>
+                            </div>
+                            {RESTAURANT_RESERVATIONS.slice(0, 6).map((r, i) => (
+                              <div key={i} className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-colors ${i === 2 ? "bg-amber-500/[0.06] border border-amber-500/20" : i === 0 ? "bg-violet-500/[0.05]" : "hover:bg-white/[0.02]"}`}>
+                                <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono w-8 sm:w-10 flex-shrink-0">{r.time}</span>
+                                <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[7px] sm:text-[8px] font-bold flex-shrink-0 ${i % 3 === 0 ? "bg-violet-500/20 text-violet-300" : i % 3 === 1 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
+                                  {r.name.split(' ').map(n => n[0]).join('')}
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <span className="text-[10px] sm:text-[11px] text-white font-medium block truncate">{r.name}</span>
+                                  <span className="text-[7px] sm:text-[8px] text-gray-600">{r.guests} pax · {r.table}</span>
+                                </div>
+                                <div className="flex items-center gap-1 flex-shrink-0">
+                                  {i % 3 === 0 ? (
+                                    <span className="text-[7px] sm:text-[8px] bg-emerald-500/10 text-emerald-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">WhatsApp</span>
+                                  ) : i % 3 === 1 ? (
+                                    <span className="text-[7px] sm:text-[8px] bg-violet-500/10 text-violet-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">Web</span>
+                                  ) : (
+                                    <span className="text-[7px] sm:text-[8px] bg-cyan-500/10 text-cyan-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">Bot IA</span>
+                                  )}
+                                  <span className={`text-[8px] sm:text-[9px] font-medium px-1.5 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
+                                    {r.status === "confirmed" ? "✓" : "⏳"}
+                                  </span>
+                                </div>
+                              </div>
+                            ))}
+                            <div className="text-center pt-2">
+                              <span className="text-[9px] text-violet-400 cursor-pointer hover:text-violet-300">Ver todas (14) →</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right: Side panels — hidden on mobile */}
+                        <div className="w-full lg:w-64 flex flex-col gap-3 sm:gap-4">
+                          {/* Floor map */}
+                          <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                            <div className="flex items-center justify-between mb-3">
+                              <span className="text-[10px] text-gray-400 font-medium">Mapa de mesas</span>
+                              <span className="text-[8px] text-emerald-400">3 libres</span>
+                            </div>
+                            <div className="grid grid-cols-4 gap-1.5">
+                              {[
+                                { id: 1, status: "occupied", name: "A.M." },
+                                { id: 2, status: "occupied", name: "R.D." },
+                                { id: 3, status: "occupied", name: "M.G." },
+                                { id: 4, status: "free", name: "" },
+                                { id: 5, status: "soon", name: "P.S." },
+                                { id: 6, status: "occupied", name: "J.M." },
+                                { id: 7, status: "occupied", name: "C.L." },
+                                { id: 8, status: "free", name: "" },
+                              ].map((table) => (
+                                <div key={table.id} className={`aspect-square rounded-lg flex flex-col items-center justify-center text-[7px] sm:text-[8px] font-medium border ${
+                                  table.status === "occupied" ? "bg-violet-500/15 border-violet-500/30 text-violet-300" :
+                                  table.status === "soon" ? "bg-amber-500/15 border-amber-500/30 text-amber-300" :
+                                  "bg-slate-800/30 border-slate-700/30 text-gray-600"
+                                }`}>
+                                  <span className="text-[8px] sm:text-[9px]">{table.id}</span>
+                                  {table.name && <span className="text-[6px] sm:text-[7px] opacity-70">{table.name}</span>}
+                                  {table.status === "soon" && <span className="text-[5px] sm:text-[6px] text-amber-400 mt-0.5">14:30</span>}
+                                </div>
+                              ))}
+                            </div>
+                            <div className="flex items-center gap-3 mt-2 pt-2 border-t border-white/[0.04]">
+                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-violet-500/60" />Ocupada</span>
+                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-amber-500/60" />Próxima</span>
+                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-slate-600/60" />Libre</span>
+                            </div>
+                          </div>
+
+                          {/* WhatsApp preview */}
+                          <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <div className="w-5 h-5 bg-emerald-500/20 rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
+                              </div>
+                              <span className="text-[10px] text-gray-400 font-medium">Recordatorio automático</span>
+                            </div>
+                            <div className="bg-[#0b2e18] rounded-xl rounded-tl-sm p-2.5 border border-emerald-800/30">
+                              <p className="text-[9px] sm:text-[10px] text-emerald-100/90 leading-relaxed">
+                                Hola María 👋<br/>
+                                Te recordamos tu reserva <span className="font-semibold">mañana a las 14:00</span> en La Trattoria (Mesa 3, 4 pax).<br/><br/>
+                                ¿Confirmas? Responde <span className="font-bold">SÍ</span> o <span className="font-bold">NO</span>
+                              </p>
+                              <div className="flex items-center justify-end gap-1 mt-1">
+                                <span className="text-[7px] text-emerald-400/50">13:42</span>
+                                <svg className="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg>
+                              </div>
+                            </div>
+                            <div className="mt-2 bg-[#0b2e18] rounded-xl rounded-tl-sm p-2 border border-emerald-800/30 ml-8">
+                              <p className="text-[9px] sm:text-[10px] text-emerald-100/90">SÍ, confirmado! 😊</p>
+                              <div className="flex items-center justify-end gap-1 mt-0.5">
+                                <span className="text-[7px] text-emerald-400/50">13:44</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Activity feed */}
+                          <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                            <span className="text-[10px] text-gray-400 font-medium block mb-2">Actividad reciente</span>
+                            <div className="space-y-2">
+                              {[
+                                { icon: "✓", color: "text-emerald-400 bg-emerald-500/20", text: "Ana confirmó su reserva", time: "hace 2 min" },
+                                { icon: "🤖", color: "text-violet-400 bg-violet-500/20", text: "Bot IA contestó a Carlos", time: "hace 5 min" },
+                                { icon: "📱", color: "text-cyan-400 bg-cyan-500/20", text: "Recordatorio enviado a Laura", time: "hace 8 min" },
+                                { icon: "➕", color: "text-amber-400 bg-amber-500/20", text: "Nueva reserva vía web", time: "hace 12 min" },
+                              ].map((a, i) => (
+                                <div key={i} className="flex items-start gap-2">
+                                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] flex-shrink-0 ${a.color}`}>{a.icon}</span>
+                                  <div className="min-w-0">
+                                    <span className="text-[9px] text-gray-300 block leading-tight">{a.text}</span>
+                                    <span className="text-[7px] text-gray-600">{a.time}</span>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Bottom bar — weekly chart + AI summary */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/[0.04]">
+                        {/* Weekly area chart */}
+                        <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] text-gray-400 font-medium">Reservas esta semana</span>
+                            <span className="text-[9px] text-emerald-400 font-medium">+18% ↑</span>
+                          </div>
+                          <div className="flex items-end gap-1 h-16 sm:h-20">
+                            {[
+                              { day: "L", val: 14, max: true },
+                              { day: "M", val: 11, max: false },
+                              { day: "X", val: 9, max: false },
+                              { day: "J", val: 16, max: false },
+                              { day: "V", val: 22, max: false },
+                              { day: "S", val: 28, max: false },
+                              { day: "D", val: 8, max: false },
+                            ].map((d) => (
+                              <div key={d.day} className="flex-1 flex flex-col items-center gap-0.5">
+                                <div className="w-full bg-slate-800/40 rounded-sm overflow-hidden flex items-end" style={{ height: '100%' }}>
+                                  <div className={`w-full rounded-sm transition-all ${d.day === "L" ? "bg-violet-500/80 animate-pulse-slow" : d.val >= 20 ? "bg-emerald-500/60" : d.val >= 12 ? "bg-violet-500/50" : "bg-indigo-500/40"}`} style={{ height: `${(d.val / 28) * 100}%` }} />
+                                </div>
+                                <span className="text-[7px] sm:text-[8px] text-gray-600">{d.day}</span>
+                              </div>
                             ))}
                           </div>
                         </div>
-                      ))}
-                    </div>
 
-                    {/* Filters */}
-                    <div className="flex items-center gap-2 mb-4">
-                      {["Todos", "Confirmadas", "Pendientes"].map((f, i) => (
-                        <span key={f} className={`text-[10px] px-3 py-1 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-violet-500/20 text-violet-300 font-medium" : "bg-slate-800/40 text-gray-500 hover:text-gray-300"}`}>{f}</span>
-                      ))}
-                      <span className="text-[10px] text-gray-600 ml-auto">14 total</span>
-                    </div>
-
-                    {/* Enterprise Table */}
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left">
-                        <thead>
-                          <tr className="border-b border-white/[0.06]">
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Hora</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Cliente</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Pax</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden sm:table-cell">Mesa</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3 hidden md:table-cell">Canal</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 pr-3">Estado</th>
-                            <th className="text-[9px] text-gray-500 font-medium uppercase tracking-wider pb-2 hidden sm:table-cell">Acciones</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {RESTAURANT_RESERVATIONS.map((r, i) => (
-                            <tr key={i} className={`border-b border-white/[0.03] transition-colors ${i === 1 ? "bg-violet-500/[0.05]" : "hover:bg-white/[0.02]"}`}>
-                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 font-mono">{r.time}</td>
-                              <td className="py-2.5 pr-3">
-                                <div className="flex items-center gap-2">
-                                  <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[8px] font-bold flex-shrink-0 ${i % 3 === 0 ? "bg-violet-500/20 text-violet-300" : i % 3 === 1 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
-                                    {r.name.split(' ').map(n => n[0]).join('')}
-                                  </div>
-                                  <div className="min-w-0">
-                                    <span className="text-[12px] text-white font-medium block truncate">{r.name}</span>
-                                    <span className="text-[8px] text-gray-600">{i % 2 === 0 ? "Cliente habitual" : "Primera visita"}</span>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 hidden sm:table-cell">{r.guests}</td>
-                              <td className="py-2.5 pr-3 text-[12px] text-gray-400 hidden sm:table-cell">{r.table}</td>
-                              <td className="py-2.5 pr-3 hidden md:table-cell">
-                                {i % 3 === 0 ? (
-                                  <span className="text-[9px] bg-emerald-500/10 text-emerald-400 px-1.5 py-0.5 rounded font-medium">WhatsApp</span>
-                                ) : i % 3 === 1 ? (
-                                  <span className="text-[9px] bg-violet-500/10 text-violet-400 px-1.5 py-0.5 rounded font-medium">Web</span>
-                                ) : (
-                                  <span className="text-[9px] bg-cyan-500/10 text-cyan-400 px-1.5 py-0.5 rounded font-medium">Bot IA</span>
-                                )}
-                              </td>
-                              <td className="py-2.5 pr-3">
-                                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
-                                  {r.status === "confirmed" ? "✓ Confirmada" : "⏳ Pendiente"}
-                                </span>
-                              </td>
-                              <td className="py-2.5 hidden sm:table-cell">
-                                <div className="flex items-center gap-1">
-                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-emerald-500/20 transition-colors">
-                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                                  </div>
-                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-violet-500/20 transition-colors">
-                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
-                                  </div>
-                                  <div className="w-5 h-5 rounded bg-slate-700/40 flex items-center justify-center cursor-pointer hover:bg-slate-600/40 transition-colors">
-                                    <svg className="w-2.5 h-2.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
-                                  </div>
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-
-                    {/* Pagination */}
-                    <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/[0.04]">
-                      <span className="text-[10px] text-gray-600">Mostrando 8 de 14 reservas</span>
-                      <div className="flex items-center gap-1">
-                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">←</div>
-                        <div className="w-6 h-6 rounded bg-violet-500/20 flex items-center justify-center text-[10px] text-violet-400 font-medium">1</div>
-                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">2</div>
-                        <div className="w-6 h-6 rounded bg-slate-700/30 flex items-center justify-center text-[10px] text-gray-500 cursor-pointer hover:bg-slate-600/40 transition-colors">→</div>
+                        {/* AI summary */}
+                        <div className="bg-gradient-to-br from-violet-500/[0.08] to-indigo-500/[0.08] border border-violet-500/10 rounded-xl p-3">
+                          <div className="flex items-center gap-2 mb-2">
+                            <div className="w-6 h-6 bg-violet-500/20 rounded-lg flex items-center justify-center">
+                              <svg className="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            </div>
+                            <span className="text-[10px] sm:text-[11px] text-violet-300 font-semibold">Resumen IA del día</span>
+                          </div>
+                          <div className="space-y-1.5">
+                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                              <span className="text-emerald-400 mt-0.5">●</span>
+                              <span><span className="text-white font-medium">11 de 14</span> reservas confirmadas automáticamente</span>
+                            </p>
+                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                              <span className="text-violet-400 mt-0.5">●</span>
+                              <span>Viernes proyectado: <span className="text-white font-medium">100% ocupación</span></span>
+                            </p>
+                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                              <span className="text-amber-400 mt-0.5">●</span>
+                              <span>Pedro Sánchez (14:00) aún <span className="text-amber-400 font-medium">sin confirmar</span></span>
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
