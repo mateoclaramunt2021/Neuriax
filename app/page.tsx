@@ -527,7 +527,7 @@ export default function Home() {
           </ScrollReveal>
 
           <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {/* Landing 1 — Restaurant Premium */}
+            {/* Landing 1 — Restaurant Ultra-Premium */}
             <ScrollReveal>
               <div className="relative">
                 <div className="absolute -inset-3 bg-amber-500/[0.06] rounded-3xl blur-2xl" />
@@ -537,15 +537,19 @@ export default function Home() {
                     <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
                     <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <span className="ml-3 text-[10px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md flex items-center gap-1">
+                    <span className="ml-3 text-[10px] text-gray-500 font-mono bg-slate-800/50 px-3 py-0.5 rounded-md flex items-center gap-1.5">
                       <svg className="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
                       reservas.trattorialanonna.es
                     </span>
+                    <div className="ml-auto flex items-center gap-1">
+                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" /></svg>
+                    </div>
                   </div>
                   {/* Scrollable landing */}
-                  <div className="max-h-[520px] overflow-y-auto scrollbar-thin">
+                  <div className="max-h-[540px] overflow-y-auto scrollbar-thin">
                     {/* Navbar */}
-                    <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.04] bg-[#0c1015]/90 backdrop-blur-md">
+                    <div className="flex items-center justify-between px-5 py-2.5 border-b border-white/[0.04] bg-[#0c1015]/95 backdrop-blur-xl sticky top-0 z-10">
                       <div className="flex items-center gap-2">
                         <span className="text-amber-400 text-sm">🍝</span>
                         <span className="text-[12px] text-white font-semibold tracking-wide">Trattoria La Nonna</span>
@@ -554,147 +558,279 @@ export default function Home() {
                         <span className="text-[9px] text-gray-400 hidden sm:block hover:text-white transition-colors cursor-pointer">Carta</span>
                         <span className="text-[9px] text-gray-400 hidden sm:block hover:text-white transition-colors cursor-pointer">Horarios</span>
                         <span className="text-[9px] text-gray-400 hidden sm:block hover:text-white transition-colors cursor-pointer">Contacto</span>
-                        <span className="text-[9px] bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold px-3 py-1 rounded-full">Reservar</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" /></span>
+                          <span className="text-[8px] text-emerald-400 font-medium hidden sm:block">Abierto</span>
+                        </div>
+                        <span className="text-[9px] bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold px-3 py-1 rounded-full shadow-lg shadow-amber-500/25">Reservar</span>
                       </div>
                     </div>
                     {/* Hero con imagen real */}
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-52 overflow-hidden">
                       <img src="/mockups/restaurante/hero.jpg" alt="Trattoria La Nonna" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/40 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/30 to-black/20" />
+                      {/* Trust badges floating */}
+                      <div className="absolute top-3 right-3 flex flex-col gap-1.5">
+                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
+                          <svg className="w-2.5 h-2.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.41 16.09V16.9c-1.63-.11-2.88-.72-3.72-1.26l.66-1.56c.87.54 1.99 1.08 3.24 1.08 1.35 0 2.04-.63 2.04-1.44 0-.81-.54-1.29-2.1-1.8-2.19-.72-3.48-1.53-3.48-3.33 0-1.62 1.14-2.88 3.12-3.24V4.09h1.5v1.2c1.29.12 2.16.51 2.82.93l-.63 1.5c-.51-.3-1.38-.84-2.64-.84-1.44 0-1.89.72-1.89 1.32 0 .78.63 1.17 2.37 1.77 2.31.78 3.21 1.74 3.21 3.42 0 1.71-1.26 3.03-3.36 3.33v1.31h-1.5z" /></svg>
+                          <span className="text-[7px] text-white font-bold">TheFork</span>
+                        </div>
+                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
+                          <svg className="w-2.5 h-2.5 text-green-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z" /></svg>
+                          <span className="text-[7px] text-white font-bold">TripAdvisor</span>
+                        </div>
+                      </div>
+                      {/* Social proof toast */}
+                      <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/70 backdrop-blur-sm rounded-lg px-2.5 py-1.5 border border-white/10 animate-pulse">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-[7px] font-bold text-black">A</div>
+                        <div>
+                          <p className="text-[8px] text-white font-medium">Ana reservó mesa para 4</p>
+                          <p className="text-[7px] text-gray-400">hace 5 min</p>
+                        </div>
+                      </div>
                       <div className="absolute bottom-0 left-0 right-0 p-5">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[9px] bg-amber-500/20 text-amber-400 font-semibold px-2 py-0.5 rounded-full border border-amber-500/20">Fine Dining</span>
-                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full">Madrid Centro</span>
+                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">📍 Madrid Centro</span>
                         </div>
                         <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">Trattoria La Nonna</h3>
                         <p className="text-[12px] text-gray-300/80 italic">Cocina italiana auténtica desde 1998</p>
-                        <div className="flex items-center gap-2 mt-2">
-                          <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
-                          <span className="text-[10px] text-gray-400">4.8 · 324 reseñas Google</span>
+                        <div className="flex items-center gap-3 mt-2">
+                          <div className="flex items-center gap-1">
+                            <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
+                            <span className="text-[10px] text-gray-400 ml-0.5">4.8</span>
+                          </div>
+                          <span className="text-[9px] text-gray-500">·</span>
+                          <span className="text-[10px] text-gray-400">324 reseñas</span>
+                          <span className="text-[9px] text-gray-500">·</span>
+                          <span className="text-[10px] text-gray-400">€€€</span>
                         </div>
                       </div>
                     </div>
-                    {/* Galería de platos reales */}
-                    <div className="grid grid-cols-3 gap-1 px-1 py-1">
-                      {[
-                        { src: "/mockups/restaurante/plato1.jpg", label: "Pasta fresca" },
-                        { src: "/mockups/restaurante/plato2.jpg", label: "Especialidad" },
-                        { src: "/mockups/restaurante/plato3.jpg", label: "Carta del chef" },
-                      ].map((img, i) => (
-                        <div key={i} className="relative h-20 rounded-lg overflow-hidden group cursor-pointer">
-                          <img src={img.src} alt={img.label} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-1.5">
-                            <span className="text-[8px] text-white font-medium">{img.label}</span>
-                          </div>
+                    {/* Galería de platos — masonry 2x2 */}
+                    <div className="grid grid-cols-4 grid-rows-2 gap-1 px-1 py-1 h-32">
+                      <div className="col-span-2 row-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
+                        <img src="/mockups/restaurante/plato1.jpg" alt="Pasta fresca" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                          <span className="text-[9px] text-white font-semibold">🍝 Pasta fresca del día</span>
                         </div>
-                      ))}
+                      </div>
+                      <div className="col-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
+                        <img src="/mockups/restaurante/plato2.jpg" alt="Especialidad" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                          <span className="text-[9px] text-white font-semibold">🥩 Especialidad de la casa</span>
+                        </div>
+                      </div>
+                      <div className="col-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
+                        <img src="/mockups/restaurante/plato3.jpg" alt="Carta del chef" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+                          <span className="text-[9px] text-white font-semibold">👨‍🍳 Menú degustación</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Menú categorías */}
+                    <div className="px-5 pt-4 pb-2">
+                      <div className="flex items-center gap-2 mb-3">
+                        <div className="w-1 h-4 bg-amber-500 rounded-full" />
+                        <span className="text-[11px] text-white font-semibold">Nuestra carta</span>
+                      </div>
+                      <div className="grid grid-cols-4 gap-2">
+                        {[
+                          { icon: "🥗", name: "Entrantes", count: "12" },
+                          { icon: "🍝", name: "Pasta", count: "8" },
+                          { icon: "🥩", name: "Carnes", count: "6" },
+                          { icon: "🍰", name: "Postres", count: "5" },
+                        ].map((cat) => (
+                          <div key={cat.name} className="text-center bg-white/[0.03] border border-white/[0.06] rounded-xl p-2 hover:border-amber-500/30 transition-colors cursor-pointer group">
+                            <span className="text-base block mb-0.5 group-hover:scale-110 transition-transform">{cat.icon}</span>
+                            <p className="text-[9px] text-white font-medium">{cat.name}</p>
+                            <p className="text-[7px] text-gray-500">{cat.count} platos</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Urgencia de disponibilidad */}
+                    <div className="mx-5 mb-2 flex items-center gap-2 bg-amber-500/[0.08] border border-amber-500/20 rounded-lg px-3 py-2">
+                      <span className="text-amber-400 text-xs">⚡</span>
+                      <span className="text-[10px] text-amber-300 font-medium">Solo quedan 2 mesas para viernes noche</span>
+                      <span className="text-[8px] text-amber-500/60 ml-auto">Alta demanda</span>
                     </div>
                     {/* Formulario de reserva premium */}
                     <div className="p-5 sm:p-6 space-y-4">
                       <div className="flex items-center gap-2 mb-1">
-                        <div className="w-1 h-5 bg-amber-500 rounded-full" />
+                        <div className="w-1 h-5 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full" />
                         <span className="text-[13px] text-white font-semibold">Reserva tu mesa</span>
+                        <span className="ml-auto text-[8px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">Confirmación inmediata</span>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
                           <label className="text-[9px] text-gray-500 uppercase tracking-widest mb-1.5 block font-medium">Comensales</label>
                           <div className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-[12px] text-white flex items-center justify-between hover:border-amber-500/30 transition-colors cursor-pointer">
-                            <span>4 personas</span>
-                            <svg className="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                            <div className="flex items-center gap-2">
+                              <svg className="w-3.5 h-3.5 text-amber-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                              <span>4 personas</span>
+                            </div>
+                            <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                           </div>
                         </div>
                         <div>
                           <label className="text-[9px] text-gray-500 uppercase tracking-widest mb-1.5 block font-medium">Fecha</label>
                           <div className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-[12px] text-white flex items-center justify-between hover:border-amber-500/30 transition-colors cursor-pointer">
-                            <span>Vie, 21 Feb</span>
-                            <svg className="w-3 h-3 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <div className="flex items-center gap-2">
+                              <svg className="w-3.5 h-3.5 text-amber-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                              <span>Vie, 21 Feb</span>
+                            </div>
+                            <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                           </div>
                         </div>
                       </div>
                       <div>
                         <label className="text-[9px] text-gray-500 uppercase tracking-widest mb-1.5 block font-medium">Horario disponible</label>
                         <div className="grid grid-cols-4 gap-2">
-                          {["13:00", "13:30", "14:00", "14:30", "20:30", "21:00", "21:30", "22:00"].map((h, i) => (
-                            <div key={h} className={`text-center text-[11px] py-2.5 rounded-xl cursor-pointer transition-all ${i === 4 ? "bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold shadow-lg shadow-amber-500/20 scale-[1.02]" : "bg-white/[0.03] border border-white/[0.06] text-gray-400 hover:border-amber-500/30 hover:text-white"}`}>
-                              {h}
+                          {[
+                            { h: "13:00", available: true }, { h: "13:30", available: true }, { h: "14:00", available: false }, { h: "14:30", available: true },
+                            { h: "20:30", available: true, selected: true }, { h: "21:00", available: true }, { h: "21:30", available: true }, { h: "22:00", available: false },
+                          ].map((slot) => (
+                            <div key={slot.h} className={`text-center text-[11px] py-2.5 rounded-xl cursor-pointer transition-all relative ${slot.selected ? "bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold shadow-lg shadow-amber-500/20 scale-[1.02]" : slot.available ? "bg-white/[0.03] border border-white/[0.06] text-gray-400 hover:border-amber-500/30 hover:text-white" : "bg-white/[0.01] border border-white/[0.03] text-gray-700 line-through cursor-not-allowed"}`}>
+                              {slot.h}
+                              {!slot.available && <span className="absolute -top-1 -right-1 text-[6px] bg-red-500/20 text-red-400 px-1 rounded-full">Lleno</span>}
                             </div>
                           ))}
                         </div>
                       </div>
                       <div>
                         <label className="text-[9px] text-gray-500 uppercase tracking-widest mb-1.5 block font-medium">Peticiones especiales</label>
-                        <div className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-[11px] text-gray-500 italic">Alergias, celebraciones, silla infantil...</div>
+                        <div className="bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2.5 text-[11px] text-gray-500 italic hover:border-white/[0.15] transition-colors cursor-text">Alergias, celebraciones, silla infantil...</div>
                       </div>
-                      <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-3.5 rounded-xl text-sm hover:shadow-xl hover:shadow-amber-500/25 transition-all hover:scale-[1.01]">
-                        Confirmar reserva →
+                      <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-3.5 rounded-xl text-sm hover:shadow-xl hover:shadow-amber-500/25 transition-all hover:scale-[1.01] flex items-center justify-center gap-2">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        Confirmar reserva
                       </button>
-                      <p className="text-[9px] text-gray-600 text-center">Confirmación instantánea por WhatsApp</p>
-                      {/* Reseñas premium */}
+                      {/* WhatsApp confirmation preview */}
+                      <div className="bg-[#0b2014] border border-emerald-500/20 rounded-xl p-3 flex items-start gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" /></svg>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-[9px] text-emerald-400 font-semibold">WhatsApp</span>
+                            <span className="text-[7px] text-gray-600">· Confirmación automática</span>
+                          </div>
+                          <div className="bg-[#0d2e1a] rounded-lg px-2.5 py-2 border border-emerald-500/10">
+                            <p className="text-[10px] text-gray-300 leading-relaxed">✅ <span className="text-white font-medium">Reserva confirmada</span></p>
+                            <p className="text-[9px] text-gray-400 mt-0.5">Trattoria La Nonna · Vie 21 Feb · 20:30</p>
+                            <p className="text-[9px] text-gray-400">Mesa para 4 · Ref: #TLN-2847</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Reseñas con fuente */}
                       <div className="pt-4 border-t border-white/[0.06] space-y-2.5">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">Reseñas verificadas</span>
-                          <div className="flex items-center gap-1.5 bg-amber-500/10 px-2 py-0.5 rounded-full">
-                            <span className="text-[10px] text-amber-400 font-bold">4.8</span>
-                            <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
+                              <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+                              <span className="text-[8px] text-gray-400 font-semibold">4.8</span>
+                            </div>
+                            <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
+                              <span className="text-[8px]">🍴</span>
+                              <span className="text-[8px] text-gray-400 font-semibold">TheFork 9.2</span>
+                            </div>
                           </div>
                         </div>
                         {[
-                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online en 20 segundos.", stars: 5, time: "hace 2 días", badge: "Cliente habitual" },
-                          { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5, time: "hace 1 semana", badge: "Verificado" },
+                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online en 20 segundos.", stars: 5, time: "hace 2 días", source: "Google", badge: "Local Guide" },
+                          { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5, time: "hace 1 semana", source: "TripAdvisor", badge: "Verificado" },
                         ].map((rev) => (
                           <div key={rev.name} className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3">
                             <div className="flex items-center justify-between mb-1.5">
                               <div className="flex items-center gap-2">
                                 <div className="w-6 h-6 bg-gradient-to-br from-amber-500/30 to-orange-500/20 rounded-full flex items-center justify-center text-[8px] font-bold text-amber-300">{rev.name.split(' ').map(n => n[0]).join('')}</div>
                                 <div>
-                                  <span className="text-[11px] text-white font-medium block">{rev.name}</span>
-                                  <span className="text-[8px] text-amber-500/60">{rev.badge}</span>
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-[11px] text-white font-medium">{rev.name}</span>
+                                    <span className="text-[7px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded-full border border-amber-500/10">{rev.badge}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1 mt-0.5">
+                                    <span className="text-[7px] text-gray-500">vía {rev.source}</span>
+                                    <span className="text-[7px] text-gray-600">· {rev.time}</span>
+                                  </div>
                                 </div>
                               </div>
-                              <span className="text-[8px] text-gray-600">{rev.time}</span>
+                              <div className="flex gap-0.5">{Array.from({length: rev.stars}).map((_, i) => <svg key={i} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
                             </div>
-                            <div className="flex gap-0.5 mb-1">{Array.from({length: rev.stars}).map((_, i) => <svg key={i} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
-                            <p className="text-[11px] text-gray-400 leading-relaxed">{rev.text}</p>
+                            <p className="text-[10px] text-gray-400 leading-relaxed italic">&ldquo;{rev.text}&rdquo;</p>
                           </div>
                         ))}
                       </div>
-                      {/* Ubicación */}
-                      <div className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                          <span className="text-[11px] text-white font-medium">C/ Gran Vía 45, Madrid</span>
+                      {/* Ubicación con mapa estilizado */}
+                      <div className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3 overflow-hidden">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span className="text-[11px] text-white font-medium">C/ Gran Vía 45, Madrid</span>
+                          </div>
+                          <span className="text-[8px] text-amber-400 cursor-pointer hover:text-amber-300">Cómo llegar →</span>
                         </div>
-                        <div className="h-14 bg-[#0b0f14] rounded-lg flex items-center justify-center relative overflow-hidden border border-white/[0.04]">
-                          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(#334155 1px, transparent 1px), linear-gradient(90deg, #334155 1px, transparent 1px)", backgroundSize: "16px 16px" }} />
-                          <div className="relative flex items-center gap-1.5 text-[9px] text-amber-400 font-medium">
-                            <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                            Ver en Google Maps →
+                        <div className="h-20 bg-[#1a1f2e] rounded-lg relative overflow-hidden border border-white/[0.06]">
+                          {/* Stylized map */}
+                          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, #334155 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
+                          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 200 80"><path d="M0 40h40l10-10 20 20 15-15 20 10h95" stroke="#475569" strokeWidth="0.5" fill="none" /><path d="M20 0v80M60 0v80M100 0v80M140 0v80M180 0v80" stroke="#334155" strokeWidth="0.3" /><path d="M0 20h200M0 60h200" stroke="#334155" strokeWidth="0.3" /></svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="relative">
+                              <div className="absolute -inset-3 bg-amber-500/20 rounded-full animate-ping" />
+                              <div className="relative w-6 h-6 bg-gradient-to-br from-amber-500 to-orange-500 rounded-full flex items-center justify-center shadow-lg shadow-amber-500/30 border-2 border-white/20">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="absolute bottom-1 left-2 flex items-center gap-1">
+                            <span className="text-[7px] text-gray-500 bg-black/40 px-1 rounded">Metro: Gran Vía · 2 min</span>
                           </div>
                         </div>
                       </div>
-                      {/* Footer */}
+                      {/* Footer completo */}
                       <div className="pt-4 border-t border-white/[0.06] grid grid-cols-3 gap-3">
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-widest mb-1 font-medium">Horario</p>
                           <p className="text-[9px] text-gray-400">L-J: 13-16, 20-23</p>
                           <p className="text-[9px] text-gray-400">V-S: 13-16, 20-00</p>
+                          <p className="text-[9px] text-amber-400/60 mt-0.5">D: Cerrado</p>
                         </div>
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-widest mb-1 font-medium">Contacto</p>
                           <p className="text-[9px] text-gray-400">info@trattoria.es</p>
                           <p className="text-[9px] text-gray-400">+34 911 234 567</p>
+                          <p className="text-[9px] text-emerald-400/70 mt-0.5 flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />WhatsApp
+                          </p>
                         </div>
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-widest mb-1 font-medium">Social</p>
                           <div className="flex gap-1.5">
-                            {["IG", "FB", "G"].map(s => (
-                              <div key={s} className="w-5 h-5 rounded-md bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[7px] text-gray-500 hover:text-white hover:border-amber-500/30 transition-colors cursor-pointer">{s}</div>
+                            {[
+                              { label: "IG", gradient: "from-pink-500 to-purple-500" },
+                              { label: "FB", gradient: "from-blue-600 to-blue-500" },
+                              { label: "G", gradient: "from-amber-500 to-red-500" },
+                            ].map(s => (
+                              <div key={s.label} className={`w-5 h-5 rounded-md bg-gradient-to-br ${s.gradient} flex items-center justify-center text-[7px] text-white font-bold shadow-sm hover:scale-110 transition-transform cursor-pointer`}>{s.label}</div>
                             ))}
                           </div>
                         </div>
                       </div>
+                      {/* Cookie banner mini */}
+                      <div className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs">🍪</span>
+                          <span className="text-[8px] text-gray-500">Usamos cookies para mejorar tu experiencia</span>
+                        </div>
+                        <div className="flex gap-1.5">
+                          <span className="text-[7px] text-gray-500 cursor-pointer hover:text-white transition-colors">Configurar</span>
+                          <span className="text-[7px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded cursor-pointer font-medium">Aceptar</span>
+                        </div>
+                      </div>
                       <div className="text-center pt-3 border-t border-white/[0.04]">
-                        <span className="text-[9px] text-gray-600">Powered by <span className="text-violet-400 font-semibold">Neuriax</span></span>
+                        <span className="text-[9px] text-gray-600">Powered by <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-semibold">Neuriax</span></span>
                       </div>
                     </div>
                   </div>
@@ -702,7 +838,7 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Landing 2 — Barbershop */}
+            {/* Landing 2 — Barbershop Ultra-Premium */}
             <ScrollReveal delay={150}>
               <div className="relative">
                 <div className="absolute -inset-3 bg-indigo-500/[0.04] rounded-3xl blur-2xl" />
@@ -716,10 +852,14 @@ export default function Home() {
                       <svg className="w-2.5 h-2.5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
                       <span className="text-[10px] text-gray-500 font-mono">reservas.urbancutbarberia.es</span>
                     </div>
+                    <div className="ml-auto flex items-center gap-1">
+                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" /></svg>
+                    </div>
                   </div>
-                  <div className="max-h-[520px] overflow-y-auto scrollbar-thin">
+                  <div className="max-h-[540px] overflow-y-auto scrollbar-thin">
                     {/* Navbar */}
-                    <div className="flex items-center justify-between px-5 py-3 border-b border-white/[0.04] bg-[#0b0f14]/80 backdrop-blur-md">
+                    <div className="flex items-center justify-between px-5 py-2.5 border-b border-white/[0.04] bg-[#0b0f14]/95 backdrop-blur-xl sticky top-0 z-10">
                       <div className="flex items-center gap-2">
                         <span className="text-indigo-400 text-sm">💈</span>
                         <span className="text-[11px] text-white font-bold tracking-wide">Urban Cut Barbería</span>
@@ -727,91 +867,160 @@ export default function Home() {
                       <div className="flex items-center gap-4">
                         <span className="text-[9px] text-gray-500 hidden sm:block hover:text-gray-300 cursor-pointer transition-colors">Servicios</span>
                         <span className="text-[9px] text-gray-500 hidden sm:block hover:text-gray-300 cursor-pointer transition-colors">Equipo</span>
-                        <span className="text-[9px] bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold px-3 py-1 rounded-full shadow-lg shadow-indigo-500/20">Reservar</span>
+                        <div className="flex items-center gap-1.5">
+                          <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" /></span>
+                          <span className="text-[8px] text-emerald-400 font-medium hidden sm:block">Abierto · 2 en espera</span>
+                        </div>
+                        <span className="text-[9px] bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold px-3 py-1 rounded-full shadow-lg shadow-indigo-500/25">Reservar</span>
                       </div>
                     </div>
                     {/* Hero with real image */}
-                    <div className="relative h-44 overflow-hidden">
+                    <div className="relative h-52 overflow-hidden">
                       <img src="/mockups/barberia/salon.jpg" alt="Urban Cut Barbería" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/60 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-5 text-center">
-                        <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1 mb-3 border border-white/10">
-                          <span className="text-indigo-400 text-xs">💈</span>
-                          <span className="text-[10px] text-white/90 font-medium">Barbería Premium</span>
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/30 to-black/20" />
+                      {/* Trust badges */}
+                      <div className="absolute top-3 right-3 flex flex-col gap-1.5">
+                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
+                          <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+                          <span className="text-[7px] text-white font-bold">4.9 Google</span>
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">Reserva tu cita</h3>
-                        <p className="text-[11px] text-gray-300/80">Estilo y precisión en cada corte</p>
-                        <div className="flex items-center justify-center gap-1 mt-2">
-                          {[1,2,3,4,5].map((s) => (
-                            <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-                              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                            </svg>
-                          ))}
-                          <span className="text-[10px] text-gray-400 ml-1">4.9 · 187 reseñas</span>
+                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
+                          <span className="text-[8px]">🏆</span>
+                          <span className="text-[7px] text-white font-bold">Top 10 BCN</span>
+                        </div>
+                      </div>
+                      {/* Social proof toast */}
+                      <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/70 backdrop-blur-sm rounded-lg px-2.5 py-1.5 border border-white/10 animate-pulse">
+                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[7px] font-bold text-white">J</div>
+                        <div>
+                          <p className="text-[8px] text-white font-medium">Javi reservó con Carlos</p>
+                          <p className="text-[7px] text-gray-400">hace 8 min</p>
+                        </div>
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-[9px] bg-indigo-500/20 text-indigo-300 font-semibold px-2 py-0.5 rounded-full border border-indigo-500/20">Barbería Premium</span>
+                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">📍 Barcelona</span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">Urban Cut Barbería</h3>
+                        <p className="text-[12px] text-gray-300/80">Estilo y precisión en cada corte</p>
+                        <div className="flex items-center gap-3 mt-2">
+                          <div className="flex items-center gap-1">
+                            <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
+                            <span className="text-[10px] text-gray-400 ml-0.5">4.9</span>
+                          </div>
+                          <span className="text-[9px] text-gray-500">·</span>
+                          <span className="text-[10px] text-gray-400">187 reseñas</span>
+                          <span className="text-[9px] text-gray-500">·</span>
+                          <span className="text-[10px] text-gray-400">€€</span>
                         </div>
                       </div>
                     </div>
-                    {/* Gallery of real cuts */}
-                    <div className="grid grid-cols-4 gap-1 px-1 py-1 bg-black/20">
-                      {[
-                        { src: "/mockups/barberia/corte1.jpg", label: "Degradado" },
-                        { src: "/mockups/barberia/corte2.jpg", label: "Clásico" },
-                        { src: "/mockups/barberia/corte-barba.jpg", label: "Barba" },
-                        { src: "/mockups/barberia/corte-estilo.jpg", label: "Premium" },
-                      ].map((cut, i) => (
-                        <div key={i} className="relative h-16 rounded overflow-hidden group cursor-pointer">
-                          <img src={cut.src} alt={cut.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-1">
-                            <span className="text-[7px] text-white font-semibold">{cut.label}</span>
+                    {/* Before/After gallery */}
+                    <div className="px-4 pt-3 pb-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">✂️ Nuestros trabajos</span>
+                        <span className="text-[8px] text-indigo-400 cursor-pointer">Ver todos →</span>
+                      </div>
+                      <div className="grid grid-cols-4 gap-1.5">
+                        {[
+                          { src: "/mockups/barberia/corte1.jpg", label: "Degradado", tag: "Popular" },
+                          { src: "/mockups/barberia/corte2.jpg", label: "Clásico", tag: null },
+                          { src: "/mockups/barberia/corte-barba.jpg", label: "Barba", tag: "Nuevo" },
+                          { src: "/mockups/barberia/corte-estilo.jpg", label: "Premium", tag: null },
+                        ].map((cut, i) => (
+                          <div key={i} className="relative rounded-lg overflow-hidden group cursor-pointer aspect-square">
+                            <img src={cut.src} alt={cut.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col items-center justify-end pb-1.5">
+                              <span className="text-[8px] text-white font-semibold">{cut.label}</span>
+                            </div>
+                            {cut.tag && <span className="absolute top-1 right-1 text-[6px] bg-indigo-500 text-white px-1.5 py-0.5 rounded-full font-bold">{cut.tag}</span>}
                           </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Instagram feed preview */}
+                    <div className="mx-4 mt-2 mb-1 bg-white/[0.02] border border-white/[0.06] rounded-xl p-2.5">
+                      <div className="flex items-center gap-2 mb-2">
+                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-pink-500 via-red-500 to-amber-500 flex items-center justify-center">
+                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
                         </div>
-                      ))}
+                        <div>
+                          <span className="text-[9px] text-white font-semibold">@urbancutbarberia</span>
+                          <span className="text-[7px] text-gray-500 ml-1.5">· 2.4k seguidores</span>
+                        </div>
+                        <span className="ml-auto text-[7px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded-full font-semibold cursor-pointer">Seguir</span>
+                      </div>
+                      <div className="grid grid-cols-4 gap-1">
+                        {["/mockups/barberia/corte1.jpg", "/mockups/barberia/corte-estilo.jpg", "/mockups/barberia/corte-barba.jpg", "/mockups/barberia/corte2.jpg"].map((src, i) => (
+                          <div key={i} className="aspect-square rounded overflow-hidden">
+                            <img src={src} alt="" className="w-full h-full object-cover hover:opacity-80 transition-opacity cursor-pointer" />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    {/* Urgencia */}
+                    <div className="mx-4 my-2 flex items-center gap-2 bg-indigo-500/[0.08] border border-indigo-500/20 rounded-lg px-3 py-2">
+                      <span className="text-indigo-400 text-xs">⚡</span>
+                      <span className="text-[10px] text-indigo-300 font-medium">Próxima cita disponible: <span className="text-white font-bold">Hoy 15:30</span></span>
+                      <span className="text-[8px] text-indigo-400/60 ml-auto">3 huecos hoy</span>
                     </div>
                     {/* Booking form */}
                     <div className="p-5 sm:p-6 space-y-4">
                       {/* Barber selector */}
                       <div>
-                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 block flex items-center gap-1.5">
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 flex items-center gap-1.5">
                           <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                           Elige barbero
                         </label>
                         <div className="grid grid-cols-3 gap-2">
                           {[
-                            { name: "Carlos", specialty: "Degradados", selected: true },
-                            { name: "Alex", specialty: "Clásico & Barba", selected: false },
-                            { name: "David", specialty: "Diseño", selected: false },
+                            { name: "Carlos", specialty: "Degradados", rating: "4.9", reviews: "84", selected: true },
+                            { name: "Alex", specialty: "Clásico & Barba", rating: "4.8", reviews: "62", selected: false },
+                            { name: "David", specialty: "Diseño", rating: "4.9", reviews: "41", selected: false },
                           ].map((b) => (
                             <div key={b.name} className={`text-center p-2.5 rounded-xl cursor-pointer transition-all duration-300 ${b.selected ? "bg-indigo-500/[0.15] border-2 border-indigo-500/40 shadow-lg shadow-indigo-500/10" : "bg-slate-800/50 border border-slate-700/40 hover:border-indigo-500/20"}`}>
-                              <div className={`w-9 h-9 rounded-full mx-auto mb-1.5 flex items-center justify-center text-[9px] font-bold ring-2 ${b.selected ? "bg-gradient-to-br from-indigo-500 to-violet-500 text-white ring-indigo-400/30" : "bg-slate-700 text-gray-400 ring-transparent"}`}>{b.name[0]}</div>
+                              <div className={`w-10 h-10 rounded-full mx-auto mb-1.5 flex items-center justify-center text-sm font-bold ring-2 ${b.selected ? "bg-gradient-to-br from-indigo-500 to-violet-500 text-white ring-indigo-400/30" : "bg-slate-700 text-gray-400 ring-transparent"}`}>{b.name[0]}</div>
                               <p className="text-[11px] text-white font-semibold">{b.name}</p>
                               <p className="text-[8px] text-gray-500">{b.specialty}</p>
+                              <div className="flex items-center justify-center gap-0.5 mt-1">
+                                <svg className="w-2 h-2 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                                <span className="text-[7px] text-gray-400">{b.rating} ({b.reviews})</span>
+                              </div>
+                              {b.selected && <span className="text-[7px] text-emerald-400 mt-0.5 block">● Disponible hoy</span>}
                             </div>
                           ))}
                         </div>
                       </div>
                       {/* Services */}
                       <div>
-                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 block flex items-center gap-1.5">
+                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 flex items-center gap-1.5">
                           <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
                           Servicio
                         </label>
                         <div className="space-y-1.5">
                           {[
-                            { name: "Corte Degradado", price: "15€", duration: "30 min", selected: false },
-                            { name: "Corte + Barba", price: "22€", duration: "45 min", selected: true },
-                            { name: "Corte Premium", price: "28€", duration: "40 min", selected: false },
-                            { name: "Tratamiento Capilar", price: "35€", duration: "50 min", selected: false },
+                            { name: "Corte Degradado", price: "15€", duration: "30 min", selected: false, popular: true },
+                            { name: "Corte + Barba", price: "22€", duration: "45 min", selected: true, popular: false },
+                            { name: "Corte Premium", price: "28€", duration: "40 min", selected: false, popular: false },
+                            { name: "Tratamiento Capilar", price: "35€", duration: "50 min", selected: false, popular: false },
                           ].map((s) => (
                             <div key={s.name} className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-all duration-200 ${s.selected ? "bg-indigo-500/[0.12] border border-indigo-500/30 shadow-md shadow-indigo-500/5" : "bg-slate-800/30 border border-slate-700/30 hover:border-indigo-500/20 hover:bg-slate-800/50"}`}>
                               <div className="flex items-center gap-2.5">
                                 <div className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${s.selected ? "border-indigo-400 bg-indigo-400 shadow-sm shadow-indigo-400/50" : "border-gray-600"}`}>
                                   {s.selected && <svg className="w-full h-full text-white p-[1px]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
                                 </div>
-                                <span className={`text-[12px] ${s.selected ? "text-white font-semibold" : "text-gray-300"}`}>{s.name}</span>
+                                <div>
+                                  <span className={`text-[12px] block ${s.selected ? "text-white font-semibold" : "text-gray-300"}`}>{s.name}</span>
+                                  {s.popular && <span className="text-[7px] text-amber-400">🔥 Más popular</span>}
+                                </div>
                               </div>
                               <div className="text-right flex items-center gap-2">
                                 <span className={`text-[12px] font-bold ${s.selected ? "text-indigo-300" : "text-white"}`}>{s.price}</span>
-                                <span className="text-[9px] text-gray-500 bg-slate-800/60 px-1.5 py-0.5 rounded">{s.duration}</span>
+                                <span className="text-[9px] text-gray-500 bg-slate-800/60 px-1.5 py-0.5 rounded flex items-center gap-1">
+                                  <svg className="w-2 h-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                  {s.duration}
+                                </span>
                               </div>
                             </div>
                           ))}
@@ -822,15 +1031,17 @@ export default function Home() {
                         <div>
                           <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1 block">Fecha</label>
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center gap-2 hover:border-indigo-500/30 transition-colors cursor-pointer">
-                            <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                            <svg className="w-3.5 h-3.5 text-indigo-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                             Mar, 18 Feb
+                            <svg className="w-3 h-3 text-gray-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                           </div>
                         </div>
                         <div>
                           <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1 block">Hora</label>
                           <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center gap-2 hover:border-indigo-500/30 transition-colors cursor-pointer">
-                            <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <svg className="w-3.5 h-3.5 text-indigo-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             10:30
+                            <svg className="w-3 h-3 text-gray-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                           </div>
                         </div>
                       </div>
@@ -846,26 +1057,62 @@ export default function Home() {
                         <div className="w-full h-2 bg-slate-700/40 rounded-full overflow-hidden">
                           <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all" style={{ width: "68%" }} />
                         </div>
-                        <span className="text-[8px] text-gray-500 mt-1.5 block">160 pts más para un corte gratis 🎉</span>
+                        <div className="flex items-center justify-between mt-1.5">
+                          <span className="text-[8px] text-gray-500">160 pts más para un corte gratis 🎉</span>
+                          <span className="text-[7px] text-indigo-400/60">Nv. Plata</span>
+                        </div>
                       </div>
                       {/* CTA button */}
-                      <button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3 rounded-xl text-sm shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:from-indigo-400 hover:to-violet-400 transition-all duration-300 flex items-center justify-center gap-2">
+                      <button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:from-indigo-400 hover:to-violet-400 transition-all duration-300 flex items-center justify-center gap-2">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        Reservar cita
+                        Reservar cita · 22€
                       </button>
-                      {/* Reviews */}
-                      <div className="space-y-2 pt-2">
-                        <p className="text-[9px] text-gray-500 uppercase tracking-wider font-semibold">Lo que dicen nuestros clientes</p>
+                      {/* WhatsApp confirmation preview */}
+                      <div className="bg-[#0b2014] border border-emerald-500/20 rounded-xl p-3 flex items-start gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                          <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" /></svg>
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-1.5 mb-1">
+                            <span className="text-[9px] text-emerald-400 font-semibold">WhatsApp</span>
+                            <span className="text-[7px] text-gray-600">· Confirmación automática</span>
+                          </div>
+                          <div className="bg-[#0d2e1a] rounded-lg px-2.5 py-2 border border-emerald-500/10">
+                            <p className="text-[10px] text-gray-300 leading-relaxed">✅ <span className="text-white font-medium">Cita confirmada</span></p>
+                            <p className="text-[9px] text-gray-400 mt-0.5">Urban Cut · Mar 18 Feb · 10:30</p>
+                            <p className="text-[9px] text-gray-400">Corte + Barba con Carlos · Ref: #UC-1293</p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Reviews con fuente */}
+                      <div className="space-y-2 pt-3 border-t border-white/[0.06]">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[9px] text-gray-500 uppercase tracking-wider font-semibold">Reseñas verificadas</span>
+                          <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
+                              <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
+                              <span className="text-[8px] text-gray-400 font-semibold">4.9</span>
+                            </div>
+                          </div>
+                        </div>
                         {[
-                          { name: "Sergio M.", text: "El mejor degradado que me han hecho. Carlos es un artista.", rating: 5, badge: "Cliente habitual" },
-                          { name: "Pablo R.", text: "Siempre salgo contento. Reservar online es comodísimo.", rating: 5, badge: "Verificado" },
+                          { name: "Sergio M.", text: "El mejor degradado que me han hecho. Carlos es un artista. La reserva online es genial.", rating: 5, source: "Google", badge: "Local Guide", time: "hace 3 días" },
+                          { name: "Pablo R.", text: "Siempre salgo contento. Ambiente top y nunca esperas.", rating: 5, source: "Google", badge: "Verificado", time: "hace 1 semana" },
                         ].map((r) => (
                           <div key={r.name} className="bg-slate-800/30 border border-slate-700/20 rounded-lg p-3">
                             <div className="flex items-center justify-between mb-1">
                               <div className="flex items-center gap-2">
-                                <div className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-[7px] text-white font-bold">{r.name[0]}</div>
-                                <span className="text-[10px] text-white font-semibold">{r.name}</span>
-                                <span className="text-[7px] text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded-full">{r.badge}</span>
+                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-[8px] text-white font-bold">{r.name[0]}</div>
+                                <div>
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="text-[10px] text-white font-semibold">{r.name}</span>
+                                    <span className="text-[7px] text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded-full">{r.badge}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1">
+                                    <span className="text-[7px] text-gray-500">vía {r.source}</span>
+                                    <span className="text-[7px] text-gray-600">· {r.time}</span>
+                                  </div>
+                                </div>
                               </div>
                               <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
                             </div>
@@ -873,28 +1120,68 @@ export default function Home() {
                           </div>
                         ))}
                       </div>
+                      {/* Ubicación */}
+                      <div className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3 overflow-hidden">
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                            <span className="text-[11px] text-white font-medium">C/ Enric Granados 38, Barcelona</span>
+                          </div>
+                          <span className="text-[8px] text-indigo-400 cursor-pointer hover:text-indigo-300">Cómo llegar →</span>
+                        </div>
+                        <div className="h-16 bg-[#1a1f2e] rounded-lg relative overflow-hidden border border-white/[0.06]">
+                          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, #334155 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
+                          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 200 80"><path d="M0 40h40l10-10 20 20 15-15 20 10h95" stroke="#475569" strokeWidth="0.5" fill="none" /><path d="M20 0v80M60 0v80M100 0v80M140 0v80M180 0v80" stroke="#334155" strokeWidth="0.3" /><path d="M0 20h200M0 60h200" stroke="#334155" strokeWidth="0.3" /></svg>
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <div className="relative">
+                              <div className="absolute -inset-3 bg-indigo-500/20 rounded-full animate-ping" />
+                              <div className="relative w-6 h-6 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/30 border-2 border-white/20">
+                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="absolute bottom-1 left-2 flex items-center gap-1">
+                            <span className="text-[7px] text-gray-500 bg-black/40 px-1 rounded">Metro: Diagonal · 3 min</span>
+                          </div>
+                        </div>
+                      </div>
                       {/* Footer */}
                       <div className="pt-4 border-t border-white/[0.04] grid grid-cols-3 gap-3">
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Horario</p>
                           <p className="text-[9px] text-gray-400">L-V: 10:00-20:00</p>
                           <p className="text-[9px] text-gray-400">S: 10:00-15:00</p>
+                          <p className="text-[9px] text-indigo-400/60 mt-0.5">D: Cerrado</p>
                         </div>
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Contacto</p>
-                          <p className="text-[9px] text-gray-400 flex items-center gap-1"><span className="text-green-400">●</span> WhatsApp</p>
-                          <p className="text-[9px] text-gray-400">📍 Barcelona</p>
+                          <p className="text-[9px] text-gray-400">+34 633 456 789</p>
+                          <p className="text-[9px] text-emerald-400/70 flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />WhatsApp
+                          </p>
                         </div>
                         <div>
                           <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Social</p>
                           <div className="flex gap-1.5">
                             {[
-                              { label: "IG", color: "from-pink-500 to-purple-500" },
-                              { label: "TK", color: "from-cyan-400 to-blue-500" },
+                              { label: "IG", gradient: "from-pink-500 to-purple-500" },
+                              { label: "TK", gradient: "from-cyan-400 to-blue-500" },
+                              { label: "G", gradient: "from-amber-500 to-red-500" },
                             ].map(s => (
-                              <div key={s.label} className={`w-5 h-5 rounded bg-gradient-to-br ${s.color} flex items-center justify-center text-[7px] text-white font-bold shadow-sm cursor-pointer hover:scale-110 transition-transform`}>{s.label}</div>
+                              <div key={s.label} className={`w-5 h-5 rounded-md bg-gradient-to-br ${s.gradient} flex items-center justify-center text-[7px] text-white font-bold shadow-sm hover:scale-110 transition-transform cursor-pointer`}>{s.label}</div>
                             ))}
                           </div>
+                        </div>
+                      </div>
+                      {/* Cookie mini */}
+                      <div className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs">🍪</span>
+                          <span className="text-[8px] text-gray-500">Usamos cookies para mejorar tu experiencia</span>
+                        </div>
+                        <div className="flex gap-1.5">
+                          <span className="text-[7px] text-gray-500 cursor-pointer hover:text-white transition-colors">Configurar</span>
+                          <span className="text-[7px] bg-indigo-500/20 text-indigo-400 px-1.5 py-0.5 rounded cursor-pointer font-medium">Aceptar</span>
                         </div>
                       </div>
                       <div className="text-center pt-3 border-t border-white/[0.04]">
