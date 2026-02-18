@@ -3,11 +3,11 @@ import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Neuriax | Sistema de Reservas Inteligente para Restaurantes y Barberías",
+  title: "Neuriax | Agentes de IA Personalizados · Atención al Cliente 24/7",
   description:
-    "Panel de reservas + web personalizada + recordatorios automáticos por WhatsApp. Elimina no-shows, llena tu agenda 24/7. Garantía 30 días.",
+    "Agentes de IA conversacional que atienden a tus clientes 24/7. Sistema personalizado + landing white-label + panel de control. Multi-canal: WhatsApp, voz y web chat.",
   keywords:
-    "sistema reservas restaurante, reservas barbería, panel reservas online, recordatorios WhatsApp, gestión reservas, agenda digital negocio",
+    "agente IA, atención al cliente IA, chatbot personalizado, agente conversacional, automatización atención cliente, landing page white-label, IA empresas",
 };
 
 /* ─────────────────────────────────────────────────────
@@ -61,17 +61,17 @@ export default function Home() {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
               <span className="text-[12px] sm:text-[13px] text-violet-700 font-semibold">
-                ⚡ +60% reservas en 30 días
+                AI-Powered Customer Operations
               </span>
             </div>
 
             {/* H1 — BIG on mobile */}
             <h1 className="text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.02] tracking-[-0.04em] mb-5 text-center w-full px-2">
-              <span className="block text-slate-900">Tu negocio</span>
-              <span className="block text-slate-900">lleno.</span>
+              <span className="block text-slate-900">Agentes de IA</span>
+              <span className="block text-slate-900">que atienden,</span>
               <span className="relative inline-block mt-1">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500 animate-gradient-x hero-text-glow">
-                  Sin llamadas.
+                  convierten y escalan.
                 </span>
                 <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2/3 h-[3px] bg-gradient-to-r from-transparent via-violet-500/70 to-transparent rounded-full" />
               </span>
@@ -79,18 +79,18 @@ export default function Home() {
 
             {/* Subtitle — max 2 lines on mobile */}
             <p className="text-base sm:text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-lg sm:max-w-2xl mx-auto px-2">
-              Reservas, web con tu marca y WhatsApp automático para{" "}
-              <span className="text-slate-900 font-semibold">restaurantes y barberías</span>.
+              Sistema integral de atención al cliente con IA.{" "}
+              <span className="text-slate-900 font-semibold">Agente personalizado + landing profesional + panel de control</span>. Un solo sistema, adaptado a tu negocio.
             </p>
 
-            {/* Live counter */}
+            {/* Platform status */}
             <div className="flex items-center gap-2 mb-6">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
               </span>
               <span className="text-sm sm:text-base text-slate-600 font-medium">
-                <span className="text-slate-900 font-bold">237</span> reservas gestionadas hoy
+                Conectado con <span className="text-slate-900 font-bold">25+</span> integraciones · Multi-canal
               </span>
             </div>
 
@@ -102,7 +102,7 @@ export default function Home() {
               >
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
                 <span className="relative z-10 flex items-center gap-3">
-                  Ver demo en 2 min
+                  Explorar plataforma
                   <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -112,16 +112,16 @@ export default function Home() {
                 href="#contacto"
                 className="inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-white border border-slate-200 text-slate-700 font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl sm:rounded-full text-[15px] sm:text-base transition-all duration-300 backdrop-blur-sm w-full sm:w-auto"
               >
-                Hablar con un humano →
+                Solicitar demostración →
               </a>
             </div>
 
             {/* Trust pills — horizontal scroll on mobile */}
             <div className="flex items-center justify-center gap-3 sm:gap-5 text-[12px] sm:text-[13px] text-slate-500 overflow-x-auto no-scrollbar w-full px-2">
               {[
-                { icon: "✓", text: "Sin permanencia" },
-                { icon: "⚡", text: "Listo en 5 días" },
-                { icon: "🛡️", text: "Garantía 30 días" },
+                { icon: "◆", text: "API-first" },
+                { icon: "◆", text: "Multi-canal" },
+                { icon: "◆", text: "White-label" },
               ].map((t) => (
                 <span key={t.text} className="flex items-center gap-1.5 whitespace-nowrap bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-full px-3 py-1.5">
                   <span className="text-[11px]">{t.icon}</span>
@@ -149,10 +149,10 @@ export default function Home() {
                   {/* Stats row */}
                   <div className="grid grid-cols-4 gap-1.5 sm:gap-3 mb-3 sm:mb-5">
                     {[
-                      { label: "Reservas", value: "14", color: "text-violet-400", bg: "bg-violet-500/10" },
-                      { label: "Ocupación", value: "87%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
-                      { label: "No-shows", value: "0", color: "text-amber-400", bg: "bg-amber-500/10" },
-                      { label: "Ingresos", value: "€1.2k", color: "text-cyan-400", bg: "bg-cyan-500/10" },
+                      { label: "Atendidos", value: "142", color: "text-violet-400", bg: "bg-violet-500/10" },
+                      { label: "Resolución", value: "97%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
+                      { label: "Auto", value: "89%", color: "text-amber-400", bg: "bg-amber-500/10" },
+                      { label: "Satisf.", value: "4.9", color: "text-cyan-400", bg: "bg-cyan-500/10" },
                     ].map((s) => (
                       <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2 sm:p-3`}>
                         <span className="text-[7px] sm:text-[9px] text-gray-500 uppercase tracking-wider block">{s.label}</span>
@@ -170,8 +170,8 @@ export default function Home() {
                           <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
                         </div>
                         <div>
-                          <span className="text-[10px] text-gray-400 block">WhatsApp · ahora</span>
-                          <span className="text-[11px] text-white font-medium">María confirmó su reserva ✓</span>
+                          <span className="text-[10px] text-gray-400 block">Agente IA · ahora</span>
+                          <span className="text-[11px] text-white font-medium">Consulta #1247 resuelta ✔</span>
                         </div>
                       </div>
                     </div>
@@ -182,8 +182,8 @@ export default function Home() {
                           <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                         </div>
                         <div>
-                          <span className="text-[10px] text-gray-400 block">Bot IA · hace 2 min</span>
-                          <span className="text-[11px] text-white font-medium">3 reservas confirmadas auto.</span>
+                          <span className="text-[10px] text-gray-400 block">Sistema · hace 2 min</span>
+                          <span className="text-[11px] text-white font-medium">Satisfacción: 98% · 3 canales</span>
                         </div>
                       </div>
                     </div>
@@ -209,7 +209,7 @@ export default function Home() {
                   </div>
                   {/* Fade out overlay on mobile */}
                   <div className="h-8 sm:h-12 bg-gradient-to-t from-[#0d1117] to-transparent -mx-3 sm:-mx-5 -mb-3 sm:-mb-5 mt-1 flex items-end justify-center pb-2">
-                    <span className="text-[9px] sm:text-[10px] text-gray-600">Ver todas las reservas →</span>
+                    <span className="text-[9px] sm:text-[10px] text-gray-600">Ver todas las conversaciones →</span>
                   </div>
                 </div>
               </div>
@@ -219,9 +219,9 @@ export default function Home() {
           {/* Social proof badges — mobile */}
           <div className="flex items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
             {[
-              { value: "−95%", label: "no-shows" },
-              { value: "50+", label: "negocios" },
-              { value: "4.9★", label: "valoración" },
+              { value: "99.9%", label: "uptime" },
+              { value: "<2s", label: "respuesta" },
+              { value: "24/7", label: "disponible" },
             ].map((s) => (
               <div key={s.label} className="text-center">
                 <div className="text-lg sm:text-2xl font-extrabold text-slate-900">{s.value}</div>
@@ -249,12 +249,12 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 text-center items-end">
             {[
-              { value: "−95%", label: "no-shows", color: "text-emerald-400" },
-              { value: "+60%", label: "reservas online", color: "text-violet-400" },
-              { value: "24/7", label: "reservas activas", color: "text-amber-400" },
-              { value: "50+", label: "negocios activos", color: "text-slate-900" },
-              { value: "2.400+", label: "reservas/mes", color: "text-slate-900" },
-              { value: "4.9★", label: "satisfacción", color: "text-slate-900" },
+              { value: "99.9%", label: "uptime garantizado", color: "text-emerald-400" },
+              { value: "<2s", label: "tiempo de respuesta", color: "text-violet-400" },
+              { value: "24/7", label: "disponibilidad total", color: "text-amber-400" },
+              { value: "25+", label: "integraciones", color: "text-slate-900" },
+              { value: "Multi", label: "idioma y canal", color: "text-slate-900" },
+              { value: "RGPD", label: "compliant", color: "text-slate-900" },
             ].map((s) => (
               <div key={s.label}>
                 <div className={`text-2xl sm:text-3xl font-extrabold ${s.color}`}>{s.value}</div>
@@ -272,12 +272,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-10 sm:mb-14">
-              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Panel de control</span>
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Centro de operaciones</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Todo tu negocio en una pantalla
+                Command Center
               </h2>
               <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">
-                Reservas, mensajes automáticos, IA y mapa de mesas. El panel que trabaja por ti.
+                Monitoriza conversaciones, métricas de rendimiento y configuración del agente desde un único panel.
               </p>
             </div>
           </ScrollReveal>
@@ -291,7 +291,7 @@ export default function Home() {
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500/80" />
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-2 sm:ml-4 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-4 py-0.5 sm:py-1 rounded-md truncate">panel.neuriax.com/reservas</span>
+                  <span className="ml-2 sm:ml-4 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-4 py-0.5 sm:py-1 rounded-md truncate">panel.neuriax.com/agents</span>
                   <div className="ml-auto flex items-center gap-1.5">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
@@ -309,12 +309,12 @@ export default function Home() {
                       <span className="text-sm font-bold text-white">Neuriax</span>
                     </div>
                     {[
-                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Inicio", active: false, badge: "" },
-                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Reservas", active: true, badge: "14" },
+                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Overview", active: false, badge: "" },
+                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Conversaciones", active: true, badge: "14" },
                       { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Clientes", active: false, badge: "312" },
-                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Mensajes", active: false, badge: "3" },
-                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Estadísticas", active: false, badge: "" },
-                      { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z", label: "Ajustes", active: false, badge: "" },
+                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Analytics", active: false, badge: "" },
+                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Integraciones", active: false, badge: "25" },
+                      { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z", label: "Configuración", active: false, badge: "" },
                     ].map((item) => (
                       <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm cursor-pointer transition-colors ${item.active ? "bg-violet-500/[0.15] text-violet-300 font-medium border border-violet-500/20" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
                         <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -334,9 +334,9 @@ export default function Home() {
                           <div className="w-5 h-5 bg-violet-500/30 rounded-lg flex items-center justify-center">
                             <svg className="w-3 h-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                           </div>
-                          <span className="text-[10px] text-violet-300 font-semibold">Asistente IA</span>
+                          <span className="text-[10px] text-violet-300 font-semibold">Estado del Agente</span>
                         </div>
-                        <p className="text-[9px] text-gray-400 leading-relaxed">He confirmado <span className="text-emerald-400 font-medium">3 reservas</span> automáticamente hoy. 0 no-shows.</p>
+                        <p className="text-[9px] text-gray-400 leading-relaxed">Procesadas <span className="text-emerald-400 font-medium">142 consultas</span> hoy. Tasa de resolución: 97%.</p>
                       </div>
                     </div>
                   </div>
@@ -347,10 +347,10 @@ export default function Home() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 px-3 sm:px-6 py-3 sm:py-4 border-b border-white/[0.06]">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm sm:text-lg font-bold text-white">Reservas — Hoy</h3>
-                          <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full font-medium">⚠️ 1 sin confirmar</span>
+                          <h3 className="text-sm sm:text-lg font-bold text-white">Conversaciones — Hoy</h3>
+                          <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full font-medium">1 pendiente de revisión</span>
                         </div>
-                        <p className="text-[10px] sm:text-[11px] text-gray-500">Lunes 17 Feb · La Trattoria Napoli · 8 mesas</p>
+                        <p className="text-[10px] sm:text-[11px] text-gray-500">Lunes 17 Feb · 3 canales activos · Agente v2.4</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
@@ -369,10 +369,10 @@ export default function Home() {
                       {/* Stats with icons + trends */}
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
                         {[
-                          { label: "Confirmadas", value: "11", change: "+2 vs ayer", icon: "✓", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", iconBg: "bg-emerald-500/20" },
-                          { label: "Pendientes", value: "3", change: "−1 vs ayer", icon: "⏳", color: "text-amber-400", bg: "bg-amber-500/[0.08]", iconBg: "bg-amber-500/20" },
-                          { label: "Comensales", value: "42", change: "+8 esta semana", icon: "👥", color: "text-violet-400", bg: "bg-violet-500/[0.08]", iconBg: "bg-violet-500/20" },
-                          { label: "Ingresos hoy", value: "€1.2k", change: "+12%", icon: "📈", color: "text-cyan-400", bg: "bg-cyan-500/[0.08]", iconBg: "bg-cyan-500/20" },
+                          { label: "Resueltas", value: "138", change: "+12 vs ayer", icon: "✓", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", iconBg: "bg-emerald-500/20" },
+                          { label: "Pendientes", value: "4", change: "−1 vs ayer", icon: "⏳", color: "text-amber-400", bg: "bg-amber-500/[0.08]", iconBg: "bg-amber-500/20" },
+                          { label: "Usuarios", value: "89", change: "+15 esta semana", icon: "◆", color: "text-violet-400", bg: "bg-violet-500/[0.08]", iconBg: "bg-violet-500/20" },
+                          { label: "Satisfacción", value: "4.9", change: "+0.2", icon: "★", color: "text-cyan-400", bg: "bg-cyan-500/[0.08]", iconBg: "bg-cyan-500/20" },
                         ].map((s) => (
                           <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2.5 sm:p-3`}>
                             <div className="flex items-center gap-1.5 mb-1">
@@ -428,7 +428,7 @@ export default function Home() {
                           {/* Compact reservation list */}
                           <div className="space-y-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Próximas reservas</span>
+                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Conversaciones recientes</span>
                               <div className="flex items-center gap-1 ml-auto">
                                 {["Todas", "Pendientes"].map((f, i) => (
                                   <span key={f} className={`text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-violet-500/20 text-violet-300" : "bg-slate-800/40 text-gray-500"}`}>{f}</span>
@@ -534,10 +534,10 @@ export default function Home() {
                             <span className="text-[10px] text-gray-400 font-medium block mb-2">Actividad reciente</span>
                             <div className="space-y-2">
                               {[
-                                { icon: "✓", color: "text-emerald-400 bg-emerald-500/20", text: "Ana confirmó su reserva", time: "hace 2 min" },
-                                { icon: "🤖", color: "text-violet-400 bg-violet-500/20", text: "Bot IA contestó a Carlos", time: "hace 5 min" },
-                                { icon: "📱", color: "text-cyan-400 bg-cyan-500/20", text: "Recordatorio enviado a Laura", time: "hace 8 min" },
-                                { icon: "➕", color: "text-amber-400 bg-amber-500/20", text: "Nueva reserva vía web", time: "hace 12 min" },
+                                { icon: "✓", color: "text-emerald-400 bg-emerald-500/20", text: "Consulta #1247 resuelta por el agente", time: "hace 2 min" },
+                                { icon: "◆", color: "text-violet-400 bg-violet-500/20", text: "Nuevo lead cualificado vía web chat", time: "hace 5 min" },
+                                { icon: "◆", color: "text-cyan-400 bg-cyan-500/20", text: "Follow-up enviado a María", time: "hace 8 min" },
+                                { icon: "◆", color: "text-amber-400 bg-amber-500/20", text: "Agente de voz atendió llamada", time: "hace 12 min" },
                               ].map((a, i) => (
                                 <div key={i} className="flex items-start gap-2">
                                   <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] flex-shrink-0 ${a.color}`}>{a.icon}</span>
@@ -557,7 +557,7 @@ export default function Home() {
                         {/* Weekly area chart */}
                         <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] text-gray-400 font-medium">Reservas esta semana</span>
+                            <span className="text-[10px] text-gray-400 font-medium">Interacciones esta semana</span>
                             <span className="text-[9px] text-emerald-400 font-medium">+18% ↑</span>
                           </div>
                           <div className="flex items-end gap-1 h-16 sm:h-20">
@@ -591,15 +591,15 @@ export default function Home() {
                           <div className="space-y-1.5">
                             <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-emerald-400 mt-0.5">●</span>
-                              <span><span className="text-white font-medium">11 de 14</span> reservas confirmadas automáticamente</span>
+                              <span><span className="text-white font-medium">138 de 142</span> consultas resueltas automáticamente</span>
                             </p>
                             <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-violet-400 mt-0.5">●</span>
-                              <span>Viernes proyectado: <span className="text-white font-medium">100% ocupación</span></span>
+                              <span>Tiempo medio de respuesta: <span className="text-white font-medium">1.2 segundos</span></span>
                             </p>
                             <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-amber-400 mt-0.5">●</span>
-                              <span>Pedro Sánchez (14:00) aún <span className="text-amber-400 font-medium">sin confirmar</span></span>
+                              <span>4 consultas <span className="text-amber-400 font-medium">requieren revisión manual</span></span>
                             </p>
                           </div>
                         </div>
@@ -620,12 +620,12 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <span className="text-indigo-400 text-xs font-semibold tracking-[0.2em] uppercase">Tu web de reservas</span>
+              <span className="text-indigo-400 text-xs font-semibold tracking-[0.2em] uppercase">Landing incluida</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Tu propia web de reservas. Con tu marca.
+                Landing page white-label. Personalizable.
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Tus clientes entran, eligen día y hora, y reservan en 30 segundos. Sin llamar. Sin esperar.
+                Cada agente incluye una landing profesional con la identidad de tu marca. Dominio propio, diseño adaptado y conversión optimizada.
               </p>
             </div>
           </ScrollReveal>
@@ -1307,12 +1307,12 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-6">
-              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Recordatorios automáticos</span>
+              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Comunicación automatizada</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Tus clientes nunca más se olvidan
+                Comunicación multi-canal con IA
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-2">
-                Recordatorios por WhatsApp que eliminan los no-shows de tu negocio.
+                El agente se comunica con tus clientes a través de WhatsApp, email y web chat. Cada interacción se registra y analiza.
               </p>
             </div>
           </ScrollReveal>
@@ -1320,8 +1320,8 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-3 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-2xl px-6 py-4">
-                <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400">35% → 3%</span>
-                <span className="text-sm text-slate-500 text-left">de no-shows<br />con recordatorios</span>
+                <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400">97%</span>
+                <span className="text-sm text-slate-500 text-left">tasa de resolución<br />automática</span>
               </div>
             </div>
           </ScrollReveal>
@@ -1332,26 +1332,26 @@ export default function Home() {
 
             {[
               {
-                icon: "✅", color: "bg-emerald-500", label: "Reserva confirmada", time: "Al instante",
+                icon: "✓", color: "bg-emerald-500", label: "Confirmación automática", time: "Al instante",
                 message: "¡Hola María! 🎉 Tu mesa para 4 en Trattoria La Nonna está confirmada:\n📅 Viernes 21 Feb — 20:30\n📍 C/ Gran Vía 45, Madrid\n\nSi necesitas cambiar algo, responde a este mensaje.",
                 quickReplies: ["👍 Perfecto", "📝 Modificar"],
                 timestamp: "14:23",
               },
               {
-                icon: "⏰", color: "bg-violet-500", label: "Recordatorio 24h antes", time: "Jueves 20:30",
+                icon: "◆", color: "bg-violet-500", label: "Follow-up programado", time: "Jueves 20:30",
                 message: "Hola María 👋 Te recordamos tu reserva mañana viernes a las 20:30 en Trattoria La Nonna.\n\n¿Sigues viniendo?",
                 quickReplies: ["✅ Confirmo", "❌ Cancelar", "🔄 Cambiar hora"],
                 timestamp: "20:30",
               },
               {
-                icon: "📍", color: "bg-indigo-500", label: "Último aviso + ubicación", time: "Viernes 19:30",
+                icon: "◆", color: "bg-indigo-500", label: "Notificación contextual", time: "Viernes 19:30",
                 message: "¡María, te esperamos en 1 hora! 🍝\n\n📍 Cómo llegar: maps.google.com/trattoria\n🅿️ Parking: Parking Centro (2 min)\n\n¡Buen provecho!",
                 hasMap: true,
                 quickReplies: ["🚗 Abrir mapa"],
                 timestamp: "19:30",
               },
               {
-                icon: "⭐", color: "bg-amber-500", label: "Post-visita", time: "Sábado 10:00",
+                icon: "◆", color: "bg-amber-500", label: "Post-interacción · Feedback loop", time: "Sábado 10:00",
                 message: "¡Hola María! Esperamos que disfrutaras de tu cena 😊\n\n¿Nos dejas tu opinión? Nos ayuda muchísimo:",
                 quickReplies: ["⭐ Dejar reseña", "📅 Reservar otra vez"],
                 timestamp: "10:00",
@@ -1437,9 +1437,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <span className="text-rose-400 text-xs font-semibold tracking-[0.2em] uppercase">La diferencia</span>
+              <span className="text-rose-400 text-xs font-semibold tracking-[0.2em] uppercase">Comparativa</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                La diferencia es brutal
+                Operaciones manuales vs. Operaciones con IA
               </h2>
             </div>
           </ScrollReveal>
@@ -1451,16 +1451,16 @@ export default function Home() {
                   <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                     <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                   </div>
-                  <h3 className="text-xl font-bold text-red-600">Sin Neuriax</h3>
+                  <h3 className="text-xl font-bold text-red-600">Operación manual</h3>
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { icon: "📓", text: "Libreta de papel con tachones y reservas perdidas" },
-                    { icon: "📱", text: "52+ mensajes de WhatsApp sin contestar al día" },
-                    { icon: "🚫", text: "35% de no-shows cada mes — mesas vacías, dinero perdido" },
-                    { icon: "📞", text: "Llamadas a las 23:00 para reservar — imposible descansar" },
-                    { icon: "💸", text: "Miles de euros perdidos en sillas y mesas vacías" },
-                    { icon: "😤", text: "Clientes frustrados que no vuelven" },
+                    { icon: "○", text: "Atención limitada a horario comercial — clientes perdidos fuera de horas" },
+                    { icon: "○", text: "Respuestas manuales e inconsistentes entre canales" },
+                    { icon: "○", text: "Datos dispersos sin análisis ni trazabilidad" },
+                    { icon: "○", text: "Escalabilidad limitada por recursos humanos" },
+                    { icon: "○", text: "Costes crecientes con cada nuevo canal de comunicación" },
+                    { icon: "○", text: "Sin métricas de satisfacción ni feedback automatizado" },
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
@@ -1481,12 +1481,12 @@ export default function Home() {
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { icon: "📊", text: "Panel digital con todas las reservas organizadas" },
-                    { icon: "✅", text: "Reservas automáticas 24/7, sin intervención tuya" },
-                    { icon: "📉", text: "Menos del 3% de no-shows con recordatorios WhatsApp" },
-                    { icon: "🔕", text: "0 llamadas para reservar — todo online automático" },
-                    { icon: "💰", text: "Agenda siempre llena, ingresos predecibles cada semana" },
-                    { icon: "🔄", text: "Clientes que vuelven gracias al seguimiento automático" },
+                    { icon: "◆", text: "Cobertura 24/7 sin intervención humana en todos los canales" },
+                    { icon: "◆", text: "Respuestas personalizadas con NLP avanzado en <2 segundos" },
+                    { icon: "◆", text: "Analytics en tiempo real con insights accionables" },
+                    { icon: "◆", text: "Escalabilidad ilimitada sin incremento de costes operativos" },
+                    { icon: "◆", text: "Un único sistema multi-canal: WhatsApp, voz, web chat" },
+                    { icon: "◆", text: "Feedback loop automático con medición de satisfacción" },
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
@@ -1507,9 +1507,9 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-14">
-              <span className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">Sectores</span>
+              <span className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase">Casos de uso</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Diseñado para tu tipo de negocio
+                Soluciones por sector
               </h2>
             </div>
           </ScrollReveal>
@@ -1518,20 +1518,20 @@ export default function Home() {
             <ScrollReveal>
               <div className="group bg-gradient-to-br from-amber-50 to-white border border-amber-200/60 rounded-2xl p-6 sm:p-8 hover:border-amber-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">🍽</div>
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">�</div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900">Restaurantes</h3>
-                    <p className="text-xs text-slate-500">Llena tus mesas cada servicio</p>
+                    <h3 className="text-xl font-bold text-slate-900">Hostelería & Restauración</h3>
+                    <p className="text-xs text-slate-500">Gestión integral de reservas y atención</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
                   {[
-                    "Gestión de mesas y turnos (comida/cena)",
-                    "Menú del día visible en la web de reservas",
-                    "Reservas para grupos y eventos especiales",
-                    "Integración con Google Reviews y Google Maps",
-                    "Recordatorios automáticos por WhatsApp",
-                    "Panel de estadísticas: ocupación, ingresos, no-shows",
+                    "Agente IA que gestiona reservas por WhatsApp, voz y web",
+                    "Landing personalizada con carta, horarios y reserva online",
+                    "Follow-up automático y recogida de feedback post-visita",
+                    "Integración con Google Reviews, Maps y plataformas de reserva",
+                    "Panel de control con analytics de ocupación y satisfacción",
+                    "Multi-idioma para establecimientos turísticos",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -1539,27 +1539,27 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, bares, cafeterías, gastrobares, brunch spots</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, bares, hoteles, cafeterías, catering, gastrobares</p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
               <div className="group bg-gradient-to-br from-indigo-50 to-white border border-indigo-200/60 rounded-2xl p-6 sm:p-8 hover:border-indigo-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl">💈</div>
+                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl">✂️</div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900">Barberías</h3>
-                    <p className="text-xs text-slate-500">Agenda siempre llena sin esfuerzo</p>
+                    <h3 className="text-xl font-bold text-slate-900">Servicios & Bienestar</h3>
+                    <p className="text-xs text-slate-500">Automatización de citas y fidelización</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
                   {[
-                    "Gestión por barbero/estilista individual",
-                    "Servicios con duración y precio automático",
-                    "Galería de trabajos y estilos en la web",
-                    "Programa de fidelización integrado",
-                    "Recordatorios de cita por WhatsApp",
-                    "Estadísticas por barbero: agenda, clientes, ingresos",
+                    "Agente IA que gestiona citas por profesional/especialista",
+                    "Landing con catálogo de servicios, galería y booking",
+                    "Programa de fidelización y puntos integrado",
+                    "Recordatorios inteligentes y reprogramación automática",
+                    "Analytics por profesional: agenda, retención, ingresos",
+                    "Gestión de reseñas y reputación online",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -1567,7 +1567,7 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-slate-400 italic">Ideal para: barberías, peluquerías, centros de estética, nail bars</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: barberías, peluquerías, centros de estética, clínicas, spas, consultas</p>
               </div>
             </ScrollReveal>
           </div>
@@ -1600,9 +1600,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Proceso</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">En 5 días, funcionando</h2>
-              <p className="text-lg text-slate-500">Simple, rápido, sin complicaciones.</p>
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Implementación</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">Proceso de implementación</h2>
+              <p className="text-lg text-slate-500">Del análisis al despliegue en 5 días laborables.</p>
             </div>
           </ScrollReveal>
 
@@ -1610,10 +1610,10 @@ export default function Home() {
             <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-violet-500/30 via-indigo-500/30 to-amber-500/30" />
 
             {[
-              { num: "01", title: "Hablamos", desc: "15 min por teléfono. Me cuentas tu negocio, te enseño una demo personalizada. Sin compromiso.", gradient: "from-violet-500 to-violet-600" },
-              { num: "02", title: "Diseñamos", desc: "Creo tu panel de reservas + web personalizada con tu marca, colores, logo y servicios.", gradient: "from-indigo-500 to-indigo-600" },
-              { num: "03", title: "Lanzamos", desc: "Te formo en 30 minutos. Empiezas a recibir reservas automáticas desde el día 1.", gradient: "from-blue-500 to-blue-600" },
-              { num: "04", title: "Crecemos", desc: "Soporte continuo + optimización mensual. Tu sistema mejora cada semana.", gradient: "from-amber-500 to-orange-500" },
+              { num: "01", title: "Discovery", desc: "Análisis de tu operación, flujos de atención actuales y puntos de fricción. Definición de requisitos y arquitectura del agente.", gradient: "from-violet-500 to-violet-600" },
+              { num: "02", title: "Configuración", desc: "Personalización del agente IA, integraciones con tus sistemas, diseño de la landing page y flujos conversacionales.", gradient: "from-indigo-500 to-indigo-600" },
+              { num: "03", title: "Despliegue", desc: "Puesta en producción con testing end-to-end, validación de todos los canales y formación del equipo.", gradient: "from-blue-500 to-blue-600" },
+              { num: "04", title: "Optimización", desc: "Mejora continua basada en datos, ajuste de respuestas del agente y reporting mensual de rendimiento.", gradient: "from-amber-500 to-orange-500" },
             ].map((step, i) => (
               <ScrollReveal key={step.num} delay={i * 100}>
                 <div className="text-center relative">
@@ -1630,7 +1630,7 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mt-16">
               <a href="#contacto" className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-amber-500/20">
-                Quiero mi sistema de reservas
+                Solicitar implementación
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </div>
@@ -1646,14 +1646,14 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-2 bg-cyan-500/[0.08] border border-cyan-500/20 rounded-full px-4 py-2 mb-5">
-                <span className="text-[13px] text-cyan-300 font-semibold">⚡ Complemento Premium</span>
+                <span className="text-[13px] text-cyan-300 font-semibold">Canal de voz integrado</span>
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                ¿Y si además tu teléfono<br className="hidden sm:block" /> se contesta solo?
+                Agente de voz con IA
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Añade un agente de voz con IA a tu sistema de reservas. Contesta llamadas,
-                gestiona reservas y responde preguntas — con voz natural, 24 horas del día.
+                Canal telefónico con procesamiento de lenguaje natural en tiempo real.
+                Voz sintética indistinguible, conectada al sistema central del agente.
               </p>
             </div>
           </ScrollReveal>
@@ -1663,9 +1663,9 @@ export default function Home() {
               <div>
                 <ul className="space-y-5 mb-8">
                   {[
-                    { title: "Responde llamadas 24/7", desc: "Un cliente llama a las 23:00 para reservar. El agente contesta, busca disponibilidad y confirma la reserva.", color: "text-cyan-400" },
-                    { title: "Habla como una persona real", desc: "Voz natural con IA avanzada. Tus clientes no notarán la diferencia. Trato amable y profesional.", color: "text-violet-400" },
-                    { title: "Conectado a tu panel", desc: "Las reservas que gestiona el agente aparecen directamente en tu panel. Todo sincronizado en tiempo real.", color: "text-amber-400" },
+                    { title: "Atención telefónica 24/7", desc: "Un cliente llama fuera de horario. El agente procesa la consulta, accede al sistema y resuelve la petición en tiempo real.", color: "text-cyan-400" },
+                    { title: "Voz natural con NLP avanzado", desc: "Síntesis de voz indistinguible de un operador humano. Procesamiento contextual y respuestas adaptadas al historial del cliente.", color: "text-violet-400" },
+                    { title: "Integrado con el sistema central", desc: "Todas las interacciones del agente de voz se sincronizan con el panel de control, analytics y los demás canales en tiempo real.", color: "text-amber-400" },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">
                       <div className="w-10 h-10 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -1679,7 +1679,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <a href="#contacto" className="inline-flex items-center gap-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-full text-sm transition-all duration-300">
-                  Añadir agente de voz a mi plan
+                  Explorar canal de voz
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 </a>
               </div>
@@ -1842,10 +1842,10 @@ export default function Home() {
           <ScrollReveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
               {[
-                { value: "−95%", label: "no-shows", color: "text-emerald-400", bg: "from-emerald-500/[0.06] to-transparent" },
-                { value: "+60%", label: "reservas online", color: "text-violet-400", bg: "from-violet-500/[0.06] to-transparent" },
-                { value: "−80%", label: "llamadas teléfono", color: "text-indigo-400", bg: "from-indigo-500/[0.06] to-transparent" },
-                { value: "4.9★", label: "satisfacción media", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
+                { value: "<2s", label: "tiempo medio de respuesta", color: "text-emerald-400", bg: "from-emerald-500/[0.06] to-transparent" },
+                { value: "97%", label: "resolución automática", color: "text-violet-400", bg: "from-violet-500/[0.06] to-transparent" },
+                { value: "99.9%", label: "disponibilidad del servicio", color: "text-indigo-400", bg: "from-indigo-500/[0.06] to-transparent" },
+                { value: "4.9/5", label: "satisfacción usuarios finales", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
               ].map((r) => (
                 <div key={r.label} className={`bg-gradient-to-b ${r.bg} border border-slate-200 rounded-2xl p-6 text-center`}>
                   <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${r.color} mb-2`}>{r.value}</div>
@@ -1864,10 +1864,10 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "Garantía 30 días", desc: "No funciona = te devuelvo el dinero", bgClass: "bg-emerald-500/10", iconClass: "text-emerald-400" },
-              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Listo en 5 días", desc: "Panel + web funcionando", bgClass: "bg-violet-500/10", iconClass: "text-violet-400" },
-              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", title: "Trato directo", desc: "Hablas conmigo, no con vendedores", bgClass: "bg-indigo-500/10", iconClass: "text-indigo-400" },
-              { icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", title: "Sin permanencia", desc: "Cancela cuando quieras", bgClass: "bg-amber-500/10", iconClass: "text-amber-400" },
+              { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "SLA garantizado", desc: "Disponibilidad 99.9%", bgClass: "bg-emerald-500/10", iconClass: "text-emerald-400" },
+              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Despliegue en 5 días", desc: "Implementación rápida", bgClass: "bg-violet-500/10", iconClass: "text-violet-400" },
+              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", title: "Soporte dedicado", desc: "Equipo técnico asignado", bgClass: "bg-indigo-500/10", iconClass: "text-indigo-400" },
+              { icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", title: "Sin lock-in", desc: "Portabilidad total de datos", bgClass: "bg-amber-500/10", iconClass: "text-amber-400" },
             ].map((item) => (
               <ScrollReveal key={item.title}>
                 <div>
@@ -1899,13 +1899,13 @@ export default function Home() {
           <ScrollReveal>
             <div className="space-y-3">
               {[
-                { q: "¿Cuánto cuesta el sistema de reservas?", a: "Depende de las funcionalidades que necesites. En la llamada de 15 min te doy precio exacto para tu caso, sin sorpresas. Incluye panel, web personalizada y recordatorios." },
-                { q: "¿Funciona para mi tipo de negocio?", a: "Si tienes un restaurante, bar, barbería, peluquería o centro de estética, sí. El sistema se adapta a tu tipo de negocio con funcionalidades específicas." },
-                { q: "¿Mis clientes sabrán usar la web de reservas?", a: "Es más fácil que pedir un Uber. Eligen día, hora, confirman y listo. 30 segundos. Hemos probado con personas de todas las edades." },
-                { q: "¿Cómo se reducen los no-shows?", a: "Con recordatorios automáticos por WhatsApp: confirmación al reservar, aviso 24h antes con botón de confirmar/cancelar, y último recordatorio 1h antes. De un 35% a menos del 3%." },
-                { q: "¿Puedo probarlo antes de pagar?", a: "Sí. En la llamada te enseño una demo con datos reales de tu negocio. Además, tienes garantía de 30 días: si no funciona, devuelvo tu dinero." },
-                { q: "¿Cuánto tarda en estar funcionando?", a: "5 días laborables desde que empezamos. Incluye diseño, configuración, personalización con tu marca y formación." },
-                { q: "¿Qué pasa con el agente de voz?", a: "Es un complemento opcional. Si además de las reservas online quieres que alguien conteste el teléfono 24/7, añadimos el agente de voz IA a tu sistema." },
+                { q: "¿Cuál es el modelo de pricing?", a: "Ofrecemos planes adaptados al volumen de interacciones y canales requeridos. En la demostración técnica definimos el alcance y proporcionamos un presupuesto cerrado. Sin costes ocultos." },
+                { q: "¿Para qué sectores funciona la plataforma?", a: "Cualquier negocio que requiera atención al cliente: hostelería, servicios profesionales, salud, retail, consultorías. El agente se personaliza para cada vertical con flujos conversacionales adaptados." },
+                { q: "¿Qué experiencia tienen los usuarios finales?", a: "Los clientes interactuían de forma natural por WhatsApp, teléfono o web chat. El agente responde en <2 segundos con lenguaje natural. La experiencia es indistinguible de un operador humano." },
+                { q: "¿Cómo se entrena al agente?", a: "Durante la fase de Discovery analizamos tus flujos de atención y configuramos el agente con tu información: servicios, políticas, horarios, FAQ. El sistema mejora automáticamente con cada interacción." },
+                { q: "¿Qué integraciones soporta la plataforma?", a: "Más de 25 integraciones nativas: WhatsApp Business, Google Calendar, Stripe, CRMs, Make, Zapier, n8n, APIs REST y webhooks. Si necesitas una integración específica, la desarrollamos." },
+                { q: "¿Cuánto tarda la implementación?", a: "5 días laborables desde el kickoff. Incluye análisis, configuración del agente, diseño de la landing, integraciones, testing y formación del equipo." },
+                { q: "¿Cumplís con RGPD?", a: "Sí. Todos los datos se procesan en la UE, con cifrado end-to-end, políticas de retención configurables y cumplimiento total con RGPD. Proporcionamos DPA si es necesario." },
               ].map((faq, i) => (
                 <details key={i} className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-violet-500/20 transition-colors">
                   <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
@@ -1936,20 +1936,20 @@ export default function Home() {
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
                   </span>
                   <span className="text-amber-300 text-xs font-medium">
-                    Solo 5 negocios nuevos al mes
+                    Implementación disponible
                   </span>
                 </div>
 
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-5">
-                  ¿Listo para llenar<br />tu agenda?
+                  Empieza a operar<br />con IA
                 </h2>
                 <p className="text-lg text-slate-500 mb-8 leading-relaxed">
-                  Rellena el formulario y elige tu horario en Calendly.{" "}
-                  <span className="text-slate-900 font-medium">15 minutos. Sin compromiso.</span> Te enseño una demo personalizada para tu negocio.
+                  Solicita una demostración personalizada.{" "}
+                  <span className="text-slate-900 font-medium">Nuestro equipo técnico analizará tu caso</span> y propondrá una solución a medida.
                 </p>
 
                 <ul className="space-y-4 mb-8">
-                  {["Demo personalizada con datos de tu negocio", "Presupuesto cerrado sin sorpresas", "Garantía 30 días o te devuelvo el dinero"].map((b) => (
+                  {["Análisis técnico de tu operación actual", "Propuesta de arquitectura personalizada", "Presupuesto cerrado sin costes ocultos"].map((b) => (
                     <li key={b} className="flex items-center gap-3 text-slate-600 text-sm">
                       <div className="w-6 h-6 bg-violet-500/10 rounded-md flex items-center justify-center flex-shrink-0">
                         <svg className="w-3.5 h-3.5 text-violet-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>

@@ -58,7 +58,7 @@ export default function Footer() {
               </div>
               <div>
                 <span className="text-lg font-bold text-slate-900">Neuriax</span>
-                <p className="text-xs text-slate-500">Automatización IA & Agentes de Voz</p>
+                <p className="text-xs text-slate-500">Agentes de IA Personalizados</p>
               </div>
             </div>
 
