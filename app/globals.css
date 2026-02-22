@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F1F5F9;
+  --background: #FAFBFF;
   --foreground: #0f172a;
 }
 
@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #F1F5F9;
+    --background: #FAFBFF;
     --foreground: #0f172a;
   }
 }
@@ -22,15 +22,163 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========== FUTURISTIC HERO ANIMATIONS - ULTRA FLUID ========== */
+/* ========== SMOOTH SCROLL ========== */
+html {
+  scroll-behavior: smooth;
+}
 
-/* Animated gradient for text */
+/* ========== AURORA MESH BACKGROUND ========== */
+@keyframes aurora-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(30px, -40px) scale(1.05); }
+  50% { transform: translate(-20px, 20px) scale(0.95); }
+  75% { transform: translate(15px, 30px) scale(1.02); }
+}
+
+@keyframes aurora-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-40px, 20px) scale(1.03); }
+  50% { transform: translate(25px, -30px) scale(0.97); }
+  75% { transform: translate(-15px, -20px) scale(1.04); }
+}
+
+@keyframes aurora-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20px, 35px) scale(0.98); }
+  50% { transform: translate(-35px, -15px) scale(1.06); }
+  75% { transform: translate(25px, -25px) scale(1); }
+}
+
+.aurora-blob-1 {
+  animation: aurora-float-1 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+.aurora-blob-2 {
+  animation: aurora-float-2 25s ease-in-out infinite;
+  will-change: transform;
+}
+
+.aurora-blob-3 {
+  animation: aurora-float-3 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* ========== NOISE TEXTURE OVERLAY ========== */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ========== MICRO GRID PATTERN ========== */
+.grid-micro {
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ========== GLASSMORPHISM ========== */
+.glass {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.75);
+  border-color: rgba(139, 92, 246, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.08);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+/* ========== DASHBOARD FRAME ========== */
+.dashboard-frame {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.03),
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 12px 24px rgba(0, 0, 0, 0.04),
+    0 32px 64px -12px rgba(0, 0, 0, 0.06);
+}
+
+.dashboard-perspective {
+  transform: perspective(1500px) rotateX(4deg);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-perspective:hover {
+  transform: perspective(1500px) rotateX(0deg);
+}
+
+@media (max-width: 640px) {
+  .dashboard-perspective {
+    transform: none;
+  }
+  .dashboard-perspective:hover {
+    transform: none;
+  }
+}
+
+/* ========== FLOATING ANIMATION ========== */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-gentle-delayed {
+  animation: float-gentle 6s ease-in-out infinite;
+  animation-delay: 3s;
+  will-change: transform;
+}
+
+/* ========== GRADIENT TEXT ========== */
+.text-gradient-subtle {
+  background: linear-gradient(135deg, #7C3AED, #6366F1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== ANIMATED GRADIENT ========== */
 @keyframes gradient-x {
-  0%, 100% { background-position: 0% 50%; background-size: 200% 200%; }
-  50% { background-position: 100% 50%; background-size: 200% 200%; }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .animate-gradient-x {
@@ -38,300 +186,7 @@ body {
   animation: gradient-x 3s ease infinite;
 }
 
-/* Ultra smooth gradient animation */
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* Gentle floating particles - very smooth */
-@keyframes floatUp {
-  0% { transform: translateY(100vh) translateX(0) scale(0.5); opacity: 0; }
-  5% { opacity: 0.4; }
-  95% { opacity: 0.4; }
-  100% { transform: translateY(-50px) translateX(50px) scale(1); opacity: 0; }
-}
-
-/* Ultra smooth pulse */
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.08; transform: scale(1); }
-  50% { opacity: 0.15; transform: scale(1.02); }
-}
-
-/* Elegant text glow - subtle */
-@keyframes textGlow {
-  0%, 100% { 
-    text-shadow: 0 0 40px rgba(34, 211, 238, 0.2), 0 0 80px rgba(34, 211, 238, 0.1); 
-    filter: brightness(1);
-  }
-  50% { 
-    text-shadow: 0 0 60px rgba(34, 211, 238, 0.35), 0 0 100px rgba(34, 211, 238, 0.15); 
-    filter: brightness(1.03);
-  }
-}
-
-/* Ultra smooth orbit */
-@keyframes orbit {
-  0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
-  100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
-}
-
-/* Gentle float - very subtle */
-@keyframes gentleFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-/* Ultra smooth ring rotation */
-@keyframes smoothSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Subtle grid pulse */
-@keyframes gridPulse {
-  0%, 100% { opacity: 0.015; }
-  50% { opacity: 0.03; }
-}
-
-/* Smooth fade in up */
-@keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(40px); 
-  }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
-  }
-}
-
-/* Smooth fade in scale */
-@keyframes fadeInScale {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
-}
-
-/* Elegant shimmer */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-/* Floating animation - ultra smooth */
-@keyframes floatSmooth {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-8px) rotate(0.5deg); }
-  50% { transform: translateY(-12px) rotate(0deg); }
-  75% { transform: translateY(-8px) rotate(-0.5deg); }
-}
-
-/* Professional hero classes */
-.hero-futuristic {
-  background: linear-gradient(-45deg, #000000, #020617, #0c1222, #000000);
-  background-size: 400% 400%;
-  animation: gradientShift 30s ease infinite;
-}
-
-.text-glow-cyan {
-  animation: textGlow 5s ease-in-out infinite;
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: rgba(34, 211, 238, 0.5);
-  border-radius: 50%;
-  animation: floatUp linear infinite;
-  pointer-events: none;
-}
-
-.orb-glow {
-  animation: pulseGlow 8s ease-in-out infinite;
-  will-change: opacity, transform;
-}
-
-.orb-float {
-  animation: gentleFloat 10s ease-in-out infinite;
-  will-change: transform;
-}
-
-.smooth-spin {
-  animation: smoothSpin linear infinite;
-  will-change: transform;
-}
-
-.fade-in-up {
-  animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.fade-in-scale {
-  animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  opacity: 0;
-}
-
-.float-smooth {
-  animation: floatSmooth 6s ease-in-out infinite;
-  will-change: transform;
-}
-
-/* Professional grid background */
-.grid-pattern {
-  background-image: 
-    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-  animation: gridPulse 8s ease-in-out infinite;
-}
-
-/* Thin scrollbar for preview sections */
-.scrollbar-thin {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.1) transparent;
-}
-.scrollbar-thin::-webkit-scrollbar { width: 4px; }
-.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
-
-/* Shimmer button effect */
-.btn-shimmer {
-  position: relative;
-  overflow: hidden;
-}
-
-.btn-shimmer::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.08) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 4s ease-in-out infinite;
-}
-
-/* Glass morphism cards - refined */
-.glass-card {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(34, 211, 238, 0.2);
-  transform: translateY(-4px);
-}
-
-/* Slow bounce animation */
-@keyframes bounce-slow {
-  0%, 100% { transform: translateY(0) translateX(-50%); }
-  50% { transform: translateY(-10px) translateX(-50%); }
-}
-
-.animate-bounce-slow {
-  animation: bounce-slow 2s ease-in-out infinite;
-}
-
-/* Slow pulse animation */
-@keyframes pulse-slow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.animate-pulse-slow {
-  animation: pulse-slow 2s ease-in-out infinite;
-}
-
-/* Hero aurora background */
-@keyframes aurora {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.hero-aurora {
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(99, 102, 241, 0.06), rgba(139, 92, 246, 0.04), rgba(99, 102, 241, 0.08));
-  background-size: 400% 400%;
-  animation: aurora 8s ease-in-out infinite;
-}
-
-/* Hero text glow */
-.hero-text-glow {
-  filter: drop-shadow(0 0 40px rgba(124, 58, 237, 0.25));
-}
-
-/* Dashboard 3D tilt on desktop */
-.hero-dashboard-tilt {
-  transform: perspective(1200px) rotateX(2deg);
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-dashboard-tilt:hover {
-  transform: perspective(1200px) rotateX(0deg);
-}
-
-@media (max-width: 640px) {
-  .hero-dashboard-tilt {
-    transform: none;
-  }
-  .hero-dashboard-tilt:hover {
-    transform: none;
-  }
-}
-
-/* Hide scrollbar for trust pills */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* Ultra smooth transitions */
-.smooth-transition {
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* ========== CHAT FORMULARIO ANIMATIONS ========== */
-
-/* Fade in up animation */
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in-up {
-  animation: fade-in-up 0.4s ease-out forwards;
-}
-
-.animate-fade-in {
-  animation: fade-in-up 0.3s ease-out forwards;
-}
-
-/* Shimmer effect for progress bar */
+/* ========== SHIMMER ========== */
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
@@ -341,77 +196,87 @@ body {
   animation: shimmer 2s ease-in-out infinite;
 }
 
-/* Floating animation for particles */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+/* ========== PULSE SLOW ========== */
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
 }
 
-/* Rotate animation for elements */
-@keyframes rotate-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* ========== FADE IN UP ========== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-rotate {
-  animation: rotate-slow 20s linear infinite;
+.fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
 }
 
-/* Scroll down indicator animation */
+/* ========== SCROLL REVEAL ========== */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ========== SCROLLBAR THIN ========== */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.08) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar { width: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.08); border-radius: 10px; }
+
+/* ========== NO SCROLLBAR ========== */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ========== SCROLL INDICATOR ========== */
 @keyframes scroll-indicator {
   0%, 100% { opacity: 1; transform: translateY(0); }
-  50% { opacity: 0.5; transform: translateY(6px); }
+  50% { opacity: 0.4; transform: translateY(6px); }
 }
 
 .animate-scroll-indicator {
   animation: scroll-indicator 1.5s ease-in-out infinite;
 }
 
-/* ========== SCROLL-TRIGGERED SECTION FADE-IN ========== */
-@keyframes sectionFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* ========== CHAT FORM ANIMATIONS ========== */
+@keyframes fade-in-up-sm {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.section-fade-in {
-  opacity: 0;
-  animation: sectionFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  animation-play-state: paused;
+.animate-fade-in-up {
+  animation: fade-in-up-sm 0.4s ease-out forwards;
 }
 
-/* Auto-play when element is in viewport - uses CSS-only approach via animation-timeline where supported */
-@supports (animation-timeline: view()) {
-  .section-fade-in {
-    animation-play-state: running;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
+.animate-fade-in {
+  animation: fade-in-up-sm 0.3s ease-out forwards;
 }
 
-/* Fallback: play immediately for browsers without scroll-timeline */
-@supports not (animation-timeline: view()) {
-  .section-fade-in {
-    animation-play-state: running;
-    animation-delay: var(--delay, 0s);
-  }
+/* ========== WHATSAPP PING ========== */
+@keyframes ping-slow {
+  0% { transform: scale(1); opacity: 0.75; }
+  75%, 100% { transform: scale(1.6); opacity: 0; }
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
+.animate-ping-slow {
+  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* ========== MARQUEE / INFINITE SCROLL ========== */
+/* ========== MARQUEE ========== */
 @keyframes marquee {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -423,7 +288,8 @@ html {
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
-.marquee-track {
+.marquee-track,
+.animate-marquee {
   display: flex;
   width: max-content;
   animation: marquee 30s linear infinite;
@@ -433,24 +299,20 @@ html {
   animation-play-state: paused;
 }
 
-/* ========== PING SLOW (WhatsApp button) ========== */
-@keyframes ping-slow {
-  0% { transform: scale(1); opacity: 0.75; }
-  75%, 100% { transform: scale(1.6); opacity: 0; }
+/* ========== UNDERLINE DECORATIVE ========== */
+.underline-glow {
+  position: relative;
+  display: inline-block;
 }
 
-.animate-ping-slow {
-  animation: ping-slow 2.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* ========== SCROLL REVEAL (IntersectionObserver) ========== */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
+.underline-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #7C3AED, #6366F1, transparent);
+  border-radius: 2px;
+  opacity: 0.5;
 }

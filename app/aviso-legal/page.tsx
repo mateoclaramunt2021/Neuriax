@@ -28,26 +28,20 @@ export default function AvisoLegal() {
       <section id="titular" className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Titular del Sitio Web</h2>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-gray-900 mb-3">⚠️ Datos en Proceso de Formalización</h3>
-          <p className="text-sm text-gray-700 mb-2">
-            Este proyecto está en proceso de constitución como entidad legal. Los datos fiscales definitivos serán completados una vez se finalice el trámite de alta:
-          </p>
-          <ul className="text-sm text-gray-700 space-y-1 ml-4 list-disc">
-            <li><strong>[PENDIENTE: NIF/CIF]</strong> – Se actualizará al obtener el número de identificación fiscal</li>
-            <li><strong>[PENDIENTE: RAZÓN SOCIAL / DOMICILIO FISCAL]</strong> – Se completará con el domicilio profesional definitivo</li>
-          </ul>
-        </div>
+
 
         <div className="space-y-3 text-sm text-gray-700">
           <p>
             <strong>Nombre comercial:</strong> Neuriax
           </p>
           <p>
-            <strong>Titular provisional:</strong> Mateo Claramunt González (persona física)
+            <strong>Titular:</strong> Mateo Claramunt González
           </p>
           <p>
-            <strong>Domicilio provisional de contacto:</strong> [PENDIENTE: DOMICILIO FISCAL/PROFESIONAL]
+            <strong>NIF:</strong> 48099847Q
+          </p>
+          <p>
+            <strong>Domicilio fiscal:</strong> Arcadi Balaguer 62
           </p>
           <p>
             <strong>Correo electrónico:</strong>{' '}

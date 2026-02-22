@@ -32,23 +32,14 @@ export default function PoliticaPrivacidad() {
       <section id="responsable" className="mb-12">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">1. Responsable del Tratamiento de Datos</h2>
 
-        <div className="bg-amber-50 border border-amber-200 rounded-lg p-6 mb-6">
-          <h3 className="font-semibold text-gray-900 mb-3">⚠️ Identificación en Proceso</h3>
-          <p className="text-sm text-gray-700 mb-2">
-            La identificación fiscal está en trámite de completarse:
-          </p>
-          <ul className="text-sm text-gray-700 space-y-1 ml-4 list-disc">
-            <li><strong>NIF/CIF: [PENDIENTE]</strong></li>
-            <li><strong>Domicilio fiscal/profesional: [PENDIENTE: DOMICILIO COMPLETO]</strong></li>
-          </ul>
-        </div>
+
 
         <div className="space-y-3 text-sm text-gray-700">
           <p>
             <strong>Nombre:</strong> Neuriax (Mateo Claramunt González)
           </p>
           <p>
-            <strong>Tipo de entidad:</strong> Persona física (en proceso de formalización)
+            <strong>NIF:</strong> 48099847Q
           </p>
           <p>
             <strong>Correo:</strong>{' '}
@@ -60,7 +51,7 @@ export default function PoliticaPrivacidad() {
             <strong>Teléfono:</strong> +34 640 791 041
           </p>
           <p>
-            <strong>Domicilio provisional:</strong> [PENDIENTE]
+            <strong>Domicilio fiscal:</strong> Arcadi Balaguer 62
           </p>
         </div>
 
