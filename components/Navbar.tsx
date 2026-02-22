@@ -49,26 +49,29 @@ export default function Navbar() {
 
   return (
     <>
+      {/* ─── Top accent line ─── */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500" />
+
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        className={`fixed top-[2px] w-full z-50 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           scrolled
-            ? "bg-white/70 backdrop-blur-2xl backdrop-saturate-150 border-b border-slate-200/60 shadow-lg shadow-slate-900/[0.03]"
+            ? "bg-white/80 backdrop-blur-2xl backdrop-saturate-150 border-b border-slate-200 shadow-lg shadow-slate-900/5"
             : "bg-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-          <div className="flex justify-between items-center h-16 sm:h-20">
+<div className="flex justify-between items-center h-36 sm:h-40">
 
             {/* ─── Logo ─── */}
             <Link href="/" className="flex items-center group">
-              <div className="relative h-12 w-12 sm:h-14 sm:w-14 transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-[132px] w-[132px] sm:h-36 sm:w-36 transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/assets/images/ChatGPT_Image_10_ene_2026__17_49_11-removebg-preview.png"
                   alt="Neuriax"
                   fill
                   className="object-contain"
                   priority
-                  sizes="56px"
+                  sizes="144px"
                 />
               </div>
             </Link>
