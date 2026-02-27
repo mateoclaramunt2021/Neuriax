@@ -42,202 +42,134 @@ export default function Home() {
     <div className="min-h-screen bg-[#F1F5F9] text-slate-900 overflow-x-hidden">
 
       {/* ════════════════════════════════════════════════
-          HERO — Mobile-first
+          HERO — Formulario + Mensaje de conversión
           ════════════════════════════════════════════════ */}
-      <section className="relative min-h-[100svh] flex items-center px-4 overflow-hidden">
+      <section id="contacto" className="relative min-h-[100svh] flex items-center px-4 overflow-hidden">
         {/* Animated aurora BG */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
         <div className="absolute inset-0 hero-aurora opacity-30" />
         <div className="absolute top-[10%] right-[-10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-violet-400/[0.15] rounded-full blur-[120px] sm:blur-[200px] animate-pulse-slow" />
         <div className="absolute bottom-[5%] left-[-5%] w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-indigo-400/[0.12] rounded-full blur-[100px] sm:blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full flex flex-col items-center py-20 sm:py-32 lg:py-40">
-          {/* MOBILE-FIRST HERO CONTENT */}
-          <div className="text-center w-full max-w-4xl mx-auto flex flex-col items-center">
-            {/* Badge — compact for mobile */}
-            <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-4 py-2 mb-5 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              <span className="text-[12px] sm:text-[13px] text-violet-700 font-semibold">
-                AI-Powered Customer Operations
-              </span>
-            </div>
+        <div className="relative z-10 max-w-7xl mx-auto w-full py-20 sm:py-28 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            {/* H1 — BIG on mobile */}
-            <h1 className="text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.02] tracking-[-0.04em] mb-5 text-center w-full px-2">
-              <span className="block text-slate-900">Agentes de IA</span>
-              <span className="block text-slate-900">que atienden,</span>
-              <span className="relative inline-block mt-1">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500 animate-gradient-x hero-text-glow">
-                  convierten y escalan.
+            {/* LEFT COLUMN — Conversion message */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-4 py-2 mb-6 backdrop-blur-md">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-2/3 h-[3px] bg-gradient-to-r from-transparent via-violet-500/70 to-transparent rounded-full" />
-              </span>
-            </h1>
+                <span className="text-[12px] sm:text-[13px] text-violet-700 font-semibold">
+                  Implementación en 5 días
+                </span>
+              </div>
 
-            {/* Subtitle — max 2 lines on mobile */}
-            <p className="text-base sm:text-lg md:text-xl text-slate-500 leading-relaxed mb-8 max-w-lg sm:max-w-2xl mx-auto px-2">
-              Sistema integral de atención al cliente con IA.{" "}
-              <span className="text-slate-900 font-semibold">Agente personalizado + landing profesional + panel de control</span>. Un solo sistema, adaptado a tu negocio.
-            </p>
+              {/* H1 */}
+              <h1 className="text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-black leading-[1.05] tracking-[-0.03em] mb-5">
+                <span className="block text-slate-900">Tu negocio</span>
+                <span className="block text-slate-900">atendido 24/7</span>
+                <span className="relative inline-block mt-1">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-500 via-indigo-400 to-violet-500 animate-gradient-x hero-text-glow">
+                    por Inteligencia Artificial
+                  </span>
+                  <span className="absolute -bottom-1.5 left-0 lg:left-0 w-2/3 h-[3px] bg-gradient-to-r from-violet-500/70 via-violet-500/70 to-transparent rounded-full" />
+                </span>
+              </h1>
 
-            {/* Platform status */}
-            <div className="flex items-center gap-2 mb-6">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
-              </span>
-              <span className="text-sm sm:text-base text-slate-600 font-medium">
-                Conectado con <span className="text-slate-900 font-bold">25+</span> integraciones · Multi-canal
-              </span>
-            </div>
+              {/* Subtitle */}
+              <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
+                Agentes de IA que atienden, convierten y escalan.{" "}
+                <span className="text-slate-900 font-semibold">Más clientes, menos trabajo manual.</span>
+              </p>
 
-            {/* CTA — full width on mobile, thumb-friendly */}
-            <div className="flex flex-col sm:flex-row justify-center gap-3 mb-6 w-full px-2 sm:px-0">
-              <a
-                href="#contacto"
-                className="group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-[18px] sm:py-4 px-8 sm:px-10 rounded-2xl sm:rounded-full text-[17px] sm:text-lg transition-all duration-300 hover:scale-[1.03] shadow-xl shadow-amber-500/20 overflow-hidden w-full sm:w-auto"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-                <span className="relative z-10 flex items-center gap-3">
-                  Explorar plataforma
-                  <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              {/* Value bullets */}
+              <div className="space-y-4 mb-8 w-full max-w-md">
+                {[
+                  {
+                    icon: (
+                      <svg className="w-5 h-5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    ),
+                    title: "Respuesta instantánea",
+                    desc: "Tu agente IA responde en menos de 2 segundos, 24/7",
+                  },
+                  {
+                    icon: (
+                      <svg className="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    ),
+                    title: "Multi-canal integrado",
+                    desc: "WhatsApp, web chat, voz y más en un solo panel",
+                  },
+                  {
+                    icon: (
+                      <svg className="w-5 h-5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    ),
+                    title: "ROI desde el primer mes",
+                    desc: "Reduce costes de atención hasta un 70%",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="flex items-start gap-3 text-left">
+                    <div className="flex-shrink-0 w-10 h-10 bg-white/80 border border-slate-200/60 rounded-xl flex items-center justify-center shadow-sm">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <span className="text-sm font-bold text-slate-900 block">{item.title}</span>
+                      <span className="text-[13px] text-slate-500">{item.desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Social proof mini */}
+              <div className="flex items-center gap-5 mb-6">
+                {[
+                  { value: "99.9%", label: "uptime" },
+                  { value: "<2s", label: "respuesta" },
+                  { value: "24/7", label: "disponible" },
+                ].map((s) => (
+                  <div key={s.label} className="text-center">
+                    <div className="text-lg sm:text-xl font-extrabold text-slate-900">{s.value}</div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Contact info */}
+              <div className="flex flex-col sm:flex-row items-center lg:items-start gap-3 text-sm text-slate-500">
+                <a href="mailto:hola@neuriax.com" className="flex items-center gap-1.5 hover:text-violet-600 transition-colors">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
-                </span>
-              </a>
-              <a
-                href="#contacto"
-                className="inline-flex items-center justify-center gap-2 bg-white/80 hover:bg-white border border-slate-200 text-slate-700 font-semibold py-3.5 sm:py-4 px-6 sm:px-8 rounded-2xl sm:rounded-full text-[15px] sm:text-base transition-all duration-300 backdrop-blur-sm w-full sm:w-auto"
-              >
-                Solicitar demostración →
-              </a>
+                  hola@neuriax.com
+                </a>
+                <span className="hidden sm:inline text-slate-300">|</span>
+                <a href="https://calendly.com/neuriax/llamada" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-violet-600 transition-colors">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Agendar llamada
+                </a>
+              </div>
             </div>
 
-            {/* Trust pills — horizontal scroll on mobile */}
-            <div className="flex items-center justify-center gap-3 sm:gap-5 text-[12px] sm:text-[13px] text-slate-500 overflow-x-auto no-scrollbar w-full px-2">
-              {[
-                { icon: "◆", text: "API-first" },
-                { icon: "◆", text: "Multi-canal" },
-                { icon: "◆", text: "White-label" },
-              ].map((t) => (
-                <span key={t.text} className="flex items-center gap-1.5 whitespace-nowrap bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-full px-3 py-1.5">
-                  <span className="text-[11px]">{t.icon}</span>
-                  <span className="font-medium">{t.text}</span>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* DASHBOARD PREVIEW — Compact on mobile, full on desktop */}
-          <div className="w-full max-w-4xl mx-auto mt-10 sm:mt-16 lg:mt-20 px-0 sm:px-0">
-            <div className="relative">
-              <div className="absolute -inset-4 sm:-inset-6 bg-violet-500/[0.06] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl" />
-              <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-xl sm:rounded-2xl shadow-2xl shadow-black/60 overflow-hidden hero-dashboard-tilt">
-                {/* Chrome */}
-                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2.5 sm:py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500/80" />
-                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500/80" />
-                  <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-2 sm:ml-3 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-3 py-0.5 rounded-md truncate">panel.neuriax.com</span>
-                </div>
-
-                {/* Mobile: compact stats + 3 rows. Desktop: full view */}
-                <div className="p-3 sm:p-5">
-                  {/* Stats row */}
-                  <div className="grid grid-cols-4 gap-1.5 sm:gap-3 mb-3 sm:mb-5">
-                    {[
-                      { label: "Atendidos", value: "142", color: "text-violet-400", bg: "bg-violet-500/10" },
-                      { label: "Resolución", value: "97%", color: "text-emerald-400", bg: "bg-emerald-500/10" },
-                      { label: "Auto", value: "89%", color: "text-amber-400", bg: "bg-amber-500/10" },
-                      { label: "Satisf.", value: "4.9", color: "text-cyan-400", bg: "bg-cyan-500/10" },
-                    ].map((s) => (
-                      <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2 sm:p-3`}>
-                        <span className="text-[7px] sm:text-[9px] text-gray-500 uppercase tracking-wider block">{s.label}</span>
-                        <div className={`text-sm sm:text-xl font-bold ${s.color} mt-0.5`}>{s.value}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Floating notifications — desktop only */}
-                  <div className="hidden lg:block">
-                    {/* WhatsApp toast */}
-                    <div className="absolute top-16 -right-4 bg-[#1a1f2e] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl shadow-black/40 z-20 animate-float" style={{ animationDelay: "1s" }}>
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                          <svg className="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-gray-400 block">Agente IA · ahora</span>
-                          <span className="text-[11px] text-white font-medium">Consulta #1247 resuelta ✔</span>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Alert toast */}
-                    <div className="absolute bottom-20 -left-4 bg-[#1a1f2e] border border-white/[0.08] rounded-xl px-4 py-3 shadow-xl shadow-black/40 z-20 animate-float" style={{ animationDelay: "2.5s" }}>
-                      <div className="flex items-center gap-2.5">
-                        <div className="w-8 h-8 bg-violet-500/20 rounded-full flex items-center justify-center">
-                          <svg className="w-4 h-4 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        </div>
-                        <div>
-                          <span className="text-[10px] text-gray-400 block">Sistema · hace 2 min</span>
-                          <span className="text-[11px] text-white font-medium">Satisfacción: 98% · 3 canales</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Mini reservation list — 3 rows on mobile, more on desktop */}
-                  <div className="space-y-1 sm:space-y-1.5">
-                    {RESTAURANT_RESERVATIONS.slice(0, 4).map((r, i) => (
-                      <div key={i} className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-2 sm:py-2.5 rounded-lg transition-colors ${i === 0 ? "bg-violet-500/[0.08] border border-violet-500/20" : "bg-white/[0.02] hover:bg-white/[0.04]"}`}>
-                        <span className="text-[10px] sm:text-[12px] text-gray-400 font-mono w-10 sm:w-12 flex-shrink-0">{r.time}</span>
-                        <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[7px] sm:text-[8px] font-bold flex-shrink-0 ${i === 0 ? "bg-violet-500/30 text-violet-300" : i % 2 === 0 ? "bg-emerald-500/20 text-emerald-300" : "bg-slate-700/60 text-gray-400"}`}>
-                          {r.name.split(' ').map(n => n[0]).join('')}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-[10px] sm:text-[12px] text-white font-medium block truncate">{r.name}</span>
-                        </div>
-                        <span className="text-[9px] sm:text-[10px] text-gray-500 hidden sm:block">{r.guests} pax</span>
-                        <span className={`text-[8px] sm:text-[9px] font-medium px-1.5 sm:px-2 py-0.5 rounded-full flex-shrink-0 ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
-                          {r.status === "confirmed" ? "✓" : "⏳"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  {/* Fade out overlay on mobile */}
-                  <div className="h-8 sm:h-12 bg-gradient-to-t from-[#0d1117] to-transparent -mx-3 sm:-mx-5 -mb-3 sm:-mb-5 mt-1 flex items-end justify-center pb-2">
-                    <span className="text-[9px] sm:text-[10px] text-gray-600">Ver todas las conversaciones →</span>
-                  </div>
+            {/* RIGHT COLUMN — Contact Form */}
+            <div className="w-full max-w-lg mx-auto lg:mx-0 lg:ml-auto">
+              <div className="relative">
+                <div className="absolute -inset-3 sm:-inset-4 bg-violet-500/[0.06] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl" />
+                <div className="relative">
+                  <ContactForm />
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Social proof badges — mobile */}
-          <div className="flex items-center justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
-            {[
-              { value: "99.9%", label: "uptime" },
-              { value: "<2s", label: "respuesta" },
-              { value: "24/7", label: "disponible" },
-            ].map((s) => (
-              <div key={s.label} className="text-center">
-                <div className="text-lg sm:text-2xl font-extrabold text-slate-900">{s.value}</div>
-                <div className="text-[9px] sm:text-[11px] text-slate-500">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[10px] text-slate-400 font-medium tracking-wider uppercase hidden sm:block">Descubre más</span>
-            <div className="w-5 h-9 border-2 border-slate-300/60 rounded-full flex justify-center">
-              <div className="w-1 h-2.5 bg-slate-400 rounded-full mt-2 animate-scroll-indicator" />
-            </div>
           </div>
         </div>
       </section>
