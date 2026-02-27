@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Marketing Automático para PYMEs | Neuriax</title>
+    <meta name="description" content="Guía completa de email marketing automatizado para PYMEs. Aprende las 5 secuencias esenciales y consigue un ROI del 4200%.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+        
+        /* Header */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border-bottom: 2px solid rgba(6,182,212,0.3);
+            margin-bottom: 3rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Sections */
+        h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--cyan);
+        }
+        p { margin-bottom: 1rem; }
+        
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            margin: 1.25rem 0;
+            transition: border-color 0.3s;
+        }
+        .card:hover { border-color: rgba(6,182,212,0.4); }
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Stat Box */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        .stat-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(6,182,212,0.15);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        /* Sequence Cards */
+        .sequence-card {
+            background: var(--bg-card);
+            border-left: 4px solid var(--cyan);
+            border-radius: 0 var(--radius) var(--radius) 0;
+            padding: 1.5rem 1.75rem;
+            margin: 1.25rem 0;
+        }
+        .sequence-card .seq-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+        .sequence-card h3 { display: inline; margin: 0; }
+        .sequence-card ul { margin-top: 0.75rem; padding-left: 1.5rem; }
+        .sequence-card li { margin-bottom: 0.35rem; color: var(--text-muted); }
+
+        /* Table */
+        .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: var(--radius); }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        th {
+            background: rgba(6,182,212,0.15);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--cyan);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td { padding: 0.85rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        tr:hover td { background: rgba(6,182,212,0.05); }
+
+        /* Tip Box */
+        .tip-box {
+            background: rgba(6,182,212,0.1);
+            border: 1px solid rgba(6,182,212,0.3);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .tip-box strong { color: var(--cyan); }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(245,158,11,0.1);
+            border: 1px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius);
+            padding: 1.25rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+        .warning-box strong { color: #f59e0b; }
+
+        /* CTA */
+        .cta-section {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(59,130,246,0.12));
+            border-radius: var(--radius);
+            margin: 3rem 0 2rem;
+            border: 1px solid rgba(6,182,212,0.2);
+        }
+        .cta-section h2 { justify-content: center; margin-top: 0; }
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2.25rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6,182,212,0.3); }
+        .btn-primary { background: var(--accent-gradient); color: #fff; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+            margin-left: 0.75rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 2rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        /* Print */
+        @media print {
+            body { background: #fff; color: #1a1a1a; font-size: 12pt; }
+            .hero { background: none; border-bottom: 2px solid #06b6d4; padding: 2rem 0; }
+            .hero h1, .logo-text, .stat-number { -webkit-text-fill-color: #06b6d4; color: #06b6d4; }
+            .hero p, .stat-label, .sequence-card li, td { color: #444; }
+            .card, .stat-box, .sequence-card, .tip-box, .warning-box, .cta-section, table { background: #fff; border-color: #ddd; }
+            th { background: #f0f0f0; color: #06b6d4; }
+            h2 { color: #1a1a1a; }
+            h3, .tip-box strong { color: #06b6d4; }
+            .warning-box strong { color: #d97706; }
+            .btn-secondary, .btn-print { display: none !important; }
+            .btn-primary { background: #06b6d4; color: #fff; }
+            .cta-section { break-inside: avoid; }
+            .sequence-card { break-inside: avoid; }
+        }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .hero { padding: 2.5rem 1rem; }
+            .hero h1 { font-size: 1.75rem; }
+            .container { padding: 1.25rem 1rem; }
+            h2 { font-size: 1.4rem; }
+            .stat-grid { grid-template-columns: 1fr 1fr; }
+            .btn { display: block; margin: 0.5rem auto; max-width: 280px; }
+            .btn-secondary { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="logo-text">NEURIAX</div>
+    <span class="hero-badge">📧 Guía #06</span>
+    <h1>Email Marketing Automático para PYMEs</h1>
+    <p>Convierte suscriptores en clientes con secuencias automatizadas que trabajan 24/7 mientras tú te centras en tu negocio.</p>
+    <br>
+    <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- ROI -->
+    <h2>📊 El Canal con Mayor ROI del Marketing Digital</h2>
+    <p>Mientras otros canales fluctúan, el email marketing se mantiene como el rey indiscutible del retorno de inversión. No es casualidad que las empresas más exitosas inviertan fuertemente en esta estrategia.</p>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="stat-number">4.200%</div>
+            <div class="stat-label">ROI medio del email marketing</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">42€</div>
+            <div class="stat-label">retorno por cada 1€ invertido</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">4x</div>
+            <div class="stat-label">más conversiones que redes sociales</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">80%</div>
+            <div class="stat-label">de PYMEs usan email para retención</div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <strong>💡 Dato clave:</strong> El email marketing genera un ROI medio del 4.200%, muy por encima de cualquier otro canal digital. Por cada euro invertido, recuperas 42€. Y lo mejor: una vez configurado, funciona en piloto automático.
+    </div>
+
+    <!-- Por qué automatizar -->
+    <h2>🤖 ¿Por Qué Automatizar Tu Email Marketing?</h2>
+    <p>La automatización no es un lujo, es una necesidad competitiva. Estos son los beneficios directos para tu PYME:</p>
+
+    <div class="card">
+        <div class="card-title">⏰ Ahorro de Tiempo Masivo</div>
+        <p style="margin:0; color: var(--text-muted);">Configuras una vez, funciona para siempre. Las secuencias automáticas envían el email correcto, a la persona correcta, en el momento correcto. Sin intervención manual.</p>
+    </div>
+    <div class="card">
+        <div class="card-title">🎯 Personalización a Escala</div>
+        <p style="margin:0; color: var(--text-muted);">Cada suscriptor recibe contenido relevante según su comportamiento, intereses y etapa en el ciclo de compra. Imposible hacerlo manualmente con cientos o miles de contactos.</p>
+    </div>
+    <div class="card">
+        <div class="card-title">💰 Más Ingresos, Menos Esfuerzo</div>
+        <p style="margin:0; color: var(--text-muted);">Los emails automatizados generan un 320% más de ingresos que los emails no automatizados. Recuperas ventas perdidas y cultivas relaciones automáticamente.</p>
+    </div>
+    <div class="card">
+        <div class="card-title">📈 Escalabilidad Total</div>
+        <p style="margin:0; color: var(--text-muted);">Da igual si tienes 100 o 100.000 suscriptores: los flujos automatizados funcionan igual de bien. Tu negocio crece sin que crezca tu carga operativa.</p>
+    </div>
+
+    <!-- 5 Secuencias -->
+    <h2>🔥 Las 5 Secuencias que Toda PYME Necesita</h2>
+    <p>Estas son las cinco secuencias de email automatizadas fundamentales. Cada una resuelve un punto crítico del ciclo de vida del cliente.</p>
+
+    <div class="sequence-card">
+        <span class="seq-num">1</span>
+        <h3>Secuencia de Bienvenida</h3>
+        <p style="margin-top: 0.75rem;"><strong>Objetivo:</strong> Crear una primera impresión memorable y establecer expectativas.</p>
+        <ul>
+            <li><strong>Email 1 (Inmediato):</strong> Agradecimiento + entrega del lead magnet/recurso prometido</li>
+            <li><strong>Email 2 (Día 1):</strong> Historia de la marca y por qué existes</li>
+            <li><strong>Email 3 (Día 3):</strong> Caso de éxito o testimonio de cliente real</li>
+            <li><strong>Email 4 (Día 5):</strong> Tu mejor contenido o recurso gratuito</li>
+            <li><strong>Email 5 (Día 7):</strong> Oferta especial de bienvenida con fecha límite</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>📊 Benchmark:</strong> Tasa de apertura esperada: 50-60%. Tasa de clics: 15-20%. Los primeros 7 días determinan si un suscriptor se convierte en cliente.
+        </div>
+    </div>
+
+    <div class="sequence-card">
+        <span class="seq-num">2</span>
+        <h3>Secuencia de Nurturing (Cultivo)</h3>
+        <p style="margin-top: 0.75rem;"><strong>Objetivo:</strong> Educar, generar confianza y preparar para la venta.</p>
+        <ul>
+            <li><strong>Semana 1-2:</strong> Contenido educativo de alto valor sobre su problema principal</li>
+            <li><strong>Semana 3:</strong> Comparativa de soluciones (posicionándote como experto)</li>
+            <li><strong>Semana 4:</strong> Caso de éxito detallado con datos reales</li>
+            <li><strong>Semana 5:</strong> FAQ y objeciones comunes resueltas</li>
+            <li><strong>Semana 6:</strong> Oferta directa con prueba social</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>💡 Pro tip:</strong> Sigue la regla 80/20 → 80% contenido de valor, 20% contenido promocional. Así mantienes la lista sana y comprometida.
+        </div>
+    </div>
+
+    <div class="sequence-card">
+        <span class="seq-num">3</span>
+        <h3>Secuencia de Re-engagement (Reactivación)</h3>
+        <p style="margin-top: 0.75rem;"><strong>Objetivo:</strong> Recuperar suscriptores inactivos antes de perderlos definitivamente.</p>
+        <ul>
+            <li><strong>Email 1:</strong> "¡Te echamos de menos!" — recordatorio de beneficios</li>
+            <li><strong>Email 2 (Día 3):</strong> Oferta exclusiva para reactivación</li>
+            <li><strong>Email 3 (Día 7):</strong> Encuesta: "¿Qué contenido te gustaría recibir?"</li>
+            <li><strong>Email 4 (Día 10):</strong> Último aviso: "¿Seguimos en contacto?"</li>
+            <li><strong>Acción final:</strong> Eliminar inactivos para mejorar deliverability</li>
+        </ul>
+        <div class="warning-box" style="margin-top: 1rem;">
+            <strong>⚠️ Importante:</strong> Una lista de 5.000 suscriptores activos vale más que una de 50.000 inactivos. Los inactivos dañan tu reputación de envío y reducen las tasas de entrega.
+        </div>
+    </div>
+
+    <div class="sequence-card">
+        <span class="seq-num">4</span>
+        <h3>Secuencia Post-Venta</h3>
+        <p style="margin-top: 0.75rem;"><strong>Objetivo:</strong> Fidelizar, obtener reseñas y generar ventas recurrentes.</p>
+        <ul>
+            <li><strong>Email 1 (Inmediato):</strong> Confirmación y guía de inicio rápido</li>
+            <li><strong>Email 2 (Día 3):</strong> "¿Todo bien?" — soporte proactivo</li>
+            <li><strong>Email 3 (Día 7):</strong> Tips para sacar el máximo partido al producto/servicio</li>
+            <li><strong>Email 4 (Día 14):</strong> Solicitud de reseña/testimonio</li>
+            <li><strong>Email 5 (Día 30):</strong> Oferta de upsell/cross-sell complementario</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>📊 Dato:</strong> Conseguir un cliente nuevo cuesta 5-7x más que retener uno existente. La secuencia post-venta es la que mayor ROI tiene a largo plazo.
+        </div>
+    </div>
+
+    <div class="sequence-card">
+        <span class="seq-num">5</span>
+        <h3>Secuencia de Carrito Abandonado</h3>
+        <p style="margin-top: 0.75rem;"><strong>Objetivo:</strong> Recuperar ventas perdidas (aplicable a e-commerce y servicios con checkout).</p>
+        <ul>
+            <li><strong>Email 1 (1 hora):</strong> "¿Te olvidaste algo?" — recordatorio simple</li>
+            <li><strong>Email 2 (24 horas):</strong> Prueba social + resumen del carrito</li>
+            <li><strong>Email 3 (48 horas):</strong> Incentivo (envío gratis, descuento 5-10%)</li>
+            <li><strong>Email 4 (72 horas):</strong> Urgencia: "Tu carrito caduca pronto"</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>💰 Impacto:</strong> Las secuencias de carrito abandonado recuperan entre un 5% y un 15% de ventas perdidas. En un negocio con 10.000€/mes, eso son 500-1.500€ extra sin esfuerzo adicional.
+        </div>
+    </div>
+
+    <!-- Herramientas -->
+    <h2>🛠️ Herramientas Recomendadas</h2>
+    <p>No necesitas herramientas caras para empezar. Aquí tienes las mejores opciones según el tamaño de tu negocio:</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Herramienta</th>
+                    <th>Precio Inicio</th>
+                    <th>Mejor Para</th>
+                    <th>Automatización</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Brevo (Sendinblue)</strong></td>
+                    <td>Gratis hasta 300/día</td>
+                    <td>PYMEs que empiezan</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Mailchimp</strong></td>
+                    <td>Gratis hasta 500 contactos</td>
+                    <td>E-commerce pequeño</td>
+                    <td>⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>MailerLite</strong></td>
+                    <td>Gratis hasta 1.000 contactos</td>
+                    <td>Creadores de contenido</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>ActiveCampaign</strong></td>
+                    <td>Desde 29€/mes</td>
+                    <td>PYMEs en crecimiento</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>HubSpot</strong></td>
+                    <td>Gratis (limitado)</td>
+                    <td>Empresas B2B</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tip-box">
+        <strong>💡 Nuestra recomendación:</strong> Si empiezas desde cero, <strong>Brevo</strong> o <strong>MailerLite</strong> son las mejores opciones. Plan gratuito generoso, interfaz en español y automatizaciones potentes. Cuando crezcas, migra a <strong>ActiveCampaign</strong>.
+    </div>
+
+    <!-- Métricas -->
+    <h2>📈 Métricas Clave que Debes Monitorizar</h2>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="stat-number" style="font-size: 1.5rem;">Tasa de Apertura</div>
+            <div class="stat-label">Objetivo: &gt;25%. Depende del asunto y reputación del remitente.</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" style="font-size: 1.5rem;">Tasa de Clics (CTR)</div>
+            <div class="stat-label">Objetivo: &gt;3%. Mide la relevancia del contenido.</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" style="font-size: 1.5rem;">Tasa de Conversión</div>
+            <div class="stat-label">Objetivo: &gt;1%. La métrica que realmente importa.</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" style="font-size: 1.5rem;">Tasa de Baja</div>
+            <div class="stat-label">Máximo aceptable: &lt;0.5% por envío.</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📋 Fórmula del Éxito en Email Marketing</div>
+        <p style="margin: 0.75rem 0 0; color: var(--text-muted);">
+            <strong style="color: var(--cyan);">Lista segmentada</strong> + <strong style="color: var(--cyan);">Asunto irresistible</strong> + <strong style="color: var(--cyan);">Contenido de valor</strong> + <strong style="color: var(--cyan);">CTA claro</strong> + <strong style="color: var(--cyan);">Timing perfecto</strong> = Conversiones garantizadas.
+        </p>
+    </div>
+
+    <!-- Errores Comunes -->
+    <h2>🚫 7 Errores que Matan Tu Email Marketing</h2>
+    <div class="card">
+        <ol style="padding-left: 1.5rem;">
+            <li style="margin-bottom: 0.6rem;"><strong>Comprar listas de emails</strong> — Destruye tu deliverability y es ilegal (RGPD).</li>
+            <li style="margin-bottom: 0.6rem;"><strong>No segmentar</strong> — Enviar lo mismo a todos = altas tasas de baja.</li>
+            <li style="margin-bottom: 0.6rem;"><strong>Solo vender</strong> — Sin valor, la gente se da de baja rápidamente.</li>
+            <li style="margin-bottom: 0.6rem;"><strong>Ignorar el móvil</strong> — El 60% de emails se abren en móvil. Diseña para móvil primero.</li>
+            <li style="margin-bottom: 0.6rem;"><strong>No testear asuntos</strong> — El A/B testing mejora aperturas un 20-30%.</li>
+            <li style="margin-bottom: 0.6rem;"><strong>Frecuencia irregular</strong> — Consistencia genera confianza y anticipación.</li>
+            <li style="margin-bottom: 0;"><strong>No limpiar la lista</strong> — Eliminando inactivos mejoras todas las métricas.</li>
+        </ol>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>🚀 ¿Listo para Automatizar Tu Email Marketing?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            En Neuriax configuramos tus secuencias de email completas en menos de 2 semanas. Agenda una consultoría gratuita y te mostramos cómo.
+        </p>
+        <a href="https://calendly.com/neuriax/30min" class="btn btn-primary">📅 Agendar Consultoría Gratuita</a>
+        <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Neuriax — Automatización inteligente para empresas que quieren crecer.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://neuriax.com">neuriax.com</a></p>
+</footer>
+
+</body>
+</html>

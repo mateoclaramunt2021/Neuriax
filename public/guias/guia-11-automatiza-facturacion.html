@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 11: Automatiza Tu Facturación y Cobros | Neuriax</title>
+<meta name="description" content="Aprende a automatizar tu facturación, cobros y recordatorios. Elimina errores manuales y cobra más rápido con las herramientas adecuadas.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cyan:#06b6d4;--blue:#3b82f6;--bg-dark:#0f172a;--bg-card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6)}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--blue)}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:2px solid var(--cyan);padding:1.5rem 0;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:1.8rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo span{font-weight:300}
+.badge{display:inline-block;background:var(--accent-gradient);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:50px;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero{text-align:center;padding:4rem 1.5rem;background:radial-gradient(ellipse at center,rgba(6,182,212,.08) 0%,transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.5rem 0 1rem;line-height:1.2}
+.hero h1 .gradient{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-muted);max-width:650px;margin:0 auto}
+.section{margin:3rem 0}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid rgba(6,182,212,.3);display:flex;align-items:center;gap:.5rem}
+.section h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 .75rem;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.75rem;margin:1.25rem 0;transition:border-color .3s}
+.card:hover{border-color:rgba(6,182,212,.3)}
+.card h3{margin-top:0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--bg-card);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid rgba(6,182,212,.15)}
+.stat .number{font-size:2.2rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.9rem;color:var(--text-muted);margin-top:.25rem}
+ul,ol{padding-left:1.5rem;margin:.75rem 0}
+li{margin:.5rem 0;color:var(--text-muted)}
+li strong{color:var(--text)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.5rem;margin:2rem 0;padding:1.5rem;background:var(--bg-card);border-radius:12px;border:1px solid rgba(6,182,212,.15)}
+.flow-step{background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.3);padding:.75rem 1.25rem;border-radius:8px;font-weight:600;font-size:.95rem;text-align:center;min-width:140px}
+.flow-arrow{color:var(--cyan);font-size:1.5rem;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.92rem}
+thead{background:rgba(6,182,212,.12)}
+th,td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font-weight:700;color:var(--cyan);font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+td{color:var(--text-muted)}
+.highlight{background:rgba(6,182,212,.06);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:1.5rem 0;font-size:.95rem}
+.highlight strong{color:var(--cyan)}
+.cta-box{background:var(--accent-gradient);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;font-size:1.6rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center}
+.cta-box p{color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .3s;cursor:pointer;border:none;text-decoration:none}
+.btn-white{background:#fff;color:var(--bg-dark)}.btn-white:hover{background:#e2e8f0;color:var(--bg-dark)}
+.btn-outline{border:2px solid #fff;color:#fff;background:transparent;margin-left:.5rem}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-print{background:var(--bg-card);color:var(--text);border:1px solid rgba(255,255,255,.1);padding:.6rem 1.2rem;font-size:.85rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin:1rem 0}
+.btn-print:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
+.toc{background:var(--bg-card);border-radius:12px;padding:1.75rem;margin:2rem 0;border:1px solid rgba(6,182,212,.15)}
+.toc h3{color:var(--cyan);margin:0 0 1rem;font-size:1.1rem}
+.toc ol{margin:0}.toc li{margin:.35rem 0}.toc a{color:var(--text-muted);font-size:.95rem}.toc a:hover{color:var(--cyan)}
+.emoji{font-style:normal}
+@media(max-width:640px){.container{padding:1.25rem 1rem}.hero{padding:2.5rem 1rem}.hero h1{font-size:1.7rem}.stat-grid{grid-template-columns:1fr}.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg)}.btn{display:block;margin:.5rem 0;text-align:center}.btn-outline{margin-left:0}.cta-box{padding:1.75rem}}
+@media print{body{background:#fff;color:#111}header{position:static;border-bottom:2px solid #06b6d4;background:#fff}.logo{-webkit-text-fill-color:#06b6d4}.hero{background:none;padding:2rem 0}.card,.stat,.toc,.flow{border:1px solid #ddd;break-inside:avoid}.highlight{border-left:4px solid #06b6d4;background:#f0fdfa}.cta-box{background:#f0fdfa;border:2px solid #06b6d4}.cta-box h2,.cta-box p{color:#111}.btn-print{display:none}a{color:#06b6d4}footer{border-top:1px solid #ddd}.stat .number{-webkit-text-fill-color:#06b6d4}th{color:#06b6d4}td,li,p,.hero p,.stat .label{color:#333}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Neuriax<span>.com</span></div>
+</header>
+
+<section class="hero">
+<span class="badge">Guía 11 de 15</span>
+<h1>🧾 Automatiza Tu <span class="gradient">Facturación y Cobros</span></h1>
+<p>Deja de perder horas creando facturas a mano. Automatiza todo el ciclo: desde el presupuesto hasta el cobro y los recordatorios de pago.</p>
+<button class="btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</section>
+
+<div class="container">
+
+<nav class="toc">
+<h3>📑 Índice de Contenidos</h3>
+<ol>
+<li><a href="#problema">El problema de la facturación manual</a></li>
+<li><a href="#flujo">Flujo automatizado completo</a></li>
+<li><a href="#herramientas">Herramientas recomendadas</a></li>
+<li><a href="#implementacion">Implementación paso a paso</a></li>
+<li><a href="#integracion">Integración contable</a></li>
+<li><a href="#ahorro">Ahorro estimado</a></li>
+<li><a href="#errores">Errores a evitar</a></li>
+</ol>
+</nav>
+
+<section class="section" id="problema">
+<h2>😩 1. El Problema de la Facturación Manual</h2>
+<p>La facturación manual es una de las tareas que más tiempo consume en una PYME y, paradójicamente, una de las más fáciles de automatizar. Estos son los problemas más comunes:</p>
+<div class="stat-grid">
+<div class="stat"><div class="number">5-8h</div><div class="label">al mes dedicadas a facturar manualmente</div></div>
+<div class="stat"><div class="number">23%</div><div class="label">de facturas contienen errores humanos</div></div>
+<div class="stat"><div class="number">34 días</div><div class="label">plazo medio de cobro en España</div></div>
+<div class="stat"><div class="number">15%</div><div class="label">de facturas se quedan sin cobrar</div></div>
+</div>
+<div class="card">
+<h3>🔴 Síntomas de un sistema de facturación ineficiente</h3>
+<ul>
+<li><strong>Copiar y pegar datos</strong> de emails o presupuestos a la factura manualmente</li>
+<li><strong>Perseguir pagos</strong> con llamadas y emails escritos uno a uno</li>
+<li><strong>Errores de IVA</strong> o datos incorrectos que provocan rechazos</li>
+<li><strong>No saber quién te debe</strong> dinero sin revisar el banco manualmente</li>
+<li><strong>Duplicar trabajo</strong> al pasar datos al programa de contabilidad</li>
+<li><strong>Facturas en Word/Excel</strong> sin numeración automática ni control</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="flujo">
+<h2>🔄 2. Flujo Automatizado Completo</h2>
+<p>El objetivo es crear un flujo donde cada paso desencadena el siguiente automáticamente:</p>
+<div class="flow">
+<div class="flow-step">📋 Presupuesto<br><small>aceptado</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">🧾 Factura<br><small>generada auto</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">📧 Envío<br><small>automático</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">💳 Cobro<br><small>online/domiciliado</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">⏰ Recordatorio<br><small>si no paga</small></div>
+<span class="flow-arrow">→</span>
+<div class="flow-step">📊 Contabilidad<br><small>sincronizada</small></div>
+</div>
+<div class="card">
+<h3>⚡ ¿Qué se automatiza exactamente?</h3>
+<table>
+<thead><tr><th>Paso</th><th>Manual</th><th>Automatizado</th></tr></thead>
+<tbody>
+<tr><td>Crear presupuesto</td><td>30-45 min</td><td>5 min (plantilla)</td></tr>
+<tr><td>Generar factura</td><td>15-20 min</td><td>0 min (auto al aceptar)</td></tr>
+<tr><td>Enviar factura</td><td>5 min</td><td>0 min (envío auto)</td></tr>
+<tr><td>Registrar cobro</td><td>10 min</td><td>0 min (conciliación auto)</td></tr>
+<tr><td>Recordatorio impago</td><td>15-20 min</td><td>0 min (secuencia auto)</td></tr>
+<tr><td>Registrar en contabilidad</td><td>10-15 min</td><td>0 min (sync auto)</td></tr>
+<tr><td><strong>Total por factura</strong></td><td><strong>85-125 min</strong></td><td><strong>5 min</strong></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="section" id="herramientas">
+<h2>🛠️ 3. Herramientas Recomendadas</h2>
+
+<div class="card">
+<h3>💳 Stripe — Cobros automáticos</h3>
+<ul>
+<li><strong>Qué hace:</strong> Pasarela de pago que permite cobrar por tarjeta, SEPA, y generar enlaces de pago</li>
+<li><strong>Facturación recurrente:</strong> Ideal para suscripciones y servicios mensuales</li>
+<li><strong>Stripe Invoicing:</strong> Crea y envía facturas directamente desde el panel</li>
+<li><strong>Automatización:</strong> Reintentos automáticos de cobro fallido, recordatorios configurables</li>
+<li><strong>Precio:</strong> 1,5% + 0,25€ por transacción (SEPA) / 2,9% + 0,25€ (tarjeta)</li>
+<li><strong>Ideal para:</strong> Negocios digitales, SaaS, servicios recurrentes</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>📑 Holded / Facturas.com — Facturación española</h3>
+<ul>
+<li><strong>Qué hace:</strong> Facturación adaptada a normativa española (SII, TicketBAI)</li>
+<li><strong>Automatización:</strong> Facturas recurrentes, envío automático, numeración secuencial</li>
+<li><strong>Integración bancaria:</strong> Conciliación automática de cobros</li>
+<li><strong>Contabilidad:</strong> Libros de IVA, modelo 303 y 390 auto-rellenados</li>
+<li><strong>Precio:</strong> Desde 0€ (básico) hasta 40€/mes (premium)</li>
+<li><strong>Ideal para:</strong> Autónomos y PYMEs que necesitan cumplir con Hacienda</li>
+</ul>
+</div>
+
+<div class="card">
+<h3>🔗 Zapier / Make — El pegamento</h3>
+<ul>
+<li><strong>Qué hace:</strong> Conecta herramientas entre sí sin código</li>
+<li><strong>Ejemplo:</strong> "Cuando un presupuesto se acepta en HubSpot → Crear factura en Holded → Enviar por email → Crear enlace de pago en Stripe"</li>
+<li><strong>Precio:</strong> Zapier desde 19€/mes, Make desde 9€/mes</li>
+</ul>
+</div>
+
+<div class="highlight">
+<strong>💡 Recomendación Neuriax:</strong> Para la mayoría de PYMEs españolas, la combinación <strong>Holded + Stripe + Make</strong> cubre el 95% de las necesidades de facturación automatizada. Si facturas menos de 50 facturas/mes, Holded básico (gratuito) + Stripe es suficiente.
+</div>
+</section>
+
+<section class="section" id="implementacion">
+<h2>🚀 4. Implementación Paso a Paso</h2>
+
+<div class="card">
+<h3>Paso 1: Configura tu herramienta de facturación (Día 1-2)</h3>
+<ol>
+<li>Crea cuenta en <strong>Holded</strong> o tu herramienta elegida</li>
+<li>Introduce datos fiscales: NIF, dirección, régimen de IVA</li>
+<li>Configura la <strong>numeración de facturas</strong> (ej: 2026-001)</li>
+<li>Diseña tu <strong>plantilla de factura</strong> con logo y colores corporativos</li>
+<li>Configura <strong>tipos de IVA</strong> que usas (21%, 10%, exento)</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Paso 2: Configura cobros automáticos (Día 3-4)</h3>
+<ol>
+<li>Crea cuenta en <strong>Stripe</strong> y verifica tu negocio</li>
+<li>Conecta tu <strong>cuenta bancaria</strong> para recibir pagos</li>
+<li>Configura <strong>Stripe Invoicing</strong> para incluir enlace de pago en cada factura</li>
+<li>Activa <strong>reintentos automáticos</strong>: 3 intentos en 7 días</li>
+<li>Crea <strong>productos/servicios</strong> con precios predefinidos</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Paso 3: Configura recordatorios automáticos (Día 5)</h3>
+<ol>
+<li>Configura <strong>recordatorio 1</strong>: Email 3 días antes del vencimiento</li>
+<li>Configura <strong>recordatorio 2</strong>: Email el día del vencimiento</li>
+<li>Configura <strong>recordatorio 3</strong>: Email 7 días después + tono más firme</li>
+<li>Configura <strong>recordatorio 4</strong>: Email 15 días después + aviso de recargo</li>
+<li>Define <strong>escalado</strong>: A los 30 días, notificación al responsable para acción manual</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>Paso 4: Conecta todo con automatización (Día 6-7)</h3>
+<ol>
+<li>En <strong>Make/Zapier</strong>, crea flujo: Presupuesto aceptado → Factura generada</li>
+<li>Añade paso: Factura creada → Enviar email al cliente con PDF + enlace de pago</li>
+<li>Añade paso: Pago recibido → Marcar factura como cobrada + email de agradecimiento</li>
+<li>Añade paso: Factura cobrada → Registrar en contabilidad automáticamente</li>
+<li><strong>Testea</strong> todo el flujo con una factura de prueba</li>
+</ol>
+</div>
+</section>
+
+<section class="section" id="integracion">
+<h2>📊 5. Integración Contable</h2>
+<div class="card">
+<h3>Sincronización automática con contabilidad</h3>
+<p>El mayor beneficio de automatizar la facturación es que <strong>la contabilidad se actualiza sola</strong>. Así funciona:</p>
+<table>
+<thead><tr><th>Evento</th><th>Acción automática en contabilidad</th></tr></thead>
+<tbody>
+<tr><td>Factura emitida</td><td>Asiento de venta + IVA repercutido registrado</td></tr>
+<tr><td>Pago recibido</td><td>Conciliación bancaria automática</td></tr>
+<tr><td>Factura de gasto recibida</td><td>OCR extrae datos + asiento de compra</td></tr>
+<tr><td>Fin de trimestre</td><td>Modelo 303 auto-calculado y listo para presentar</td></tr>
+<tr><td>Fin de año</td><td>Modelo 390 y libros de IVA generados</td></tr>
+</tbody>
+</table>
+</div>
+<div class="highlight">
+<strong>⚠️ Requisito legal 2026:</strong> El sistema <strong>Verifactu</strong> ya es obligatorio para autónomos y PYMEs. Asegúrate de que tu herramienta de facturación está certificada. Holded, Sage, y la mayoría de herramientas líderes ya lo cumplen.
+</div>
+</section>
+
+<section class="section" id="ahorro">
+<h2>💰 6. Ahorro Estimado</h2>
+<div class="stat-grid">
+<div class="stat"><div class="number">92%</div><div class="label">reducción de tiempo en facturación</div></div>
+<div class="stat"><div class="number">-8 días</div><div class="label">reducción plazo medio de cobro</div></div>
+<div class="stat"><div class="number">3.600€</div><div class="label">ahorro anual estimado (autónomo)</div></div>
+<div class="stat"><div class="number">0 errores</div><div class="label">de IVA o datos incorrectos</div></div>
+</div>
+<div class="card">
+<h3>📊 Cálculo de ahorro detallado</h3>
+<table>
+<thead><tr><th>Concepto</th><th>Antes</th><th>Después</th><th>Ahorro</th></tr></thead>
+<tbody>
+<tr><td>Tiempo facturación/mes</td><td>8 horas</td><td>0,5 horas</td><td>7,5 horas</td></tr>
+<tr><td>Tiempo perseguir cobros/mes</td><td>4 horas</td><td>0 horas</td><td>4 horas</td></tr>
+<tr><td>Errores/devoluciones/mes</td><td>2-3 incidencias</td><td>0</td><td>~2 horas</td></tr>
+<tr><td>Conciliación bancaria/mes</td><td>3 horas</td><td>0 horas</td><td>3 horas</td></tr>
+<tr><td><strong>Total mensual</strong></td><td><strong>15+ horas</strong></td><td><strong>0,5 horas</strong></td><td><strong>14,5 horas</strong></td></tr>
+<tr><td><strong>Valor anual (a 25€/h)</strong></td><td></td><td></td><td><strong>4.350€</strong></td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="section" id="errores">
+<h2>⚠️ 7. Errores a Evitar</h2>
+<div class="card">
+<ul>
+<li><strong>No probar el flujo completo</strong> antes de usarlo con clientes reales — siempre haz un test end-to-end</li>
+<li><strong>Olvidar la normativa fiscal española</strong> — usa herramientas certificadas para Verifactu/SII</li>
+<li><strong>No personalizar las plantillas</strong> — una factura profesional transmite confianza</li>
+<li><strong>Ignorar los recordatorios de pago</strong> — el 80% de los impagos se resuelven con un simple recordatorio automático</li>
+<li><strong>No hacer backup</strong> — exporta tus facturas periódicamente, no dependas 100% de una herramienta</li>
+<li><strong>Complicar demasiado al inicio</strong> — empieza con facturación + cobro, luego añade capas</li>
+</ul>
+</div>
+</section>
+
+<section class="cta-box">
+<h2>🧾 ¿Quieres automatizar tu facturación esta semana?</h2>
+<p>Te ayudamos a configurar tu flujo completo de facturación automatizada en menos de 7 días. Sin errores, sin perseguir cobros.</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-white">📞 Reservar Consulta Gratuita</a>
+<a href="https://neuriax.com" class="btn btn-outline">🌐 Visitar Neuriax</a>
+</section>
+
+</div>
+
+<footer>
+<p>© 2026 Neuriax — <a href="https://neuriax.com">neuriax.com</a></p>
+<p style="margin-top:.5rem;font-size:.8rem">Guía 11 de la serie "Automatización para PYMEs" · Todos los derechos reservados</p>
+</footer>
+</body>
+</html>

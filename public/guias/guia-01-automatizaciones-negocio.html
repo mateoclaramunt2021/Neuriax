@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Automatizaciones que Todo Negocio Necesita en 2026 | Neuriax</title>
+    <meta name="description" content="Descubre las 10 automatizaciones esenciales que todo negocio necesita en 2026 para escalar, ahorrar tiempo y aumentar ingresos.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        /* Header */
+        header {
+            background: linear-gradient(180deg, rgba(6,182,212,0.12) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(6,182,212,0.15);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(16px);
+            z-index: 100;
+        }
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+        .btn-pdf {
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pdf:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,182,212,0.35); }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 80px 0 60px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(6,182,212,0.12);
+            border: 1px solid rgba(6,182,212,0.25);
+            color: var(--cyan);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin: 0 auto; }
+
+        /* Sections */
+        section { margin-bottom: 60px; }
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .section-subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 32px;
+        }
+
+        /* Intro */
+        .intro-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 48px;
+        }
+        .intro-card p { margin-bottom: 16px; color: var(--text-muted); }
+        .intro-card p:last-child { margin-bottom: 0; }
+        .highlight { color: var(--cyan); font-weight: 600; }
+
+        /* Automation Cards */
+        .auto-grid { display: flex; flex-direction: column; gap: 24px; }
+        .auto-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: border-color 0.3s, transform 0.2s;
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+        .auto-card:hover { border-color: rgba(6,182,212,0.3); transform: translateY(-2px); }
+        .auto-number {
+            flex-shrink: 0;
+            width: 52px;
+            height: 52px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #fff;
+        }
+        .auto-content h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .auto-content p { color: var(--text-muted); font-size: 0.95rem; }
+        .auto-icon { font-size: 1.5rem; margin-bottom: 4px; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border: 1px solid rgba(6,182,212,0.2);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .cta-section p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .btn-cta {
+            display: inline-block;
+            background: var(--gradient);
+            color: #fff;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.35); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        /* Mobile */
+        @media (max-width: 640px) {
+            .hero { padding: 50px 0 40px; }
+            .intro-card { padding: 24px; }
+            .auto-card { flex-direction: column; gap: 16px; padding: 24px; }
+            .cta-section { padding: 40px 24px; }
+        }
+
+        /* Print */
+        @media print {
+            body { background: #fff; color: #1a1a1a; }
+            header, .btn-pdf, .btn-cta { display: none; }
+            .hero h1 { -webkit-text-fill-color: #1a1a1a; }
+            .auto-card, .intro-card, .cta-section { border: 1px solid #ddd; background: #f9f9f9; }
+            .auto-content h3, .section-title, .cta-section h2 { color: #1a1a1a; }
+            .auto-content p, .intro-card p, .section-subtitle, .cta-section p { color: #444; }
+            .auto-number { background: #1a1a1a; }
+            .highlight { color: #0891b2; }
+            footer { color: #666; }
+            footer a { color: #0891b2; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">⚡ Neuriax</div>
+            <button class="btn-pdf" onclick="window.print()">📥 Descargar PDF</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">📘 Guía Gratuita — 2026</div>
+            <h1>10 Automatizaciones que Todo Negocio Necesita en 2026</h1>
+            <p>Descubre las herramientas y estrategias que están usando los negocios más rentables para escalar sin aumentar personal.</p>
+        </section>
+
+        <section>
+            <div class="intro-card">
+                <p><span class="highlight">En 2026, automatizar ya no es opcional — es supervivencia.</span> Los negocios que no automatizan procesos están perdiendo entre 15 y 25 horas semanales en tareas repetitivas que una máquina haría mejor, más rápido y sin errores.</p>
+                <p>Según estudios recientes, las empresas que implementan automatizaciones estratégicas experimentan un <span class="highlight">aumento del 35% en productividad</span> y una <span class="highlight">reducción del 40% en costes operativos</span> durante el primer año.</p>
+                <p>En esta guía te presentamos las 10 automatizaciones más impactantes que puedes implementar hoy para transformar tu negocio.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Las 10 Automatizaciones Esenciales</h2>
+            <p class="section-subtitle">Cada una de estas automatizaciones puede implementarse en menos de 2 semanas y generar resultados inmediatos.</p>
+
+            <div class="auto-grid">
+                <div class="auto-card">
+                    <div class="auto-number">1</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📩</div>
+                        <h3>Respuestas Automáticas a Leads</h3>
+                        <p>Cuando un lead llena un formulario, cada minuto cuenta. Con respuestas automáticas por email y WhatsApp, contactas al prospecto en menos de 60 segundos. Esto aumenta la tasa de conversión hasta un <span class="highlight">391%</span> según Harvard Business Review. Configura secuencias que cualifiquen, informen y agenden sin intervención humana.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">2</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📅</div>
+                        <h3>Agendamiento de Citas Automático</h3>
+                        <p>Olvídate del "¿qué día te viene bien?". Herramientas como Calendly o Cal.com permiten que tus clientes agenden directamente en tu calendario, con confirmaciones, recordatorios y seguimiento automáticos. Elimina el <span class="highlight">100% del ping-pong</span> de emails para agendar reuniones.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">3</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📧</div>
+                        <h3>Seguimiento de Clientes por Email</h3>
+                        <p>Crea secuencias de nurturing que mantengan a tus leads calientes. Desde el primer contacto hasta la venta y el seguimiento post-venta, cada email se envía en el momento perfecto. Los negocios con secuencias automatizadas generan un <span class="highlight">80% más de ventas</span> que los que hacen seguimiento manual.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">4</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">🧾</div>
+                        <h3>Facturación Automática</h3>
+                        <p>Genera y envía facturas automáticamente al completarse un servicio o suscripción. Integra con tu software contable para que los datos fluyan sin errores. Ahorra <span class="highlight">8+ horas mensuales</span> en administración y reduce errores de facturación a prácticamente cero.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">5</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">🤖</div>
+                        <h3>Chatbot Web 24/7</h3>
+                        <p>Un chatbot inteligente en tu web responde preguntas frecuentes, captura datos de contacto y agenda citas mientras tú duermes. El <span class="highlight">64% de los consumidores</span> esperan respuestas en tiempo real. Un chatbot cumple esa expectativa las 24 horas, los 365 días.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">6</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📬</div>
+                        <h3>Email Marketing Automático</h3>
+                        <p>Newsletters, ofertas, recordatorios y campañas de reactivación que se ejecutan solas. Segmenta por comportamiento y envía el mensaje correcto a la persona correcta. El email marketing automatizado tiene un ROI promedio de <span class="highlight">42:1</span> — por cada euro invertido, 42 de retorno.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">7</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">🧠</div>
+                        <h3>CRM con Inteligencia Artificial</h3>
+                        <p>Un CRM potenciado con IA predice qué leads tienen más probabilidad de comprar, sugiere acciones de seguimiento y automatiza la entrada de datos. Libera a tu equipo comercial para que se enfoque en <span class="highlight">cerrar ventas, no en llenar formularios</span>.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">8</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📊</div>
+                        <h3>Reportes Automáticos</h3>
+                        <p>Dashboards que se actualizan en tiempo real y reportes que llegan a tu email cada lunes por la mañana. Ventas, marketing, operaciones — toda la información que necesitas para tomar decisiones, <span class="highlight">sin dedicar ni un minuto</span> a crearlos manualmente.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">9</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">📱</div>
+                        <h3>Gestión de Redes Sociales</h3>
+                        <p>Programa publicaciones, responde comentarios con IA y analiza rendimiento automáticamente. Mantén una presencia activa en todas tus redes sin contratar un community manager a tiempo completo. Ahorra <span class="highlight">hasta 12 horas semanales</span> en gestión de contenidos.</p>
+                    </div>
+                </div>
+
+                <div class="auto-card">
+                    <div class="auto-number">10</div>
+                    <div class="auto-content">
+                        <div class="auto-icon">🔗</div>
+                        <h3>Integración de Herramientas</h3>
+                        <p>Conecta todas tus herramientas para que los datos fluyan sin intervención: cuando llega un lead, se crea en el CRM, se envía un email, se notifica al equipo y se agrega al pipeline. Con herramientas como Zapier o Make, construyes un <span class="highlight">ecosistema digital sin fisuras</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>¿Quieres implementar estas automatizaciones?</h2>
+            <p>Agenda una consulta gratuita de 30 minutos y te mostraremos cuáles son las más rentables para tu negocio.</p>
+            <a href="https://calendly.com/neuriax/30min" class="btn-cta" target="_blank" rel="noopener">🚀 Agendar Consulta Gratuita</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Neuriax — <a href="https://neuriax.com" target="_blank" rel="noopener">neuriax.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>

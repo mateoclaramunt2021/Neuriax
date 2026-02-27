@@ -2,13 +2,17 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import { createClient } from '@supabase/supabase-js';
 import { checkRateLimit, getClientIP, rateLimitExceededResponse, RATE_LIMIT_CONFIGS } from '@/lib/rate-limit';
+import { getEmailTemplate } from '@/lib/email-templates';
 
-const resend = new Resend('re_SkvxdW82_ChjGZRx157xETMZ3ejJfYCg9');
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const supabase = createClient(
-  'https://wfnaknuhwzmkriaetvtn.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmbmFrbnVod3pta3JpYWV0dnRuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODA1OTMwMCwiZXhwIjoyMDgzNjM1MzAwfQ.CQ4Gm1k_eZ3Pn5TGQRbPblL_sRp9gahQubIUiytUdlE'
+  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 );
+
+const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/neuriax/30min';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://neuriax.com';
 
 export async function POST(request: NextRequest) {
   try {
@@ -263,87 +267,48 @@ export async function POST(request: NextRequest) {
 
       if (dbError) {
         console.error('Error guardando contacto:', dbError);
-        // Continuamos para enviar el email aunque falle la DB
       }
 
-      // Enviar email de notificación con Resend
+      // ========== 1) EMAIL A MATEO CON TODA LA INFO ==========
       const { data: emailData, error: emailError } = await resend.emails.send({
         from: 'Neuriax <hola@neuriax.com>',
         to: 'mateoclaramunt2021@gmail.com',
-        subject: `🎯 Nuevo lead de contacto: ${nombre}`,
+        subject: `🎯 NUEVO LEAD: ${nombre} - ${empresa || 'Sin empresa'}`,
         html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 30px; border-radius: 12px 12px 0 0;">
-              <h1 style="color: white; margin: 0; font-size: 24px;">🎯 Nuevo Lead de Contacto</h1>
-              <p style="color: rgba(255,255,255,0.9); margin: 10px 0 0 0;">Alguien quiere agendar una llamada contigo</p>
+          <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #ffffff;">
+            <div style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 30px 40px;">
+              <h1 style="color: #06b6d4; margin: 0; font-size: 24px; font-weight: 800;">🎯 Nuevo Lead de Contacto</h1>
+              <p style="color: #94a3b8; margin: 8px 0 0 0; font-size: 14px;">Formulario completado → Redirigido a Calendly</p>
             </div>
             
-            <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
-              <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <strong style="color: #6b7280;">👤 Nombre:</strong>
-                  </td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
-                    ${nombre}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <strong style="color: #6b7280;">📧 Email:</strong>
-                  </td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <a href="mailto:${email}" style="color: #3b82f6;">${email}</a>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <strong style="color: #6b7280;">📞 Teléfono:</strong>
-                  </td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
-                    ${telefono || 'No proporcionado'}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <strong style="color: #6b7280;">🏢 Empresa:</strong>
-                  </td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
-                    ${empresa || 'No especificada'}
-                  </td>
-                </tr>
-                <tr>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6;">
-                    <strong style="color: #6b7280;">🏷️ Sector:</strong>
-                  </td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827;">
-                    ${sector || 'No especificado'}
-                  </td>
-                </tr>
+            <div style="padding: 30px 40px;">
+              <div style="background: #f0fdfa; border: 2px solid #06b6d4; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+                <p style="margin: 0; color: #0f172a; font-weight: 700; font-size: 16px;">⚡ Este lead ha sido redirigido a Calendly</p>
+                <p style="margin: 6px 0 0 0; color: #475569; font-size: 14px;">Revisa tu calendario para la próxima disponibilidad</p>
+              </div>
+
+              <h3 style="color: #0f172a; font-size: 16px; margin: 0 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">👤 Datos del contacto</h3>
+              <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+                <tr><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px; width: 140px;"><strong>Nombre:</strong></td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 14px;">${nombre}</td></tr>
+                <tr><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;"><strong>Email:</strong></td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9;"><a href="mailto:${email}" style="color: #3b82f6; text-decoration: none;">${email}</a></td></tr>
+                <tr><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;"><strong>Teléfono:</strong></td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 14px;"><a href="tel:${telefono}" style="color: #3b82f6; text-decoration: none;">${telefono || 'No proporcionado'}</a></td></tr>
+                <tr><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;"><strong>Empresa:</strong></td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 14px;">${empresa || 'No especificada'}</td></tr>
+                <tr><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #64748b; font-size: 14px;"><strong>Sector:</strong></td><td style="padding: 10px 0; border-bottom: 1px solid #f1f5f9; color: #0f172a; font-size: 14px;">${sector || 'No especificado'}</td></tr>
               </table>
               
               ${mensaje ? `
-              <div style="margin-top: 20px;">
-                <strong style="color: #6b7280;">💬 Mensaje:</strong>
-                <div style="background: #f3f4f6; padding: 15px; border-radius: 8px; margin-top: 8px; color: #374151;">
-                  ${mensaje}
-                </div>
-              </div>
+              <h3 style="color: #0f172a; font-size: 16px; margin: 0 0 12px 0; padding-bottom: 8px; border-bottom: 2px solid #e2e8f0;">💬 Mensaje del cliente</h3>
+              <div style="background: #f8fafc; padding: 20px; border-radius: 8px; color: #334155; font-size: 14px; line-height: 1.7; white-space: pre-wrap; margin-bottom: 24px;">${mensaje}</div>
               ` : ''}
-              
-              <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 8px; border: 1px solid #a7f3d0;">
-                <p style="margin: 0; color: #065f46; font-weight: 600;">
-                  ⏰ Este lead va a agendar una llamada en Calendly
-                </p>
-                <p style="margin: 8px 0 0 0; color: #047857; font-size: 14px;">
-                  Revisa tu calendario para la próxima disponibilidad
-                </p>
+
+              <div style="background: #eff6ff; border-radius: 8px; padding: 16px; text-align: center;">
+                <p style="margin: 0; color: #1e40af; font-size: 13px;">📧 Secuencia de 15 emails de nurturing iniciada automáticamente</p>
               </div>
             </div>
             
-            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
-              Email enviado automáticamente desde el formulario de contacto de neuriax.com
-            </p>
+            <div style="background: #f8fafc; padding: 16px 40px; border-top: 1px solid #e2e8f0; text-align: center;">
+              <p style="color: #94a3b8; font-size: 12px; margin: 0;">Enviado automáticamente desde el formulario de neuriax.com</p>
+            </div>
           </div>
         `
       });
@@ -356,92 +321,60 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // ========== ENVIAR EMAIL DE AGRADECIMIENTO AL CLIENTE ==========
-      const discountCode = 'BIENVENIDO10';
-      
-      // Intentar enviar email al cliente (puede fallar si el dominio no está verificado)
+      // ========== 2) EMAIL DE BIENVENIDA AL CLIENTE (Email 1 de la secuencia) ==========
       try {
-        const { data: clientEmailData, error: clientEmailError } = await resend.emails.send({
-          from: 'Neuriax <hola@neuriax.com>',
-          to: email,
-          subject: '🎉 ¡Gracias por contactar con Neuriax! Tu código de descuento',
-          html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f9fafb; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #06b6d4, #3b82f6); padding: 40px 30px; border-radius: 12px 12px 0 0; text-align: center;">
-              <h1 style="color: white; margin: 0; font-size: 28px;">¡Hola ${nombre}! 👋</h1>
-              <p style="color: rgba(255,255,255,0.9); margin: 15px 0 0 0; font-size: 16px;">Gracias por confiar en Neuriax</p>
-            </div>
-            
-            <div style="background: white; padding: 30px; border-radius: 0 0 12px 12px; border: 1px solid #e5e7eb; border-top: none;">
-              <p style="color: #374151; font-size: 16px; line-height: 1.6; margin-top: 0;">
-                Somos el equipo de Neuriax. Hemos recibido tu consulta y estamos revisando tu caso.
-              </p>
-              
-              <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-                Como agradecimiento por elegirnos, aquí tienes un <strong>código de descuento del 10%</strong> para tu primer proyecto:
-              </p>
-              
-              <div style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); padding: 25px; border-radius: 12px; text-align: center; margin: 25px 0; border: 2px dashed #10b981;">
-                <p style="color: #065f46; font-size: 14px; margin: 0 0 10px 0; font-weight: 500;">Tu código de descuento:</p>
-                <p style="color: #047857; font-size: 32px; font-weight: bold; margin: 0; letter-spacing: 3px;">${discountCode}</p>
-                <p style="color: #059669; font-size: 14px; margin: 10px 0 0 0;">10% de descuento en tu primer proyecto</p>
-              </div>
-              
-              <p style="color: #374151; font-size: 16px; line-height: 1.6;">
-                <strong>¿Siguiente paso?</strong> Agenda una llamada gratuita de 15 minutos conmigo para hablar de tu proyecto:
-              </p>
-              
-              <div style="text-align: center; margin: 25px 0;">
-                <a href="https://calendly.com/neuriax/30min" style="display: inline-block; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; padding: 15px 35px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
-                  📅 Agendar llamada gratuita
-                </a>
-              </div>
-              
-              <p style="color: #6b7280; font-size: 14px; line-height: 1.6;">
-                En la llamada:
-              </p>
-              <ul style="color: #6b7280; font-size: 14px; line-height: 1.8;">
-                <li>Entenderé mejor tu caso y necesidades</li>
-                <li>Te daré un presupuesto cerrado sin sorpresas</li>
-                <li>Te diré honestamente si podemos ayudarte</li>
-              </ul>
-              
-              <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 25px 0;">
-              
-              <p style="color: #9ca3af; font-size: 14px; margin-bottom: 5px;">
-                ¿Prefieres escribirme directamente?
-              </p>
-              <p style="color: #6b7280; font-size: 14px; margin-top: 0;">
-                📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
-                📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
-              </p>
-              
-              <p style="color: #374151; font-size: 16px; margin-top: 25px;">
-                ¡Hablamos pronto!<br>
-                <strong>El equipo de Neuriax</strong>
-              </p>
-            </div>
-            
-            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-top: 20px;">
-              Recibes este email porque contactaste a través de neuriax.com
-            </p>
-          </div>
-        `
-        });
-
-        if (clientEmailError) {
-          console.error('Error enviando email al cliente:', clientEmailError);
-          // No fallamos la request, el email a Mateo ya se envió correctamente
-        } else {
-          console.log('Email de confirmación enviado al cliente:', clientEmailData?.id);
+        const welcomeTemplate = getEmailTemplate(1);
+        if (welcomeTemplate) {
+          const unsubscribeUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
+          await resend.emails.send({
+            from: 'Neuriax <hola@neuriax.com>',
+            to: email,
+            subject: welcomeTemplate.subject,
+            html: welcomeTemplate.getHtml(nombre, unsubscribeUrl),
+          });
+          console.log('Email de bienvenida (Guía 1) enviado a:', email);
         }
       } catch (clientError) {
-        console.error('Error inesperado enviando email al cliente:', clientError);
-        // Continuamos, el email principal a Mateo ya se envió
+        console.error('Error enviando email de bienvenida al cliente:', clientError);
+      }
+
+      // ========== 3) REGISTRAR SECUENCIA DE 15 EMAILS ==========
+      try {
+        // Calcular próxima fecha de envío (2 días después)
+        const nextSendDate = new Date();
+        nextSendDate.setDate(nextSendDate.getDate() + 2);
+
+        // Verificar si ya existe una secuencia para este email
+        const { data: existingSeq } = await supabase
+          .from('email_sequences')
+          .select('id')
+          .eq('contact_email', email)
+          .eq('completed', false)
+          .single();
+
+        if (!existingSeq) {
+          await supabase.from('email_sequences').insert({
+            contact_email: email,
+            contact_nombre: nombre,
+            current_email: 2, // El email 1 ya se envió arriba
+            next_send_date: nextSendDate.toISOString().split('T')[0],
+            completed: false,
+            unsubscribed: false
+          });
+          console.log('Secuencia de emails registrada para:', email);
+        } else {
+          console.log('Ya existe una secuencia activa para:', email);
+        }
+      } catch (seqError) {
+        console.error('Error registrando secuencia de emails:', seqError);
       }
 
       return NextResponse.json(
-        { message: 'Contacto enviado correctamente', emailId: emailData?.id },
+        { 
+          message: 'Contacto enviado correctamente', 
+          emailId: emailData?.id,
+          calendlyUrl: CALENDLY_URL 
+        },
         { status: 200 }
       );
     }

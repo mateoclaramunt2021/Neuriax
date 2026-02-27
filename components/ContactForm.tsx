@@ -4,9 +4,33 @@ import { useState, FormEvent } from "react";
 
 const CALENDLY_URL = "https://calendly.com/neuriax/llamada";
 
+const SECTORES = [
+  "Restauración / Hostelería",
+  "Clínica / Salud",
+  "Comercio / Retail",
+  "Consultoría / Servicios profesionales",
+  "Construcción / Reformas",
+  "Inmobiliaria",
+  "Educación / Formación",
+  "Logística / Transporte",
+  "Industria / Fabricación",
+  "Tecnología / SaaS",
+  "Otro",
+];
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState({ nombre: "", telefono: "" });
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    telefono: "",
+    empresa: "",
+    sector: "",
+  });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -18,16 +42,19 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           nombre: formData.nombre,
-          email: "",
+          email: formData.email,
           telefono: formData.telefono,
-          mensaje: "Solicitud de llamada desde landing",
-          type: "landing_contact",
+          empresa: formData.empresa,
+          sector: formData.sector,
+          mensaje: `Solicitud de llamada (empresa: ${formData.empresa}, sector: ${formData.sector})`,
+          type: "contact_form",
         }),
       });
 
       if (!res.ok) throw new Error("Error enviando");
       setStatus("success");
 
+      // Redirigir a Calendly para agendar llamada
       setTimeout(() => {
         window.open(CALENDLY_URL, "_blank");
       }, 1500);
@@ -44,18 +71,19 @@ export default function ContactForm() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="text-xl font-bold text-slate-900 mb-2">¡Recibido!</h3>
-        <p className="text-slate-500 text-sm mb-4">Redirigiendo a Calendly para elegir tu horario...</p>
+        <h3 className="text-xl font-bold text-slate-900 mb-2">¡Solicitud recibida!</h3>
+        <p className="text-slate-600 text-sm mb-2">Te hemos enviado un email de confirmación a <strong>{formData.email}</strong>.</p>
+        <p className="text-slate-500 text-sm mb-5">Redirigiendo a Calendly para que elijas tu horario...</p>
         <a
           href={CALENDLY_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-semibold text-sm transition-colors"
+          className="inline-flex items-center gap-2 bg-slate-900 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:bg-slate-800 hover:scale-[1.02]"
         >
-          Abrir Calendly ahora
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
+          Agendar llamada en Calendly
         </a>
       </div>
     );
@@ -64,29 +92,78 @@ export default function ContactForm() {
   return (
     <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-lg shadow-slate-900/5">
       <h3 className="text-lg font-bold text-slate-900 mb-1">Agenda tu llamada gratuita</h3>
-      <p className="text-sm text-slate-500 mb-6">Solo necesito tu nombre y teléfono. Te llamo yo.</p>
+      <p className="text-sm text-slate-500 mb-6">Cuéntanos sobre tu empresa. Te contactamos en menos de 24 h.</p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Nombre */}
         <div>
           <input
             type="text"
+            name="nombre"
             placeholder="Tu nombre"
             required
             value={formData.nombre}
-            onChange={(e) => setFormData({ ...formData, nombre: e.target.value })}
+            onChange={handleChange}
             className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all text-sm"
           />
         </div>
+
+        {/* Email */}
+        <div>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email corporativo"
+            required
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all text-sm"
+          />
+        </div>
+
+        {/* Teléfono */}
         <div>
           <input
             type="tel"
-            placeholder="Tu teléfono"
+            name="telefono"
+            placeholder="Teléfono de contacto"
             required
             value={formData.telefono}
-            onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
+            onChange={handleChange}
             className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all text-sm"
           />
         </div>
+
+        {/* Empresa */}
+        <div>
+          <input
+            type="text"
+            name="empresa"
+            placeholder="Nombre de tu empresa"
+            required
+            value={formData.empresa}
+            onChange={handleChange}
+            className="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all text-sm"
+          />
+        </div>
+
+        {/* Sector */}
+        <div>
+          <select
+            name="sector"
+            required
+            value={formData.sector}
+            onChange={handleChange}
+            className={`w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-violet-500/50 focus:ring-1 focus:ring-violet-500/20 transition-all ${formData.sector ? "text-slate-900" : "text-slate-400"}`}
+          >
+            <option value="" disabled>Sector de tu empresa</option>
+            {SECTORES.map((s) => (
+              <option key={s} value={s} className="text-slate-900">{s}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Submit */}
         <button
           type="submit"
           disabled={status === "sending"}
@@ -110,6 +187,7 @@ export default function ContactForm() {
           )}
         </button>
       </form>
+
       {status === "error" && (
         <p className="text-red-400 text-xs mt-3 text-center">
           Error al enviar. Intenta de nuevo o llámanos directamente.

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 14: Plan de Acción — Automatiza en 30 Días | Neuriax</title>
+<meta name="description" content="Plan paso a paso para automatizar tu negocio en 30 días. Semana a semana: auditoría, email, web, chatbot, integración y optimización.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cyan:#06b6d4;--blue:#3b82f6;--bg-dark:#0f172a;--bg-card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6);--green:#22c55e;--yellow:#eab308;--purple:#8b5cf6}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--blue)}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:2px solid var(--cyan);padding:1.5rem 0;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:1.8rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo span{font-weight:300}
+.badge{display:inline-block;background:var(--accent-gradient);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:50px;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero{text-align:center;padding:4rem 1.5rem;background:radial-gradient(ellipse at center,rgba(6,182,212,.08) 0%,transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.5rem 0 1rem;line-height:1.2}
+.hero h1 .gradient{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-muted);max-width:650px;margin:0 auto}
+.section{margin:3rem 0}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid rgba(6,182,212,.3);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.section h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 .75rem;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.75rem;margin:1.25rem 0;transition:border-color .3s}
+.card:hover{border-color:rgba(6,182,212,.3)}
+.card h3{margin-top:0}
+ul,ol{padding-left:1.5rem;margin:.75rem 0}
+li{margin:.5rem 0;color:var(--text-muted)}
+li strong{color:var(--text)}
+.highlight{background:rgba(6,182,212,.06);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:1.5rem 0;font-size:.95rem}
+.highlight strong{color:var(--cyan)}
+.week{border-radius:16px;padding:2rem;margin:2rem 0;border-left:4px solid}
+.week-1{background:rgba(6,182,212,.04);border-color:var(--cyan)}
+.week-2{background:rgba(59,130,246,.04);border-color:var(--blue)}
+.week-3{background:rgba(34,197,94,.04);border-color:var(--green)}
+.week-4{background:rgba(139,92,246,.04);border-color:var(--purple)}
+.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.week-title{font-size:1.4rem;font-weight:800}
+.week-tag{font-size:.8rem;font-weight:700;padding:.3rem .8rem;border-radius:6px;text-transform:uppercase;letter-spacing:.5px}
+.week-1 .week-tag{background:rgba(6,182,212,.2);color:var(--cyan)}
+.week-2 .week-tag{background:rgba(59,130,246,.2);color:var(--blue)}
+.week-3 .week-tag{background:rgba(34,197,94,.2);color:var(--green)}
+.week-4 .week-tag{background:rgba(139,92,246,.2);color:var(--purple)}
+.day-block{background:rgba(0,0,0,.2);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0}
+.day-block h4{font-size:1rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.5rem}
+.day-block h4 .day-num{background:rgba(255,255,255,.08);padding:.15rem .5rem;border-radius:4px;font-size:.85rem;font-weight:700}
+.checklist{list-style:none;padding-left:0}
+.checklist li{display:flex;align-items:flex-start;gap:.6rem;padding:.4rem 0;margin:0;color:var(--text-muted)}
+.checklist li::before{content:'☐';font-size:1.1rem;color:var(--cyan);flex-shrink:0;margin-top:1px}
+.progress-bar{background:rgba(255,255,255,.06);border-radius:8px;height:12px;margin:1rem 0;overflow:hidden}
+.progress-fill{height:100%;border-radius:8px;transition:width .5s}
+.progress-1{width:25%;background:var(--cyan)}
+.progress-2{width:50%;background:var(--blue)}
+.progress-3{width:75%;background:var(--green)}
+.progress-4{width:100%;background:var(--accent-gradient)}
+.milestone{display:flex;align-items:center;gap:.75rem;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:1rem;margin:1rem 0}
+.milestone .icon{font-size:1.5rem}
+.milestone .milestone-text{font-size:.95rem}
+.milestone .milestone-text strong{color:var(--green)}
+.cta-box{background:var(--accent-gradient);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;font-size:1.6rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center}
+.cta-box p{color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .3s;cursor:pointer;border:none;text-decoration:none}
+.btn-white{background:#fff;color:var(--bg-dark)}.btn-white:hover{background:#e2e8f0;color:var(--bg-dark)}
+.btn-outline{border:2px solid #fff;color:#fff;background:transparent;margin-left:.5rem}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-print{background:var(--bg-card);color:var(--text);border:1px solid rgba(255,255,255,.1);padding:.6rem 1.2rem;font-size:.85rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin:1rem 0}
+.btn-print:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
+.toc{background:var(--bg-card);border-radius:12px;padding:1.75rem;margin:2rem 0;border:1px solid rgba(6,182,212,.15)}
+.toc h3{color:var(--cyan);margin:0 0 1rem;font-size:1.1rem}
+.toc ol{margin:0}.toc li{margin:.35rem 0}.toc a{color:var(--text-muted);font-size:.95rem}.toc a:hover{color:var(--cyan)}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--bg-card);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid rgba(6,182,212,.15)}
+.stat .number{font-size:2.2rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.9rem;color:var(--text-muted);margin-top:.25rem}
+@media(max-width:640px){.container{padding:1.25rem 1rem}.hero{padding:2.5rem 1rem}.hero h1{font-size:1.7rem}.week{padding:1.25rem}.stat-grid{grid-template-columns:1fr}.btn{display:block;margin:.5rem 0;text-align:center}.btn-outline{margin-left:0}.cta-box{padding:1.75rem}}
+@media print{body{background:#fff;color:#111}header{position:static;border-bottom:2px solid #06b6d4;background:#fff}.logo{-webkit-text-fill-color:#06b6d4}.hero{background:none;padding:2rem 0}.card,.stat,.toc,.week,.day-block,.milestone{border:1px solid #ddd;break-inside:avoid}.week-1{background:#f0fdfa;border-color:#06b6d4}.week-2{background:#eff6ff;border-color:#3b82f6}.week-3{background:#f0fdf4;border-color:#22c55e}.week-4{background:#f5f3ff;border-color:#8b5cf6}.highlight{border-left:4px solid #06b6d4;background:#f0fdfa}.cta-box{background:#f0fdfa;border:2px solid #06b6d4}.cta-box h2,.cta-box p{color:#111}.btn-print{display:none}a{color:#06b6d4}footer{border-top:1px solid #ddd}.stat .number{-webkit-text-fill-color:#06b6d4}.checklist li::before{color:#06b6d4}td,li,p,.hero p,.stat .label{color:#333}.progress-bar{background:#eee}.day-block{background:#f8fafc;border:1px solid #e2e8f0}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Neuriax<span>.com</span></div>
+</header>
+
+<section class="hero">
+<span class="badge">Guía 14 de 15</span>
+<h1>📋 Plan de Acción: <span class="gradient">Automatiza en 30 Días</span></h1>
+<p>Un plan concreto, día a día, para transformar tu negocio. Sin excusas, sin complicaciones. Solo acción.</p>
+<button class="btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</section>
+
+<div class="container">
+
+<nav class="toc">
+<h3>📑 Índice — Las 4 Semanas</h3>
+<ol>
+<li><a href="#vision">Visión general del plan</a></li>
+<li><a href="#semana1">Semana 1: Auditoría y Priorización</a></li>
+<li><a href="#semana2">Semana 2: Primera Automatización (Email)</a></li>
+<li><a href="#semana3">Semana 3: Web y Chatbot</a></li>
+<li><a href="#semana4">Semana 4: Integración y Optimización</a></li>
+<li><a href="#despues">Después del día 30</a></li>
+</ol>
+</nav>
+
+<section class="section" id="vision">
+<h2>🎯 Visión General del Plan</h2>
+<div class="stat-grid">
+<div class="stat"><div class="number">30</div><div class="label">días para transformar tu negocio</div></div>
+<div class="stat"><div class="number">1-2h</div><div class="label">de trabajo diario requerido</div></div>
+<div class="stat"><div class="number">4</div><div class="label">automatizaciones implementadas</div></div>
+<div class="stat"><div class="number">15-20h</div><div class="label">ahorradas cada mes después</div></div>
+</div>
+<div class="highlight">
+<strong>📌 Prerequisito:</strong> Este plan asume que has leído las guías anteriores de la serie. Si no, no te preocupes — cada paso incluye lo que necesitas saber. Dedica <strong>1-2 horas al día</strong> durante los 30 días.
+</div>
+</section>
+
+<!-- SEMANA 1 -->
+<section class="section" id="semana1">
+<h2>📊 Semana 1: Auditoría y Priorización</h2>
+<div class="progress-bar"><div class="progress-fill progress-1"></div></div>
+
+<div class="week week-1">
+<div class="week-header">
+<div class="week-title">🔍 Semana 1</div>
+<div class="week-tag">Días 1-7</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Objetivo: Entender dónde estás, identificar oportunidades y definir prioridades.</p>
+
+<div class="day-block">
+<h4><span class="day-num">Día 1</span> Auditoría de tiempo</h4>
+<ul class="checklist">
+<li>Anota TODAS las tareas que haces en un día normal de trabajo</li>
+<li>Junto a cada tarea, apunta cuánto tiempo tardas</li>
+<li>Marca cuáles son repetitivas (las haces más de 1 vez/semana)</li>
+<li>Marca cuáles no requieren decisiones creativas o estratégicas</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 2</span> Auditoría de herramientas</h4>
+<ul class="checklist">
+<li>Lista TODAS las herramientas digitales que usas (apps, webs, software)</li>
+<li>Anota cuánto pagas por cada una al mes</li>
+<li>Puntúa del 1-5 cuánto la usas realmente</li>
+<li>Identifica herramientas duplicadas o infrautilizadas</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 3</span> Mapa de procesos</h4>
+<ul class="checklist">
+<li>Dibuja el flujo de cómo llega un cliente: desde que te descubre hasta que paga</li>
+<li>Identifica cada punto donde hay trabajo manual evitable</li>
+<li>Identifica dónde se pierden leads o clientes potenciales</li>
+<li>Anota los "cuellos de botella" — donde todo se ralentiza</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 4</span> Priorizar automatizaciones</h4>
+<ul class="checklist">
+<li>De tu lista del Día 1, ordena las tareas repetitivas por horas/mes</li>
+<li>Investiga si cada una se puede automatizar (busca en Google: "automatizar [tarea]")</li>
+<li>Elige las TOP 3 tareas que más tiempo consumen y son automatizables</li>
+<li>Asigna una prioridad: 1º Email, 2º Web/Chatbot, 3º Facturación o RRSS</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 5</span> Elegir herramientas</h4>
+<ul class="checklist">
+<li>Consulta la Guía 13 (Mapa Tecnológico) y elige tu tier de presupuesto</li>
+<li>Para cada automatización priorizada, elige la herramienta específica</li>
+<li>Verifica que las herramientas se integran entre sí</li>
+<li>Crea cuentas en las herramientas elegidas (aprovecha trials gratuitos)</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 6-7</span> Preparar datos y cuentas</h4>
+<ul class="checklist">
+<li>Exporta tu lista de contactos/clientes actual (CSV)</li>
+<li>Limpia los datos: emails válidos, nombres correctos, segmentación básica</li>
+<li>Configura las cuentas creadas con tus datos de empresa</li>
+<li>Sube tu logo, colores corporativos y datos fiscales a cada herramienta</li>
+</ul>
+</div>
+
+<div class="milestone">
+<div class="icon">🏆</div>
+<div class="milestone-text"><strong>Hito Semana 1:</strong> Tienes un diagnóstico claro de tu negocio, un plan priorizado de 3 automatizaciones y las herramientas listas para configurar.</div>
+</div>
+</div>
+</section>
+
+<!-- SEMANA 2 -->
+<section class="section" id="semana2">
+<h2>📧 Semana 2: Primera Automatización (Email)</h2>
+<div class="progress-bar"><div class="progress-fill progress-2"></div></div>
+
+<div class="week week-2">
+<div class="week-header">
+<div class="week-title">📧 Semana 2</div>
+<div class="week-tag">Días 8-14</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Objetivo: Tener email marketing automatizado generando leads y nutriendo clientes.</p>
+
+<div class="day-block">
+<h4><span class="day-num">Día 8</span> Configurar plataforma email</h4>
+<ul class="checklist">
+<li>Configura tu dominio de envío (SPF, DKIM, DMARC) para evitar spam</li>
+<li>Sube tu lista de contactos segmentada</li>
+<li>Crea tu plantilla de email base con diseño de marca</li>
+<li>Configura los datos del remitente y firma</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 9</span> Crear lead magnet</h4>
+<ul class="checklist">
+<li>Elige un lead magnet: guía PDF, checklist, plantilla, mini-curso</li>
+<li>Créalo (usa IA para acelerar: ChatGPT para texto, Canva para diseño)</li>
+<li>Súbelo a tu plataforma de email / web</li>
+<li>Crea la landing page o formulario de descarga</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 10-11</span> Secuencia de bienvenida</h4>
+<ul class="checklist">
+<li>Email 1 (inmediato): Bienvenida + entrega del lead magnet</li>
+<li>Email 2 (día 2): Tu historia, qué haces y por qué eres diferente</li>
+<li>Email 3 (día 4): Caso de éxito o testimonio de cliente</li>
+<li>Email 4 (día 6): Contenido de valor adicional relacionado</li>
+<li>Email 5 (día 8): Oferta o CTA — agenda llamada / consulta</li>
+<li>Configura la automatización: disparo = nuevo suscriptor</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 12</span> Formularios y captación</h4>
+<ul class="checklist">
+<li>Instala formularios de captación en tu web (header, sidebar, exit-intent)</li>
+<li>Crea un pop-up con tu lead magnet (configura timing: 30s o 50% scroll)</li>
+<li>Añade CTA en tu firma de email personal</li>
+<li>Comparte el lead magnet en RRSS</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 13-14</span> Testing y optimización</h4>
+<ul class="checklist">
+<li>Envíate un email de prueba desde cada paso de la secuencia</li>
+<li>Verifica que los enlaces funcionan y el diseño se ve bien en móvil</li>
+<li>Suscríbete tú mismo desde el formulario y comprueba todo el flujo</li>
+<li>Ajusta asuntos, textos o timing según lo que veas</li>
+</ul>
+</div>
+
+<div class="milestone">
+<div class="icon">🏆</div>
+<div class="milestone-text"><strong>Hito Semana 2:</strong> Tienes un sistema de captación de leads funcionando 24/7. Cada nuevo suscriptor recibe automáticamente 5 emails que le llevan a contactarte.</div>
+</div>
+</div>
+</section>
+
+<!-- SEMANA 3 -->
+<section class="section" id="semana3">
+<h2>🌐 Semana 3: Web y Chatbot</h2>
+<div class="progress-bar"><div class="progress-fill progress-3"></div></div>
+
+<div class="week week-3">
+<div class="week-header">
+<div class="week-title">🌐 Semana 3</div>
+<div class="week-tag">Días 15-21</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Objetivo: Web optimizada para convertir y chatbot que atiende 24/7.</p>
+
+<div class="day-block">
+<h4><span class="day-num">Días 15-16</span> Optimizar web para conversión</h4>
+<ul class="checklist">
+<li>Revisa la velocidad de tu web (Google PageSpeed Insights) y corrige errores</li>
+<li>Añade CTA claros en cada página (botón de contacto, WhatsApp, Calendly)</li>
+<li>Implementa formularios de contacto conectados a tu CRM</li>
+<li>Añade testimonios y logos de clientes como prueba social</li>
+<li>Verifica que la web se ve bien en móvil</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 17-18</span> Implementar chatbot</h4>
+<ul class="checklist">
+<li>Elige tu herramienta: Tidio (fácil), Crisp (versátil), o Tawk.to (gratis)</li>
+<li>Instala el widget en tu web (normalmente 1 línea de código)</li>
+<li>Configura un saludo automático según la página que visita el usuario</li>
+<li>Crea flujos para las 5 preguntas más frecuentes de tus clientes</li>
+<li>Configura escalado a humano si el bot no sabe responder</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 19-20</span> Conectar web → CRM → email</h4>
+<ul class="checklist">
+<li>Conecta formularios de contacto → CRM (nuevo contacto = nuevo lead)</li>
+<li>Conecta chatbot → CRM (conversación = contacto registrado)</li>
+<li>Configura notificación automática cuando llega un nuevo lead</li>
+<li>Crea una secuencia de follow-up automática para nuevos leads de la web</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 21</span> SEO básico</h4>
+<ul class="checklist">
+<li>Configura Google Search Console y Google Analytics</li>
+<li>Optimiza títulos y descripciones de tus páginas principales</li>
+<li>Verifica que tienes sitemap.xml y robots.txt</li>
+<li>Publica al menos 1 artículo de blog optimizado para SEO</li>
+</ul>
+</div>
+
+<div class="milestone">
+<div class="icon">🏆</div>
+<div class="milestone-text"><strong>Hito Semana 3:</strong> Tu web convierte visitantes en leads automáticamente. Un chatbot atiende 24/7 y cada contacto se registra en tu CRM con follow-up automático.</div>
+</div>
+</div>
+</section>
+
+<!-- SEMANA 4 -->
+<section class="section" id="semana4">
+<h2>🔗 Semana 4: Integración y Optimización</h2>
+<div class="progress-bar"><div class="progress-fill progress-4"></div></div>
+
+<div class="week week-4">
+<div class="week-header">
+<div class="week-title">⚡ Semana 4</div>
+<div class="week-tag">Días 22-30</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Objetivo: Conectar todo, automatizar la tercera tarea priorizada y optimizar lo implementado.</p>
+
+<div class="day-block">
+<h4><span class="day-num">Días 22-23</span> Tercera automatización</h4>
+<ul class="checklist">
+<li>Implementa tu 3ª automatización priorizada (facturación, RRSS, o informes)</li>
+<li>Sigue el mismo proceso: configurar herramienta → crear flujos → testear</li>
+<li>Conecta con las automatizaciones existentes (CRM, email)</li>
+<li>Documenta el proceso para futuras referencias</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 24-25</span> Integrar todo con Make/Zapier</h4>
+<ul class="checklist">
+<li>Crea flujo: Nuevo lead en web → CRM → Email de bienvenida → Tarea en gestor</li>
+<li>Crea flujo: Nuevo cliente → Factura auto → Email con enlace de pago</li>
+<li>Crea flujo: Informe semanal automático con métricas clave</li>
+<li>Verifica que no hay duplicados o errores en los flujos</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 26-27</span> Monitorización y dashboards</h4>
+<ul class="checklist">
+<li>Configura un dashboard con las métricas clave (leads/semana, conversión, ingresos)</li>
+<li>Configura alertas automáticas: si algo falla, te lo notifica por email/Slack</li>
+<li>Programa un informe semanal automático que te llega cada lunes</li>
+<li>Revisa los datos de las 3 primeras semanas y detecta patrones</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Días 28-29</span> Optimización</h4>
+<ul class="checklist">
+<li>Revisa las tasas de apertura de emails — ¿ajustar asuntos?</li>
+<li>Revisa las conversaciones del chatbot — ¿añadir más respuestas?</li>
+<li>Revisa los leads del CRM — ¿se están trabajando todos?</li>
+<li>Identifica oportunidades de mejora y crea un plan para el mes siguiente</li>
+</ul>
+</div>
+
+<div class="day-block">
+<h4><span class="day-num">Día 30</span> Revisión final 🎉</h4>
+<ul class="checklist">
+<li>Mide el tiempo total ahorrado por semana vs antes del plan</li>
+<li>Compara métricas: leads generados, velocidad de respuesta, facturas automatizadas</li>
+<li>Documenta lo implementado y compártelo con tu equipo</li>
+<li>Celebra los logros y planifica las automatizaciones del próximo mes</li>
+</ul>
+</div>
+
+<div class="milestone">
+<div class="icon">🎉</div>
+<div class="milestone-text"><strong>Hito Semana 4:</strong> Tu negocio tiene 3+ automatizaciones funcionando, todo conectado, dashboards de control y un plan de mejora continua. ¡Has transformado tu negocio en 30 días!</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="despues">
+<h2>🚀 Después del Día 30</h2>
+<div class="card">
+<h3>Plan de mantenimiento mensual</h3>
+<ul class="checklist">
+<li>Semana 1 de cada mes: revisar métricas y ajustar automatizaciones</li>
+<li>Semana 2: implementar una mejora o nueva automatización</li>
+<li>Semana 3: crear contenido para nutrir leads (blog, email, RRSS)</li>
+<li>Semana 4: auditoría rápida de herramientas y costes</li>
+<li>Cada trimestre: revisar el stack tecnológico completo</li>
+</ul>
+</div>
+<div class="highlight">
+<strong>📈 Dato clave:</strong> Las empresas que mantienen y optimizan sus automatizaciones durante 6 meses ven un <strong>ROI del 400-800%</strong> sobre la inversión inicial. La clave está en la consistencia, no en la perfección.
+</div>
+</section>
+
+<section class="cta-box">
+<h2>📋 ¿Quieres que te acompañemos durante los 30 días?</h2>
+<p>Implementamos todo el plan contigo — paso a paso, sin complicaciones. Tú te centras en tu negocio, nosotros en la tecnología.</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-white">📞 Reservar Consulta Gratuita</a>
+<a href="https://neuriax.com" class="btn btn-outline">🌐 Visitar Neuriax</a>
+</section>
+
+</div>
+
+<footer>
+<p>© 2026 Neuriax — <a href="https://neuriax.com">neuriax.com</a></p>
+<p style="margin-top:.5rem;font-size:.8rem">Guía 14 de la serie "Automatización para PYMEs" · Todos los derechos reservados</p>
+</footer>
+</body>
+</html>

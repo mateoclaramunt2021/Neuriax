@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webs que Generan Clientes en Piloto Automático | Neuriax</title>
+    <meta name="description" content="Descubre los 7 elementos esenciales que convierten tu web en una máquina de generar clientes. Guía práctica para PYMEs.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border-bottom: 2px solid rgba(6,182,212,0.3);
+            margin-bottom: 3rem;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent-gradient);
+            color: #fff;
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+        .logo-text {
+            font-size: 1.4rem; font-weight: 700; letter-spacing: 1px;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 1.75rem; font-weight: 700; margin: 2.5rem 0 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--cyan); }
+        p { margin-bottom: 1rem; }
+
+        .card {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.75rem; margin: 1.25rem 0; transition: border-color 0.3s;
+        }
+        .card:hover { border-color: rgba(6,182,212,0.4); }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+        .stat-box {
+            background: var(--bg-card); border-radius: var(--radius); padding: 1.5rem; text-align: center;
+            border: 1px solid rgba(6,182,212,0.15);
+        }
+        .stat-number {
+            font-size: 2.5rem; font-weight: 800;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        /* Element Cards */
+        .element-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(6,182,212,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .element-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-gradient);
+        }
+        .element-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 40px; height: 40px; background: var(--accent-gradient);
+            border-radius: 50%; color: #fff; font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem;
+        }
+        .element-card h3 { margin-top: 0; }
+        .element-card ul { padding-left: 1.5rem; }
+        .element-card li { margin-bottom: 0.4rem; color: var(--text-muted); }
+
+        .tip-box {
+            background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .tip-box strong { color: var(--cyan); }
+
+        .warning-box {
+            background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .warning-box strong { color: #f59e0b; }
+
+        .error-box {
+            background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .error-box strong { color: #ef4444; }
+
+        /* Checklist */
+        .checklist { list-style: none; padding: 0; }
+        .checklist li {
+            padding: 0.6rem 0 0.6rem 2rem;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+        }
+        .checklist li::before {
+            content: '☐';
+            position: absolute; left: 0; top: 0.6rem;
+            font-size: 1.1rem; color: var(--cyan);
+        }
+
+        /* Comparison */
+        .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.5rem 0; }
+        .compare-bad { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.2); border-radius: var(--radius); padding: 1.5rem; }
+        .compare-good { background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2); border-radius: var(--radius); padding: 1.5rem; }
+        .compare-bad h3 { color: #ef4444; }
+        .compare-good h3 { color: var(--cyan); }
+        .compare-bad ul, .compare-good ul { padding-left: 1.25rem; }
+        .compare-bad li, .compare-good li { margin-bottom: 0.4rem; color: var(--text-muted); }
+
+        .cta-section {
+            text-align: center; padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(59,130,246,0.12));
+            border-radius: var(--radius); margin: 3rem 0 2rem;
+            border: 1px solid rgba(6,182,212,0.2);
+        }
+        .cta-section h2 { justify-content: center; margin-top: 0; }
+        .btn {
+            display: inline-block; padding: 0.9rem 2.25rem; border-radius: 50px;
+            font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6,182,212,0.3); }
+        .btn-primary { background: var(--accent-gradient); color: #fff; }
+        .btn-secondary { background: transparent; color: var(--cyan); border: 2px solid var(--cyan); margin-left: 0.75rem; }
+
+        footer {
+            text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; font-size: 12pt; }
+            .hero { background: none; border-bottom: 2px solid #06b6d4; padding: 2rem 0; }
+            .hero h1, .logo-text, .stat-number { -webkit-text-fill-color: #06b6d4; color: #06b6d4; }
+            .hero p, .stat-label, .element-card li, td { color: #444; }
+            .card, .stat-box, .element-card, .tip-box, .warning-box, .error-box, .cta-section, .compare-bad, .compare-good { background: #fff; border-color: #ddd; }
+            h2 { color: #1a1a1a; } h3, .tip-box strong { color: #06b6d4; }
+            .warning-box strong { color: #d97706; } .error-box strong, .compare-bad h3 { color: #dc2626; }
+            .btn-secondary, .btn-print { display: none !important; }
+            .btn-primary { background: #06b6d4; color: #fff; }
+            .cta-section, .element-card { break-inside: avoid; }
+            .element-card::before { background: #06b6d4; }
+            .checklist li::before { color: #06b6d4; }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 2.5rem 1rem; } .hero h1 { font-size: 1.75rem; }
+            .container { padding: 1.25rem 1rem; } h2 { font-size: 1.4rem; }
+            .stat-grid { grid-template-columns: 1fr 1fr; }
+            .compare-grid { grid-template-columns: 1fr; }
+            .btn { display: block; margin: 0.5rem auto; max-width: 280px; }
+            .btn-secondary { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="logo-text">NEURIAX</div>
+    <span class="hero-badge">🌐 Guía #07</span>
+    <h1>Webs que Generan Clientes en Piloto Automático</h1>
+    <p>Tu web no debería ser un escaparate bonito. Debería ser tu mejor comercial, trabajando 24/7 para convertir visitantes en clientes.</p>
+    <br>
+    <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- El problema -->
+    <h2>🚨 El Problema: Webs Bonitas que No Convierten</h2>
+
+    <div class="error-box">
+        <strong>❌ Realidad incómoda:</strong> El 96% de los visitantes de una web se van sin hacer NADA. Sin llamar, sin pedir presupuesto, sin comprar. Y la mayoría de webs de PYMEs están diseñadas como folletos digitales, no como máquinas de ventas.
+    </div>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="stat-number">96%</div>
+            <div class="stat-label">de visitantes se van sin convertir</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">3 seg</div>
+            <div class="stat-label">para captar la atención o te pierden</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">53%</div>
+            <div class="stat-label">abandonan si tarda más de 3 seg</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">70%</div>
+            <div class="stat-label">del tráfico viene de móvil</div>
+        </div>
+    </div>
+
+    <div class="compare-grid">
+        <div class="compare-bad">
+            <h3>❌ Web Folleto</h3>
+            <ul>
+                <li>Habla solo de la empresa</li>
+                <li>Sin llamadas a la acción claras</li>
+                <li>Formulario de contacto en una página perdida</li>
+                <li>No tiene prueba social</li>
+                <li>Lenta y no optimizada para móvil</li>
+                <li>Sin estrategia de captación de leads</li>
+            </ul>
+        </div>
+        <div class="compare-good">
+            <h3>✅ Web que Convierte</h3>
+            <ul>
+                <li>Habla del problema del cliente</li>
+                <li>CTAs visibles en cada sección</li>
+                <li>Múltiples puntos de contacto</li>
+                <li>Testimonios y casos de éxito</li>
+                <li>Rápida y mobile-first</li>
+                <li>Lead magnets y captación activa</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 7 Elementos -->
+    <h2>🏗️ Los 7 Elementos de una Web que Convierte</h2>
+
+    <div class="element-card">
+        <div class="element-num">1</div>
+        <h3>Hero Section que Engancha</h3>
+        <p>Es lo primero que ve el visitante. Tienes 3 segundos para convencerle de que está en el lugar correcto.</p>
+        <ul>
+            <li><strong>Titular claro:</strong> Qué ofreces y para quién (sin jerga técnica)</li>
+            <li><strong>Subtítulo de beneficio:</strong> Qué resultado va a conseguir el visitante</li>
+            <li><strong>CTA principal visible:</strong> "Pide Presupuesto Gratis", "Descarga la Guía"</li>
+            <li><strong>Imagen/vídeo:</strong> Que refuerce el mensaje, no que decore</li>
+            <li><strong>Prueba social rápida:</strong> "Más de 200 empresas confían en nosotros"</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>💡 Fórmula del Hero perfecto:</strong> [Resultado deseado] + [Sin problema que temen] + [En plazo razonable]. Ejemplo: "Consigue más clientes sin invertir horas en marketing. Resultados en 30 días."
+        </div>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">2</div>
+        <h3>Social Proof (Prueba Social)</h3>
+        <p>Las personas confían más en lo que dicen otros clientes que en lo que dices tú sobre tu propio negocio.</p>
+        <ul>
+            <li><strong>Testimonios reales:</strong> Con nombre, foto y empresa (idealmente en vídeo)</li>
+            <li><strong>Logos de clientes:</strong> Si trabajas con marcas reconocidas</li>
+            <li><strong>Casos de éxito:</strong> Antes → Después con datos reales</li>
+            <li><strong>Cifras de confianza:</strong> "1.500+ proyectos completados"</li>
+            <li><strong>Reseñas Google:</strong> Widget integrado con valoración media</li>
+        </ul>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">3</div>
+        <h3>CTAs (Llamadas a la Acción) Estratégicos</h3>
+        <p>Cada sección de tu web debe guiar al visitante hacia el siguiente paso. Un CTA no es un botón de "Contacto" perdido en el menú.</p>
+        <ul>
+            <li><strong>CTA primario:</strong> Acción principal (presupuesto, compra, demo) — color destacado</li>
+            <li><strong>CTA secundario:</strong> Para los que no están listos (descargar guía, ver casos)</li>
+            <li><strong>CTA flotante/fijo:</strong> Visible al hacer scroll en móvil</li>
+            <li><strong>Microcopy:</strong> Texto bajo el botón que reduce fricción ("Sin compromiso", "Gratis")</li>
+            <li><strong>Frecuencia:</strong> Mínimo un CTA visible en cada scroll completo</li>
+        </ul>
+        <div class="warning-box" style="margin-top: 1rem;">
+            <strong>⚠️ Error común:</strong> Tener solo un botón de "Contacto" en la barra de navegación. Eso no convierte. Un visitante necesita ver el CTA varias veces antes de actuar.
+        </div>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">4</div>
+        <h3>Chat / WhatsApp Integrado</h3>
+        <p>El visitante tiene una duda → No encuentra la respuesta → Se va. Un chat evita esto capturando la intención en el momento exacto.</p>
+        <ul>
+            <li><strong>WhatsApp Business:</strong> Canal preferido en España, respuesta rápida</li>
+            <li><strong>Chatbot con IA:</strong> Responde las 20 preguntas más frecuentes 24/7</li>
+            <li><strong>Posición:</strong> Esquina inferior derecha, siempre visible</li>
+            <li><strong>Mensaje proactivo:</strong> "¿Tienes alguna duda? Te ayudo en 1 minuto"</li>
+            <li><strong>Captura de datos:</strong> Nombre + email/teléfono antes de responder</li>
+        </ul>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">5</div>
+        <h3>Formularios Optimizados</h3>
+        <p>Cada campo extra que añades reduce las conversiones un 10%. Pide solo lo necesario.</p>
+        <ul>
+            <li><strong>Máximo 3-4 campos:</strong> Nombre, email, teléfono (y uno contextual)</li>
+            <li><strong>Multi-step:</strong> Divide formularios largos en pasos (mejora un 86%)</li>
+            <li><strong>Microcopy:</strong> "Tu información es 100% privada"</li>
+            <li><strong>Valor claro:</strong> "Recibe tu presupuesto en 24h" junto al formulario</li>
+            <li><strong>Autocompletado:</strong> Activa el autocompletado del navegador</li>
+            <li><strong>Lead magnet:</strong> Ofrece algo a cambio (guía, checklist, descuento)</li>
+        </ul>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">6</div>
+        <h3>Velocidad de Carga</h3>
+        <p>Google penaliza las webs lentas y los usuarios las abandonan. La velocidad no es opcional.</p>
+        <ul>
+            <li><strong>Objetivo:</strong> Carga completa en menos de 3 segundos</li>
+            <li><strong>Core Web Vitals:</strong> LCP &lt; 2.5s, FID &lt; 100ms, CLS &lt; 0.1</li>
+            <li><strong>Imágenes:</strong> Formato WebP, lazy loading, tamaños optimizados</li>
+            <li><strong>Hosting:</strong> Servidor rápido con CDN (Vercel, Cloudflare)</li>
+            <li><strong>Código limpio:</strong> Minimizar CSS/JS, eliminar plugins innecesarios</li>
+            <li><strong>Herramienta:</strong> Testea en PageSpeed Insights de Google</li>
+        </ul>
+        <div class="tip-box" style="margin-top: 1rem;">
+            <strong>📊 Dato:</strong> Por cada segundo extra de carga, las conversiones caen un 7%. Una web que tarda 5 segundos pierde el 40% de visitantes frente a una que carga en 1 segundo.
+        </div>
+    </div>
+
+    <div class="element-card">
+        <div class="element-num">7</div>
+        <h3>SEO On-Page Básico</h3>
+        <p>De nada sirve tener la mejor web si nadie la encuentra. El SEO es tu fuente de tráfico gratuito más potente.</p>
+        <ul>
+            <li><strong>Title tags:</strong> Incluye tu keyword principal + localidad si aplica</li>
+            <li><strong>Meta descriptions:</strong> Describe el beneficio, incluye CTA</li>
+            <li><strong>H1, H2, H3:</strong> Estructura jerárquica de contenido</li>
+            <li><strong>URLs amigables:</strong> tudominio.com/servicios/diseno-web (no ?id=123)</li>
+            <li><strong>Imágenes con alt:</strong> Describe la imagen con keywords</li>
+            <li><strong>Schema markup:</strong> LocalBusiness, FAQ, Reviews</li>
+        </ul>
+    </div>
+
+    <!-- Checklist -->
+    <h2>✅ Checklist: ¿Tu Web Está Lista para Convertir?</h2>
+    <div class="card">
+        <ul class="checklist">
+            <li>Hero con titular claro enfocado en el cliente, no en la empresa</li>
+            <li>CTA principal visible sin hacer scroll (above the fold)</li>
+            <li>Al menos 3 testimonios reales con nombre y empresa</li>
+            <li>WhatsApp o chat visible en todas las páginas</li>
+            <li>Formulario de contacto con máximo 4 campos</li>
+            <li>Velocidad de carga inferior a 3 segundos en móvil</li>
+            <li>Diseño responsive que se ve bien en todos los dispositivos</li>
+            <li>Página de servicios con beneficios, no solo características</li>
+            <li>Página de precios o al menos rangos orientativos</li>
+            <li>Lead magnet (guía, checklist) para captar emails</li>
+            <li>Favicon y Open Graph configurados correctamente</li>
+            <li>SSL activo (https://) en todo el sitio</li>
+            <li>Google Analytics y Search Console conectados</li>
+            <li>Política de privacidad y aviso de cookies (RGPD)</li>
+            <li>Blog con al menos 5 artículos optimizados para SEO</li>
+        </ul>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>🚀 ¿Tu Web No Genera Clientes?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            Analizamos tu web gratis y te decimos exactamente qué mejorar para empezar a convertir visitantes en clientes. Sin compromiso.
+        </p>
+        <a href="https://calendly.com/neuriax/30min" class="btn btn-primary">📅 Solicitar Auditoría Web Gratuita</a>
+        <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Neuriax — Automatización inteligente para empresas que quieren crecer.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://neuriax.com">neuriax.com</a></p>
+</footer>
+
+</body>
+</html>

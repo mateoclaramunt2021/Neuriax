@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Gratuito + Automatización | Neuriax</title>
+    <meta name="description" content="Compara los top 5 CRMs gratuitos y aprende a automatizar seguimiento, email y WhatsApp para tu PYME. Guía completa de Neuriax.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero {
+            text-align: center; padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border-bottom: 2px solid rgba(6,182,212,0.3); margin-bottom: 3rem;
+        }
+        .hero-badge {
+            display: inline-block; background: var(--accent-gradient); color: #fff;
+            padding: 0.35rem 1.2rem; border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.5rem; text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+        .logo-text {
+            font-size: 1.4rem; font-weight: 700; letter-spacing: 1px;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 1.75rem; font-weight: 700; margin: 2.5rem 0 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--cyan); }
+        p { margin-bottom: 1rem; }
+
+        .card {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.75rem; margin: 1.25rem 0; transition: border-color 0.3s;
+        }
+        .card:hover { border-color: rgba(6,182,212,0.4); }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+        .stat-box {
+            background: var(--bg-card); border-radius: var(--radius); padding: 1.5rem; text-align: center;
+            border: 1px solid rgba(6,182,212,0.15);
+        }
+        .stat-number {
+            font-size: 2.5rem; font-weight: 800;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        /* Tables */
+        .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: var(--radius); }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; }
+        th {
+            background: rgba(6,182,212,0.15); padding: 1rem; text-align: left;
+            font-weight: 600; color: var(--cyan); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        td { padding: 0.85rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.95rem; }
+        tr:hover td { background: rgba(6,182,212,0.05); }
+        .winner { background: rgba(6,182,212,0.08); }
+        .winner td { font-weight: 600; }
+
+        .tip-box {
+            background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .tip-box strong { color: var(--cyan); }
+
+        .warning-box {
+            background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .warning-box strong { color: #f59e0b; }
+
+        /* CRM Detail Cards */
+        .crm-card {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.75rem; margin: 1.5rem 0;
+            position: relative; overflow: hidden;
+        }
+        .crm-card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+            background: var(--accent-gradient);
+        }
+        .crm-card h3 { margin-top: 0.5rem; font-size: 1.3rem; }
+        .crm-card .crm-meta {
+            display: flex; flex-wrap: wrap; gap: 1rem; margin: 0.75rem 0; font-size: 0.9rem;
+        }
+        .crm-card .crm-meta span {
+            background: rgba(6,182,212,0.1); padding: 0.25rem 0.75rem; border-radius: 50px; color: var(--cyan);
+        }
+        .crm-card .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+        .crm-card .pros h4 { color: #22c55e; margin-bottom: 0.5rem; }
+        .crm-card .cons h4 { color: #ef4444; margin-bottom: 0.5rem; }
+        .crm-card .pros li, .crm-card .cons li { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+
+        /* Flow Steps */
+        .auto-flow {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem; margin: 1.5rem 0;
+        }
+        .auto-step {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.5rem; text-align: center;
+            transition: border-color 0.3s;
+        }
+        .auto-step:hover { border-color: rgba(6,182,212,0.4); }
+        .auto-step .step-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+        .auto-step h4 { color: #fff; margin-bottom: 0.5rem; }
+        .auto-step p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        /* Integration diagram */
+        .integration-hub {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.2);
+            border-radius: var(--radius); padding: 2rem; margin: 1.5rem 0; text-align: center;
+        }
+        .hub-center {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: var(--accent-gradient); color: #fff; font-weight: 700;
+            padding: 1rem 2rem; border-radius: 50px; font-size: 1.1rem; margin-bottom: 1.5rem;
+        }
+        .hub-connections { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+        .hub-node {
+            background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+            padding: 0.5rem 1.25rem; border-radius: 50px; font-size: 0.9rem; color: var(--text);
+        }
+
+        .cta-section {
+            text-align: center; padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(6,182,212,0.12), rgba(59,130,246,0.12));
+            border-radius: var(--radius); margin: 3rem 0 2rem;
+            border: 1px solid rgba(6,182,212,0.2);
+        }
+        .cta-section h2 { justify-content: center; margin-top: 0; }
+        .btn {
+            display: inline-block; padding: 0.9rem 2.25rem; border-radius: 50px;
+            font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6,182,212,0.3); }
+        .btn-primary { background: var(--accent-gradient); color: #fff; }
+        .btn-secondary { background: transparent; color: var(--cyan); border: 2px solid var(--cyan); margin-left: 0.75rem; }
+
+        footer {
+            text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; font-size: 12pt; }
+            .hero { background: none; border-bottom: 2px solid #06b6d4; padding: 2rem 0; }
+            .hero h1, .logo-text, .stat-number { -webkit-text-fill-color: #06b6d4; color: #06b6d4; }
+            .hero p, .stat-label, td, .auto-step p, .crm-card .pros li, .crm-card .cons li { color: #444; }
+            .card, .stat-box, .crm-card, .auto-step, .integration-hub, .tip-box, .warning-box, .cta-section, table { background: #fff; border-color: #ddd; }
+            th { background: #f0f0f0; color: #06b6d4; }
+            h2 { color: #1a1a1a; } h3, .tip-box strong { color: #06b6d4; }
+            .crm-card::before { background: #06b6d4; }
+            .btn-secondary, .btn-print { display: none !important; }
+            .btn-primary { background: #06b6d4; color: #fff; }
+            .cta-section, .crm-card { break-inside: avoid; }
+            .hub-node { border-color: #ddd; background: #f5f5f5; color: #333; }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 2.5rem 1rem; } .hero h1 { font-size: 1.75rem; }
+            .container { padding: 1.25rem 1rem; } h2 { font-size: 1.4rem; }
+            .stat-grid { grid-template-columns: 1fr 1fr; }
+            .auto-flow { grid-template-columns: 1fr; }
+            .crm-card .pros-cons { grid-template-columns: 1fr; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 0.6rem 0.5rem; }
+            .btn { display: block; margin: 0.5rem auto; max-width: 280px; }
+            .btn-secondary { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="logo-text">NEURIAX</div>
+    <span class="hero-badge">🗂️ Guía #10</span>
+    <h1>CRM Gratuito + Automatización</h1>
+    <p>No pierdas ni un cliente más por falta de seguimiento. Los mejores CRMs gratuitos del mercado y cómo automatizarlos para tu PYME.</p>
+    <br>
+    <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- Por qué un CRM -->
+    <h2>💡 ¿Por Qué Tu PYME Necesita un CRM?</h2>
+    <p>Si estás gestionando clientes con Excel, notas adhesivas o memorizando quién te pidió qué... estás perdiendo dinero. Un CRM organiza, automatiza y potencia todas tus relaciones comerciales.</p>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="stat-number">29%</div>
+            <div class="stat-label">aumento en ventas con CRM</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">34%</div>
+            <div class="stat-label">mejora en productividad</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">42%</div>
+            <div class="stat-label">mejora en pronóstico de ventas</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">0€</div>
+            <div class="stat-label">las mejores opciones son gratuitas</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">🚫 Sin CRM vs ✅ Con CRM</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+            <div>
+                <p style="color: #ef4444; font-weight: 600; margin-bottom: 0.5rem;">❌ Sin CRM</p>
+                <ul style="padding-left: 1.25rem;">
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">Olvidas hacer seguimiento a leads</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">No sabes en qué etapa está cada venta</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">La info está en 5 sitios diferentes</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">No puedes medir métricas de ventas</li>
+                    <li style="color: var(--text-muted);">Dependes de la memoria</li>
+                </ul>
+            </div>
+            <div>
+                <p style="color: var(--cyan); font-weight: 600; margin-bottom: 0.5rem;">✅ Con CRM</p>
+                <ul style="padding-left: 1.25rem;">
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">Seguimientos automáticos programados</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">Pipeline visual de todo tu embudo</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">Todo centralizado en un solo lugar</li>
+                    <li style="color: var(--text-muted); margin-bottom: 0.3rem;">Dashboards con datos en tiempo real</li>
+                    <li style="color: var(--text-muted);">IA que te recuerda y sugiere acciones</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparativa -->
+    <h2>🏆 Top 5 CRMs Gratuitos Comparados</h2>
+    <p>Hemos analizado los CRMs con plan gratuito más potentes del mercado. Esta comparativa te ahorrará semanas de investigación.</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>CRM</th>
+                    <th>Contactos Gratis</th>
+                    <th>Usuarios</th>
+                    <th>Automatización</th>
+                    <th>Email</th>
+                    <th>WhatsApp</th>
+                    <th>Valoración</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="winner">
+                    <td><strong>🥇 HubSpot CRM</strong></td>
+                    <td>1.000.000</td>
+                    <td>Ilimitados</td>
+                    <td>Básica</td>
+                    <td>✅ (2.000/mes)</td>
+                    <td>Integración</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>🥈 Zoho CRM</strong></td>
+                    <td>5.000</td>
+                    <td>3</td>
+                    <td>Workflows</td>
+                    <td>✅</td>
+                    <td>Via Zoho</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>🥉 Freshsales</strong></td>
+                    <td>Ilimitados</td>
+                    <td>3</td>
+                    <td>IA (Freddy)</td>
+                    <td>✅</td>
+                    <td>Integración</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Bitrix24</strong></td>
+                    <td>Ilimitados</td>
+                    <td>Ilimitados</td>
+                    <td>Completa</td>
+                    <td>✅</td>
+                    <td>✅ Nativo</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Agile CRM</strong></td>
+                    <td>1.000</td>
+                    <td>10</td>
+                    <td>Básica</td>
+                    <td>✅ (5.000/mes)</td>
+                    <td>Integración</td>
+                    <td>⭐⭐⭐</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- CRM Details -->
+    <div class="crm-card">
+        <h3>🥇 HubSpot CRM</h3>
+        <div class="crm-meta">
+            <span>🆓 Gratis para siempre</span>
+            <span>👥 Contactos ilimitados</span>
+            <span>🌐 En español</span>
+        </div>
+        <p style="color: var(--text-muted);">El CRM gratuito más completo del mercado. Ideal para empezar y crecer. Su plan gratuito incluye más funcionalidades que muchos CRMs de pago.</p>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ Pros</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Interfaz intuitiva y moderna</li>
+                    <li>Pipeline visual drag &amp; drop</li>
+                    <li>Integraciones con 1.000+ apps</li>
+                    <li>Excelente app móvil</li>
+                    <li>Formación gratuita (HubSpot Academy)</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>❌ Contras</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Automatización limitada en plan gratis</li>
+                    <li>Planes de pago caros al crecer</li>
+                    <li>Reportes avanzados son de pago</li>
+                    <li>Sin WhatsApp nativo en gratis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="crm-card">
+        <h3>🥈 Zoho CRM</h3>
+        <div class="crm-meta">
+            <span>🆓 3 usuarios gratis</span>
+            <span>👥 5.000 contactos</span>
+            <span>🌐 En español</span>
+        </div>
+        <p style="color: var(--text-muted);">Parte del ecosistema Zoho con 40+ apps integradas. Muy potente para PYMEs que necesitan un suite completo de herramientas.</p>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ Pros</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Ecosistema completo (email, facturación, soporte)</li>
+                    <li>IA integrada (Zia)</li>
+                    <li>Personalización profunda</li>
+                    <li>Excelente relación calidad-precio</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>❌ Contras</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Curva de aprendizaje media</li>
+                    <li>Interfaz algo sobrecargada</li>
+                    <li>Soporte lento en plan gratuito</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="crm-card">
+        <h3>🥉 Freshsales</h3>
+        <div class="crm-meta">
+            <span>🆓 3 usuarios gratis</span>
+            <span>👥 Contactos ilimitados</span>
+            <span>🤖 IA Freddy</span>
+        </div>
+        <p style="color: var(--text-muted);">CRM moderno de Freshworks con IA integrada. Destaca por su facilidad de uso y las funciones de inteligencia artificial incluso en el plan gratuito.</p>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ Pros</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>IA para scoring de leads</li>
+                    <li>Interfaz limpia y fácil</li>
+                    <li>Contactos ilimitados en gratis</li>
+                    <li>Buen sistema de teléfono integrado</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>❌ Contras</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Menos integraciones que HubSpot</li>
+                    <li>Automatización limitada en gratis</li>
+                    <li>Interfaz solo parcialmente en español</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="crm-card">
+        <h3>💪 Bitrix24</h3>
+        <div class="crm-meta">
+            <span>🆓 Usuarios ilimitados</span>
+            <span>👥 Contactos ilimitados</span>
+            <span>💬 WhatsApp nativo</span>
+        </div>
+        <p style="color: var(--text-muted);">La opción más completa en cuanto a funcionalidades gratuitas. CRM + gestión de proyectos + comunicación interna todo en uno.</p>
+        <div class="pros-cons">
+            <div class="pros">
+                <h4>✅ Pros</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>WhatsApp integrado nativamente</li>
+                    <li>Usuarios y contactos ilimitados</li>
+                    <li>Automatización completa gratis</li>
+                    <li>Gestión de proyectos incluida</li>
+                </ul>
+            </div>
+            <div class="cons">
+                <h4>❌ Contras</h4>
+                <ul style="padding-left: 1.25rem;">
+                    <li>Curva de aprendizaje pronunciada</li>
+                    <li>Interfaz compleja para principiantes</li>
+                    <li>Puede resultar abrumador</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tip-box">
+        <strong>💡 Nuestra recomendación por caso de uso:</strong><br><br>
+        <strong>Empezar rápido y fácil →</strong> HubSpot CRM<br>
+        <strong>Suite completo →</strong> Zoho CRM<br>
+        <strong>Máxima funcionalidad gratis →</strong> Bitrix24<br>
+        <strong>WhatsApp + CRM integrado →</strong> Bitrix24 o Kommo<br>
+        <strong>E-commerce →</strong> HubSpot + Shopify / WooCommerce
+    </div>
+
+    <!-- Automatizar seguimiento -->
+    <h2>🤖 Cómo Automatizar el Seguimiento de Clientes</h2>
+    <p>El seguimiento manual es el mayor cuello de botella de cualquier PYME. Estas automatizaciones eliminan la dependencia de la memoria humana:</p>
+
+    <div class="auto-flow">
+        <div class="auto-step">
+            <div class="step-icon">📥</div>
+            <h4>Lead Entra</h4>
+            <p>Formulario web, WA, llamada o red social. El CRM crea el contacto automáticamente.</p>
+        </div>
+        <div class="auto-step">
+            <div class="step-icon">🏷️</div>
+            <h4>Clasificación Auto</h4>
+            <p>Se asigna etapa, puntuación y propietario según reglas predefinidas.</p>
+        </div>
+        <div class="auto-step">
+            <div class="step-icon">📧</div>
+            <h4>Secuencia Activada</h4>
+            <p>Se dispara secuencia de emails + WA según perfil del lead.</p>
+        </div>
+        <div class="auto-step">
+            <div class="step-icon">⏰</div>
+            <h4>Recordatorios</h4>
+            <p>Si no hay respuesta en 48h, tarea automática de seguimiento asignada.</p>
+        </div>
+        <div class="auto-step">
+            <div class="step-icon">🔄</div>
+            <h4>Pipeline Actualizado</h4>
+            <p>El lead se mueve de etapa automáticamente según su interacción.</p>
+        </div>
+        <div class="auto-step">
+            <div class="step-icon">📊</div>
+            <h4>Reporte Auto</h4>
+            <p>Dashboard actualizado en tiempo real con métricas de conversión.</p>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">⚡ 5 Automatizaciones que Debes Configurar Primero</div>
+        <ol style="padding-left: 1.5rem; margin-top: 0.75rem;">
+            <li style="margin-bottom: 0.75rem; color: var(--text-muted);">
+                <strong style="color: #fff;">Email de bienvenida automático:</strong> Se envía en los 5 minutos siguientes a que un lead rellene un formulario. Incluye presentación y siguiente paso.
+            </li>
+            <li style="margin-bottom: 0.75rem; color: var(--text-muted);">
+                <strong style="color: #fff;">Recordatorio de seguimiento:</strong> Si un lead no ha respondido en 48 horas, crear tarea automática con prioridad alta para el comercial.
+            </li>
+            <li style="margin-bottom: 0.75rem; color: var(--text-muted);">
+                <strong style="color: #fff;">Alerta de lead caliente:</strong> Cuando un contacto visita la página de precios o abre 3+ emails, notificación inmediata al equipo de ventas.
+            </li>
+            <li style="margin-bottom: 0.75rem; color: var(--text-muted);">
+                <strong style="color: #fff;">Secuencia de nurturing:</strong> Serie de 5-7 emails educativos que se activan cuando un lead no está listo para comprar aún.
+            </li>
+            <li style="color: var(--text-muted);">
+                <strong style="color: #fff;">Encuesta post-venta:</strong> 7 días después de cerrar una venta, envío automático de encuesta de satisfacción + solicitud de reseña.
+            </li>
+        </ol>
+    </div>
+
+    <!-- Integración Email + WhatsApp -->
+    <h2>🔗 Integración con Email y WhatsApp</h2>
+    <p>El verdadero poder del CRM emerge cuando lo conectas con tus canales de comunicación. Toda la información fluye en un solo lugar.</p>
+
+    <div class="integration-hub">
+        <div class="hub-center">🗂️ CRM (Centro de Datos)</div>
+        <br>
+        <div class="hub-connections">
+            <div class="hub-node">📧 Email Marketing</div>
+            <div class="hub-node">💬 WhatsApp Business</div>
+            <div class="hub-node">🌐 Formularios Web</div>
+            <div class="hub-node">📱 Redes Sociales</div>
+            <div class="hub-node">📞 Teléfono/VoIP</div>
+            <div class="hub-node">🛒 E-commerce</div>
+            <div class="hub-node">📊 Analytics</div>
+            <div class="hub-node">📅 Calendario</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📧 CRM + Email: Qué Automatizar</div>
+        <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Sincronización bidireccional:</strong> Emails enviados/recibidos se registran automáticamente en la ficha del contacto</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Secuencias por etapa:</strong> Distintos contenidos según la fase del embudo</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Score por engagement:</strong> Abrir emails suma puntos, no abrir resta. El score determina acciones</li>
+            <li style="color: var(--text-muted);"><strong style="color: #fff;">Plantillas:</strong> Emails pre-diseñados que el equipo envía con un clic desde el CRM</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <div class="card-title">💬 CRM + WhatsApp: Qué Automatizar</div>
+        <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Historial unificado:</strong> Conversaciones de WA visibles en la ficha del CRM</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Templates aprobados:</strong> Mensajes masivos de follow-up, confirmaciones, recordatorios</li>
+            <li style="margin-bottom: 0.5rem; color: var(--text-muted);"><strong style="color: #fff;">Chatbot → CRM:</strong> Los datos que recoge el chatbot se mapean a campos del CRM</li>
+            <li style="color: var(--text-muted);"><strong style="color: #fff;">Alertas cruzadas:</strong> Si un lead responde un WA, se actualiza su estado en el pipeline</li>
+        </ul>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Herramienta de Conexión</th>
+                    <th>Conecta</th>
+                    <th>Dificultad</th>
+                    <th>Coste</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Zapier</strong></td>
+                    <td>CRM ↔ Email ↔ WA ↔ Todo</td>
+                    <td>🟢 Fácil</td>
+                    <td>Gratis (100 tareas/mes)</td>
+                </tr>
+                <tr>
+                    <td><strong>Make (Integromat)</strong></td>
+                    <td>CRM ↔ Email ↔ WA ↔ Todo</td>
+                    <td>🟡 Media</td>
+                    <td>Gratis (1.000 ops/mes)</td>
+                </tr>
+                <tr>
+                    <td><strong>n8n</strong></td>
+                    <td>CRM ↔ Email ↔ WA ↔ Todo</td>
+                    <td>🔴 Técnica</td>
+                    <td>Gratis (self-hosted)</td>
+                </tr>
+                <tr>
+                    <td><strong>Integraciones Nativas</strong></td>
+                    <td>Depende del CRM</td>
+                    <td>🟢 Fácil</td>
+                    <td>Incluido</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="warning-box">
+        <strong>⚠️ Consejo importante:</strong> No intentes automatizar todo de golpe. Empieza con 2-3 flujos básicos (bienvenida, seguimiento, alerta de lead caliente), mide resultados durante 30 días y luego añade complejidad.
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>🚀 ¿Quieres Tu CRM Configurado y Automatizado?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; margin-left: auto; margin-right: auto;">
+            En Neuriax te configuramos el CRM perfecto para tu negocio, con todas las automatizaciones de seguimiento, email y WhatsApp funcionando desde el día 1.
+        </p>
+        <a href="https://calendly.com/neuriax/30min" class="btn btn-primary">📅 Agendar Consultoría CRM Gratuita</a>
+        <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Neuriax — Automatización inteligente para empresas que quieren crecer.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://neuriax.com">neuriax.com</a></p>
+</footer>
+
+</body>
+</html>

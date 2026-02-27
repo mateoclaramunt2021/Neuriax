@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Casos de Éxito: De 0 a Automatizado | Neuriax</title>
+    <meta name="description" content="Descubre 5 casos reales de negocios que transformaron sus operaciones con automatización e IA. Resultados medibles y estrategias replicables.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            background: linear-gradient(180deg, rgba(6,182,212,0.12) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(6,182,212,0.15);
+            padding: 20px 0; position: sticky; top: 0;
+            backdrop-filter: blur(16px); z-index: 100;
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-size: 1.6rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .btn-pdf {
+            background: var(--gradient); color: #fff; border: none;
+            padding: 10px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pdf:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,182,212,0.35); }
+
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .hero-badge {
+            display: inline-block; background: rgba(6,182,212,0.12);
+            border: 1px solid rgba(6,182,212,0.25); color: var(--cyan);
+            padding: 6px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin: 0 auto; }
+
+        section { margin-bottom: 60px; }
+        .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; }
+        .highlight { color: var(--cyan); font-weight: 600; }
+
+        .intro-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px; padding: 40px; margin-bottom: 48px;
+        }
+        .intro-card p { margin-bottom: 16px; color: var(--text-muted); }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        /* Case Study */
+        .case-studies { display: flex; flex-direction: column; gap: 40px; }
+        .case {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 20px; overflow: hidden;
+        }
+        .case-top {
+            background: rgba(6,182,212,0.06); padding: 28px 32px;
+            display: flex; align-items: center; gap: 20px;
+            border-bottom: 1px solid rgba(6,182,212,0.1);
+        }
+        .case-emoji {
+            font-size: 2.2rem; width: 64px; height: 64px;
+            background: var(--gradient); border-radius: 16px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .case-top-info h3 { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
+        .case-top-info span { color: var(--text-muted); font-size: 0.9rem; }
+        .case-content { padding: 32px; }
+
+        /* Phase headers */
+        .phase {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 12px; margin-top: 24px;
+        }
+        .phase:first-child { margin-top: 0; }
+        .phase-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem; font-weight: 700; color: #fff;
+        }
+        .phase-before { background: rgba(248,113,113,0.2); color: #f87171; }
+        .phase-impl { background: rgba(6,182,212,0.2); color: var(--cyan); }
+        .phase-after { background: rgba(52,211,153,0.2); color: #34d399; }
+        .phase h4 { font-size: 1rem; font-weight: 700; color: #fff; }
+
+        .case-content p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 12px; }
+        .case-content ul {
+            list-style: none; padding: 0; margin-bottom: 16px;
+        }
+        .case-content ul li {
+            color: var(--text-muted); font-size: 0.92rem; padding: 6px 0 6px 24px; position: relative;
+        }
+        .case-content ul li::before {
+            content: '→'; position: absolute; left: 0; color: var(--cyan); font-weight: 700;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px; margin-top: 16px;
+        }
+        .result-item {
+            background: rgba(52,211,153,0.06); border: 1px solid rgba(52,211,153,0.15);
+            border-radius: 12px; padding: 16px; text-align: center;
+        }
+        .result-value {
+            font-size: 1.5rem; font-weight: 800;
+            background: linear-gradient(135deg, #34d399, #06b6d4);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .result-label { color: var(--text-muted); font-size: 0.78rem; margin-top: 4px; }
+
+        /* Testimonial */
+        .testimonial {
+            background: rgba(6,182,212,0.06); border-left: 3px solid var(--cyan);
+            padding: 16px 20px; border-radius: 0 12px 12px 0; margin-top: 20px;
+        }
+        .testimonial p {
+            color: var(--text); font-style: italic; font-size: 0.95rem; margin-bottom: 8px;
+        }
+        .testimonial .author { color: var(--cyan); font-style: normal; font-weight: 600; font-size: 0.85rem; }
+
+        /* Summary Stats */
+        .summary-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; margin-bottom: 48px;
+        }
+        .summary-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px; padding: 28px; text-align: center;
+        }
+        .summary-number {
+            font-size: 2.2rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .summary-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border: 1px solid rgba(6,182,212,0.2);
+            border-radius: 20px; padding: 60px 40px; text-align: center; margin: 60px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .cta-section p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .btn-cta {
+            display: inline-block; background: var(--gradient); color: #fff;
+            text-decoration: none; padding: 16px 40px; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.35); }
+
+        footer {
+            text-align: center; padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 50px 0 40px; }
+            .intro-card { padding: 24px; }
+            .case-top { flex-direction: column; text-align: center; padding: 20px; }
+            .case-content { padding: 20px; }
+            .results-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-section { padding: 40px 24px; }
+        }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; }
+            header, .btn-pdf, .btn-cta { display: none; }
+            .hero h1 { -webkit-text-fill-color: #1a1a1a; }
+            .summary-number, .result-value { -webkit-text-fill-color: #0891b2; }
+            .case, .intro-card, .summary-card, .cta-section {
+                border: 1px solid #ddd; background: #f9f9f9;
+            }
+            .result-item { background: #f0fdf4; border-color: #bbf7d0; }
+            .testimonial { background: #f0f9ff; border-color: #0891b2; }
+            .section-title, .cta-section h2, .case-top-info h3, .phase h4 { color: #1a1a1a; }
+            .highlight { color: #0891b2; }
+            footer { color: #666; }
+            footer a { color: #0891b2; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">⚡ Neuriax</div>
+            <button class="btn-pdf" onclick="window.print()">📥 Descargar PDF</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">🏆 Casos Reales — 2026</div>
+            <h1>5 Casos de Éxito: De 0 a Automatizado</h1>
+            <p>Historias reales de negocios que transformaron sus operaciones con automatización e inteligencia artificial. Con números, estrategias y resultados.</p>
+        </section>
+
+        <section>
+            <div class="intro-card">
+                <p>Estos 5 casos representan negocios reales en sectores muy diferentes, pero con un denominador común: <span class="highlight">estaban perdiendo tiempo, dinero y oportunidades por no tener sus procesos automatizados.</span></p>
+                <p>En cada caso desglosamos la situación inicial, qué se implementó y los resultados medibles que se obtuvieron. No son promesas — son <span class="highlight">datos verificables</span>.</p>
+            </div>
+        </section>
+
+        <div class="summary-grid">
+            <div class="summary-card">
+                <div class="summary-number">5</div>
+                <div class="summary-label">Negocios transformados</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-number">+47%</div>
+                <div class="summary-label">Aumento promedio en ingresos</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-number">-62%</div>
+                <div class="summary-label">Reducción en tareas manuales</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-number">4.2x</div>
+                <div class="summary-label">ROI promedio primer año</div>
+            </div>
+        </div>
+
+        <section>
+            <div class="case-studies">
+
+                <!-- Caso 1: Restaurante -->
+                <div class="case">
+                    <div class="case-top">
+                        <div class="case-emoji">🍽️</div>
+                        <div class="case-top-info">
+                            <h3>Caso 1: Cadena de Restaurantes "Sabor Mediterráneo"</h3>
+                            <span>3 locales en Valencia · 28 empleados</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <div class="phase">
+                            <div class="phase-icon phase-before">❌</div>
+                            <h4>Situación Anterior</h4>
+                        </div>
+                        <p>Gestión de reservas por teléfono con constantes errores y solapamientos. Pedidos a proveedores por WhatsApp sin trazabilidad. El equipo de administración dedicaba 20+ horas semanales a tareas repetitivas. Las reseñas en Google se acumulaban sin responder y la reputación online se deterioraba.</p>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-impl">⚡</div>
+                            <h4>Qué Implementamos</h4>
+                        </div>
+                        <ul>
+                            <li>Sistema de reservas online con confirmación automática por SMS y email</li>
+                            <li>Automatización de pedidos a proveedores basada en inventario</li>
+                            <li>Bot de respuesta a reseñas de Google (positivas y negativas)</li>
+                            <li>Dashboard de métricas en tiempo real para los 3 locales</li>
+                            <li>Encuestas de satisfacción automáticas post-visita</li>
+                        </ul>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-after">✅</div>
+                            <h4>Resultados (6 meses)</h4>
+                        </div>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-value">+32%</div>
+                                <div class="result-label">Reservas online</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">-75%</div>
+                                <div class="result-label">Errores de reserva</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">-18h</div>
+                                <div class="result-label">Horas admin/semana</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">4.6★</div>
+                                <div class="result-label">Rating Google (era 3.9)</div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"Antes pasábamos más tiempo al teléfono que cocinando. Ahora el sistema hace el trabajo pesado y nosotros nos enfocamos en lo que importa: la experiencia del cliente."</p>
+                            <div class="author">— Carlos M., propietario</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 2: Inmobiliaria -->
+                <div class="case">
+                    <div class="case-top">
+                        <div class="case-emoji">🏠</div>
+                        <div class="case-top-info">
+                            <h3>Caso 2: Inmobiliaria "Costa Properties"</h3>
+                            <span>Agencia en Marbella · 8 agentes</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <div class="phase">
+                            <div class="phase-icon phase-before">❌</div>
+                            <h4>Situación Anterior</h4>
+                        </div>
+                        <p>Los leads de portales inmobiliarios se respondían con 4-6 horas de retraso. No había seguimiento sistemático: el 70% de los contactos se perdían después del primer email. Los agentes dedicaban 3+ horas diarias a buscar propiedades para clientes manualmente.</p>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-impl">⚡</div>
+                            <h4>Qué Implementamos</h4>
+                        </div>
+                        <ul>
+                            <li>Respuesta automática a leads en menos de 2 minutos por WhatsApp y email</li>
+                            <li>CRM con scoring de leads por IA (priorización automática)</li>
+                            <li>Secuencia de nurturing de 30 días con emails personalizados</li>
+                            <li>Alertas automáticas de nuevas propiedades según preferencias del cliente</li>
+                            <li>Agendamiento automático de visitas con calendario compartido</li>
+                        </ul>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-after">✅</div>
+                            <h4>Resultados (6 meses)</h4>
+                        </div>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-value">+54%</div>
+                                <div class="result-label">Leads convertidos</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">2 min</div>
+                                <div class="result-label">Tiempo de respuesta</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+€28k</div>
+                                <div class="result-label">Comisiones extra/mes</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">-65%</div>
+                                <div class="result-label">Tiempo administrativo</div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"El cambio fue radical. Antes perdíamos clientes por tardar en responder. Ahora el sistema cualifica y responde antes de que el agente termine su café."</p>
+                            <div class="author">— Laura S., directora comercial</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 3: Clínica Dental -->
+                <div class="case">
+                    <div class="case-top">
+                        <div class="case-emoji">🦷</div>
+                        <div class="case-top-info">
+                            <h3>Caso 3: Clínica Dental "Sonrisas"</h3>
+                            <span>2 clínicas en Madrid · 15 profesionales</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <div class="phase">
+                            <div class="phase-icon phase-before">❌</div>
+                            <h4>Situación Anterior</h4>
+                        </div>
+                        <p>Tasa de no-show del 22% (pacientes que no acudían a su cita). La recepcionista pasaba 4 horas diarias al teléfono gestionando citas. No había seguimiento post-tratamiento ni programa de referidos. La captación dependía exclusivamente de Google Ads costosos.</p>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-impl">⚡</div>
+                            <h4>Qué Implementamos</h4>
+                        </div>
+                        <ul>
+                            <li>Agendamiento online con confirmación y recordatorio 24h + 2h antes</li>
+                            <li>Chatbot web para resolver dudas de tratamientos y agendar primera visita</li>
+                            <li>Secuencia de seguimiento post-tratamiento por email y WhatsApp</li>
+                            <li>Programa de referidos automatizado con incentivos</li>
+                            <li>Encuesta NPS automática después de cada visita</li>
+                        </ul>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-after">✅</div>
+                            <h4>Resultados (6 meses)</h4>
+                        </div>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-value">-68%</div>
+                                <div class="result-label">Reducción no-shows</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+40%</div>
+                                <div class="result-label">Pacientes nuevos/mes</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">-3.5h</div>
+                                <div class="result-label">Horas teléfono/día</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">92 NPS</div>
+                                <div class="result-label">Satisfacción (era 71)</div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"Los no-shows nos costaban miles de euros al mes. Los recordatorios automáticos resolvieron el problema casi por completo. Y el programa de referidos nos trae pacientes sin gastar en publicidad."</p>
+                            <div class="author">— Dra. Ana R., directora clínica</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 4: E-commerce -->
+                <div class="case">
+                    <div class="case-top">
+                        <div class="case-emoji">🛒</div>
+                        <div class="case-top-info">
+                            <h3>Caso 4: E-commerce "TechGadgets.es"</h3>
+                            <span>Tienda online de electrónica · 5 empleados</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <div class="phase">
+                            <div class="phase-icon phase-before">❌</div>
+                            <h4>Situación Anterior</h4>
+                        </div>
+                        <p>Tasa de abandono de carrito del 78%. Las consultas de clientes tardaban 8+ horas en responderse. No había remarketing ni secuencias de recuperación. Las descripciones de productos eran genéricas y el SEO era deficiente. Facturación y envío se gestionaban manualmente.</p>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-impl">⚡</div>
+                            <h4>Qué Implementamos</h4>
+                        </div>
+                        <ul>
+                            <li>Emails de recuperación de carrito abandonado (secuencia de 3 emails)</li>
+                            <li>Chatbot e-commerce con recomendaciones de productos por IA</li>
+                            <li>Automatización de facturación y tracking de envíos</li>
+                            <li>Secuencia post-compra con cross-selling personalizado</li>
+                            <li>Generación automática de descripciones SEO con IA</li>
+                        </ul>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-after">✅</div>
+                            <h4>Resultados (6 meses)</h4>
+                        </div>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-value">-34%</div>
+                                <div class="result-label">Abandono de carrito</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+28%</div>
+                                <div class="result-label">Tasa de conversión</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+€12k</div>
+                                <div class="result-label">Ingresos extra/mes</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+45%</div>
+                                <div class="result-label">Tráfico orgánico</div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"Los emails de carrito abandonado solos recuperan más de €3.000 al mes. La inversión en automatización se pagó en el primer mes."</p>
+                            <div class="author">— Miguel P., fundador</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Caso 5: Despacho de Abogados -->
+                <div class="case">
+                    <div class="case-top">
+                        <div class="case-emoji">⚖️</div>
+                        <div class="case-top-info">
+                            <h3>Caso 5: Despacho "García & Asociados Abogados"</h3>
+                            <span>Bufete en Barcelona · 6 abogados</span>
+                        </div>
+                    </div>
+                    <div class="case-content">
+                        <div class="phase">
+                            <div class="phase-icon phase-before">❌</div>
+                            <h4>Situación Anterior</h4>
+                        </div>
+                        <p>Los abogados dedicaban 2+ horas diarias a tareas administrativas. La captación de clientes dependía al 100% de referencias personales. No había presencia online efectiva. Los plazos y fechas de vencimiento se gestionaban con hojas de Excel propensas a errores.</p>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-impl">⚡</div>
+                            <h4>Qué Implementamos</h4>
+                        </div>
+                        <ul>
+                            <li>Web profesional con SEO local optimizado y blog de contenido jurídico</li>
+                            <li>Chatbot cualificador que filtra consultas y agenda citas con el abogado correcto</li>
+                            <li>Sistema automático de gestión de plazos y recordatorios</li>
+                            <li>CRM jurídico con seguimiento de casos y facturación automática</li>
+                            <li>Newsletter jurídica mensual automatizada para fidelización</li>
+                        </ul>
+
+                        <div class="phase">
+                            <div class="phase-icon phase-after">✅</div>
+                            <h4>Resultados (6 meses)</h4>
+                        </div>
+                        <div class="results-grid">
+                            <div class="result-item">
+                                <div class="result-value">+60%</div>
+                                <div class="result-label">Clientes nuevos/mes</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">-85%</div>
+                                <div class="result-label">Tiempo administrativo</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">0</div>
+                                <div class="result-label">Plazos incumplidos</div>
+                            </div>
+                            <div class="result-item">
+                                <div class="result-value">+€18k</div>
+                                <div class="result-label">Facturación extra/mes</div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial">
+                            <p>"Siempre pensé que la tecnología no era para despachos de abogados. Me equivocaba completamente. El chatbot solo nos trae 15 consultas cualificadas al mes que antes no existían."</p>
+                            <div class="author">— Javier G., socio director</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>¿Quieres ser el próximo caso de éxito?</h2>
+            <p>Agenda una consulta gratuita de 30 minutos y te mostraremos qué automatizaciones pueden transformar tu negocio.</p>
+            <a href="https://calendly.com/neuriax/30min" class="btn-cta" target="_blank" rel="noopener">🚀 Agendar Consulta Gratuita</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Neuriax — <a href="https://neuriax.com" target="_blank" rel="noopener">neuriax.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>

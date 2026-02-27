@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Business + IA: Tu Mejor Vendedor | Neuriax</title>
+    <meta name="description" content="Aprende a usar WhatsApp Business con IA como tu mejor vendedor automático. Flujos de venta, automatizaciones e integración CRM para PYMEs.">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --green: #25d366;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --wa-gradient: linear-gradient(135deg, #25d366, #128c7e);
+            --radius: 12px;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+        .hero {
+            text-align: center; padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(37,211,102,0.1), rgba(6,182,212,0.15));
+            border-bottom: 2px solid rgba(37,211,102,0.3); margin-bottom: 3rem;
+        }
+        .hero-badge {
+            display: inline-block; background: var(--wa-gradient); color: #fff;
+            padding: 0.35rem 1.2rem; border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; letter-spacing: 0.5px; margin-bottom: 1.5rem; text-transform: uppercase;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+        .logo-text {
+            font-size: 1.4rem; font-weight: 700; letter-spacing: 1px;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        h2 { font-size: 1.75rem; font-weight: 700; margin: 2.5rem 0 1rem; color: #fff; display: flex; align-items: center; gap: 0.5rem; }
+        h3 { font-size: 1.25rem; font-weight: 600; margin: 1.5rem 0 0.75rem; color: var(--cyan); }
+        p { margin-bottom: 1rem; }
+
+        .card {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.75rem; margin: 1.25rem 0; transition: border-color 0.3s;
+        }
+        .card:hover { border-color: rgba(6,182,212,0.4); }
+        .card-title { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; }
+
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+        .stat-box {
+            background: var(--bg-card); border-radius: var(--radius); padding: 1.5rem; text-align: center;
+            border: 1px solid rgba(6,182,212,0.15);
+        }
+        .stat-number {
+            font-size: 2.5rem; font-weight: 800;
+            background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .stat-label { font-size: 0.9rem; color: var(--text-muted); margin-top: 0.25rem; }
+
+        .table-wrapper { overflow-x: auto; margin: 1.5rem 0; border-radius: var(--radius); }
+        table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: var(--radius); overflow: hidden; }
+        th {
+            background: rgba(6,182,212,0.15); padding: 1rem; text-align: left;
+            font-weight: 600; color: var(--cyan); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        td { padding: 0.85rem 1rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        tr:hover td { background: rgba(6,182,212,0.05); }
+
+        .tip-box {
+            background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .tip-box strong { color: var(--cyan); }
+
+        .warning-box {
+            background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin: 1.5rem 0;
+        }
+        .warning-box strong { color: #f59e0b; }
+
+        /* Flow diagram */
+        .flow-container { margin: 2rem 0; }
+        .flow-step {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .flow-step::after {
+            content: '⬇️'; display: block; text-align: center;
+            font-size: 1.2rem; padding: 0.5rem 0;
+        }
+        .flow-step:last-child::after { display: none; }
+        .flow-step .step-label {
+            display: inline-block; background: var(--accent-gradient);
+            color: #fff; padding: 0.15rem 0.75rem; border-radius: 50px;
+            font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; text-transform: uppercase;
+        }
+        .flow-step .step-label.wa { background: var(--wa-gradient); }
+        .flow-step .step-label.ia { background: linear-gradient(135deg, #8b5cf6, #6366f1); }
+        .flow-step .step-label.crm { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+
+        /* Automation Cards */
+        .auto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin: 1.5rem 0; }
+        .auto-card {
+            background: var(--bg-card); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: var(--radius); padding: 1.5rem; transition: border-color 0.3s;
+        }
+        .auto-card:hover { border-color: rgba(6,182,212,0.4); }
+        .auto-card h4 { color: #fff; font-size: 1rem; margin-bottom: 0.5rem; }
+        .auto-card p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
+
+        .cta-section {
+            text-align: center; padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(37,211,102,0.08), rgba(6,182,212,0.12));
+            border-radius: var(--radius); margin: 3rem 0 2rem;
+            border: 1px solid rgba(6,182,212,0.2);
+        }
+        .cta-section h2 { justify-content: center; margin-top: 0; }
+        .btn {
+            display: inline-block; padding: 0.9rem 2.25rem; border-radius: 50px;
+            font-weight: 700; font-size: 1rem; text-decoration: none; cursor: pointer; border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(6,182,212,0.3); }
+        .btn-primary { background: var(--accent-gradient); color: #fff; }
+        .btn-secondary { background: transparent; color: var(--cyan); border: 2px solid var(--cyan); margin-left: 0.75rem; }
+
+        footer {
+            text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; font-size: 12pt; }
+            .hero { background: none; border-bottom: 2px solid #25d366; padding: 2rem 0; }
+            .hero h1, .logo-text, .stat-number { -webkit-text-fill-color: #06b6d4; color: #06b6d4; }
+            .hero p, .stat-label, td, .auto-card p { color: #444; }
+            .card, .stat-box, .flow-step, .auto-card, .tip-box, .warning-box, .cta-section, table { background: #fff; border-color: #ddd; }
+            th { background: #f0f0f0; color: #06b6d4; }
+            h2 { color: #1a1a1a; } h3, .tip-box strong { color: #06b6d4; }
+            .btn-secondary, .btn-print { display: none !important; }
+            .btn-primary { background: #06b6d4; color: #fff; }
+            .cta-section, .flow-step { break-inside: avoid; }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 2.5rem 1rem; } .hero h1 { font-size: 1.75rem; }
+            .container { padding: 1.25rem 1rem; } h2 { font-size: 1.4rem; }
+            .stat-grid { grid-template-columns: 1fr 1fr; }
+            .auto-grid { grid-template-columns: 1fr; }
+            .btn { display: block; margin: 0.5rem auto; max-width: 280px; }
+            .btn-secondary { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="logo-text">NEURIAX</div>
+    <span class="hero-badge">💬 Guía #08</span>
+    <h1>WhatsApp Business + IA: Tu Mejor Vendedor</h1>
+    <p>Convierte WhatsApp en un canal de ventas automatizado que atiende, cualifica y cierra clientes las 24 horas del día, los 7 días de la semana.</p>
+    <br>
+    <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</div>
+
+<div class="container">
+
+    <!-- Stats -->
+    <h2>📊 WhatsApp en Números</h2>
+    <p>WhatsApp es la app más usada en España. No estar ahí es perder la oportunidad de hablar con tus clientes donde YA están.</p>
+
+    <div class="stat-grid">
+        <div class="stat-box">
+            <div class="stat-number">36M</div>
+            <div class="stat-label">usuarios de WhatsApp en España</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">tasa de apertura de mensajes</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">40%</div>
+            <div class="stat-label">tasa de respuesta media</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number">3x</div>
+            <div class="stat-label">más conversiones que email</div>
+        </div>
+    </div>
+
+    <!-- WA Business vs Normal -->
+    <h2>📱 WhatsApp Business vs WhatsApp Normal</h2>
+    <p>Si todavía usas WhatsApp personal para tu negocio, estás perdiendo funcionalidades clave que multiplican tus resultados.</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Funcionalidad</th>
+                    <th>WA Normal</th>
+                    <th>WA Business</th>
+                    <th>WA Business API</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Perfil de empresa</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Catálogo de productos</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Respuestas rápidas</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Etiquetas de contacto</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Mensajes de ausencia</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Mensajes de bienvenida</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Chatbot con IA</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Integración CRM</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Envíos masivos</td>
+                    <td>❌</td>
+                    <td>Limitado (listas)</td>
+                    <td>✅ (templates)</td>
+                </tr>
+                <tr>
+                    <td>Multi-agente</td>
+                    <td>❌</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+                <tr>
+                    <td>Coste</td>
+                    <td>Gratis</td>
+                    <td>Gratis</td>
+                    <td>Desde ~50€/mes</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="tip-box">
+        <strong>💡 Recomendación Neuriax:</strong> Si tienes menos de 50 conversaciones/día, empieza con <strong>WA Business gratis</strong>. Si necesitas chatbot con IA, varios agentes o integración CRM, necesitas la <strong>API de WhatsApp Business</strong> (mediante proveedores como 360dialog, WATI o Twilio).
+    </div>
+
+    <!-- Automatizaciones -->
+    <h2>🤖 Automatizaciones Clave de WhatsApp</h2>
+    <p>Configura estas automatizaciones para que WhatsApp trabaje por ti incluso cuando duermes:</p>
+
+    <div class="auto-grid">
+        <div class="auto-card">
+            <h4>👋 Mensaje de Bienvenida</h4>
+            <p>Se envía automáticamente cuando un contacto nuevo te escribe. Preséntate e indica cómo puedes ayudar.</p>
+        </div>
+        <div class="auto-card">
+            <h4>🌙 Mensaje de Ausencia</h4>
+            <p>Fuera de horario, avisa que responderás pronto e indica horarios. Evita que el cliente se vaya a la competencia.</p>
+        </div>
+        <div class="auto-card">
+            <h4>⚡ Respuestas Rápidas</h4>
+            <p>Atajos para las 20 preguntas más frecuentes: precios, horarios, ubicación, servicios. Teclea "/" y selecciona.</p>
+        </div>
+        <div class="auto-card">
+            <h4>🏷️ Etiquetado Automático</h4>
+            <p>Clasifica contactos automáticamente: "Nuevo lead", "Presupuesto enviado", "Cliente", "Seguimiento".</p>
+        </div>
+        <div class="auto-card">
+            <h4>📋 Catálogo de Productos</h4>
+            <p>Tu escaparate dentro de WhatsApp. El cliente ve productos, precios y puede pedir directamente desde el chat.</p>
+        </div>
+        <div class="auto-card">
+            <h4>🤖 Chatbot con IA</h4>
+            <p>Atiende, cualifica y responde consultas 24/7. Escala a humano cuando detecta intención de compra real.</p>
+        </div>
+    </div>
+
+    <!-- Flujo de Venta -->
+    <h2>🔄 Flujo de Venta Automatizado por WhatsApp</h2>
+    <p>Este es el flujo completo que usamos en Neuriax para convertir una consulta de WhatsApp en una venta cerrada:</p>
+
+    <div class="flow-container">
+        <div class="flow-step">
+            <span class="step-label">Captación</span>
+            <p><strong>1. El cliente te contacta</strong> — Desde tu web (botón WA), Google (click-to-chat), redes sociales o anuncio.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label wa">WhatsApp</span>
+            <p><strong>2. Mensaje de bienvenida automático</strong> — "¡Hola! Soy [nombre] de [empresa]. ¿En qué puedo ayudarte?" + Menú de opciones interactivo.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label ia">IA</span>
+            <p><strong>3. Chatbot cualifica al lead</strong> — Preguntas automáticas: ¿Qué necesitas? ¿Cuál es tu presupuesto? ¿Para cuándo? Recopila datos clave.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label crm">CRM</span>
+            <p><strong>4. Lead registrado en CRM</strong> — Automáticamente se crea el contacto con todos los datos, se asigna etiqueta y se programa seguimiento.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label wa">WhatsApp</span>
+            <p><strong>5. Envío de información/presupuesto</strong> — Catálogo, PDF de servicios o presupuesto personalizado enviado por WhatsApp.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label ia">IA</span>
+            <p><strong>6. Seguimiento automático</strong> — Si no responde en 24h: recordatorio amable. En 48h: incentivo o urgencia. En 72h: oferta final.</p>
+        </div>
+        <div class="flow-step">
+            <span class="step-label wa">WhatsApp</span>
+            <p><strong>7. Cierre y post-venta</strong> — Confirmación de compra, instrucciones, solicitud de reseña y programa de referidos. Todo automatizado.</p>
+        </div>
+    </div>
+
+    <!-- Integración CRM -->
+    <h2>🔗 Integración WhatsApp + CRM</h2>
+    <p>La magia ocurre cuando conectas WhatsApp con tu CRM. Cada conversación se convierte en datos accionables.</p>
+
+    <div class="card">
+        <div class="card-title">¿Qué se sincroniza automáticamente?</div>
+        <ul style="padding-left: 1.5rem; margin-top: 0.75rem;">
+            <li style="margin-bottom: 0.4rem; color: var(--text-muted);"><strong style="color: #fff;">Contacto nuevo:</strong> Se crea automáticamente en el CRM con nombre, teléfono y fuente</li>
+            <li style="margin-bottom: 0.4rem; color: var(--text-muted);"><strong style="color: #fff;">Historial completo:</strong> Todas las conversaciones quedan registradas</li>
+            <li style="margin-bottom: 0.4rem; color: var(--text-muted);"><strong style="color: #fff;">Etiquetas:</strong> Se asignan según la etapa del embudo (lead, cualificado, propuesta, cliente)</li>
+            <li style="margin-bottom: 0.4rem; color: var(--text-muted);"><strong style="color: #fff;">Tareas:</strong> Se crean recordatorios de seguimiento automáticos</li>
+            <li style="color: var(--text-muted);"><strong style="color: #fff;">Notas internas:</strong> Resumen IA de cada conversación para contexto rápido</li>
+        </ul>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Herramienta de Integración</th>
+                    <th>CRMs Compatibles</th>
+                    <th>Precio</th>
+                    <th>Nivel IA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>WATI</strong></td>
+                    <td>HubSpot, Zoho, Salesforce</td>
+                    <td>Desde 49€/mes</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Respond.io</strong></td>
+                    <td>HubSpot, Pipedrive, Zapier</td>
+                    <td>Desde 79€/mes</td>
+                    <td>⭐⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Kommo (amoCRM)</strong></td>
+                    <td>CRM propio + WhatsApp nativo</td>
+                    <td>Desde 15€/mes</td>
+                    <td>⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Make + 360dialog</strong></td>
+                    <td>Cualquier CRM via webhooks</td>
+                    <td>Desde 30€/mes</td>
+                    <td>⭐⭐⭐⭐</td>
+                </tr>
+                <tr>
+                    <td><strong>Manychat</strong></td>
+                    <td>HubSpot, ActiveCampaign, Sheets</td>
+                    <td>Desde 15€/mes</td>
+                    <td>⭐⭐⭐</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Mejores prácticas -->
+    <h2>✅ Mejores Prácticas de WhatsApp para Ventas</h2>
+
+    <div class="card">
+        <ol style="padding-left: 1.5rem;">
+            <li style="margin-bottom: 0.75rem;"><strong>Responde en menos de 5 minutos</strong> — La probabilidad de conversión cae un 80% si tardas más de 30 minutos. La IA resuelve esto.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Usa mensajes de voz</strong> — Generan 3x más confianza que el texto. La IA puede generar audios naturales.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Envía contenido visual</strong> — Fotos de productos, vídeos cortos de testimonios, infografías de servicios.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Segmenta tus listas de difusión</strong> — No envíes lo mismo a todos. Segmenta por interés, etapa y comportamiento.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Respeta los horarios</strong> — Envíos entre 9:00-20:00. Fuera de ese horario, solo respuestas automáticas de cortesía.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Pide permiso (opt-in)</strong> — Obligatorio por RGPD. Incluye checkbox en formularios.</li>
+            <li style="margin-bottom: 0;"><strong>Mide y optimiza</strong> — Tasa de respuesta, tiempo medio de respuesta, tasa de cierre por WhatsApp.</li>
+        </ol>
+    </div>
+
+    <div class="warning-box">
+        <strong>⚠️ Aviso legal:</strong> WhatsApp Business está sujeto a sus políticas de uso comercial. No está permitido el spam, los envíos no solicitados ni el uso de números no verificados. El incumplimiento puede suponer el baneo permanente de tu número.
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>🚀 ¿Quieres un WhatsApp que Venda Solo?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; max-width: 520px; margin-left: auto; margin-right: auto;">
+            En Neuriax configuramos tu WhatsApp Business con IA, chatbot y CRM integrados. Tu mejor vendedor trabaja 24/7 sin sueldo ni vacaciones.
+        </p>
+        <a href="https://calendly.com/neuriax/30min" class="btn btn-primary">📅 Agendar Consultoría Gratuita</a>
+        <button class="btn btn-secondary btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Neuriax — Automatización inteligente para empresas que quieren crecer.</p>
+    <p style="margin-top: 0.5rem;"><a href="https://neuriax.com">neuriax.com</a></p>
+</footer>
+
+</body>
+</html>

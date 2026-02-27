@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 15: Checklist Final de Automatización + Oferta Especial | Neuriax</title>
+<meta name="description" content="Checklist definitivo de 30 puntos de automatización, calculadora de ahorro estimado y oferta especial del 15% por completar la serie de guías Neuriax.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cyan:#06b6d4;--blue:#3b82f6;--bg-dark:#0f172a;--bg-card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6);--green:#22c55e;--yellow:#eab308;--gold:#f59e0b}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--blue)}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:2px solid var(--cyan);padding:1.5rem 0;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:1.8rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo span{font-weight:300}
+.badge{display:inline-block;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:50px;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero{text-align:center;padding:4rem 1.5rem;background:radial-gradient(ellipse at center,rgba(245,158,11,.08) 0%,transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.5rem 0 1rem;line-height:1.2}
+.hero h1 .gradient{background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-muted);max-width:650px;margin:0 auto}
+.section{margin:3rem 0}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid rgba(6,182,212,.3);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.section h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 .75rem;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.75rem;margin:1.25rem 0;transition:border-color .3s}
+.card:hover{border-color:rgba(6,182,212,.3)}
+.card h3{margin-top:0}
+ul,ol{padding-left:1.5rem;margin:.75rem 0}
+li{margin:.5rem 0;color:var(--text-muted)}
+li strong{color:var(--text)}
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.92rem}
+thead{background:rgba(6,182,212,.12)}
+th,td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font-weight:700;color:var(--cyan);font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+td{color:var(--text-muted)}
+.highlight{background:rgba(6,182,212,.06);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:1.5rem 0;font-size:.95rem}
+.highlight strong{color:var(--cyan)}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--bg-card);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid rgba(6,182,212,.15)}
+.stat .number{font-size:2.2rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.9rem;color:var(--text-muted);margin-top:.25rem}
+
+/* Checklist interactive */
+.checklist-section{counter-reset:checklist}
+.check-group{margin:1.5rem 0}
+.check-group h3{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.check-item{display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;margin:.35rem 0;background:rgba(0,0,0,.15);border-radius:8px;border:1px solid rgba(255,255,255,.04);cursor:pointer;transition:all .2s;counter-increment:checklist}
+.check-item:hover{border-color:rgba(6,182,212,.2);background:rgba(6,182,212,.04)}
+.check-item.checked{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.06)}
+.check-item.checked .check-box{background:var(--green);border-color:var(--green);color:#fff}
+.check-item.checked .check-text{text-decoration:line-through;color:var(--text-muted);opacity:.7}
+.check-box{width:22px;height:22px;border:2px solid rgba(255,255,255,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.75rem;margin-top:2px;transition:all .2s}
+.check-text{flex:1;font-size:.95rem}
+.check-num{color:var(--cyan);font-weight:700;font-size:.85rem;min-width:28px}
+.progress-counter{text-align:center;padding:1.5rem;background:var(--bg-card);border-radius:12px;border:1px solid rgba(6,182,212,.15);margin:2rem 0}
+.progress-counter .big-number{font-size:3rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.progress-bar{background:rgba(255,255,255,.06);border-radius:8px;height:12px;margin:1rem auto;max-width:400px;overflow:hidden}
+.progress-fill{height:100%;border-radius:8px;background:var(--accent-gradient);transition:width .5s;width:0%}
+
+/* Savings calculator */
+.calc-table td.savings{color:var(--green);font-weight:700}
+.calc-total{background:rgba(6,182,212,.08);font-weight:700}
+.calc-total td{color:var(--text) !important;font-size:1rem}
+
+/* Offer section */
+.offer-box{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(239,68,68,.08));border:2px solid var(--gold);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0;position:relative;overflow:hidden}
+.offer-box::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(245,158,11,.05) 0%,transparent 60%);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.1);opacity:1}}
+.offer-box h2{font-size:1.8rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center;position:relative;color:var(--gold)}
+.offer-box .discount{font-size:4rem;font-weight:900;background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:block;margin:.5rem 0;position:relative}
+.offer-box p{color:var(--text-muted);font-size:1.05rem;margin-bottom:1.5rem;position:relative}
+.offer-box .code{display:inline-block;background:rgba(245,158,11,.15);border:2px dashed var(--gold);padding:.5rem 1.5rem;border-radius:8px;font-family:monospace;font-size:1.3rem;font-weight:800;color:var(--gold);margin:1rem 0;letter-spacing:2px;position:relative}
+.offer-conditions{font-size:.8rem;color:var(--text-muted);margin-top:1rem;position:relative}
+
+/* Guide summary */
+.guide-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.75rem;margin:1.5rem 0}
+.guide-item{display:flex;align-items:center;gap:.75rem;background:var(--bg-card);padding:.75rem 1rem;border-radius:8px;border:1px solid rgba(255,255,255,.04);font-size:.9rem}
+.guide-item .guide-num{background:var(--accent-gradient);color:#fff;font-weight:800;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.8rem}
+
+.cta-box{background:var(--accent-gradient);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;font-size:1.6rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center}
+.cta-box p{color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .3s;cursor:pointer;border:none;text-decoration:none}
+.btn-white{background:#fff;color:var(--bg-dark)}.btn-white:hover{background:#e2e8f0;color:var(--bg-dark)}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:1.15rem;padding:1rem 2.5rem}.btn-gold:hover{opacity:.9;color:#fff}
+.btn-outline{border:2px solid #fff;color:#fff;background:transparent;margin-left:.5rem}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-print{background:var(--bg-card);color:var(--text);border:1px solid rgba(255,255,255,.1);padding:.6rem 1.2rem;font-size:.85rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin:1rem 0}
+.btn-print:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
+.toc{background:var(--bg-card);border-radius:12px;padding:1.75rem;margin:2rem 0;border:1px solid rgba(6,182,212,.15)}
+.toc h3{color:var(--cyan);margin:0 0 1rem;font-size:1.1rem}
+.toc ol{margin:0}.toc li{margin:.35rem 0}.toc a{color:var(--text-muted);font-size:.95rem}.toc a:hover{color:var(--cyan)}
+@media(max-width:640px){.container{padding:1.25rem 1rem}.hero{padding:2.5rem 1rem}.hero h1{font-size:1.7rem}.stat-grid{grid-template-columns:1fr}.guide-list{grid-template-columns:1fr}.offer-box{padding:1.75rem}.offer-box .discount{font-size:3rem}.btn{display:block;margin:.5rem 0;text-align:center}.btn-outline{margin-left:0}.cta-box{padding:1.75rem}table{font-size:.82rem}th,td{padding:.5rem .4rem}}
+@media print{body{background:#fff;color:#111}header{position:static;border-bottom:2px solid #06b6d4;background:#fff}.logo{-webkit-text-fill-color:#06b6d4}.hero{background:none;padding:2rem 0}.card,.stat,.toc,.check-item,.guide-item,.progress-counter{border:1px solid #ddd;break-inside:avoid}.highlight{border-left:4px solid #06b6d4;background:#f0fdfa}.cta-box{background:#f0fdfa;border:2px solid #06b6d4}.cta-box h2,.cta-box p{color:#111}.offer-box{background:#fffbeb;border:2px solid #f59e0b}.offer-box h2{color:#b45309}.offer-box .discount{-webkit-text-fill-color:#ef4444}.offer-box p,.offer-conditions{color:#333}.offer-box .code{background:#fef3c7;border-color:#f59e0b;color:#b45309}.btn-print{display:none}a{color:#06b6d4}footer{border-top:1px solid #ddd}.stat .number{-webkit-text-fill-color:#06b6d4}th{color:#06b6d4}td,li,p,.hero p,.stat .label{color:#333}.check-item{background:#f8fafc}.check-item.checked{background:#f0fdf4}.check-box{border-color:#999}.guide-item{border:1px solid #e2e8f0}.guide-item .guide-num{background:#06b6d4}.progress-bar{background:#eee}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Neuriax<span>.com</span></div>
+</header>
+
+<section class="hero">
+<span class="badge">🏆 Guía 15 de 15 — Final</span>
+<h1>✅ Checklist Final de <span class="gradient">Automatización + Oferta Especial</span></h1>
+<p>Has llegado al final de la serie. Aquí tienes el resumen, el checklist definitivo, una calculadora de ahorro y una recompensa por haber completado las 15 guías.</p>
+<button class="btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</section>
+
+<div class="container">
+
+<nav class="toc">
+<h3>📑 Índice de Contenidos</h3>
+<ol>
+<li><a href="#resumen">Resumen de las 14 guías anteriores</a></li>
+<li><a href="#checklist">Checklist de 30 puntos de automatización</a></li>
+<li><a href="#calculadora">Calculadora de ahorro estimado</a></li>
+<li><a href="#oferta">Oferta especial — 15% descuento</a></li>
+</ol>
+</nav>
+
+<!-- RESUMEN GUÍAS -->
+<section class="section" id="resumen">
+<h2>📚 1. Resumen de las 14 Guías Anteriores</h2>
+<p>A lo largo de esta serie, has aprendido todo lo necesario para automatizar tu negocio. Aquí tienes un resumen rápido de cada guía:</p>
+
+<div class="guide-list">
+<div class="guide-item"><div class="guide-num">1</div><div>Por qué automatizar — El caso empresarial</div></div>
+<div class="guide-item"><div class="guide-num">2</div><div>Tu primera automatización de email</div></div>
+<div class="guide-item"><div class="guide-num">3</div><div>CRM: Gestión de clientes sin esfuerzo</div></div>
+<div class="guide-item"><div class="guide-num">4</div><div>Chatbots: Atención 24/7 automatizada</div></div>
+<div class="guide-item"><div class="guide-num">5</div><div>Web profesional que convierte</div></div>
+<div class="guide-item"><div class="guide-num">6</div><div>SEO y visibilidad orgánica</div></div>
+<div class="guide-item"><div class="guide-num">7</div><div>Automatizar la captación de leads</div></div>
+<div class="guide-item"><div class="guide-num">8</div><div>Email marketing avanzado</div></div>
+<div class="guide-item"><div class="guide-num">9</div><div>Integraciones: Conectar herramientas</div></div>
+<div class="guide-item"><div class="guide-num">10</div><div>Analítica y métricas clave</div></div>
+<div class="guide-item"><div class="guide-num">11</div><div>Automatiza facturación y cobros</div></div>
+<div class="guide-item"><div class="guide-num">12</div><div>Redes sociales en piloto automático</div></div>
+<div class="guide-item"><div class="guide-num">13</div><div>Mapa tecnológico para PYMEs 2026</div></div>
+<div class="guide-item"><div class="guide-num">14</div><div>Plan de acción: Automatiza en 30 días</div></div>
+</div>
+
+<div class="highlight">
+<strong>🎓 Si has leído las 14 guías</strong>, tienes todo el conocimiento necesario para automatizar cualquier PYME. Ahora toca <strong>pasar a la acción</strong>. El checklist de abajo te ayudará a verificar que no te dejas nada.
+</div>
+</section>
+
+<!-- CHECKLIST 30 PUNTOS -->
+<section class="section checklist-section" id="checklist">
+<h2>✅ 2. Checklist de 30 Puntos de Automatización</h2>
+<p>Marca cada punto que tengas implementado. Tu objetivo: llegar al 100%.</p>
+
+<div class="progress-counter">
+<div class="big-number" id="counterDisplay">0 / 30</div>
+<div style="color:var(--text-muted);font-size:.9rem;margin-top:.25rem">puntos completados</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="check-group">
+<h3>🌐 Web y Presencia Digital (1-6)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">01</div><div class="check-text">Web profesional, rápida y responsive con diseño actual</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">02</div><div class="check-text">CTA claros en cada página (contacto, WhatsApp, Calendly)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">03</div><div class="check-text">SEO básico implementado (títulos, meta, sitemap, Search Console)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">04</div><div class="check-text">Chatbot instalado que responde preguntas frecuentes 24/7</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">05</div><div class="check-text">Formularios de contacto conectados al CRM automáticamente</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">06</div><div class="check-text">Google Analytics configurado y revisado semanalmente</div></div>
+</div>
+
+<div class="check-group">
+<h3>📧 Email Marketing (7-12)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">07</div><div class="check-text">Plataforma de email configurada con dominio verificado (SPF/DKIM)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">08</div><div class="check-text">Lead magnet creado (guía, checklist, plantilla descargable)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">09</div><div class="check-text">Secuencia de bienvenida automatizada (5+ emails)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">10</div><div class="check-text">Formularios de captación en la web (pop-up, inline, exit-intent)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">11</div><div class="check-text">Segmentación de lista por interés o comportamiento</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">12</div><div class="check-text">Newsletter periódica programada (semanal o quincenal)</div></div>
+</div>
+
+<div class="check-group">
+<h3>👥 CRM y Gestión Comercial (13-18)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">13</div><div class="check-text">CRM implementado con pipeline de ventas configurado</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">14</div><div class="check-text">Todos los leads se registran automáticamente (web, email, chat)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">15</div><div class="check-text">Notificaciones automáticas cuando llega un nuevo lead</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">16</div><div class="check-text">Secuencia de follow-up automática para cada nuevo lead</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">17</div><div class="check-text">Tareas automáticas del equipo comercial al cambiar fase del lead</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">18</div><div class="check-text">Informe semanal automático de métricas comerciales</div></div>
+</div>
+
+<div class="check-group">
+<h3>🧾 Facturación y Cobros (19-22)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">19</div><div class="check-text">Facturación automatizada con herramienta certificada (Verifactu)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">20</div><div class="check-text">Cobros online configurados (Stripe, enlace de pago en facturas)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">21</div><div class="check-text">Recordatorios de pago automáticos (3, 7 y 15 días)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">22</div><div class="check-text">Conciliación bancaria automática y contabilidad sincronizada</div></div>
+</div>
+
+<div class="check-group">
+<h3>📱 Redes Sociales (23-26)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">23</div><div class="check-text">Herramienta de programación en uso (Buffer, Later, Hootsuite)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">24</div><div class="check-text">Calendario editorial semanal definido y respetado</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">25</div><div class="check-text">Creación de contenido asistida por IA (textos, diseños)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">26</div><div class="check-text">Métricas de RRSS revisadas semanalmente</div></div>
+</div>
+
+<div class="check-group">
+<h3>⚡ Integraciones y Optimización (27-30)</h3>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">27</div><div class="check-text">Herramientas conectadas con Make/Zapier (mínimo 3 flujos activos)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">28</div><div class="check-text">Dashboard de métricas clave configurado y revisado</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">29</div><div class="check-text">Auditoría de herramientas realizada (sin duplicados, sin infrauso)</div></div>
+<div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-num">30</div><div class="check-text">Plan de mejora continua documentado y con responsable asignado</div></div>
+</div>
+</section>
+
+<!-- CALCULADORA DE AHORRO -->
+<section class="section" id="calculadora">
+<h2>💰 3. Calculadora de Ahorro Estimado</h2>
+<p>Esta tabla muestra el ahorro estimado al automatizar cada área de tu negocio. Los valores están calculados para una PYME media con 2-5 empleados:</p>
+
+<div class="card" style="overflow-x:auto">
+<table>
+<thead><tr><th>Área Automatizada</th><th>Horas/Mes Antes</th><th>Horas/Mes Después</th><th>Ahorro Horas</th><th>Ahorro €/Año*</th></tr></thead>
+<tbody>
+<tr><td>📧 Email Marketing manual</td><td>12</td><td>2</td><td>10</td><td class="savings">3.000€</td></tr>
+<tr><td>👥 Gestión CRM manual</td><td>10</td><td>1</td><td>9</td><td class="savings">2.700€</td></tr>
+<tr><td>💬 Atención al cliente sin chatbot</td><td>20</td><td>5</td><td>15</td><td class="savings">4.500€</td></tr>
+<tr><td>🧾 Facturación y cobros</td><td>15</td><td>1</td><td>14</td><td class="savings">4.200€</td></tr>
+<tr><td>📱 Redes sociales</td><td>16</td><td>4</td><td>12</td><td class="savings">3.600€</td></tr>
+<tr><td>📊 Reporting y análisis</td><td>8</td><td>1</td><td>7</td><td class="savings">2.100€</td></tr>
+<tr><td>🔗 Tareas de integración manual</td><td>6</td><td>0</td><td>6</td><td class="savings">1.800€</td></tr>
+<tr><td>📋 Seguimiento comercial</td><td>10</td><td>2</td><td>8</td><td class="savings">2.400€</td></tr>
+<tr class="calc-total"><td><strong>TOTAL</strong></td><td><strong>97</strong></td><td><strong>16</strong></td><td><strong>81</strong></td><td class="savings"><strong>24.300€</strong></td></tr>
+</tbody>
+</table>
+<p style="font-size:.8rem;color:var(--text-muted);margin-top:.75rem">* Calculado a 25€/hora de coste de personal. Tu ahorro real dependerá de tu estructura de costes.</p>
+</div>
+
+<div class="stat-grid">
+<div class="stat"><div class="number">81h</div><div class="label">ahorradas al mes</div></div>
+<div class="stat"><div class="number">83%</div><div class="label">reducción de trabajo manual</div></div>
+<div class="stat"><div class="number">24.300€</div><div class="label">ahorro estimado anual</div></div>
+<div class="stat"><div class="number">3-6 meses</div><div class="label">para recuperar la inversión</div></div>
+</div>
+
+<div class="highlight">
+<strong>📊 Incluso implementando solo el 50%</strong> de estas automatizaciones, estarías ahorrando unas <strong>40 horas al mes</strong> — el equivalente a una semana completa de trabajo. Tiempo que puedes dedicar a hacer crecer tu negocio.
+</div>
+</section>
+
+<!-- OFERTA ESPECIAL -->
+<section class="section" id="oferta">
+<h2>🎁 4. Oferta Especial — Has Completado la Serie</h2>
+
+<div class="offer-box">
+<h2>🏆 ¡Enhorabuena por completar las 15 guías!</h2>
+<p>Como recompensa por tu compromiso con la automatización de tu negocio, tenemos algo especial para ti:</p>
+<span class="discount">15% DESCUENTO</span>
+<p>En cualquier servicio de automatización de Neuriax. Válido para:</p>
+<ul style="text-align:left;max-width:450px;margin:1rem auto;list-style:none;padding:0">
+<li style="padding:.4rem 0;color:var(--text)">✅ Implementación de automatizaciones</li>
+<li style="padding:.4rem 0;color:var(--text)">✅ Consultoría tecnológica personalizada</li>
+<li style="padding:.4rem 0;color:var(--text)">✅ Desarrollo web + automatización</li>
+<li style="padding:.4rem 0;color:var(--text)">✅ Pack completo de transformación digital</li>
+</ul>
+<div class="code">GUIAS15</div>
+<p style="margin-top:1rem">Menciona este código al reservar tu consulta gratuita:</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-gold" style="position:relative">📞 Reservar Consulta y Aplicar Descuento</a>
+<div class="offer-conditions">
+Oferta válida durante 30 días desde la recepción de este email. No acumulable con otras promociones.<br>
+El descuento se aplica sobre el presupuesto final del servicio contratado.
+</div>
+</div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-box">
+<h2>🚀 Es el momento de pasar a la acción</h2>
+<p>Tienes el conocimiento, tienes el plan, tienes el descuento. Solo falta dar el primer paso. Reserva una consulta gratuita de 30 minutos y te ayudamos a implementar todo.</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-white">📞 Reservar Consulta Gratuita (30 min)</a>
+<a href="https://neuriax.com" class="btn btn-outline">🌐 Visitar Neuriax</a>
+</section>
+
+</div>
+
+<footer>
+<p>© 2026 Neuriax — <a href="https://neuriax.com">neuriax.com</a></p>
+<p style="margin-top:.5rem;font-size:.8rem">Guía 15 de la serie "Automatización para PYMEs" · Todos los derechos reservados</p>
+</footer>
+
+<script>
+function toggleCheck(el){
+el.classList.toggle('checked');
+const box=el.querySelector('.check-box');
+box.textContent=el.classList.contains('checked')?'✓':'';
+updateProgress();
+}
+function updateProgress(){
+const total=document.querySelectorAll('.check-item').length;
+const checked=document.querySelectorAll('.check-item.checked').length;
+document.getElementById('counterDisplay').textContent=checked+' / '+total;
+document.getElementById('progressFill').style.width=(checked/total*100)+'%';
+}
+</script>
+</body>
+</html>

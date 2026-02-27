@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcula el ROI de Automatizar Tu Negocio | Neuriax</title>
+    <meta name="description" content="Aprende a calcular el retorno de inversión de automatizar tu negocio. Fórmulas, ejemplos reales y el coste oculto de no automatizar.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            background: linear-gradient(180deg, rgba(6,182,212,0.12) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(6,182,212,0.15);
+            padding: 20px 0; position: sticky; top: 0;
+            backdrop-filter: blur(16px); z-index: 100;
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-size: 1.6rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .btn-pdf {
+            background: var(--gradient); color: #fff; border: none;
+            padding: 10px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pdf:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,182,212,0.35); }
+
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .hero-badge {
+            display: inline-block; background: rgba(6,182,212,0.12);
+            border: 1px solid rgba(6,182,212,0.25); color: var(--cyan);
+            padding: 6px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin: 0 auto; }
+
+        section { margin-bottom: 60px; }
+        .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; }
+        .highlight { color: var(--cyan); font-weight: 600; }
+
+        .intro-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px; padding: 40px; margin-bottom: 48px;
+        }
+        .intro-card p { margin-bottom: 16px; color: var(--text-muted); }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        /* Formula Card */
+        .formula-card {
+            background: linear-gradient(135deg, rgba(6,182,212,0.08), rgba(59,130,246,0.08));
+            border: 1px solid rgba(6,182,212,0.2);
+            border-radius: 20px; padding: 48px; text-align: center; margin-bottom: 48px;
+        }
+        .formula-label { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        .formula {
+            font-size: clamp(1.2rem, 3vw, 1.8rem); font-weight: 800; color: #fff;
+            background: var(--card-bg); padding: 24px 32px; border-radius: 12px;
+            display: inline-block; margin-bottom: 20px;
+            border: 1px solid rgba(6,182,212,0.15);
+        }
+        .formula span { color: var(--cyan); }
+        .formula-explanation { color: var(--text-muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto; }
+
+        /* Variables Explanation */
+        .var-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+        .var-card {
+            background: var(--card-bg); border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 12px; padding: 20px;
+        }
+        .var-name { color: var(--cyan); font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+        .var-desc { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* Case Study Cards */
+        .case-grid { display: flex; flex-direction: column; gap: 32px; }
+        .case-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 20px; overflow: hidden;
+        }
+        .case-header {
+            background: rgba(6,182,212,0.08); padding: 24px 32px;
+            display: flex; align-items: center; gap: 16px;
+            border-bottom: 1px solid rgba(6,182,212,0.1);
+        }
+        .case-icon {
+            font-size: 2rem; width: 56px; height: 56px;
+            background: var(--gradient); border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .case-header h3 { font-size: 1.2rem; font-weight: 700; color: #fff; }
+        .case-header span { color: var(--text-muted); font-size: 0.9rem; }
+        .case-body { padding: 32px; }
+        .case-row {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px; margin-bottom: 24px;
+        }
+        .case-metric {
+            background: rgba(0,0,0,0.2); border-radius: 12px; padding: 16px; text-align: center;
+        }
+        .case-metric-value {
+            font-size: 1.4rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .case-metric-label { color: var(--text-muted); font-size: 0.8rem; margin-top: 4px; }
+        .case-calc {
+            background: rgba(6,182,212,0.06); border: 1px solid rgba(6,182,212,0.12);
+            border-radius: 12px; padding: 20px;
+        }
+        .case-calc p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 8px; }
+        .case-calc p:last-child { margin-bottom: 0; }
+        .case-calc .result { color: #34d399; font-size: 1.1rem; font-weight: 700; }
+
+        /* Comparison Table */
+        .table-wrapper { overflow-x: auto; margin-bottom: 48px; }
+        .comp-table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            background: var(--card-bg); border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(6,182,212,0.1);
+        }
+        .comp-table thead th {
+            background: rgba(6,182,212,0.1); padding: 16px 18px;
+            text-align: left; font-weight: 700; font-size: 0.9rem; color: #fff;
+            border-bottom: 1px solid rgba(6,182,212,0.15);
+        }
+        .comp-table tbody td {
+            padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 0.9rem;
+        }
+        .comp-table tbody tr:last-child td { border-bottom: none; }
+        .comp-table tbody tr:hover { background: rgba(6,182,212,0.04); }
+        .green { color: #34d399; font-weight: 600; }
+        .red { color: #f87171; font-weight: 600; }
+
+        /* Hidden Cost Section */
+        .cost-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .cost-card {
+            background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.15);
+            border-radius: 16px; padding: 28px;
+        }
+        .cost-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+        .cost-card h3 { font-size: 1.05rem; font-weight: 700; color: #f87171; margin-bottom: 8px; }
+        .cost-card p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border: 1px solid rgba(6,182,212,0.2);
+            border-radius: 20px; padding: 60px 40px; text-align: center; margin: 60px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .cta-section p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .btn-cta {
+            display: inline-block; background: var(--gradient); color: #fff;
+            text-decoration: none; padding: 16px 40px; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.35); }
+
+        footer {
+            text-align: center; padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 50px 0 40px; }
+            .intro-card, .formula-card { padding: 24px; }
+            .case-header { padding: 18px 20px; flex-direction: column; text-align: center; }
+            .case-body { padding: 20px; }
+            .case-row { grid-template-columns: repeat(2, 1fr); }
+            .cta-section { padding: 40px 24px; }
+        }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; }
+            header, .btn-pdf, .btn-cta { display: none; }
+            .hero h1 { -webkit-text-fill-color: #1a1a1a; }
+            .case-metric-value { -webkit-text-fill-color: #0891b2; }
+            .intro-card, .formula-card, .case-card, .cost-card, .comp-table, .cta-section {
+                border: 1px solid #ddd; background: #f9f9f9;
+            }
+            .section-title, .cta-section h2, .case-header h3, .formula { color: #1a1a1a; }
+            .cost-card { background: #fff5f5; }
+            .cost-card h3 { color: #dc2626; }
+            .highlight, .var-name { color: #0891b2; }
+            footer { color: #666; }
+            footer a { color: #0891b2; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">⚡ Neuriax</div>
+            <button class="btn-pdf" onclick="window.print()">📥 Descargar PDF</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">📊 Guía Financiera — 2026</div>
+            <h1>Calcula el ROI de Automatizar Tu Negocio</h1>
+            <p>Fórmulas claras, ejemplos reales para 3 tipos de negocio y el coste oculto que pagas cada día por no automatizar.</p>
+        </section>
+
+        <section>
+            <div class="intro-card">
+                <p>La pregunta más importante antes de invertir en automatización no es "¿cuánto cuesta?" sino <span class="highlight">"¿cuánto me cuesta NO automatizar?"</span></p>
+                <p>Cada hora que tu equipo dedica a tareas repetitivas es una hora que no invierte en crecer tu negocio. Cada lead que no se responde en 5 minutos es un cliente que se va a la competencia. Cada factura enviada tarde es dinero que tarda más en entrar.</p>
+                <p>En esta guía te damos las <span class="highlight">herramientas para calcular exactamente cuánto ganarías</span> automatizando tu negocio.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🧮 La Fórmula del ROI</h2>
+            <p class="section-subtitle">Simple, clara y aplicable a cualquier negocio.</p>
+
+            <div class="formula-card">
+                <div class="formula-label">Fórmula ROI de Automatización</div>
+                <div class="formula">ROI = (<span>Ahorro + Ingresos Extra</span> - Inversión) / Inversión × 100</div>
+                <p class="formula-explanation">El ROI se expresa en porcentaje. Un ROI del 300% significa que por cada euro invertido, recuperas 3 euros de beneficio neto.</p>
+
+                <div class="var-grid">
+                    <div class="var-card">
+                        <div class="var-name">💰 Ahorro</div>
+                        <div class="var-desc">Horas ahorradas × coste/hora de empleado + reducción de errores</div>
+                    </div>
+                    <div class="var-card">
+                        <div class="var-name">📈 Ingresos Extra</div>
+                        <div class="var-desc">Leads adicionales convertidos + ventas por disponibilidad 24/7</div>
+                    </div>
+                    <div class="var-card">
+                        <div class="var-name">🔧 Inversión</div>
+                        <div class="var-desc">Coste de implementación + licencias mensuales de herramientas</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">📋 Ejemplos Reales por Tipo de Negocio</h2>
+            <p class="section-subtitle">Cálculos detallados para restaurante, inmobiliaria y clínica.</p>
+
+            <div class="case-grid">
+                <!-- Restaurante -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🍽️</div>
+                        <div>
+                            <h3>Cadena de Restaurantes (3 locales)</h3>
+                            <span>Sector Hostelería</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-row">
+                            <div class="case-metric">
+                                <div class="case-metric-value">€2.400</div>
+                                <div class="case-metric-label">Inversión inicial</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€180/mes</div>
+                                <div class="case-metric-label">Coste mensual</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€1.850/mes</div>
+                                <div class="case-metric-label">Ahorro mensual</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">412%</div>
+                                <div class="case-metric-label">ROI primer año</div>
+                            </div>
+                        </div>
+                        <div class="case-calc">
+                            <p><strong>Automatizaciones:</strong> Reservas online, pedidos automáticos a proveedores, encuestas de satisfacción, gestión de reseñas Google, turnos de personal.</p>
+                            <p><strong>Ahorro:</strong> 30h/mes de recepcionista (€900) + 20h/mes de gestión (€600) + menos errores en pedidos (€350/mes)</p>
+                            <p><strong>Inversión anual:</strong> €2.400 + (€180 × 12) = €4.560</p>
+                            <p class="result">→ Beneficio neto año 1: €22.200 — €4.560 = €17.640</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inmobiliaria -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🏠</div>
+                        <div>
+                            <h3>Agencia Inmobiliaria</h3>
+                            <span>Sector Real Estate</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-row">
+                            <div class="case-metric">
+                                <div class="case-metric-value">€3.200</div>
+                                <div class="case-metric-label">Inversión inicial</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€250/mes</div>
+                                <div class="case-metric-label">Coste mensual</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€4.200/mes</div>
+                                <div class="case-metric-label">Valor generado</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">680%</div>
+                                <div class="case-metric-label">ROI primer año</div>
+                            </div>
+                        </div>
+                        <div class="case-calc">
+                            <p><strong>Automatizaciones:</strong> Seguimiento de leads por email/WhatsApp, alertas de propiedades, CRM con IA, generación de exposés, agendamiento de visitas.</p>
+                            <p><strong>Ingresos extra:</strong> 3 ventas adicionales/mes a €800 comisión = €2.400/mes. Ahorro de 40h/mes en gestión = €1.800/mes.</p>
+                            <p><strong>Inversión anual:</strong> €3.200 + (€250 × 12) = €6.200</p>
+                            <p class="result">→ Beneficio neto año 1: €50.400 — €6.200 = €44.200</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clínica -->
+                <div class="case-card">
+                    <div class="case-header">
+                        <div class="case-icon">🏥</div>
+                        <div>
+                            <h3>Clínica Dental</h3>
+                            <span>Sector Salud</span>
+                        </div>
+                    </div>
+                    <div class="case-body">
+                        <div class="case-row">
+                            <div class="case-metric">
+                                <div class="case-metric-value">€2.800</div>
+                                <div class="case-metric-label">Inversión inicial</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€200/mes</div>
+                                <div class="case-metric-label">Coste mensual</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">€3.100/mes</div>
+                                <div class="case-metric-label">Valor generado</div>
+                            </div>
+                            <div class="case-metric">
+                                <div class="case-metric-value">590%</div>
+                                <div class="case-metric-label">ROI primer año</div>
+                            </div>
+                        </div>
+                        <div class="case-calc">
+                            <p><strong>Automatizaciones:</strong> Agendamiento online, recordatorios de citas (reduce no-shows 40%), seguimiento post-tratamiento, chatbot de FAQs, programa de referidos automático.</p>
+                            <p><strong>Valor:</strong> 8 citas recuperadas/mes (€150 c/u = €1.200) + 25h/mes ahorro recepción (€750) + 5 pacientes nuevos por referidos (€1.150/mes)</p>
+                            <p><strong>Inversión anual:</strong> €2.800 + (€200 × 12) = €5.200</p>
+                            <p class="result">→ Beneficio neto año 1: €37.200 — €5.200 = €32.000</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">⚠️ El Coste Oculto de NO Automatizar</h2>
+            <p class="section-subtitle">Lo que pagas cada día por mantener procesos manuales.</p>
+
+            <div class="cost-cards">
+                <div class="cost-card">
+                    <div class="icon">⏰</div>
+                    <h3>Tiempo perdido</h3>
+                    <p>20+ horas semanales en tareas repetitivas × €25/hora = más de €26.000 al año en productividad desperdiciada.</p>
+                </div>
+                <div class="cost-card">
+                    <div class="icon">🚪</div>
+                    <h3>Leads que se escapan</h3>
+                    <p>El 78% de los clientes compra al primero que responde. Sin respuesta automática, pierdes el 60% de tus oportunidades.</p>
+                </div>
+                <div class="cost-card">
+                    <div class="icon">❌</div>
+                    <h3>Errores humanos</h3>
+                    <p>Facturas incorrectas, citas olvidadas, datos mal ingresados. Cada error cuesta tiempo, dinero y reputación.</p>
+                </div>
+                <div class="cost-card">
+                    <div class="icon">😰</div>
+                    <h3>Burnout del equipo</h3>
+                    <p>Tareas repetitivas desmotivan. Alta rotación de personal cuesta entre €5.000 y €15.000 por empleado reemplazado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">📊 Tabla Comparativa: Automatizado vs Manual</h2>
+            <div class="table-wrapper">
+                <table class="comp-table">
+                    <thead>
+                        <tr>
+                            <th>Aspecto</th>
+                            <th>Negocio Manual</th>
+                            <th>Negocio Automatizado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>⏱️ Tiempo de respuesta a leads</td>
+                            <td class="red">2-24 horas</td>
+                            <td class="green">< 1 minuto</td>
+                        </tr>
+                        <tr>
+                            <td>📅 Disponibilidad</td>
+                            <td class="red">Horario laboral</td>
+                            <td class="green">24/7/365</td>
+                        </tr>
+                        <tr>
+                            <td>📧 Seguimiento de clientes</td>
+                            <td class="red">Inconsistente</td>
+                            <td class="green">Sistemático y puntual</td>
+                        </tr>
+                        <tr>
+                            <td>🧾 Errores en facturación</td>
+                            <td class="red">5-10% de facturas</td>
+                            <td class="green">< 0.1%</td>
+                        </tr>
+                        <tr>
+                            <td>📊 Reportes</td>
+                            <td class="red">Manuales, semanales</td>
+                            <td class="green">Automáticos, en tiempo real</td>
+                        </tr>
+                        <tr>
+                            <td>📈 Escalabilidad</td>
+                            <td class="red">Requiere más personal</td>
+                            <td class="green">Crece sin coste lineal</td>
+                        </tr>
+                        <tr>
+                            <td>💰 Coste por cliente</td>
+                            <td class="red">Aumenta con volumen</td>
+                            <td class="green">Disminuye con volumen</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>¿Quieres calcular el ROI exacto para tu negocio?</h2>
+            <p>Agenda una consulta gratuita y te haremos un análisis personalizado con números reales para tu caso.</p>
+            <a href="https://calendly.com/neuriax/30min" class="btn-cta" target="_blank" rel="noopener">🚀 Agendar Consulta Gratuita</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Neuriax — <a href="https://neuriax.com" target="_blank" rel="noopener">neuriax.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>

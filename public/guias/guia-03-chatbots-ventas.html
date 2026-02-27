@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbots que Venden: Guía Práctica | Neuriax</title>
+    <meta name="description" content="Aprende cómo implementar chatbots que generan ventas 24/7. Tipos, flujos, ejemplos reales y ROI esperado.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cyan: #06b6d4;
+            --blue: #3b82f6;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --gradient: linear-gradient(135deg, #06b6d4, #3b82f6);
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+        header {
+            background: linear-gradient(180deg, rgba(6,182,212,0.12) 0%, transparent 100%);
+            border-bottom: 1px solid rgba(6,182,212,0.15);
+            padding: 20px 0;
+            position: sticky; top: 0;
+            backdrop-filter: blur(16px); z-index: 100;
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-size: 1.6rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .btn-pdf {
+            background: var(--gradient); color: #fff; border: none;
+            padding: 10px 22px; border-radius: 8px; font-size: 0.9rem; font-weight: 600;
+            cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-pdf:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(6,182,212,0.35); }
+
+        .hero { text-align: center; padding: 80px 0 60px; }
+        .hero-badge {
+            display: inline-block; background: rgba(6,182,212,0.12);
+            border: 1px solid rgba(6,182,212,0.25); color: var(--cyan);
+            padding: 6px 18px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; line-height: 1.2; margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 640px; margin: 0 auto; }
+
+        section { margin-bottom: 60px; }
+        .section-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 16px; color: #fff; }
+        .section-subtitle { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; }
+        .highlight { color: var(--cyan); font-weight: 600; }
+
+        .intro-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px; padding: 40px; margin-bottom: 48px;
+        }
+        .intro-card p { margin-bottom: 16px; color: var(--text-muted); }
+        .intro-card p:last-child { margin-bottom: 0; }
+
+        /* Type Cards */
+        .type-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 48px; }
+        .type-card {
+            background: var(--card-bg); border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 16px; padding: 28px; transition: border-color 0.3s, transform 0.2s;
+        }
+        .type-card:hover { border-color: rgba(6,182,212,0.3); transform: translateY(-2px); }
+        .type-card .icon { font-size: 2rem; margin-bottom: 12px; }
+        .type-card h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+        .type-card p { color: var(--text-muted); font-size: 0.9rem; }
+        .type-badge {
+            display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 0.75rem;
+            font-weight: 600; margin-top: 12px;
+        }
+        .badge-basic { background: rgba(52,211,153,0.15); color: #34d399; }
+        .badge-advanced { background: rgba(6,182,212,0.15); color: var(--cyan); }
+        .badge-premium { background: rgba(168,85,247,0.15); color: #a855f7; }
+
+        /* Chat Mockup */
+        .chat-mockup {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.15);
+            border-radius: 20px; overflow: hidden; max-width: 480px; margin: 0 auto 48px;
+        }
+        .chat-header {
+            background: rgba(6,182,212,0.1); padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px;
+            border-bottom: 1px solid rgba(6,182,212,0.1);
+        }
+        .chat-avatar {
+            width: 40px; height: 40px; background: var(--gradient);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: #fff;
+        }
+        .chat-info h4 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+        .chat-info span { font-size: 0.8rem; color: #34d399; }
+        .chat-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+        .msg {
+            max-width: 80%; padding: 12px 16px; border-radius: 16px;
+            font-size: 0.9rem; line-height: 1.5;
+        }
+        .msg-bot {
+            background: rgba(6,182,212,0.12); color: var(--text);
+            align-self: flex-start; border-bottom-left-radius: 4px;
+        }
+        .msg-user {
+            background: var(--gradient); color: #fff;
+            align-self: flex-end; border-bottom-right-radius: 4px;
+        }
+        .msg-options { display: flex; flex-wrap: wrap; gap: 8px; align-self: flex-start; }
+        .msg-option {
+            background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.25);
+            color: var(--cyan); padding: 8px 16px; border-radius: 20px;
+            font-size: 0.82rem; font-weight: 600;
+        }
+        .chat-typing {
+            padding: 0 20px 16px; color: var(--text-muted); font-size: 0.8rem;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .typing-dots span {
+            display: inline-block; width: 6px; height: 6px; background: var(--cyan);
+            border-radius: 50%; animation: typing 1.4s infinite;
+        }
+        .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+            30% { opacity: 1; transform: translateY(-4px); }
+        }
+
+        /* ROI Stats */
+        .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 48px; }
+        .roi-card {
+            background: var(--card-bg); border: 1px solid rgba(6,182,212,0.1);
+            border-radius: 16px; padding: 28px; text-align: center;
+        }
+        .roi-number {
+            font-size: 2rem; font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .roi-label { color: var(--text-muted); font-size: 0.85rem; margin-top: 6px; }
+
+        /* Implementation Steps */
+        .steps { display: flex; flex-direction: column; gap: 20px; }
+        .step {
+            background: var(--card-bg); border: 1px solid rgba(59,130,246,0.1);
+            border-radius: 16px; padding: 28px; display: flex; gap: 20px; align-items: flex-start;
+            transition: border-color 0.3s;
+        }
+        .step:hover { border-color: rgba(6,182,212,0.3); }
+        .step-num {
+            flex-shrink: 0; width: 44px; height: 44px; background: var(--gradient);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-weight: 800; color: #fff; font-size: 1.1rem;
+        }
+        .step h3 { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .step p { color: var(--text-muted); font-size: 0.9rem; }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(59,130,246,0.15));
+            border: 1px solid rgba(6,182,212,0.2);
+            border-radius: 20px; padding: 60px 40px; text-align: center; margin: 60px 0;
+        }
+        .cta-section h2 { font-size: 1.8rem; font-weight: 800; color: #fff; margin-bottom: 16px; }
+        .cta-section p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .btn-cta {
+            display: inline-block; background: var(--gradient); color: #fff;
+            text-decoration: none; padding: 16px 40px; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 700;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.35); }
+
+        footer {
+            text-align: center; padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        footer a { color: var(--cyan); text-decoration: none; }
+
+        @media (max-width: 640px) {
+            .hero { padding: 50px 0 40px; }
+            .intro-card { padding: 24px; }
+            .type-grid { grid-template-columns: 1fr; }
+            .step { flex-direction: column; gap: 12px; }
+            .cta-section { padding: 40px 24px; }
+            .chat-mockup { max-width: 100%; }
+        }
+
+        @media print {
+            body { background: #fff; color: #1a1a1a; }
+            header, .btn-pdf, .btn-cta { display: none; }
+            .hero h1 { -webkit-text-fill-color: #1a1a1a; }
+            .roi-number { -webkit-text-fill-color: #0891b2; }
+            .type-card, .intro-card, .cta-section, .roi-card, .step, .chat-mockup {
+                border: 1px solid #ddd; background: #f9f9f9;
+            }
+            .section-title, .cta-section h2, .type-card h3, .step h3 { color: #1a1a1a; }
+            .highlight { color: #0891b2; }
+            footer { color: #666; }
+            footer a { color: #0891b2; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-inner">
+            <div class="logo">⚡ Neuriax</div>
+            <button class="btn-pdf" onclick="window.print()">📥 Descargar PDF</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero-badge">🤖 Guía Práctica — 2026</div>
+            <h1>Chatbots que Venden: Guía Práctica</h1>
+            <p>Aprende a implementar chatbots que capturan leads, cualifican prospectos y cierran ventas las 24 horas del día, los 365 días del año.</p>
+        </section>
+
+        <section>
+            <div class="intro-card">
+                <p><span class="highlight">El 67% de los consumidores a nivel mundial ha interactuado con un chatbot en el último año.</span> Pero la diferencia entre un chatbot que frustra y uno que vende está en el diseño del flujo conversacional.</p>
+                <p>Un chatbot de ventas bien implementado no es solo un FAQ automatizado. Es un vendedor digital que trabaja 24/7, cualifica leads, resuelve objeciones y guía al cliente hasta la conversión. Y lo hace sin cobrar comisiones, sin días libres y sin mal humor.</p>
+                <p>En esta guía te enseñamos los <span class="highlight">5 tipos de chatbots</span>, flujos probados y el ROI que puedes esperar.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🔧 5 Tipos de Chatbots de Ventas</h2>
+            <p class="section-subtitle">Elige el que mejor se adapte a tu modelo de negocio y nivel de madurez digital.</p>
+
+            <div class="type-grid">
+                <div class="type-card">
+                    <div class="icon">📋</div>
+                    <h3>Chatbot de Reglas</h3>
+                    <p>Flujos predefinidos con opciones de botones. Ideal para negocios con procesos claros y FAQs definidas. Fácil de implementar y mantener.</p>
+                    <span class="type-badge badge-basic">Básico</span>
+                </div>
+                <div class="type-card">
+                    <div class="icon">🧠</div>
+                    <h3>Chatbot con IA Generativa</h3>
+                    <p>Usa modelos de lenguaje para conversaciones naturales. Entiende contexto, resuelve preguntas complejas y se adapta a cada cliente.</p>
+                    <span class="type-badge badge-premium">Premium</span>
+                </div>
+                <div class="type-card">
+                    <div class="icon">🎯</div>
+                    <h3>Chatbot Cualificador</h3>
+                    <p>Diseñado para filtrar leads. Hace preguntas estratégicas para determinar si el prospecto es ideal antes de pasarlo al equipo comercial.</p>
+                    <span class="type-badge badge-advanced">Avanzado</span>
+                </div>
+                <div class="type-card">
+                    <div class="icon">📅</div>
+                    <h3>Chatbot de Agendamiento</h3>
+                    <p>Su único objetivo es agendar citas. Muestra disponibilidad, confirma horarios y envía recordatorios. Perfecto para servicios profesionales.</p>
+                    <span class="type-badge badge-basic">Básico</span>
+                </div>
+                <div class="type-card">
+                    <div class="icon">🛒</div>
+                    <h3>Chatbot E-commerce</h3>
+                    <p>Recomienda productos, gestiona carritos abandonados, ofrece descuentos personalizados y facilita el checkout directamente en el chat.</p>
+                    <span class="type-badge badge-advanced">Avanzado</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">💬 Ejemplo de Flujo de Chatbot</h2>
+            <p class="section-subtitle">Así se ve una conversación real de un chatbot de ventas en acción.</p>
+
+            <div class="chat-mockup">
+                <div class="chat-header">
+                    <div class="chat-avatar">⚡</div>
+                    <div class="chat-info">
+                        <h4>Neuri — Asistente Neuriax</h4>
+                        <span>● En línea</span>
+                    </div>
+                </div>
+                <div class="chat-body">
+                    <div class="msg msg-bot">¡Hola! 👋 Soy Neuri, el asistente virtual de Neuriax. ¿En qué puedo ayudarte hoy?</div>
+                    <div class="msg-options">
+                        <div class="msg-option">💻 Quiero una web</div>
+                        <div class="msg-option">🤖 Automatizaciones</div>
+                        <div class="msg-option">💰 Ver precios</div>
+                    </div>
+                    <div class="msg msg-user">Quiero una web</div>
+                    <div class="msg msg-bot">¡Genial! Me encanta ayudar con eso. 🚀 ¿Qué tipo de negocio tienes?</div>
+                    <div class="msg msg-user">Tengo una clínica dental</div>
+                    <div class="msg msg-bot">Perfecto, trabajamos mucho con clínicas. Una web profesional para clínicas incluye: agenda online, galería de tratamientos y SEO local. ¿Te gustaría agendar una consulta gratuita de 30 min para ver opciones?</div>
+                    <div class="msg-options">
+                        <div class="msg-option">✅ Sí, agendar</div>
+                        <div class="msg-option">💰 ¿Cuánto cuesta?</div>
+                    </div>
+                    <div class="msg msg-user">Sí, agendar</div>
+                    <div class="msg msg-bot">¡Excelente! 🎉 Aquí puedes elegir el horario que mejor te venga. Te enviaré una confirmación por email.</div>
+                </div>
+                <div class="chat-typing">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    Neuri está escribiendo...
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">🛠️ Cómo Implementar tu Chatbot</h2>
+            <p class="section-subtitle">5 pasos para tener tu chatbot de ventas funcionando en menos de 2 semanas.</p>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Define tus objetivos</h3>
+                        <p>¿Quieres capturar leads, agendar citas, resolver FAQs o vender directamente? Cada objetivo requiere un flujo diferente. Define KPIs claros: tasa de conversión, leads capturados, citas agendadas.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Diseña los flujos conversacionales</h3>
+                        <p>Mapea las conversaciones más comunes. Crea árboles de decisión con ramificaciones para cada respuesta posible. Incluye manejo de objeciones y caminos alternativos.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Elige la plataforma adecuada</h3>
+                        <p>Para chatbots de reglas: ManyChat, Chatfuel. Para IA generativa: soluciones custom con GPT-4 o Claude. En Neuriax construimos chatbots a medida integrados con tu web y CRM.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">4</div>
+                    <div>
+                        <h3>Integra con tu ecosistema</h3>
+                        <p>Conecta el chatbot con tu CRM, calendario, email marketing y WhatsApp. Los datos deben fluir automáticamente para que cada interacción se convierta en una oportunidad de venta registrada.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-num">5</div>
+                    <div>
+                        <h3>Mide, itera y optimiza</h3>
+                        <p>Analiza las conversaciones. ¿Dónde abandonan los usuarios? ¿Qué preguntas no puede resolver? Mejora los flujos semanalmente. Los mejores chatbots se construyen con datos reales.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">📈 ROI Esperado de un Chatbot de Ventas</h2>
+            <p class="section-subtitle">Números reales basados en implementaciones de chatbots en negocios similares al tuyo.</p>
+
+            <div class="roi-grid">
+                <div class="roi-card">
+                    <div class="roi-number">+35%</div>
+                    <div class="roi-label">Aumento en captación de leads</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">-60%</div>
+                    <div class="roi-label">Reducción en tiempo de respuesta</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">+25%</div>
+                    <div class="roi-label">Incremento en tasa de conversión</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">24/7</div>
+                    <div class="roi-label">Disponibilidad sin coste adicional</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">3-6x</div>
+                    <div class="roi-label">ROI en los primeros 6 meses</div>
+                </div>
+                <div class="roi-card">
+                    <div class="roi-number">80%</div>
+                    <div class="roi-label">De consultas resueltas sin humano</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>¿Quieres un chatbot que venda por ti?</h2>
+            <p>Agenda una consulta gratuita y diseñaremos juntos el flujo conversacional perfecto para tu negocio.</p>
+            <a href="https://calendly.com/neuriax/30min" class="btn-cta" target="_blank" rel="noopener">🚀 Agendar Consulta Gratuita</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Neuriax — <a href="https://neuriax.com" target="_blank" rel="noopener">neuriax.com</a></p>
+        </div>
+    </footer>
+</body>
+</html>

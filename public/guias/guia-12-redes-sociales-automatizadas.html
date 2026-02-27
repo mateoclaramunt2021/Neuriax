@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 12: Redes Sociales en Piloto Automático | Neuriax</title>
+<meta name="description" content="Automatiza tus redes sociales: programación, creación de contenido con IA, calendario editorial y métricas clave para crecer sin perder horas.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cyan:#06b6d4;--blue:#3b82f6;--bg-dark:#0f172a;--bg-card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6)}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--blue)}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:2px solid var(--cyan);padding:1.5rem 0;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:1.8rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo span{font-weight:300}
+.badge{display:inline-block;background:var(--accent-gradient);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:50px;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero{text-align:center;padding:4rem 1.5rem;background:radial-gradient(ellipse at center,rgba(6,182,212,.08) 0%,transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.5rem 0 1rem;line-height:1.2}
+.hero h1 .gradient{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-muted);max-width:650px;margin:0 auto}
+.section{margin:3rem 0}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid rgba(6,182,212,.3);display:flex;align-items:center;gap:.5rem}
+.section h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 .75rem;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.75rem;margin:1.25rem 0;transition:border-color .3s}
+.card:hover{border-color:rgba(6,182,212,.3)}
+.card h3{margin-top:0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--bg-card);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid rgba(6,182,212,.15)}
+.stat .number{font-size:2.2rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.9rem;color:var(--text-muted);margin-top:.25rem}
+ul,ol{padding-left:1.5rem;margin:.75rem 0}
+li{margin:.5rem 0;color:var(--text-muted)}
+li strong{color:var(--text)}
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.92rem}
+thead{background:rgba(6,182,212,.12)}
+th,td{padding:.75rem 1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font-weight:700;color:var(--cyan);font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
+td{color:var(--text-muted)}
+.highlight{background:rgba(6,182,212,.06);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:1.5rem 0;font-size:.95rem}
+.highlight strong{color:var(--cyan)}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin:1.5rem 0}
+.compare-card{background:var(--bg-card);border-radius:12px;padding:1.5rem;border:1px solid rgba(255,255,255,.06);position:relative}
+.compare-card.recommended{border-color:var(--cyan);box-shadow:0 0 20px rgba(6,182,212,.15)}
+.compare-card.recommended::after{content:'⭐ Recomendado';position:absolute;top:-10px;right:15px;background:var(--accent-gradient);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .6rem;border-radius:4px}
+.compare-card h4{font-size:1.1rem;margin-bottom:.5rem;color:var(--text)}
+.compare-card .price{font-size:1.4rem;font-weight:800;color:var(--cyan);margin:.5rem 0}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:1rem 0;font-size:.8rem}
+.calendar .day-header{text-align:center;font-weight:700;color:var(--cyan);padding:.5rem .25rem;font-size:.75rem}
+.calendar .day{background:var(--bg-card);border-radius:6px;padding:.5rem .25rem;text-align:center;min-height:55px;border:1px solid rgba(255,255,255,.04);font-size:.72rem;color:var(--text-muted)}
+.calendar .day.active{border-color:rgba(6,182,212,.3);background:rgba(6,182,212,.08)}
+.calendar .day strong{display:block;color:var(--text);font-size:.8rem;margin-bottom:2px}
+.cta-box{background:var(--accent-gradient);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;font-size:1.6rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center}
+.cta-box p{color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .3s;cursor:pointer;border:none;text-decoration:none}
+.btn-white{background:#fff;color:var(--bg-dark)}.btn-white:hover{background:#e2e8f0;color:var(--bg-dark)}
+.btn-outline{border:2px solid #fff;color:#fff;background:transparent;margin-left:.5rem}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-print{background:var(--bg-card);color:var(--text);border:1px solid rgba(255,255,255,.1);padding:.6rem 1.2rem;font-size:.85rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin:1rem 0}
+.btn-print:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
+.toc{background:var(--bg-card);border-radius:12px;padding:1.75rem;margin:2rem 0;border:1px solid rgba(6,182,212,.15)}
+.toc h3{color:var(--cyan);margin:0 0 1rem;font-size:1.1rem}
+.toc ol{margin:0}.toc li{margin:.35rem 0}.toc a{color:var(--text-muted);font-size:.95rem}.toc a:hover{color:var(--cyan)}
+@media(max-width:640px){.container{padding:1.25rem 1rem}.hero{padding:2.5rem 1rem}.hero h1{font-size:1.7rem}.stat-grid{grid-template-columns:1fr}.compare-grid{grid-template-columns:1fr}.calendar{grid-template-columns:repeat(7,1fr);font-size:.65rem}.calendar .day{min-height:45px;padding:.3rem .15rem}.btn{display:block;margin:.5rem 0;text-align:center}.btn-outline{margin-left:0}.cta-box{padding:1.75rem}}
+@media print{body{background:#fff;color:#111}header{position:static;border-bottom:2px solid #06b6d4;background:#fff}.logo{-webkit-text-fill-color:#06b6d4}.hero{background:none;padding:2rem 0}.card,.stat,.toc,.compare-card{border:1px solid #ddd;break-inside:avoid}.highlight{border-left:4px solid #06b6d4;background:#f0fdfa}.cta-box{background:#f0fdfa;border:2px solid #06b6d4}.cta-box h2,.cta-box p{color:#111}.btn-print{display:none}a{color:#06b6d4}footer{border-top:1px solid #ddd}.stat .number{-webkit-text-fill-color:#06b6d4}.compare-card.recommended{border-color:#06b6d4}.compare-card.recommended::after{background:#06b6d4}th{color:#06b6d4}td,li,p,.hero p,.stat .label{color:#333}.calendar .day{border:1px solid #ddd}.calendar .day.active{background:#f0fdfa;border-color:#06b6d4}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Neuriax<span>.com</span></div>
+</header>
+
+<section class="hero">
+<span class="badge">Guía 12 de 15</span>
+<h1>📱 Redes Sociales en <span class="gradient">Piloto Automático</span></h1>
+<p>Publica contenido de calidad todos los días sin estar pegado al móvil. IA + programación + estrategia = resultados sin estrés.</p>
+<button class="btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</section>
+
+<div class="container">
+
+<nav class="toc">
+<h3>📑 Índice de Contenidos</h3>
+<ol>
+<li><a href="#problema">El problema de las RRSS manuales</a></li>
+<li><a href="#herramientas">Comparativa de herramientas</a></li>
+<li><a href="#ia">IA para crear contenido</a></li>
+<li><a href="#automatizar">Automatizar la publicación</a></li>
+<li><a href="#calendario">Calendario editorial</a></li>
+<li><a href="#metricas">Métricas a seguir</a></li>
+<li><a href="#workflow">Workflow semanal completo</a></li>
+</ol>
+</nav>
+
+<section class="section" id="problema">
+<h2>😫 1. El Problema de las RRSS Manuales</h2>
+<div class="stat-grid">
+<div class="stat"><div class="number">6-10h</div><div class="label">por semana gestionando RRSS manualmente</div></div>
+<div class="stat"><div class="number">63%</div><div class="label">de PYMEs publican inconsistentemente</div></div>
+<div class="stat"><div class="number">1-2h</div><div class="label">por semana con automatización</div></div>
+</div>
+<div class="card">
+<h3>🔴 ¿Te identificas?</h3>
+<ul>
+<li><strong>Publicas cuando te acuerdas</strong> — 3 posts una semana, 0 la siguiente</li>
+<li><strong>Se te acaban las ideas</strong> y acabas compartiendo contenido genérico</li>
+<li><strong>No sabes qué funciona</strong> porque no mides resultados</li>
+<li><strong>Pierdes el tiempo</strong> entrando en cada red a publicar manualmente</li>
+<li><strong>Tu competencia está más activa</strong> y gana visibilidad que debería ser tuya</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="herramientas">
+<h2>🛠️ 2. Comparativa de Herramientas de Programación</h2>
+
+<div class="compare-grid">
+<div class="compare-card">
+<h4>📌 Buffer</h4>
+<div class="price">Desde 6€/mes</div>
+<ul>
+<li>Interfaz simple y limpia</li>
+<li>Hasta 3 canales (gratis)</li>
+<li>Programación por cola</li>
+<li>Analytics básicos</li>
+<li>Sugerencias de horarios</li>
+<li>IA integrada básica</li>
+</ul>
+<p style="margin-top:.75rem;font-size:.85rem;color:var(--text-muted)"><strong>Ideal para:</strong> Autónomos, 1-3 redes</p>
+</div>
+
+<div class="compare-card recommended">
+<h4>📅 Later</h4>
+<div class="price">Desde 25€/mes</div>
+<ul>
+<li>Calendario visual excelente</li>
+<li>Link in Bio incluido</li>
+<li>Preview del feed de Instagram</li>
+<li>Analytics avanzados</li>
+<li>Publicación automática real</li>
+<li>UGC y Hashtag analytics</li>
+</ul>
+<p style="margin-top:.75rem;font-size:.85rem;color:var(--text-muted)"><strong>Ideal para:</strong> PYMEs con foco en Instagram/TikTok</p>
+</div>
+
+<div class="compare-card">
+<h4>🦉 Hootsuite</h4>
+<div class="price">Desde 99€/mes</div>
+<ul>
+<li>Gestión multi-equipo</li>
+<li>Monitorización social</li>
+<li>Flujos de aprobación</li>
+<li>Integraciones avanzadas</li>
+<li>Informes personalizados</li>
+<li>Social listening incluido</li>
+</ul>
+<p style="margin-top:.75rem;font-size:.85rem;color:var(--text-muted)"><strong>Ideal para:</strong> Empresas medianas con equipo</p>
+</div>
+</div>
+
+<div class="card">
+<h3>📊 Comparativa rápida</h3>
+<table>
+<thead><tr><th>Característica</th><th>Buffer</th><th>Later</th><th>Hootsuite</th></tr></thead>
+<tbody>
+<tr><td>Precio mínimo</td><td>6€/mes</td><td>25€/mes</td><td>99€/mes</td></tr>
+<tr><td>Redes soportadas</td><td>8</td><td>7</td><td>10+</td></tr>
+<tr><td>Auto-publicación</td><td>✅</td><td>✅</td><td>✅</td></tr>
+<tr><td>Calendario visual</td><td>Básico</td><td>⭐ Excelente</td><td>Bueno</td></tr>
+<tr><td>IA integrada</td><td>Básica</td><td>Intermedia</td><td>Avanzada</td></tr>
+<tr><td>Analytics</td><td>Básicos</td><td>Avanzados</td><td>⭐ Completos</td></tr>
+<tr><td>Curva aprendizaje</td><td>⭐ Muy fácil</td><td>Fácil</td><td>Media</td></tr>
+<tr><td>Nº usuarios</td><td>1</td><td>1</td><td>Ilimitados</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight">
+<strong>💡 Recomendación Neuriax:</strong> Para la mayoría de PYMEs, <strong>Later</strong> ofrece el mejor equilibrio entre funcionalidad, precio y facilidad. Si presupuesto es clave, <strong>Buffer</strong> gratis es un gran punto de partida.
+</div>
+</section>
+
+<section class="section" id="ia">
+<h2>🤖 3. IA para Crear Contenido</h2>
+<div class="card">
+<h3>Herramientas de IA para RRSS</h3>
+<table>
+<thead><tr><th>Herramienta</th><th>Para qué</th><th>Precio</th></tr></thead>
+<tbody>
+<tr><td>ChatGPT / Claude</td><td>Textos, ideas, captions, hilos, carruseles</td><td>Gratis / 20€/mes</td></tr>
+<tr><td>Canva AI</td><td>Imágenes, diseños, presentaciones</td><td>Gratis / 12€/mes</td></tr>
+<tr><td>Opus Clip</td><td>Cortar vídeos largos en clips virales</td><td>Desde 15€/mes</td></tr>
+<tr><td>ElevenLabs</td><td>Narración con voz IA para vídeos</td><td>Desde 5€/mes</td></tr>
+<tr><td>Predis.ai</td><td>Crear posts completos con IA (texto + diseño)</td><td>Desde 29€/mes</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>📝 Workflow de creación con IA (30 minutos = 1 semana de contenido)</h3>
+<ol>
+<li><strong>Genera ideas (5 min):</strong> Pide a ChatGPT "Dame 7 ideas de posts para [tu sector] esta semana. Mezcla educativo, entretenimiento y promocional"</li>
+<li><strong>Escribe los textos (10 min):</strong> Para cada idea, pide el caption adaptado a cada red. Edita el tono a tu marca</li>
+<li><strong>Crea diseños (10 min):</strong> En Canva, usa plantillas de marca y genera variantes con IA</li>
+<li><strong>Programa todo (5 min):</strong> Sube los 7 posts a Later/Buffer y asigna fecha y hora</li>
+</ol>
+</div>
+
+<div class="card">
+<h3>🧠 Prompts que funcionan</h3>
+<ul>
+<li><strong>Carrusel educativo:</strong> "Crea un carrusel de 8 slides sobre [tema]. Cada slide: título corto + texto de 2 líneas. Tono profesional pero cercano."</li>
+<li><strong>Caption Instagram:</strong> "Escribe un caption de Instagram sobre [tema] para [sector]. Incluye hook en primera línea, historia/ejemplo, CTA al final. 3-5 hashtags relevantes."</li>
+<li><strong>Hilo LinkedIn:</strong> "Crea un hilo de 5 posts para LinkedIn sobre [tema]. Primer post = hook potente. Usa datos y ejemplos. CTA en el último."</li>
+<li><strong>Vídeo corto:</strong> "Escribe un guión de 30 segundos para Reels/TikTok sobre [tema]. Estructura: gancho (3s) + contenido (22s) + CTA (5s)."</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="automatizar">
+<h2>⚡ 4. Automatizar la Publicación</h2>
+<div class="card">
+<h3>Nivel 1: Programación básica</h3>
+<ul>
+<li>Crea contenido una vez por semana (sesión de 1 hora)</li>
+<li>Programa todos los posts en tu herramienta elegida</li>
+<li>Configura <strong>mejores horarios</strong> según tu audiencia</li>
+<li>Activa <strong>auto-publicación</strong> (sin notificación para publicar)</li>
+</ul>
+</div>
+<div class="card">
+<h3>Nivel 2: Automatización intermedia</h3>
+<ul>
+<li><strong>RSS a RRSS:</strong> Publica automáticamente cuando se publica un nuevo artículo en tu blog</li>
+<li><strong>Republica contenido evergreen:</strong> Configura Buffer para reciclar los mejores posts</li>
+<li><strong>Cross-posting:</strong> Publica en Instagram → se comparte automáticamente a Facebook, Pinterest</li>
+<li><strong>Auto-respuestas:</strong> Configura respuestas automáticas a mensajes frecuentes (ManyChat)</li>
+</ul>
+</div>
+<div class="card">
+<h3>Nivel 3: Automatización avanzada</h3>
+<ul>
+<li><strong>Zapier + OpenAI:</strong> Genera borradores de posts automáticamente cada semana</li>
+<li><strong>Social listening automático:</strong> Recibe alertas cuando mencionan tu marca o competencia</li>
+<li><strong>Lead gen automatizado:</strong> Cuando alguien comenta en un post → se añade a tu CRM → secuencia de email</li>
+<li><strong>Informes automáticos:</strong> Recibe cada lunes un resumen de métricas por email</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="calendario">
+<h2>📅 5. Calendario Editorial Semanal</h2>
+<p>Un calendario equilibrado para PYMEs que publican 5 veces por semana:</p>
+<div class="calendar">
+<div class="day-header">LUN</div>
+<div class="day-header">MAR</div>
+<div class="day-header">MIÉ</div>
+<div class="day-header">JUE</div>
+<div class="day-header">VIE</div>
+<div class="day-header">SÁB</div>
+<div class="day-header">DOM</div>
+
+<div class="day active"><strong>1</strong>📚 Educativo<br>Tip/Consejo</div>
+<div class="day active"><strong>2</strong>🎬 Vídeo<br>Reel/Short</div>
+<div class="day active"><strong>3</strong>💬 Interacción<br>Encuesta/Pregunta</div>
+<div class="day active"><strong>4</strong>⭐ Social Proof<br>Caso de éxito</div>
+<div class="day active"><strong>5</strong>🎯 Promocional<br>CTA/Oferta</div>
+<div class="day"><strong>6</strong>📖 Story<br>Tras cámaras</div>
+<div class="day"><strong>7</strong>🔄 Repurpose<br>Mejor post</div>
+</div>
+
+<div class="card">
+<h3>📋 Distribución de contenido por tipo</h3>
+<table>
+<thead><tr><th>Tipo</th><th>%</th><th>Ejemplo</th></tr></thead>
+<tbody>
+<tr><td>📚 Educativo</td><td>40%</td><td>Tips, tutoriales, datos del sector</td></tr>
+<tr><td>💬 Engagement</td><td>20%</td><td>Encuestas, preguntas, debates</td></tr>
+<tr><td>⭐ Social Proof</td><td>20%</td><td>Testimonios, casos de éxito, resultados</td></tr>
+<tr><td>🎯 Promocional</td><td>15%</td><td>Ofertas, servicios, CTA directos</td></tr>
+<tr><td>🎭 Marca personal</td><td>5%</td><td>Tras cámaras, equipo, valores</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section class="section" id="metricas">
+<h2>📊 6. Métricas a Seguir</h2>
+<div class="card">
+<h3>KPIs esenciales por red</h3>
+<table>
+<thead><tr><th>Métrica</th><th>Qué mide</th><th>Objetivo</th></tr></thead>
+<tbody>
+<tr><td><strong>Alcance</strong></td><td>A cuántas personas llega tu contenido</td><td>Crecimiento mensual &gt;5%</td></tr>
+<tr><td><strong>Engagement Rate</strong></td><td>% de interacción vs alcance</td><td>&gt;3% Instagram, &gt;1% LinkedIn</td></tr>
+<tr><td><strong>Clics al enlace</strong></td><td>Tráfico real a tu web</td><td>Crecimiento mensual &gt;10%</td></tr>
+<tr><td><strong>Seguidores netos</strong></td><td>Nuevos - perdidos por periodo</td><td>Crecimiento sostenido</td></tr>
+<tr><td><strong>Conversiones</strong></td><td>Leads/ventas generados desde RRSS</td><td>Tu objetivo de negocio</td></tr>
+<tr><td><strong>Tiempo de respuesta</strong></td><td>Cuánto tardas en responder DMs</td><td>&lt;2 horas en horario laboral</td></tr>
+<tr><td><strong>Mejor contenido</strong></td><td>Qué tipo de posts funcionan mejor</td><td>Replicar los top performers</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="highlight">
+<strong>📈 Regla de oro:</strong> Revisa métricas <strong>una vez por semana</strong> (no cada día). Analiza qué funcionó, qué no, y ajusta la estrategia de la semana siguiente. La consistencia supera a la perfección.
+</div>
+</section>
+
+<section class="section" id="workflow">
+<h2>🔄 7. Workflow Semanal Completo</h2>
+<div class="card">
+<h3>📋 Lunes (60 min) — Sesión de creación</h3>
+<ol>
+<li><strong>10 min:</strong> Revisa métricas de la semana anterior</li>
+<li><strong>10 min:</strong> Genera ideas con IA adaptadas a tendencias actuales</li>
+<li><strong>20 min:</strong> Escribe textos para 5-7 publicaciones</li>
+<li><strong>15 min:</strong> Crea o ajusta diseños en Canva</li>
+<li><strong>5 min:</strong> Programa todo en Later/Buffer</li>
+</ol>
+</div>
+<div class="card">
+<h3>📋 Diario (10 min) — Engagement</h3>
+<ol>
+<li><strong>5 min:</strong> Responder comentarios y mensajes directos</li>
+<li><strong>5 min:</strong> Interaccionar con cuentas relevantes de tu sector</li>
+</ol>
+</div>
+<div class="card">
+<h3>📋 Viernes (15 min) — Review</h3>
+<ol>
+<li><strong>5 min:</strong> Verificar que todo se publicó correctamente</li>
+<li><strong>5 min:</strong> Anotar ideas para la semana siguiente</li>
+<li><strong>5 min:</strong> Guardar contenido inspirador de otros perfiles</li>
+</ol>
+</div>
+<div class="stat-grid">
+<div class="stat"><div class="number">2h</div><div class="label">por semana (vs 8-10h manual)</div></div>
+<div class="stat"><div class="number">5-7</div><div class="label">publicaciones por semana</div></div>
+<div class="stat"><div class="number">100%</div><div class="label">consistencia garantizada</div></div>
+</div>
+</section>
+
+<section class="cta-box">
+<h2>📱 ¿Quieres poner tus RRSS en piloto automático?</h2>
+<p>Configuramos tu sistema completo de redes sociales automatizadas: herramientas, IA, calendario y métricas. En 1 semana, listo.</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-white">📞 Reservar Consulta Gratuita</a>
+<a href="https://neuriax.com" class="btn btn-outline">🌐 Visitar Neuriax</a>
+</section>
+
+</div>
+
+<footer>
+<p>© 2026 Neuriax — <a href="https://neuriax.com">neuriax.com</a></p>
+<p style="margin-top:.5rem;font-size:.8rem">Guía 12 de la serie "Automatización para PYMEs" · Todos los derechos reservados</p>
+</footer>
+</body>
+</html>

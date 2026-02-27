@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía 13: Mapa Tecnológico para PYMEs 2026 | Neuriax</title>
+<meta name="description" content="Stack tecnológico completo por presupuesto para PYMEs. Descubre las herramientas esenciales para web, email, CRM, contabilidad, RRSS y automatización.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cyan:#06b6d4;--blue:#3b82f6;--bg-dark:#0f172a;--bg-card:#1e293b;--text:#e2e8f0;--text-muted:#94a3b8;--accent-gradient:linear-gradient(135deg,#06b6d4,#3b82f6)}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-dark);color:var(--text);line-height:1.7;min-height:100vh}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}a:hover{color:var(--blue)}
+.container{max-width:900px;margin:0 auto;padding:2rem 1.5rem}
+header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-bottom:2px solid var(--cyan);padding:1.5rem 0;text-align:center;position:sticky;top:0;z-index:100;backdrop-filter:blur(10px)}
+.logo{font-size:1.8rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-0.5px}
+.logo span{font-weight:300}
+.badge{display:inline-block;background:var(--accent-gradient);color:#fff;font-size:.75rem;font-weight:700;padding:.25rem .75rem;border-radius:50px;margin-bottom:.5rem;text-transform:uppercase;letter-spacing:1px}
+.hero{text-align:center;padding:4rem 1.5rem;background:radial-gradient(ellipse at center,rgba(6,182,212,.08) 0%,transparent 70%)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;margin:.5rem 0 1rem;line-height:1.2}
+.hero h1 .gradient{background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-muted);max-width:650px;margin:0 auto}
+.section{margin:3rem 0}
+.section h2{font-size:1.6rem;font-weight:700;margin-bottom:1.5rem;padding-bottom:.5rem;border-bottom:2px solid rgba(6,182,212,.3);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.section h3{font-size:1.2rem;font-weight:600;margin:1.5rem 0 .75rem;color:var(--cyan)}
+.card{background:var(--bg-card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:1.75rem;margin:1.25rem 0;transition:border-color .3s}
+.card:hover{border-color:rgba(6,182,212,.3)}
+.card h3{margin-top:0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin:1.5rem 0}
+.stat{background:var(--bg-card);border-radius:12px;padding:1.5rem;text-align:center;border:1px solid rgba(6,182,212,.15)}
+.stat .number{font-size:2.2rem;font-weight:800;background:var(--accent-gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.9rem;color:var(--text-muted);margin-top:.25rem}
+ul,ol{padding-left:1.5rem;margin:.75rem 0}
+li{margin:.5rem 0;color:var(--text-muted)}
+li strong{color:var(--text)}
+table{width:100%;border-collapse:collapse;margin:1.25rem 0;font-size:.88rem}
+thead{background:rgba(6,182,212,.12)}
+th,td{padding:.75rem .65rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.06)}
+th{font-weight:700;color:var(--cyan);font-size:.8rem;text-transform:uppercase;letter-spacing:.5px}
+td{color:var(--text-muted)}
+.highlight{background:rgba(6,182,212,.06);border-left:4px solid var(--cyan);padding:1.25rem 1.5rem;border-radius:0 8px 8px 0;margin:1.5rem 0;font-size:.95rem}
+.highlight strong{color:var(--cyan)}
+.tier{border-radius:16px;padding:2rem;margin:1.5rem 0;border:2px solid rgba(255,255,255,.08)}
+.tier-free{background:linear-gradient(135deg,rgba(34,197,94,.06),rgba(6,182,212,.06));border-color:rgba(34,197,94,.3)}
+.tier-mid{background:linear-gradient(135deg,rgba(6,182,212,.06),rgba(59,130,246,.06));border-color:rgba(6,182,212,.3)}
+.tier-pro{background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(139,92,246,.06));border-color:rgba(139,92,246,.3)}
+.tier-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+.tier-title{font-size:1.3rem;font-weight:800}
+.tier-price{font-size:1.4rem;font-weight:800;padding:.25rem 1rem;border-radius:8px}
+.tier-free .tier-price{background:rgba(34,197,94,.15);color:#22c55e}
+.tier-mid .tier-price{background:rgba(6,182,212,.15);color:#06b6d4}
+.tier-pro .tier-price{background:rgba(139,92,246,.15);color:#8b5cf6}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.5rem 0}
+.category-card{background:var(--bg-card);border-radius:12px;padding:1.5rem;border:1px solid rgba(255,255,255,.06)}
+.category-card h4{font-size:1.05rem;margin-bottom:.75rem;color:var(--cyan);display:flex;align-items:center;gap:.4rem}
+.cta-box{background:var(--accent-gradient);border-radius:16px;padding:2.5rem;text-align:center;margin:3rem 0}
+.cta-box h2{color:#fff;font-size:1.6rem;margin-bottom:.5rem;border:none;padding:0;justify-content:center}
+.cta-box p{color:rgba(255,255,255,.85);margin-bottom:1.5rem}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;transition:all .3s;cursor:pointer;border:none;text-decoration:none}
+.btn-white{background:#fff;color:var(--bg-dark)}.btn-white:hover{background:#e2e8f0;color:var(--bg-dark)}
+.btn-outline{border:2px solid #fff;color:#fff;background:transparent;margin-left:.5rem}.btn-outline:hover{background:rgba(255,255,255,.1)}
+.btn-print{background:var(--bg-card);color:var(--text);border:1px solid rgba(255,255,255,.1);padding:.6rem 1.2rem;font-size:.85rem;border-radius:6px;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin:1rem 0}
+.btn-print:hover{border-color:var(--cyan)}
+footer{text-align:center;padding:2rem;color:var(--text-muted);font-size:.85rem;border-top:1px solid rgba(255,255,255,.06);margin-top:3rem}
+.toc{background:var(--bg-card);border-radius:12px;padding:1.75rem;margin:2rem 0;border:1px solid rgba(6,182,212,.15)}
+.toc h3{color:var(--cyan);margin:0 0 1rem;font-size:1.1rem}
+.toc ol{margin:0}.toc li{margin:.35rem 0}.toc a{color:var(--text-muted);font-size:.95rem}.toc a:hover{color:var(--cyan)}
+.overflow-x{overflow-x:auto}
+@media(max-width:640px){.container{padding:1.25rem 1rem}.hero{padding:2.5rem 1rem}.hero h1{font-size:1.7rem}.stat-grid{grid-template-columns:1fr}.category-grid{grid-template-columns:1fr}.tier{padding:1.25rem}.btn{display:block;margin:.5rem 0;text-align:center}.btn-outline{margin-left:0}.cta-box{padding:1.75rem}table{font-size:.8rem}th,td{padding:.5rem .4rem}}
+@media print{body{background:#fff;color:#111}header{position:static;border-bottom:2px solid #06b6d4;background:#fff}.logo{-webkit-text-fill-color:#06b6d4}.hero{background:none;padding:2rem 0}.card,.stat,.toc,.tier,.category-card{border:1px solid #ddd;break-inside:avoid}.tier-free{background:#f0fdf4;border-color:#22c55e}.tier-mid{background:#f0fdfa;border-color:#06b6d4}.tier-pro{background:#f5f3ff;border-color:#8b5cf6}.highlight{border-left:4px solid #06b6d4;background:#f0fdfa}.cta-box{background:#f0fdfa;border:2px solid #06b6d4}.cta-box h2,.cta-box p{color:#111}.btn-print{display:none}a{color:#06b6d4}footer{border-top:1px solid #ddd}.stat .number{-webkit-text-fill-color:#06b6d4}th{color:#06b6d4}td,li,p,.hero p,.stat .label{color:#333}}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">Neuriax<span>.com</span></div>
+</header>
+
+<section class="hero">
+<span class="badge">Guía 13 de 15</span>
+<h1>🗺️ Mapa Tecnológico para <span class="gradient">PYMEs 2026</span></h1>
+<p>El stack tecnológico perfecto para tu negocio según tu presupuesto. Desde 0€ hasta configuraciones profesionales completas.</p>
+<button class="btn-print" onclick="window.print()">🖨️ Descargar PDF</button>
+</section>
+
+<div class="container">
+
+<nav class="toc">
+<h3>📑 Índice de Contenidos</h3>
+<ol>
+<li><a href="#por-que">Por qué necesitas un mapa tecnológico</a></li>
+<li><a href="#tier-0">Stack Gratuito (0€/mes)</a></li>
+<li><a href="#tier-500">Stack Intermedio (500€/mes)</a></li>
+<li><a href="#tier-2000">Stack Profesional (2.000€/mes)</a></li>
+<li><a href="#categorias">Herramientas por categoría</a></li>
+<li><a href="#elegir">Cómo elegir tu stack</a></li>
+<li><a href="#errores">Errores comunes</a></li>
+</ol>
+</nav>
+
+<section class="section" id="por-que">
+<h2>🎯 1. Por Qué Necesitas un Mapa Tecnológico</h2>
+<div class="stat-grid">
+<div class="stat"><div class="number">12-15</div><div class="label">herramientas usa una PYME media</div></div>
+<div class="stat"><div class="number">40%</div><div class="label">están duplicadas o infrautilizadas</div></div>
+<div class="stat"><div class="number">350€</div><div class="label">gasto medio mensual en SaaS</div></div>
+</div>
+<div class="card">
+<p>Un <strong>mapa tecnológico</strong> es el plano de todas las herramientas digitales que usa tu negocio, organizadas por función. Sin él:</p>
+<ul>
+<li>Pagas por herramientas que <strong>hacen lo mismo</strong></li>
+<li>Tus datos están <strong>dispersos</strong> en 10 sitios distintos</li>
+<li>No puedes <strong>automatizar</strong> porque nada está conectado</li>
+<li>Cuando creces, tu stack <strong>no escala</strong> contigo</li>
+<li>Pierdes tiempo <strong>cambiando entre herramientas</strong> constantemente</li>
+</ul>
+</div>
+</section>
+
+<section class="section" id="tier-0">
+<h2>🆓 2. Stack Gratuito (0€/mes)</h2>
+<div class="tier tier-free">
+<div class="tier-header">
+<div class="tier-title">🌱 Stack "Arranque sin inversión"</div>
+<div class="tier-price">0€/mes</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Perfecto para: autónomos que empiezan, validación de negocio, primeros meses.</p>
+<div class="overflow-x">
+<table>
+<thead><tr><th>Categoría</th><th>Herramienta</th><th>Plan Gratis Incluye</th></tr></thead>
+<tbody>
+<tr><td>🌐 Web</td><td>Carrd / Google Sites</td><td>Landing page básica con dominio subdominio</td></tr>
+<tr><td>📧 Email Marketing</td><td>Mailchimp / Brevo</td><td>Hasta 300-500 envíos/día, formularios</td></tr>
+<tr><td>👥 CRM</td><td>HubSpot CRM Free</td><td>Ilimitados contactos, pipeline básico</td></tr>
+<tr><td>📊 Contabilidad</td><td>Holded Free / Wave</td><td>Facturación básica, hasta 20 facturas/mes</td></tr>
+<tr><td>📱 RRSS</td><td>Buffer Free</td><td>3 canales, 10 posts programados</td></tr>
+<tr><td>⚡ Automatización</td><td>Make Free</td><td>1.000 operaciones/mes, 2 escenarios</td></tr>
+<tr><td>💬 Chat/Soporte</td><td>Tawk.to</td><td>Chat en vivo ilimitado, 100% gratis</td></tr>
+<tr><td>📁 Almacenamiento</td><td>Google Drive</td><td>15 GB gratis</td></tr>
+<tr><td>📋 Gestión tareas</td><td>Notion / Trello</td><td>Proyectos ilimitados para uso personal</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="highlight">
+<strong>💡 Con 0€</strong> puedes tener una presencia digital básica funcional. No será perfecta, pero te permite <strong>empezar a vender y validar</strong> tu modelo de negocio sin inversión tecnológica.
+</div>
+</section>
+
+<section class="section" id="tier-500">
+<h2>🚀 3. Stack Intermedio (500€/mes)</h2>
+<div class="tier tier-mid">
+<div class="tier-header">
+<div class="tier-title">📈 Stack "Crecimiento activo"</div>
+<div class="tier-price">~500€/mes</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Perfecto para: PYMEs facturando 3.000-15.000€/mes, 1-5 empleados, crecimiento estable.</p>
+<div class="overflow-x">
+<table>
+<thead><tr><th>Categoría</th><th>Herramienta</th><th>Precio</th><th>Incluye</th></tr></thead>
+<tbody>
+<tr><td>🌐 Web</td><td>WordPress + Hosting</td><td>~30€/mes</td><td>Web profesional, blog, SEO, plugins</td></tr>
+<tr><td>📧 Email</td><td>Brevo Premium</td><td>~25€/mes</td><td>20.000 emails/mes, automatización, landing pages</td></tr>
+<tr><td>👥 CRM</td><td>HubSpot Starter</td><td>~45€/mes</td><td>CRM completo, secuencias, reporting</td></tr>
+<tr><td>📊 Contabilidad</td><td>Holded Premium</td><td>~40€/mes</td><td>Facturación ilimitada, contabilidad, SII, nóminas</td></tr>
+<tr><td>📱 RRSS</td><td>Later Growth</td><td>~40€/mes</td><td>Todas las redes, analytics, calendario visual</td></tr>
+<tr><td>⚡ Automatización</td><td>Make Pro</td><td>~16€/mes</td><td>10.000 ops/mes, escenarios ilimitados</td></tr>
+<tr><td>💬 Chatbot</td><td>Tidio / Crisp</td><td>~29€/mes</td><td>Chatbot con IA, multicanal, base de conocimiento</td></tr>
+<tr><td>📞 VoIP</td><td>Ringover / Aircall</td><td>~40€/mes</td><td>Centralita virtual, grabación, IVR</td></tr>
+<tr><td>💳 Pagos</td><td>Stripe</td><td>% transacción</td><td>Cobros online, suscripciones, facturas</td></tr>
+<tr><td>📋 Gestión</td><td>Notion Team</td><td>~10€/mes</td><td>Wiki, proyectos, bases de datos colaborativas</td></tr>
+<tr><td>🔒 Contraseñas</td><td>1Password</td><td>~8€/mes</td><td>Gestión segura de credenciales del equipo</td></tr>
+<tr><td>☁️ Almacenamiento</td><td>Google Workspace</td><td>~12€/mes</td><td>Email profesional, 30GB, Drive, Meet</td></tr>
+<tr><td><strong>TOTAL</strong></td><td></td><td><strong>~295-500€</strong></td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="section" id="tier-2000">
+<h2>🏢 4. Stack Profesional (2.000€/mes)</h2>
+<div class="tier tier-pro">
+<div class="tier-header">
+<div class="tier-title">⚡ Stack "Escala sin límites"</div>
+<div class="tier-price">~2.000€/mes</div>
+</div>
+<p style="color:var(--text-muted);margin-bottom:1rem">Perfecto para: empresas facturando 30.000€+/mes, 5-25 empleados, múltiples procesos automatizados.</p>
+<div class="overflow-x">
+<table>
+<thead><tr><th>Categoría</th><th>Herramienta</th><th>Precio</th><th>Incluye</th></tr></thead>
+<tbody>
+<tr><td>🌐 Web</td><td>Next.js + Vercel Pro</td><td>~50€/mes</td><td>Web ultra-rápida, SSR, analytics, A/B testing</td></tr>
+<tr><td>📧 Email</td><td>ActiveCampaign Pro</td><td>~150€/mes</td><td>Automatización avanzada, scoring, CRM integrado</td></tr>
+<tr><td>👥 CRM</td><td>HubSpot Professional</td><td>~450€/mes</td><td>Pipeline avanzado, workflows, reporting custom</td></tr>
+<tr><td>📊 Contabilidad</td><td>Holded + A3 / Sage</td><td>~100€/mes</td><td>Contabilidad completa, multi-empresa, BI</td></tr>
+<tr><td>📱 RRSS</td><td>Hootsuite Professional</td><td>~100€/mes</td><td>Social listening, equipo, aprobaciones, analytics</td></tr>
+<tr><td>⚡ Automatización</td><td>Make Teams + n8n</td><td>~100€/mes</td><td>100.000+ ops, IA integrada, webhooks, API custom</td></tr>
+<tr><td>🤖 IA</td><td>OpenAI API + Anthropic</td><td>~200€/mes</td><td>Chatbot avanzado, generación de contenido, análisis</td></tr>
+<tr><td>💬 Soporte</td><td>Intercom / Zendesk</td><td>~200€/mes</td><td>Help desk completo, IA, base conocimiento, tickets</td></tr>
+<tr><td>📊 Analytics</td><td>Mixpanel / Amplitude</td><td>~150€/mes</td><td>Product analytics, funnels, cohorts, predicciones</td></tr>
+<tr><td>🔐 Seguridad</td><td>Cloudflare Pro + Vault</td><td>~50€/mes</td><td>WAF, DDoS, SSL, gestión de secretos</td></tr>
+<tr><td>📋 Gestión</td><td>ClickUp / Monday Business</td><td>~100€/mes</td><td>PM avanzado, time tracking, dashboards, OKRs</td></tr>
+<tr><td>💰 BI</td><td>Metabase / Looker</td><td>~100€/mes</td><td>Dashboards, informes automatizados, data warehouse</td></tr>
+<tr><td><strong>TOTAL</strong></td><td></td><td><strong>~1.750-2.200€</strong></td><td></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+
+<section class="section" id="categorias">
+<h2>📂 5. Herramientas por Categoría — Guía Rápida</h2>
+
+<div class="category-grid">
+<div class="category-card">
+<h4>🌐 Web</h4>
+<ul>
+<li><strong>Gratis:</strong> Carrd, Google Sites</li>
+<li><strong>Medio:</strong> WordPress, Webflow</li>
+<li><strong>Premium:</strong> Next.js, headless CMS</li>
+</ul>
+</div>
+<div class="category-card">
+<h4>📧 Email Marketing</h4>
+<ul>
+<li><strong>Gratis:</strong> Mailchimp, Brevo</li>
+<li><strong>Medio:</strong> Brevo Premium, ConvertKit</li>
+<li><strong>Premium:</strong> ActiveCampaign, Klaviyo</li>
+</ul>
+</div>
+<div class="category-card">
+<h4>👥 CRM</h4>
+<ul>
+<li><strong>Gratis:</strong> HubSpot Free, Notion</li>
+<li><strong>Medio:</strong> HubSpot Starter, Pipedrive</li>
+<li><strong>Premium:</strong> HubSpot Pro, Salesforce</li>
+</ul>
+</div>
+<div class="category-card">
+<h4>📊 Contabilidad</h4>
+<ul>
+<li><strong>Gratis:</strong> Holded Free, Wave</li>
+<li><strong>Medio:</strong> Holded Premium, Quaderno</li>
+<li><strong>Premium:</strong> Sage, A3, Contasol</li>
+</ul>
+</div>
+<div class="category-card">
+<h4>📱 Redes Sociales</h4>
+<ul>
+<li><strong>Gratis:</strong> Buffer Free, nativo</li>
+<li><strong>Medio:</strong> Later, Metricool</li>
+<li><strong>Premium:</strong> Hootsuite, Sprout Social</li>
+</ul>
+</div>
+<div class="category-card">
+<h4>⚡ Automatización</h4>
+<ul>
+<li><strong>Gratis:</strong> Make Free, IFTTT</li>
+<li><strong>Medio:</strong> Make Pro, Zapier</li>
+<li><strong>Premium:</strong> n8n, Make Teams, custom</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section class="section" id="elegir">
+<h2>🧭 6. Cómo Elegir Tu Stack</h2>
+<div class="card">
+<h3>Paso 1: Evalúa tu situación</h3>
+<ul>
+<li><strong>Facturación mensual:</strong> Define tu presupuesto tecnológico (5-10% de facturación)</li>
+<li><strong>Tamaño de equipo:</strong> 1 persona vs equipo cambia las necesidades</li>
+<li><strong>Prioridades:</strong> ¿Vender más? ¿Ahorrar tiempo? ¿Mejorar servicio al cliente?</li>
+<li><strong>Habilidades técnicas:</strong> ¿Puedes configurar herramientas tú mismo?</li>
+</ul>
+</div>
+<div class="card">
+<h3>Paso 2: Prioriza por impacto</h3>
+<table>
+<thead><tr><th>Prioridad</th><th>Herramienta</th><th>Por qué</th></tr></thead>
+<tbody>
+<tr><td>1️⃣</td><td>Web profesional</td><td>Tu escaparate 24/7, base de todo</td></tr>
+<tr><td>2️⃣</td><td>Email Marketing</td><td>Canal con mejor ROI (42:1)</td></tr>
+<tr><td>3️⃣</td><td>CRM</td><td>No perder oportunidades de venta</td></tr>
+<tr><td>4️⃣</td><td>Facturación</td><td>Cobrar más rápido y sin errores</td></tr>
+<tr><td>5️⃣</td><td>Automatización</td><td>Conectar todo y ahorrar horas</td></tr>
+<tr><td>6️⃣</td><td>RRSS</td><td>Visibilidad y marca</td></tr>
+</tbody>
+</table>
+</div>
+<div class="card">
+<h3>Paso 3: Principio de integración</h3>
+<p>La regla más importante al elegir herramientas:</p>
+<div class="highlight">
+<strong>🔗 Elige herramientas que se conecten entre sí.</strong> Una herramienta "peor" que se integra con tu stack vale más que la "mejor" que funciona aislada. Comprueba siempre que tenga API o integración con Zapier/Make.
+</div>
+</div>
+</section>
+
+<section class="section" id="errores">
+<h2>⚠️ 7. Errores Comunes</h2>
+<div class="card">
+<ul>
+<li><strong>Comprar herramientas que no necesitas (aún):</strong> Empieza con lo mínimo y escala cuando lo necesites, no antes</li>
+<li><strong>No cancelar suscripciones que no usas:</strong> Audita tus herramientas cada 3 meses. Si no la usas, cancélala</li>
+<li><strong>Elegir la más barata siempre:</strong> A veces 20€/mes más te ahorran 10 horas de trabajo manual</li>
+<li><strong>No formar al equipo:</strong> De nada sirve tener HubSpot si nadie sabe usarlo correctamente</li>
+<li><strong>Datos en silos:</strong> Si tus herramientas no están conectadas, pierdes el 80% de su potencial</li>
+<li><strong>Migrar todo a la vez:</strong> Cambia una herramienta a la vez. Nunca migres todo el stack de golpe</li>
+<li><strong>Ignorar la seguridad:</strong> Contraseñas compartidas por WhatsApp, sin 2FA, sin backups — es cuestión de tiempo</li>
+<li><strong>No tener un "dueño" del stack:</strong> Alguien debe ser responsable de mantener y actualizar las herramientas</li>
+</ul>
+</div>
+
+<div class="stat-grid">
+<div class="stat"><div class="number">5-10%</div><div class="label">de facturación = presupuesto tech ideal</div></div>
+<div class="stat"><div class="number">3 meses</div><div class="label">para auditar y limpiar herramientas</div></div>
+<div class="stat"><div class="number">1 semana</div><div class="label">para implementar cada herramienta nueva</div></div>
+</div>
+</section>
+
+<section class="cta-box">
+<h2>🗺️ ¿Necesitas ayuda para diseñar tu stack tecnológico?</h2>
+<p>Analizamos tu negocio y te recomendamos las herramientas exactas que necesitas, configuradas e integradas. Sin pagar de más, sin complicaciones.</p>
+<a href="https://calendly.com/neuriax/30min" class="btn btn-white">📞 Reservar Consulta Gratuita</a>
+<a href="https://neuriax.com" class="btn btn-outline">🌐 Visitar Neuriax</a>
+</section>
+
+</div>
+
+<footer>
+<p>© 2026 Neuriax — <a href="https://neuriax.com">neuriax.com</a></p>
+<p style="margin-top:.5rem;font-size:.8rem">Guía 13 de la serie "Automatización para PYMEs" · Todos los derechos reservados</p>
+</footer>
+</body>
+</html>
