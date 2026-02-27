@@ -502,7 +502,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json(
-      { error: 'Error al procesar la solicitud' },
+      { error: 'Error al procesar la solicitud', debug: String(error) },
       { status: 500 }
     );
   }
