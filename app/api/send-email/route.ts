@@ -53,16 +53,14 @@ export async function POST(request: NextRequest) {
           );
         }
 
-        // Guardar en Supabase (tabla contacts)
-        const { error: dbError } = await supabase.from('contacts').insert({
+        // Guardar en Supabase (tabla contact_forms)
+        const demoMsg = `DEMO LANDING REQUEST\n\nEmpresa: ${nombreEmpresa}\nSector: ${sector}\nObjetivo: ${objetivo}\nServicio destacado: ${servicioDestacado}\nColor preferido: ${colorPreferido || 'No especificado'}\nWeb actual: ${urlActual || 'No tiene'}\nCompetencia: ${competencia || 'No especificada'}\nComentarios: ${comentarios || 'Sin comentarios'}`;
+
+        const { error: dbError } = await supabase.from('contact_forms').insert({
           nombre,
           email,
           telefono: telefono || null,
-          empresa: nombreEmpresa,
-          sector: sector,
-          mensaje: `DEMO LANDING REQUEST\n\nObjetivo: ${objetivo}\nServicio destacado: ${servicioDestacado}\nColor preferido: ${colorPreferido || 'No especificado'}\nWeb actual: ${urlActual || 'No tiene'}\nCompetencia: ${competencia || 'No especificada'}\nComentarios: ${comentarios || 'Sin comentarios'}`,
-          tipo: 'demo-landing',
-          leido: false
+          mensaje: demoMsg,
         });
 
         if (dbError) {
@@ -259,16 +257,21 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      // Guardar en Supabase (tabla contacts)
-      const { error: dbError } = await supabase.from('contacts').insert({
+      // Guardar en Supabase (tabla contact_forms)
+      const fullMessage = [
+        mensaje || '',
+        '',
+        `--- Datos adicionales ---`,
+        `Empresa: ${empresa || 'No especificada'}`,
+        `Sector: ${sector || 'No especificado'}`,
+        `Tipo: ${type || 'contact_form'}`,
+      ].join('\n');
+
+      const { error: dbError } = await supabase.from('contact_forms').insert({
         nombre,
         email,
         telefono: telefono || null,
-        empresa: empresa || null,
-        sector: sector || null,
-        mensaje: mensaje || null,
-        tipo: type || 'contact_form',
-        leido: false
+        mensaje: fullMessage,
       });
 
       if (dbError) {
@@ -321,10 +324,7 @@ export async function POST(request: NextRequest) {
 
       if (emailError) {
         console.error('Error enviando email de contacto:', emailError);
-        return NextResponse.json(
-          { error: 'Error al enviar el email', details: emailError.message },
-          { status: 500 }
-        );
+        // No bloqueamos — el contacto se guardó en DB, seguimos
       }
 
       // ========== 2) EMAIL DE BIENVENIDA AL CLIENTE (Email 1 de la secuencia) ==========

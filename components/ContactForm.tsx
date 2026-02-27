@@ -20,20 +20,11 @@ const SECTORES = [
   "Otro",
 ];
 
-const TAMAÑOS = [
-  "1-5 empleados",
-  "6-20 empleados",
-  "21-50 empleados",
-  "51-200 empleados",
-  "+200 empleados",
-];
-
 const SERVICIOS = [
-  "Automatización de procesos",
   "Chatbot / Asistente virtual con IA",
+  "Automatización de procesos",
   "Desarrollo web / Landing pages",
   "CRM e integración de sistemas",
-  "Análisis de datos / Business Intelligence",
   "Marketing automatizado",
   "Otro / No estoy seguro",
 ];
@@ -44,14 +35,7 @@ const PRESUPUESTOS = [
   "2.000 € – 5.000 €",
   "5.000 € – 15.000 €",
   "+15.000 €",
-  "Prefiero hablarlo en la llamada",
-];
-
-const URGENCIAS = [
-  "Lo antes posible",
-  "En las próximas 2-4 semanas",
-  "En 1-3 meses",
-  "Estoy explorando opciones",
+  "Prefiero hablarlo",
 ];
 
 export default function ContactForm() {
@@ -60,24 +44,21 @@ export default function ContactForm() {
     nombre: "",
     email: "",
     telefono: "",
-    cargo: "",
     empresa: "",
     sector: "",
-    tamano: "",
-    webActual: "",
     servicio: "",
     presupuesto: "",
-    urgencia: "",
     mensaje: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const canGoStep2 = formData.nombre && formData.email && formData.telefono;
-  const canGoStep3 = formData.empresa && formData.sector && formData.tamano;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -94,21 +75,14 @@ export default function ContactForm() {
           empresa: formData.empresa,
           sector: formData.sector,
           mensaje: [
-            `📋 SOLICITUD COMPLETA DE EMPRESAS`,
+            `📋 SOLICITUD DESDE FORMULARIO WEB`,
             ``,
-            `👤 CONTACTO`,
-            `Cargo: ${formData.cargo || "No especificado"}`,
+            `🏢 Empresa: ${formData.empresa || "No especificada"}`,
+            `📍 Sector: ${formData.sector || "No especificado"}`,
+            `🎯 Servicio: ${formData.servicio || "No especificado"}`,
+            `💰 Presupuesto: ${formData.presupuesto || "No especificado"}`,
             ``,
-            `🏢 EMPRESA`,
-            `Tamaño: ${formData.tamano}`,
-            `Web actual: ${formData.webActual || "No tiene"}`,
-            ``,
-            `🎯 PROYECTO`,
-            `Servicio: ${formData.servicio}`,
-            `Presupuesto: ${formData.presupuesto}`,
-            `Urgencia: ${formData.urgencia}`,
-            ``,
-            `💬 MENSAJE`,
+            `💬 Mensaje:`,
             formData.mensaje || "Sin comentarios adicionales",
           ].join("\n"),
           type: "contact_form",
@@ -120,306 +94,413 @@ export default function ContactForm() {
 
       setTimeout(() => {
         window.open(CALENDLY_URL, "_blank");
-      }, 2000);
+      }, 2500);
     } catch {
       setStatus("error");
     }
   };
 
-  // ───── Estado de éxito ─────
+  /* ─────────────────────────────────────
+     SUCCESS STATE
+     ───────────────────────────────────── */
   if (status === "success") {
     return (
-      <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg shadow-slate-900/5">
-        {/* Header éxito */}
-        <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-8 py-6 text-center">
-          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <h3 className="text-xl font-bold text-white mb-1">¡Solicitud recibida!</h3>
-          <p className="text-emerald-50 text-sm">Tu consulta está siendo analizada por nuestro equipo</p>
-        </div>
-
-        <div className="px-8 py-6 space-y-5">
-          {/* Confirmación email */}
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex items-start gap-3">
-            <svg className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            <div>
-              <p className="text-sm font-semibold text-slate-800">Email de confirmación enviado</p>
-              <p className="text-xs text-slate-500 mt-0.5">Revisa tu bandeja en <strong>{formData.email}</strong></p>
+      <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-500/10 border border-white/20">
+        {/* Glow backdrop */}
+        <div className="absolute -inset-1 bg-gradient-to-br from-emerald-400/20 via-teal-400/10 to-cyan-400/20 blur-xl" />
+        <div className="relative bg-white/95 backdrop-blur-xl rounded-3xl">
+          {/* Header éxito */}
+          <div className="relative overflow-hidden bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 px-8 py-8 text-center">
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiLz48L3N2Zz4=')] opacity-50" />
+            <div className="relative">
+              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4 ring-4 ring-white/10">
+                <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-2xl font-black text-white mb-2">¡Solicitud recibida!</h3>
+              <p className="text-emerald-50 text-sm font-medium">Nuestro equipo analizará tu caso en las próximas horas</p>
             </div>
           </div>
 
-          {/* Próximos pasos */}
-          <div className="space-y-3">
-            <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Próximos pasos</p>
-            {[
-              { icon: "📅", text: "Agenda tu llamada ahora en Calendly" },
-              { icon: "🔍", text: "Analizaremos tu operación antes de la llamada" },
-              { icon: "📊", text: "Recibirás una propuesta personalizada" },
-            ].map((paso, i) => (
-              <div key={i} className="flex items-center gap-3 text-sm text-slate-600">
-                <span className="text-base">{paso.icon}</span>
-                <span>{paso.text}</span>
+          <div className="px-8 py-6 space-y-5">
+            {/* Confirmación email */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-4 flex items-start gap-3">
+              <div className="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
               </div>
-            ))}
+              <div>
+                <p className="text-sm font-bold text-slate-800">Email de confirmación enviado</p>
+                <p className="text-xs text-slate-500 mt-0.5">Revisa tu bandeja en <strong>{formData.email}</strong></p>
+              </div>
+            </div>
+
+            {/* CTA Calendly */}
+            <a
+              href={CALENDLY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative flex items-center justify-center gap-3 w-full bg-gradient-to-r from-slate-900 to-slate-800 text-white px-6 py-4 rounded-2xl font-bold text-sm transition-all hover:shadow-xl hover:shadow-slate-900/20 hover:scale-[1.02] overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+              <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="relative z-10">Agendar llamada estratégica gratuita</span>
+            </a>
+
+            <p className="text-[11px] text-slate-400 text-center animate-pulse">
+              Redirigiendo automáticamente a Calendly...
+            </p>
           </div>
-
-          {/* CTA Calendly */}
-          <a
-            href={CALENDLY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full bg-slate-900 text-white px-6 py-4 rounded-xl font-bold text-sm transition-all hover:bg-slate-800 hover:scale-[1.01] hover:shadow-lg"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            Agendar llamada estratégica gratuita
-          </a>
-
-          <p className="text-[11px] text-slate-400 text-center">
-            Redirigiendo automáticamente a Calendly...
-          </p>
         </div>
       </div>
     );
   }
 
-  // ───── Formulario multi-step ─────
-  const inputClass = "w-full px-4 py-3 bg-slate-50/80 border border-slate-200 rounded-xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/15 transition-all text-sm";
-  const selectClass = (hasValue: boolean) =>
-    `${inputClass} ${hasValue ? "text-slate-900" : "text-slate-400"} appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg%20xmlns%3d%22http%3a%2f%2fwww.w3.org%2f2000%2fsvg%22%20width%3d%2212%22%20height%3d%2212%22%20viewBox%3d%220%200%2012%2012%22%3e%3cpath%20fill%3d%22%2394a3b8%22%20d%3d%22M2%204l4%204%204-4%22%2f%3e%3c%2fsvg%3e')] bg-[length:12px] bg-[right_16px_center] bg-no-repeat`;
-  const labelClass = "block text-xs font-semibold text-slate-700 mb-1.5 tracking-wide";
+  /* ─────────────────────────────────────
+     FORM STEPS
+     ───────────────────────────────────── */
+  const inputBase =
+    "w-full px-4 py-3.5 bg-white border-2 border-slate-200 rounded-2xl text-slate-900 placeholder-slate-400 focus:outline-none focus:border-violet-500 focus:ring-4 focus:ring-violet-500/10 transition-all duration-200 text-sm font-medium";
+  const selectBase = (hasValue: boolean) =>
+    `${inputBase} ${hasValue ? "text-slate-900" : "text-slate-400"} appearance-none bg-[url('data:image/svg+xml;charset=UTF-8,%3csvg%20xmlns%3d%22http%3a%2f%2fwww.w3.org%2f2000%2fsvg%22%20width%3d%2214%22%20height%3d%2214%22%20viewBox%3d%220%200%2024%2024%22%20fill%3d%22none%22%20stroke%3d%22%2394a3b8%22%20stroke-width%3d%222.5%22%20stroke-linecap%3d%22round%22%20stroke-linejoin%3d%22round%22%3e%3cpath%20d%3d%22M6%209l6%206%206-6%22%2f%3e%3c%2fsvg%3e')] bg-[length:14px] bg-[right_14px_center] bg-no-repeat pr-10`;
+  const labelBase = "block text-[13px] font-bold text-slate-700 mb-2 flex items-center gap-1.5";
+
+  const steps = [
+    { num: 1, label: "Contacto", icon: "👤" },
+    { num: 2, label: "Proyecto", icon: "🎯" },
+  ];
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-lg shadow-slate-900/5">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 px-8 py-5">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-base font-bold text-white">Solicitar análisis gratuito</h3>
-          <span className="text-[11px] text-slate-400 font-mono">Paso {step}/3</span>
-        </div>
-        {/* Progress bar */}
-        <div className="flex gap-1.5">
-          {[1, 2, 3].map((s) => (
-            <div
-              key={s}
-              className={`h-1 rounded-full flex-1 transition-all duration-500 ${
-                s <= step ? "bg-violet-400" : "bg-slate-700"
-              }`}
-            />
-          ))}
-        </div>
-      </div>
+    <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-violet-500/10">
+      {/* Animated glow border */}
+      <div className="absolute -inset-[1px] bg-gradient-to-br from-violet-500/30 via-indigo-500/20 to-violet-500/30 rounded-3xl" />
+      <div className="absolute -inset-[1px] bg-gradient-to-tl from-violet-500/20 via-transparent to-indigo-500/20 rounded-3xl animate-pulse-slow" />
 
-      {/* Step labels */}
-      <div className="px-8 pt-5 pb-1">
-        <div className="flex items-center gap-2 mb-1">
-          <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[11px] font-bold ${
-            step === 1 ? "bg-violet-500 text-white" : step > 1 ? "bg-emerald-100 text-emerald-600" : "bg-slate-100 text-slate-400"
-          }`}>
-            {step > 1 ? "✓" : "1"}
+      <div className="relative bg-white/[0.97] backdrop-blur-xl rounded-3xl">
+        {/* ═══ Header ═══ */}
+        <div className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 px-6 sm:px-8 py-6">
+          {/* Subtle pattern */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSIxIiBmaWxsPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDMpIi8+PC9zdmc+')] opacity-50" />
+          <div className="relative">
+            {/* Title row */}
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <h3 className="text-lg sm:text-xl font-black text-white tracking-tight">
+                  Solicitar análisis gratuito
+                </h3>
+                <p className="text-violet-300/80 text-xs mt-1 font-medium">Sin compromiso · Respuesta en menos de 24h</p>
+              </div>
+              <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+                </span>
+                <span className="text-[11px] text-emerald-300 font-bold">Online</span>
+              </div>
+            </div>
+
+            {/* Step indicators */}
+            <div className="flex gap-3">
+              {steps.map((s) => (
+                <button
+                  key={s.num}
+                  type="button"
+                  onClick={() => {
+                    if (s.num === 1) setStep(1);
+                    if (s.num === 2 && canGoStep2) setStep(2);
+                  }}
+                  className={`flex-1 flex items-center gap-2 px-3 py-2.5 rounded-xl text-left transition-all duration-300 ${
+                    step === s.num
+                      ? "bg-white/15 border border-white/20 shadow-lg shadow-black/20"
+                      : step > s.num
+                      ? "bg-emerald-500/15 border border-emerald-400/20"
+                      : "bg-white/5 border border-white/5"
+                  }`}
+                >
+                  <div
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-black transition-all ${
+                      step === s.num
+                        ? "bg-violet-500 text-white shadow-md shadow-violet-500/30"
+                        : step > s.num
+                        ? "bg-emerald-500 text-white"
+                        : "bg-white/10 text-white/40"
+                    }`}
+                  >
+                    {step > s.num ? "✓" : s.num}
+                  </div>
+                  <div>
+                    <span className={`text-[11px] font-bold block ${step >= s.num ? "text-white" : "text-white/30"}`}>
+                      {s.label}
+                    </span>
+                    <span className="text-[9px] text-white/30 block">{s.icon}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
-          <span className={`text-xs font-medium ${step === 1 ? "text-slate-900" : "text-slate-400"}`}>
-            {step === 1 ? "Tus datos de contacto" : step === 2 ? "Datos de tu empresa" : "Detalles del proyecto"}
-          </span>
         </div>
-      </div>
 
-      <form onSubmit={handleSubmit} className="px-8 pb-6">
-        {/* ═══ STEP 1: Contacto ═══ */}
-        {step === 1 && (
-          <div className="space-y-4 pt-3 animate-in fade-in duration-300">
-            <div>
-              <label className={labelClass}>Nombre completo *</label>
-              <input type="text" name="nombre" placeholder="Ej: María García López" required value={formData.nombre} onChange={handleChange} className={inputClass} />
-            </div>
-            <div>
-              <label className={labelClass}>Email corporativo *</label>
-              <input type="email" name="email" placeholder="maria@tuempresa.com" required value={formData.email} onChange={handleChange} className={inputClass} />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
+        {/* ═══ Form body ═══ */}
+        <form onSubmit={handleSubmit} className="px-6 sm:px-8 py-6">
+          {/* ═══ STEP 1: Contacto ═══ */}
+          {step === 1 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
               <div>
-                <label className={labelClass}>Teléfono *</label>
-                <input type="tel" name="telefono" placeholder="+34 6XX XXX XXX" required value={formData.telefono} onChange={handleChange} className={inputClass} />
+                <label className={labelBase}>
+                  <span className="text-violet-500">●</span> Nombre completo
+                </label>
+                <input
+                  type="text"
+                  name="nombre"
+                  placeholder="Ej: María García López"
+                  required
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  className={inputBase}
+                />
               </div>
-              <div>
-                <label className={labelClass}>Cargo en la empresa</label>
-                <input type="text" name="cargo" placeholder="Ej: Director/a" value={formData.cargo} onChange={handleChange} className={inputClass} />
-              </div>
-            </div>
 
-            <button
-              type="button"
-              onClick={() => canGoStep2 && setStep(2)}
-              disabled={!canGoStep2}
-              className="w-full bg-slate-900 text-white font-bold py-3.5 px-6 rounded-xl text-sm transition-all duration-300 hover:bg-slate-800 hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
-            >
-              Siguiente: tu empresa
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-          </div>
-        )}
-
-        {/* ═══ STEP 2: Empresa ═══ */}
-        {step === 2 && (
-          <div className="space-y-4 pt-3 animate-in fade-in duration-300">
-            <div>
-              <label className={labelClass}>Nombre de la empresa *</label>
-              <input type="text" name="empresa" placeholder="Ej: TuEmpresa S.L." required value={formData.empresa} onChange={handleChange} className={inputClass} />
-            </div>
-            <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className={labelClass}>Sector *</label>
-                <select name="sector" required value={formData.sector} onChange={handleChange} className={selectClass(!!formData.sector)}>
-                  <option value="" disabled>Seleccionar</option>
-                  {SECTORES.map((s) => (
-                    <option key={s} value={s} className="text-slate-900">{s}</option>
-                  ))}
-                </select>
+                <label className={labelBase}>
+                  <span className="text-violet-500">●</span> Email profesional
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="maria@tuempresa.com"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={inputBase}
+                />
               </div>
-              <div>
-                <label className={labelClass}>Tamaño *</label>
-                <select name="tamano" required value={formData.tamano} onChange={handleChange} className={selectClass(!!formData.tamano)}>
-                  <option value="" disabled>Empleados</option>
-                  {TAMAÑOS.map((t) => (
-                    <option key={t} value={t} className="text-slate-900">{t}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div>
-              <label className={labelClass}>Web actual <span className="text-slate-400 font-normal">(opcional)</span></label>
-              <input type="url" name="webActual" placeholder="https://tuempresa.com" value={formData.webActual} onChange={handleChange} className={inputClass} />
-            </div>
 
-            <div className="flex gap-3 mt-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className={labelBase}>
+                    <span className="text-violet-500">●</span> Teléfono
+                  </label>
+                  <input
+                    type="tel"
+                    name="telefono"
+                    placeholder="+34 6XX XXX XXX"
+                    required
+                    value={formData.telefono}
+                    onChange={handleChange}
+                    className={inputBase}
+                  />
+                </div>
+                <div>
+                  <label className={labelBase}>
+                    <span className="text-slate-300">○</span> Empresa
+                  </label>
+                  <input
+                    type="text"
+                    name="empresa"
+                    placeholder="Nombre de tu empresa"
+                    value={formData.empresa}
+                    onChange={handleChange}
+                    className={inputBase}
+                  />
+                </div>
+              </div>
+
               <button
                 type="button"
-                onClick={() => setStep(1)}
-                className="flex-shrink-0 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+                onClick={() => canGoStep2 && setStep(2)}
+                disabled={!canGoStep2}
+                className="group w-full relative bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold py-4 px-6 rounded-2xl text-sm transition-all duration-300 hover:from-violet-500 hover:to-indigo-500 hover:shadow-xl hover:shadow-violet-500/25 hover:scale-[1.02] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none flex items-center justify-center gap-2 mt-2 overflow-hidden"
               >
-                ← Atrás
-              </button>
-              <button
-                type="button"
-                onClick={() => canGoStep3 && setStep(3)}
-                disabled={!canGoStep3}
-                className="flex-1 bg-slate-900 text-white font-bold py-3.5 px-6 rounded-xl text-sm transition-all duration-300 hover:bg-slate-800 hover:shadow-lg disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                Siguiente: tu proyecto
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+                <span className="relative z-10 flex items-center gap-2">
+                  Siguiente: tu proyecto
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </button>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* ═══ STEP 3: Proyecto ═══ */}
-        {step === 3 && (
-          <div className="space-y-4 pt-3 animate-in fade-in duration-300">
-            <div>
-              <label className={labelClass}>¿Qué servicio necesitas? *</label>
-              <select name="servicio" required value={formData.servicio} onChange={handleChange} className={selectClass(!!formData.servicio)}>
-                <option value="" disabled>Seleccionar servicio</option>
-                {SERVICIOS.map((s) => (
-                  <option key={s} value={s} className="text-slate-900">{s}</option>
-                ))}
-              </select>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
+          {/* ═══ STEP 2: Proyecto ═══ */}
+          {step === 2 && (
+            <div className="space-y-4 animate-in fade-in slide-in-from-right-4 duration-300">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className={labelBase}>
+                    <span className="text-violet-500">●</span> Sector
+                  </label>
+                  <select
+                    name="sector"
+                    value={formData.sector}
+                    onChange={handleChange}
+                    className={selectBase(!!formData.sector)}
+                  >
+                    <option value="" disabled>
+                      Seleccionar sector
+                    </option>
+                    {SECTORES.map((s) => (
+                      <option key={s} value={s} className="text-slate-900">
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className={labelBase}>
+                    <span className="text-violet-500">●</span> Servicio
+                  </label>
+                  <select
+                    name="servicio"
+                    required
+                    value={formData.servicio}
+                    onChange={handleChange}
+                    className={selectBase(!!formData.servicio)}
+                  >
+                    <option value="" disabled>
+                      ¿Qué necesitas?
+                    </option>
+                    {SERVICIOS.map((s) => (
+                      <option key={s} value={s} className="text-slate-900">
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
               <div>
-                <label className={labelClass}>Presupuesto estimado</label>
-                <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} className={selectClass(!!formData.presupuesto)}>
-                  <option value="" disabled>Seleccionar rango</option>
+                <label className={labelBase}>
+                  <span className="text-slate-300">○</span> Presupuesto orientativo
+                </label>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {PRESUPUESTOS.map((p) => (
-                    <option key={p} value={p} className="text-slate-900">{p}</option>
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, presupuesto: p })}
+                      className={`px-3 py-2.5 rounded-xl text-xs font-semibold border-2 transition-all duration-200 ${
+                        formData.presupuesto === p
+                          ? "border-violet-500 bg-violet-50 text-violet-700 shadow-sm shadow-violet-500/10"
+                          : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                      }`}
+                    >
+                      {p}
+                    </button>
                   ))}
-                </select>
+                </div>
+              </div>
+
+              <div>
+                <label className={labelBase}>
+                  <span className="text-slate-300">○</span> Cuéntanos más
+                </label>
+                <textarea
+                  name="mensaje"
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                  rows={3}
+                  placeholder="¿Qué problema quieres resolver? Cualquier detalle nos ayuda a preparar la llamada."
+                  className={`${inputBase} resize-none`}
+                />
+              </div>
+
+              <div className="flex gap-3 mt-2">
+                <button
+                  type="button"
+                  onClick={() => setStep(1)}
+                  className="flex items-center gap-1 px-5 py-4 rounded-2xl text-sm font-bold text-slate-500 bg-slate-100 hover:bg-slate-200 hover:text-slate-700 transition-all duration-200"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                  </svg>
+                  Atrás
+                </button>
+                <button
+                  type="submit"
+                  disabled={status === "sending" || !formData.servicio}
+                  className="group flex-1 relative bg-gradient-to-r from-amber-500 to-orange-500 text-black font-black py-4 px-6 rounded-2xl text-sm transition-all duration-300 hover:from-amber-400 hover:to-orange-400 hover:shadow-xl hover:shadow-amber-500/25 hover:scale-[1.02] disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 overflow-hidden"
+                >
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
+                  {status === "sending" ? (
+                    <span className="relative z-10 flex items-center gap-2">
+                      <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Enviando...
+                    </span>
+                  ) : (
+                    <span className="relative z-10 flex items-center gap-2">
+                      🚀 Solicitar análisis gratuito
+                    </span>
+                  )}
+                </button>
+              </div>
+            </div>
+          )}
+        </form>
+
+        {/* ═══ Footer ═══ */}
+        <div className="px-6 sm:px-8 pb-5">
+          {status === "error" && (
+            <div className="bg-gradient-to-r from-red-50 to-rose-50 border-2 border-red-200 rounded-2xl p-4 mb-4 flex items-center gap-3">
+              <div className="w-8 h-8 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               </div>
               <div>
-                <label className={labelClass}>Urgencia</label>
-                <select name="urgencia" value={formData.urgencia} onChange={handleChange} className={selectClass(!!formData.urgencia)}>
-                  <option value="" disabled>Seleccionar plazo</option>
-                  {URGENCIAS.map((u) => (
-                    <option key={u} value={u} className="text-slate-900">{u}</option>
-                  ))}
-                </select>
+                <p className="text-red-700 text-xs font-bold">Error al enviar el formulario</p>
+                <p className="text-red-500 text-[11px] mt-0.5">
+                  Intenta de nuevo o llámanos al{" "}
+                  <a href="tel:+34640791041" className="underline font-semibold">+34 640 791 041</a>
+                </p>
               </div>
             </div>
-            <div>
-              <label className={labelClass}>Cuéntanos más sobre tu proyecto <span className="text-slate-400 font-normal">(opcional)</span></label>
-              <textarea
-                name="mensaje"
-                value={formData.mensaje}
-                onChange={handleChange}
-                rows={3}
-                placeholder="¿Qué problema quieres resolver? ¿Qué herramientas usas actualmente? Cualquier detalle nos ayuda a preparar mejor la llamada."
-                className={`${inputClass} resize-none`}
-              />
-            </div>
+          )}
 
-            <div className="flex gap-3 mt-2">
-              <button
-                type="button"
-                onClick={() => setStep(2)}
-                className="flex-shrink-0 px-5 py-3.5 rounded-xl text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors"
+          {/* Trust badges */}
+          <div className="flex items-center justify-center gap-2 flex-wrap">
+            {[
+              {
+                icon: (
+                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                ),
+                label: "Datos protegidos",
+              },
+              {
+                icon: (
+                  <svg className="w-3.5 h-3.5 text-violet-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                  </svg>
+                ),
+                label: "Sin compromiso",
+              },
+              {
+                icon: (
+                  <svg className="w-3.5 h-3.5 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ),
+                label: "Respuesta <24h",
+              },
+            ].map((badge) => (
+              <span
+                key={badge.label}
+                className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-500 bg-slate-50 rounded-full px-3 py-1.5 border border-slate-100"
               >
-                ← Atrás
-              </button>
-              <button
-                type="submit"
-                disabled={status === "sending" || !formData.servicio}
-                className="flex-1 bg-gradient-to-r from-violet-600 to-indigo-600 text-white font-bold py-3.5 px-6 rounded-xl text-sm transition-all duration-300 hover:from-violet-500 hover:to-indigo-500 hover:shadow-lg hover:shadow-violet-500/20 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-              >
-                {status === "sending" ? (
-                  <>
-                    <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                    </svg>
-                    Enviando solicitud...
-                  </>
-                ) : (
-                  <>
-                    Solicitar análisis gratuito
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </>
-                )}
-              </button>
-            </div>
+                {badge.icon}
+                {badge.label}
+              </span>
+            ))}
           </div>
-        )}
-      </form>
-
-      {/* Footer info */}
-      <div className="px-8 pb-5">
-        {status === "error" && (
-          <div className="bg-red-50 border border-red-100 rounded-xl p-3 mb-3 flex items-center gap-2">
-            <svg className="w-4 h-4 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p className="text-red-600 text-xs">Error al enviar. Intenta de nuevo o llámanos al +34 640 791 041.</p>
-          </div>
-        )}
-        <div className="flex items-center justify-center gap-4 text-[11px] text-slate-400">
-          <span className="flex items-center gap-1">
-            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-            Datos protegidos
-          </span>
-          <span>·</span>
-          <span>Sin compromiso</span>
-          <span>·</span>
-          <span>Respuesta &lt;24h</span>
         </div>
       </div>
     </div>
