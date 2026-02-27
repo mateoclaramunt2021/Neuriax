@@ -9,19 +9,20 @@ function getResend() {
 }
 
 function getSupabase() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-  );
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  if (!url || !key) {
+    throw new Error(`Supabase config missing: url=${!!url}, key=${!!key}`);
+  }
+  return createClient(url, key);
 }
 
 export async function POST(request: NextRequest) {
-  const resend = getResend();
-  const supabase = getSupabase();
-  const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/neuriax/30min';
-  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://neuriax.com';
-
   try {
+    const resend = getResend();
+    const supabase = getSupabase();
+    const CALENDLY_URL = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/neuriax/30min';
+    const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://neuriax.com';
     // Rate limiting - máximo 3 requests por minuto para formularios de contacto
     const clientIP = getClientIP(request);
     const rateLimit = checkRateLimit(`send-email:${clientIP}`, RATE_LIMIT_CONFIGS.contact);
