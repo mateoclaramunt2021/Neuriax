@@ -5,12 +5,15 @@ import { createClient } from '@supabase/supabase-js';
 // Endpoint para darse de baja de la secuencia de emails
 // ============================================
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  );
+}
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase();
   const email = request.nextUrl.searchParams.get('email');
 
   if (!email) {

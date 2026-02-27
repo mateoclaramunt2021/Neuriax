@@ -9,16 +9,22 @@ import { getEmailTemplate } from '@/lib/email-templates';
 // Revisa la tabla email_sequences y envía el email que toque
 // ============================================
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+function getResend() {
+  return new Resend(process.env.RESEND_API_KEY);
+}
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-);
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://neuriax.com';
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  );
+}
 
 export async function GET(request: NextRequest) {
+  const supabase = getSupabase();
+  const resend = getResend();
+  const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://neuriax.com';
+
   try {
     // Verificar CRON_SECRET para proteger el endpoint
     const authHeader = request.headers.get('authorization');

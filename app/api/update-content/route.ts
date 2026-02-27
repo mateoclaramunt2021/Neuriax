@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextResponse } from 'next/server';
 
-const SUPABASE_URL = 'https://wfnaknuhwzmkriaetvtn.supabase.co';
-const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndmbmFrbnVod3pta3JpYWV0dnRuIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODA1OTMwMCwiZXhwIjoyMDgzNjM1MzAwfQ.CQ4Gm1k_eZ3Pn5TGQRbPblL_sRp9gahQubIUiytUdlE';
-
-const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+function getSupabase() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+  );
+}
 
 // Contenido profesional para cada noticia
 const professionalContent: Record<string, { content: string; description: string }> = {
@@ -236,6 +238,7 @@ const professionalContent: Record<string, { content: string; description: string
 };
 
 export async function GET() {
+  const supabase = getSupabase();
   try {
     const updates = [];
     
