@@ -328,21 +328,60 @@ export async function POST(request: NextRequest) {
         // No bloqueamos — el contacto se guardó en DB, seguimos
       }
 
-      // ========== 2) EMAIL DE BIENVENIDA AL CLIENTE (Email 1 de la secuencia) ==========
+      // ========== 2) EMAIL DE CONFIRMACIÓN AL CLIENTE ==========
       try {
-        const welcomeTemplate = getEmailTemplate(1);
-        if (welcomeTemplate) {
-          const unsubscribeUrl = `${SITE_URL}/api/unsubscribe?email=${encodeURIComponent(email)}`;
-          await resend.emails.send({
-            from: 'Neuriax <hola@neuriax.com>',
-            to: email,
-            subject: welcomeTemplate.subject,
-            html: welcomeTemplate.getHtml(nombre, unsubscribeUrl),
-          });
-          console.log('Email de bienvenida (Guía 1) enviado a:', email);
-        }
+        await resend.emails.send({
+          from: 'Neuriax <hola@neuriax.com>',
+          to: email,
+          subject: '✅ Hemos recibido tu solicitud - Neuriax',
+          html: `
+<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin: 0; padding: 0; background: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif;">
+<div style="max-width: 600px; margin: 0 auto; background: #ffffff;">
+  <div style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 30px 40px; text-align: center;">
+    <h1 style="color: #06b6d4; font-size: 28px; margin: 0; font-weight: 800;">Neuriax</h1>
+    <p style="color: #94a3b8; font-size: 13px; margin: 8px 0 0 0;">Automatización inteligente para tu negocio</p>
+  </div>
+  <div style="padding: 40px;">
+    <p style="color: #334155; font-size: 16px; line-height: 1.6;">Hola <strong style="color: #0f172a;">${nombre}</strong>,</p>
+    <p style="color: #334155; font-size: 16px; line-height: 1.6;">Hemos recibido tu solicitud correctamente. Nuestro equipo la revisará y <strong>te contactaremos en las próximas 24 horas</strong> para hablar sobre cómo podemos ayudarte.</p>
+    
+    <div style="background: linear-gradient(135deg, #f0fdfa, #ecfdf5); border: 2px solid #06b6d4; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+      <p style="color: #0f172a; font-weight: 700; font-size: 16px; margin: 0 0 8px 0;">⚡ ¿Quieres avanzar más rápido?</p>
+      <p style="color: #475569; font-size: 14px; margin: 0 0 16px 0;">Agenda directamente una llamada estratégica gratuita de 30 minutos:</p>
+      <a href="${CALENDLY_URL}" style="display: inline-block; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px;">📅 Agendar llamada gratuita</a>
+    </div>
+    
+    <div style="background: #f8fafc; border-radius: 8px; padding: 20px; margin: 24px 0;">
+      <p style="color: #0f172a; font-weight: 600; font-size: 14px; margin: 0 0 12px 0;">📋 Resumen de tu solicitud:</p>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <tr><td style="padding: 6px 0; color: #64748b;">Nombre:</td><td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${nombre}</td></tr>
+        <tr><td style="padding: 6px 0; color: #64748b;">Email:</td><td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${email}</td></tr>
+        ${telefono ? `<tr><td style="padding: 6px 0; color: #64748b;">Teléfono:</td><td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${telefono}</td></tr>` : ''}
+        ${empresa ? `<tr><td style="padding: 6px 0; color: #64748b;">Empresa:</td><td style="padding: 6px 0; color: #0f172a; font-weight: 500;">${empresa}</td></tr>` : ''}
+      </table>
+    </div>
+    
+    <p style="color: #334155; font-size: 16px; line-height: 1.6;">Mientras tanto, si tienes cualquier duda:</p>
+    <p style="color: #334155; font-size: 14px; line-height: 1.8;">
+      📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
+      📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
+    </p>
+    <p style="color: #334155; font-size: 16px; margin-top: 24px;">Un saludo,<br><strong>El equipo de Neuriax</strong></p>
+  </div>
+  <div style="background: #f8fafc; padding: 16px 40px; border-top: 1px solid #e2e8f0; text-align: center;">
+    <p style="color: #94a3b8; font-size: 12px; margin: 0;">© ${new Date().getFullYear()} Neuriax · <a href="${SITE_URL}" style="color: #94a3b8;">neuriax.com</a></p>
+  </div>
+</div>
+</body>
+</html>
+          `,
+        });
+        console.log('Email de confirmación enviado a:', email);
       } catch (clientError) {
-        console.error('Error enviando email de bienvenida al cliente:', clientError);
+        console.error('Error enviando email de confirmación al cliente:', clientError);
       }
 
       // ========== 3) REGISTRAR SECUENCIA DE 15 EMAILS ==========

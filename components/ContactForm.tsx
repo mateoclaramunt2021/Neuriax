@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from "react";
 
-const CALENDLY_URL = "https://calendly.com/neuriax/llamada";
+const CALENDLY_URL = "https://calendly.com/neuriax/30min";
 
 const SECTORES = [
   "Restauración / Hostelería",
