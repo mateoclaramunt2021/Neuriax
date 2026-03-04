@@ -1,9 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useRealtimeData } from '@/hooks/useRealtimeData';
 import StatsCard from '@/components/superadmin/StatsCard';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface DashboardData {
+  activeNow: number;
   stats: {
     totalVisitors: number;
     todayVisitors: number;
@@ -33,28 +35,10 @@ interface DashboardData {
 }
 
 export default function SuperAdminDashboard() {
-  const [data, setData] = useState<DashboardData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/superadmin/dashboard');
-        if (res.ok) {
-          const result = await res.json();
-          setData(result);
-        }
-      } catch (err) {
-        console.error('Error fetching dashboard:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-    const interval = setInterval(fetchData, 30000);
-    return () => clearInterval(interval);
-  }, []);
+  const { data, loading, lastUpdated } = useRealtimeData<DashboardData>({
+    url: '/api/superadmin/dashboard',
+    interval: 5000,
+  });
 
   if (loading) {
     return (
@@ -93,10 +77,21 @@ export default function SuperAdminDashboard() {
           <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
           <p className="text-slate-500 mt-1">Panel de control de Neuriax</p>
         </div>
-        <div className="text-sm text-slate-400">
-          Actualización automática cada 30s
-        </div>
+        <LiveIndicator lastUpdated={lastUpdated} />
       </div>
+
+      {/* Active Now Banner */}
+      {(data?.activeNow ?? 0) > 0 && (
+        <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3">
+          <span className="relative flex h-3 w-3">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+          </span>
+          <span className="text-green-800 font-semibold text-sm">
+            {data?.activeNow} {data?.activeNow === 1 ? 'persona' : 'personas'} en la web ahora mismo
+          </span>
+        </div>
+      )}
 
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

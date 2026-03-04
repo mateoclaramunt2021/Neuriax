@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import StatsCard from '@/components/superadmin/StatsCard';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface Conversation {
   id: number;
@@ -20,6 +21,8 @@ export default function ChatbotPage() {
   const [stats, setStats] = useState({ total: 0, converted: 0, avgMessages: 0, conversionRate: 0 });
   const [loading, setLoading] = useState(true);
   const [selectedConv, setSelectedConv] = useState<Conversation | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,14 +32,20 @@ export default function ChatbotPage() {
           const data = await res.json();
           setConversations(data.conversations);
           setStats(data.stats);
+          setLastUpdated(new Date());
         }
       } catch (err) {
         console.error('Error:', err);
       } finally {
-        setLoading(false);
+        if (isFirstLoad.current) {
+          setLoading(false);
+          isFirstLoad.current = false;
+        }
       }
     };
     fetchData();
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) {
@@ -49,9 +58,12 @@ export default function ChatbotPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">🤖 Chatbot</h1>
-        <p className="text-slate-500 mt-1">Historial de conversaciones del chatbot web</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900">🤖 Chatbot</h1>
+          <p className="text-slate-500 mt-1">Historial de conversaciones del chatbot web</p>
+        </div>
+        <LiveIndicator lastUpdated={lastUpdated} />
       </div>
 
       {/* Stats */}

@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import StatsCard from '@/components/superadmin/StatsCard';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface AnalyticsData {
   overview: {
@@ -22,6 +23,8 @@ export default function AnalyticsPage() {
   const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [days, setDays] = useState(30);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const isFirstLoad = useRef(true);
 
   const fetchData = async () => {
     try {
@@ -29,18 +32,23 @@ export default function AnalyticsPage() {
       if (res.ok) {
         const result = await res.json();
         setData(result);
+        setLastUpdated(new Date());
       }
     } catch (err) {
       console.error('Error:', err);
     } finally {
-      setLoading(false);
+      if (isFirstLoad.current) {
+        setLoading(false);
+        isFirstLoad.current = false;
+      }
     }
   };
 
   useEffect(() => {
+    isFirstLoad.current = true;
     setLoading(true);
     fetchData();
-    const interval = setInterval(fetchData, 60000);
+    const interval = setInterval(fetchData, 5000);
     return () => clearInterval(interval);
   }, [days]);
 
@@ -68,16 +76,19 @@ export default function AnalyticsPage() {
           <h1 className="text-3xl font-bold text-slate-900">📈 Analítica Web</h1>
           <p className="text-slate-500 mt-1">Comportamiento de los visitantes</p>
         </div>
-        <select
-          value={days}
-          onChange={(e) => setDays(parseInt(e.target.value))}
-          className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
-        >
-          <option value={7}>Últimos 7 días</option>
-          <option value={14}>Últimos 14 días</option>
-          <option value={30}>Últimos 30 días</option>
-          <option value={90}>Últimos 90 días</option>
-        </select>
+        <div className="flex items-center gap-4">
+          <LiveIndicator lastUpdated={lastUpdated} />
+          <select
+            value={days}
+            onChange={(e) => setDays(parseInt(e.target.value))}
+            className="px-3 py-2 border border-slate-300 rounded-lg text-sm"
+          >
+            <option value={7}>Últimos 7 días</option>
+            <option value={14}>Últimos 14 días</option>
+            <option value={30}>Últimos 30 días</option>
+            <option value={90}>Últimos 90 días</option>
+          </select>
+        </div>
       </div>
 
       {/* KPIs */}

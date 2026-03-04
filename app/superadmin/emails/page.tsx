@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface Email {
   id: number;
@@ -37,8 +38,10 @@ export default function EmailsPage() {
   const [filterType, setFilterType] = useState('all');
   const [typeStats, setTypeStats] = useState<Record<string, number>>({});
   const [total, setTotal] = useState(0);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const isFirstLoad = useRef(true);
 
-  const fetchEmails = async () => {
+  const fetchEmails = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (search) params.set('search', search);
@@ -49,17 +52,23 @@ export default function EmailsPage() {
         setEmails(data.emails);
         setTypeStats(data.typeStats);
         setTotal(data.total);
+        setLastUpdated(new Date());
       }
     } catch (err) {
       console.error('Error:', err);
     } finally {
-      setLoading(false);
+      if (isFirstLoad.current) {
+        setLoading(false);
+        isFirstLoad.current = false;
+      }
     }
-  };
+  }, [search, filterType]);
 
   useEffect(() => {
     fetchEmails();
-  }, [filterType]);
+    const interval = setInterval(fetchEmails, 5000);
+    return () => clearInterval(interval);
+  }, [filterType, fetchEmails]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -77,9 +86,12 @@ export default function EmailsPage() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">📧 Emails</h1>
-        <p className="text-slate-500 mt-1">{total} emails enviados en total</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900">📧 Emails</h1>
+          <p className="text-slate-500 mt-1">{total} emails enviados en total</p>
+        </div>
+        <LiveIndicator lastUpdated={lastUpdated} />
       </div>
 
       {/* Stats Cards */}

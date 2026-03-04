@@ -108,7 +108,16 @@ export async function GET() {
       pipeline[s.status] = (pipeline[s.status] || 0) + 1;
     });
 
+    // Active visitors (last 5 minutes)
+    const fiveMinAgo = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
+    const { data: activeVisitors } = await supabase
+      .from('visitor_events')
+      .select('visitor_id')
+      .gte('timestamp', fiveMinAgo);
+    const activeNow = new Set(activeVisitors?.map((v: { visitor_id: number }) => v.visitor_id)).size;
+
     return NextResponse.json({
+      activeNow,
       stats: {
         totalVisitors: totalVisitors || 0,
         todayVisitors: todayVisitors || 0,

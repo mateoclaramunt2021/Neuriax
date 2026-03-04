@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface Client {
   id: number;
@@ -40,8 +41,10 @@ export default function ClientesPage() {
   const [filterStatus, setFilterStatus] = useState('all');
   const [editingClient, setEditingClient] = useState<number | null>(null);
   const [editForm, setEditForm] = useState({ status: '', priority: '', value: 0, notes: '' });
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const isFirstLoad = useRef(true);
 
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (search) params.set('search', search);
@@ -50,17 +53,23 @@ export default function ClientesPage() {
       if (res.ok) {
         const data = await res.json();
         setClients(data.clients);
+        setLastUpdated(new Date());
       }
     } catch (err) {
       console.error('Error:', err);
     } finally {
-      setLoading(false);
+      if (isFirstLoad.current) {
+        setLoading(false);
+        isFirstLoad.current = false;
+      }
     }
-  };
+  }, [search, filterStatus]);
 
   useEffect(() => {
     fetchClients();
-  }, [filterStatus]);
+    const interval = setInterval(fetchClients, 5000);
+    return () => clearInterval(interval);
+  }, [filterStatus, fetchClients]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -124,12 +133,15 @@ export default function ClientesPage() {
           <h1 className="text-3xl font-bold text-slate-900">👥 Clientes (CRM)</h1>
           <p className="text-slate-500 mt-1">{clients.length} contactos</p>
         </div>
-        <button
+        <div className="flex items-center gap-4">
+          <LiveIndicator lastUpdated={lastUpdated} />
+          <button
           onClick={exportCSV}
           className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm hover:bg-slate-800 transition-colors"
         >
           📥 Exportar CSV
         </button>
+        </div>
       </div>
 
       {/* Filters */}
