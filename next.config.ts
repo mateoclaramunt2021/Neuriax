@@ -126,6 +126,46 @@ const nextConfig: NextConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/agencia-ia.html',
+        destination: '/agencia-ia',
+        permanent: true,
+      },
+      {
+        source: '/agencia-inteligencia-artificial',
+        destination: '/agencia-ia',
+        permanent: true,
+      },
+      {
+        source: '/agencia-de-ia',
+        destination: '/agencia-ia',
+        permanent: true,
+      },
+      {
+        source: '/servicios-ia',
+        destination: '/soluciones',
+        permanent: true,
+      },
+      {
+        source: '/servicios',
+        destination: '/soluciones',
+        permanent: true,
+      },
+      {
+        source: '/chatbot-ia',
+        destination: '/soluciones',
+        permanent: true,
+      },
+      {
+        source: '/automatizacion-ia',
+        destination: '/soluciones',
+        permanent: true,
+      },
+      {
+        source: '/consultoria-ia',
+        destination: '/contacto',
+        permanent: true,
+      },
     ]
   },
 };

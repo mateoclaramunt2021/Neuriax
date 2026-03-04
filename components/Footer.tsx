@@ -53,14 +53,14 @@ export default function Footer() {
               <div className="relative h-10 w-10">
                 <Image
                   src="/assets/images/ChatGPT_Image_10_ene_2026__17_49_11-removebg-preview.png"
-                  alt="Neuriax"
+                  alt="Neuriax - Agencia de IA #1 en España"
                   fill
                   className="object-contain"
                 />
               </div>
               <div>
                 <span className="text-lg font-bold text-slate-900">Neuriax</span>
-                <p className="text-xs text-slate-500">Agentes de IA Personalizados</p>
+                <p className="text-xs text-slate-500">Agencia de Inteligencia Artificial #1 en España</p>
               </div>
             </div>
 
@@ -72,6 +72,41 @@ export default function Footer() {
               <a href="mailto:hola@neuriax.com" className="hover:text-cyan-400 transition-colors">
                 hola@neuriax.com
               </a>
+            </div>
+          </div>
+
+          {/* Service links - Internal linking para SEO */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-8">
+            <div>
+              <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-3">Servicios IA</h3>
+              <ul className="space-y-2 text-xs text-slate-500">
+                <li><Link href="/agencia-ia" className="hover:text-slate-900 transition-colors">Agencia de IA</Link></li>
+                <li><Link href="/soluciones" className="hover:text-slate-900 transition-colors">Soluciones IA</Link></li>
+                <li><Link href="/precios" className="hover:text-slate-900 transition-colors">Precios</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-3">Sectores</h3>
+              <ul className="space-y-2 text-xs text-slate-500">
+                <li><Link href="/sectores" className="hover:text-slate-900 transition-colors">Todos los sectores</Link></li>
+                <li><Link href="/landings/clinica" className="hover:text-slate-900 transition-colors">Clínicas</Link></li>
+                <li><Link href="/landings/restaurante" className="hover:text-slate-900 transition-colors">Restaurantes</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-3">Empresa</h3>
+              <ul className="space-y-2 text-xs text-slate-500">
+                <li><Link href="/quien-soy" className="hover:text-slate-900 transition-colors">Sobre Neuriax</Link></li>
+                <li><Link href="/contacto" className="hover:text-slate-900 transition-colors">Contacto</Link></li>
+                <li><Link href="/trabajo" className="hover:text-slate-900 transition-colors">Trabaja con nosotros</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-3">Recursos</h3>
+              <ul className="space-y-2 text-xs text-slate-500">
+                <li><Link href="/webs" className="hover:text-slate-900 transition-colors">Webs profesionales</Link></li>
+                <li><Link href="/landings" className="hover:text-slate-900 transition-colors">Casos de éxito</Link></li>
+              </ul>
             </div>
           </div>
 

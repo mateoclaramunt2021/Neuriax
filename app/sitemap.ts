@@ -4,10 +4,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.neuriax.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
-    // Páginas principales
+    // Páginas principales - máxima prioridad
     { path: "/", priority: 1.0, changeFrequency: "daily" as const },
+    { path: "/agencia-ia", priority: 1.0, changeFrequency: "weekly" as const },
     
-    // Páginas de negocio (más importantes)
+    // Páginas de negocio (muy importantes)
     { path: "/soluciones", priority: 0.95, changeFrequency: "weekly" as const },
     { path: "/webs", priority: 0.95, changeFrequency: "weekly" as const },
     { path: "/contacto", priority: 0.95, changeFrequency: "weekly" as const },
@@ -26,17 +27,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/blog/ia-negocio-guia-practica", priority: 0.85, changeFrequency: "weekly" as const },
     { path: "/blog/paginas-web-que-venden", priority: 0.85, changeFrequency: "weekly" as const },
     
+    // Sectores (topical authority)
+    { path: "/sectores", priority: 0.9, changeFrequency: "weekly" as const },
+    
     // Otros servicios
     { path: "/precios", priority: 0.85, changeFrequency: "weekly" as const },
-    { path: "/sectores", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/quien-soy", priority: 0.8, changeFrequency: "monthly" as const },
     { path: "/trabajo", priority: 0.75, changeFrequency: "monthly" as const },
-    { path: "/quien-soy", priority: 0.75, changeFrequency: "monthly" as const },
     
     // Legales
-    { path: "/politica-de-privacidad", priority: 0.5, changeFrequency: "monthly" as const },
-    { path: "/politica-de-cookies", priority: 0.5, changeFrequency: "monthly" as const },
-    { path: "/aviso-legal", priority: 0.5, changeFrequency: "monthly" as const },
-    { path: "/condiciones-generales", priority: 0.5, changeFrequency: "monthly" as const },
+    { path: "/politica-de-privacidad", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/politica-de-cookies", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/aviso-legal", priority: 0.3, changeFrequency: "yearly" as const },
+    { path: "/condiciones-generales", priority: 0.3, changeFrequency: "yearly" as const },
   ];
 
   const lastModified = new Date();

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 
 const NAV_LINKS = [
+  { label: "Agencia IA", href: "/agencia-ia" },
   { label: "Servicios", href: "#servicios" },
   { label: "Proceso", href: "#proceso" },
   { label: "Resultados", href: "#resultados" },
@@ -81,8 +82,10 @@ export default function Navbar() {
               <div className="flex items-center gap-0.5 bg-slate-100 border border-slate-200 rounded-full px-1.5 py-1">
                 {NAV_LINKS.map((link) => {
                   const isActive = activeSection === link.href.replace("#", "");
+                  const isExternal = link.href.startsWith("/");
+                  const Tag = isExternal ? Link : "a";
                   return (
-                    <a
+                    <Tag
                       key={link.href}
                       href={link.href}
                       className={`relative px-4 py-1.5 text-[13px] font-medium rounded-full transition-all duration-300 ${
@@ -92,7 +95,7 @@ export default function Navbar() {
                       }`}
                     >
                       {link.label}
-                    </a>
+                    </Tag>
                   );
                 })}
               </div>
@@ -158,8 +161,10 @@ export default function Navbar() {
           <nav className="flex flex-col gap-2">
             {NAV_LINKS.map((link, i) => {
               const isActive = activeSection === link.href.replace("#", "");
+              const isPage = link.href.startsWith("/");
+              const Tag = isPage ? Link : "a";
               return (
-                <a
+                <Tag
                   key={link.href}
                   href={link.href}
                   onClick={closeMobile}
@@ -176,7 +181,7 @@ export default function Navbar() {
                   <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Tag>
               );
             })}
           </nav>

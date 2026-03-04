@@ -3,11 +3,14 @@ import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Neuriax | Agentes de IA Personalizados · Atención al Cliente 24/7",
+  title: "Neuriax | Agencia de IA #1 en España · Agentes IA & Automatización 24/7",
   description:
-    "Agentes de IA conversacional que atienden a tus clientes 24/7. Sistema personalizado + landing white-label + panel de control. Multi-canal: WhatsApp, voz y web chat.",
+    "Agencia de inteligencia artificial líder en España. Agentes de IA conversacional que atienden a tus clientes 24/7 por WhatsApp, voz y web. Implementación en 5 días. +50 empresas confían en Neuriax. Consultoría gratuita.",
   keywords:
-    "agente IA, atención al cliente IA, chatbot personalizado, agente conversacional, automatización atención cliente, landing page white-label, IA empresas",
+    "agencia de IA, agencias de IA, agencia inteligencia artificial, mejor agencia IA España, agente IA, atención al cliente IA, chatbot personalizado, agente conversacional, automatización IA, agentes de voz IA, empresa IA España, consultoría IA, implementar IA empresa, chatbot IA empresas",
+  alternates: {
+    canonical: 'https://www.neuriax.com',
+  },
 };
 
 /* ─────────────────────────────────────────────────────
