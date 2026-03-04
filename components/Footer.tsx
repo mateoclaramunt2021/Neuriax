@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import CookiePreferencesModal from "./CookiePreferencesModal";
+import LoginModal from "./superadmin/LoginModal";
 
 type CookieConsent = {
   necessary: boolean;
@@ -14,6 +15,7 @@ type CookieConsent = {
 
 export default function Footer() {
   const [showCookiePreferences, setShowCookiePreferences] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [currentPreferences, setCurrentPreferences] = useState<CookieConsent>({
     necessary: true,
     analytics: false,
@@ -98,6 +100,15 @@ export default function Footer() {
                 >
                   Configurar Cookies
                 </button>
+                {/* Hidden admin access */}
+                <button
+                  onClick={() => setShowAdminLogin(true)}
+                  className="text-slate-300 hover:text-slate-400 transition-colors opacity-30 hover:opacity-60"
+                  title=""
+                  aria-label="Admin"
+                >
+                  🔒
+                </button>
               </div>
             </div>
           </div>
@@ -111,6 +122,11 @@ export default function Footer() {
           onClose={() => setShowCookiePreferences(false)}
           onSave={handleSavePreferences}
         />
+      )}
+
+      {/* Admin Login Modal */}
+      {showAdminLogin && (
+        <LoginModal onClose={() => setShowAdminLogin(false)} />
       )}
     </>
   );

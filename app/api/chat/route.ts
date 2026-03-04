@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
+
+function getSupabaseAdmin() {
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+  if (!url || !key) return null;
+  return createClient(url, key);
+}
 
 const SYSTEM_PROMPT = `Eres Neuri, la mascota asistente virtual de Neuriax. Tu objetivo es AYUDAR al cliente resolviendo sus dudas y guiándole a través del formulario de contacto.
 
@@ -142,6 +150,23 @@ export async function POST(request: NextRequest) {
 
     const data = await response.json();
     const aiMessage = data.choices[0]?.message?.content || "¿Podrías repetir eso? No te he entendido bien.";
+
+    // Log conversation to Supabase for superadmin panel
+    try {
+      const supabase = getSupabaseAdmin();
+      if (supabase) {
+        const userMessage = messages[messages.length - 1]?.content || '';
+        await supabase.from('chatbot_conversations').insert({
+          visitor_id: leadData?.visitorId || null,
+          user_message: userMessage,
+          bot_response: aiMessage,
+          lead_data: leadData || null,
+          converted: !!(leadData?.email),
+        });
+      }
+    } catch (logError) {
+      console.error('Error logging chat:', logError);
+    }
 
     return NextResponse.json({
       message: aiMessage,

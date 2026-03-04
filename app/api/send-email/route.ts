@@ -17,6 +17,22 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// Helper to log emails to email_log table for superadmin panel
+async function logEmail(params: { to: string; subject: string; type: string; contact_id?: string }) {
+  try {
+    const supabase = getSupabase();
+    await supabase.from('email_log').insert({
+      to_email: params.to,
+      subject: params.subject,
+      type: params.type,
+      status: 'sent',
+      contact_id: params.contact_id || null,
+    });
+  } catch (err) {
+    console.error('Error logging email:', err);
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const resend = getResend();
@@ -241,6 +257,8 @@ export async function POST(request: NextRequest) {
           console.error('Error enviando email de confirmación al cliente:', clientError);
         }
 
+        await logEmail({ to: email, subject: '🎨 NUEVA DEMO LANDING', type: 'demo_landing' });
+
         return NextResponse.json(
           { message: 'Solicitud de demo enviada correctamente', emailId: emailData?.id },
           { status: 200 }
@@ -415,6 +433,8 @@ export async function POST(request: NextRequest) {
         console.error('Error registrando secuencia de emails:', seqError);
       }
 
+      await logEmail({ to: email, subject: `Nuevo contacto: ${nombre}`, type: 'contact_form' });
+
       return NextResponse.json(
         { 
           message: 'Contacto enviado correctamente', 
@@ -533,6 +553,8 @@ export async function POST(request: NextRequest) {
         { status: 200 }
       );
     }
+
+    await logEmail({ to: email, subject: `Postulación: ${posicion}`, type: 'job_application' });
 
     return NextResponse.json(
       { message: 'Postulación enviada correctamente', emailId: emailData?.id },
