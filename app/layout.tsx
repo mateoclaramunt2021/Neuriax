@@ -11,6 +11,7 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import StickyCTA from "../components/StickyCTA";
 import SocialProofToast from "../components/SocialProofToast";
 import ExitIntentPopup from "../components/ExitIntentPopup";
+import LayoutShell from "../components/LayoutShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -123,16 +124,21 @@ export default function RootLayout({
         <CookieBanner />
         {/* PageTracker gracefully handles Supabase failures */}
         <PageTracker />
-        <Navbar />
-        <main className="pt-20 min-h-screen">
+        <LayoutShell
+          navbar={<Navbar />}
+          footer={<Footer />}
+          extras={
+            <>
+              <LeadMagnetModal />
+              <WhatsAppButton />
+              <StickyCTA />
+              <SocialProofToast />
+              <ExitIntentPopup />
+            </>
+          }
+        >
           {children}
-        </main>
-        <Footer />
-        <LeadMagnetModal />
-        <WhatsAppButton />
-        <StickyCTA />
-        <SocialProofToast />
-        <ExitIntentPopup />
+        </LayoutShell>
         <Analytics mode="production" />
         {/* Supabase PageTracker depends on cookie consent */}
       </body>
