@@ -48,7 +48,7 @@ export default function PoliticaPrivacidad() {
             </a>
           </p>
           <p>
-            <strong>Teléfono:</strong> +34 640 791 041
+            <strong>Teléfono:</strong> +34 643 045 488
           </p>
           <p>
             <strong>Domicilio fiscal:</strong> Arcadi Balaguer 62
@@ -364,7 +364,7 @@ export default function PoliticaPrivacidad() {
         </p>
         <div className="bg-gray-100 p-4 rounded text-sm text-gray-700 space-y-2">
           <p><strong>Email:</strong> <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">neuriaxx@gmail.com</a></p>
-          <p><strong>Teléfono:</strong> +34 640 791 041</p>
+          <p><strong>Teléfono:</strong> +34 643 045 488</p>
           <p><strong>Asunto:</strong> "Ejercicio de derechos RGPD"</p>
         </div>
 
@@ -438,7 +438,7 @@ export default function PoliticaPrivacidad() {
         </p>
         <div className="mt-3 space-y-2 text-sm text-gray-700">
           <p>📧 <a href="mailto:neuriaxx@gmail.com" className="text-blue-600 hover:underline">neuriaxx@gmail.com</a></p>
-          <p>📞 +34 640 791 041</p>
+          <p>📞 +34 643 045 488</p>
           <p>🌐 www.neuriax.com</p>
         </div>
       </section>

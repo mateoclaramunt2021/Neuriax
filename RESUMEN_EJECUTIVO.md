@@ -99,7 +99,7 @@ Implementación integral de cumplimiento RGPD/LSSI/LOPDGDD/ePrivacy para **neuri
 Nombre Comercial:      Neuriax
 Titular Provisional:   Mateo Claramunt González
 Email de Contacto:     neuriaxx@gmail.com
-Teléfono:              +34 640 791 041
+Teléfono:              +34 643 045 488
 Dominio:               neuriax.com
 Estado Legal:          En proceso de alta (NO hay NIF/CIF definitivo)
 ```
@@ -260,7 +260,7 @@ Generating static pages using 5 workers (28/28) in 756.3ms
 **Responsable del Sitio:**
 - Nombre: Mateo Claramunt González
 - Email: neuriaxx@gmail.com
-- Teléfono: +34 640 791 041
+- Teléfono: +34 643 045 488
 - Dominio: neuriax.com
 
 **Datos Fiscales Pendientes:**

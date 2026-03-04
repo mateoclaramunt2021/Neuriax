@@ -64,8 +64,8 @@ export default function Footer() {
 
             {/* Contacto rápido */}
             <div className="flex flex-col sm:flex-row gap-4 text-sm text-slate-500">
-              <a href="tel:+34640791041" className="hover:text-cyan-400 transition-colors">
-                +34 640 791 041
+              <a href="tel:+34643045488" className="hover:text-cyan-400 transition-colors">
+                +34 643 045 488
               </a>
               <a href="mailto:hola@neuriax.com" className="hover:text-cyan-400 transition-colors">
                 hola@neuriax.com

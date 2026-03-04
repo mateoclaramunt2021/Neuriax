@@ -458,7 +458,7 @@ export default function ContactForm() {
                 <p className="text-red-700 text-xs font-bold">Error al enviar el formulario</p>
                 <p className="text-red-500 text-[11px] mt-0.5">
                   Intenta de nuevo o llámanos al{" "}
-                  <a href="tel:+34640791041" className="underline font-semibold">+34 640 791 041</a>
+                  <a href="tel:+34643045488" className="underline font-semibold">+34 643 045 488</a>
                 </p>
               </div>
             </div>

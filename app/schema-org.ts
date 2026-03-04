@@ -7,7 +7,7 @@ export const organizationSchema = {
   'url': 'https://www.neuriax.com',
   'image': 'https://www.neuriax.com/logo.png',
   'description': 'Agencia digital especializada en automatización e IA. Soluciones inteligentes para transformación digital empresarial.',
-  'telephone': '+34640791041',
+  'telephone': '+34643045488',
   'email': 'info@neuriax.com',
   'areaServed': 'ES',
   'serviceType': [
@@ -37,7 +37,7 @@ export const organizationSchema = {
   'contactPoint': {
     '@type': 'ContactPoint',
     'contactType': 'Customer Service',
-    'telephone': '+34-640-791-041',
+    'telephone': '+34-643-045-488',
     'email': 'info@neuriax.com',
     'availableLanguage': ['es', 'en'],
   },

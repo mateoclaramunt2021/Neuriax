@@ -106,7 +106,7 @@ export default function RootLayout({
               name: 'Neuriax',
               description: 'Soluciones digitales, automatización e IA aplicada a negocio',
               url: 'https://www.neuriax.com',
-              telephone: '+34640791041',
+              telephone: '+34643045488',
               email: 'info@neuriax.com',
               priceRange: '$$',
               areaServed: 'ES',

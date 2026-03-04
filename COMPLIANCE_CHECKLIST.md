@@ -252,7 +252,7 @@ Suscriptores newsletter: hasta solicitar baja
 
 **Titular (responsable del tratamiento):**
 - Email: neuriaxx@gmail.com
-- Teléfono: +34 640 791 041
+- Teléfono: +34 643 045 488
 - Dominio: neuriax.com
 - Estado: En proceso de constitución (actualizar cuando se formalice)
 

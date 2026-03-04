@@ -85,7 +85,7 @@ export default function ExitIntentPopup() {
             </svg>
           </a>
           <a
-            href="https://wa.me/34640791041?text=Hola%2C%20quiero%20un%20análisis%20gratuito%20de%20automatización"
+            href="https://wa.me/34643045488?text=Hola%2C%20quiero%20un%20análisis%20gratuito%20de%20automatización"
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleClose}

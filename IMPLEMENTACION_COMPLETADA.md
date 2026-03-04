@@ -239,7 +239,7 @@ DOCUMENTACIÓN:
 **Titular del Sitio:**
 - Nombre: Mateo Claramunt González
 - Email: neuriaxx@gmail.com
-- Teléfono: +34 640 791 041
+- Teléfono: +34 643 045 488
 - Dominio: neuriax.com
 
 **Estado:** En proceso de formalización (NIF/CIF [PENDIENTE])

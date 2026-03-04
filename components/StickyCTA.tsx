@@ -24,7 +24,7 @@ export default function StickyCTA() {
       >
         <div className="bg-black/90 backdrop-blur-xl border-t border-white/10 px-4 py-3 flex gap-3">
           <a
-            href="https://wa.me/34640791041?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
+            href="https://wa.me/34643045488?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
             target="_blank"
             rel="noopener noreferrer"
             className="flex-1 flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-xl text-sm transition-all hover:bg-[#22c55e]"

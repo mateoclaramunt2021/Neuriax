@@ -101,7 +101,7 @@ export default function Navbar() {
             {/* ─── Desktop right ─── */}
             <div className="hidden lg:flex items-center gap-4">
               <a
-                href="https://wa.me/34640791041?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
+                href="https://wa.me/34643045488?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-1.5 text-[13px] font-medium text-slate-500 hover:text-[#25D366] transition-colors duration-200"
@@ -202,7 +202,7 @@ export default function Navbar() {
               </svg>
             </a>
             <a
-              href="https://wa.me/34640791041?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
+              href="https://wa.me/34643045488?text=Hola%2C%20quiero%20info%20sobre%20agentes%20de%20voz%20IA"
               target="_blank"
               rel="noopener noreferrer"
               onClick={closeMobile}

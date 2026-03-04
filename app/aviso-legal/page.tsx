@@ -50,7 +50,7 @@ export default function AvisoLegal() {
             </a>
           </p>
           <p>
-            <strong>Teléfono:</strong> +34 640 791 041
+            <strong>Teléfono:</strong> +34 643 045 488
           </p>
           <p>
             <strong>Dominio:</strong> neuriax.com

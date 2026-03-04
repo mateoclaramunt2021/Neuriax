@@ -221,7 +221,7 @@ export async function POST(request: NextRequest) {
                 </p>
                 <p style="color: #6b7280; font-size: 14px; margin-top: 0;">
                   📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
-                  📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
+                  📱 <a href="https://wa.me/34643045488" style="color: #3b82f6;">+34 643 045 488</a> (WhatsApp)
                 </p>
                 
                 <p style="color: #374151; font-size: 16px; margin-top: 25px;">
@@ -367,7 +367,7 @@ export async function POST(request: NextRequest) {
     <p style="color: #334155; font-size: 16px; line-height: 1.6;">Mientras tanto, si tienes cualquier duda:</p>
     <p style="color: #334155; font-size: 14px; line-height: 1.8;">
       📧 <a href="mailto:hola@neuriax.com" style="color: #3b82f6;">hola@neuriax.com</a><br>
-      📱 <a href="https://wa.me/34640791041" style="color: #3b82f6;">+34 640 791 041</a> (WhatsApp)
+      📱 <a href="https://wa.me/34643045488" style="color: #3b82f6;">+34 643 045 488</a> (WhatsApp)
     </p>
     <p style="color: #334155; font-size: 16px; margin-top: 24px;">Un saludo,<br><strong>El equipo de Neuriax</strong></p>
   </div>

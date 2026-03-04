@@ -69,7 +69,7 @@ Tú: "Al completar el formulario recibirás por email un código de 10% de descu
 
 ## DATOS EMPRESA
 - Mateo, fundador de Neuriax (España)
-- +34 640 791 041 | hola@neuriax.com
+- +34 643 045 488 | hola@neuriax.com
 - Calendly: https://calendly.com/neuriax/30min`;
 
 export async function POST(request: NextRequest) {
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
       
       if (response.status === 401) {
         return NextResponse.json({
-          message: "Error de configuración del sistema. Por favor, contacta con nosotros directamente en hola@neuriax.com o llama al +34 640 791 041.",
+          message: "Error de configuración del sistema. Por favor, contacta con nosotros directamente en hola@neuriax.com o llama al +34 643 045 488.",
           error: true
         });
       }
