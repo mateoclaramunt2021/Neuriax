@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import { supabase } from '@/lib/supabase'
 
 export function PageTracker() {
   const pathname = usePathname()
@@ -10,93 +9,83 @@ export function PageTracker() {
   const visitorIdRef = useRef<number | null>(null)
 
   useEffect(() => {
-    // Solo ejecutar en cliente
     if (typeof window === 'undefined') return;
 
-    // Validar que Supabase esté configurado
-    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-      console.warn('[PageTracker] Tracking disabled - missing Supabase credentials');
-      return;
-    }
+    // Don't track superadmin pages
+    if (pathname.startsWith('/superadmin')) return;
 
-    // Registrar página visitada
     const trackPageView = async () => {
       timeStartRef.current = Date.now()
 
       try {
-        // Obtener o crear visitante anónimo
+        // Get or create visitor via API (uses service_role key server-side)
         let visitorId = sessionStorage.getItem('visitor_id')
 
         if (!visitorId) {
-          // Crear visitante anónimo
-          const { data, error } = await supabase
-            .from('visitors')
-            .insert([
-              {
-                email: `anon_${Date.now()}@tracking.local`,
-                nombre: null,
-                telefono: null,
-              },
-            ])
-            .select()
+          const res = await fetch('/api/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ type: 'create_visitor' }),
+          });
 
-          if (error) {
-            console.warn('Tracking unavailable:', error.message);
+          if (!res.ok) {
+            console.warn('Tracking unavailable');
             return;
           }
 
-          if (data && data[0]) {
-            visitorId = String(data[0].id)
-            sessionStorage.setItem('visitor_id', visitorId)
-            visitorIdRef.current = data[0].id
+          const data = await res.json();
+          if (data.visitorId) {
+            visitorId = String(data.visitorId);
+            sessionStorage.setItem('visitor_id', visitorId);
+            visitorIdRef.current = data.visitorId;
           }
         } else {
-          visitorIdRef.current = parseInt(visitorId)
+          visitorIdRef.current = parseInt(visitorId);
         }
 
-        // Registrar evento de page_view
+        // Track page view via API
         if (visitorIdRef.current) {
-          const referrer = typeof document !== 'undefined' ? document.referrer : '';
-          await supabase.from('visitor_events').insert([
-            {
-              visitor_id: visitorIdRef.current,
-              pagina: pathname,
-              evento_tipo: 'page_view',
-              datos_adicionales: { referrer },
-            },
-          ])
+          await fetch('/api/track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'page_view',
+              visitorId: visitorIdRef.current,
+              pathname,
+              referrer: document.referrer || '',
+            }),
+          });
         }
       } catch (error) {
-        console.error('Error tracking page:', error)
+        console.warn('Error tracking page:', error);
       }
     }
 
     trackPageView()
 
-    // Limpiar: registrar tiempo invertido en la página
     return () => {
       if (visitorIdRef.current && timeStartRef.current) {
         const timeSpent = Math.round((Date.now() - timeStartRef.current) / 1000)
 
         if (timeSpent > 5) {
-          // Solo registrar si pasó más de 5 segundos
-          const trackTime = async () => {
-            try {
-              await supabase
-                .from('visitor_events')
-                .insert([
-                  {
-                    visitor_id: visitorIdRef.current,
-                    pagina: pathname,
-                    evento_tipo: 'time_spent',
-                    datos_adicionales: { segundos: timeSpent },
-                  },
-                ]);
-            } catch (error) {
-              console.warn('Failed to track time spent:', error instanceof Error ? error.message : 'Unknown error');
-            }
+          // Use sendBeacon for reliability on page unload
+          const payload = JSON.stringify({
+            type: 'time_spent',
+            visitorId: visitorIdRef.current,
+            pathname,
+            timeSpent,
+          });
+
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon('/api/track', new Blob([payload], { type: 'application/json' }));
+          } else {
+            fetch('/api/track', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: payload,
+              keepalive: true,
+            }).catch(() => {});
           }
-          trackTime()
         }
       }
     }
