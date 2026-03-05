@@ -54,7 +54,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Permissions-Policy',
-            value: 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()'
+            value: 'geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), browsing-topics=(), interest-cohort=(), serial=(), hid=(), bluetooth=(), display-capture=()'
           },
           {
             key: 'Strict-Transport-Security',
@@ -75,6 +75,14 @@ const nextConfig: NextConfig = {
           {
             key: 'Cross-Origin-Resource-Policy',
             value: 'same-origin'
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'credentialless'
+          },
+          {
+            key: 'X-Permitted-Cross-Domain-Policies',
+            value: 'none'
           },
           // Pages: no browser cache, revalidate on CDN every 60s
           {
@@ -102,19 +110,44 @@ const nextConfig: NextConfig = {
           }
         ]
       },
-      // Headers específicos para APIs - sin cache
+      // Headers específicos para APIs - sin cache + security hardened
       {
         source: '/api/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate'
+            value: 'no-store, no-cache, must-revalidate, private'
           },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'none'; frame-ancestors 'none'"
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache'
+          },
+          {
+            key: 'Expires',
+            value: '0'
           }
         ]
+      },
+      // Block access to sensitive dotfiles and config
+      {
+        source: '/.env',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
+      },
+      {
+        source: '/.git/:path*',
+        headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }]
       }
     ]
   },

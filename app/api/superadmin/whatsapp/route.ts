@@ -115,7 +115,7 @@ export async function PUT(request: NextRequest) {
   }
 }
 
-// POST - Send a WhatsApp message (manual)
+// POST - Send a WhatsApp message (manual from panel)
 export async function POST(request: NextRequest) {
   try {
     const supabase = getSupabase();
@@ -125,24 +125,48 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Teléfono y mensaje requeridos' }, { status: 400 });
     }
 
+    // Try to send via WhatsApp Business API
+    const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
+    const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
+    let sent = false;
+
+    if (phoneNumberId && accessToken) {
+      try {
+        const waRes = await fetch(
+          `https://graph.facebook.com/v21.0/${phoneNumberId}/messages`,
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              messaging_product: 'whatsapp',
+              to: phone.replace(/[^0-9]/g, ''),
+              type: 'text',
+              text: { body: message },
+            }),
+          }
+        );
+        sent = waRes.ok;
+      } catch (e) {
+        console.error('WhatsApp API send error:', e);
+      }
+    }
+
     // Log the message
     await supabase.from('whatsapp_messages').insert({
       phone_number: phone,
       direction: 'outbound',
       content: message,
-      status: 'pending',
+      status: sent ? 'sent' : 'pending',
       is_bot: false,
     });
 
-    // TODO: Send via WhatsApp Business API when configured
-    // const config = await supabase.from('whatsapp_config').select('*').single();
-    // if (config.data?.api_token && config.data?.phone_number_id) {
-    //   await sendWhatsAppMessage(config.data, phone, message);
-    // }
-
     return NextResponse.json({ 
       success: true, 
-      note: 'Mensaje registrado. Configura la API de WhatsApp Business para envío automático.' 
+      sent,
+      note: sent ? 'Mensaje enviado por WhatsApp' : 'Mensaje registrado. Configura la API de WhatsApp Business para envío real.' 
     });
   } catch (error) {
     console.error('Send WhatsApp error:', error);

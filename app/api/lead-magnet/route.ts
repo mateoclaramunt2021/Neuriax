@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase';
 import { NextRequest, NextResponse } from 'next/server';
+import { checkRateLimit, getClientIP, rateLimitExceededResponse, RATE_LIMIT_CONFIGS } from '@/lib/rate-limit';
 
 // Importar Resend solo si la API key existe
 let resend: any = null;
@@ -8,19 +9,45 @@ if (process.env.RESEND_API_KEY) {
   resend = new Resend(process.env.RESEND_API_KEY);
 }
 
+// ── Input sanitization ──
+function sanitize(input: string): string {
+  return input
+    .replace(/[<>]/g, '')           // Strip HTML tags
+    .replace(/javascript:/gi, '')    // Strip JS protocol
+    .replace(/on\w+\s*=/gi, '')     // Strip event handlers
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '') // Strip control chars
+    .trim()
+    .slice(0, 500);                  // Max length
+}
+
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const { nombre, email, telefono } = await request.json();
+    // Rate limiting
+    const clientIP = getClientIP(request);
+    const rateLimit = checkRateLimit(`lead-magnet:${clientIP}`, RATE_LIMIT_CONFIGS.contact);
+    if (!rateLimit.allowed) {
+      return rateLimitExceededResponse(rateLimit.resetIn);
+    }
 
-    // Validación básica
-    if (!email || !email.includes('@')) {
+    const body = await request.json();
+    const nombre = sanitize(body.nombre || '');
+    const email = sanitize(body.email || '');
+    const telefono = sanitize(body.telefono || '');
+
+    // Validación estricta
+    if (!isValidEmail(email)) {
       return NextResponse.json(
         { error: 'Email inválido' },
         { status: 400 }
       );
     }
 
-    if (!nombre || nombre.trim().length < 2) {
+    if (!nombre || nombre.length < 2) {
       return NextResponse.json(
         { error: 'Nombre inválido' },
         { status: 400 }

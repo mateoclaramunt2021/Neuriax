@@ -1,6 +1,7 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
 interface Conversation {
   phone: string;
@@ -12,23 +13,21 @@ interface Conversation {
 }
 
 interface Message {
-  id: number;
+  id: string;
   phone_number: string;
-  contact_name: string;
   direction: 'inbound' | 'outbound';
   content: string;
-  status: string;
   is_bot: boolean;
+  status: string;
   created_at: string;
 }
 
 interface WhatsAppConfig {
-  id?: number;
   bot_enabled: boolean;
-  system_prompt: string;
   greeting_message: string;
   auto_reply_outside_hours: string;
-  business_hours: { start: string; end: string; timezone: string };
+  system_prompt?: string;
+  business_hours?: { start: string; end: string };
   api_token?: string;
   phone_number_id?: string;
 }
@@ -37,14 +36,21 @@ export default function WhatsAppPage() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [config, setConfig] = useState<WhatsAppConfig | null>(null);
-  const [stats, setStats] = useState<Record<string, number>>({});
-  const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<any>({});
   const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
   const [tab, setTab] = useState<'conversations' | 'config'>('conversations');
+  const [loading, setLoading] = useState(true);
   const [savingConfig, setSavingConfig] = useState(false);
+  const [sending, setSending] = useState(false);
+  const chatEndRef = useRef<HTMLDivElement>(null);
+  const selectedPhoneRef = useRef<string | null>(null);
 
-  const fetchData = async () => {
+  useEffect(() => {
+    selectedPhoneRef.current = selectedPhone;
+  }, [selectedPhone]);
+
+  const fetchData = useCallback(async () => {
     try {
       const res = await fetch('/api/superadmin/whatsapp');
       if (res.ok) {
@@ -58,9 +64,9 @@ export default function WhatsAppPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchConversation = async (phone: string) => {
+  const fetchConversation = useCallback(async (phone: string) => {
     try {
       const res = await fetch(`/api/superadmin/whatsapp?phone=${encodeURIComponent(phone)}`);
       if (res.ok) {
@@ -70,20 +76,38 @@ export default function WhatsAppPage() {
     } catch (err) {
       console.error('Error:', err);
     }
-  };
+  }, []);
 
+  // Initial load
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
+
+  // Real-time polling every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData();
+      if (selectedPhoneRef.current) {
+        fetchConversation(selectedPhoneRef.current);
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [fetchData, fetchConversation]);
 
   useEffect(() => {
     if (selectedPhone) {
       fetchConversation(selectedPhone);
     }
-  }, [selectedPhone]);
+  }, [selectedPhone, fetchConversation]);
+
+  // Auto-scroll
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!selectedPhone || !newMessage.trim()) return;
+    if (!selectedPhone || !newMessage.trim() || sending) return;
+    setSending(true);
     try {
       const res = await fetch('/api/superadmin/whatsapp', {
         method: 'POST',
@@ -91,11 +115,17 @@ export default function WhatsAppPage() {
         body: JSON.stringify({ phone: selectedPhone, message: newMessage }),
       });
       if (res.ok) {
+        const data = await res.json();
         setNewMessage('');
-        fetchConversation(selectedPhone);
+        await fetchConversation(selectedPhone);
+        if (!data.sent) {
+          console.warn('Mensaje guardado pero no enviado por WhatsApp. Configura las credenciales de Meta.');
+        }
       }
     } catch (err) {
       console.error('Error:', err);
+    } finally {
+      setSending(false);
     }
   };
 
@@ -108,9 +138,7 @@ export default function WhatsAppPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(config),
       });
-      if (res.ok) {
-        alert('Configuración guardada');
-      }
+      if (res.ok) alert('Configuración guardada');
     } catch (err) {
       console.error('Error:', err);
     } finally {
@@ -128,14 +156,18 @@ export default function WhatsAppPage() {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">💬 WhatsApp IA</h1>
           <p className="text-slate-500 mt-1">Gestiona conversaciones y automatización</p>
         </div>
-        <div className="flex items-center gap-2">
-          <span className={`w-3 h-3 rounded-full ${config?.bot_enabled ? 'bg-green-500' : 'bg-red-400'}`} />
-          <span className="text-sm text-slate-600">{config?.bot_enabled ? 'Bot activo' : 'Bot desactivado'}</span>
+        <div className="flex items-center gap-4">
+          <LiveIndicator lastUpdated={new Date()} />
+          <div className="flex items-center gap-2">
+            <span className={`w-3 h-3 rounded-full ${config?.bot_enabled ? 'bg-green-500 animate-pulse' : 'bg-red-400'}`} />
+            <span className="text-sm text-slate-600">{config?.bot_enabled ? 'Bot activo' : 'Bot desactivado'}</span>
+          </div>
         </div>
       </div>
 
@@ -151,7 +183,7 @@ export default function WhatsAppPage() {
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <p className="text-2xl font-bold text-green-600">{stats.botMessages || 0}</p>
-          <p className="text-xs text-slate-500">Mensajes del bot</p>
+          <p className="text-xs text-slate-500">Respuestas del bot</p>
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <p className="text-2xl font-bold text-blue-600">{stats.humanMessages || 0}</p>
@@ -183,8 +215,9 @@ export default function WhatsAppPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Conversation list */}
           <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
-            <div className="p-4 border-b border-slate-200">
+            <div className="p-4 border-b border-slate-200 flex items-center justify-between">
               <h3 className="font-semibold text-slate-900">Conversaciones</h3>
+              <span className="text-xs text-slate-400">{conversations.length} total</span>
             </div>
             <div className="divide-y divide-slate-100 max-h-[500px] overflow-y-auto">
               {conversations.length > 0 ? conversations.map((conv) => (
@@ -192,13 +225,13 @@ export default function WhatsAppPage() {
                   key={conv.phone}
                   onClick={() => setSelectedPhone(conv.phone)}
                   className={`w-full text-left p-4 hover:bg-slate-50 transition-colors ${
-                    selectedPhone === conv.phone ? 'bg-cyan-50' : ''
+                    selectedPhone === conv.phone ? 'bg-green-50 border-l-4 border-green-500' : ''
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <p className="font-medium text-slate-900 text-sm">{conv.name}</p>
                     {conv.unread > 0 && (
-                      <span className="w-5 h-5 bg-green-500 text-white text-xs rounded-full flex items-center justify-center">
+                      <span className="w-5 h-5 bg-green-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse">
                         {conv.unread}
                       </span>
                     )}
@@ -210,8 +243,9 @@ export default function WhatsAppPage() {
                 </button>
               )) : (
                 <div className="p-8 text-center text-slate-400 text-sm">
-                  <p>No hay conversaciones aún.</p>
-                  <p className="mt-2 text-xs">Configura la API de WhatsApp Business para empezar a recibir mensajes.</p>
+                  <p className="text-4xl mb-3">📱</p>
+                  <p className="font-medium">No hay conversaciones aún</p>
+                  <p className="mt-2 text-xs">Cuando alguien te escriba por WhatsApp, las conversaciones aparecerán aquí en tiempo real.</p>
                 </div>
               )}
             </div>
@@ -221,29 +255,45 @@ export default function WhatsAppPage() {
           <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 flex flex-col min-h-[500px]">
             {selectedPhone ? (
               <>
-                <div className="p-4 border-b border-slate-200">
-                  <p className="font-semibold text-slate-900">{selectedPhone}</p>
+                <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-slate-900">
+                      {conversations.find(c => c.phone === selectedPhone)?.name || selectedPhone}
+                    </p>
+                    <p className="text-xs text-slate-400">{selectedPhone}</p>
+                  </div>
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                    WhatsApp
+                  </span>
                 </div>
-                <div className="flex-1 p-4 overflow-y-auto space-y-3 max-h-[400px]">
+                <div className="flex-1 p-4 overflow-y-auto space-y-3 max-h-[400px] bg-[#f0f2f5]">
                   {messages.map((msg) => (
                     <div
                       key={msg.id}
                       className={`flex ${msg.direction === 'outbound' ? 'justify-end' : 'justify-start'}`}
                     >
                       <div
-                        className={`max-w-[70%] rounded-2xl px-4 py-2 text-sm ${
+                        className={`max-w-[70%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
                           msg.direction === 'outbound'
                             ? msg.is_bot
                               ? 'bg-green-100 text-green-900'
                               : 'bg-cyan-500 text-white'
-                            : 'bg-slate-100 text-slate-800'
+                            : 'bg-white text-slate-800'
                         }`}
                       >
-                        {msg.is_bot && <p className="text-[10px] opacity-60 mb-1">🤖 Bot</p>}
-                        <p>{msg.content}</p>
-                        <p className={`text-[10px] mt-1 ${msg.direction === 'outbound' && !msg.is_bot ? 'text-cyan-100' : 'text-slate-400'}`}>
-                          {new Date(msg.created_at).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
-                        </p>
+                        {msg.is_bot && <p className="text-[10px] opacity-60 mb-1">🤖 Bot IA</p>}
+                        {msg.direction === 'outbound' && !msg.is_bot && <p className="text-[10px] opacity-60 mb-1">👤 Manual</p>}
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                        <div className="flex items-center gap-1 mt-1">
+                          <p className={`text-[10px] ${msg.direction === 'outbound' && !msg.is_bot ? 'text-cyan-100' : 'text-slate-400'}`}>
+                            {new Date(msg.created_at).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                          {msg.direction === 'outbound' && (
+                            <span className={`text-[10px] ${msg.status === 'sent' ? 'text-green-500' : 'text-slate-300'}`}>
+                              {msg.status === 'sent' ? '✓✓' : '✓'}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -252,28 +302,36 @@ export default function WhatsAppPage() {
                       Sin mensajes
                     </div>
                   )}
+                  <div ref={chatEndRef} />
                 </div>
                 <div className="p-4 border-t border-slate-200 flex gap-3">
                   <input
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                    onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
                     placeholder="Escribe un mensaje..."
                     className="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    disabled={sending}
                   />
                   <button
                     onClick={handleSendMessage}
-                    disabled={!newMessage.trim()}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 disabled:opacity-50 transition-colors"
+                    disabled={!newMessage.trim() || sending}
+                    className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 disabled:opacity-50 transition-colors flex items-center gap-2"
                   >
+                    {sending ? (
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                      '📤'
+                    )}
                     Enviar
                   </button>
                 </div>
               </>
             ) : (
-              <div className="flex items-center justify-center h-full text-slate-400 text-sm">
-                Selecciona una conversación
+              <div className="flex flex-col items-center justify-center h-full text-slate-400 text-sm gap-3">
+                <span className="text-5xl">💬</span>
+                <p>Selecciona una conversación para ver los mensajes</p>
               </div>
             )}
           </div>
@@ -335,7 +393,7 @@ export default function WhatsAppPage() {
               <input
                 type="time"
                 value={config.business_hours?.start || '09:00'}
-                onChange={(e) => setConfig({ ...config, business_hours: { ...config.business_hours, start: e.target.value } })}
+                onChange={(e) => setConfig({ ...config, business_hours: { ...config.business_hours, start: e.target.value, end: config.business_hours?.end || '20:00' } })}
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg text-sm"
               />
             </div>
@@ -344,7 +402,7 @@ export default function WhatsAppPage() {
               <input
                 type="time"
                 value={config.business_hours?.end || '20:00'}
-                onChange={(e) => setConfig({ ...config, business_hours: { ...config.business_hours, end: e.target.value } })}
+                onChange={(e) => setConfig({ ...config, business_hours: { start: config.business_hours?.start || '09:00', ...config.business_hours, end: e.target.value } })}
                 className="w-full px-4 py-2 border border-slate-300 rounded-lg text-sm"
               />
             </div>

@@ -4,6 +4,24 @@ import { useState, FormEvent } from "react";
 
 const CALENDLY_URL = "https://calendly.com/neuriax/30min";
 
+// Client-side input sanitization
+function sanitize(input: string, maxLen = 500): string {
+  return input
+    .replace(/[<>]/g, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+\s*=/gi, '')
+    .trim()
+    .slice(0, maxLen);
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email) && email.length <= 254;
+}
+
+function isValidPhone(phone: string): boolean {
+  return /^[+\d\s\-().]{6,20}$/.test(phone);
+}
+
 const SECTORES = [
   "Restauración / Hostelería",
   "Clínica / Salud",
@@ -62,6 +80,18 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    // Client-side validation before sending
+    const cleanName = sanitize(formData.nombre, 100);
+    const cleanEmail = sanitize(formData.email, 254);
+    const cleanPhone = sanitize(formData.telefono, 20);
+    const cleanEmpresa = sanitize(formData.empresa, 200);
+    const cleanMensaje = sanitize(formData.mensaje, 2000);
+
+    if (!cleanName || cleanName.length < 2) return;
+    if (!isValidEmail(cleanEmail)) return;
+    if (cleanPhone && !isValidPhone(cleanPhone)) return;
+
     setStatus("sending");
 
     try {
@@ -69,21 +99,22 @@ export default function ContactForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          empresa: formData.empresa,
+          nombre: cleanName,
+          email: cleanEmail,
+          telefono: cleanPhone,
+          empresa: cleanEmpresa,
           sector: formData.sector,
+          servicio: formData.servicio,
           mensaje: [
             `📋 SOLICITUD DESDE FORMULARIO WEB`,
             ``,
-            `🏢 Empresa: ${formData.empresa || "No especificada"}`,
+            `🏢 Empresa: ${cleanEmpresa || "No especificada"}`,
             `📍 Sector: ${formData.sector || "No especificado"}`,
             `🎯 Servicio: ${formData.servicio || "No especificado"}`,
             `💰 Presupuesto: ${formData.presupuesto || "No especificado"}`,
             ``,
             `💬 Mensaje:`,
-            formData.mensaje || "Sin comentarios adicionales",
+            cleanMensaje || "Sin comentarios adicionales",
           ].join("\n"),
           type: "contact_form",
         }),

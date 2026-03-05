@@ -17,6 +17,22 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// ── Server-side input sanitization ──
+function sanitize(input: unknown, maxLen = 500): string {
+  if (typeof input !== 'string') return '';
+  return input
+    .replace(/[<>]/g, '')
+    .replace(/javascript:/gi, '')
+    .replace(/on\w+\s*=/gi, '')
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '')
+    .trim()
+    .slice(0, maxLen);
+}
+
+function isValidEmail(email: string): boolean {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email) && email.length <= 254;
+}
+
 // Helper to log emails to email_log table for superadmin panel
 async function logEmail(params: { to: string; subject: string; type: string; contact_id?: string }) {
   try {
@@ -56,14 +72,20 @@ export async function POST(request: NextRequest) {
       
       // ========== FORMULARIO DE DEMO LANDING ==========
       if (jsonData.tipo === 'demo-landing') {
-        const { 
-          nombre, email, telefono, 
-          nombreEmpresa, sector, urlActual,
-          objetivo, servicioDestacado, colorPreferido, competencia, comentarios 
-        } = jsonData;
+        const nombre = sanitize(jsonData.nombre, 100);
+        const email = sanitize(jsonData.email, 254);
+        const telefono = sanitize(jsonData.telefono, 20);
+        const nombreEmpresa = sanitize(jsonData.nombreEmpresa, 200);
+        const sector = sanitize(jsonData.sector, 100);
+        const urlActual = sanitize(jsonData.urlActual, 500);
+        const objetivo = sanitize(jsonData.objetivo, 500);
+        const servicioDestacado = sanitize(jsonData.servicioDestacado, 200);
+        const colorPreferido = sanitize(jsonData.colorPreferido, 50);
+        const competencia = sanitize(jsonData.competencia, 500);
+        const comentarios = sanitize(jsonData.comentarios, 2000);
 
         // Validar datos del formulario
-        if (!nombre || !email || !nombreEmpresa || !sector || !objetivo || !servicioDestacado) {
+        if (!nombre || !isValidEmail(email) || !nombreEmpresa || !sector || !objetivo || !servicioDestacado) {
           return NextResponse.json(
             { error: 'Faltan campos requeridos' },
             { status: 400 }
@@ -266,10 +288,16 @@ export async function POST(request: NextRequest) {
       }
 
       // ========== FORMULARIO DE CONTACTO NORMAL ==========
-      const { nombre, email, telefono, empresa, sector, mensaje, type } = jsonData;
+      const nombre = sanitize(jsonData.nombre, 100);
+      const email = sanitize(jsonData.email, 254);
+      const telefono = sanitize(jsonData.telefono, 20);
+      const empresa = sanitize(jsonData.empresa, 200);
+      const sector = sanitize(jsonData.sector, 100);
+      const mensaje = sanitize(jsonData.mensaje, 5000);
+      const type = sanitize(jsonData.type, 50);
 
       // Validar datos del formulario de contacto
-      if (!nombre || !email) {
+      if (!nombre || !isValidEmail(email)) {
         return NextResponse.json(
           { error: 'Faltan campos requeridos (nombre y email)' },
           { status: 400 }
