@@ -14,6 +14,9 @@ interface DashboardData {
     todayContacts: number;
     totalEmails: number;
     totalChats: number;
+    todayCalls: number;
+    totalCalls: number;
+    pendingMeetings: number;
   };
   topPages: [string, number][];
   recentContacts: Array<{
@@ -30,6 +33,20 @@ interface DashboardData {
     nombre: string;
     created_at: string;
   }>;
+  recentCalls: Array<{
+    vapi_call_id: string;
+    phone_number: string;
+    contact_name: string;
+    status: string;
+    duration_seconds: number;
+    meeting_scheduled: boolean;
+    created_at: string;
+  }>;
+  nextMeeting: {
+    contact_name: string;
+    meeting_date: string;
+    meeting_type: string;
+  } | null;
   dailyVisits: Record<string, number>;
   pipeline: Record<string, number>;
 }
@@ -116,6 +133,27 @@ export default function SuperAdminDashboard() {
           title="Emails Enviados"
           value={stats?.totalEmails || 0}
           icon="📧"
+        />
+      </div>
+
+      {/* VAPI KPIs */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <StatsCard
+          title="Llamadas Hoy"
+          value={stats?.todayCalls || 0}
+          icon="📞"
+          subtitle={`${stats?.totalCalls || 0} total`}
+        />
+        <StatsCard
+          title="Reuniones Pendientes"
+          value={stats?.pendingMeetings || 0}
+          icon="📅"
+          subtitle={data?.nextMeeting ? `Próxima: ${data.nextMeeting.contact_name}` : undefined}
+        />
+        <StatsCard
+          title="Chats IA"
+          value={stats?.totalChats || 0}
+          icon="🤖"
         />
       </div>
 
@@ -225,6 +263,41 @@ export default function SuperAdminDashboard() {
           </div>
         </div>
       </div>
+
+      {/* Recent VAPI Calls */}
+      {data?.recentCalls && data.recentCalls.length > 0 && (
+        <div className="bg-white rounded-xl border border-slate-200 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-slate-900">📞 Últimas llamadas VAPI</h2>
+            <a href="/superadmin/llamadas" className="text-sm text-cyan-600 hover:text-cyan-800 font-medium">
+              Ver todas →
+            </a>
+          </div>
+          <div className="space-y-2">
+            {data.recentCalls.map((call) => (
+              <div key={call.vapi_call_id} className="flex items-center justify-between py-2 px-3 bg-slate-50 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <span className={`text-lg ${call.status === 'ended' ? '' : call.status === 'in-progress' ? '' : ''}`}>
+                    {call.status === 'ended' ? '✅' : call.status === 'in-progress' ? '🔵' : '❌'}
+                  </span>
+                  <div>
+                    <p className="text-sm font-medium text-slate-900">
+                      {call.contact_name || call.phone_number || 'Desconocido'}
+                    </p>
+                    <p className="text-xs text-slate-500">
+                      {call.duration_seconds > 0 ? `${Math.floor(call.duration_seconds / 60)}:${(call.duration_seconds % 60).toString().padStart(2, '0')}` : 'En curso'}
+                      {call.meeting_scheduled && ' · 📅 Reunión agendada'}
+                    </p>
+                  </div>
+                </div>
+                <span className="text-xs text-slate-400 whitespace-nowrap">
+                  {new Date(call.created_at).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

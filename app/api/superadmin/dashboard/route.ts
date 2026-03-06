@@ -116,6 +116,38 @@ export async function GET() {
       .gte('timestamp', fiveMinAgo);
     const activeNow = new Set(activeVisitors?.map((v: { visitor_id: number }) => v.visitor_id)).size;
 
+    // ── VAPI Stats ──
+    const { count: todayCalls } = await supabase
+      .from('vapi_calls')
+      .select('*', { count: 'exact', head: true })
+      .gte('created_at', todayStart);
+
+    const { count: totalCalls } = await supabase
+      .from('vapi_calls')
+      .select('*', { count: 'exact', head: true });
+
+    const { count: pendingMeetings } = await supabase
+      .from('vapi_meetings')
+      .select('*', { count: 'exact', head: true })
+      .eq('status', 'scheduled')
+      .gte('meeting_date', now.toISOString());
+
+    const { data: nextMeetingData } = await supabase
+      .from('vapi_meetings')
+      .select('contact_name, meeting_date, meeting_type')
+      .eq('status', 'scheduled')
+      .gte('meeting_date', now.toISOString())
+      .order('meeting_date', { ascending: true })
+      .limit(1)
+      .single();
+
+    // Recent calls
+    const { data: recentCalls } = await supabase
+      .from('vapi_calls')
+      .select('vapi_call_id, phone_number, contact_name, status, duration_seconds, meeting_scheduled, created_at')
+      .order('created_at', { ascending: false })
+      .limit(5);
+
     return NextResponse.json({
       activeNow,
       stats: {
@@ -126,10 +158,15 @@ export async function GET() {
         todayContacts: todayContacts || 0,
         totalEmails: totalEmails || 0,
         totalChats: totalChats || 0,
+        todayCalls: todayCalls || 0,
+        totalCalls: totalCalls || 0,
+        pendingMeetings: pendingMeetings || 0,
       },
       topPages,
       recentContacts: recentContacts || [],
       recentVisitors: recentVisitors || [],
+      recentCalls: recentCalls || [],
+      nextMeeting: nextMeetingData || null,
       dailyVisits,
       pipeline,
     });

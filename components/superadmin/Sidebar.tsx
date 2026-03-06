@@ -8,6 +8,8 @@ const navItems = [
   { href: '/superadmin', label: 'Dashboard', icon: '📊' },
   { href: '/superadmin/inbox', label: 'Bandeja Unificada', icon: '📥' },
   { href: '/superadmin/clientes', label: 'Clientes (CRM)', icon: '👥' },
+  { href: '/superadmin/llamadas', label: 'Llamadas VAPI', icon: '📞' },
+  { href: '/superadmin/reuniones', label: 'Reuniones', icon: '📅' },
   { href: '/superadmin/emails', label: 'Emails', icon: '📧' },
   { href: '/superadmin/whatsapp', label: 'WhatsApp IA', icon: '💬' },
   { href: '/superadmin/instagram', label: 'Instagram', icon: '📸' },
