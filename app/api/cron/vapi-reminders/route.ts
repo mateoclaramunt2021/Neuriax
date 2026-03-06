@@ -15,8 +15,8 @@ function getResend() {
 }
 
 /**
- * Cron job: checks upcoming meetings and sends reminder emails.
- * Runs every 5 minutes via Vercel Cron.
+ * Cron job: checks today's meetings and sends reminder emails.
+ * Runs daily at 7:00 AM (UTC) via Vercel Cron.
  * GET /api/cron/vapi-reminders
  */
 export async function GET() {
@@ -24,22 +24,21 @@ export async function GET() {
     const supabase = getSupabase();
     const resend = getResend();
 
-    // Get reminder config
+    // Get config
     const { data: config } = await supabase
       .from('vapi_config')
-      .select('reminder_minutes_before, confirmation_email_enabled')
+      .select('confirmation_email_enabled')
       .limit(1)
       .single();
-
-    const reminderMinutes = config?.reminder_minutes_before || 15;
 
     if (config && !config.confirmation_email_enabled) {
       return NextResponse.json({ ok: true, skipped: true, reason: 'emails disabled' });
     }
 
-    // Find meetings happening in the next [reminderMinutes] that haven't been reminded
+    // Find all scheduled meetings happening today that haven't been reminded
     const now = new Date();
-    const reminderWindow = new Date(now.getTime() + reminderMinutes * 60 * 1000);
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
 
     const { data: meetings, error } = await supabase
       .from('vapi_meetings')
@@ -47,7 +46,7 @@ export async function GET() {
       .eq('status', 'scheduled')
       .eq('reminder_email_sent', false)
       .gte('meeting_date', now.toISOString())
-      .lte('meeting_date', reminderWindow.toISOString());
+      .lte('meeting_date', endOfDay.toISOString());
 
     if (error) {
       console.error('[VAPI Reminders] DB error:', error);
