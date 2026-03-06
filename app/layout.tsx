@@ -25,7 +25,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Neuriax | Agencia de IA #1 en España · Automatización & Agentes Inteligentes',
+    default: 'Neuriax | Agencia de IA en España · Automatización & Agentes Inteligentes',
     template: '%s | Neuriax - Agencia de Inteligencia Artificial',
   },
   description: "Agencia de inteligencia artificial líder en España. Expertos en agentes IA conversacionales, chatbots empresariales, automatización con IA y agentes de voz. +50 empresas confían en Neuriax. Consultoría gratuita.",
@@ -120,12 +120,12 @@ export const metadata: Metadata = {
     'ICBM': '40.4168, -3.7038',
     'dc.language': 'es',
     'dc.source': 'https://www.neuriax.com',
-    'dc.title': 'Neuriax - Agencia de IA #1 en España',
+    'dc.title': 'Neuriax - Agencia de IA en España',
     'dc.creator': 'Neuriax',
     'dc.subject': 'Inteligencia Artificial, Agencia IA, Automatización',
   },
   openGraph: {
-    title: 'Neuriax | Agencia de IA #1 en España · Automatización Inteligente',
+    title: 'Neuriax | Agencia de IA en España · Automatización Inteligente',
     description: 'Agencia de inteligencia artificial líder en España. Expertos en agentes IA, chatbots, automatización empresarial y soluciones de IA a medida. +50 empresas. Consultoría gratuita.',
     url: 'https://www.neuriax.com',
     siteName: 'Neuriax - Agencia de Inteligencia Artificial',
@@ -134,7 +134,7 @@ export const metadata: Metadata = {
         url: 'https://www.neuriax.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Neuriax - Agencia de IA #1 en España - Automatización e Inteligencia Artificial',
+        alt: 'Neuriax - Agencia de IA en España - Automatización e Inteligencia Artificial',
         type: 'image/jpeg',
       },
     ],
@@ -145,7 +145,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Neuriax | Agencia de IA #1 en España',
+    title: 'Neuriax | Agencia de IA en España',
     description: 'La agencia de inteligencia artificial líder. Agentes IA conversacionales, automatización empresarial y soluciones a medida. Resultados desde el primer mes.',
     creator: '@neuriax_ia',
     site: '@neuriax_ia',
@@ -220,7 +220,7 @@ export default function RootLayout({
                 minValue: 5,
                 maxValue: 20,
               },
-              slogan: 'La Agencia de IA #1 en España',
+              slogan: 'Tu Agencia de IA en España',
               award: 'Agencia de IA más innovadora 2025',
               geo: {
                 '@type': 'GeoCoordinates',
@@ -337,7 +337,7 @@ export default function RootLayout({
                   name: '¿Qué es una agencia de IA?',
                   acceptedAnswer: {
                     '@type': 'Answer',
-                    text: 'Una agencia de IA (inteligencia artificial) es una empresa especializada en desarrollar, implementar y gestionar soluciones basadas en inteligencia artificial para otras empresas. Neuriax es la agencia de IA #1 en España, especializada en agentes conversacionales, automatización empresarial y chatbots inteligentes.',
+                    text: 'Una agencia de IA (inteligencia artificial) es una empresa especializada en desarrollar, implementar y gestionar soluciones basadas en inteligencia artificial para otras empresas. Neuriax es una agencia de IA líder en España, especializada en agentes conversacionales, automatización empresarial y chatbots inteligentes.',
                   },
                 },
                 {
@@ -425,7 +425,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebPage',
               '@id': 'https://www.neuriax.com/#webpage',
-              name: 'Neuriax - Agencia de IA #1 en España',
+              name: 'Neuriax - Agencia de IA en España',
               description: 'Agencia de inteligencia artificial líder en España',
               isPartOf: { '@id': 'https://www.neuriax.com/#website' },
               about: { '@id': 'https://www.neuriax.com/#organization' },

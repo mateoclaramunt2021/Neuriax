@@ -4,7 +4,7 @@ import ContactForm from "../../components/ContactForm";
 import ScrollReveal from "../../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Agencia de IA #1 en España | Neuriax · Inteligencia Artificial para Empresas",
+  title: "Agencia de IA en España | Neuriax · Inteligencia Artificial para Empresas",
   description:
     "Neuriax es la agencia de IA líder en España. Especialistas en agentes IA conversacionales, chatbots inteligentes, automatización empresarial y agentes de voz. +50 empresas confían en nosotros. Implementación en 5 días. Consultoría gratuita.",
   keywords:
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     canonical: "https://www.neuriax.com/agencia-ia",
   },
   openGraph: {
-    title: "Agencia de IA #1 en España | Neuriax",
+    title: "Agencia de IA en España | Neuriax",
     description:
       "La agencia de inteligencia artificial líder. Agentes IA, chatbots, automatización y soluciones a medida. +50 empresas. Resultados desde el primer mes.",
     url: "https://www.neuriax.com/agencia-ia",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia de IA #1 en España | Neuriax",
+    title: "Agencia de IA en España | Neuriax",
     description:
       "Agencia de inteligencia artificial líder. Agentes IA conversacionales, automatización y más.",
   },

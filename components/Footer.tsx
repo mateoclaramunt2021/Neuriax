@@ -53,7 +53,7 @@ export default function Footer() {
               <div className="relative h-10 w-10">
                 <Image
                   src="/assets/images/ChatGPT_Image_10_ene_2026__17_49_11-removebg-preview.png"
-                  alt="Neuriax - Agencia de IA #1 en España"
+                  alt="Neuriax - Agencia de IA en España"
                   fill
                   className="object-contain"
                 />

@@ -76,7 +76,7 @@ export const organizationSchema = {
   },
   'priceRange': '€€',
   'foundingDate': '2024',
-  'slogan': 'La Agencia de IA #1 en España',
+  'slogan': 'Tu Agencia de IA en España',
   'geo': {
     '@type': 'GeoCoordinates',
     'latitude': 40.4168,
@@ -212,7 +212,7 @@ export const faqSchema = {
       'name': '¿Qué es una agencia de IA?',
       'acceptedAnswer': {
         '@type': 'Answer',
-        'text': 'Una agencia de IA es una empresa especializada en desarrollar e implementar soluciones de inteligencia artificial. Neuriax es la agencia de IA #1 en España.',
+        'text': 'Una agencia de IA es una empresa especializada en desarrollar e implementar soluciones de inteligencia artificial. Neuriax es una agencia de IA líder en España.',
       },
     },
     {

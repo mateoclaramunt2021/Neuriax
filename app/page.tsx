@@ -3,7 +3,7 @@ import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Neuriax | Agencia de IA #1 en España · Agentes IA & Automatización 24/7",
+  title: "Neuriax | Agencia de IA en España · Agentes IA & Automatización 24/7",
   description:
     "Agencia de inteligencia artificial líder en España. Agentes de IA conversacional que atienden a tus clientes 24/7 por WhatsApp, voz y web. Implementación en 5 días. +50 empresas confían en Neuriax. Consultoría gratuita.",
   keywords:
