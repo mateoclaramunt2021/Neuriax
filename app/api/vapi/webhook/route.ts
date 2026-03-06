@@ -34,115 +34,197 @@ function formatTimeES(date: Date): string {
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 // VAPI Webhook — receives all events from VAPI
-// Configure in VAPI dashboard: https://yourdomain.com/api/vapi/webhook
+// Supports multiple payload formats from VAPI API
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 export async function POST(req: NextRequest) {
+  let body: any;
   try {
-    const body = await req.json();
-    const supabase = getSupabase();
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
 
-    console.log('[VAPI Webhook]', body.message?.type || 'unknown', JSON.stringify(body).slice(0, 500));
+  const supabase = getSupabase();
+  const bodyStr = JSON.stringify(body).slice(0, 3000);
 
-    const messageType = body.message?.type;
+  // ── Flexible event type detection ──
+  // VAPI sends events in different formats depending on the version:
+  // Format A: { message: { type: "...", ... } }
+  // Format B: { type: "...", ... } (flat)
+  // Format C: { event: "...", ... }
+  const messageType =
+    body.message?.type ||
+    body.type ||
+    body.event ||
+    '';
 
-    // ═══ CALL STARTED (status-update with status "in-progress") ═══
-    if (messageType === 'status-update' && body.message?.status === 'in-progress') {
-      const call = body.message?.call || body.message;
-      const callId = call?.id || body.message?.callId;
-      const phoneNumber = call?.customer?.number || '';
-      const customerName = call?.customer?.name || '';
+  // Extract call ID flexibly
+  const callId =
+    body.message?.call?.id ||
+    body.message?.callId ||
+    body.call?.id ||
+    body.callId ||
+    body.id ||
+    '';
 
-      if (callId) {
+  // Log EVERY incoming webhook for debugging
+  try {
+    await supabase.from('vapi_webhook_logs').insert({
+      event_type: messageType || 'unknown',
+      call_id: callId || null,
+      payload: body,
+      processed: false,
+    });
+  } catch (logErr) {
+    console.error('[VAPI Log Error]', logErr);
+  }
+
+  console.log(`[VAPI Webhook] type=${messageType} callId=${callId} body=${bodyStr.slice(0, 300)}`);
+
+  try {
+    // ═══ STATUS UPDATE (call started / ringing / ended) ═══
+    if (messageType === 'status-update') {
+      const status = body.message?.status || body.status || '';
+      const call = body.message?.call || body.call || body.message || body;
+      const cId = call?.id || callId;
+      const phoneNumber = call?.customer?.number || body.customer?.number || '';
+      const customerName = call?.customer?.name || body.customer?.name || '';
+
+      if (cId && (status === 'in-progress' || status === 'ringing')) {
         await supabase.from('vapi_calls').upsert({
-          vapi_call_id: callId,
-          assistant_id: call?.assistantId || '2c027356-c455-4039-bb78-f9da3184c79f',
+          vapi_call_id: cId,
+          assistant_id: call?.assistantId || call?.assistant_id || '2c027356-c455-4039-bb78-f9da3184c79f',
           phone_number: phoneNumber,
           contact_name: customerName,
-          direction: 'inbound',
-          status: 'in-progress',
+          direction: call?.direction || 'inbound',
+          status: status === 'ringing' ? 'ringing' : 'in-progress',
           started_at: new Date().toISOString(),
-          metadata: { raw_event: 'status-update-in-progress' },
+          metadata: { raw_event: `status-update-${status}` },
         }, { onConflict: 'vapi_call_id' });
 
-        // Try to link to existing contact
         if (phoneNumber) {
-          await linkToContact(supabase, callId, phoneNumber);
+          await linkToContact(supabase, cId, phoneNumber);
         }
       }
+
+      // Mark log as processed
+      await supabase.from('vapi_webhook_logs').update({ processed: true })
+        .eq('call_id', callId).eq('event_type', 'status-update').order('created_at', { ascending: false }).limit(1);
 
       return NextResponse.json({ ok: true });
     }
 
     // ═══ END OF CALL REPORT ═══
     if (messageType === 'end-of-call-report') {
-      const report = body.message;
-      const callId = report?.call?.id || report?.callId;
+      const report = body.message || body;
+      const cId = report?.call?.id || report?.callId || callId;
 
-      if (!callId) {
+      if (!cId) {
+        console.log('[VAPI] end-of-call-report without callId, skipping');
         return NextResponse.json({ ok: true, msg: 'no callId' });
       }
 
-      const transcript = report?.transcript || report?.artifact?.transcript || [];
-      const summary = report?.summary || report?.artifact?.summary || '';
-      const recordingUrl = report?.recordingUrl || report?.artifact?.recordingUrl || '';
-      const duration = report?.durationSeconds || report?.call?.duration || 0;
-      const endedReason = report?.endedReason || '';
-      const cost = report?.cost || 0;
-      const phoneNumber = report?.call?.customer?.number || '';
-      const customerName = report?.call?.customer?.name || '';
+      // Extract data flexibly — VAPI puts data in different paths
+      const transcript =
+        report?.transcript ||
+        report?.artifact?.transcript ||
+        report?.messages ||
+        body.transcript ||
+        [];
+      const summary =
+        report?.summary ||
+        report?.artifact?.summary ||
+        report?.analysis?.summary ||
+        body.summary ||
+        '';
+      const recordingUrl =
+        report?.recordingUrl ||
+        report?.artifact?.recordingUrl ||
+        report?.recording_url ||
+        body.recordingUrl ||
+        '';
+      const duration =
+        report?.durationSeconds ||
+        report?.duration ||
+        report?.call?.duration ||
+        body.durationSeconds ||
+        body.duration ||
+        0;
+      const endedReason =
+        report?.endedReason ||
+        report?.ended_reason ||
+        body.endedReason ||
+        '';
+      const cost =
+        report?.cost ||
+        report?.costBreakdown?.total ||
+        body.cost ||
+        0;
+      const phoneNumber =
+        report?.call?.customer?.number ||
+        report?.customer?.number ||
+        body.customer?.number ||
+        '';
+      const customerName =
+        report?.call?.customer?.name ||
+        report?.customer?.name ||
+        body.customer?.name ||
+        '';
 
-      // Update the call record
+      // Check if call exists
       const { data: existingCall } = await supabase
         .from('vapi_calls')
         .select('id')
-        .eq('vapi_call_id', callId)
+        .eq('vapi_call_id', cId)
         .single();
 
       if (existingCall) {
         await supabase.from('vapi_calls').update({
           status: 'ended',
           ended_at: new Date().toISOString(),
-          duration_seconds: Math.round(duration),
-          summary,
-          transcript,
-          recording_url: recordingUrl,
-          ended_reason: endedReason,
-          cost,
+          duration_seconds: Math.round(Number(duration) || 0),
+          summary: summary || null,
+          transcript: Array.isArray(transcript) ? transcript : [],
+          recording_url: recordingUrl || null,
+          ended_reason: endedReason || null,
+          cost: Number(cost) || 0,
           contact_name: customerName || undefined,
-        }).eq('vapi_call_id', callId);
+        }).eq('vapi_call_id', cId);
       } else {
-        // Call wasn't registered (maybe status-update was missed)
         await supabase.from('vapi_calls').insert({
-          vapi_call_id: callId,
-          assistant_id: report?.call?.assistantId || '2c027356-c455-4039-bb78-f9da3184c79f',
+          vapi_call_id: cId,
+          assistant_id: report?.call?.assistantId || report?.assistantId || '2c027356-c455-4039-bb78-f9da3184c79f',
           phone_number: phoneNumber,
           contact_name: customerName,
-          direction: 'inbound',
+          direction: report?.call?.direction || 'inbound',
           status: 'ended',
-          started_at: report?.startedAt || new Date().toISOString(),
+          started_at: report?.startedAt || report?.started_at || new Date().toISOString(),
           ended_at: new Date().toISOString(),
-          duration_seconds: Math.round(duration),
-          summary,
-          transcript,
-          recording_url: recordingUrl,
-          ended_reason: endedReason,
-          cost,
+          duration_seconds: Math.round(Number(duration) || 0),
+          summary: summary || null,
+          transcript: Array.isArray(transcript) ? transcript : [],
+          recording_url: recordingUrl || null,
+          ended_reason: endedReason || null,
+          cost: Number(cost) || 0,
         });
 
         if (phoneNumber) {
-          await linkToContact(supabase, callId, phoneNumber);
+          await linkToContact(supabase, cId, phoneNumber);
         }
       }
 
-      // Check if a meeting was scheduled during this call (via tool calls)
-      const meetingScheduled = await checkForScheduledMeeting(supabase, callId);
+      // Check if a meeting was scheduled during this call
+      const meetingScheduled = await checkForScheduledMeeting(supabase, cId);
 
-      // If no meeting was scheduled but we have an email, send post-call email with PDF
-      if (!meetingScheduled) {
+      // Send post-call email only if:
+      // 1. No meeting was scheduled
+      // 2. We have an email
+      // 3. We have a real summary (not empty)
+      if (!meetingScheduled && summary) {
         const { data: callData } = await supabase
           .from('vapi_calls')
           .select('contact_email, contact_name')
-          .eq('vapi_call_id', callId)
+          .eq('vapi_call_id', cId)
           .single();
 
         if (callData?.contact_email) {
@@ -154,25 +236,73 @@ export async function POST(req: NextRequest) {
         }
       }
 
+      // Send notification to Mateo with call summary
+      try {
+        const resend = getResend();
+        await resend.emails.send({
+          from: 'Neuriax <hola@neuriax.com>',
+          to: 'mateoclaramunt2021@gmail.com',
+          subject: `📞 Llamada VAPI finalizada — ${customerName || phoneNumber || 'Desconocido'}`,
+          html: `
+            <div style="font-family: Arial; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h2 style="color: #0891b2;">📞 Llamada VAPI Finalizada</h2>
+              <p><strong>Contacto:</strong> ${customerName || 'No identificado'}</p>
+              <p><strong>Teléfono:</strong> ${phoneNumber || 'No disponible'}</p>
+              <p><strong>Duración:</strong> ${Math.round(Number(duration) || 0)} segundos</p>
+              <p><strong>Motivo fin:</strong> ${endedReason || 'No especificado'}</p>
+              <p><strong>Reunión agendada:</strong> ${meetingScheduled ? '✅ Sí' : '❌ No'}</p>
+              ${summary ? `<h3 style="color: #0891b2;">📝 Resumen:</h3><p style="background: #f1f5f9; padding: 15px; border-radius: 8px; line-height: 1.6;">${summary}</p>` : '<p style="color:#94a3b8;">Sin resumen disponible</p>'}
+              <hr style="border-color: #e2e8f0; margin: 20px 0;">
+              <p style="font-size: 12px; color: #94a3b8;">ID: ${cId}</p>
+            </div>
+          `,
+        });
+      } catch (emailErr) {
+        console.error('[VAPI] Error sending notification email:', emailErr);
+      }
+
+      // Mark log as processed
+      await supabase.from('vapi_webhook_logs').update({ processed: true })
+        .eq('call_id', cId).eq('event_type', 'end-of-call-report').order('created_at', { ascending: false }).limit(1);
+
       return NextResponse.json({ ok: true });
     }
 
-    // ═══ TOOL CALLS (agent schedules a meeting) ═══
-    if (messageType === 'tool-calls') {
-      const toolCalls = body.message?.toolCalls || body.message?.toolCallList || [];
+    // ═══ TOOL CALLS (agent uses a function) ═══
+    if (messageType === 'tool-calls' || messageType === 'function-call') {
+      const toolCalls =
+        body.message?.toolCalls ||
+        body.message?.toolCallList ||
+        body.toolCalls ||
+        body.toolCallList ||
+        (body.message?.functionCall ? [{ function: body.message.functionCall }] : []) ||
+        (body.functionCall ? [{ function: body.functionCall }] : []) ||
+        [];
+
+      // Also support single tool call format
+      if (toolCalls.length === 0 && (body.message?.function || body.function)) {
+        toolCalls.push({ function: body.message?.function || body.function });
+      }
+
+      const toolCallId =
+        body.message?.call?.id ||
+        body.message?.callId ||
+        body.call?.id ||
+        body.callId ||
+        callId;
 
       for (const toolCall of toolCalls) {
-        const fnName = toolCall?.function?.name || toolCall?.name || '';
+        const fnName =
+          toolCall?.function?.name ||
+          toolCall?.name ||
+          toolCall?.functionName ||
+          '';
 
-        // Handle meeting scheduling tool call
-        if (fnName === 'schedule_meeting' || fnName === 'agendar_reunion' || fnName === 'book_meeting' || fnName === 'bookMeeting') {
-          const args = toolCall?.function?.arguments
-            ? (typeof toolCall.function.arguments === 'string'
-              ? JSON.parse(toolCall.function.arguments)
-              : toolCall.function.arguments)
-            : {};
+        const rawArgs = toolCall?.function?.arguments || toolCall?.arguments || toolCall?.input || {};
+        const args = typeof rawArgs === 'string' ? JSON.parse(rawArgs) : rawArgs;
 
-          const callId = body.message?.call?.id || body.message?.callId || '';
+        // ── Handle meeting scheduling ──
+        if (['schedule_meeting', 'agendar_reunion', 'book_meeting', 'bookMeeting', 'agendar_reunión'].includes(fnName)) {
           const meetingDate = args.date || args.fecha || args.meeting_date || '';
           const meetingTime = args.time || args.hora || args.meeting_time || '';
           const name = args.name || args.nombre || args.contact_name || '';
@@ -181,7 +311,6 @@ export async function POST(req: NextRequest) {
           const type = args.type || args.tipo || args.meeting_type || 'demo';
           const notes = args.notes || args.notas || '';
 
-          // Parse the meeting datetime
           let meetingDatetime: Date;
           try {
             if (meetingDate && meetingTime) {
@@ -189,15 +318,17 @@ export async function POST(req: NextRequest) {
             } else if (meetingDate) {
               meetingDatetime = new Date(meetingDate);
             } else {
-              meetingDatetime = new Date(Date.now() + 24 * 60 * 60 * 1000); // tomorrow
+              meetingDatetime = new Date(Date.now() + 24 * 60 * 60 * 1000);
+            }
+            if (isNaN(meetingDatetime.getTime())) {
+              meetingDatetime = new Date(Date.now() + 24 * 60 * 60 * 1000);
             }
           } catch {
             meetingDatetime = new Date(Date.now() + 24 * 60 * 60 * 1000);
           }
 
-          // Save the meeting
           await supabase.from('vapi_meetings').insert({
-            vapi_call_id: callId,
+            vapi_call_id: toolCallId,
             contact_name: name,
             contact_email: email,
             contact_phone: phone,
@@ -207,16 +338,14 @@ export async function POST(req: NextRequest) {
             status: 'scheduled',
           });
 
-          // Update the call record
-          if (callId) {
+          if (toolCallId) {
             await supabase.from('vapi_calls').update({
               meeting_scheduled: true,
               contact_name: name || undefined,
               contact_email: email || undefined,
-            }).eq('vapi_call_id', callId);
+            }).eq('vapi_call_id', toolCallId);
           }
 
-          // Send confirmation email + PDF
           if (email) {
             await sendMeetingConfirmationWithPDF({
               nombre: name || 'amigo/a',
@@ -227,21 +356,15 @@ export async function POST(req: NextRequest) {
             });
           }
 
-          // Link to CRM
           if (phone || email) {
-            await linkToContactFromMeeting(supabase, callId, { name, email, phone });
+            await linkToContactFromMeeting(supabase, toolCallId, { name, email, phone });
           }
+
+          console.log(`[VAPI] Meeting scheduled: ${name} ${email} ${meetingDate} ${meetingTime}`);
         }
 
-        // ═══ Handle business profile tool call ═══
-        if (fnName === 'guardar_perfil_negocio' || fnName === 'save_business_profile') {
-          const args = toolCall?.function?.arguments
-            ? (typeof toolCall.function.arguments === 'string'
-              ? JSON.parse(toolCall.function.arguments)
-              : toolCall.function.arguments)
-            : {};
-
-          const callId = body.message?.call?.id || body.message?.callId || '';
+        // ── Handle business profile ──
+        if (['guardar_perfil_negocio', 'save_business_profile'].includes(fnName)) {
           const sector = args.sector || 'otro';
           const nombreNegocio = args.nombre_negocio || args.business_name || '';
           const numEmpleados = args.num_empleados || args.employees || 'no_definido';
@@ -252,19 +375,12 @@ export async function POST(req: NextRequest) {
           const urgencia = args.urgencia || args.urgency || 'media';
           const notas = args.notas || args.notes || '';
 
-          // Calculate lead score (1-10)
           const leadScore = calculateLeadScore({
-            sector,
-            numEmpleados,
-            experienciaIa,
-            presupuestoMensual,
-            urgencia,
-            problemaPrincipal,
+            sector, numEmpleados, experienciaIa, presupuestoMensual, urgencia, problemaPrincipal,
           });
 
-          // Save business profile
           await supabase.from('vapi_business_profiles').insert({
-            vapi_call_id: callId,
+            vapi_call_id: toolCallId,
             sector,
             nombre_negocio: nombreNegocio,
             num_empleados: numEmpleados,
@@ -277,17 +393,39 @@ export async function POST(req: NextRequest) {
             lead_score: leadScore,
           });
 
-          console.log(`[VAPI] Business profile saved for call ${callId} — Score: ${leadScore}/10, Sector: ${sector}`);
+          console.log(`[VAPI] Business profile saved — Score: ${leadScore}/10, Sector: ${sector}`);
         }
       }
+
+      // Mark log as processed
+      await supabase.from('vapi_webhook_logs').update({ processed: true })
+        .eq('call_id', callId).eq('event_type', messageType).order('created_at', { ascending: false }).limit(1);
 
       return NextResponse.json({ ok: true });
     }
 
-    // ═══ Other events (transcript, speech-update, etc.) — just acknowledge ═══
-    return NextResponse.json({ ok: true });
+    // ═══ HANG / SPEECH / TRANSCRIPT / CONVERSATION-UPDATE — acknowledge ═══
+    // These are common VAPI events we don't need to process
+    if (['hang', 'speech-update', 'transcript', 'conversation-update', 'model-output', 'voice-input', 'user-interrupted', 'transfer-destination-request'].includes(messageType)) {
+      await supabase.from('vapi_webhook_logs').update({ processed: true })
+        .eq('call_id', callId).eq('event_type', messageType).order('created_at', { ascending: false }).limit(1);
+      return NextResponse.json({ ok: true });
+    }
+
+    // ═══ Unknown event — log it but don't error ═══
+    console.log(`[VAPI Webhook] Unhandled event type: ${messageType}`);
+    return NextResponse.json({ ok: true, unhandled: messageType });
   } catch (error) {
     console.error('[VAPI Webhook Error]', error);
+
+    // Log the error
+    try {
+      await supabase.from('vapi_webhook_logs').update({
+        processed: false,
+        error: String(error),
+      }).eq('call_id', callId).eq('event_type', messageType).order('created_at', { ascending: false }).limit(1);
+    } catch { /* ignore */ }
+
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
