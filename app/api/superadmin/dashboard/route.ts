@@ -148,6 +148,16 @@ export async function GET() {
       .order('created_at', { ascending: false })
       .limit(5);
 
+    // Lead score stats
+    const { data: leadScoreData } = await supabase
+      .from('vapi_business_profiles')
+      .select('lead_score');
+
+    const allScores = (leadScoreData || []).map((r: { lead_score: number }) => r.lead_score).filter(s => s > 0);
+    const avgLeadScore = allScores.length > 0
+      ? Math.round((allScores.reduce((a: number, b: number) => a + b, 0) / allScores.length) * 10) / 10
+      : 0;
+
     return NextResponse.json({
       activeNow,
       stats: {
@@ -161,6 +171,7 @@ export async function GET() {
         todayCalls: todayCalls || 0,
         totalCalls: totalCalls || 0,
         pendingMeetings: pendingMeetings || 0,
+        avgLeadScore,
       },
       topPages,
       recentContacts: recentContacts || [],

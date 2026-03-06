@@ -232,6 +232,53 @@ export async function POST(req: NextRequest) {
             await linkToContactFromMeeting(supabase, callId, { name, email, phone });
           }
         }
+
+        // ═══ Handle business profile tool call ═══
+        if (fnName === 'guardar_perfil_negocio' || fnName === 'save_business_profile') {
+          const args = toolCall?.function?.arguments
+            ? (typeof toolCall.function.arguments === 'string'
+              ? JSON.parse(toolCall.function.arguments)
+              : toolCall.function.arguments)
+            : {};
+
+          const callId = body.message?.call?.id || body.message?.callId || '';
+          const sector = args.sector || 'otro';
+          const nombreNegocio = args.nombre_negocio || args.business_name || '';
+          const numEmpleados = args.num_empleados || args.employees || 'no_definido';
+          const problemaPrincipal = args.problema_principal || args.main_problem || '';
+          const herramientasActuales = args.herramientas_actuales || args.current_tools || '';
+          const experienciaIa = args.experiencia_ia || args.ai_experience || 'ninguna';
+          const presupuestoMensual = args.presupuesto_mensual || args.monthly_budget || 'no_definido';
+          const urgencia = args.urgencia || args.urgency || 'media';
+          const notas = args.notas || args.notes || '';
+
+          // Calculate lead score (1-10)
+          const leadScore = calculateLeadScore({
+            sector,
+            numEmpleados,
+            experienciaIa,
+            presupuestoMensual,
+            urgencia,
+            problemaPrincipal,
+          });
+
+          // Save business profile
+          await supabase.from('vapi_business_profiles').insert({
+            vapi_call_id: callId,
+            sector,
+            nombre_negocio: nombreNegocio,
+            num_empleados: numEmpleados,
+            problema_principal: problemaPrincipal,
+            herramientas_actuales: herramientasActuales,
+            experiencia_ia: experienciaIa,
+            presupuesto_mensual: presupuestoMensual,
+            urgencia,
+            notas,
+            lead_score: leadScore,
+          });
+
+          console.log(`[VAPI] Business profile saved for call ${callId} — Score: ${leadScore}/10, Sector: ${sector}`);
+        }
       }
 
       return NextResponse.json({ ok: true });
@@ -243,6 +290,52 @@ export async function POST(req: NextRequest) {
     console.error('[VAPI Webhook Error]', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// Lead Score Calculator
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+function calculateLeadScore(data: {
+  sector: string;
+  numEmpleados: string;
+  experienciaIa: string;
+  presupuestoMensual: string;
+  urgencia: string;
+  problemaPrincipal: string;
+}): number {
+  let score = 5; // base
+
+  // Sector bonus (high-value sectors)
+  const highValueSectors = ['ecommerce', 'inmobiliaria', 'clinica', 'abogados', 'asesoria'];
+  const midValueSectors = ['hosteleria', 'marketing', 'retail', 'formacion', 'tecnologia'];
+  if (highValueSectors.includes(data.sector)) score += 2;
+  else if (midValueSectors.includes(data.sector)) score += 1;
+
+  // Employees bonus (bigger = higher potential)
+  if (data.numEmpleados === '50+') score += 2;
+  else if (data.numEmpleados === '21-50') score += 1.5;
+  else if (data.numEmpleados === '6-20') score += 1;
+
+  // Budget bonus
+  if (data.presupuestoMensual === 'mas_2000') score += 2;
+  else if (data.presupuestoMensual === '500_2000') score += 1.5;
+  else if (data.presupuestoMensual === '100_500') score += 0.5;
+  else if (data.presupuestoMensual === 'menos_100') score -= 0.5;
+
+  // Urgency bonus
+  if (data.urgencia === 'alta') score += 1;
+  else if (data.urgencia === 'baja') score -= 0.5;
+
+  // AI experience (less = more upside)
+  if (data.experienciaIa === 'ninguna') score += 0.5;
+  else if (data.experienciaIa === 'avanzada') score -= 0.5;
+
+  // Has a clear problem identified
+  if (data.problemaPrincipal && data.problemaPrincipal.length > 15) score += 0.5;
+
+  // Clamp between 1-10
+  return Math.max(1, Math.min(10, Math.round(score)));
 }
 
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

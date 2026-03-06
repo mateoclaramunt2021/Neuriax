@@ -17,6 +17,7 @@ interface DashboardData {
     todayCalls: number;
     totalCalls: number;
     pendingMeetings: number;
+    avgLeadScore: number;
   };
   topPages: [string, number][];
   recentContacts: Array<{
@@ -137,7 +138,7 @@ export default function SuperAdminDashboard() {
       </div>
 
       {/* VAPI KPIs */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatsCard
           title="Llamadas Hoy"
           value={stats?.todayCalls || 0}
@@ -149,6 +150,12 @@ export default function SuperAdminDashboard() {
           value={stats?.pendingMeetings || 0}
           icon="📅"
           subtitle={data?.nextMeeting ? `Próxima: ${data.nextMeeting.contact_name}` : undefined}
+        />
+        <StatsCard
+          title="Lead Score Medio"
+          value={stats?.avgLeadScore || 0}
+          icon="⭐"
+          subtitle="de las llamadas cualificadas"
         />
         <StatsCard
           title="Chats IA"
