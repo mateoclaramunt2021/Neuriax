@@ -109,6 +109,20 @@ export function middleware(request: NextRequest) {
     || request.headers.get('x-real-ip')
     || 'unknown';
 
+  // ━━━━ 0. ALLOW EXTERNAL WEBHOOKS (VAPI, etc.) ━━━━
+  // These endpoints receive POST requests from external services
+  // and must NOT be blocked by bot detection or user-agent filtering
+  const WEBHOOK_PATHS = [
+    '/api/vapi/webhook',
+    '/api/whatsapp',
+    '/api/instagram',
+  ];
+  if (WEBHOOK_PATHS.some(p => pathname.startsWith(p))) {
+    const response = NextResponse.next();
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    return response;
+  }
+
   // ━━━━ 1. BLOCK MALICIOUS BOTS ━━━━
   if (BLOCKED_USER_AGENTS.some(bot => userAgent.includes(bot))) {
     return new NextResponse('Forbidden', { status: 403 });

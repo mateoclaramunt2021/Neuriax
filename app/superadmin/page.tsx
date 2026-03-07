@@ -272,16 +272,16 @@ export default function SuperAdminDashboard() {
       </div>
 
       {/* Recent VAPI Calls */}
-      {data?.recentCalls && data.recentCalls.length > 0 && (
-        <div className="bg-white rounded-xl border border-slate-200 p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-slate-900">📞 Últimas llamadas VAPI</h2>
-            <a href="/superadmin/llamadas" className="text-sm text-cyan-600 hover:text-cyan-800 font-medium">
-              Ver todas →
-            </a>
-          </div>
-          <div className="space-y-2">
-            {data.recentCalls.map((call) => (
+      <div className="bg-white rounded-xl border border-slate-200 p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-slate-900">📞 Últimas llamadas VAPI</h2>
+          <a href="/superadmin/llamadas" className="text-sm text-cyan-600 hover:text-cyan-800 font-medium">
+            Ver todas →
+          </a>
+        </div>
+        <div className="space-y-2">
+          {data?.recentCalls && data.recentCalls.length > 0 ? (
+            data.recentCalls.map((call) => (
               <div key={call.vapi_call_id} className="flex items-center justify-between py-2 px-3 bg-slate-50 rounded-lg">
                 <div className="flex items-center gap-3">
                   <span className={`text-lg ${call.status === 'ended' ? '' : call.status === 'in-progress' ? '' : ''}`}>
@@ -301,10 +301,16 @@ export default function SuperAdminDashboard() {
                   {new Date(call.created_at).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                 </span>
               </div>
-            ))}
-          </div>
+            ))
+          ) : (
+            <div className="text-center py-8 text-slate-400">
+              <p className="text-3xl mb-2">📞</p>
+              <p className="text-sm">Sin llamadas registradas aún</p>
+              <p className="text-xs mt-1">Las llamadas de VAPI aparecerán aquí automáticamente</p>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
