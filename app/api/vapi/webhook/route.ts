@@ -36,6 +36,65 @@ function formatTimeES(date: Date): string {
 // VAPI Webhook — receives all events from VAPI
 // Supports multiple payload formats from VAPI API
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// Helper: Extract phone/name/email from ANY VAPI payload
+function extractContactFromBody(body: any): { phone: string; name: string; email: string } {
+  const msg = body.message || body;
+  const call = msg?.call || body.call || {};
+  const customer = call?.customer || msg?.customer || body.customer || {};
+  return {
+    phone: customer?.number || customer?.phone || '',
+    name: customer?.name || '',
+    email: customer?.email || '',
+  };
+}
+
+// Helper: Ensure a vapi_calls record exists for a given call ID.
+// This is the KEY fix: we create the call record on the FIRST event
+// we receive, regardless of event type (tool-calls, status-update, etc.)
+async function ensureCallRecord(
+  supabase: any,
+  vapiCallId: string,
+  body: any,
+  eventType: string
+) {
+  if (!vapiCallId || vapiCallId.startsWith('test-') || vapiCallId.startsWith('diag-')) return;
+
+  const { data: existing } = await supabase
+    .from('vapi_calls')
+    .select('id')
+    .eq('vapi_call_id', vapiCallId)
+    .maybeSingle();
+
+  if (existing) return; // Already exists
+
+  const contact = extractContactFromBody(body);
+  const msg = body.message || body;
+  const call = msg?.call || body.call || {};
+
+  const { error } = await supabase.from('vapi_calls').insert({
+    vapi_call_id: vapiCallId,
+    assistant_id: call?.assistantId || call?.assistant_id || msg?.assistantId || '2c027356-c455-4039-bb78-f9da3184c79f',
+    phone_number: contact.phone,
+    contact_name: contact.name,
+    contact_email: contact.email,
+    direction: call?.direction || msg?.direction || 'inbound',
+    status: 'in-progress',
+    started_at: call?.startedAt || call?.started_at || new Date().toISOString(),
+    metadata: { created_from_event: eventType },
+  });
+
+  if (error) {
+    console.error(`[VAPI] ensureCallRecord FAILED for ${vapiCallId}:`, error.message, error.details, error.hint);
+  } else {
+    console.log(`[VAPI] Call record created from ${eventType} event: ${vapiCallId}`);
+    // Try to link to existing contact
+    if (contact.phone) {
+      await linkToContact(supabase, vapiCallId, contact.phone);
+    }
+  }
+}
+
 export async function POST(req: NextRequest) {
   let body: any;
   try {
@@ -79,7 +138,13 @@ export async function POST(req: NextRequest) {
     console.error('[VAPI Log Error]', logErr);
   }
 
-  console.log(`[VAPI Webhook] type=${messageType} callId=${callId} body=${bodyStr.slice(0, 300)}`);
+  console.log(`[VAPI Webhook] type=${messageType} callId=${callId} body=${bodyStr.slice(0, 500)}`);
+
+  // ═══ UNIVERSAL: Ensure a call record exists for ANY event with a call ID ═══
+  // This is crucial because VAPI may not always send status-update before other events
+  if (callId) {
+    await ensureCallRecord(supabase, callId, body, messageType);
+  }
 
   try {
     // ═══ STATUS UPDATE (call started / ringing / ended) ═══
@@ -91,7 +156,7 @@ export async function POST(req: NextRequest) {
       const customerName = call?.customer?.name || body.customer?.name || '';
 
       if (cId && (status === 'in-progress' || status === 'ringing')) {
-        await supabase.from('vapi_calls').upsert({
+        const { error: upsertErr } = await supabase.from('vapi_calls').upsert({
           vapi_call_id: cId,
           assistant_id: call?.assistantId || call?.assistant_id || '2c027356-c455-4039-bb78-f9da3184c79f',
           phone_number: phoneNumber,
@@ -101,6 +166,10 @@ export async function POST(req: NextRequest) {
           started_at: new Date().toISOString(),
           metadata: { raw_event: `status-update-${status}` },
         }, { onConflict: 'vapi_call_id' });
+
+        if (upsertErr) {
+          console.error(`[VAPI] status-update UPSERT FAILED for ${cId}:`, upsertErr.message, upsertErr.details);
+        }
 
         if (phoneNumber) {
           await linkToContact(supabase, cId, phoneNumber);
@@ -171,15 +240,15 @@ export async function POST(req: NextRequest) {
         body.customer?.name ||
         '';
 
-      // Check if call exists
+      // Check if call exists (use maybeSingle to avoid errors)
       const { data: existingCall } = await supabase
         .from('vapi_calls')
         .select('id')
         .eq('vapi_call_id', cId)
-        .single();
+        .maybeSingle();
 
       if (existingCall) {
-        await supabase.from('vapi_calls').update({
+        const { error: updateErr } = await supabase.from('vapi_calls').update({
           status: 'ended',
           ended_at: new Date().toISOString(),
           duration_seconds: Math.round(Number(duration) || 0),
@@ -190,8 +259,14 @@ export async function POST(req: NextRequest) {
           cost: Number(cost) || 0,
           contact_name: customerName || undefined,
         }).eq('vapi_call_id', cId);
+
+        if (updateErr) {
+          console.error(`[VAPI] end-of-call UPDATE FAILED for ${cId}:`, updateErr.message, updateErr.details);
+        } else {
+          console.log(`[VAPI] Call ${cId} updated to ended (duration: ${duration}s)`);
+        }
       } else {
-        await supabase.from('vapi_calls').insert({
+        const { error: insertErr } = await supabase.from('vapi_calls').insert({
           vapi_call_id: cId,
           assistant_id: report?.call?.assistantId || report?.assistantId || '2c027356-c455-4039-bb78-f9da3184c79f',
           phone_number: phoneNumber,
@@ -207,6 +282,12 @@ export async function POST(req: NextRequest) {
           ended_reason: endedReason || null,
           cost: Number(cost) || 0,
         });
+
+        if (insertErr) {
+          console.error(`[VAPI] end-of-call INSERT FAILED for ${cId}:`, insertErr.message, insertErr.details);
+        } else {
+          console.log(`[VAPI] Call ${cId} inserted as ended (duration: ${duration}s)`);
+        }
 
         if (phoneNumber) {
           await linkToContact(supabase, cId, phoneNumber);
@@ -339,11 +420,18 @@ export async function POST(req: NextRequest) {
           });
 
           if (toolCallId) {
-            await supabase.from('vapi_calls').update({
-              meeting_scheduled: true,
-              contact_name: name || undefined,
-              contact_email: email || undefined,
-            }).eq('vapi_call_id', toolCallId);
+            const updateData: any = { meeting_scheduled: true };
+            if (name) updateData.contact_name = name;
+            if (email) updateData.contact_email = email;
+            if (phone) updateData.phone_number = phone;
+
+            const { error: meetUpdateErr } = await supabase.from('vapi_calls')
+              .update(updateData)
+              .eq('vapi_call_id', toolCallId);
+
+            if (meetUpdateErr) {
+              console.error(`[VAPI] Failed to update call ${toolCallId} with meeting info:`, meetUpdateErr.message);
+            }
           }
 
           if (email) {
@@ -401,19 +489,23 @@ export async function POST(req: NextRequest) {
       await supabase.from('vapi_webhook_logs').update({ processed: true })
         .eq('call_id', callId).eq('event_type', messageType).order('created_at', { ascending: false }).limit(1);
 
-      return NextResponse.json({ ok: true });
+      // VAPI expects tool call results in a specific format
+      // Return results so VAPI can continue the conversation
+      return NextResponse.json({ ok: true, results: [{ result: 'success' }] });
     }
 
     // ═══ HANG / SPEECH / TRANSCRIPT / CONVERSATION-UPDATE — acknowledge ═══
     // These are common VAPI events we don't need to process
-    if (['hang', 'speech-update', 'transcript', 'conversation-update', 'model-output', 'voice-input', 'user-interrupted', 'transfer-destination-request'].includes(messageType)) {
+    // ensureCallRecord already ran above, so the call IS tracked
+    if (['hang', 'speech-update', 'transcript', 'conversation-update', 'model-output', 'voice-input', 'user-interrupted', 'transfer-destination-request', 'assistant-request'].includes(messageType)) {
       await supabase.from('vapi_webhook_logs').update({ processed: true })
         .eq('call_id', callId).eq('event_type', messageType).order('created_at', { ascending: false }).limit(1);
       return NextResponse.json({ ok: true });
     }
 
     // ═══ Unknown event — log it but don't error ═══
-    console.log(`[VAPI Webhook] Unhandled event type: ${messageType}`);
+    // ensureCallRecord already ran, so even unknown events create call records
+    console.log(`[VAPI Webhook] Unhandled event type: ${messageType}, callId: ${callId}`);
     return NextResponse.json({ ok: true, unhandled: messageType });
   } catch (error) {
     console.error('[VAPI Webhook Error]', error);
