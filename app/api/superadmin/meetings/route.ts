@@ -113,3 +113,50 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
+
+/**
+ * PUT /api/superadmin/meetings — edit meeting details
+ * Body: { id: number, contact_name?, contact_email?, contact_phone?, meeting_date?, meeting_type?, status?, notes? }
+ */
+export async function PUT(req: Request) {
+  try {
+    const supabase = getSupabase();
+    const body = await req.json();
+    const { id, ...fields } = body;
+
+    if (!id) {
+      return NextResponse.json({ error: 'id is required' }, { status: 400 });
+    }
+
+    // Only allow these fields to be updated
+    const allowedFields = [
+      'contact_name', 'contact_email', 'contact_phone',
+      'meeting_date', 'meeting_type', 'status', 'notes', 'meeting_url',
+    ];
+
+    const updateData: Record<string, unknown> = {};
+    for (const key of allowedFields) {
+      if (fields[key] !== undefined) {
+        updateData[key] = fields[key];
+      }
+    }
+
+    if (Object.keys(updateData).length === 0) {
+      return NextResponse.json({ error: 'No fields to update' }, { status: 400 });
+    }
+
+    const { error } = await supabase
+      .from('vapi_meetings')
+      .update(updateData)
+      .eq('id', id);
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error('[Meetings PUT Error]', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}

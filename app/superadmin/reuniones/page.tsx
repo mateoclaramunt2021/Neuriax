@@ -2,7 +2,7 @@
 
 import { useRealtimeData } from '@/hooks/useRealtimeData';
 import StatsCard from '@/components/superadmin/StatsCard';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Meeting {
   id: number;
@@ -83,6 +83,277 @@ function isUpcoming(dateStr: string): boolean {
   return new Date(dateStr) > new Date();
 }
 
+// ── Edit Meeting Modal ──
+function EditMeetingModal({
+  meeting,
+  onClose,
+  onSaved,
+}: {
+  meeting: Meeting;
+  onClose: () => void;
+  onSaved: () => void;
+}) {
+  const [form, setForm] = useState({
+    contact_name: meeting.contact_name || '',
+    contact_email: meeting.contact_email || '',
+    contact_phone: meeting.contact_phone || '',
+    meeting_date: '',
+    meeting_time: '',
+    meeting_type: meeting.meeting_type || 'demo',
+    status: meeting.status || 'scheduled',
+    notes: meeting.notes || '',
+    meeting_url: meeting.meeting_url || '',
+  });
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  // Parse meeting_date into date and time inputs
+  useEffect(() => {
+    if (meeting.meeting_date) {
+      const d = new Date(meeting.meeting_date);
+      const dateStr = d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+      const timeStr = String(d.getHours()).padStart(2, '0') + ':' +
+        String(d.getMinutes()).padStart(2, '0');
+      setForm(prev => ({ ...prev, meeting_date: dateStr, meeting_time: timeStr }));
+    }
+  }, [meeting.meeting_date]);
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setError('');
+  }
+
+  async function handleSave() {
+    if (!form.contact_name.trim()) {
+      setError('El nombre es obligatorio');
+      return;
+    }
+    if (form.contact_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.contact_email)) {
+      setError('Email no válido');
+      return;
+    }
+    if (!form.meeting_date) {
+      setError('La fecha es obligatoria');
+      return;
+    }
+
+    setSaving(true);
+    setError('');
+
+    try {
+      // Combine date + time into ISO string
+      const meetingDatetime = form.meeting_time
+        ? new Date(`${form.meeting_date}T${form.meeting_time}:00`).toISOString()
+        : new Date(`${form.meeting_date}T00:00:00`).toISOString();
+
+      const res = await fetch('/api/superadmin/meetings', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: meeting.id,
+          contact_name: form.contact_name.trim(),
+          contact_email: form.contact_email.trim(),
+          contact_phone: form.contact_phone.trim(),
+          meeting_date: meetingDatetime,
+          meeting_type: form.meeting_type,
+          status: form.status,
+          notes: form.notes.trim(),
+          meeting_url: form.meeting_url.trim(),
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || 'Error al guardar');
+      }
+
+      setSuccess(true);
+      setTimeout(() => {
+        onSaved();
+        onClose();
+      }, 800);
+    } catch (err: any) {
+      setError(err.message || 'Error al guardar');
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between p-5 border-b border-slate-200">
+          <h2 className="text-lg font-bold text-slate-900">✏️ Editar Reunión</h2>
+          <button
+            onClick={onClose}
+            className="text-slate-400 hover:text-slate-600 transition-colors text-xl leading-none"
+          >
+            ✕
+          </button>
+        </div>
+
+        {/* Form */}
+        <div className="p-5 space-y-4">
+          {/* Nombre */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Nombre del contacto *</label>
+            <input
+              type="text"
+              name="contact_name"
+              value={form.contact_name}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              placeholder="Nombre completo"
+            />
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="contact_email"
+              value={form.contact_email}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              placeholder="email@ejemplo.com"
+            />
+          </div>
+
+          {/* Teléfono */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Teléfono</label>
+            <input
+              type="tel"
+              name="contact_phone"
+              value={form.contact_phone}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              placeholder="+34 6XX XXX XXX"
+            />
+          </div>
+
+          {/* Fecha y Hora */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Fecha *</label>
+              <input
+                type="date"
+                name="meeting_date"
+                value={form.meeting_date}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Hora</label>
+              <input
+                type="time"
+                name="meeting_time"
+                value={form.meeting_time}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              />
+            </div>
+          </div>
+
+          {/* Tipo y Estado */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Tipo de reunión</label>
+              <select
+                name="meeting_type"
+                value={form.meeting_type}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none bg-white"
+              >
+                <option value="demo">🎨 Demo</option>
+                <option value="consultoria">💼 Consultoría</option>
+                <option value="seguimiento">🔄 Seguimiento</option>
+                <option value="presentacion">📊 Presentación</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Estado</label>
+              <select
+                name="status"
+                value={form.status}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none bg-white"
+              >
+                <option value="scheduled">🕐 Programada</option>
+                <option value="confirmed">✅ Confirmada</option>
+                <option value="completed">🎉 Completada</option>
+                <option value="cancelled">❌ Cancelada</option>
+                <option value="no-show">👻 No-show</option>
+              </select>
+            </div>
+          </div>
+
+          {/* URL de reunión */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">URL de reunión (opcional)</label>
+            <input
+              type="url"
+              name="meeting_url"
+              value={form.meeting_url}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none"
+              placeholder="https://meet.google.com/..."
+            />
+          </div>
+
+          {/* Notas */}
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Notas</label>
+            <textarea
+              name="notes"
+              value={form.notes}
+              onChange={handleChange}
+              rows={3}
+              className="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 outline-none resize-none"
+              placeholder="Detalles sobre la reunión..."
+            />
+          </div>
+
+          {/* Error / Success */}
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-700 text-sm rounded-lg p-3">
+              ❌ {error}
+            </div>
+          )}
+          {success && (
+            <div className="bg-green-50 border border-green-200 text-green-700 text-sm rounded-lg p-3">
+              ✅ Reunión actualizada correctamente
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-end gap-3 p-5 border-t border-slate-200">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 text-sm font-medium text-slate-600 bg-slate-100 rounded-lg hover:bg-slate-200 transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="px-5 py-2 text-sm font-medium text-white bg-cyan-500 rounded-lg hover:bg-cyan-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {saving ? 'Guardando...' : '💾 Guardar cambios'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ReunionesPage() {
   const { data, loading } = useRealtimeData<MeetingsData>({
     url: '/api/superadmin/meetings',
@@ -91,6 +362,7 @@ export default function ReunionesPage() {
 
   const [filter, setFilter] = useState<string>('all');
   const [updatingId, setUpdatingId] = useState<number | null>(null);
+  const [editingMeeting, setEditingMeeting] = useState<Meeting | null>(null);
 
   async function updateMeetingStatus(id: number, newStatus: string) {
     setUpdatingId(id);
@@ -259,6 +531,12 @@ export default function ReunionesPage() {
 
                   {/* Right: Actions */}
                   <div className="flex flex-col gap-2 min-w-[140px]">
+                    <button
+                      onClick={() => setEditingMeeting(meeting)}
+                      className="px-3 py-1.5 bg-amber-50 text-amber-700 rounded-lg text-xs font-medium hover:bg-amber-100 transition-colors"
+                    >
+                      ✏️ Editar
+                    </button>
                     {meeting.status === 'scheduled' && (
                       <>
                         <button
@@ -305,6 +583,17 @@ export default function ReunionesPage() {
           </div>
         )}
       </div>
+
+      {/* Edit Modal */}
+      {editingMeeting && (
+        <EditMeetingModal
+          meeting={editingMeeting}
+          onClose={() => setEditingMeeting(null)}
+          onSaved={() => {
+            // Data will refresh automatically via polling
+          }}
+        />
+      )}
     </div>
   );
 }
