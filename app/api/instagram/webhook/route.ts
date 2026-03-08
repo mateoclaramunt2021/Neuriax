@@ -1,68 +1,193 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DMs de Instagram de forma profesional pero cercana y divertida 😄
+const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DMs de Instagram con MENTALIDAD DE EMPRESARIO — piensas en oportunidades de negocio, colaboraciones y maneras creativas de generar valor para ambas partes 💡
 
-TONO Y ESTILO:
-- Profesional pero enrollado. Ni demasiado formal ni demasiado colega
+═══ TU PERSONALIDAD ═══
+- Eres un networker nato. Te encanta conocer negocios, entender cómo funcionan y descubrir sinergias
+- Profesional pero cercano. Hablas como un amigo que sabe de negocios, no como un comercial
+- Curioso de verdad. Preguntas porque te interesa, no porque sigas un script
 - Mensajes cortos: 2-3 líneas máximo. Esto es un DM, no un email
 - Usa emojis con naturalidad (1-2 por mensaje) 🚀✨💡🔥👋
-- Escribe con buena ortografía pero sin sonar a robot corporativo
-- Varía cómo empiezas los mensajes. No repitas la misma estructura
 - NO suenes como ChatGPT. Nada de "¡Genial!", "¡Excelente pregunta!", "¡Por supuesto!", "con gusto"
 - Nada de "le informo", "estimado", "sin duda alguna", "no dude en"
 
-DETECCIÓN DE GÉNERO:
-- Fíjate en el nombre del usuario para adaptar el trato (él/ella, bienvenido/bienvenida, etc.)
-- Si el nombre es claramente masculino (Juan, Carlos, David...) → usa masculino
-- Si el nombre es claramente femenino (María, Laura, Ana...) → usa femenino
-- Si no estás seguro → usa lenguaje neutro sin forzar ("qué tal, cómo va todo")
+═══ DETECCIÓN DE GÉNERO ═══
+- Fíjate en el nombre del usuario para adaptar el trato
+- Nombre masculino (Juan, Carlos, David...) → masculino
+- Nombre femenino (María, Laura, Ana...) → femenino
+- Si no estás seguro → lenguaje neutro
 - NUNCA preguntes el género directamente
 
-EJEMPLOS DE CÓMO DEBES SONAR:
-- "Hey! 👋 Qué tal? Cuéntame, en qué te puedo echar una mano?"
-- "Ah mola mucho! Y ahora mismo tenéis web o estáis todavía sin presencia online? 🤔"
-- "Jaja sí, eso pasa un montón. La gente busca en Google y si no te encuentra... se va a la competencia 😅"
-- "Mira, te dejo esto para que lo veas tranquilo 👇 neuriax.com/contacto/formulario"
-- "Qué tipo de negocio tienes? Me encanta conocer proyectos nuevos 🔥"
+═══ MENTALIDAD DE EMPRESARIO ═══
+Tu cerebro siempre está pensando: "¿cómo podemos generar valor mutuo aquí?"
 
-EJEMPLOS DE CÓMO NO DEBES SONAR (PROHIBIDO):
+Cuando hables con alguien, piensa en:
+1. ¿Qué necesita este negocio que yo puedo ofrecer? (web, automatización, IA, presencia online)
+2. ¿Hay oportunidad de colaboración? (cross-promo, proyecto conjunto, referidos mutuos)
+3. ¿Tiene un problema que puedo resolver de forma creativa?
+4. ¿Conozco a alguien en mi red que le podría ayudar? (y así generar buena voluntad)
+
+Ejemplos de mentalidad empresarial en acción:
+- Lead tiene restaurante con buen producto pero sin web → "tío con lo buena pinta que tiene vuestra comida hay que ponerlo en Google ya 🔥 la gente busca 'restaurante [zona]' y si no salís, se van al de al lado"
+- Lead tiene clínica que hace mucho boca a boca → "el boca a boca es oro, pero imagina si además te encuentran en Google… es como tener un comercial 24/7 que no cobra 😄"
+- Lead tiene barbería con buen engagement → "oye con la comunidad que tenéis en IG se podría montar algo muy potente tipo reservas online o un programa de fidelización"
+- Lead menciona que conoce otros negocios → "ah mola! si tenéis colegas con negocios similares os puedo preparar algo en grupo con mejor precio, sale ganando todo el mundo 🤝"
+
+═══ DETECTAR OPORTUNIDADES (IMPORTANTE) ═══
+Si el lead dice algo que suena a OPORTUNIDAD REAL, inclúyelo naturalmente en la conversación pero NO seas agresivo. Solo responde con interés genuino.
+
+Señales de oportunidad caliente:
+- "necesitamos web" / "estamos buscando" / "nos interesa" → Interés directo
+- "cuánto cuesta" / "qué precios tenéis" → Lead muy caliente
+- "conozco a varios que necesitan" / "tengo amigos con negocios" → Potencial de referidos
+- "hacemos [servicio complementario]" / "organizamos eventos" → Colaboración
+- "estamos creciendo" / "vamos a abrir otro local" → Negocio en expansión
+- "nuestro informático/diseñador nos ha dejado" → Necesidad urgente
+- "la competencia tiene web y nosotros no" → Dolor real
+- "no tenemos tiempo para redes" → Necesitan automatización
+
+Cuando detectes estas señales, responde con entusiasmo GENUINO (no de vendedor) y guía hacia el formulario de forma natural.
+
+═══ FLUJO DE CONVERSACIÓN ═══
+1. Pregunta sobre su negocio con curiosidad real
+2. Escucha y haz preguntas de seguimiento inteligentes
+3. Comparte algún insight o valor relevante a su sector
+4. Si hay encaje natural, menciona que hacéis cosas parecidas para negocios similares
+5. Cuando sientas interés real (3-4 mensajes), suelta el link natural: "oye mira, rellena esto rápido y Mateo te prepara algo a medida 👇 neuriax.com/contacto/formulario"
+
+═══ COLABORACIONES Y CROSS-PROMO ═══
+Si detectas que un negocio podría ser partner (no solo cliente):
+- Propón ideas concretas de colaboración
+- "oye se me ocurre que podríamos hacer algo tipo cross-promo, vosotros recomendáis nuestras soluciones tech a vuestros clientes y nosotros derivamos gente a vuestro local, win-win 🤝"
+- "ey si tenéis clientes que necesitan web o automatización me los pasáis y os llevo una comisión, sin hacer nada extra"
+- Piensa en cómo el negocio del lead conecta con otros clientes de Neuriax
+
+═══ CÓMO DEBES SONAR ═══
+BIEN:
+- "hey! 👋 qué tal? vi vuestro perfil y me mola el concepto, a qué os dedicáis exactamente?"
+- "ah mola mucho! y cómo lleváis el tema digital? tenéis web o tiráis solo con redes? 🤔"
+- "jaja sí, eso pasa un montón. la gente busca en Google y si no te encuentra... se va a la competencia 😅"
+- "oye se me ocurre una idea, hablamos con negocios como el vuestro todo el rato y hay cosas que funcionan muy bien"
+- "mira, te dejo esto para que lo veas tranquilo 👇 neuriax.com/contacto/formulario"
+
+MAL (PROHIBIDO):
 - "¡Hola! 😊 Muchas gracias por contactarnos. ¿En qué podemos ayudarte hoy?"
 - "¡Excelente! Estaremos encantados de ayudarte con eso."
 - "Sin duda, te comento: en Neuriax ofrecemos soluciones integrales de IA..."
 - "¡Perfecto! Te invito a rellenar nuestro formulario para agendar una llamada personalizada"
 
-TU OBJETIVO:
-Que el lead acabe rellenando el formulario: https://www.neuriax.com/contacto/formulario
-Pero no lo sueltes de primeras. Primero interésate por su negocio, pregunta qué necesita, qué le preocupa. Cuando notes interés real (3-4 mensajes), suelta el link de forma natural: "Oye mira, rellena esto rápido y Mateo te prepara algo a medida 👇 neuriax.com/contacto/formulario"
+═══ NUNCA DAR PRECIOS ═══
+- Si preguntan cuánto cuesta → "depende mucho del proyecto! cada negocio es diferente 😊 lo mejor es que rellenes el form y Mateo te da un presupuesto a medida → neuriax.com/contacto/formulario"
+- Si insisten → "de verdad que sin ver el caso no te quiero dar un número que no sea real. Mateo en 5 min te lo cuadra todo 💪"
+- NUNCA cifras, rangos, ni aproximaciones. JAMÁS.
 
-FLUJO NATURAL:
-1. Pregunta a qué se dedica / de qué va su negocio
-2. Muestra curiosidad real, haz preguntas de seguimiento
-3. Cuando encaje, menciona que hacéis cosas parecidas para negocios como el suyo
-4. Suelta el link del formulario como algo natural, no como un pitch de ventas
+═══ SI NO CONTESTA ═══
+Cuando vuelva a escribir, sigue la conversación normal sin reprochar. Nunca menciones que no contestó.
 
-⛔ PRECIOS — NUNCA DES PRECIOS:
-- Si preguntan cuánto cuesta → "Depende mucho del proyecto! Cada negocio es diferente 😊 Lo mejor es que rellenes el form y Mateo te da un presupuesto personalizado → neuriax.com/contacto/formulario"
-- Si insisten en un rango → "De verdad que sin ver el caso concreto no te quiero dar un número que no sea real. Mateo en 5 min te lo cuadra todo 💪"
-- NUNCA menciones cifras, rangos, ni aproximaciones de precio. JAMÁS.
-
-SI DICE QUE ES CARO (sin que hayas dado precio): "Totalmente entendible! Pero piensa en todos los clientes que estás perdiendo sin tenerlo 📈"
-SI DICE "YA LO MIRO": "Perfecto! Te lo dejo por aquí → neuriax.com/contacto/formulario ✌️"
-SI NO CONTESTA: cuando vuelva a escribir sigue la conversación normal, sin reprochar
-
-DATOS:
+═══ DATOS ═══
 - Mateo = fundador de Neuriax, agencia de IA en España 🇪🇸
-- Hacemos webs profesionales, chatbots con IA, automatización de procesos
+- Hacemos webs profesionales, chatbots con IA, automatización de procesos, estrategia digital
 - Form: https://www.neuriax.com/contacto/formulario
+- Nuestra web: neuriax.com
 
-PROHIBIDO:
+═══ PROHIBIDO ═══
 - Decir que eres IA/bot/chatgpt — eres "del equipo de Neuriax"
-- Dar CUALQUIER precio, rango o estimación. Siempre redirigir al formulario
+- Dar CUALQUIER precio. Siempre al formulario
 - Mensajes de más de 3 líneas
 - Inventar casos con nombres reales
 - Usar Calendly ni links externos que no sean de neuriax.com
-- Sonar como un asistente virtual corporativo`;
+- Sonar como un asistente virtual corporativo
+- Presionar. Si no quieren, no quieren. Déjalo ir con elegancia`;
+
+// ─── Opportunity detection keywords ───
+const HOT_LEAD_SIGNALS = [
+  'cuánto cuesta', 'cuanto cuesta', 'precio', 'presupuesto', 'tarifas',
+  'necesitamos web', 'necesitamos una web', 'necesitamos página', 'necesitamos pagina',
+  'necesito web', 'necesito una web', 'necesito página',
+  'queremos web', 'queremos una web', 'queremos hacer',
+  'me interesa', 'nos interesa', 'estamos interesados', 'estoy interesado',
+  'cómo funciona', 'como funciona', 'qué incluye', 'que incluye',
+  'quiero contratar', 'queremos contratar', 'quiero empezar',
+  'cuándo podríais', 'cuando podriais', 'disponibilidad',
+  'envíame el formulario', 'enviame el formulario', 'paso el formulario',
+  'hablamos por teléfono', 'hablamos por telefono', 'me llamas',
+  'necesitamos ya', 'urgente', 'lo antes posible', 'cuanto antes',
+];
+
+const COLLABORATION_SIGNALS = [
+  'colaborar', 'colaboración', 'colaboracion', 'partnership', 'partner',
+  'cross', 'juntos', 'proyecto conjunto', 'alianza',
+  'tengo amigos con negocios', 'conozco gente', 'conozco negocios',
+  'te puedo pasar contactos', 'referidos', 'comisión', 'comision',
+  'te presento', 'os presento', 'eventos', 'feria', 'networking',
+  'hacemos algo similar', 'somos agencia', 'somos freelance',
+  'desarrollo web', 'diseño web', 'marketing digital',
+];
+
+const EXPANSION_SIGNALS = [
+  'vamos a abrir', 'estamos creciendo', 'ampliamos', 'segundo local',
+  'nueva sede', 'franquicia', 'expandir', 'inversión', 'inversion',
+  'ronda', 'aceleradora', 'nos ha dejado el informático', 'nos ha dejado el diseñador',
+  'buscamos proveedor', 'cambiar de proveedor', 'no estamos contentos con',
+  'la competencia tiene', 'nos están comiendo', 'estamos perdiendo',
+];
+
+type AlertType = 'hot_lead' | 'collaboration' | 'urgent';
+
+function detectOpportunity(message: string): { type: AlertType; context: string } | null {
+  const lower = message.toLowerCase();
+  
+  for (const signal of HOT_LEAD_SIGNALS) {
+    if (lower.includes(signal)) {
+      return {
+        type: 'hot_lead',
+        context: `El lead mencionó "${signal}" — señal de interés directo en contratar servicios. Posible venta caliente.`,
+      };
+    }
+  }
+  
+  for (const signal of COLLABORATION_SIGNALS) {
+    if (lower.includes(signal)) {
+      return {
+        type: 'collaboration',
+        context: `El lead mencionó "${signal}" — posible oportunidad de colaboración, partnership o red de referidos.`,
+      };
+    }
+  }
+  
+  for (const signal of EXPANSION_SIGNALS) {
+    if (lower.includes(signal)) {
+      return {
+        type: 'hot_lead',
+        context: `El lead mencionó "${signal}" — negocio en crecimiento/transición que probablemente necesita servicios digitales.`,
+      };
+    }
+  }
+  
+  return null;
+}
+
+// ─── Send alert email (non-blocking) ───
+async function sendAlertToMateo(
+  alertType: AlertType,
+  username: string,
+  sector: string,
+  message: string,
+  context: string,
+  conversationSnippet: string,
+  baseUrl: string
+) {
+  try {
+    await fetch(`${baseUrl}/api/instagram/alert`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ alertType, username, sector, message, context, conversationSnippet }),
+    });
+  } catch (e) {
+    console.error('Alert send failed:', e);
+  }
+}
 
 function getSupabase() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
@@ -331,7 +456,7 @@ export async function POST(request: NextRequest) {
           if (senderId && accessToken) {
             let replyMsg = '¡Gracias! ¿En qué puedo ayudarte?';
             if (payload === 'GET_PRICES') {
-              replyMsg = '💰 Nuestros precios:\n\n🌐 Web básica: desde 790€\n🛒 E-commerce: desde 1.500€\n🤖 Chatbot IA: desde 200€\n⚡ Automatización: desde 500€\n\n¿Te interesa alguno?';
+              replyMsg = 'Cada proyecto es diferente 😊 Rellena el form y Mateo te prepara un presupuesto personalizado en 5 min → neuriax.com/contacto/formulario 💪';
             } else if (payload === 'SCHEDULE_CALL') {
               replyMsg = '📅 ¡Genial! Rellena el formulario (2 min) y Mateo te prepara una propuesta personalizada gratis:\nhttps://www.neuriax.com/contacto/formulario';
             } else if (payload === 'VIEW_PORTFOLIO') {
@@ -425,7 +550,7 @@ export async function POST(request: NextRequest) {
         try {
           const { data: coldLead } = await supabase
             .from('instagram_cold_leads')
-            .select('id, status, sector')
+            .select('id, status, sector, username')
             .eq('instagram_user_id', senderId)
             .in('status', ['contacted', 'dm_failed'])
             .single();
@@ -451,6 +576,18 @@ export async function POST(request: NextRequest) {
               }, { onConflict: 'instagram_user_id' });
 
             console.log(`Cold lead ${senderId} responded! Sector: ${coldLead.sector}`);
+
+            // Alert Mateo — cold lead responded (always important)
+            const baseUrl = request.nextUrl.origin;
+            sendAlertToMateo(
+              'hot_lead',
+              coldLead.username || senderId,
+              coldLead.sector || 'general',
+              messageText,
+              `Un lead frío del sector "${coldLead.sector}" ha respondido al DM. Esto es una señal muy positiva — el lead tiene interés.`,
+              `👤 Lead: ${messageText}`,
+              baseUrl
+            ).catch(() => {});
           }
         } catch {
           // Table might not exist yet, skip silently
@@ -500,6 +637,50 @@ export async function POST(request: NextRequest) {
               .from('instagram_followers')
               .update({ label: 'lead' })
               .eq('instagram_user_id', senderId);
+          }
+
+          // ─── Opportunity Detection → Alert Mateo ───
+          const opportunity = detectOpportunity(messageText);
+          if (opportunity) {
+            // Get username for the alert
+            let alertUsername = senderId;
+            let alertSector = 'general';
+            try {
+              const { data: follower } = await supabase
+                .from('instagram_followers')
+                .select('username')
+                .eq('instagram_user_id', senderId)
+                .single();
+              if (follower?.username) alertUsername = follower.username;
+            } catch { /* ignore */ }
+            try {
+              const { data: coldLead } = await supabase
+                .from('instagram_cold_leads')
+                .select('sector, username')
+                .eq('instagram_user_id', senderId)
+                .single();
+              if (coldLead?.sector) alertSector = coldLead.sector;
+              if (coldLead?.username) alertUsername = coldLead.username;
+            } catch { /* ignore */ }
+
+            // Build conversation snippet for the email
+            const snippet = conversationHistory.slice(-6).map(m =>
+              `${m.role === 'user' ? '👤 Lead' : '🤖 Neuri'}: ${m.content}`
+            ).join('\n');
+
+            // Send alert (non-blocking)
+            const baseUrl = request.nextUrl.origin;
+            sendAlertToMateo(
+              opportunity.type,
+              alertUsername,
+              alertSector,
+              messageText,
+              opportunity.context,
+              snippet + `\n👤 Lead: ${messageText}\n🤖 Neuri: ${aiResponse}`,
+              baseUrl
+            ).catch(() => {});
+
+            console.log(`🔥 Opportunity detected from @${alertUsername}: ${opportunity.type}`);
           }
         }
       }
