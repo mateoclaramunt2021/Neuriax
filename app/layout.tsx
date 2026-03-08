@@ -11,6 +11,7 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import StickyCTA from "../components/StickyCTA";
 import SocialProofToast from "../components/SocialProofToast";
 import ExitIntentPopup from "../components/ExitIntentPopup";
+import Chatbot from "../components/Chatbot";
 import LayoutShell from "../components/LayoutShell";
 
 const geistSans = Geist({
@@ -466,6 +467,7 @@ export default function RootLayout({
               <StickyCTA />
               <SocialProofToast />
               <ExitIntentPopup />
+              <Chatbot />
             </>
           }
         >

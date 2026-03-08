@@ -50,6 +50,23 @@ interface DashboardData {
   } | null;
   dailyVisits: Record<string, number>;
   pipeline: Record<string, number>;
+  igStats: {
+    total: number;
+    new: number;
+    contacted: number;
+    responded: number;
+    converted: number;
+    responseRate: number;
+  };
+  recentIgLeads: Array<{
+    id: number;
+    username: string;
+    sector: string;
+    status: string;
+    created_at: string;
+    responded: boolean;
+    lead_intel: { resumen?: string; nivel_interes?: string; nombre_negocio?: string } | null;
+  }>;
 }
 
 export default function SuperAdminDashboard() {
@@ -311,6 +328,113 @@ export default function SuperAdminDashboard() {
           )}
         </div>
       </div>
+
+      {/* ═══ Instagram Cold Leads ═══ */}
+      {data?.igStats && (
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold text-slate-900">📸 Instagram — Leads Fríos</h2>
+            <a href="/superadmin/instagram" className="text-sm text-fuchsia-600 hover:text-fuchsia-800 font-medium">
+              Ver CRM completo →
+            </a>
+          </div>
+
+          {/* IG KPI Cards */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="bg-white rounded-xl border border-slate-200 p-3">
+              <p className="text-2xl font-bold text-slate-900">{data.igStats.total}</p>
+              <p className="text-[11px] text-slate-500">Total leads</p>
+            </div>
+            <div className="bg-white rounded-xl border border-cyan-200 p-3">
+              <p className="text-2xl font-bold text-cyan-600">{data.igStats.new}</p>
+              <p className="text-[11px] text-slate-500">Nuevos</p>
+            </div>
+            <div className="bg-white rounded-xl border border-amber-200 p-3">
+              <p className="text-2xl font-bold text-amber-600">{data.igStats.contacted}</p>
+              <p className="text-[11px] text-slate-500">Contactados</p>
+            </div>
+            <div className="bg-white rounded-xl border border-emerald-200 p-3">
+              <p className="text-2xl font-bold text-emerald-600">{data.igStats.responded}</p>
+              <p className="text-[11px] text-slate-500">Respondieron</p>
+            </div>
+            <div className="bg-white rounded-xl border border-fuchsia-200 p-3">
+              <p className="text-2xl font-bold text-fuchsia-600">{data.igStats.converted}</p>
+              <p className="text-[11px] text-slate-500">Convertidos</p>
+            </div>
+            <div className="bg-white rounded-xl border border-violet-200 p-3">
+              <p className="text-2xl font-bold text-violet-600">{data.igStats.responseRate}%</p>
+              <p className="text-[11px] text-slate-500">Tasa respuesta</p>
+            </div>
+          </div>
+
+          {/* Recent IG Leads Table */}
+          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-100 bg-slate-50">
+                    <th className="text-left px-4 py-2.5 text-[11px] text-slate-500 font-medium uppercase">Usuario</th>
+                    <th className="text-left px-4 py-2.5 text-[11px] text-slate-500 font-medium uppercase">Sector</th>
+                    <th className="text-left px-4 py-2.5 text-[11px] text-slate-500 font-medium uppercase">Estado</th>
+                    <th className="text-left px-4 py-2.5 text-[11px] text-slate-500 font-medium uppercase">Intel</th>
+                    <th className="text-left px-4 py-2.5 text-[11px] text-slate-500 font-medium uppercase">Fecha</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50">
+                  {data.recentIgLeads && data.recentIgLeads.length > 0 ? data.recentIgLeads.map((lead) => {
+                    const sectorEmoji: Record<string, string> = {
+                      restaurante: '🍽️', clinica_estetica: '💆', barberia: '💈', clinica_salud: '🏥',
+                      inmobiliaria: '🏠', gym: '💪', tienda: '🛍️', general: '🏢',
+                    };
+                    const statusStyle: Record<string, string> = {
+                      new: 'bg-cyan-50 text-cyan-700',
+                      contacted: 'bg-amber-50 text-amber-700',
+                      responded: 'bg-emerald-50 text-emerald-700',
+                      converted: 'bg-fuchsia-50 text-fuchsia-700',
+                      no_response: 'bg-slate-50 text-slate-500',
+                      dm_failed: 'bg-red-50 text-red-700',
+                    };
+                    const statusLabel: Record<string, string> = {
+                      new: 'Nuevo', contacted: 'Contactado', responded: 'Respondió',
+                      converted: 'Convertido', no_response: 'Sin respuesta', dm_failed: 'DM falló',
+                    };
+                    return (
+                      <tr key={lead.id} className="hover:bg-slate-50/50">
+                        <td className="px-4 py-2.5">
+                          <span className="font-medium text-slate-900">@{lead.username}</span>
+                          {lead.lead_intel?.nombre_negocio && (
+                            <span className="block text-[10px] text-slate-400">{lead.lead_intel.nombre_negocio}</span>
+                          )}
+                        </td>
+                        <td className="px-4 py-2.5 text-xs">
+                          {sectorEmoji[lead.sector] || '🏢'} {lead.sector.replace('_', ' ')}
+                        </td>
+                        <td className="px-4 py-2.5">
+                          <span className={`inline-flex px-2 py-0.5 rounded text-[11px] font-medium ${statusStyle[lead.status] || statusStyle.new}`}>
+                            {statusLabel[lead.status] || lead.status}
+                          </span>
+                        </td>
+                        <td className="px-4 py-2.5 text-xs text-slate-500 max-w-[200px] truncate">
+                          {lead.lead_intel?.resumen || (lead.lead_intel?.nivel_interes ? `Interés: ${lead.lead_intel.nivel_interes}` : '—')}
+                        </td>
+                        <td className="px-4 py-2.5 text-xs text-slate-400">
+                          {new Date(lead.created_at).toLocaleDateString('es-ES', { day: '2-digit', month: 'short' })}
+                        </td>
+                      </tr>
+                    );
+                  }) : (
+                    <tr>
+                      <td colSpan={5} className="text-center py-6 text-slate-400 text-sm">
+                        Sin leads de Instagram todavía · <a href="/superadmin/instagram" className="text-fuchsia-500 hover:underline">Añadir leads →</a>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

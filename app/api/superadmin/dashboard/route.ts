@@ -158,6 +158,26 @@ export async function GET() {
       ? Math.round((allScores.reduce((a: number, b: number) => a + b, 0) / allScores.length) * 10) / 10
       : 0;
 
+    // ── Instagram Cold Leads Stats ──
+    let igStats = { total: 0, new: 0, contacted: 0, responded: 0, converted: 0, responseRate: 0 };
+    let recentIgLeads: Array<{ id: number; username: string; sector: string; status: string; created_at: string; responded: boolean; lead_intel: Record<string, unknown> | null }> = [];
+    try {
+      const { count: igTotal } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true });
+      const { count: igNew } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('status', 'new');
+      const { count: igContacted } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('status', 'contacted');
+      const { count: igResponded } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('responded', true);
+      const { count: igConverted } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('converted', true);
+      const rate = (igContacted || 0) > 0 ? Math.round(((igResponded || 0) / (igContacted || 0)) * 100) : 0;
+      igStats = { total: igTotal || 0, new: igNew || 0, contacted: igContacted || 0, responded: igResponded || 0, converted: igConverted || 0, responseRate: rate };
+
+      const { data: igLeads } = await supabase
+        .from('instagram_cold_leads')
+        .select('id, username, sector, status, created_at, responded, lead_intel')
+        .order('created_at', { ascending: false })
+        .limit(8);
+      recentIgLeads = igLeads || [];
+    } catch { /* table may not exist */ }
+
     return NextResponse.json({
       activeNow,
       stats: {
@@ -180,6 +200,8 @@ export async function GET() {
       nextMeeting: nextMeetingData || null,
       dailyVisits,
       pipeline,
+      igStats,
+      recentIgLeads,
     });
   } catch (error) {
     console.error('Dashboard API error:', error);
