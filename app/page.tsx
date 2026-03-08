@@ -25,18 +25,28 @@ const INTEGRATIONS = [
 ];
 
 /* ─────────────────────────────────────────────────────
-   DASHBOARD DATA
+   DASHBOARD DEMO DATA — Multi-channel Command Center
    ───────────────────────────────────────────────────── */
-const RESTAURANT_RESERVATIONS = [
-  { time: "13:00", name: "María García", guests: 4, table: "Mesa 3", status: "confirmed" },
-  { time: "13:30", name: "Carlos López", guests: 2, table: "Mesa 7", status: "confirmed" },
-  { time: "14:00", name: "Ana Martínez", guests: 6, table: "Mesa 1", status: "pending" },
-  { time: "14:00", name: "Pedro Sánchez", guests: 3, table: "Mesa 5", status: "confirmed" },
-  { time: "14:30", name: "Laura Fernández", guests: 2, table: "Mesa 8", status: "confirmed" },
-  { time: "20:30", name: "Roberto Díaz", guests: 5, table: "Mesa 2", status: "confirmed" },
-  { time: "21:00", name: "Sofía Ruiz", guests: 4, table: "Mesa 4", status: "pending" },
-  { time: "21:30", name: "Javier Moreno", guests: 2, table: "Mesa 6", status: "confirmed" },
+const DEMO_CONVERSATIONS = [
+  { time: "09:12", name: "Laura Fernández", channel: "instagram", preview: "Hola! Vi vuestro post sobre...", status: "resolved", sentiment: "positive" },
+  { time: "09:34", name: "Carlos Ruiz", channel: "whatsapp", preview: "Necesito info sobre el plan Pro", status: "resolved", sentiment: "positive" },
+  { time: "10:01", name: "Ana Martínez", channel: "email", preview: "Solicitud de presupuesto para...", status: "active", sentiment: "neutral" },
+  { time: "10:15", name: "Pedro López", channel: "web", preview: "¿Cómo funciona la integración?", status: "resolved", sentiment: "positive" },
+  { time: "10:42", name: "Sofía García", channel: "voice", preview: "Llamada entrante - Consulta comercial", status: "resolved", sentiment: "positive" },
+  { time: "11:03", name: "Roberto Díaz", channel: "instagram", preview: "Me interesa el servicio de IA para...", status: "resolved", sentiment: "positive" },
+  { time: "11:28", name: "Elena Torres", channel: "whatsapp", preview: "¿Tenéis disponibilidad esta semana?", status: "active", sentiment: "neutral" },
+  { time: "11:45", name: "Javier Moreno", channel: "web", preview: "Quiero automatizar mi atención al...", status: "pending", sentiment: "positive" },
+  { time: "12:10", name: "María Sánchez", channel: "email", preview: "Seguimiento propuesta comercial", status: "resolved", sentiment: "positive" },
+  { time: "12:33", name: "Diego Ramírez", channel: "voice", preview: "Llamada - Demo del producto", status: "resolved", sentiment: "positive" },
 ];
+
+const DEMO_CHANNEL_STATS = {
+  instagram: { conversations: 847, resolved: 812, avgTime: "0.8s", satisfaction: 4.9, color: "from-pink-500 to-purple-500", icon: "📸", trend: "+24%" },
+  whatsapp: { conversations: 1243, resolved: 1198, avgTime: "1.1s", satisfaction: 4.8, color: "from-emerald-500 to-green-500", icon: "💬", trend: "+18%" },
+  email: { conversations: 562, resolved: 541, avgTime: "2.3s", satisfaction: 4.7, color: "from-blue-500 to-cyan-500", icon: "📧", trend: "+12%" },
+  web: { conversations: 934, resolved: 912, avgTime: "0.6s", satisfaction: 4.9, color: "from-violet-500 to-indigo-500", icon: "🌐", trend: "+31%" },
+  voice: { conversations: 389, resolved: 371, avgTime: "3.2s", satisfaction: 4.8, color: "from-amber-500 to-orange-500", icon: "📞", trend: "+15%" },
+};
 
 /* ───────────────────────────────────────────────────── */
 
@@ -201,18 +211,18 @@ export default function Home() {
       </section>
 
       {/* ════════════════════════════════════════════════
-          DASHBOARD EXAMPLE — Ultra-Premium
+          COMMAND CENTER — Multi-Channel Professional Dashboard
           ════════════════════════════════════════════════ */}
       <section id="dashboard" className="py-16 sm:py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-10 sm:mb-14">
-              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Centro de operaciones</span>
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Centro de operaciones unificado</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Command Center
+                Un solo panel. Todos tus canales.
               </h2>
               <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">
-                Monitoriza conversaciones, métricas de rendimiento y configuración del agente desde un único panel.
+                Instagram, WhatsApp, Email, Web y Voz — todo controlado por IA desde un único command center en tiempo real.
               </p>
             </div>
           </ScrollReveal>
@@ -226,258 +236,339 @@ export default function Home() {
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-red-500/80" />
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-2.5 sm:w-3 h-2.5 sm:h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-2 sm:ml-4 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-4 py-0.5 sm:py-1 rounded-md truncate">panel.neuriax.com/agents</span>
-                  <div className="ml-auto flex items-center gap-1.5">
+                  <span className="ml-2 sm:ml-4 text-[9px] sm:text-[11px] text-gray-500 font-mono bg-slate-800/50 px-2 sm:px-4 py-0.5 sm:py-1 rounded-md truncate flex items-center gap-1.5">
+                    <svg className="w-2.5 h-2.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
+                    panel.neuriax.com/command-center
+                  </span>
+                  <div className="ml-auto flex items-center gap-2">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                     </span>
-                    <span className="text-[9px] text-emerald-400 font-medium hidden sm:inline">En vivo</span>
+                    <span className="text-[9px] text-emerald-400 font-medium hidden sm:inline">5 canales activos</span>
                   </div>
                 </div>
 
                 <div className="flex">
-                  {/* Sidebar - hidden on mobile */}
-                  <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-4 min-h-[580px]">
-                    <div className="flex items-center gap-2 mb-6">
-                      <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold text-white">N</div>
-                      <span className="text-sm font-bold text-white">Neuriax</span>
+                  {/* Sidebar — hidden on mobile */}
+                  <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-3 lg:p-4 min-h-[680px]">
+                    <div className="flex items-center gap-2 mb-5">
+                      <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-violet-500/20">N</div>
+                      <div>
+                        <span className="text-sm font-bold text-white block leading-tight">Neuriax</span>
+                        <span className="text-[8px] text-gray-500">Command Center</span>
+                      </div>
                     </div>
+
+                    <span className="text-[8px] text-gray-600 uppercase tracking-widest font-semibold mb-2 px-3">Principal</span>
                     {[
-                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Overview", active: false, badge: "" },
-                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Conversaciones", active: true, badge: "14" },
-                      { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Clientes", active: false, badge: "312" },
-                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Analytics", active: false, badge: "" },
-                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Integraciones", active: false, badge: "25" },
-                      { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z", label: "Configuración", active: false, badge: "" },
+                      { icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6", label: "Overview", active: true, badge: "" },
+                      { icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z", label: "Inbox Unificado", active: false, badge: "23" },
+                      { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", label: "Leads & CRM", active: false, badge: "847" },
                     ].map((item) => (
-                      <div key={item.label} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg mb-1 text-sm cursor-pointer transition-colors ${item.active ? "bg-violet-500/[0.15] text-violet-300 font-medium border border-violet-500/20" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
-                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} />
-                        </svg>
+                      <div key={item.label} className={`flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-[12px] cursor-pointer transition-all ${item.active ? "bg-violet-500/[0.15] text-violet-300 font-medium border border-violet-500/20 shadow-sm shadow-violet-500/10" : "text-gray-500 hover:text-gray-300 hover:bg-white/[0.03]"}`}>
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} /></svg>
                         {item.label}
-                        {item.badge && (
-                          <span className={`ml-auto text-[9px] font-medium px-1.5 py-0.5 rounded-full ${item.active ? "bg-violet-500/30 text-violet-300" : "bg-white/[0.06] text-gray-500"}`}>{item.badge}</span>
-                        )}
+                        {item.badge && <span className={`ml-auto text-[8px] font-medium px-1.5 py-0.5 rounded-full ${item.active ? "bg-violet-500/30 text-violet-300" : "bg-white/[0.06] text-gray-500"}`}>{item.badge}</span>}
                       </div>
                     ))}
 
-                    {/* IA Assistant mini */}
-                    <div className="mt-auto pt-4 border-t border-white/[0.06]">
-                      <div className="bg-gradient-to-br from-violet-500/[0.1] to-indigo-500/[0.1] border border-violet-500/20 rounded-xl p-3">
-                        <div className="flex items-center gap-2 mb-2">
+                    <span className="text-[8px] text-gray-600 uppercase tracking-widest font-semibold mt-4 mb-2 px-3">Canales</span>
+                    {[
+                      { emoji: "📸", label: "Instagram", count: "847", color: "text-pink-400" },
+                      { emoji: "💬", label: "WhatsApp", count: "1.2K", color: "text-emerald-400" },
+                      { emoji: "📧", label: "Email", count: "562", color: "text-blue-400" },
+                      { emoji: "🌐", label: "Web Chat", count: "934", color: "text-violet-400" },
+                      { emoji: "📞", label: "Voz IA", count: "389", color: "text-amber-400" },
+                    ].map((ch) => (
+                      <div key={ch.label} className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[11px] text-gray-500 hover:text-gray-300 hover:bg-white/[0.03] cursor-pointer transition-all">
+                        <span className="text-[12px]">{ch.emoji}</span>
+                        <span>{ch.label}</span>
+                        <span className={`ml-auto text-[8px] font-medium ${ch.color}`}>{ch.count}</span>
+                      </div>
+                    ))}
+
+                    <span className="text-[8px] text-gray-600 uppercase tracking-widest font-semibold mt-4 mb-2 px-3">Sistema</span>
+                    {[
+                      { icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z", label: "Analytics", badge: "" },
+                      { icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z", label: "Integraciones", badge: "25" },
+                      { icon: "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z", label: "Config", badge: "" },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center gap-3 px-3 py-2 rounded-lg mb-0.5 text-[12px] text-gray-500 hover:text-gray-300 hover:bg-white/[0.03] cursor-pointer transition-all">
+                        <svg className="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={item.icon} /></svg>
+                        {item.label}
+                        {item.badge && <span className="ml-auto text-[8px] font-medium px-1.5 py-0.5 rounded-full bg-white/[0.06] text-gray-500">{item.badge}</span>}
+                      </div>
+                    ))}
+
+                    {/* AI Status */}
+                    <div className="mt-auto pt-3 border-t border-white/[0.06]">
+                      <div className="bg-gradient-to-br from-violet-500/[0.1] to-indigo-500/[0.1] border border-violet-500/20 rounded-xl p-2.5">
+                        <div className="flex items-center gap-2 mb-1.5">
                           <div className="w-5 h-5 bg-violet-500/30 rounded-lg flex items-center justify-center">
                             <svg className="w-3 h-3 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                           </div>
-                          <span className="text-[10px] text-violet-300 font-semibold">Estado del Agente</span>
+                          <span className="text-[9px] text-violet-300 font-semibold">Motor IA v3.2</span>
+                          <span className="ml-auto relative flex h-1.5 w-1.5"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" /><span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" /></span>
                         </div>
-                        <p className="text-[9px] text-gray-400 leading-relaxed">Procesadas <span className="text-emerald-400 font-medium">142 consultas</span> hoy. Tasa de resolución: 97%.</p>
+                        <div className="grid grid-cols-2 gap-1.5">
+                          <div className="text-center"><span className="text-[11px] text-white font-bold block">3,975</span><span className="text-[7px] text-gray-500">Total hoy</span></div>
+                          <div className="text-center"><span className="text-[11px] text-emerald-400 font-bold block">97.2%</span><span className="text-[7px] text-gray-500">Auto-resueltas</span></div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  {/* Main content */}
+                  {/* Main content area */}
                   <div className="flex-1 min-w-0">
-                    {/* Header with alert */}
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 px-3 sm:px-6 py-3 sm:py-4 border-b border-white/[0.06]">
+                    {/* Top header bar */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-3 px-3 sm:px-5 py-3 sm:py-3.5 border-b border-white/[0.06]">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="text-sm sm:text-lg font-bold text-white">Conversaciones — Hoy</h3>
-                          <span className="text-[9px] sm:text-[10px] bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full font-medium">1 pendiente de revisión</span>
+                          <h3 className="text-sm sm:text-base font-bold text-white">Command Center</h3>
+                          <span className="text-[8px] sm:text-[9px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                            <span className="relative flex h-1.5 w-1.5"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" /><span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" /></span>
+                            En vivo
+                          </span>
                         </div>
-                        <p className="text-[10px] sm:text-[11px] text-gray-500">Lunes 17 Feb · 3 canales activos · Agente v2.4</p>
+                        <p className="text-[9px] sm:text-[10px] text-gray-500">Lunes 17 Feb, 2025 · 5 canales · Agente IA v3.2 · Última actividad hace 12s</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
                           <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                          <span className="text-[9px] sm:text-[10px] text-gray-500">Buscar...</span>
+                          <span className="text-[8px] sm:text-[9px] text-gray-500">Buscar conversación...</span>
                         </div>
                         <div className="relative">
                           <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-[#0d1117] text-[6px] text-white flex items-center justify-center font-bold">2</span>
+                          <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-[#0d1117] text-[6px] text-white flex items-center justify-center font-bold">3</span>
                         </div>
-                        <div className="w-6 sm:w-7 h-6 sm:h-7 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-white">MR</div>
+                        <div className="w-6 sm:w-7 h-6 sm:h-7 bg-gradient-to-br from-violet-500 to-indigo-500 rounded-full flex items-center justify-center text-[8px] sm:text-[9px] font-bold text-white ring-2 ring-violet-500/20">MC</div>
                       </div>
                     </div>
 
-                    <div className="p-3 sm:p-5">
-                      {/* Stats with icons + trends */}
-                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mb-4 sm:mb-5">
-                        {[
-                          { label: "Resueltas", value: "138", change: "+12 vs ayer", icon: "✓", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]", iconBg: "bg-emerald-500/20" },
-                          { label: "Pendientes", value: "4", change: "−1 vs ayer", icon: "⏳", color: "text-amber-400", bg: "bg-amber-500/[0.08]", iconBg: "bg-amber-500/20" },
-                          { label: "Usuarios", value: "89", change: "+15 esta semana", icon: "◆", color: "text-violet-400", bg: "bg-violet-500/[0.08]", iconBg: "bg-violet-500/20" },
-                          { label: "Satisfacción", value: "4.9", change: "+0.2", icon: "★", color: "text-cyan-400", bg: "bg-cyan-500/[0.08]", iconBg: "bg-cyan-500/20" },
-                        ].map((s) => (
-                          <div key={s.label} className={`${s.bg} border border-white/[0.04] rounded-lg sm:rounded-xl p-2.5 sm:p-3`}>
-                            <div className="flex items-center gap-1.5 mb-1">
-                              <span className={`w-5 h-5 sm:w-6 sm:h-6 ${s.iconBg} rounded-lg flex items-center justify-center text-[10px] sm:text-[12px]`}>{s.icon}</span>
-                              <span className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-wider">{s.label}</span>
+                    <div className="p-3 sm:p-4">
+                      {/* ── ROW 1: Channel Status Cards ── */}
+                      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
+                        {(Object.entries(DEMO_CHANNEL_STATS) as [string, typeof DEMO_CHANNEL_STATS.instagram][]).map(([key, ch]) => (
+                          <div key={key} className="relative bg-slate-800/30 border border-white/[0.04] rounded-xl p-2.5 sm:p-3 overflow-hidden group hover:border-white/[0.08] transition-all">
+                            <div className={`absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${ch.color}`} />
+                            <div className="flex items-center gap-1.5 mb-1.5">
+                              <span className="text-[14px]">{ch.icon}</span>
+                              <span className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-wider font-medium">{key === "voice" ? "Voz" : key === "web" ? "Web" : key.charAt(0).toUpperCase() + key.slice(1)}</span>
                             </div>
-                            <div className={`text-lg sm:text-2xl font-bold ${s.color}`}>{s.value}</div>
-                            <span className="text-[8px] sm:text-[9px] text-emerald-400/70 font-medium">{s.change}</span>
+                            <div className="text-base sm:text-xl font-bold text-white">{ch.conversations.toLocaleString()}</div>
+                            <div className="flex items-center justify-between mt-1">
+                              <span className="text-[7px] sm:text-[8px] text-gray-500">{ch.avgTime} resp.</span>
+                              <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{ch.trend}</span>
+                            </div>
+                            {/* Mini sparkline */}
+                            <div className="flex items-end gap-px mt-1.5 h-4">
+                              {[40, 65, 45, 80, 55, 90, 70, 95, 60, 85, 75, 100].map((v, i) => (
+                                <div key={i} className={`flex-1 rounded-sm bg-gradient-to-t ${ch.color} opacity-40 group-hover:opacity-60 transition-opacity`} style={{ height: `${v}%` }} />
+                              ))}
+                            </div>
                           </div>
                         ))}
                       </div>
 
-                      {/* Main grid: Table + Side panels */}
-                      <div className="flex flex-col lg:flex-row gap-4">
-                        {/* Left: Timeline + Table */}
-                        <div className="flex-1 min-w-0">
-                          {/* Visual day timeline */}
-                          <div className="mb-4">
-                            <div className="flex items-center justify-between mb-2">
-                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Timeline del día</span>
-                              <div className="flex items-center gap-2">
-                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-emerald-500/60" />Lleno</span>
-                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-violet-500/60" />Alto</span>
-                                <span className="flex items-center gap-1 text-[8px] text-gray-500"><span className="w-2 h-2 rounded-full bg-slate-600/60" />Libre</span>
-                              </div>
+                      {/* ── ROW 2: Main KPI Bar ── */}
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                        {[
+                          { label: "Total Conversaciones", value: "3,975", sub: "hoy", icon: "💬", change: "+22%", color: "text-violet-400", bg: "bg-violet-500/[0.08]" },
+                          { label: "Auto-resueltas", value: "3,834", sub: "97.2%", icon: "✓", change: "+3.1%", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]" },
+                          { label: "Leads Generados", value: "127", sub: "32 calificados", icon: "◆", change: "+41%", color: "text-pink-400", bg: "bg-pink-500/[0.08]" },
+                          { label: "Satisfacción", value: "4.87", sub: "de 5.0", icon: "★", change: "+0.3", color: "text-amber-400", bg: "bg-amber-500/[0.08]" },
+                        ].map((kpi) => (
+                          <div key={kpi.label} className={`${kpi.bg} border border-white/[0.04] rounded-xl p-2.5 sm:p-3`}>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-[8px] sm:text-[9px] text-gray-500 uppercase tracking-wider font-medium">{kpi.label}</span>
+                              <span className="text-[12px]">{kpi.icon}</span>
                             </div>
-                            <div className="relative">
-                              {/* Timeline bar */}
-                              <div className="flex gap-0.5 sm:gap-1">
-                                {[
-                                  { time: "12:00", pct: 30 }, { time: "13:00", pct: 100 }, { time: "13:30", pct: 85 },
-                                  { time: "14:00", pct: 100 }, { time: "14:30", pct: 60 }, { time: "15:00", pct: 20 },
-                                  { time: "20:00", pct: 40 }, { time: "20:30", pct: 90 }, { time: "21:00", pct: 100 },
-                                  { time: "21:30", pct: 75 }, { time: "22:00", pct: 30 },
-                                ].map((slot) => (
-                                  <div key={slot.time} className="flex-1 group relative">
-                                    <div className="h-6 sm:h-8 bg-slate-800/40 rounded-sm overflow-hidden flex items-end">
-                                      <div
-                                        className={`w-full rounded-sm ${slot.pct === 100 ? "bg-emerald-500/70" : slot.pct >= 80 ? "bg-violet-500/60" : slot.pct >= 50 ? "bg-indigo-500/50" : "bg-slate-600/40"}`}
-                                        style={{ height: `${slot.pct}%` }}
-                                      />
-                                    </div>
-                                    <span className="text-[6px] sm:text-[7px] text-gray-600 block text-center mt-0.5 hidden sm:block">{slot.time}</span>
-                                  </div>
-                                ))}
-                              </div>
-                              {/* Current time indicator */}
-                              <div className="absolute top-0 bottom-0 left-[45%] w-0.5 bg-amber-400/60 rounded-full" />
-                              <div className="absolute -top-1 left-[45%] -translate-x-1/2 text-[7px] text-amber-400 font-bold bg-[#0d1117] px-1 rounded hidden sm:block">AHORA</div>
+                            <div className={`text-xl sm:text-2xl font-bold ${kpi.color}`}>{kpi.value}</div>
+                            <div className="flex items-center justify-between mt-0.5">
+                              <span className="text-[8px] text-gray-500">{kpi.sub}</span>
+                              <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{kpi.change} ↑</span>
                             </div>
                           </div>
+                        ))}
+                      </div>
 
-                          {/* Compact reservation list */}
-                          <div className="space-y-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[10px] sm:text-[11px] text-gray-400 font-medium">Conversaciones recientes</span>
-                              <div className="flex items-center gap-1 ml-auto">
-                                {["Todas", "Pendientes"].map((f, i) => (
-                                  <span key={f} className={`text-[8px] sm:text-[9px] px-2 py-0.5 rounded-full cursor-pointer transition-colors ${i === 0 ? "bg-violet-500/20 text-violet-300" : "bg-slate-800/40 text-gray-500"}`}>{f}</span>
-                                ))}
-                              </div>
-                            </div>
-                            {RESTAURANT_RESERVATIONS.slice(0, 6).map((r, i) => (
-                              <div key={i} className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-colors ${i === 2 ? "bg-amber-500/[0.06] border border-amber-500/20" : i === 0 ? "bg-violet-500/[0.05]" : "hover:bg-white/[0.02]"}`}>
-                                <span className="text-[9px] sm:text-[11px] text-gray-400 font-mono w-8 sm:w-10 flex-shrink-0">{r.time}</span>
-                                <div className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center text-[7px] sm:text-[8px] font-bold flex-shrink-0 ${i % 3 === 0 ? "bg-violet-500/20 text-violet-300" : i % 3 === 1 ? "bg-emerald-500/20 text-emerald-300" : "bg-amber-500/20 text-amber-300"}`}>
-                                  {r.name.split(' ').map(n => n[0]).join('')}
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <span className="text-[10px] sm:text-[11px] text-white font-medium block truncate">{r.name}</span>
-                                  <span className="text-[7px] sm:text-[8px] text-gray-600">{r.guests} pax · {r.table}</span>
-                                </div>
-                                <div className="flex items-center gap-1 flex-shrink-0">
-                                  {i % 3 === 0 ? (
-                                    <span className="text-[7px] sm:text-[8px] bg-emerald-500/10 text-emerald-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">WhatsApp</span>
-                                  ) : i % 3 === 1 ? (
-                                    <span className="text-[7px] sm:text-[8px] bg-violet-500/10 text-violet-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">Web</span>
-                                  ) : (
-                                    <span className="text-[7px] sm:text-[8px] bg-cyan-500/10 text-cyan-400 px-1 sm:px-1.5 py-0.5 rounded font-medium hidden sm:block">Bot IA</span>
-                                  )}
-                                  <span className={`text-[8px] sm:text-[9px] font-medium px-1.5 py-0.5 rounded-full ${r.status === "confirmed" ? "bg-emerald-500/[0.12] text-emerald-400" : "bg-amber-500/[0.12] text-amber-400"}`}>
-                                    {r.status === "confirmed" ? "✓" : "⏳"}
-                                  </span>
-                                </div>
-                              </div>
+                      {/* ── ROW 3: Main content grid ── */}
+                      <div className="flex flex-col lg:flex-row gap-3">
+                        {/* LEFT: Unified Inbox */}
+                        <div className="flex-1 min-w-0">
+                          {/* Tab filters */}
+                          <div className="flex items-center gap-1.5 mb-3 overflow-x-auto">
+                            {[
+                              { label: "Todos", count: "23", active: true },
+                              { label: "📸 Instagram", count: "7", active: false },
+                              { label: "💬 WhatsApp", count: "5", active: false },
+                              { label: "📧 Email", count: "4", active: false },
+                              { label: "🌐 Web", count: "4", active: false },
+                              { label: "📞 Voz", count: "3", active: false },
+                            ].map((tab) => (
+                              <span key={tab.label} className={`whitespace-nowrap text-[8px] sm:text-[9px] px-2 sm:px-2.5 py-1 rounded-lg cursor-pointer transition-all font-medium ${
+                                tab.active
+                                  ? "bg-violet-500/20 text-violet-300 border border-violet-500/30"
+                                  : "bg-slate-800/30 text-gray-500 hover:text-gray-300 border border-transparent"
+                              }`}>
+                                {tab.label} <span className="opacity-60">({tab.count})</span>
+                              </span>
                             ))}
+                          </div>
+
+                          {/* Conversation list */}
+                          <div className="space-y-1">
+                            {DEMO_CONVERSATIONS.map((conv, i) => {
+                              const channelConfig: Record<string, { emoji: string; label: string; bgClass: string; textClass: string }> = {
+                                instagram: { emoji: "📸", label: "Instagram", bgClass: "bg-pink-500/10", textClass: "text-pink-400" },
+                                whatsapp: { emoji: "💬", label: "WhatsApp", bgClass: "bg-emerald-500/10", textClass: "text-emerald-400" },
+                                email: { emoji: "📧", label: "Email", bgClass: "bg-blue-500/10", textClass: "text-blue-400" },
+                                web: { emoji: "🌐", label: "Web", bgClass: "bg-violet-500/10", textClass: "text-violet-400" },
+                                voice: { emoji: "📞", label: "Voz", bgClass: "bg-amber-500/10", textClass: "text-amber-400" },
+                              };
+                              const cc = channelConfig[conv.channel];
+                              const avatarColors = ["bg-pink-500/20 text-pink-300", "bg-emerald-500/20 text-emerald-300", "bg-blue-500/20 text-blue-300", "bg-violet-500/20 text-violet-300", "bg-amber-500/20 text-amber-300"];
+                              return (
+                                <div key={i} className={`flex items-center gap-2 sm:gap-3 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg transition-all cursor-pointer ${
+                                  conv.status === "active" ? "bg-violet-500/[0.06] border border-violet-500/15" :
+                                  conv.status === "pending" ? "bg-amber-500/[0.05] border border-amber-500/15" :
+                                  "hover:bg-white/[0.02] border border-transparent"
+                                }`}>
+                                  <span className="text-[9px] sm:text-[10px] text-gray-500 font-mono w-8 sm:w-10 flex-shrink-0">{conv.time}</span>
+                                  <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-[7px] sm:text-[8px] font-bold flex-shrink-0 ${avatarColors[i % 5]}`}>
+                                    {conv.name.split(' ').map(n => n[0]).join('')}
+                                  </div>
+                                  <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-1.5">
+                                      <span className="text-[10px] sm:text-[11px] text-white font-medium truncate">{conv.name}</span>
+                                      {conv.sentiment === "positive" && <span className="text-[7px]">😊</span>}
+                                    </div>
+                                    <span className="text-[7px] sm:text-[8px] text-gray-600 block truncate">{conv.preview}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                                    <span className={`text-[7px] sm:text-[8px] ${cc.bgClass} ${cc.textClass} px-1.5 py-0.5 rounded font-medium hidden sm:flex items-center gap-1`}>
+                                      <span className="text-[8px]">{cc.emoji}</span> {cc.label}
+                                    </span>
+                                    <span className="sm:hidden text-[10px]">{cc.emoji}</span>
+                                    <span className={`text-[8px] font-medium px-1.5 py-0.5 rounded-full ${
+                                      conv.status === "resolved" ? "bg-emerald-500/[0.12] text-emerald-400" :
+                                      conv.status === "active" ? "bg-violet-500/[0.12] text-violet-400 animate-pulse" :
+                                      "bg-amber-500/[0.12] text-amber-400"
+                                    }`}>
+                                      {conv.status === "resolved" ? "✓" : conv.status === "active" ? "●" : "⏳"}
+                                    </span>
+                                  </div>
+                                </div>
+                              );
+                            })}
                             <div className="text-center pt-2">
-                              <span className="text-[9px] text-violet-400 cursor-pointer hover:text-violet-300">Ver todas (14) →</span>
+                              <span className="text-[9px] text-violet-400 cursor-pointer hover:text-violet-300 transition-colors">Ver todas las conversaciones (3,975) →</span>
                             </div>
                           </div>
                         </div>
 
-                        {/* Right: Side panels — hidden on mobile */}
-                        <div className="w-full lg:w-64 flex flex-col gap-3 sm:gap-4">
-                          {/* Floor map */}
+                        {/* RIGHT: Side panels */}
+                        <div className="w-full lg:w-72 flex flex-col gap-3">
+                          {/* Channel Distribution */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                             <div className="flex items-center justify-between mb-3">
-                              <span className="text-[10px] text-gray-400 font-medium">Mapa de mesas</span>
-                              <span className="text-[8px] text-emerald-400">3 libres</span>
+                              <span className="text-[10px] text-gray-400 font-medium">Distribución por canal</span>
+                              <span className="text-[8px] text-gray-600">Últimas 24h</span>
                             </div>
-                            <div className="grid grid-cols-4 gap-1.5">
+                            {/* Stacked bar */}
+                            <div className="flex h-3 rounded-full overflow-hidden mb-3">
+                              <div className="bg-gradient-to-r from-pink-500 to-pink-400" style={{ width: '21%' }} />
+                              <div className="bg-gradient-to-r from-emerald-500 to-emerald-400" style={{ width: '31%' }} />
+                              <div className="bg-gradient-to-r from-blue-500 to-blue-400" style={{ width: '14%' }} />
+                              <div className="bg-gradient-to-r from-violet-500 to-violet-400" style={{ width: '24%' }} />
+                              <div className="bg-gradient-to-r from-amber-500 to-amber-400" style={{ width: '10%' }} />
+                            </div>
+                            <div className="space-y-1.5">
                               {[
-                                { id: 1, status: "occupied", name: "A.M." },
-                                { id: 2, status: "occupied", name: "R.D." },
-                                { id: 3, status: "occupied", name: "M.G." },
-                                { id: 4, status: "free", name: "" },
-                                { id: 5, status: "soon", name: "P.S." },
-                                { id: 6, status: "occupied", name: "J.M." },
-                                { id: 7, status: "occupied", name: "C.L." },
-                                { id: 8, status: "free", name: "" },
-                              ].map((table) => (
-                                <div key={table.id} className={`aspect-square rounded-lg flex flex-col items-center justify-center text-[7px] sm:text-[8px] font-medium border ${
-                                  table.status === "occupied" ? "bg-violet-500/15 border-violet-500/30 text-violet-300" :
-                                  table.status === "soon" ? "bg-amber-500/15 border-amber-500/30 text-amber-300" :
-                                  "bg-slate-800/30 border-slate-700/30 text-gray-600"
-                                }`}>
-                                  <span className="text-[8px] sm:text-[9px]">{table.id}</span>
-                                  {table.name && <span className="text-[6px] sm:text-[7px] opacity-70">{table.name}</span>}
-                                  {table.status === "soon" && <span className="text-[5px] sm:text-[6px] text-amber-400 mt-0.5">14:30</span>}
+                                { label: "Instagram", value: "847", pct: "21%", color: "bg-pink-400" },
+                                { label: "WhatsApp", value: "1,243", pct: "31%", color: "bg-emerald-400" },
+                                { label: "Email", value: "562", pct: "14%", color: "bg-blue-400" },
+                                { label: "Web Chat", value: "934", pct: "24%", color: "bg-violet-400" },
+                                { label: "Voz IA", value: "389", pct: "10%", color: "bg-amber-400" },
+                              ].map((ch) => (
+                                <div key={ch.label} className="flex items-center gap-2">
+                                  <span className={`w-2 h-2 rounded-full ${ch.color} flex-shrink-0`} />
+                                  <span className="text-[9px] text-gray-400 flex-1">{ch.label}</span>
+                                  <span className="text-[9px] text-white font-medium">{ch.value}</span>
+                                  <span className="text-[8px] text-gray-600 w-7 text-right">{ch.pct}</span>
                                 </div>
                               ))}
                             </div>
-                            <div className="flex items-center gap-3 mt-2 pt-2 border-t border-white/[0.04]">
-                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-violet-500/60" />Ocupada</span>
-                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-amber-500/60" />Próxima</span>
-                              <span className="flex items-center gap-1 text-[7px] text-gray-500"><span className="w-1.5 h-1.5 rounded-full bg-slate-600/60" />Libre</span>
+                          </div>
+
+                          {/* Conversion Funnel */}
+                          <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                            <span className="text-[10px] text-gray-400 font-medium block mb-3">Funnel de conversión</span>
+                            <div className="space-y-1.5">
+                              {[
+                                { label: "Visitantes", value: "12,847", width: "100%", color: "from-slate-500 to-slate-400" },
+                                { label: "Conversaciones", value: "3,975", width: "31%", color: "from-violet-500 to-indigo-400" },
+                                { label: "Leads", value: "847", width: "22%", color: "from-pink-500 to-rose-400" },
+                                { label: "Calificados", value: "312", width: "37%", color: "from-emerald-500 to-green-400" },
+                                { label: "Clientes", value: "89", width: "29%", color: "from-amber-500 to-yellow-400" },
+                              ].map((step) => (
+                                <div key={step.label}>
+                                  <div className="flex items-center justify-between mb-0.5">
+                                    <span className="text-[8px] text-gray-500">{step.label}</span>
+                                    <span className="text-[9px] text-white font-medium">{step.value}</span>
+                                  </div>
+                                  <div className="h-1.5 bg-slate-800/60 rounded-full overflow-hidden">
+                                    <div className={`h-full rounded-full bg-gradient-to-r ${step.color}`} style={{ width: step.width }} />
+                                  </div>
+                                </div>
+                              ))}
                             </div>
                           </div>
 
-                          {/* WhatsApp preview */}
+                          {/* Live conversation preview */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                             <div className="flex items-center gap-2 mb-2">
-                              <div className="w-5 h-5 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                                <svg className="w-3 h-3 text-emerald-400" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg>
-                              </div>
-                              <span className="text-[10px] text-gray-400 font-medium">Recordatorio automático</span>
+                              <span className="text-[12px]">📸</span>
+                              <span className="text-[10px] text-gray-400 font-medium">Instagram DM — En vivo</span>
+                              <span className="ml-auto relative flex h-1.5 w-1.5"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" /><span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" /></span>
                             </div>
-                            <div className="bg-[#0b2e18] rounded-xl rounded-tl-sm p-2.5 border border-emerald-800/30">
-                              <p className="text-[9px] sm:text-[10px] text-emerald-100/90 leading-relaxed">
-                                Hola María 👋<br/>
-                                Te recordamos tu reserva <span className="font-semibold">mañana a las 14:00</span> en La Trattoria (Mesa 3, 4 pax).<br/><br/>
-                                ¿Confirmas? Responde <span className="font-bold">SÍ</span> o <span className="font-bold">NO</span>
-                              </p>
-                              <div className="flex items-center justify-end gap-1 mt-1">
-                                <span className="text-[7px] text-emerald-400/50">13:42</span>
-                                <svg className="w-3 h-3 text-blue-400" fill="currentColor" viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"/></svg>
+                            <div className="space-y-1.5">
+                              <div className="bg-slate-700/30 rounded-xl rounded-tl-sm p-2 max-w-[85%]">
+                                <p className="text-[9px] text-gray-300 leading-relaxed">Hola! Vi vuestro post sobre automatización. ¿Cómo funciona exactamente? 🤔</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana Martínez · 10:01</span>
                               </div>
-                            </div>
-                            <div className="mt-2 bg-[#0b2e18] rounded-xl rounded-tl-sm p-2 border border-emerald-800/30 ml-8">
-                              <p className="text-[9px] sm:text-[10px] text-emerald-100/90">SÍ, confirmado! 😊</p>
-                              <div className="flex items-center justify-end gap-1 mt-0.5">
-                                <span className="text-[7px] text-emerald-400/50">13:44</span>
+                              <div className="bg-gradient-to-r from-violet-500/20 to-indigo-500/20 border border-violet-500/20 rounded-xl rounded-tr-sm p-2 max-w-[85%] ml-auto">
+                                <div className="flex items-center gap-1 mb-1">
+                                  <svg className="w-2.5 h-2.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                                  <span className="text-[7px] text-violet-400 font-semibold">Agente IA</span>
+                                </div>
+                                <p className="text-[9px] text-gray-300 leading-relaxed">¡Hola Ana! 👋 Nuestro agente IA se integra con tu negocio en 5 días y atiende clientes 24/7 en todos los canales. ¿Te gustaría agendar una demo gratuita?</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Respuesta automática · 0.8s</span>
+                              </div>
+                              <div className="bg-slate-700/30 rounded-xl rounded-tl-sm p-2 max-w-[85%]">
+                                <p className="text-[9px] text-gray-300 leading-relaxed">Sí por favor! ¿Qué horarios tenéis? 📅</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana Martínez · 10:02</span>
                               </div>
                             </div>
                           </div>
 
                           {/* Activity feed */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
-                            <span className="text-[10px] text-gray-400 font-medium block mb-2">Actividad reciente</span>
+                            <span className="text-[10px] text-gray-400 font-medium block mb-2">Actividad en tiempo real</span>
                             <div className="space-y-2">
                               {[
-                                { icon: "✓", color: "text-emerald-400 bg-emerald-500/20", text: "Consulta #1247 resuelta por el agente", time: "hace 2 min" },
-                                { icon: "◆", color: "text-violet-400 bg-violet-500/20", text: "Nuevo lead cualificado vía web chat", time: "hace 5 min" },
-                                { icon: "◆", color: "text-cyan-400 bg-cyan-500/20", text: "Follow-up enviado a María", time: "hace 8 min" },
-                                { icon: "◆", color: "text-amber-400 bg-amber-500/20", text: "Agente de voz atendió llamada", time: "hace 12 min" },
+                                { icon: "📸", color: "bg-pink-500/20 text-pink-400", text: "DM de Instagram respondido automáticamente", time: "hace 12s" },
+                                { icon: "✓", color: "bg-emerald-500/20 text-emerald-400", text: "Lead calificado vía WhatsApp → CRM", time: "hace 1 min" },
+                                { icon: "📧", color: "bg-blue-500/20 text-blue-400", text: "Email de seguimiento enviado a Pedro L.", time: "hace 3 min" },
+                                { icon: "📞", color: "bg-amber-500/20 text-amber-400", text: "Llamada de voz atendida · 2:34 min", time: "hace 5 min" },
+                                { icon: "🌐", color: "bg-violet-500/20 text-violet-400", text: "Chat web: demo agendada para mañana", time: "hace 8 min" },
+                                { icon: "🔔", color: "bg-rose-500/20 text-rose-400", text: "Alerta: lead de alto valor detectado", time: "hace 11 min" },
                               ].map((a, i) => (
                                 <div key={i} className="flex items-start gap-2">
                                   <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] flex-shrink-0 ${a.color}`}>{a.icon}</span>
                                   <div className="min-w-0">
-                                    <span className="text-[9px] text-gray-300 block leading-tight">{a.text}</span>
+                                    <span className="text-[8px] sm:text-[9px] text-gray-300 block leading-tight">{a.text}</span>
                                     <span className="text-[7px] text-gray-600">{a.time}</span>
                                   </div>
                                 </div>
@@ -487,54 +578,104 @@ export default function Home() {
                         </div>
                       </div>
 
-                      {/* Bottom bar — weekly chart + AI summary */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pt-4 border-t border-white/[0.04]">
-                        {/* Weekly area chart */}
+                      {/* ── ROW 4: Bottom analytics ── */}
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-white/[0.04]">
+                        {/* Weekly chart by channel */}
                         <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                           <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] text-gray-400 font-medium">Interacciones esta semana</span>
-                            <span className="text-[9px] text-emerald-400 font-medium">+18% ↑</span>
+                            <span className="text-[10px] text-gray-400 font-medium">Esta semana</span>
+                            <span className="text-[9px] text-emerald-400 font-medium">+22% ↑</span>
                           </div>
-                          <div className="flex items-end gap-1 h-16 sm:h-20">
+                          <div className="flex items-end gap-1 h-20">
                             {[
-                              { day: "L", val: 14, max: true },
-                              { day: "M", val: 11, max: false },
-                              { day: "X", val: 9, max: false },
-                              { day: "J", val: 16, max: false },
-                              { day: "V", val: 22, max: false },
-                              { day: "S", val: 28, max: false },
-                              { day: "D", val: 8, max: false },
-                            ].map((d) => (
-                              <div key={d.day} className="flex-1 flex flex-col items-center gap-0.5">
-                                <div className="w-full bg-slate-800/40 rounded-sm overflow-hidden flex items-end" style={{ height: '100%' }}>
-                                  <div className={`w-full rounded-sm transition-all ${d.day === "L" ? "bg-violet-500/80 animate-pulse-slow" : d.val >= 20 ? "bg-emerald-500/60" : d.val >= 12 ? "bg-violet-500/50" : "bg-indigo-500/40"}`} style={{ height: `${(d.val / 28) * 100}%` }} />
+                              { day: "L", vals: [12, 18, 8, 14, 6] },
+                              { day: "M", vals: [15, 22, 10, 16, 8] },
+                              { day: "X", vals: [10, 16, 7, 12, 5] },
+                              { day: "J", vals: [18, 25, 12, 20, 9] },
+                              { day: "V", vals: [22, 30, 14, 24, 11] },
+                              { day: "S", vals: [14, 20, 8, 15, 7] },
+                              { day: "D", vals: [8, 12, 5, 9, 4] },
+                            ].map((d) => {
+                              const total = d.vals.reduce((a, b) => a + b, 0);
+                              const maxTotal = 101;
+                              const colors = ["bg-pink-500/70", "bg-emerald-500/70", "bg-blue-500/70", "bg-violet-500/70", "bg-amber-500/70"];
+                              return (
+                                <div key={d.day} className="flex-1 flex flex-col items-center gap-0.5">
+                                  <div className="w-full bg-slate-800/30 rounded-sm overflow-hidden flex flex-col justify-end" style={{ height: '100%' }}>
+                                    {d.vals.map((v, vi) => (
+                                      <div key={vi} className={`w-full ${colors[vi]}`} style={{ height: `${(v / maxTotal) * 100}%` }} />
+                                    ))}
+                                  </div>
+                                  <span className="text-[7px] text-gray-600">{d.day}</span>
                                 </div>
-                                <span className="text-[7px] sm:text-[8px] text-gray-600">{d.day}</span>
+                              );
+                            })}
+                          </div>
+                          <div className="flex items-center gap-2 mt-2 flex-wrap">
+                            {[
+                              { label: "IG", color: "bg-pink-400" },
+                              { label: "WA", color: "bg-emerald-400" },
+                              { label: "Email", color: "bg-blue-400" },
+                              { label: "Web", color: "bg-violet-400" },
+                              { label: "Voz", color: "bg-amber-400" },
+                            ].map((l) => (
+                              <span key={l.label} className="flex items-center gap-1 text-[7px] text-gray-500"><span className={`w-1.5 h-1.5 rounded-full ${l.color}`} />{l.label}</span>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Response time by channel */}
+                        <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
+                          <span className="text-[10px] text-gray-400 font-medium block mb-3">Tiempo de respuesta</span>
+                          <div className="space-y-2">
+                            {[
+                              { label: "Web Chat", value: "0.6s", pct: 95, color: "from-violet-500 to-indigo-400" },
+                              { label: "Instagram", value: "0.8s", pct: 92, color: "from-pink-500 to-rose-400" },
+                              { label: "WhatsApp", value: "1.1s", pct: 88, color: "from-emerald-500 to-green-400" },
+                              { label: "Email", value: "2.3s", pct: 72, color: "from-blue-500 to-cyan-400" },
+                              { label: "Voz IA", value: "3.2s", pct: 60, color: "from-amber-500 to-orange-400" },
+                            ].map((rt) => (
+                              <div key={rt.label}>
+                                <div className="flex items-center justify-between mb-0.5">
+                                  <span className="text-[8px] text-gray-500">{rt.label}</span>
+                                  <span className="text-[9px] text-white font-medium">{rt.value}</span>
+                                </div>
+                                <div className="h-1.5 bg-slate-800/60 rounded-full overflow-hidden">
+                                  <div className={`h-full rounded-full bg-gradient-to-r ${rt.color}`} style={{ width: `${rt.pct}%` }} />
+                                </div>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        {/* AI summary */}
+                        {/* AI Summary */}
                         <div className="bg-gradient-to-br from-violet-500/[0.08] to-indigo-500/[0.08] border border-violet-500/10 rounded-xl p-3">
                           <div className="flex items-center gap-2 mb-2">
                             <div className="w-6 h-6 bg-violet-500/20 rounded-lg flex items-center justify-center">
                               <svg className="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                             </div>
-                            <span className="text-[10px] sm:text-[11px] text-violet-300 font-semibold">Resumen IA del día</span>
+                            <span className="text-[10px] text-violet-300 font-semibold">Resumen IA del día</span>
                           </div>
                           <div className="space-y-1.5">
-                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                            <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-emerald-400 mt-0.5">●</span>
-                              <span><span className="text-white font-medium">138 de 142</span> consultas resueltas automáticamente</span>
+                              <span><span className="text-white font-medium">3,834 de 3,975</span> resueltas sin intervención humana</span>
                             </p>
-                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                            <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                              <span className="text-pink-400 mt-0.5">●</span>
+                              <span>Instagram es el canal con <span className="text-pink-400 font-medium">mayor crecimiento (+24%)</span></span>
+                            </p>
+                            <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-violet-400 mt-0.5">●</span>
-                              <span>Tiempo medio de respuesta: <span className="text-white font-medium">1.2 segundos</span></span>
+                              <span>Velocidad media de respuesta: <span className="text-white font-medium">1.2 segundos</span></span>
                             </p>
-                            <p className="text-[9px] sm:text-[10px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                            <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
                               <span className="text-amber-400 mt-0.5">●</span>
-                              <span>4 consultas <span className="text-amber-400 font-medium">requieren revisión manual</span></span>
+                              <span><span className="text-amber-400 font-medium">127 leads</span> generados · 32 requieren seguimiento</span>
+                            </p>
+                            <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
+                              <span className="text-cyan-400 mt-0.5">●</span>
+                              <span>Próx. acción sugerida: <span className="text-cyan-400 font-medium">campaña de retargeting IG</span></span>
                             </p>
                           </div>
                         </div>
