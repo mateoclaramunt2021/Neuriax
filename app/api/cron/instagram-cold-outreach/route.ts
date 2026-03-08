@@ -132,13 +132,30 @@ export async function GET() {
     const maxPerRun = config?.cold_dm_daily_limit || 8;
 
     // Get leads that haven't been contacted yet, not blacklisted
-    const { data: newLeads } = await supabase
+    // Excludes 'manual_no_dm' leads (user chose not to send DM)
+    const { data: allNewLeads } = await supabase
       .from('instagram_cold_leads')
       .select('*')
       .eq('status', 'new')
       .eq('blacklisted', false)
+      .neq('source_hashtag', 'manual_no_dm')
       .order('created_at', { ascending: true })
       .limit(maxPerRun);
+
+    // Filter out scheduled leads whose time hasn't arrived yet
+    const now = new Date();
+    const newLeads = (allNewLeads || []).filter(lead => {
+      if (lead.notes && lead.notes.startsWith('[SCHEDULED:')) {
+        const match = lead.notes.match(/^\[SCHEDULED:([^\]]+)\]/);
+        if (match) {
+          const scheduledTime = new Date(match[1]);
+          if (now < scheduledTime) return false; // Not yet time
+          // Time has passed, strip the prefix from notes before sending
+          lead.notes = lead.notes.replace(/^\[SCHEDULED:[^\]]+\]/, '').trim() || null;
+        }
+      }
+      return true;
+    });
 
     if (!newLeads || newLeads.length === 0) {
       return NextResponse.json({ processed: 0, message: 'No new leads to contact' });

@@ -376,7 +376,7 @@ export async function PUT(request: NextRequest) {
 
     // Add a manual lead
     if (body.action === 'add_lead') {
-      const { username, sector, full_name, notes } = body;
+      const { username, sector, full_name, notes, sendTiming, scheduledAt } = body;
       if (!username || !sector) {
         return NextResponse.json({ error: 'Username y sector son obligatorios' }, { status: 400 });
       }
@@ -411,7 +411,43 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: 'Error al añadir lead' }, { status: 500 });
       }
 
-      // ─── Send first DM immediately ───
+      // ─── Handle send timing ───
+      const timing = sendTiming || 'now';
+
+      // For scheduled sends, store the scheduled time in notes as a prefix
+      if (timing === 'scheduled' && scheduledAt) {
+        await supabase
+          .from('instagram_cold_leads')
+          .update({
+            notes: `[SCHEDULED:${scheduledAt}]${notes || ''}`,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('username', cleanUsername);
+      }
+
+      // For 'none' → just return, lead stays as 'new' but cron won't auto-send (we mark it)
+      if (timing === 'none') {
+        await supabase
+          .from('instagram_cold_leads')
+          .update({
+            source_hashtag: 'manual_no_dm',
+            updated_at: new Date().toISOString(),
+          })
+          .eq('username', cleanUsername);
+        return NextResponse.json({ success: true, message: `@${cleanUsername} añadido (sin DM)`, dmSent: false });
+      }
+
+      // For 'next_cron' → leave as 'new', the daily cron will pick it up
+      if (timing === 'next_cron') {
+        return NextResponse.json({ success: true, message: `@${cleanUsername} añadido — DM mañana 10 AM`, dmSent: false });
+      }
+
+      // For 'scheduled' → leave as 'new' with scheduled prefix, cron will check
+      if (timing === 'scheduled') {
+        return NextResponse.json({ success: true, message: `@${cleanUsername} añadido — DM programado`, dmSent: false });
+      }
+
+      // timing === 'now' → send immediately
       let dmSent = false;
       let dmMessage = '';
       try {

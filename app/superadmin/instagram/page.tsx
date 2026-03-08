@@ -160,6 +160,9 @@ export default function InstagramPage() {
   const [newLeadName, setNewLeadName] = useState('');
   const [newLeadNotes, setNewLeadNotes] = useState('');
   const [addingLead, setAddingLead] = useState(false);
+  const [sendTiming, setSendTiming] = useState<'now' | 'next_cron' | 'scheduled' | 'none'>('now');
+  const [scheduledDate, setScheduledDate] = useState('');
+  const [scheduledTime, setScheduledTime] = useState('10:00');
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -285,6 +288,12 @@ export default function InstagramPage() {
     if (!newLeadUsername.trim() || addingLead) return;
     setAddingLead(true);
     try {
+      // Build scheduled datetime if needed
+      let scheduledAt: string | undefined;
+      if (sendTiming === 'scheduled' && scheduledDate) {
+        scheduledAt = new Date(`${scheduledDate}T${scheduledTime || '10:00'}:00`).toISOString();
+      }
+
       const res = await fetch('/api/superadmin/instagram', {
         method: 'PUT', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -293,17 +302,28 @@ export default function InstagramPage() {
           sector: newLeadSector,
           full_name: newLeadName.trim() || undefined,
           notes: newLeadNotes.trim() || undefined,
+          sendTiming,
+          scheduledAt,
         }),
       });
       const data = await res.json();
       if (res.ok) {
+        const timingLabels: Record<string, string> = {
+          now: 'DM enviado ✅',
+          next_cron: 'DM se enviará mañana 10 AM ⏰',
+          scheduled: `DM programado para ${scheduledDate} ${scheduledTime} 📅`,
+          none: 'guardado sin DM 📋',
+        };
         showToast(data.dmSent
-          ? `@${newLeadUsername.replace(/^@/, '')} añadido y DM enviado ✅`
-          : `@${newLeadUsername.replace(/^@/, '')} añadido (DM pendiente)`
+          ? `@${newLeadUsername.replace(/^@/, '')} añadido y ${timingLabels.now}`
+          : `@${newLeadUsername.replace(/^@/, '')} añadido — ${timingLabels[sendTiming] || timingLabels.none}`
         );
         setNewLeadUsername('');
         setNewLeadName('');
         setNewLeadNotes('');
+        setSendTiming('now');
+        setScheduledDate('');
+        setScheduledTime('10:00');
         setShowAddLead(false);
         fetchColdLeads();
       } else {
@@ -810,6 +830,59 @@ export default function InstagramPage() {
                     />
                   </div>
                 </div>
+
+                {/* Send Timing Selector */}
+                <div>
+                  <label className="text-[11px] text-slate-500 mb-2 block">¿Cuándo enviar el DM?</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {([
+                      { value: 'now' as const, label: '⚡ Ahora', desc: 'Envío instantáneo' },
+                      { value: 'next_cron' as const, label: '⏰ Mañana 10AM', desc: 'Cron automático' },
+                      { value: 'scheduled' as const, label: '📅 Programar', desc: 'Elige fecha/hora' },
+                      { value: 'none' as const, label: '🚫 No enviar', desc: 'Solo guardar' },
+                    ]).map(opt => (
+                      <button
+                        key={opt.value}
+                        type="button"
+                        onClick={() => setSendTiming(opt.value)}
+                        className={`p-3 rounded-xl text-left transition-all border ${
+                          sendTiming === opt.value
+                            ? 'border-fuchsia-500/40 bg-fuchsia-500/10 ring-1 ring-fuchsia-500/20'
+                            : 'border-white/[0.06] bg-black/20 hover:border-white/[0.12]'
+                        }`}
+                      >
+                        <p className="text-sm font-medium text-white">{opt.label}</p>
+                        <p className="text-[10px] text-slate-500 mt-0.5">{opt.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Scheduled Date/Time Picker */}
+                {sendTiming === 'scheduled' && (
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[11px] text-slate-500 mb-1 block">Fecha</label>
+                      <input
+                        type="date"
+                        value={scheduledDate}
+                        onChange={e => setScheduledDate(e.target.value)}
+                        min={new Date().toISOString().split('T')[0]}
+                        className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[11px] text-slate-500 mb-1 block">Hora</label>
+                      <input
+                        type="time"
+                        value={scheduledTime}
+                        onChange={e => setScheduledTime(e.target.value)}
+                        className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                      />
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex justify-end gap-3 pt-1">
                   <button
                     onClick={() => setShowAddLead(false)}
@@ -819,14 +892,17 @@ export default function InstagramPage() {
                   </button>
                   <button
                     onClick={handleAddLead}
-                    disabled={!newLeadUsername.trim() || addingLead}
+                    disabled={!newLeadUsername.trim() || addingLead || (sendTiming === 'scheduled' && !scheduledDate)}
                     className="px-5 py-2 bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {addingLead ? 'Añadiendo...' : '+ Añadir Lead'}
+                    {addingLead ? 'Añadiendo...' : sendTiming === 'now' ? '⚡ Añadir y Enviar' : sendTiming === 'scheduled' ? '📅 Añadir y Programar' : '+ Añadir Lead'}
                   </button>
                 </div>
                 <p className="text-[10px] text-slate-600 -mt-1">
-                  💡 El lead se añadirá con estado &quot;Nuevo&quot;. El cron de captación en frío le enviará un DM personalizado automáticamente.
+                  {sendTiming === 'now' && '⚡ Se enviará el DM al instante al añadir el lead.'}
+                  {sendTiming === 'next_cron' && '⏰ El DM se enviará mañana a las 10:00 AM automáticamente.'}
+                  {sendTiming === 'scheduled' && '📅 El DM se enviará en la fecha y hora que elijas.'}
+                  {sendTiming === 'none' && '🚫 El lead se guardará sin enviar DM. Podrás enviarlo manualmente después.'}
                 </p>
               </div>
             )}
