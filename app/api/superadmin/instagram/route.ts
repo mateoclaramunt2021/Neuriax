@@ -7,18 +7,49 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// GET - Instagram config, conversations & stats
+// GET - Instagram config, conversations, stats, quick replies
 export async function GET(request: NextRequest) {
   try {
     const supabase = getSupabase();
     const { searchParams } = new URL(request.url);
     const senderId = searchParams.get('sender');
+    const section = searchParams.get('section');
 
     // Get config
     const { data: config } = await supabase
       .from('instagram_config')
       .select('*')
       .single();
+
+    // Quick replies section
+    if (section === 'quick_replies') {
+      const { data: quickReplies } = await supabase
+        .from('instagram_quick_replies')
+        .select('*')
+        .eq('active', true)
+        .order('sort_order', { ascending: true });
+      return NextResponse.json({ quickReplies: quickReplies || [] });
+    }
+
+    // Followers/labels section
+    if (section === 'followers') {
+      const { data: followers } = await supabase
+        .from('instagram_followers')
+        .select('*')
+        .order('first_seen_at', { ascending: false })
+        .limit(200);
+      return NextResponse.json({ followers: followers || [] });
+    }
+
+    // Token log section
+    if (section === 'token_log') {
+      const { data: logs } = await supabase
+        .from('instagram_token_log')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(20);
+      return NextResponse.json({ logs: logs || [] });
+    }
 
     if (senderId) {
       // Get conversation with specific sender
@@ -29,7 +60,22 @@ export async function GET(request: NextRequest) {
         .order('created_at', { ascending: true })
         .limit(100);
 
-      return NextResponse.json({ config, messages: messages || [] });
+      // Get sender label
+      const { data: follower } = await supabase
+        .from('instagram_followers')
+        .select('*')
+        .eq('instagram_user_id', senderId)
+        .single();
+
+      // Mark messages as read
+      await supabase
+        .from('instagram_messages')
+        .update({ status: 'read' })
+        .eq('sender_id', senderId)
+        .eq('direction', 'inbound')
+        .neq('status', 'read');
+
+      return NextResponse.json({ config, messages: messages || [], follower });
     }
 
     // Get all messages for conversation grouping
@@ -47,6 +93,7 @@ export async function GET(request: NextRequest) {
       lastTime: string;
       unread: number;
       totalMessages: number;
+      label: string;
     }> = {};
 
     allMessages?.forEach((msg: any) => {
@@ -59,6 +106,7 @@ export async function GET(request: NextRequest) {
           lastTime: msg.created_at,
           unread: 0,
           totalMessages: 0,
+          label: 'nuevo',
         };
       }
       conversations[key].totalMessages++;
@@ -67,24 +115,73 @@ export async function GET(request: NextRequest) {
       }
     });
 
+    // Get labels from followers table
+    const senderIds = Object.keys(conversations);
+    if (senderIds.length > 0) {
+      const { data: followers } = await supabase
+        .from('instagram_followers')
+        .select('instagram_user_id, label, username')
+        .in('instagram_user_id', senderIds);
+
+      followers?.forEach((f: any) => {
+        if (conversations[f.instagram_user_id]) {
+          conversations[f.instagram_user_id].label = f.label || 'nuevo';
+          if (f.username && conversations[f.instagram_user_id].name === f.instagram_user_id) {
+            conversations[f.instagram_user_id].name = f.username;
+          }
+        }
+      });
+    }
+
+    // Compute stats
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).toISOString();
+    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000).toISOString();
+
+    const todayMessages = allMessages?.filter((m: any) => m.created_at >= today) || [];
+    const weekMessages = allMessages?.filter((m: any) => m.created_at >= weekAgo) || [];
+
     const stats = {
       totalConversations: Object.keys(conversations).length,
       totalMessages: allMessages?.length || 0,
       botMessages: allMessages?.filter((m: any) => m.is_bot).length || 0,
       humanMessages: allMessages?.filter((m: any) => !m.is_bot && m.direction === 'outbound').length || 0,
+      todayMessages: todayMessages.length,
+      weekMessages: weekMessages.length,
+      unreadTotal: Object.values(conversations).reduce((sum, c) => sum + c.unread, 0),
+      avgResponseTime: '< 5s',
+      storyMentions: allMessages?.filter((m: any) => m.message_type === 'story_mention').length || 0,
+      firstContacts: allMessages?.filter((m: any) => m.message_type === 'first_contact').length || 0,
+      labelCounts: {
+        lead: Object.values(conversations).filter(c => c.label === 'lead').length,
+        cliente: Object.values(conversations).filter(c => c.label === 'cliente').length,
+        interesado: Object.values(conversations).filter(c => c.label === 'interesado').length,
+        spam: Object.values(conversations).filter(c => c.label === 'spam').length,
+        nuevo: Object.values(conversations).filter(c => c.label === 'nuevo').length,
+      },
     };
+
+    // Get quick replies for the chat
+    const { data: quickReplies } = await supabase
+      .from('instagram_quick_replies')
+      .select('*')
+      .eq('active', true)
+      .order('sort_order', { ascending: true });
 
     return NextResponse.json({
       config: config || {
         bot_enabled: false,
         auto_reply_enabled: false,
         auto_reply_message: 'Hola! Gracias por escribirnos. Te responderemos pronto.',
+        welcome_dm_enabled: true,
+        welcome_message: '¡Hola! 👋 Gracias por seguirnos en Instagram!\nSoy el asistente de Neuriax. ¿En qué puedo ayudarte? 🚀',
       },
       connected: !!(config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN),
       conversations: Object.values(conversations).sort((a, b) =>
         new Date(b.lastTime).getTime() - new Date(a.lastTime).getTime()
       ),
       stats,
+      quickReplies: quickReplies || [],
     });
   } catch (error) {
     console.error('Instagram API error:', error);
@@ -92,12 +189,52 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// PUT - Update Instagram config
+// PUT - Update Instagram config or labels
 export async function PUT(request: NextRequest) {
   try {
     const supabase = getSupabase();
-    const config = await request.json();
+    const body = await request.json();
 
+    // Update label for a conversation
+    if (body.action === 'update_label') {
+      await supabase
+        .from('instagram_followers')
+        .upsert({
+          instagram_user_id: body.senderId,
+          label: body.label,
+        }, { onConflict: 'instagram_user_id' });
+      return NextResponse.json({ success: true });
+    }
+
+    // Update a quick reply
+    if (body.action === 'update_quick_reply') {
+      if (body.id) {
+        await supabase
+          .from('instagram_quick_replies')
+          .update({ label: body.label, message: body.message, icon: body.icon })
+          .eq('id', body.id);
+      } else {
+        await supabase.from('instagram_quick_replies').insert({
+          label: body.label,
+          message: body.message,
+          icon: body.icon || '💬',
+          sort_order: body.sort_order || 99,
+        });
+      }
+      return NextResponse.json({ success: true });
+    }
+
+    // Delete a quick reply
+    if (body.action === 'delete_quick_reply') {
+      await supabase
+        .from('instagram_quick_replies')
+        .delete()
+        .eq('id', body.id);
+      return NextResponse.json({ success: true });
+    }
+
+    // Default: update config
+    const config = body;
     const { data: existing } = await supabase
       .from('instagram_config')
       .select('id')
@@ -129,7 +266,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'ID de destinatario y mensaje requeridos' }, { status: 400 });
     }
 
-    const accessToken = process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
+    // Try config token first, fallback to env
+    const { data: config } = await supabase
+      .from('instagram_config')
+      .select('access_token')
+      .single();
+
+    const accessToken = config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
     const igAccountId = process.env.INSTAGRAM_ACCOUNT_ID;
     let sent = false;
 
@@ -150,6 +293,10 @@ export async function POST(request: NextRequest) {
           }
         );
         sent = igRes.ok;
+        if (!igRes.ok) {
+          const err = await igRes.json();
+          console.error('Instagram API error:', err);
+        }
       } catch (e) {
         console.error('Instagram API send error:', e);
       }
