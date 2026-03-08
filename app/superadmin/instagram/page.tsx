@@ -182,6 +182,12 @@ export default function InstagramPage() {
   const [scheduledDate, setScheduledDate] = useState('');
   const [scheduledTime, setScheduledTime] = useState('10:00');
   const [selectedLead, setSelectedLead] = useState<ColdLead | null>(null);
+  const [showBulkImport, setShowBulkImport] = useState(false);
+  const [bulkText, setBulkText] = useState('');
+  const [bulkSector, setBulkSector] = useState<string>('auto');
+  const [bulkTiming, setBulkTiming] = useState<'now' | 'next_cron' | 'none'>('next_cron');
+  const [bulkImporting, setBulkImporting] = useState(false);
+  const [bulkResult, setBulkResult] = useState<{ added: number; duplicates: number; errors: number; total: number; dmsSent?: number; sectorDetected?: boolean } | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -350,6 +356,50 @@ export default function InstagramPage() {
       }
     } catch (err) { console.error('Error:', err); showToast('Error de conexión'); }
     finally { setAddingLead(false); }
+  };
+
+  /* — Bulk add leads — */
+  const handleBulkAdd = async () => {
+    if (!bulkText.trim() || bulkImporting) return;
+    setBulkImporting(true);
+    setBulkResult(null);
+    try {
+      // Parse usernames: split by newlines, commas, spaces, semicolons
+      const usernames = bulkText
+        .split(/[\n,;\s]+/)
+        .map(u => u.replace(/^@/, '').trim().toLowerCase())
+        .filter(u => u.length > 1);
+
+      if (usernames.length === 0) {
+        showToast('No se detectaron usernames válidos');
+        setBulkImporting(false);
+        return;
+      }
+
+      const res = await fetch('/api/superadmin/instagram', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'bulk_add_leads',
+          usernames,
+          sector: bulkSector === 'auto' ? 'auto' : bulkSector,
+          sendTiming: bulkTiming,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setBulkResult(data.summary);
+        showToast(data.message);
+        fetchColdLeads();
+      } else {
+        showToast(data.error || 'Error al importar');
+      }
+    } catch (err) {
+      console.error('Bulk import error:', err);
+      showToast('Error de conexión');
+    } finally {
+      setBulkImporting(false);
+    }
   };
 
   /* — Filters — */
@@ -778,7 +828,13 @@ export default function InstagramPage() {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => setShowAddLead(!showAddLead)}
+                  onClick={() => { setShowBulkImport(!showBulkImport); setShowAddLead(false); setBulkResult(null); }}
+                  className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
+                >
+                  📋 Importar lista
+                </button>
+                <button
+                  onClick={() => { setShowAddLead(!showAddLead); setShowBulkImport(false); }}
                   className="px-4 py-2 bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all"
                 >
                   + Añadir Lead
@@ -925,6 +981,138 @@ export default function InstagramPage() {
                   {sendTiming === 'next_cron' && '⏰ El DM se enviará mañana a las 10:00 AM automáticamente.'}
                   {sendTiming === 'scheduled' && '📅 El DM se enviará en la fecha y hora que elijas.'}
                   {sendTiming === 'none' && '🚫 El lead se guardará sin enviar DM. Podrás enviarlo manualmente después.'}
+                </p>
+              </div>
+            )}
+
+            {/* ─── Bulk Import Modal ─── */}
+            {showBulkImport && (
+              <div className="bg-[#1a1a2e]/80 backdrop-blur rounded-2xl border border-cyan-500/20 p-5 space-y-4 animate-in fade-in slide-in-from-top-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-cyan-300 flex items-center gap-2">
+                    <span>📋</span> Importar lista de leads
+                  </h3>
+                  <button onClick={() => { setShowBulkImport(false); setBulkResult(null); }} className="text-slate-500 hover:text-white text-sm">✕</button>
+                </div>
+
+                <div>
+                  <label className="text-[11px] text-slate-500 mb-1 block">Pega los usernames (uno por línea, separados por comas o espacios)</label>
+                  <textarea
+                    value={bulkText}
+                    onChange={e => setBulkText(e.target.value)}
+                    placeholder={`@restaurante_bueno\n@barberia_style\n@clinica_beauty\npeluqueria_top, gym_fitness\notra_tienda`}
+                    className="w-full px-3 py-3 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/20 transition-all font-mono resize-none"
+                    rows={6}
+                  />
+                  <div className="flex items-center justify-between mt-1">
+                    <p className="text-[10px] text-slate-600">
+                      {bulkText.trim() ? `${bulkText.split(/[\n,;\s]+/).filter(u => u.replace(/^@/, '').trim().length > 1).length} usernames detectados` : 'Acepta @username, username, separados por comas, espacios o líneas'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">Sector</label>
+                    <select
+                      value={bulkSector}
+                      onChange={e => setBulkSector(e.target.value)}
+                      className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white focus:outline-none focus:border-cyan-500/40 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                    >
+                      <option value="auto">🤖 Auto-detectar (AI)</option>
+                      <option value="restaurante">🍽️ Restaurante</option>
+                      <option value="clinica_estetica">💆 Clínica Estética</option>
+                      <option value="barberia">💈 Barbería</option>
+                      <option value="clinica_salud">🏥 Clínica Salud</option>
+                      <option value="inmobiliaria">🏠 Inmobiliaria</option>
+                      <option value="gym">💪 Gimnasio</option>
+                      <option value="tienda">🛍️ Tienda</option>
+                      <option value="general">🏢 General</option>
+                    </select>
+                    <p className="text-[10px] text-slate-600 mt-1">
+                      {bulkSector === 'auto' ? '🤖 IA analizará cada username para detectar el sector' : 'Se aplicará a todos los leads'}
+                    </p>
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">¿Cuándo enviar DMs?</label>
+                    <div className="space-y-1.5">
+                      {([
+                        { value: 'next_cron' as const, label: '⏰ Mañana 10AM', desc: 'Cron automático (recomendado)' },
+                        { value: 'now' as const, label: '⚡ Ahora', desc: 'Máx 8 DMs instantáneos' },
+                        { value: 'none' as const, label: '🚫 No enviar', desc: 'Solo guardar leads' },
+                      ]).map(opt => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          onClick={() => setBulkTiming(opt.value)}
+                          className={`w-full p-2 rounded-lg text-left transition-all border text-xs ${
+                            bulkTiming === opt.value
+                              ? 'border-cyan-500/40 bg-cyan-500/10 ring-1 ring-cyan-500/20'
+                              : 'border-white/[0.06] bg-black/20 hover:border-white/[0.12]'
+                          }`}
+                        >
+                          <span className="font-medium text-white">{opt.label}</span>
+                          <span className="text-slate-500 ml-1.5">{opt.desc}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bulk result summary */}
+                {bulkResult && (
+                  <div className="bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 rounded-xl p-4 border border-emerald-500/20 space-y-2">
+                    <p className="text-sm font-semibold text-emerald-300">✅ Importación completada</p>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-white">{bulkResult.total}</p>
+                        <p className="text-[10px] text-slate-500">Procesados</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-emerald-400">{bulkResult.added}</p>
+                        <p className="text-[10px] text-slate-500">Añadidos</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-amber-400">{bulkResult.duplicates}</p>
+                        <p className="text-[10px] text-slate-500">Duplicados</p>
+                      </div>
+                      <div className="text-center">
+                        <p className="text-lg font-bold text-cyan-400">{bulkResult.dmsSent || 0}</p>
+                        <p className="text-[10px] text-slate-500">DMs enviados</p>
+                      </div>
+                    </div>
+                    {bulkResult.sectorDetected && (
+                      <p className="text-[10px] text-slate-500">🤖 Sectores auto-detectados por IA</p>
+                    )}
+                  </div>
+                )}
+
+                <div className="flex justify-end gap-3 pt-1">
+                  <button
+                    onClick={() => { setShowBulkImport(false); setBulkResult(null); }}
+                    className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleBulkAdd}
+                    disabled={!bulkText.trim() || bulkImporting}
+                    className="px-5 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-cyan-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                  >
+                    {bulkImporting ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                        Importando...
+                      </>
+                    ) : (
+                      <>📋 Importar {bulkText.trim() ? `${bulkText.split(/[\n,;\s]+/).filter(u => u.replace(/^@/, '').trim().length > 1).length} leads` : 'lista'}</>
+                    )}
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-600 -mt-1">
+                  {bulkTiming === 'now' && '⚡ Se enviarán DMs instantáneamente (máx 8 por seguridad).'}
+                  {bulkTiming === 'next_cron' && '⏰ Los DMs se enviarán mañana 10 AM automáticamente.'}
+                  {bulkTiming === 'none' && '🚫 Los leads se guardarán sin enviar ningún DM.'}
                 </p>
               </div>
             )}

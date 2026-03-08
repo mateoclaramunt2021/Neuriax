@@ -534,6 +534,173 @@ export async function PUT(request: NextRequest) {
       });
     }
 
+    // ─── Bulk add leads ───
+    if (body.action === 'bulk_add_leads') {
+      const { usernames, sector, sendTiming } = body as {
+        usernames: string[];
+        sector?: string;
+        sendTiming?: string;
+      };
+
+      if (!usernames || !Array.isArray(usernames) || usernames.length === 0) {
+        return NextResponse.json({ error: 'Lista de usernames vacía' }, { status: 400 });
+      }
+
+      // Clean & deduplicate
+      const cleaned = [...new Set(
+        usernames
+          .map((u: string) => u.replace(/^@/, '').trim().toLowerCase())
+          .filter((u: string) => u.length > 0)
+      )];
+
+      if (cleaned.length === 0) {
+        return NextResponse.json({ error: 'Ningún username válido en la lista' }, { status: 400 });
+      }
+
+      // Check which already exist
+      const { data: existing } = await supabase
+        .from('instagram_cold_leads')
+        .select('username')
+        .in('username', cleaned);
+
+      const existingSet = new Set((existing || []).map((e: { username: string }) => e.username));
+      const newUsernames = cleaned.filter((u: string) => !existingSet.has(u));
+      const duplicates = cleaned.filter((u: string) => existingSet.has(u));
+
+      if (newUsernames.length === 0) {
+        return NextResponse.json({
+          success: true,
+          summary: { added: 0, duplicates: duplicates.length, errors: 0, total: cleaned.length },
+          message: `Todos los ${cleaned.length} leads ya existen`,
+        });
+      }
+
+      // Auto-detect sector via Groq if no sector specified
+      let sectorMap: Record<string, string> = {};
+      if (!sector || sector === 'auto') {
+        const groqKey = process.env.GROQ_API_KEY;
+        if (groqKey && newUsernames.length <= 50) {
+          try {
+            const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
+              body: JSON.stringify({
+                model: 'llama-3.3-70b-versatile',
+                temperature: 0.2,
+                max_tokens: 1000,
+                messages: [{
+                  role: 'user',
+                  content: `Analiza estos usernames de Instagram y adivina el sector de cada uno. Sectores posibles: restaurante, clinica_estetica, barberia, clinica_salud, inmobiliaria, gym, tienda, general.
+Responde SOLO con JSON así: {"username1":"sector1","username2":"sector2",...}
+Usernames: ${newUsernames.join(', ')}`
+                }],
+              }),
+            });
+            if (groqRes.ok) {
+              const groqData = await groqRes.json();
+              const content = groqData.choices?.[0]?.message?.content || '';
+              const jsonMatch = content.match(/\{[\s\S]*\}/);
+              if (jsonMatch) {
+                sectorMap = JSON.parse(jsonMatch[0]);
+              }
+            }
+          } catch (e) {
+            console.error('Groq sector detection error:', e);
+          }
+        }
+      }
+
+      // Insert all leads
+      const timing = sendTiming || 'next_cron';
+      const rows = newUsernames.map((username: string) => ({
+        username,
+        instagram_user_id: username,
+        sector: sector && sector !== 'auto' ? sector : (sectorMap[username] || 'general'),
+        source_hashtag: 'bulk_import',
+        status: timing === 'none' ? 'new' : 'new',
+        blacklisted: false,
+        converted: false,
+        responded: false,
+        notes: timing === 'none' ? '[BULK] sin DM' : '[BULK]',
+      }));
+
+      // Mark no-DM leads
+      if (timing === 'none') {
+        rows.forEach((r: { source_hashtag: string }) => { r.source_hashtag = 'manual_no_dm'; });
+      }
+
+      const { error: insertError, data: inserted } = await supabase
+        .from('instagram_cold_leads')
+        .insert(rows)
+        .select('id, username, sector');
+
+      if (insertError) {
+        console.error('Bulk insert error:', insertError);
+        return NextResponse.json({ error: 'Error insertando leads' }, { status: 500 });
+      }
+
+      const addedCount = inserted?.length || newUsernames.length;
+
+      // If timing === 'now', send DMs immediately (with delays)
+      let dmsSent = 0;
+      if (timing === 'now' && inserted && inserted.length > 0) {
+        const { data: config } = await supabase
+          .from('instagram_config')
+          .select('access_token, cold_outreach_enabled')
+          .single();
+        const accessToken = config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN;
+
+        if (accessToken && config?.cold_outreach_enabled !== false) {
+          // Limit to 8 DMs to stay safe
+          const toSend = inserted.slice(0, 8);
+          for (const lead of toSend) {
+            try {
+              const dmMessage = pickTemplate(lead.sector);
+              const sent = await sendInstagramDM(lead.username, dmMessage, accessToken);
+              if (sent) {
+                dmsSent++;
+                await supabase.from('instagram_cold_leads').update({
+                  status: 'contacted',
+                  first_dm_sent_at: new Date().toISOString(),
+                  first_dm_message: dmMessage,
+                  updated_at: new Date().toISOString(),
+                }).eq('id', lead.id);
+
+                await supabase.from('instagram_messages').insert({
+                  sender_id: lead.username,
+                  sender_name: lead.username,
+                  direction: 'outbound',
+                  content: dmMessage,
+                  status: 'sent',
+                  is_bot: true,
+                  message_type: 'cold_dm',
+                });
+              }
+              // Random delay 3-6 seconds
+              await new Promise(r => setTimeout(r, 3000 + Math.random() * 3000));
+            } catch (e) {
+              console.error(`Bulk DM error for ${lead.username}:`, e);
+            }
+          }
+        }
+      }
+
+      return NextResponse.json({
+        success: true,
+        summary: {
+          added: addedCount,
+          duplicates: duplicates.length,
+          errors: 0,
+          total: cleaned.length,
+          dmsSent,
+          sectorDetected: !sector || sector === 'auto',
+        },
+        message: `${addedCount} leads añadidos${duplicates.length > 0 ? `, ${duplicates.length} duplicados omitidos` : ''}${dmsSent > 0 ? `, ${dmsSent} DMs enviados` : ''}`,
+        duplicatesList: duplicates,
+        sectors: Object.fromEntries((inserted || []).map((l: { username: string; sector: string }) => [l.username, l.sector])),
+      });
+    }
+
     if (body.action === 'blacklist_lead') {
       await supabase
         .from('instagram_cold_leads')
