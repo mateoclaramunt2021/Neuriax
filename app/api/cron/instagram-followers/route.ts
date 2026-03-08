@@ -10,7 +10,7 @@ function getSupabase() {
 async function sendInstagramDM(recipientId: string, message: string, accessToken: string, igAccountId: string) {
   try {
     const response = await fetch(
-      `https://graph.facebook.com/v21.0/${igAccountId}/messages`,
+      `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
       {
         method: 'POST',
         headers: {
@@ -130,7 +130,7 @@ export async function GET() {
         let username = userId;
         try {
           const profileRes = await fetch(
-            `https://graph.facebook.com/v21.0/${userId}?fields=name,username&access_token=${accessToken}`
+            `https://graph.instagram.com/v21.0/${userId}?fields=name,username&access_token=${accessToken}`
           );
           if (profileRes.ok) {
             const profile = await profileRes.json();

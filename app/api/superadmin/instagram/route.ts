@@ -279,7 +279,7 @@ export async function POST(request: NextRequest) {
     if (accessToken && igAccountId) {
       try {
         const igRes = await fetch(
-          `https://graph.facebook.com/v21.0/${igAccountId}/messages`,
+          `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
           {
             method: 'POST',
             headers: {

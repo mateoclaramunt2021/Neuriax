@@ -115,7 +115,7 @@ async function sendInstagramMessage(recipientId: string, message: string, access
 
   try {
     const response = await fetch(
-      `https://graph.facebook.com/v21.0/${igAccountId}/messages`,
+      `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
       {
         method: 'POST',
         headers: {
@@ -155,7 +155,7 @@ async function recordSenderProfile(supabase: any, senderId: string, accessToken:
     let username = senderId;
     try {
       const res = await fetch(
-        `https://graph.facebook.com/v21.0/${senderId}?fields=name,username&access_token=${accessToken}`
+        `https://graph.instagram.com/v21.0/${senderId}?fields=name,username&access_token=${accessToken}`
       );
       if (res.ok) {
         const profile = await res.json();
