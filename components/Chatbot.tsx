@@ -16,18 +16,19 @@ interface ConversationMessage {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: "¡Hola! Soy María, la asistente de Neuriax. Estoy aquí para ayudarte con automatización, IA, webs y consultoría digital. ¿En qué puedo ayudarte?", isBot: true }
+    { text: "¡Hola! Soy María, del equipo de Neuriax. Estoy aquí para resolver cualquier duda que tengas sobre nuestros servicios de IA, automatización o desarrollo web. ¿En qué te puedo ayudar?", isBot: true }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [conversationHistory, setConversationHistory] = useState<ConversationMessage[]>([]);
+  const [sessionId] = useState(() => `chat-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const quickResponses = [
     "¿Qué servicios ofrecéis?",
-    "Precio de una web",
-    "Chatbot + automatización",
-    "Agendar llamada"
+    "¿Cómo funciona la IA?",
+    "¿Trabajáis con mi sector?",
+    "Agendar llamada gratuita"
   ];
 
   // Auto-scroll al último mensaje
@@ -60,6 +61,7 @@ export default function Chatbot() {
         },
         body: JSON.stringify({
           messages: newHistory,
+          leadData: { sessionId },
         }),
       });
 
@@ -125,8 +127,8 @@ export default function Chatbot() {
                 <span className="text-sm font-bold">N</span>
               </div>
               <div>
-                <h3 className="font-semibold">Neuriax</h3>
-                <p className="text-xs opacity-90">Asistente digital</p>
+                <h3 className="font-semibold">María · Neuriax</h3>
+                <p className="text-xs opacity-90">Asesora digital</p>
               </div>
             </div>
             <button
