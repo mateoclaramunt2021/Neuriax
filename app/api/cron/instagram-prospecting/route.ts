@@ -1,31 +1,89 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-// ─── Hashtags por sector para descubrir leads ───
-const SECTOR_HASHTAGS: Record<string, string[]> = {
+// ═══════════════════════════════════════════════════════════════════
+//  SISTEMA DE PROSPECCIÓN — Descubrimiento de leads por sector
+//  Usa business_discovery API (funciona con permisos básicos)
+// ═══════════════════════════════════════════════════════════════════
+
+// ─── Base de datos de negocios españoles por sector ───
+// Cada ejecución prueba un batch aleatorio. Se van rotando.
+const SEED_ACCOUNTS: Record<string, string[]> = {
   restaurante: [
-    'restaurantemadrid', 'restaurantebarcelona', 'restaurantevalencia',
-    'restauranteespana', 'gastronomiaespañola', 'restaurantenuevo',
-    'comidacasera', 'chefespanol', 'negociosgastronomicos',
-    'restaurantespain', 'cocinaespañola', 'foodiespain',
+    // Madrid
+    'streetxo', 'asadordeboroa', 'lateral_restaurantes', 'grupolamina',
+    'el_club_allard', 'coquemadrid', 'restaurantesmadrid', 'labarraca_madrid',
+    'tabernalaelisa', 'lakasa_restaurante', 'santceloni_restaurant', 'puntomx_madrid',
+    'restaurantetriciclo', 'smoked_room', 'numa_pompilio', 'bacira_restaurant',
+    'saladesalarestaurante', 'tipicoitalianomadrid', 'yokaloka_madrid', 'cenmejoresrestaurantes',
+    // Barcelona
+    'tickets_restaurant', 'disfrutarbcn', 'compartirbarcelona', 'hojasanta_mexico',
+    'canculleretes', 'laserenabcn', 'alkimia_restaurant', 'ciutatcomtal',
+    'lospescadores_bcn', 'restaurantenet', 'cerveceriamontana', 'flax_kale',
+    'naparestaurant', 'gresca_restaurant', 'bodega1900', 'brunch_and_cake',
+    // Valencia
+    'riffrestaurante', 'restaurante_navarro', 'lienzo_restaurante', 'myscandinavianteam',
+    'canalla_bistro', 'turianova', 'lafermata.vlc', 'copenhagen.vlc',
+    // Sevilla / Sur
+    'restaurante_abantal', 'aznarsevilla', 'contenidorcoworking', 'tradevomalaga',
+    // Varias ciudades
+    'elcellerdecannoca', 'mugaritz', 'martinberasategui_rest', 'azurmendi_rest',
+    'cenadordeamos', 'cocinarocook', 'restaurantemaui', 'grupodanigarcia',
   ],
   clinica_estetica: [
-    'clinicaestetica', 'medicinaestetica', 'clinicaesteticamadrid',
-    'clinicaesteticabarcelona', 'tratamientofacial', 'esteticaavanzada',
-    'bellezaespana', 'clinicadebelleza', 'rejuvenecimientofacial',
-    'botoxespaña', 'acido hialuronico', 'tratamientoscorporales',
+    // Madrid
+    'clinicacirugiaestetica', 'clinicamenorcamadrid', 'institutodermoestetica',
+    'dorsiamadrid', 'clinicadrsebastian', 'clinicagomezbravo', 'clinicaiml',
+    'clinicaravello', 'centrodermoestetico', 'medicinaesteticamadrid_',
+    'clinica_estetica_madrid', 'drjosemariaserrano', 'clinicasglobalderm',
+    'institutomedicodelsur', 'clinicakossti', 'clinicarealclinics',
+    // Barcelona
+    'clinicaesteticabarcelona_', 'iderma_clinica', 'teknon_barcelona',
+    'institutgregorio', 'clinicasantane', 'centrodermabcn', 'dermatologicabcn',
+    'clinica_tres_torres', 'institutbauza',
+    // Valencia
+    'clinicaesteticavalencia_', 'drdanielgomez', 'clinicapriego',
+    // Varias
+    'clinicaesteticajesusjimenez', 'dorsia.es', 'grupokvera', 'centromedicoestetico_',
+    'clinicalasamericas', 'clinicalucq', 'sveltia_clinica', 'medicos_esteticos_es',
+    'doctoramolinas', 'drjuliantresguerres', 'clinicaisabelcano_', 'elenaruizbeauty',
   ],
   barberia: [
-    'barberiamadrid', 'barberiabarcelona', 'barberiaespana',
-    'barbershopspain', 'barberiamoderna', 'cortedepelo',
-    'barberlife', 'barberoespanol', 'barberiaurbana',
-    'degradadoperfecto', 'peluqueriamasculina', 'fadehaircut',
+    // Madrid
+    'beigehaberdashery', 'captaincokmadrid', 'thebarberist_madrid', 'nobuhairsalon',
+    'barberiadistinto', 'labarberiademateo', 'barberiaelkinze', 'theblackbirdmadrid',
+    'barberia_capitol', 'oldschool_barbershop_madrid', 'kingsman_barber_madrid',
+    'barberialuismiguel', 'lacursamadrid', 'theoldbarbersmadrid', 'labarberiabarrio',
+    // Barcelona
+    'bcnbarbers', 'kinki_bcn', 'theoldbarbersbcn', 'barberiacaballeros',
+    'thebarberist_bcn', 'barbesgroupmontjuic', 'moustache_barbershop_bcn',
+    'barberiaelputoamo', 'kingshairbcn', 'oldschoolbarbershopbcn_',
+    // Valencia
+    'labarberiaoriginal_vlc', 'barberosvalencia', 'barberia_el_rey_vlc',
+    'theoldbarbersvlc', 'barberia_kings_vlc',
+    // Varias
+    'barberosdeespana', 'barberos_pro', 'barberia_classic', 'barberosurbanos',
+    'barberiamodern', 'barberia_elegance', 'labarberiaoriginal', 'topbarbers_spain',
+    'elartedelbarbero', 'barberias_de_espana', 'barberlifestyleofficial',
   ],
   clinica_salud: [
-    'clinicasalud', 'fisioterapia', 'clinicafisioterapia',
-    'dentista', 'clinicadental', 'podologia', 'nutricionista',
-    'psicologomadrid', 'fisioterapiamadrid', 'clinicamedica',
-    'saludybienestar', 'medicoespana',
+    // Fisioterapia
+    'fisiolution', 'fisiocampus', 'fisioyoga_madrid', 'physiummadrid',
+    'fisioneuroactiva', 'fisiospain', 'fisioneural', 'clinicafisioterapiamadrid_',
+    'fisiobcn_centro', 'fisiovalencia_', 'fisioterapia_deportiva_mad',
+    // Dental
+    'clinicadentalgalvan', 'asisa_dental', 'clinicadentalmadrid_', 'clinicdents',
+    'dentalcompany_oficial', 'clinicarequenadental', 'centromedicoidaemadrid',
+    'clinicdent_bcn', 'sonrisasdeldrperez', 'clinicadentalvelazquez_',
+    'vivadensclinica', 'boadent_clinicadental', 'cleardent_', 'clinicalopezdental',
+    // Nutrición & Psicología
+    'nutricionistaenmadrid', 'nutricion_bcn', 'psicologomadrid_oficial',
+    'psicotools_bcn', 'mindfulpracticemadrid', 'nutriendotusalud_', 'mentesaludable_es',
+    // Podología
+    'clinicadelpod', 'podologosmadrid_', 'podologiabcn_profesional',
+    // Varias
+    'clinicasdentalix', 'centromedicosalud_es', 'centrofisiovita',
+    'fisioterapeutas_espana', 'saludintegralcentro', 'clinicasaludbcn_',
   ],
 };
 
@@ -42,171 +100,68 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// ─── Ensure table exists ───
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function ensureTable(supabase: any) {
-  const { error } = await supabase.from('instagram_cold_leads').select('id').limit(1);
-  if (error?.message?.includes('does not exist')) {
-    console.error('Table instagram_cold_leads does not exist. Create it in Supabase Dashboard.');
+// ─── Discover a single lead via business_discovery API ───
+async function discoverByUsername(
+  username: string,
+  sector: string,
+  accessToken: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  supabase: any
+): Promise<boolean> {
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/me?fields=business_discovery.fields(id,username,name,biography,followers_count,media_count,profile_picture_url).username(${username})&access_token=${accessToken}`
+    );
+
+    if (!res.ok) {
+      const errText = await res.text();
+      // Log specific errors for debugging
+      if (errText.includes('not found') || errText.includes('does not exist')) {
+        console.log(`[Prospecting] @${username} not found (not business/creator account)`);
+      } else {
+        console.error(`[Prospecting] API error for @${username}:`, errText.substring(0, 200));
+      }
+      return false;
+    }
+
+    const data = await res.json();
+    const biz = data.business_discovery;
+    if (!biz?.id || !biz?.username) return false;
+
+    // Skip if already in cold_leads
+    const { data: existingLead } = await supabase
+      .from('instagram_cold_leads')
+      .select('id')
+      .eq('username', biz.username)
+      .single();
+    if (existingLead) return false;
+
+    // Skip if already in instagram_followers (they already DM'd us)
+    const { data: existingFollower } = await supabase
+      .from('instagram_followers')
+      .select('id')
+      .or(`username.eq.${biz.username},instagram_user_id.eq.${biz.id}`)
+      .single();
+    if (existingFollower) return false;
+
+    // Save new lead
+    await supabase.from('instagram_cold_leads').insert({
+      instagram_user_id: biz.id,
+      username: biz.username,
+      full_name: biz.name || null,
+      sector,
+      bio: biz.biography || null,
+      followers_count: biz.followers_count || 0,
+      source_hashtag: 'business_discovery',
+      status: 'new',
+    });
+
+    console.log(`[Prospecting] ✅ New lead: @${biz.username} (${sector}) — ${biz.followers_count || 0} followers`);
+    return true;
+  } catch (error) {
+    console.error(`[Prospecting] Error discovering @${username}:`, error);
     return false;
   }
-  return true;
-}
-
-// ─── Discover leads via Instagram Hashtag Search API ───
-async function discoverLeadsByHashtag(
-  hashtag: string,
-  sector: string,
-  igAccountId: string,
-  accessToken: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  supabase: any
-): Promise<number> {
-  let found = 0;
-
-  try {
-    // Step 1: Search for the hashtag ID
-    const hashtagRes = await fetch(
-      `https://graph.facebook.com/v21.0/ig_hashtag_search?q=${encodeURIComponent(hashtag)}&user_id=${igAccountId}&access_token=${accessToken}`
-    );
-
-    if (!hashtagRes.ok) {
-      const err = await hashtagRes.text();
-      console.error(`Hashtag search failed for #${hashtag}:`, err);
-      return 0;
-    }
-
-    const hashtagData = await hashtagRes.json();
-    const hashtagId = hashtagData.data?.[0]?.id;
-    if (!hashtagId) return 0;
-
-    // Step 2: Get top media for this hashtag
-    const mediaRes = await fetch(
-      `https://graph.facebook.com/v21.0/${hashtagId}/top_media?user_id=${igAccountId}&fields=id,caption,permalink,timestamp&limit=20&access_token=${accessToken}`
-    );
-
-    if (!mediaRes.ok) {
-      console.error(`Top media failed for #${hashtag}`);
-      return 0;
-    }
-
-    const mediaData = await mediaRes.json();
-    const posts = mediaData.data || [];
-
-    for (const post of posts) {
-      try {
-        // Step 3: Get the media owner
-        const ownerRes = await fetch(
-          `https://graph.facebook.com/v21.0/${post.id}?fields=owner{id,username,name,biography,followers_count}&access_token=${accessToken}`
-        );
-
-        if (!ownerRes.ok) continue;
-
-        const ownerData = await ownerRes.json();
-        const owner = ownerData.owner;
-        if (!owner?.id || !owner?.username) continue;
-
-        // Skip our own account
-        if (owner.id === igAccountId) continue;
-
-        // Check if already in DB (cold_leads or followers)
-        const { data: existing } = await supabase
-          .from('instagram_cold_leads')
-          .select('id')
-          .eq('instagram_user_id', owner.id)
-          .single();
-
-        if (existing) continue;
-
-        // Also check if they already messaged us (in instagram_followers)
-        const { data: existingFollower } = await supabase
-          .from('instagram_followers')
-          .select('id')
-          .eq('instagram_user_id', owner.id)
-          .single();
-
-        if (existingFollower) continue;
-
-        // Save the new lead
-        await supabase.from('instagram_cold_leads').insert({
-          instagram_user_id: owner.id,
-          username: owner.username,
-          full_name: owner.name || null,
-          sector,
-          bio: owner.biography || null,
-          followers_count: owner.followers_count || 0,
-          source_hashtag: hashtag,
-          status: 'new',
-        });
-
-        found++;
-      } catch {
-        // Skip individual post errors
-      }
-
-      // Small delay to respect rate limits
-      await new Promise(r => setTimeout(r, 500));
-    }
-  } catch (error) {
-    console.error(`Discover error for #${hashtag}:`, error);
-  }
-
-  return found;
-}
-
-// ─── Alternative: Discover via Instagram Search (for when hashtag API has limits) ───
-async function discoverViaConversations(
-  sector: string,
-  accessToken: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  supabase: any
-): Promise<number> {
-  // Fallback: use the IG business discovery API to search known usernames
-  // This requires knowing usernames upfront, so we use seed accounts per sector
-  const seedAccounts: Record<string, string[]> = {
-    restaurante: ['restaurantes_madrid', 'mejoresrestaurantes'],
-    clinica_estetica: ['clinicasesteticas', 'medicinaesteticasp'],
-    barberia: ['barberias_espana', 'barbershopspaña'],
-    clinica_salud: ['clinicasespana', 'fisioterapia_es'],
-  };
-
-  const seeds = seedAccounts[sector] || [];
-  let found = 0;
-
-  for (const username of seeds) {
-    try {
-      const res = await fetch(
-        `https://graph.instagram.com/v21.0/me?fields=business_discovery.fields(id,username,name,biography,followers_count).username(${username})&access_token=${accessToken}`
-      );
-      if (!res.ok) continue;
-
-      const data = await res.json();
-      const biz = data.business_discovery;
-      if (!biz?.id) continue;
-
-      const { data: existing } = await supabase
-        .from('instagram_cold_leads')
-        .select('id')
-        .eq('instagram_user_id', biz.id)
-        .single();
-
-      if (!existing) {
-        await supabase.from('instagram_cold_leads').insert({
-          instagram_user_id: biz.id,
-          username: biz.username,
-          full_name: biz.name || null,
-          sector,
-          bio: biz.biography || null,
-          followers_count: biz.followers_count || 0,
-          source_hashtag: 'business_discovery',
-          status: 'new',
-        });
-        found++;
-      }
-    } catch { /* skip */ }
-  }
-
-  return found;
 }
 
 // ─── GET: Main cron handler ───
@@ -215,8 +170,8 @@ export async function GET() {
     const supabase = getSupabase();
 
     // Check table exists
-    const tableOk = await ensureTable(supabase);
-    if (!tableOk) {
+    const { error: tableErr } = await supabase.from('instagram_cold_leads').select('id').limit(1);
+    if (tableErr?.message?.includes('does not exist')) {
       return NextResponse.json({ error: 'Table instagram_cold_leads does not exist' }, { status: 500 });
     }
 
@@ -227,9 +182,7 @@ export async function GET() {
       .single();
 
     const accessToken = config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN;
-    const igAccountId = config?.instagram_account_id || process.env.INSTAGRAM_ACCOUNT_ID;
-
-    if (!accessToken || !igAccountId) {
+    if (!accessToken) {
       return NextResponse.json({ error: 'Instagram not configured' }, { status: 400 });
     }
 
@@ -239,38 +192,41 @@ export async function GET() {
     }
 
     const results: Record<string, number> = {};
+    const errors: Record<string, number> = {};
     let totalFound = 0;
+    let totalTried = 0;
 
-    // Pick 2 random sectors per run to stay under rate limits
-    const sectors = Object.keys(SECTOR_HASHTAGS);
-    const shuffled = sectors.sort(() => Math.random() - 0.5);
+    // Pick 2 random sectors per run
+    const sectors = Object.keys(SEED_ACCOUNTS);
+    const shuffled = [...sectors].sort(() => Math.random() - 0.5);
     const selectedSectors = shuffled.slice(0, 2);
 
     for (const sector of selectedSectors) {
-      const hashtags = SECTOR_HASHTAGS[sector];
-      // Pick 2 random hashtags per sector
-      const selectedHashtags = hashtags
+      const allUsernames = SEED_ACCOUNTS[sector] || [];
+      // Pick 8 random usernames per sector
+      const selectedUsernames = [...allUsernames]
         .sort(() => Math.random() - 0.5)
-        .slice(0, 2);
+        .slice(0, 8);
 
-      let sectorTotal = 0;
+      let sectorFound = 0;
+      let sectorErrors = 0;
 
-      for (const hashtag of selectedHashtags) {
-        const found = await discoverLeadsByHashtag(hashtag, sector, igAccountId, accessToken, supabase);
-        sectorTotal += found;
+      for (const username of selectedUsernames) {
+        totalTried++;
+        const found = await discoverByUsername(username, sector, accessToken, supabase);
+        if (found) {
+          sectorFound++;
+          totalFound++;
+        } else {
+          sectorErrors++;
+        }
 
-        // Delay between hashtag searches
-        await new Promise(r => setTimeout(r, 2000));
+        // Delay between API calls (respect rate limits)
+        await new Promise(r => setTimeout(r, 1500));
       }
 
-      // If hashtag search didn't find much, try business discovery fallback
-      if (sectorTotal < 3) {
-        const fallback = await discoverViaConversations(sector, accessToken, supabase);
-        sectorTotal += fallback;
-      }
-
-      results[sector] = sectorTotal;
-      totalFound += sectorTotal;
+      results[sector] = sectorFound;
+      errors[sector] = sectorErrors;
     }
 
     // Log the run
@@ -279,7 +235,9 @@ export async function GET() {
       details: JSON.stringify({
         sectors: selectedSectors,
         results,
+        errors,
         totalFound,
+        totalTried,
         timestamp: new Date().toISOString(),
       }),
     });
@@ -298,12 +256,14 @@ export async function GET() {
       success: true,
       sectorsSearched: selectedSectors.map(s => SECTOR_LABELS[s] || s),
       newLeadsFound: totalFound,
+      totalTried,
       totalLeadsInDB: totalLeads,
       pendingOutreach: newLeads,
       details: results,
+      notFound: errors,
     });
   } catch (error) {
     console.error('Prospecting cron error:', error);
-    return NextResponse.json({ error: 'Internal error' }, { status: 500 });
+    return NextResponse.json({ error: 'Internal error', details: String(error) }, { status: 500 });
   }
 }
