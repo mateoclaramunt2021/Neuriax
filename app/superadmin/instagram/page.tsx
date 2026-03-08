@@ -297,7 +297,10 @@ export default function InstagramPage() {
       });
       const data = await res.json();
       if (res.ok) {
-        showToast(`@${newLeadUsername.replace(/^@/, '')} añadido ✅`);
+        showToast(data.dmSent
+          ? `@${newLeadUsername.replace(/^@/, '')} añadido y DM enviado ✅`
+          : `@${newLeadUsername.replace(/^@/, '')} añadido (DM pendiente)`
+        );
         setNewLeadUsername('');
         setNewLeadName('');
         setNewLeadNotes('');

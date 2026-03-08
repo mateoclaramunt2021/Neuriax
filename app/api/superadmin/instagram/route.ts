@@ -7,6 +7,101 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// ─── Cold DM templates (same as cold-outreach cron) ───
+const COLD_DM_TEMPLATES: Record<string, string[]> = {
+  restaurante: [
+    'ey! vi vuestro perfil y tiene muy buena pinta el sitio 🔥 tenéis web propia o tiráis con insta y google maps?',
+    'buenas! me salió vuestro perfil y mola mucho, cómo os va con los clientes nuevos? llegáis bien por redes o tiráis más de boca a boca?',
+    'hola! vi vuestro restaurante por aquí y flipé con las fotos jaja tenéis página web para reservas o usáis solo apps tipo eltenedor?',
+    'ey qué tal! vi vuestro perfil y se ve muy bien, estáis captando clientes nuevos por insta o más offline?',
+    'buenas! muy buena pinta vuestro sitio, tenéis web donde la gente pueda ver carta y reservar o vais más a pelo?',
+  ],
+  clinica_estetica: [
+    'hola! vi vuestra clínica por aquí y se ve muy pro, cómo lleváis el tema de captar pacientes nuevos por internet?',
+    'ey! vi vuestro perfil y los resultados que mostráis están genial, tenéis web propia o trabajáis más con redes?',
+    'buenas! me salió vuestro perfil y me llamó la atención, estáis usando algo para que os encuentren online tipo web o google ads?',
+    'hola! vi vuestra clínica y tiene buena pinta, cómo os va el tema digital? web, redes, eso',
+    'ey qué tal! vi vuestros trabajos por aquí y molan bastante, tenéis web donde la gente pueda pedir cita?',
+  ],
+  barberia: [
+    'buenas! vi vuestra barbería por aquí y tiene muy buen rollo, los clientes nuevos os llegan por insta o más por el barrio?',
+    'ey! vi vuestro perfil y los cortes están brutales, tenéis web propia o tiráis solo con redes?',
+    'hola! me salió vuestro perfil y me mola mucho el estilo, cómo lleváis el tema reservas? app, whatsapp, o a pelo?',
+    'ey qué tal! vi vuestra barber y se ve muy guay, estáis captando clientes nuevos online o más boca a boca?',
+    'buenas! vuestros cortes molan bastante, tenéis alguna web donde la gente reserve o tira todo por insta/whats?',
+  ],
+  clinica_salud: [
+    'hola! vi vuestra clínica por aquí, cómo os va el tema de captar pacientes nuevos? tiráis más de google o boca a boca?',
+    'ey! vi vuestro perfil y se ve muy profesional, tenéis web propia o estáis en lo de montar una?',
+    'buenas! me salió vuestra clínica y tiene buena pinta, los pacientes os encuentran fácil por internet o mejoraríais algo?',
+    'hola! vi vuestro perfil y mola, estáis usando algo para captar pacientes online tipo web o google ads?',
+    'ey qué tal! vi vuestra clínica por aquí, tenéis página web con reserva de citas o lo hacéis por teléfono/whatsapp?',
+  ],
+  general: [
+    'ey qué tal! vi vuestro perfil y me mola, tenéis presencia online tipo web o tiráis solo con redes?',
+    'buenas! me salió vuestro perfil por aquí y tiene buena pinta, cómo os va el tema digital?',
+    'hola! vi vuestro negocio y se ve interesante, estáis captando clientes por internet o más offline?',
+  ],
+};
+
+function pickTemplate(sector: string): string {
+  const templates = COLD_DM_TEMPLATES[sector] || COLD_DM_TEMPLATES.general;
+  return templates[Math.floor(Math.random() * templates.length)];
+}
+
+// ─── Send DM via Instagram API ───
+async function sendInstagramDM(username: string, message: string, accessToken: string): Promise<boolean> {
+  try {
+    // First, try to find the user's IGSID by searching conversations
+    let recipientId = username;
+
+    // Try to find via conversations API
+    try {
+      const convRes = await fetch(
+        `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
+        { headers: { 'Authorization': `Bearer ${accessToken}` } }
+      );
+      if (convRes.ok) {
+        const convData = await convRes.json();
+        for (const conv of convData.data || []) {
+          for (const p of conv.participants?.data || []) {
+            if (p.username?.toLowerCase() === username.toLowerCase()) {
+              recipientId = p.id;
+              break;
+            }
+          }
+          if (recipientId !== username) break;
+        }
+      }
+    } catch { /* proceed with username */ }
+
+    const response = await fetch(
+      `https://graph.instagram.com/v21.0/me/messages`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          recipient: { id: recipientId },
+          message: { text: message },
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const err = await response.json();
+      console.error('Cold DM send error:', err, 'username:', username, 'recipientId:', recipientId);
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error('Cold DM exception:', error);
+    return false;
+  }
+}
+
 // IGSID resolution: webhook sender IDs are truncated vs API participant IDs
 const igsidCache: Record<string, string> = {};
 async function resolveIGSID(webhookSenderId: string, accessToken: string): Promise<string> {
@@ -316,7 +411,76 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({ error: 'Error al añadir lead' }, { status: 500 });
       }
 
-      return NextResponse.json({ success: true, message: `@${cleanUsername} añadido como lead` });
+      // ─── Send first DM immediately ───
+      let dmSent = false;
+      let dmMessage = '';
+      try {
+        const { data: config } = await supabase
+          .from('instagram_config')
+          .select('access_token, cold_outreach_enabled')
+          .single();
+
+        const accessToken = config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN;
+
+        if (accessToken && config?.cold_outreach_enabled !== false) {
+          dmMessage = pickTemplate(sector);
+          dmSent = await sendInstagramDM(cleanUsername, dmMessage, accessToken);
+
+          if (dmSent) {
+            // Update lead → contacted
+            await supabase
+              .from('instagram_cold_leads')
+              .update({
+                status: 'contacted',
+                first_dm_sent_at: new Date().toISOString(),
+                first_dm_message: dmMessage,
+                updated_at: new Date().toISOString(),
+              })
+              .eq('username', cleanUsername);
+
+            // Save in messages for CRM
+            await supabase.from('instagram_messages').insert({
+              sender_id: cleanUsername,
+              sender_name: cleanUsername,
+              direction: 'outbound',
+              content: dmMessage,
+              status: 'sent',
+              is_bot: true,
+              message_type: 'cold_dm',
+            });
+
+            // Add to followers for CRM tracking
+            await supabase.from('instagram_followers').upsert({
+              instagram_user_id: cleanUsername,
+              username: cleanUsername,
+              label: 'lead',
+              welcome_sent: true,
+              welcome_sent_at: new Date().toISOString(),
+            }, { onConflict: 'instagram_user_id' });
+          } else {
+            // DM failed — mark it
+            await supabase
+              .from('instagram_cold_leads')
+              .update({
+                status: 'dm_failed',
+                notes: (notes || '') + ' | Primer DM falló al enviar',
+                updated_at: new Date().toISOString(),
+              })
+              .eq('username', cleanUsername);
+          }
+        }
+      } catch (e) {
+        console.error('Error sending immediate DM:', e);
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: dmSent
+          ? `@${cleanUsername} añadido y primer DM enviado ✅`
+          : `@${cleanUsername} añadido como lead (DM pendiente)`,
+        dmSent,
+        dmMessage: dmSent ? dmMessage : undefined,
+      });
     }
 
     if (body.action === 'blacklist_lead') {
