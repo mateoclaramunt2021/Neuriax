@@ -22,7 +22,7 @@
     },
     {
       "path": "/api/cron/instagram-followers",
-      "schedule": "*/15 * * * *"
+      "schedule": "0 9 * * *"
     }
   ],
   "headers": [
