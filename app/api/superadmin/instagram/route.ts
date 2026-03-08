@@ -575,38 +575,78 @@ export async function PUT(request: NextRequest) {
         });
       }
 
-      // Auto-detect sector via Groq if no sector specified
+      // Auto-detect sector: keyword-based first, then AI for unknowns
       let sectorMap: Record<string, string> = {};
       if (!sector || sector === 'auto') {
-        const groqKey = process.env.GROQ_API_KEY;
-        if (groqKey && newUsernames.length <= 50) {
-          try {
-            const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
-              body: JSON.stringify({
-                model: 'llama-3.3-70b-versatile',
-                temperature: 0.2,
-                max_tokens: 1000,
-                messages: [{
-                  role: 'user',
-                  content: `Analiza estos usernames de Instagram y adivina el sector de cada uno. Sectores posibles: restaurante, clinica_estetica, barberia, clinica_salud, inmobiliaria, gym, tienda, general.
+        // ─── Step 1: Fast keyword-based detection ───
+        const KEYWORD_RULES: Array<{ keywords: string[]; sector: string }> = [
+          { keywords: ['barber', 'barberia', 'barbershop', 'fade', 'clipper', 'haircut', 'peluquer', 'corte'], sector: 'barberia' },
+          { keywords: ['restauran', 'ristorante', 'trattoria', 'bistro', 'gastro', 'cocina', 'kitchen', 'sushi', 'ramen', 'burger', 'pizza', 'taco', 'ceviche', 'paella', 'tapas', 'bar_', 'bardel', 'barmut', 'bodega', 'cantina', 'tavern', 'grill', 'brunch', 'foodie', 'chef_', 'beach_club', 'pergola'], sector: 'restaurante' },
+          { keywords: ['clinica_est', 'estetica', 'aesthetic', 'beauty', 'botox', 'filler', 'laser', 'depilacion', 'micropigment', 'facial', 'skincare', 'med_spa', 'medispa'], sector: 'clinica_estetica' },
+          { keywords: ['clinica', 'dental', 'dentist', 'fisio', 'osteo', 'podolog', 'optometr', 'optic', 'medic', 'salud', 'health', 'rehab', 'quiropr', 'psicolog', 'nutricion'], sector: 'clinica_salud' },
+          { keywords: ['inmobili', 'realestate', 'real_estate', 'pisos', 'vivienda', 'propiedades', 'fincas', 'housing'], sector: 'inmobiliaria' },
+          { keywords: ['gym', 'fitness', 'crossfit', 'workout', 'training', 'entrena', 'pilates', 'yoga_studio'], sector: 'gym' },
+          { keywords: ['tienda', 'shop_', 'store', 'boutique', 'moda_', 'fashion', 'ropa_'], sector: 'tienda' },
+        ];
+
+        for (const u of newUsernames) {
+          const lower = u.toLowerCase();
+          let detected = false;
+          for (const rule of KEYWORD_RULES) {
+            if (rule.keywords.some(kw => lower.includes(kw))) {
+              sectorMap[u] = rule.sector;
+              detected = true;
+              break;
+            }
+          }
+          if (!detected) {
+            sectorMap[u] = ''; // mark for AI detection
+          }
+        }
+
+        // ─── Step 2: AI detection for unknowns (batched in groups of 40) ───
+        const unknowns = newUsernames.filter((u: string) => !sectorMap[u]);
+        if (unknowns.length > 0) {
+          const groqKey = process.env.GROQ_API_KEY;
+          if (groqKey) {
+            const BATCH_SIZE = 40;
+            for (let i = 0; i < unknowns.length; i += BATCH_SIZE) {
+              const batch = unknowns.slice(i, i + BATCH_SIZE);
+              try {
+                const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
+                  body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    temperature: 0.2,
+                    max_tokens: 2000,
+                    messages: [{
+                      role: 'user',
+                      content: `Analiza estos usernames de Instagram y adivina el sector de cada uno. Sectores posibles: restaurante, clinica_estetica, barberia, clinica_salud, inmobiliaria, gym, tienda, general.
 Responde SOLO con JSON así: {"username1":"sector1","username2":"sector2",...}
-Usernames: ${newUsernames.join(', ')}`
-                }],
-              }),
-            });
-            if (groqRes.ok) {
-              const groqData = await groqRes.json();
-              const content = groqData.choices?.[0]?.message?.content || '';
-              const jsonMatch = content.match(/\{[\s\S]*\}/);
-              if (jsonMatch) {
-                sectorMap = JSON.parse(jsonMatch[0]);
+Usernames: ${batch.join(', ')}`
+                    }],
+                  }),
+                });
+                if (groqRes.ok) {
+                  const groqData = await groqRes.json();
+                  const content = groqData.choices?.[0]?.message?.content || '';
+                  const jsonMatch = content.match(/\{[\s\S]*\}/);
+                  if (jsonMatch) {
+                    const parsed = JSON.parse(jsonMatch[0]);
+                    Object.assign(sectorMap, parsed);
+                  }
+                }
+              } catch (e) {
+                console.error('Groq sector detection error (batch):', e);
               }
             }
-          } catch (e) {
-            console.error('Groq sector detection error:', e);
           }
+        }
+
+        // Fill remaining unknowns with 'general'
+        for (const u of newUsernames) {
+          if (!sectorMap[u]) sectorMap[u] = 'general';
         }
       }
 
@@ -707,6 +747,107 @@ Usernames: ${newUsernames.join(', ')}`
         .update({ blacklisted: true, status: 'blacklisted', updated_at: new Date().toISOString() })
         .eq('id', body.leadId);
       return NextResponse.json({ success: true });
+    }
+
+    // ─── Re-classify sectors for existing leads ───
+    if (body.action === 'fix_sectors') {
+      // Get all leads with sector 'general'
+      const { data: generalLeads } = await supabase
+        .from('instagram_cold_leads')
+        .select('id, username, sector')
+        .eq('sector', 'general');
+
+      if (!generalLeads || generalLeads.length === 0) {
+        return NextResponse.json({ success: true, message: 'No hay leads con sector general', fixed: 0 });
+      }
+
+      const KEYWORD_RULES: Array<{ keywords: string[]; sector: string }> = [
+        { keywords: ['barber', 'barberia', 'barbershop', 'fade', 'clipper', 'haircut', 'peluquer', 'corte'], sector: 'barberia' },
+        { keywords: ['restauran', 'ristorante', 'trattoria', 'bistro', 'gastro', 'cocina', 'kitchen', 'sushi', 'ramen', 'burger', 'pizza', 'taco', 'ceviche', 'paella', 'tapas', 'bar_', 'bardel', 'barmut', 'bodega', 'cantina', 'tavern', 'grill', 'brunch', 'foodie', 'chef_', 'beach_club', 'pergola'], sector: 'restaurante' },
+        { keywords: ['clinica_est', 'estetica', 'aesthetic', 'beauty', 'botox', 'filler', 'laser', 'depilacion', 'micropigment', 'facial', 'skincare', 'med_spa', 'medispa'], sector: 'clinica_estetica' },
+        { keywords: ['clinica', 'dental', 'dentist', 'fisio', 'osteo', 'podolog', 'optometr', 'optic', 'medic', 'salud', 'health', 'rehab', 'quiropr', 'psicolog', 'nutricion'], sector: 'clinica_salud' },
+        { keywords: ['inmobili', 'realestate', 'real_estate', 'pisos', 'vivienda', 'propiedades', 'fincas', 'housing'], sector: 'inmobiliaria' },
+        { keywords: ['gym', 'fitness', 'crossfit', 'workout', 'training', 'entrena', 'pilates', 'yoga_studio'], sector: 'gym' },
+        { keywords: ['tienda', 'shop_', 'store', 'boutique', 'moda_', 'fashion', 'ropa_'], sector: 'tienda' },
+      ];
+
+      let fixedCount = 0;
+      const updates: Array<{ id: number; username: string; newSector: string }> = [];
+
+      // Step 1: Keyword detection
+      const unknowns: Array<{ id: number; username: string }> = [];
+      for (const lead of generalLeads) {
+        const lower = lead.username.toLowerCase();
+        let detected = false;
+        for (const rule of KEYWORD_RULES) {
+          if (rule.keywords.some(kw => lower.includes(kw))) {
+            updates.push({ id: lead.id, username: lead.username, newSector: rule.sector });
+            detected = true;
+            break;
+          }
+        }
+        if (!detected) unknowns.push(lead);
+      }
+
+      // Step 2: AI for remaining unknowns (batched)
+      if (unknowns.length > 0) {
+        const groqKey = process.env.GROQ_API_KEY;
+        if (groqKey) {
+          const BATCH_SIZE = 40;
+          for (let i = 0; i < unknowns.length; i += BATCH_SIZE) {
+            const batch = unknowns.slice(i, i + BATCH_SIZE);
+            try {
+              const groqRes = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${groqKey}` },
+                body: JSON.stringify({
+                  model: 'llama-3.3-70b-versatile',
+                  temperature: 0.2,
+                  max_tokens: 2000,
+                  messages: [{
+                    role: 'user',
+                    content: `Analiza estos usernames de Instagram y adivina el sector de cada uno. Sectores posibles: restaurante, clinica_estetica, barberia, clinica_salud, inmobiliaria, gym, tienda, general.
+Responde SOLO con JSON así: {"username1":"sector1","username2":"sector2",...}
+Usernames: ${batch.map(l => l.username).join(', ')}`
+                  }],
+                }),
+              });
+              if (groqRes.ok) {
+                const groqData = await groqRes.json();
+                const content = groqData.choices?.[0]?.message?.content || '';
+                const jsonMatch = content.match(/\{[\s\S]*\}/);
+                if (jsonMatch) {
+                  const parsed = JSON.parse(jsonMatch[0]);
+                  for (const lead of batch) {
+                    if (parsed[lead.username] && parsed[lead.username] !== 'general') {
+                      updates.push({ id: lead.id, username: lead.username, newSector: parsed[lead.username] });
+                    }
+                  }
+                }
+              }
+            } catch (e) {
+              console.error('Groq fix_sectors error:', e);
+            }
+          }
+        }
+      }
+
+      // Apply updates
+      for (const u of updates) {
+        const { error } = await supabase
+          .from('instagram_cold_leads')
+          .update({ sector: u.newSector, updated_at: new Date().toISOString() })
+          .eq('id', u.id);
+        if (!error) fixedCount++;
+      }
+
+      return NextResponse.json({
+        success: true,
+        message: `${fixedCount} leads reclasificados de ${generalLeads.length} con sector "general"`,
+        fixed: fixedCount,
+        total: generalLeads.length,
+        remaining: generalLeads.length - fixedCount,
+      });
     }
 
     if (body.action === 'convert_lead') {

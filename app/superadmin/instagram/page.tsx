@@ -190,6 +190,7 @@ export default function InstagramPage() {
   const [bulkResult, setBulkResult] = useState<{ added: number; duplicates: number; errors: number; total: number; dmsSent?: number; sectorDetected?: boolean } | null>(null);
   const [bulkDuplicatesList, setBulkDuplicatesList] = useState<string[]>([]);
   const [toastType, setToastType] = useState<'success' | 'error' | 'warning'>('success');
+  const [fixingSectors, setFixingSectors] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -435,6 +436,31 @@ export default function InstagramPage() {
       showToast('Error de conexión', 'error');
     } finally {
       setBulkImporting(false);
+    }
+  };
+
+  /* — Fix sectors for existing leads — */
+  const handleFixSectors = async () => {
+    if (fixingSectors) return;
+    setFixingSectors(true);
+    try {
+      const res = await fetch('/api/superadmin/instagram', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'fix_sectors' }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showToast(`✅ ${data.fixed} leads reclasificados${data.remaining > 0 ? ` (${data.remaining} siguen como general)` : ''}`);
+        fetchColdLeads();
+      } else {
+        showToast(data.error || 'Error', 'error');
+      }
+    } catch (err) {
+      console.error('Fix sectors error:', err);
+      showToast('Error de conexión', 'error');
+    } finally {
+      setFixingSectors(false);
     }
   };
 
@@ -873,6 +899,14 @@ export default function InstagramPage() {
                 <p className="text-xs text-slate-500 mt-0.5">Añade leads manualmente · AI Setter les contactará automáticamente</p>
               </div>
               <div className="flex items-center gap-3">
+                <button
+                  onClick={handleFixSectors}
+                  disabled={fixingSectors}
+                  className="px-3 py-2 bg-amber-500/10 text-amber-300 rounded-xl text-xs font-medium ring-1 ring-amber-500/20 hover:bg-amber-500/20 transition-all disabled:opacity-50"
+                  title="Re-analiza los leads con sector 'general' y les asigna el sector correcto"
+                >
+                  {fixingSectors ? '🔄 Analizando...' : '🔄 Re-clasificar sectores'}
+                </button>
                 <button
                   onClick={() => { setShowBulkImport(!showBulkImport); setShowAddLead(false); setBulkResult(null); }}
                   className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-cyan-500/25 transition-all"
