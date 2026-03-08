@@ -11,7 +11,7 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
-const MATEO_EMAIL = 'mateo@neuriax.com';
+const MATEO_EMAIL = 'mateoclaramunt2021@gmail.com';
 
 type AlertType = 'hot_lead' | 'collaboration' | 'urgent' | 'daily_summary' | 'lead_converted';
 
