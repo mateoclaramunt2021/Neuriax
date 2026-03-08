@@ -181,39 +181,60 @@ async function resolveIGSID(webhookSenderId: string, accessToken: string): Promi
 }
 
 async function sendInstagramMessage(recipientId: string, message: string, accessToken: string) {
+  // Log every step to Supabase so we can see the EXACT error in production
+  const debugLog: string[] = [];
+  const supabaseForLog = getSupabase();
+
+  debugLog.push(`START: recipientId=${recipientId}, hasToken=${!!accessToken}, tokenLen=${accessToken?.length || 0}`);
+
   if (!accessToken) {
-    console.error('Instagram access token not configured');
+    debugLog.push('FAIL: no access token');
+    await supabaseForLog.from('instagram_token_log').insert({ action: 'send_debug', details: JSON.stringify(debugLog) });
     return false;
   }
 
   // Resolve the correct IGSID (webhook IDs are truncated)
-  const resolvedId = await resolveIGSID(recipientId, accessToken);
+  let resolvedId = recipientId;
+  try {
+    resolvedId = await resolveIGSID(recipientId, accessToken);
+    debugLog.push(`IGSID resolved: ${recipientId} -> ${resolvedId}`);
+  } catch (e) {
+    debugLog.push(`IGSID error: ${e}`);
+  }
 
   try {
-    const response = await fetch(
-      `https://graph.instagram.com/v21.0/me/messages`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          recipient: { id: resolvedId },
-          message: { text: message },
-        }),
-      }
-    );
+    const url = `https://graph.instagram.com/v21.0/me/messages`;
+    const body = JSON.stringify({
+      recipient: { id: resolvedId },
+      message: { text: message },
+    });
+    debugLog.push(`FETCH: ${url} body=${body.substring(0, 200)}`);
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+      body,
+    });
+
+    debugLog.push(`RESPONSE: status=${response.status}`);
 
     if (!response.ok) {
-      const err = await response.json();
-      console.error('Instagram send error:', JSON.stringify(err), 'recipientId:', resolvedId);
+      const errText = await response.text();
+      debugLog.push(`ERROR_BODY: ${errText}`);
+      await supabaseForLog.from('instagram_token_log').insert({ action: 'send_debug', details: JSON.stringify(debugLog) });
       return false;
     }
-    console.log(`Message sent to ${resolvedId} (webhook ID: ${recipientId})`);
+
+    const okData = await response.json();
+    debugLog.push(`SUCCESS: ${JSON.stringify(okData)}`);
+    await supabaseForLog.from('instagram_token_log').insert({ action: 'send_debug', details: JSON.stringify(debugLog) });
     return true;
   } catch (error) {
-    console.error('Instagram send error:', error);
+    debugLog.push(`EXCEPTION: ${error instanceof Error ? error.message + ' ' + error.stack : String(error)}`);
+    await supabaseForLog.from('instagram_token_log').insert({ action: 'send_debug', details: JSON.stringify(debugLog) });
     return false;
   }
 }
