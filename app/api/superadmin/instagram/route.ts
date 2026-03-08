@@ -7,6 +7,30 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// IGSID resolution: webhook sender IDs are truncated vs API participant IDs
+const igsidCache: Record<string, string> = {};
+async function resolveIGSID(webhookSenderId: string, accessToken: string): Promise<string> {
+  if (igsidCache[webhookSenderId]) return igsidCache[webhookSenderId];
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
+      { headers: { 'Authorization': `Bearer ${accessToken}` } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      for (const conv of data.data || []) {
+        for (const p of conv.participants?.data || []) {
+          if (p.id.startsWith(webhookSenderId)) {
+            igsidCache[webhookSenderId] = p.id;
+            return p.id;
+          }
+        }
+      }
+    }
+  } catch { /* ignore */ }
+  return webhookSenderId;
+}
+
 // GET - Instagram config, conversations, stats, quick replies
 export async function GET(request: NextRequest) {
   try {
@@ -273,13 +297,14 @@ export async function POST(request: NextRequest) {
       .single();
 
     const accessToken = config?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
-    const igAccountId = process.env.INSTAGRAM_ACCOUNT_ID;
     let sent = false;
 
-    if (accessToken && igAccountId) {
+    if (accessToken) {
       try {
+        // Resolve the correct IGSID (webhook IDs are truncated)
+        const resolvedId = await resolveIGSID(senderId, accessToken);
         const igRes = await fetch(
-          `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
+          `https://graph.instagram.com/v21.0/me/messages`,
           {
             method: 'POST',
             headers: {
@@ -287,7 +312,7 @@ export async function POST(request: NextRequest) {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              recipient: { id: senderId },
+              recipient: { id: resolvedId },
               message: { text: message },
             }),
           }
@@ -295,7 +320,7 @@ export async function POST(request: NextRequest) {
         sent = igRes.ok;
         if (!igRes.ok) {
           const err = await igRes.json();
-          console.error('Instagram API error:', err);
+          console.error('Instagram API error:', err, 'resolvedId:', resolvedId);
         }
       } catch (e) {
         console.error('Instagram API send error:', e);

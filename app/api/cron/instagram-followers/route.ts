@@ -7,10 +7,37 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-async function sendInstagramDM(recipientId: string, message: string, accessToken: string, igAccountId: string) {
+// Instagram webhook IDs are truncated vs the real API participant IDs.
+// Resolve via Conversations API.
+const igsidCache: Record<string, string> = {};
+
+async function resolveIGSID(webhookSenderId: string, accessToken: string): Promise<string> {
+  if (igsidCache[webhookSenderId]) return igsidCache[webhookSenderId];
   try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
+      { headers: { 'Authorization': `Bearer ${accessToken}` } }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      for (const conv of data.data || []) {
+        for (const p of conv.participants?.data || []) {
+          if (p.id.startsWith(webhookSenderId)) {
+            igsidCache[webhookSenderId] = p.id;
+            return p.id;
+          }
+        }
+      }
+    }
+  } catch { /* ignore */ }
+  return webhookSenderId;
+}
+
+async function sendInstagramDM(recipientId: string, message: string, accessToken: string, _igAccountId: string) {
+  try {
+    const resolvedId = await resolveIGSID(recipientId, accessToken);
     const response = await fetch(
-      `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
+      `https://graph.instagram.com/v21.0/me/messages`,
       {
         method: 'POST',
         headers: {
@@ -18,11 +45,15 @@ async function sendInstagramDM(recipientId: string, message: string, accessToken
           'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          recipient: { id: recipientId },
+          recipient: { id: resolvedId },
           message: { text: message },
         }),
       }
     );
+    if (!response.ok) {
+      const err = await response.json();
+      console.error('Send DM error:', err, 'resolvedId:', resolvedId);
+    }
     return response.ok;
   } catch {
     return false;

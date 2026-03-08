@@ -114,21 +114,84 @@ async function getAIResponse(userMessage: string, history: Array<{role: string; 
     const data = await response.json();
     return data.choices[0]?.message?.content || '¡Hola! Escríbenos a hola@neuriax.com 😊';
   } catch {
-    return '¡Hola! Tenemos un problemilla técnico. Escríbenos a hola@neuriax.com o agenda llamada: https://calendly.com/neuriax/30min';
+    return '¡Hola! Tenemos un problemilla técnico. Escríbenos a hola@neuriax.com o rellena el formulario: https://www.neuriax.com/contacto/formulario';
   }
 }
 
-async function sendInstagramMessage(recipientId: string, message: string, accessToken: string) {
-  const igAccountId = process.env.INSTAGRAM_ACCOUNT_ID;
+// ─── IGSID Resolution ───
+// Instagram webhook sends truncated sender IDs (15 digits) that differ from
+// the full API participant IDs (16 digits). We resolve the correct ID via
+// the Conversations API and cache it.
+const igsidCache: Record<string, string> = {};
 
-  if (!accessToken || !igAccountId) {
-    console.error('Instagram credentials not configured');
+async function resolveIGSID(webhookSenderId: string, accessToken: string): Promise<string> {
+  if (igsidCache[webhookSenderId]) return igsidCache[webhookSenderId];
+
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
+      { headers: { 'Authorization': `Bearer ${accessToken}` } }
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      for (const conv of data.data || []) {
+        for (const p of conv.participants?.data || []) {
+          // The full API ID starts with the webhook's truncated ID
+          if (p.id.startsWith(webhookSenderId)) {
+            igsidCache[webhookSenderId] = p.id;
+            console.log(`IGSID resolved: ${webhookSenderId} → ${p.id} (@${p.username})`);
+            return p.id;
+          }
+        }
+      }
+    }
+  } catch (error) {
+    console.error('IGSID resolution error:', error);
+  }
+
+  // Fallback: try appending digits 0-9 and sending until one works
+  console.warn(`IGSID: no match found for ${webhookSenderId}, trying brute-force`);
+  for (let d = 0; d <= 9; d++) {
+    const candidate = webhookSenderId + d;
+    try {
+      const testRes = await fetch(
+        `https://graph.instagram.com/v21.0/me/messages`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify({
+            recipient: { id: candidate },
+            message: { text: '.' }, // minimal test — will be followed by real message
+          }),
+        }
+      );
+      if (testRes.ok) {
+        igsidCache[webhookSenderId] = candidate;
+        console.log(`IGSID brute-force: ${webhookSenderId} → ${candidate}`);
+        return candidate;
+      }
+    } catch { /* continue */ }
+  }
+
+  return webhookSenderId; // absolute fallback
+}
+
+async function sendInstagramMessage(recipientId: string, message: string, accessToken: string) {
+  if (!accessToken) {
+    console.error('Instagram access token not configured');
     return false;
   }
 
+  // Resolve the correct IGSID (webhook IDs are truncated)
+  const resolvedId = await resolveIGSID(recipientId, accessToken);
+
   try {
     const response = await fetch(
-      `https://graph.instagram.com/v21.0/${igAccountId}/messages`,
+      `https://graph.instagram.com/v21.0/me/messages`,
       {
         method: 'POST',
         headers: {
@@ -136,7 +199,7 @@ async function sendInstagramMessage(recipientId: string, message: string, access
           'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          recipient: { id: recipientId },
+          recipient: { id: resolvedId },
           message: { text: message },
         }),
       }
@@ -144,9 +207,10 @@ async function sendInstagramMessage(recipientId: string, message: string, access
 
     if (!response.ok) {
       const err = await response.json();
-      console.error('Instagram send error:', err);
+      console.error('Instagram send error:', JSON.stringify(err), 'recipientId:', resolvedId);
       return false;
     }
+    console.log(`Message sent to ${resolvedId} (webhook ID: ${recipientId})`);
     return true;
   } catch (error) {
     console.error('Instagram send error:', error);
@@ -251,7 +315,7 @@ export async function POST(request: NextRequest) {
             if (payload === 'GET_PRICES') {
               replyMsg = '💰 Nuestros precios:\n\n🌐 Web básica: desde 790€\n🛒 E-commerce: desde 1.500€\n🤖 Chatbot IA: desde 200€\n⚡ Automatización: desde 500€\n\n¿Te interesa alguno?';
             } else if (payload === 'SCHEDULE_CALL') {
-              replyMsg = '📅 ¡Genial! Agenda una llamada gratuita de 15 min con Mateo:\nhttps://calendly.com/neuriax/30min';
+              replyMsg = '📅 ¡Genial! Rellena el formulario (2 min) y Mateo te prepara una propuesta personalizada gratis:\nhttps://www.neuriax.com/contacto/formulario';
             } else if (payload === 'VIEW_PORTFOLIO') {
               replyMsg = '🎨 Mira nuestro portfolio en:\nhttps://www.neuriax.com/webs\n\n¿Quieres algo similar?';
             }
