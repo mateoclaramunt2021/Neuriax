@@ -346,10 +346,13 @@ export default function InstagramPage() {
           scheduled: `DM programado para ${scheduledDate} ${scheduledTime} 📅`,
           none: 'guardado sin DM 📋',
         };
-        showToast(data.dmSent
-          ? `@${newLeadUsername.replace(/^@/, '')} añadido y ${timingLabels.now}`
-          : `@${newLeadUsername.replace(/^@/, '')} añadido — ${timingLabels[sendTiming] || timingLabels.none}`
-        );
+        if (data.dmSent) {
+          showToast(`@${newLeadUsername.replace(/^@/, '')} añadido y ${timingLabels.now}`);
+        } else if (sendTiming === 'now' && data.dmError) {
+          showToast(`@${newLeadUsername.replace(/^@/, '')} añadido ✅ pero DM falló: ${data.dmError}`, 'warning');
+        } else {
+          showToast(`@${newLeadUsername.replace(/^@/, '')} añadido — ${timingLabels[sendTiming] || timingLabels.none}`);
+        }
         setNewLeadUsername('');
         setNewLeadName('');
         setNewLeadNotes('');

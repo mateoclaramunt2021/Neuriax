@@ -65,12 +65,13 @@ function pickTemplate(sector: string): string {
 }
 
 // ─── Send DM via Instagram API ───
-async function sendInstagramDM(username: string, message: string, accessToken: string): Promise<boolean> {
+// Returns: { sent: boolean; error?: string; recipientId?: string }
+async function sendInstagramDM(username: string, message: string, accessToken: string): Promise<{ sent: boolean; error?: string }> {
   try {
-    // First, try to find the user's IGSID by searching conversations
-    let recipientId = username;
+    // Step 1: Try to find the user's IGSID by searching existing conversations
+    let recipientId = '';
+    let foundInConversations = false;
 
-    // Try to find via conversations API
     try {
       const convRes = await fetch(
         `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
@@ -82,14 +83,59 @@ async function sendInstagramDM(username: string, message: string, accessToken: s
           for (const p of conv.participants?.data || []) {
             if (p.username?.toLowerCase() === username.toLowerCase()) {
               recipientId = p.id;
+              foundInConversations = true;
               break;
             }
           }
-          if (recipientId !== username) break;
+          if (foundInConversations) break;
         }
       }
-    } catch { /* proceed with username */ }
+    } catch { /* proceed */ }
 
+    // Step 2: If not found in conversations, try Business Discovery API to get IG User ID
+    if (!foundInConversations) {
+      try {
+        // Get our own IG account ID first
+        const meRes = await fetch(
+          `https://graph.instagram.com/v21.0/me?fields=id,username`,
+          { headers: { 'Authorization': `Bearer ${accessToken}` } }
+        );
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          const myIgId = meData.id;
+
+          // Use Business Discovery to look up the target user
+          const bdRes = await fetch(
+            `https://graph.instagram.com/v21.0/${myIgId}?fields=business_discovery.fields(id,username,followers_count,biography){username=${encodeURIComponent(username)}}`,
+            { headers: { 'Authorization': `Bearer ${accessToken}` } }
+          );
+          if (bdRes.ok) {
+            const bdData = await bdRes.json();
+            const targetId = bdData?.business_discovery?.id;
+            if (targetId) {
+              recipientId = targetId;
+              console.log(`Business Discovery found: @${username} -> ID: ${targetId}`);
+            }
+          } else {
+            const bdErr = await bdRes.json().catch(() => ({}));
+            console.log(`Business Discovery failed for @${username}:`, bdErr?.error?.message || 'unknown');
+          }
+        }
+      } catch (e) {
+        console.error('Business Discovery error:', e);
+      }
+    }
+
+    // Step 3: If we still have no ID, we can't send
+    if (!recipientId) {
+      console.error(`Cannot resolve IGSID for @${username} — user hasn't interacted with the account`);
+      return {
+        sent: false,
+        error: `No se puede enviar DM a @${username}: la cuenta no ha interactuado con @neuriaxx. Instagram solo permite DMs a usuarios que te han escrito primero.`,
+      };
+    }
+
+    // Step 4: Try to send the message
     const response = await fetch(
       `https://graph.instagram.com/v21.0/me/messages`,
       {
@@ -107,13 +153,22 @@ async function sendInstagramDM(username: string, message: string, accessToken: s
 
     if (!response.ok) {
       const err = await response.json();
+      const errorMsg = err?.error?.message || 'Error desconocido de Instagram';
       console.error('Cold DM send error:', err, 'username:', username, 'recipientId:', recipientId);
-      return false;
+
+      // Common Instagram errors
+      if (errorMsg.includes('not eligible') || errorMsg.includes('cannot be sent') || errorMsg.includes('outside the allowed')) {
+        return {
+          sent: false,
+          error: `Instagram bloqueó el DM a @${username}: la ventana de mensajería está cerrada (el usuario debe escribirte primero).`,
+        };
+      }
+      return { sent: false, error: `Error de Instagram: ${errorMsg}` };
     }
-    return true;
+    return { sent: true };
   } catch (error) {
     console.error('Cold DM exception:', error);
-    return false;
+    return { sent: false, error: 'Error de conexión con Instagram API' };
   }
 }
 
@@ -465,6 +520,7 @@ export async function PUT(request: NextRequest) {
       // timing === 'now' → send immediately
       let dmSent = false;
       let dmMessage = '';
+      let dmError: string | null = null;
       try {
         const { data: config } = await supabase
           .from('instagram_config')
@@ -475,7 +531,9 @@ export async function PUT(request: NextRequest) {
 
         if (accessToken && config?.cold_outreach_enabled !== false) {
           dmMessage = pickTemplate(sector);
-          dmSent = await sendInstagramDM(cleanUsername, dmMessage, accessToken);
+          const dmResult = await sendInstagramDM(cleanUsername, dmMessage, accessToken);
+          dmSent = dmResult.sent;
+          dmError = dmResult.error || null;
 
           if (dmSent) {
             // Update lead → contacted
@@ -509,27 +567,31 @@ export async function PUT(request: NextRequest) {
               welcome_sent_at: new Date().toISOString(),
             }, { onConflict: 'instagram_user_id' });
           } else {
-            // DM failed — mark it
+            // DM failed — mark it with the actual error
             await supabase
               .from('instagram_cold_leads')
               .update({
                 status: 'dm_failed',
-                notes: (notes || '') + ' | Primer DM falló al enviar',
+                notes: (notes || '') + ` | DM falló: ${dmError || 'error desconocido'}`,
                 updated_at: new Date().toISOString(),
               })
               .eq('username', cleanUsername);
           }
+        } else {
+          dmError = !accessToken ? 'No hay token de Instagram configurado' : 'Captación en frío desactivada';
         }
       } catch (e) {
         console.error('Error sending immediate DM:', e);
+        dmError = 'Error interno al enviar DM';
       }
 
       return NextResponse.json({
         success: true,
         message: dmSent
           ? `@${cleanUsername} añadido y primer DM enviado ✅`
-          : `@${cleanUsername} añadido como lead (DM pendiente)`,
+          : `@${cleanUsername} añadido como lead — DM no enviado`,
         dmSent,
+        dmError: dmSent ? undefined : dmError,
         dmMessage: dmSent ? dmMessage : undefined,
       });
     }
@@ -696,8 +758,8 @@ Usernames: ${batch.join(', ')}`
           for (const lead of toSend) {
             try {
               const dmMessage = pickTemplate(lead.sector);
-              const sent = await sendInstagramDM(lead.username, dmMessage, accessToken);
-              if (sent) {
+              const dmResult = await sendInstagramDM(lead.username, dmMessage, accessToken);
+              if (dmResult.sent) {
                 dmsSent++;
                 await supabase.from('instagram_cold_leads').update({
                   status: 'contacted',

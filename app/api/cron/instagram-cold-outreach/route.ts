@@ -85,9 +85,49 @@ async function resolveIGSID(webhookSenderId: string, accessToken: string): Promi
 }
 
 // ─── Send cold DM ───
-async function sendColdDM(recipientId: string, message: string, accessToken: string): Promise<boolean> {
+async function sendColdDM(recipientId: string, message: string, accessToken: string): Promise<{ sent: boolean; error?: string }> {
   try {
-    const resolvedId = await resolveIGSID(recipientId, accessToken);
+    // Step 1: Try to find IGSID from existing conversations
+    let resolvedId = await resolveIGSID(recipientId, accessToken);
+    
+    // Step 2: If IGSID is same as input (not found in conversations),
+    // try Business Discovery API to get the real IG user ID
+    if (resolvedId === recipientId) {
+      try {
+        // First get our own IG user ID
+        const meRes = await fetch(
+          `https://graph.instagram.com/v21.0/me?fields=id`,
+          { headers: { 'Authorization': `Bearer ${accessToken}` } }
+        );
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          // Clean the username (remove @)
+          const cleanUsername = recipientId.replace(/^@/, '');
+          const bdRes = await fetch(
+            `https://graph.instagram.com/v21.0/${meData.id}?fields=business_discovery.fields(ig_id,id,username)&username=${cleanUsername}`,
+            { headers: { 'Authorization': `Bearer ${accessToken}` } }
+          );
+          if (bdRes.ok) {
+            const bdData = await bdRes.json();
+            const discoveredId = bdData?.business_discovery?.id;
+            if (discoveredId) {
+              resolvedId = discoveredId;
+              console.log(`Business Discovery: ${recipientId} → ${resolvedId}`);
+            }
+          }
+        }
+      } catch (bdErr) {
+        console.log('Business Discovery lookup failed:', bdErr);
+      }
+    }
+
+    // Step 3: If we still only have the username, DM will likely fail
+    if (resolvedId === recipientId) {
+      console.log(`No IGSID found for ${recipientId} — Instagram solo permite enviar DMs a usuarios que te han escrito primero`);
+      return { sent: false, error: 'Instagram solo permite DMs a usuarios que han interactuado con tu cuenta' };
+    }
+
+    // Step 4: Attempt to send the DM
     const response = await fetch(
       `https://graph.instagram.com/v21.0/me/messages`,
       {
@@ -105,13 +145,14 @@ async function sendColdDM(recipientId: string, message: string, accessToken: str
 
     if (!response.ok) {
       const err = await response.json();
-      console.error('Cold DM send error:', err, 'recipientId:', resolvedId);
-      return false;
+      const errorMsg = err?.error?.message || JSON.stringify(err);
+      console.error('Cold DM send error:', errorMsg, 'recipientId:', resolvedId);
+      return { sent: false, error: errorMsg };
     }
-    return true;
+    return { sent: true };
   } catch (error) {
     console.error('Cold DM exception:', error);
-    return false;
+    return { sent: false, error: 'Error de conexión al enviar DM' };
   }
 }
 
@@ -185,9 +226,9 @@ export async function GET() {
       const message = pickTemplate(lead.sector);
 
       // Send the DM
-      const sent = await sendColdDM(lead.instagram_user_id, message, accessToken);
+      const dmResult = await sendColdDM(lead.instagram_user_id, message, accessToken);
 
-      if (sent) {
+      if (dmResult.sent) {
         // Update lead status
         await supabase
           .from('instagram_cold_leads')
@@ -224,12 +265,12 @@ export async function GET() {
       } else {
         failedCount++;
 
-        // Mark as failed so we can retry later or skip
+        // Mark as failed with the actual error
         await supabase
           .from('instagram_cold_leads')
           .update({
             status: 'dm_failed',
-            notes: 'First DM failed to send',
+            notes: `DM falló: ${dmResult.error || 'error desconocido'}`,
             updated_at: new Date().toISOString(),
           })
           .eq('id', lead.id);
