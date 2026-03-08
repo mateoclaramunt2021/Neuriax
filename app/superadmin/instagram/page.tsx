@@ -188,13 +188,19 @@ export default function InstagramPage() {
   const [bulkTiming, setBulkTiming] = useState<'now' | 'next_cron' | 'none'>('next_cron');
   const [bulkImporting, setBulkImporting] = useState(false);
   const [bulkResult, setBulkResult] = useState<{ added: number; duplicates: number; errors: number; total: number; dmsSent?: number; sectorDetected?: boolean } | null>(null);
+  const [bulkDuplicatesList, setBulkDuplicatesList] = useState<string[]>([]);
+  const [toastType, setToastType] = useState<'success' | 'error' | 'warning'>('success');
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
   useEffect(() => { selectedSenderRef.current = selectedSender; }, [selectedSender]);
 
   /* — Show toast — */
-  const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
+  const showToast = (msg: string, type: 'success' | 'error' | 'warning' = 'success') => {
+    setToast(msg);
+    setToastType(type);
+    setTimeout(() => setToast(null), type === 'error' ? 5000 : 3000);
+  };
 
   /* — Fetch cold leads — */
   const fetchColdLeads = useCallback(async () => {
@@ -352,9 +358,14 @@ export default function InstagramPage() {
         setShowAddLead(false);
         fetchColdLeads();
       } else {
-        showToast(data.error || 'Error al añadir lead');
+        // Show duplicate error with warning style
+        if (res.status === 409) {
+          showToast(`⚠️ ${data.error}`, 'warning');
+        } else {
+          showToast(data.error || 'Error al añadir lead', 'error');
+        }
       }
-    } catch (err) { console.error('Error:', err); showToast('Error de conexión'); }
+    } catch (err) { console.error('Error:', err); showToast('Error de conexión', 'error'); }
     finally { setAddingLead(false); }
   };
 
@@ -363,17 +374,35 @@ export default function InstagramPage() {
     if (!bulkText.trim() || bulkImporting) return;
     setBulkImporting(true);
     setBulkResult(null);
+    setBulkDuplicatesList([]);
     try {
       // Parse usernames: split by newlines, commas, spaces, semicolons
-      const usernames = bulkText
+      const rawList = bulkText
         .split(/[\n,;\s]+/)
         .map(u => u.replace(/^@/, '').trim().toLowerCase())
         .filter(u => u.length > 1);
 
+      // Detect internal duplicates (within the list itself)
+      const seen = new Set<string>();
+      const internalDups: string[] = [];
+      const usernames: string[] = [];
+      for (const u of rawList) {
+        if (seen.has(u)) {
+          if (!internalDups.includes(u)) internalDups.push(u);
+        } else {
+          seen.add(u);
+          usernames.push(u);
+        }
+      }
+
       if (usernames.length === 0) {
-        showToast('No se detectaron usernames válidos');
+        showToast('No se detectaron usernames válidos', 'error');
         setBulkImporting(false);
         return;
+      }
+
+      if (internalDups.length > 0) {
+        showToast(`⚠️ ${internalDups.length} duplicados dentro de tu lista eliminados: @${internalDups.slice(0, 5).join(', @')}${internalDups.length > 5 ? '...' : ''}`, 'warning');
       }
 
       const res = await fetch('/api/superadmin/instagram', {
@@ -389,14 +418,21 @@ export default function InstagramPage() {
       const data = await res.json();
       if (res.ok) {
         setBulkResult(data.summary);
-        showToast(data.message);
+        setBulkDuplicatesList(data.duplicatesList || []);
+        if (data.summary.duplicates > 0 && data.summary.added > 0) {
+          showToast(`${data.summary.added} añadidos, ${data.summary.duplicates} duplicados omitidos`, 'warning');
+        } else if (data.summary.added === 0) {
+          showToast('Todos los leads ya existían — 0 añadidos', 'warning');
+        } else {
+          showToast(data.message);
+        }
         fetchColdLeads();
       } else {
-        showToast(data.error || 'Error al importar');
+        showToast(data.error || 'Error al importar', 'error');
       }
     } catch (err) {
       console.error('Bulk import error:', err);
-      showToast('Error de conexión');
+      showToast('Error de conexión', 'error');
     } finally {
       setBulkImporting(false);
     }
@@ -434,8 +470,18 @@ export default function InstagramPage() {
     <div className="min-h-screen bg-[#0f0f1a] text-white">
       {/* ─── Toast ─── */}
       {toast && (
-        <div className="fixed top-6 right-6 z-50 bg-emerald-500/90 backdrop-blur text-white text-sm px-5 py-3 rounded-xl shadow-2xl shadow-emerald-500/20 animate-[slideIn_0.3s_ease-out] flex items-center gap-2">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+        <div className={`fixed top-6 right-6 z-50 backdrop-blur text-white text-sm px-5 py-3 rounded-xl shadow-2xl animate-[slideIn_0.3s_ease-out] flex items-center gap-2 ${
+          toastType === 'error' ? 'bg-red-500/90 shadow-red-500/20' :
+          toastType === 'warning' ? 'bg-amber-500/90 shadow-amber-500/20' :
+          'bg-emerald-500/90 shadow-emerald-500/20'
+        }`}>
+          {toastType === 'error' ? (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" /></svg>
+          ) : toastType === 'warning' ? (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" /></svg>
+          )}
           {toast}
         </div>
       )}
@@ -1083,6 +1129,17 @@ export default function InstagramPage() {
                     </div>
                     {bulkResult.sectorDetected && (
                       <p className="text-[10px] text-slate-500">🤖 Sectores auto-detectados por IA</p>
+                    )}
+                    {/* Show duplicate usernames */}
+                    {bulkDuplicatesList.length > 0 && (
+                      <div className="mt-2 pt-2 border-t border-white/[0.06]">
+                        <p className="text-[10px] text-amber-400 font-semibold mb-1">⚠️ Duplicados omitidos ({bulkDuplicatesList.length}):</p>
+                        <div className="flex flex-wrap gap-1">
+                          {bulkDuplicatesList.map((u, i) => (
+                            <span key={i} className="px-1.5 py-0.5 bg-amber-500/10 text-amber-300 rounded text-[10px] ring-1 ring-amber-500/20">@{u}</span>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
                 )}
