@@ -278,6 +278,47 @@ export async function PUT(request: NextRequest) {
     }
 
     // ─── Cold lead actions ───
+
+    // Add a manual lead
+    if (body.action === 'add_lead') {
+      const { username, sector, full_name, notes } = body;
+      if (!username || !sector) {
+        return NextResponse.json({ error: 'Username y sector son obligatorios' }, { status: 400 });
+      }
+      const cleanUsername = username.replace(/^@/, '').trim().toLowerCase();
+
+      // Check if lead already exists
+      const { data: existing } = await supabase
+        .from('instagram_cold_leads')
+        .select('id, status')
+        .eq('username', cleanUsername)
+        .maybeSingle();
+
+      if (existing) {
+        return NextResponse.json({ error: `@${cleanUsername} ya existe como lead (estado: ${existing.status})` }, { status: 409 });
+      }
+
+      const { error } = await supabase.from('instagram_cold_leads').insert({
+        username: cleanUsername,
+        instagram_user_id: cleanUsername, // Will be resolved when DM is sent
+        sector,
+        full_name: full_name || null,
+        notes: notes || null,
+        source_hashtag: 'manual',
+        status: 'new',
+        blacklisted: false,
+        converted: false,
+        responded: false,
+      });
+
+      if (error) {
+        console.error('Error adding lead:', error);
+        return NextResponse.json({ error: 'Error al añadir lead' }, { status: 500 });
+      }
+
+      return NextResponse.json({ success: true, message: `@${cleanUsername} añadido como lead` });
+    }
+
     if (body.action === 'blacklist_lead') {
       await supabase
         .from('instagram_cold_leads')

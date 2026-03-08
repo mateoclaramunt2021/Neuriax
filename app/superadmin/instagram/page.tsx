@@ -154,6 +154,12 @@ export default function InstagramPage() {
   const [coldStats, setColdStats] = useState<ColdStats | null>(null);
   const [coldFilter, setColdFilter] = useState<string>('all');
   const [coldSectorFilter, setColdSectorFilter] = useState<string>('all');
+  const [showAddLead, setShowAddLead] = useState(false);
+  const [newLeadUsername, setNewLeadUsername] = useState('');
+  const [newLeadSector, setNewLeadSector] = useState('restaurante');
+  const [newLeadName, setNewLeadName] = useState('');
+  const [newLeadNotes, setNewLeadNotes] = useState('');
+  const [addingLead, setAddingLead] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -273,6 +279,35 @@ export default function InstagramPage() {
   const handleSendDMToLead = async (leadId: number, username: string) => {
     setSelectedSender(username);
     setTab('inbox');
+  };
+
+  const handleAddLead = async () => {
+    if (!newLeadUsername.trim() || addingLead) return;
+    setAddingLead(true);
+    try {
+      const res = await fetch('/api/superadmin/instagram', {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'add_lead',
+          username: newLeadUsername.trim(),
+          sector: newLeadSector,
+          full_name: newLeadName.trim() || undefined,
+          notes: newLeadNotes.trim() || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        showToast(`@${newLeadUsername.replace(/^@/, '')} añadido ✅`);
+        setNewLeadUsername('');
+        setNewLeadName('');
+        setNewLeadNotes('');
+        setShowAddLead(false);
+        fetchColdLeads();
+      } else {
+        showToast(data.error || 'Error al añadir lead');
+      }
+    } catch (err) { console.error('Error:', err); showToast('Error de conexión'); }
+    finally { setAddingLead(false); }
   };
 
   /* — Filters — */
@@ -697,9 +732,15 @@ export default function InstagramPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-lg font-semibold">Captación en Frío</h2>
-                <p className="text-xs text-slate-500 mt-0.5">Leads descubiertos por hashtags · AI Setter automático</p>
+                <p className="text-xs text-slate-500 mt-0.5">Añade leads manualmente · AI Setter les contactará automáticamente</p>
               </div>
               <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowAddLead(!showAddLead)}
+                  className="px-4 py-2 bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all"
+                >
+                  + Añadir Lead
+                </button>
                 <span className={`px-3 py-1.5 rounded-lg text-xs font-medium ring-1 ${
                   config?.cold_outreach_enabled !== false
                     ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-500/20'
@@ -709,6 +750,83 @@ export default function InstagramPage() {
                 </span>
               </div>
             </div>
+
+            {/* Add Lead Form */}
+            {showAddLead && (
+              <div className="bg-[#1a1a2e]/80 backdrop-blur rounded-2xl border border-fuchsia-500/20 p-5 space-y-4 animate-in fade-in slide-in-from-top-2">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-fuchsia-300 flex items-center gap-2">
+                    <span>🎯</span> Añadir Lead Manualmente
+                  </h3>
+                  <button onClick={() => setShowAddLead(false)} className="text-slate-500 hover:text-white text-sm">✕</button>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">Username de Instagram *</label>
+                    <input
+                      type="text"
+                      value={newLeadUsername}
+                      onChange={e => setNewLeadUsername(e.target.value)}
+                      placeholder="@restaurante_ejemplo"
+                      className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                      onKeyDown={e => e.key === 'Enter' && handleAddLead()}
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">Sector *</label>
+                    <select
+                      value={newLeadSector}
+                      onChange={e => setNewLeadSector(e.target.value)}
+                      className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                    >
+                      <option value="restaurante">🍽️ Restaurante</option>
+                      <option value="clinica_estetica">💆 Clínica Estética</option>
+                      <option value="barberia">💈 Barbería</option>
+                      <option value="clinica_salud">🏥 Clínica Salud</option>
+                      <option value="general">🏢 General</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">Nombre (opcional)</label>
+                    <input
+                      type="text"
+                      value={newLeadName}
+                      onChange={e => setNewLeadName(e.target.value)}
+                      placeholder="Restaurante La Buena Mesa"
+                      className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[11px] text-slate-500 mb-1 block">Notas (opcional)</label>
+                    <input
+                      type="text"
+                      value={newLeadNotes}
+                      onChange={e => setNewLeadNotes(e.target.value)}
+                      placeholder="Visto en Instagram, poca presencia online"
+                      className="w-full px-3 py-2.5 bg-black/30 border border-white/[0.08] rounded-xl text-sm text-white placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/40 focus:ring-1 focus:ring-fuchsia-500/20 transition-all"
+                    />
+                  </div>
+                </div>
+                <div className="flex justify-end gap-3 pt-1">
+                  <button
+                    onClick={() => setShowAddLead(false)}
+                    className="px-4 py-2 text-sm text-slate-400 hover:text-white transition-colors"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    onClick={handleAddLead}
+                    disabled={!newLeadUsername.trim() || addingLead}
+                    className="px-5 py-2 bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {addingLead ? 'Añadiendo...' : '+ Añadir Lead'}
+                  </button>
+                </div>
+                <p className="text-[10px] text-slate-600 -mt-1">
+                  💡 El lead se añadirá con estado &quot;Nuevo&quot;. El cron de captación en frío le enviará un DM personalizado automáticamente.
+                </p>
+              </div>
+            )}
 
             {/* Cold Stats */}
             {coldStats && (
@@ -874,7 +992,13 @@ export default function InstagramPage() {
                               <span className="text-3xl">🎯</span>
                             </div>
                             <p className="text-sm font-medium">Sin leads fríos todavía</p>
-                            <p className="text-xs text-slate-700">El cron de prospección descubrirá leads automáticamente</p>
+                            <p className="text-xs text-slate-700">Pulsa &quot;+ Añadir Lead&quot; para empezar a captar clientes</p>
+                            <button
+                              onClick={() => setShowAddLead(true)}
+                              className="mt-2 px-4 py-2 bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white rounded-xl text-xs font-medium hover:shadow-lg hover:shadow-fuchsia-500/25 transition-all"
+                            >
+                              + Añadir primer lead
+                            </button>
                           </div>
                         </td>
                       </tr>
