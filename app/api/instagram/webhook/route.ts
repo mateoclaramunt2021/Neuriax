@@ -54,7 +54,8 @@ Cuando detectes estas señales, responde con entusiasmo GENUINO (no de vendedor)
 2. Escucha y haz preguntas de seguimiento inteligentes
 3. Comparte algún insight o valor relevante a su sector
 4. Si hay encaje natural, menciona que hacéis cosas parecidas para negocios similares
-5. Cuando sientas interés real (3-4 mensajes), suelta el link natural: "oye mira, rellena esto rápido y Mateo te prepara algo a medida 👇 neuriax.com/contacto/formulario"
+5. Cuando sientas interés real (3-4 mensajes), suelta el link natural: "oye mira, échale un ojo a lo que hacemos 👇 neuriax.com"
+6. Si quiere agendar llamada directamente → "dale, agenda aquí cuando te venga bien 👇 calendly.com/neuriax/30min"
 
 ═══ COLABORACIONES Y CROSS-PROMO ═══
 Si detectas que un negocio podría ser partner (no solo cliente):
@@ -69,7 +70,8 @@ BIEN:
 - "ah mola mucho! y cómo lleváis el tema digital? tenéis web o tiráis solo con redes? 🤔"
 - "jaja sí, eso pasa un montón. la gente busca en Google y si no te encuentra... se va a la competencia 😅"
 - "oye se me ocurre una idea, hablamos con negocios como el vuestro todo el rato y hay cosas que funcionan muy bien"
-- "mira, te dejo esto para que lo veas tranquilo 👇 neuriax.com/contacto/formulario"
+- "mira, te dejo esto para que lo veas tranquilo 👇 neuriax.com"
+- "oye si quieres hablar con Mateo directo → calendly.com/neuriax/30min"
 
 MAL (PROHIBIDO):
 - "¡Hola! 😊 Muchas gracias por contactarnos. ¿En qué podemos ayudarte hoy?"
@@ -78,25 +80,42 @@ MAL (PROHIBIDO):
 - "¡Perfecto! Te invito a rellenar nuestro formulario para agendar una llamada personalizada"
 
 ═══ NUNCA DAR PRECIOS ═══
-- Si preguntan cuánto cuesta → "depende mucho del proyecto! cada negocio es diferente 😊 lo mejor es que rellenes el form y Mateo te da un presupuesto a medida → neuriax.com/contacto/formulario"
-- Si insisten → "de verdad que sin ver el caso no te quiero dar un número que no sea real. Mateo en 5 min te lo cuadra todo 💪"
+- Si preguntan cuánto cuesta → "depende mucho del proyecto! cada negocio es diferente 😊 lo mejor es que hables con Mateo → agenda una llamada rápida: calendly.com/neuriax/30min"
+- Si insisten → "de verdad que sin ver el caso no te quiero dar un número que no sea real. Mateo en 5 min te lo cuadra todo 💪 calendly.com/neuriax/30min"
 - NUNCA cifras, rangos, ni aproximaciones. JAMÁS.
 
 ═══ SI NO CONTESTA ═══
 Cuando vuelva a escribir, sigue la conversación normal sin reprochar. Nunca menciones que no contestó.
 
+═══ EXTRACCIÓN DE INTEL (MUY IMPORTANTE) ═══
+Mientras hablas, tu cerebro está captando datos del negocio del lead. Saca info de forma natural SIN interrogar:
+- Nombre del negocio
+- Tipo/sector (restaurante, barbería, clínica, tienda, etc.)
+- ¿Tienen web? ¿Cuál?
+- Ciudad/zona
+- Problemas que mencionan (no llegan clientes, no tienen web, pierden contra competencia...)
+- Qué necesitan (web, SEO, automatización, redes...)
+- Nivel de interés (curioso, interesado, muy caliente, listo para comprar)
+- Cualquier dato extra (nº empleados, años abiertos, facturación aprox, otros locales...)
+
+Haz preguntas naturales que saquen esta info:
+- "y cómo os va el tema online? tenéis web o vais más con redes?"
+- "sois de [ciudad]? tenéis más de un local?"
+- "y qué tal la competencia por la zona?"
+- "lleváis mucho con el negocio?"
+
 ═══ DATOS ═══
 - Mateo = fundador de Neuriax, agencia de IA en España 🇪🇸
 - Hacemos webs profesionales, chatbots con IA, automatización de procesos, estrategia digital
-- Form: https://www.neuriax.com/contacto/formulario
-- Nuestra web: neuriax.com
+- Web: neuriax.com
+- Agendar llamada: calendly.com/neuriax/30min
 
 ═══ PROHIBIDO ═══
 - Decir que eres IA/bot/chatgpt — eres "del equipo de Neuriax"
-- Dar CUALQUIER precio. Siempre al formulario
+- Dar CUALQUIER precio. Siempre a web o Calendly
 - Mensajes de más de 3 líneas
 - Inventar casos con nombres reales
-- Usar Calendly ni links externos que no sean de neuriax.com
+- Links externos que no sean de neuriax.com o calendly.com/neuriax
 - Sonar como un asistente virtual corporativo
 - Presionar. Si no quieren, no quieren. Déjalo ir con elegancia`;
 
@@ -195,6 +214,146 @@ function getSupabase() {
   return createClient(url, key);
 }
 
+// ─── Lead Intel Extraction (non-blocking) ───
+async function extractLeadIntel(
+  senderId: string,
+  conversationHistory: Array<{ role: string; content: string }>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  supabase: any
+) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey || conversationHistory.length < 3) return; // Need at least a few exchanges
+
+  try {
+    const convoText = conversationHistory.map(m =>
+      `${m.role === 'user' ? 'Lead' : 'Neuri'}: ${m.content}`
+    ).join('\n');
+
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          {
+            role: 'system',
+            content: `Analiza esta conversación de Instagram DM y extrae la información de negocio del lead. Responde SOLO con JSON válido, sin texto extra. Si no tienes datos para un campo, pon null. Formato exacto:
+{
+  "nombre_negocio": "string o null",
+  "sector": "string o null (restaurante, barbería, clínica, tienda, inmobiliaria, gym, hotel, etc.)",
+  "tiene_web": "sí/no/null",
+  "url_web": "string o null",
+  "ciudad": "string o null",
+  "zona_barrio": "string o null",
+  "redes_sociales": "string o null (instagram, tiktok, etc.)",
+  "num_empleados": "string o null",
+  "anos_abierto": "string o null",
+  "problemas": ["lista de problemas mencionados"],
+  "necesidades": ["lista de lo que necesitan: web, SEO, redes, chatbot, etc."],
+  "nivel_interes": "frío/tibio/caliente/muy_caliente/null",
+  "tiene_competencia_online": "sí/no/null",
+  "notas_extra": "string o null (cualquier dato relevante extra)",
+  "resumen": "1-2 frases resumen del lead para Mateo"
+}`
+          },
+          { role: 'user', content: convoText },
+        ],
+        max_tokens: 500,
+        temperature: 0.3,
+      }),
+    });
+
+    if (!response.ok) return;
+    const data = await response.json();
+    const raw = data.choices?.[0]?.message?.content || '';
+    
+    // Parse JSON from response (handle markdown code blocks)
+    let intel;
+    try {
+      const jsonStr = raw.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+      intel = JSON.parse(jsonStr);
+    } catch {
+      console.error('Intel parse error:', raw.substring(0, 200));
+      return;
+    }
+
+    // Save to cold_leads table if this sender is a cold lead
+    const { data: coldLead } = await supabase
+      .from('instagram_cold_leads')
+      .select('id, notes')
+      .eq('instagram_user_id', senderId)
+      .maybeSingle();
+
+    if (coldLead) {
+      // Try saving to lead_intel column first, fallback to notes
+      const { error: colErr } = await supabase
+        .from('instagram_cold_leads')
+        .update({
+          lead_intel: intel,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', coldLead.id);
+
+      if (colErr && colErr.message.includes('does not exist')) {
+        // Column not yet added — store in notes as JSON
+        const notesPrefix = coldLead.notes ? coldLead.notes.replace(/\[INTEL:[\s\S]*$/, '').trim() : '';
+        await supabase
+          .from('instagram_cold_leads')
+          .update({
+            notes: `${notesPrefix}\n[INTEL:${JSON.stringify(intel)}]`.trim(),
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', coldLead.id);
+      }
+    }
+
+    // Also try matching by username (manual leads use username as ID)
+    if (!coldLead) {
+      const { data: coldLeadByUser } = await supabase
+        .from('instagram_cold_leads')
+        .select('id, notes')
+        .eq('username', senderId)
+        .maybeSingle();
+
+      if (coldLeadByUser) {
+        const { error: colErr2 } = await supabase
+          .from('instagram_cold_leads')
+          .update({
+            lead_intel: intel,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', coldLeadByUser.id);
+
+        if (colErr2 && colErr2.message.includes('does not exist')) {
+          const notesPrefix = coldLeadByUser.notes ? coldLeadByUser.notes.replace(/\[INTEL:[\s\S]*$/, '').trim() : '';
+          await supabase
+            .from('instagram_cold_leads')
+            .update({
+              notes: `${notesPrefix}\n[INTEL:${JSON.stringify(intel)}]`.trim(),
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', coldLeadByUser.id);
+        }
+      }
+    }
+
+    // Also save intel in followers table for non-cold-lead conversations
+    const { error: fErr } = await supabase
+      .from('instagram_followers')
+      .update({ lead_intel: intel })
+      .eq('instagram_user_id', senderId);
+    if (fErr) console.log('Followers intel save skipped (column may not exist)');
+
+
+    console.log(`📊 Intel extracted for ${senderId}:`, intel.resumen || 'no summary');
+  } catch (e) {
+    console.error('Intel extraction error:', e);
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function getAccessToken(supabase: any) {
   // Try config first (auto-refreshed tokens), then fallback to env
@@ -207,7 +366,7 @@ async function getAccessToken(supabase: any) {
 
 async function getAIResponse(userMessage: string, history: Array<{role: string; content: string}>, isFirstMessage: boolean) {
   const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return 'Hey! 👋 Ahora mismo Mateo no está disponible, pero si rellenas esto te contesta rápido → neuriax.com/contacto/formulario';
+  if (!apiKey) return 'Hey! 👋 Ahora mismo Mateo no está disponible, pero agenda llamada aquí → calendly.com/neuriax/30min';
 
   const systemPrompt = isFirstMessage
     ? INSTAGRAM_SYSTEM_PROMPT + '\n\nEste es su primer mensaje. Saluda de forma cercana y profesional con un emoji, y pregunta sobre su negocio. NO hagas bienvenida formal ni robótica.'
@@ -456,9 +615,9 @@ export async function POST(request: NextRequest) {
           if (senderId && accessToken) {
             let replyMsg = '¡Gracias! ¿En qué puedo ayudarte?';
             if (payload === 'GET_PRICES') {
-              replyMsg = 'Cada proyecto es diferente 😊 Rellena el form y Mateo te prepara un presupuesto personalizado en 5 min → neuriax.com/contacto/formulario 💪';
+              replyMsg = 'Cada proyecto es diferente 😊 Habla con Mateo y te prepara un presupuesto personalizado → calendly.com/neuriax/30min 💪';
             } else if (payload === 'SCHEDULE_CALL') {
-              replyMsg = '📅 ¡Genial! Rellena el formulario (2 min) y Mateo te prepara una propuesta personalizada gratis:\nhttps://www.neuriax.com/contacto/formulario';
+              replyMsg = '📅 ¡Genial! Agenda una llamada rápida con Mateo y te prepara una propuesta personalizada gratis:\nhttps://calendly.com/neuriax/30min';
             } else if (payload === 'VIEW_PORTFOLIO') {
               replyMsg = '🎨 Mira nuestro portfolio en:\nhttps://www.neuriax.com/webs\n\n¿Quieres algo similar?';
             }
@@ -681,6 +840,17 @@ export async function POST(request: NextRequest) {
             ).catch(() => {});
 
             console.log(`🔥 Opportunity detected from @${alertUsername}: ${opportunity.type}`);
+          }
+
+          // ─── Lead Intel Extraction (non-blocking, every 3 messages) ───
+          const totalMsgs = conversationHistory.length + 2; // +2 for current exchange
+          if (totalMsgs >= 3 && totalMsgs % 2 === 0) {
+            const fullHistory = [
+              ...conversationHistory,
+              { role: 'user', content: messageText },
+              { role: 'assistant', content: aiResponse },
+            ];
+            extractLeadIntel(senderId, fullHistory, supabase).catch(() => {});
           }
         }
       }

@@ -3,6 +3,23 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 
 /* ─── Types ─── */
+interface LeadIntel {
+  nombre_negocio?: string | null;
+  sector?: string | null;
+  tiene_web?: string | null;
+  url_web?: string | null;
+  ciudad?: string | null;
+  zona_barrio?: string | null;
+  redes_sociales?: string | null;
+  num_empleados?: string | null;
+  anos_abierto?: string | null;
+  problemas?: string[];
+  necesidades?: string[];
+  nivel_interes?: string | null;
+  tiene_competencia_online?: string | null;
+  notas_extra?: string | null;
+  resumen?: string | null;
+}
 interface ColdLead {
   id: number;
   instagram_user_id: string;
@@ -22,6 +39,7 @@ interface ColdLead {
   converted: boolean;
   blacklisted: boolean;
   notes: string | null;
+  lead_intel?: LeadIntel | null;
   created_at: string;
   updated_at: string;
 }
@@ -163,6 +181,7 @@ export default function InstagramPage() {
   const [sendTiming, setSendTiming] = useState<'now' | 'next_cron' | 'scheduled' | 'none'>('now');
   const [scheduledDate, setScheduledDate] = useState('');
   const [scheduledTime, setScheduledTime] = useState('10:00');
+  const [selectedLead, setSelectedLead] = useState<ColdLead | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -806,6 +825,9 @@ export default function InstagramPage() {
                       <option value="clinica_estetica">💆 Clínica Estética</option>
                       <option value="barberia">💈 Barbería</option>
                       <option value="clinica_salud">🏥 Clínica Salud</option>
+                      <option value="inmobiliaria">🏠 Inmobiliaria</option>
+                      <option value="gym">💪 Gimnasio</option>
+                      <option value="tienda">🛍️ Tienda</option>
                       <option value="general">🏢 General</option>
                     </select>
                   </div>
@@ -986,7 +1008,8 @@ export default function InstagramPage() {
                   <tbody className="divide-y divide-white/[0.04]">
                     {coldLeads.length > 0 ? coldLeads.map((lead) => {
                       const sectorIcons: Record<string, string> = {
-                        restaurante: '🍽️', clinica_estetica: '💆', barberia: '💈', clinica_salud: '🏥', general: '🏢'
+                        restaurante: '🍽️', clinica_estetica: '💆', barberia: '💈', clinica_salud: '🏥',
+                        inmobiliaria: '🏠', gym: '💪', tienda: '🛍️', general: '🏢',
                       };
                       const statusColors: Record<string, string> = {
                         new: 'bg-cyan-500/10 text-cyan-300 ring-cyan-500/20',
@@ -1003,7 +1026,7 @@ export default function InstagramPage() {
                         dm_failed: 'DM falló', blacklisted: 'Bloqueado',
                       };
                       return (
-                        <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
+                        <tr key={lead.id} onClick={() => setSelectedLead(selectedLead?.id === lead.id ? null : lead)} className={`hover:bg-white/[0.02] transition-colors group cursor-pointer ${selectedLead?.id === lead.id ? 'bg-fuchsia-500/[0.04] ring-1 ring-fuchsia-500/20' : ''}`}>
                           <td className="px-4 py-3">
                             <div className="flex items-center gap-2.5">
                               <div className="w-8 h-8 rounded-full bg-white/[0.06] flex items-center justify-center text-xs font-medium text-slate-400">
@@ -1086,6 +1109,155 @@ export default function InstagramPage() {
                 </table>
               </div>
             </div>
+
+            {/* ─── Lead Intel Panel ─── */}
+            {selectedLead && (() => {
+              // Parse intel from lead_intel field or from notes fallback
+              let intel: LeadIntel | null = null;
+              if (selectedLead.lead_intel) {
+                intel = selectedLead.lead_intel;
+              } else if (selectedLead.notes && selectedLead.notes.includes('[INTEL:')) {
+                try {
+                  const match = selectedLead.notes.match(/\[INTEL:([\s\S]*)\]$/);
+                  if (match) intel = JSON.parse(match[1]);
+                } catch { /* ignore parse error */ }
+              }
+
+              return (
+                <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-fuchsia-500/20 overflow-hidden animate-in slide-in-from-top-2">
+                  <div className="p-4 border-b border-white/[0.06] flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-fuchsia-500 to-violet-500 flex items-center justify-center text-white font-bold text-lg">
+                        {(selectedLead.username || '?')[0].toUpperCase()}
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-semibold text-white">@{selectedLead.username}</h3>
+                        <p className="text-[10px] text-slate-500">{selectedLead.full_name || selectedLead.sector} · {intel?.ciudad || 'ubicación desconocida'}</p>
+                      </div>
+                    </div>
+                    <button onClick={() => setSelectedLead(null)} className="text-slate-500 hover:text-white text-lg">✕</button>
+                  </div>
+
+                  {intel ? (
+                    <div className="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {/* Resumen */}
+                      {intel.resumen && (
+                        <div className="col-span-full bg-gradient-to-r from-fuchsia-500/5 to-violet-500/5 rounded-xl p-3 border border-fuchsia-500/10">
+                          <p className="text-[10px] text-fuchsia-400 font-bold uppercase tracking-wider mb-1">📋 Resumen para Mateo</p>
+                          <p className="text-sm text-slate-300">{intel.resumen}</p>
+                        </div>
+                      )}
+
+                      {/* Datos del negocio */}
+                      <div className="bg-white/[0.02] rounded-xl p-3 border border-white/[0.06]">
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">🏢 Negocio</p>
+                        <div className="space-y-1.5 text-xs">
+                          <div className="flex justify-between"><span className="text-slate-500">Nombre</span><span className="text-slate-300">{intel.nombre_negocio || '—'}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Sector</span><span className="text-slate-300">{intel.sector || selectedLead.sector}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Ciudad</span><span className="text-slate-300">{intel.ciudad || '—'}{intel.zona_barrio ? ` (${intel.zona_barrio})` : ''}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Años abierto</span><span className="text-slate-300">{intel.anos_abierto || '—'}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Empleados</span><span className="text-slate-300">{intel.num_empleados || '—'}</span></div>
+                        </div>
+                      </div>
+
+                      {/* Presencia digital */}
+                      <div className="bg-white/[0.02] rounded-xl p-3 border border-white/[0.06]">
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">🌐 Digital</p>
+                        <div className="space-y-1.5 text-xs">
+                          <div className="flex justify-between"><span className="text-slate-500">Tiene web</span><span className={`font-medium ${intel.tiene_web === 'sí' ? 'text-emerald-400' : intel.tiene_web === 'no' ? 'text-red-400' : 'text-slate-400'}`}>{intel.tiene_web || '—'}</span></div>
+                          {intel.url_web && <div className="flex justify-between"><span className="text-slate-500">URL</span><span className="text-cyan-400 truncate max-w-[150px]">{intel.url_web}</span></div>}
+                          <div className="flex justify-between"><span className="text-slate-500">Redes</span><span className="text-slate-300">{intel.redes_sociales || '—'}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Competencia online</span><span className="text-slate-300">{intel.tiene_competencia_online || '—'}</span></div>
+                        </div>
+                      </div>
+
+                      {/* Interés y necesidades */}
+                      <div className="bg-white/[0.02] rounded-xl p-3 border border-white/[0.06]">
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">🎯 Interés</p>
+                        <div className="space-y-1.5 text-xs">
+                          <div className="flex justify-between">
+                            <span className="text-slate-500">Nivel</span>
+                            <span className={`font-semibold ${
+                              intel.nivel_interes === 'muy_caliente' ? 'text-red-400' :
+                              intel.nivel_interes === 'caliente' ? 'text-orange-400' :
+                              intel.nivel_interes === 'tibio' ? 'text-amber-400' :
+                              intel.nivel_interes === 'frío' ? 'text-cyan-400' : 'text-slate-400'
+                            }`}>
+                              {intel.nivel_interes === 'muy_caliente' ? '🔥🔥 Muy caliente' :
+                               intel.nivel_interes === 'caliente' ? '🔥 Caliente' :
+                               intel.nivel_interes === 'tibio' ? '🌡️ Tibio' :
+                               intel.nivel_interes === 'frío' ? '❄️ Frío' : '—'}
+                            </span>
+                          </div>
+                        </div>
+                        {intel.necesidades && intel.necesidades.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-[10px] text-slate-600 mb-1">Necesita:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {intel.necesidades.map((n, i) => (
+                                <span key={i} className="px-1.5 py-0.5 bg-violet-500/10 text-violet-300 rounded text-[10px] ring-1 ring-violet-500/20">{n}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                        {intel.problemas && intel.problemas.length > 0 && (
+                          <div className="mt-2">
+                            <p className="text-[10px] text-slate-600 mb-1">Problemas:</p>
+                            <div className="flex flex-wrap gap-1">
+                              {intel.problemas.map((p, i) => (
+                                <span key={i} className="px-1.5 py-0.5 bg-red-500/10 text-red-300 rounded text-[10px] ring-1 ring-red-500/20">{p}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Notas extra */}
+                      {intel.notas_extra && (
+                        <div className="col-span-full bg-white/[0.02] rounded-xl p-3 border border-white/[0.06]">
+                          <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-1">📝 Notas extra</p>
+                          <p className="text-xs text-slate-400">{intel.notas_extra}</p>
+                        </div>
+                      )}
+
+                      {/* DM History */}
+                      <div className="col-span-full bg-white/[0.02] rounded-xl p-3 border border-white/[0.06]">
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider mb-2">💬 Historial DM</p>
+                        <div className="space-y-1 text-xs">
+                          {selectedLead.first_dm_message && (
+                            <div><span className="text-fuchsia-400">1er DM:</span> <span className="text-slate-400">{selectedLead.first_dm_message}</span></div>
+                          )}
+                          {selectedLead.followup_message && (
+                            <div><span className="text-amber-400">Follow-up:</span> <span className="text-slate-400">{selectedLead.followup_message}</span></div>
+                          )}
+                          {selectedLead.notes && !selectedLead.notes.includes('[INTEL:') && (
+                            <div><span className="text-slate-500">Notas:</span> <span className="text-slate-400">{selectedLead.notes}</span></div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="p-8 text-center text-slate-600">
+                      <p className="text-lg mb-1">📊</p>
+                      <p className="text-sm font-medium">Sin inteligencia todavía</p>
+                      <p className="text-xs text-slate-700 mt-1">El bot extraerá datos automáticamente mientras conversa con este lead</p>
+                      {/* DM info even without intel */}
+                      <div className="mt-4 text-left max-w-md mx-auto space-y-1 text-xs">
+                        {selectedLead.first_dm_message && (
+                          <div><span className="text-fuchsia-400">1er DM:</span> <span className="text-slate-400">{selectedLead.first_dm_message}</span></div>
+                        )}
+                        {selectedLead.followup_message && (
+                          <div><span className="text-amber-400">Follow-up:</span> <span className="text-slate-400">{selectedLead.followup_message}</span></div>
+                        )}
+                        {selectedLead.notes && (
+                          <div><span className="text-slate-500">Notas:</span> <span className="text-slate-400">{selectedLead.notes}</span></div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         )}
 
