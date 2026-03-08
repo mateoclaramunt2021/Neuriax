@@ -548,7 +548,7 @@ export default function Soluciones() {
                   </li>
                 </ul>
                 <a 
-                  href="https://wa.me/34631415151?text=Hola%20Mateo,%20quiero%20conocer%20el%20plan%20Enterprise%20de%20automatizaci%C3%B3n" 
+                  href="https://ig.me/m/neuriaxx" 
                   className="w-full text-center px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
                 >
                   Hablar con un experto
