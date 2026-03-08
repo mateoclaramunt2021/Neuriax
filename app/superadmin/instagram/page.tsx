@@ -3,6 +3,38 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 
 /* ─── Types ─── */
+interface ColdLead {
+  id: number;
+  instagram_user_id: string;
+  username: string;
+  full_name: string | null;
+  sector: string;
+  bio: string | null;
+  followers_count: number;
+  source_hashtag: string;
+  status: string;
+  first_dm_sent_at: string | null;
+  first_dm_message: string | null;
+  followup_sent_at: string | null;
+  followup_message: string | null;
+  responded: boolean;
+  responded_at: string | null;
+  converted: boolean;
+  blacklisted: boolean;
+  notes: string | null;
+  created_at: string;
+  updated_at: string;
+}
+interface ColdStats {
+  total: number;
+  new: number;
+  contacted: number;
+  responded: number;
+  noResponse: number;
+  converted: number;
+  responseRate: number;
+  sectors: Record<string, number>;
+}
 interface Conversation {
   senderId: string;
   name: string;
@@ -33,6 +65,8 @@ interface InstagramConfig {
   welcome_dm_enabled: boolean;
   welcome_message: string;
   token_expires_at?: string;
+  cold_outreach_enabled?: boolean;
+  cold_dm_daily_limit?: number;
 }
 interface Stats {
   totalConversations: number;
@@ -108,14 +142,18 @@ export default function InstagramPage() {
   const [connected, setConnected] = useState(false);
   const [selectedSender, setSelectedSender] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
-  const [tab, setTab] = useState<'inbox' | 'pipeline' | 'settings'>('inbox');
+  const [tab, setTab] = useState<'inbox' | 'pipeline' | 'prospecting' | 'settings'>('inbox');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [sending, setSending] = useState(false);
   const [filterLabel, setFilterLabel] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [settingsTab, setSettingsTab] = useState<'bot' | 'welcome' | 'quick'>('bot');
+  const [settingsTab, setSettingsTab] = useState<'bot' | 'welcome' | 'quick' | 'outreach'>('bot');
   const [toast, setToast] = useState<string | null>(null);
+  const [coldLeads, setColdLeads] = useState<ColdLead[]>([]);
+  const [coldStats, setColdStats] = useState<ColdStats | null>(null);
+  const [coldFilter, setColdFilter] = useState<string>('all');
+  const [coldSectorFilter, setColdSectorFilter] = useState<string>('all');
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -123,6 +161,21 @@ export default function InstagramPage() {
 
   /* — Show toast — */
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
+
+  /* — Fetch cold leads — */
+  const fetchColdLeads = useCallback(async () => {
+    try {
+      const params = new URLSearchParams({ section: 'cold_leads' });
+      if (coldFilter !== 'all') params.set('status', coldFilter);
+      if (coldSectorFilter !== 'all') params.set('sector', coldSectorFilter);
+      const res = await fetch(`/api/superadmin/instagram?${params}`);
+      if (res.ok) {
+        const data = await res.json();
+        setColdLeads(data.coldLeads || []);
+        setColdStats(data.coldStats || null);
+      }
+    } catch (err) { console.error('Cold leads fetch error:', err); }
+  }, [coldFilter, coldSectorFilter]);
 
   /* — Data fetching — */
   const fetchData = useCallback(async () => {
@@ -147,14 +200,15 @@ export default function InstagramPage() {
     } catch (err) { console.error('Error:', err); }
   }, []);
 
-  useEffect(() => { fetchData(); }, [fetchData]);
+  useEffect(() => { fetchData(); fetchColdLeads(); }, [fetchData, fetchColdLeads]);
   useEffect(() => {
     const interval = setInterval(() => {
       fetchData();
+      fetchColdLeads();
       if (selectedSenderRef.current) fetchConversation(selectedSenderRef.current);
-    }, 5000);
+    }, 8000);
     return () => clearInterval(interval);
-  }, [fetchData, fetchConversation]);
+  }, [fetchData, fetchConversation, fetchColdLeads]);
   useEffect(() => { if (selectedSender) fetchConversation(selectedSender); }, [selectedSender, fetchConversation]);
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
@@ -195,6 +249,30 @@ export default function InstagramPage() {
       if (res.ok) showToast('Configuración guardada');
     } catch (err) { console.error('Error:', err); }
     finally { setSaving(false); }
+  };
+
+  /* — Cold lead actions — */
+  const handleBlacklistLead = async (leadId: number) => {
+    await fetch('/api/superadmin/instagram', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'blacklist_lead', leadId }),
+    });
+    setColdLeads(prev => prev.filter(l => l.id !== leadId));
+    showToast('Lead bloqueado');
+  };
+
+  const handleConvertLead = async (leadId: number) => {
+    await fetch('/api/superadmin/instagram', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'convert_lead', leadId }),
+    });
+    setColdLeads(prev => prev.map(l => l.id === leadId ? { ...l, converted: true, status: 'converted' } : l));
+    showToast('Lead convertido 🎉');
+  };
+
+  const handleSendDMToLead = async (leadId: number, username: string) => {
+    setSelectedSender(username);
+    setTab('inbox');
   };
 
   /* — Filters — */
@@ -255,6 +333,7 @@ export default function InstagramPage() {
               {([
                 { id: 'inbox' as const, label: 'Inbox', count: stats?.unreadTotal },
                 { id: 'pipeline' as const, label: 'Pipeline' },
+                { id: 'prospecting' as const, label: 'Prospección', count: coldStats?.new },
                 { id: 'settings' as const, label: 'Settings' },
               ]).map(t => (
                 <button
@@ -294,7 +373,7 @@ export default function InstagramPage() {
 
           {/* Mobile tabs */}
           <nav className="md:hidden flex items-center gap-1 mt-3 bg-white/[0.04] rounded-xl p-1">
-            {(['inbox', 'pipeline', 'settings'] as const).map(t => (
+            {(['inbox', 'pipeline', 'prospecting', 'settings'] as const).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -302,7 +381,7 @@ export default function InstagramPage() {
                   tab === t ? 'bg-white/[0.08] text-white' : 'text-slate-500'
                 }`}
               >
-                {t === 'inbox' ? '📥 Inbox' : t === 'pipeline' ? '📊 Pipeline' : '⚙️ Settings'}
+                {t === 'inbox' ? '📥 Inbox' : t === 'pipeline' ? '📊 Pipeline' : t === 'prospecting' ? '🎯 Prospección' : '⚙️ Settings'}
               </button>
             ))}
           </nav>
@@ -611,6 +690,202 @@ export default function InstagramPage() {
           </div>
         )}
 
+        {/* ═══════════════════ PROSPECTING TAB ═══════════════════ */}
+        {tab === 'prospecting' && (
+          <div className="space-y-6">
+            {/* Header */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="text-lg font-semibold">Captación en Frío</h2>
+                <p className="text-xs text-slate-500 mt-0.5">Leads descubiertos por hashtags · AI Setter automático</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className={`px-3 py-1.5 rounded-lg text-xs font-medium ring-1 ${
+                  config?.cold_outreach_enabled !== false
+                    ? 'bg-emerald-500/10 text-emerald-300 ring-emerald-500/20'
+                    : 'bg-red-500/10 text-red-300 ring-red-500/20'
+                }`}>
+                  {config?.cold_outreach_enabled !== false ? '🟢 Activo' : '🔴 Pausado'}
+                </span>
+              </div>
+            </div>
+
+            {/* Cold Stats */}
+            {coldStats && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                <StatCard value={coldStats.total} label="Total Leads" accent="text-white" />
+                <StatCard value={coldStats.new} label="Nuevos" accent="text-cyan-400" />
+                <StatCard value={coldStats.contacted} label="Contactados" accent="text-amber-400" />
+                <StatCard value={coldStats.responded} label="Respondieron" accent="text-emerald-400" />
+                <StatCard value={coldStats.noResponse} label="Sin respuesta" accent="text-slate-400" />
+                <StatCard value={coldStats.converted} label="Convertidos" accent="text-fuchsia-400" />
+                <StatCard value={`${coldStats.responseRate}%`} label="Tasa respuesta" accent="text-violet-400" />
+              </div>
+            )}
+
+            {/* Sector breakdown */}
+            {coldStats && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {[
+                  { key: 'restaurante', icon: '🍽️', label: 'Restaurantes', color: 'text-orange-400' },
+                  { key: 'clinica_estetica', icon: '💆', label: 'Clínicas Estética', color: 'text-pink-400' },
+                  { key: 'barberia', icon: '💈', label: 'Barberías', color: 'text-blue-400' },
+                  { key: 'clinica_salud', icon: '🏥', label: 'Clínicas Salud', color: 'text-emerald-400' },
+                ].map(s => (
+                  <button
+                    key={s.key}
+                    onClick={() => setColdSectorFilter(coldSectorFilter === s.key ? 'all' : s.key)}
+                    className={`bg-[#1a1a2e]/80 backdrop-blur-sm rounded-2xl border p-4 transition-all text-left ${
+                      coldSectorFilter === s.key ? 'border-fuchsia-500/40 bg-fuchsia-500/5' : 'border-white/[0.06] hover:border-white/[0.12]'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-lg">{s.icon}</span>
+                      <span className={`text-xl font-semibold ${s.color}`}>{coldStats.sectors[s.key] || 0}</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500">{s.label}</p>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Filters */}
+            <div className="flex gap-2 flex-wrap">
+              {[
+                { value: 'all', label: 'Todos' },
+                { value: 'new', label: '🆕 Nuevos' },
+                { value: 'contacted', label: '📤 Contactados' },
+                { value: 'responded', label: '💬 Respondieron' },
+                { value: 'no_response', label: '😶 Sin respuesta' },
+                { value: 'converted', label: '🎉 Convertidos' },
+              ].map(f => (
+                <button
+                  key={f.value}
+                  onClick={() => setColdFilter(f.value)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    coldFilter === f.value ? 'bg-fuchsia-500/20 text-fuchsia-300 ring-1 ring-fuchsia-500/30' : 'bg-white/[0.04] text-slate-500 hover:text-slate-300'
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Leads Table */}
+            <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-white/[0.06]">
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Usuario</th>
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Sector</th>
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Estado</th>
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Primer DM</th>
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Follow-up</th>
+                      <th className="text-left px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Hashtag</th>
+                      <th className="text-right px-4 py-3 text-[11px] text-slate-500 font-medium uppercase tracking-wider">Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/[0.04]">
+                    {coldLeads.length > 0 ? coldLeads.map((lead) => {
+                      const sectorIcons: Record<string, string> = {
+                        restaurante: '🍽️', clinica_estetica: '💆', barberia: '💈', clinica_salud: '🏥', general: '🏢'
+                      };
+                      const statusColors: Record<string, string> = {
+                        new: 'bg-cyan-500/10 text-cyan-300 ring-cyan-500/20',
+                        contacted: 'bg-amber-500/10 text-amber-300 ring-amber-500/20',
+                        responded: 'bg-emerald-500/10 text-emerald-300 ring-emerald-500/20',
+                        no_response: 'bg-slate-500/10 text-slate-400 ring-slate-500/20',
+                        converted: 'bg-fuchsia-500/10 text-fuchsia-300 ring-fuchsia-500/20',
+                        dm_failed: 'bg-red-500/10 text-red-300 ring-red-500/20',
+                        blacklisted: 'bg-red-500/10 text-red-400 ring-red-500/20',
+                      };
+                      const statusLabels: Record<string, string> = {
+                        new: 'Nuevo', contacted: 'Contactado', responded: 'Respondió',
+                        no_response: 'Sin respuesta', converted: 'Convertido',
+                        dm_failed: 'DM falló', blacklisted: 'Bloqueado',
+                      };
+                      return (
+                        <tr key={lead.id} className="hover:bg-white/[0.02] transition-colors group">
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-2.5">
+                              <div className="w-8 h-8 rounded-full bg-white/[0.06] flex items-center justify-center text-xs font-medium text-slate-400">
+                                {(lead.username || '?')[0].toUpperCase()}
+                              </div>
+                              <div>
+                                <p className="text-sm font-medium text-slate-200">@{lead.username || lead.instagram_user_id}</p>
+                                {lead.full_name && <p className="text-[10px] text-slate-600">{lead.full_name}</p>}
+                              </div>
+                            </div>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="text-sm">{sectorIcons[lead.sector] || '🏢'} {lead.sector.replace('_', ' ')}</span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className={`inline-flex px-2 py-0.5 rounded-md text-[11px] font-semibold ring-1 ${statusColors[lead.status] || statusColors.new}`}>
+                              {statusLabels[lead.status] || lead.status}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-500">
+                            {lead.first_dm_sent_at ? timeAgo(lead.first_dm_sent_at) : '—'}
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-500">
+                            {lead.followup_sent_at ? timeAgo(lead.followup_sent_at) : '—'}
+                          </td>
+                          <td className="px-4 py-3 text-xs text-slate-600">
+                            #{lead.source_hashtag}
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="flex items-center justify-end gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                              {lead.responded && !lead.converted && (
+                                <button
+                                  onClick={() => handleConvertLead(lead.id)}
+                                  className="px-2 py-1 bg-emerald-500/10 text-emerald-300 rounded-md text-[10px] font-medium hover:bg-emerald-500/20 transition-all ring-1 ring-emerald-500/20"
+                                  title="Marcar como convertido"
+                                >
+                                  ✓ Convertir
+                                </button>
+                              )}
+                              <button
+                                onClick={() => handleSendDMToLead(lead.id, lead.instagram_user_id)}
+                                className="px-2 py-1 bg-fuchsia-500/10 text-fuchsia-300 rounded-md text-[10px] font-medium hover:bg-fuchsia-500/20 transition-all ring-1 ring-fuchsia-500/20"
+                                title="Abrir conversación"
+                              >
+                                💬 Chat
+                              </button>
+                              {!lead.blacklisted && (
+                                <button
+                                  onClick={() => handleBlacklistLead(lead.id)}
+                                  className="px-2 py-1 bg-red-500/10 text-red-300 rounded-md text-[10px] font-medium hover:bg-red-500/20 transition-all ring-1 ring-red-500/20"
+                                  title="Bloquear lead"
+                                >
+                                  ✕
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    }) : (
+                      <tr>
+                        <td colSpan={7} className="py-16 text-center text-slate-600">
+                          <div className="flex flex-col items-center gap-3">
+                            <div className="w-16 h-16 rounded-2xl bg-white/[0.04] flex items-center justify-center">
+                              <span className="text-3xl">🎯</span>
+                            </div>
+                            <p className="text-sm font-medium">Sin leads fríos todavía</p>
+                            <p className="text-xs text-slate-700">El cron de prospección descubrirá leads automáticamente</p>
+                          </div>
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* ═══════════════════ SETTINGS TAB ═══════════════════ */}
         {tab === 'settings' && config && (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -625,6 +900,7 @@ export default function InstagramPage() {
                     { id: 'bot' as const, label: 'AI Bot & Conexión', icon: '🤖' },
                     { id: 'welcome' as const, label: 'DM de Bienvenida', icon: '👋' },
                     { id: 'quick' as const, label: 'Respuestas Rápidas', icon: '⚡' },
+                    { id: 'outreach' as const, label: 'Captación en Frío', icon: '🎯' },
                   ]).map(s => (
                     <button
                       key={s.id}
@@ -886,6 +1162,74 @@ export default function InstagramPage() {
                           + Añadir respuesta rápida
                         </button>
                       </form>
+                    </div>
+                  </>
+                )}
+
+                {/* ── Outreach Settings ── */}
+                {settingsTab === 'outreach' && (
+                  <>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">Captación en Frío</h3>
+                      <p className="text-sm text-slate-500">El bot descubre leads por hashtags y les envía DMs automáticos</p>
+                    </div>
+
+                    <Toggle
+                      on={config.cold_outreach_enabled !== false}
+                      onChange={async (v) => {
+                        await fetch('/api/superadmin/instagram', {
+                          method: 'PUT', headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ action: 'toggle_cold_outreach', enabled: v }),
+                        });
+                        setConfig({ ...config, cold_outreach_enabled: v } as InstagramConfig);
+                        showToast(v ? 'Captación activada' : 'Captación pausada');
+                      }}
+                      label="Activar captación automática"
+                    />
+
+                    {/* How it works */}
+                    <div className="bg-violet-500/5 rounded-xl p-4 ring-1 ring-violet-500/20 space-y-3">
+                      <h4 className="font-medium text-violet-300 text-sm">¿Cómo funciona?</h4>
+                      <ul className="text-xs text-violet-300/60 space-y-2">
+                        <li className="flex items-start gap-2"><span className="text-violet-400 mt-0.5">1.</span> <strong className="text-violet-300/80">Descubrimiento</strong> — Cron diario busca cuentas de negocios por hashtags (#restaurantemadrid, #barberiamadrid, etc.)</li>
+                        <li className="flex items-start gap-2"><span className="text-violet-400 mt-0.5">2.</span> <strong className="text-violet-300/80">Primer DM</strong> — Envía 5-8 DMs/día, personalizados por sector, sonando 100% humano</li>
+                        <li className="flex items-start gap-2"><span className="text-violet-400 mt-0.5">3.</span> <strong className="text-violet-300/80">Follow-up</strong> — Si no responden en 48h, envía 1 follow-up suave (máximo)</li>
+                        <li className="flex items-start gap-2"><span className="text-violet-400 mt-0.5">4.</span> <strong className="text-violet-300/80">Conversación</strong> — Si responden, el AI Setter toma la conversación y los lleva al formulario</li>
+                        <li className="flex items-start gap-2"><span className="text-violet-400 mt-0.5">5.</span> <strong className="text-violet-300/80">Descarte</strong> — Si no responden al follow-up, se marca como "sin respuesta" y no se insiste</li>
+                      </ul>
+                    </div>
+
+                    {/* Sectors */}
+                    <div className="bg-white/[0.02] rounded-xl p-4 ring-1 ring-white/[0.06]">
+                      <h4 className="font-medium text-slate-300 text-sm mb-3">Sectores objetivo</h4>
+                      <div className="grid grid-cols-2 gap-2">
+                        {[
+                          { icon: '🍽️', label: 'Restaurantes', desc: '#restaurantemadrid, #gastronomia...' },
+                          { icon: '💆', label: 'Clínicas Estética', desc: '#clinicaestetica, #medicinaestetica...' },
+                          { icon: '💈', label: 'Barberías', desc: '#barberiamadrid, #barbershop...' },
+                          { icon: '🏥', label: 'Clínicas Salud', desc: '#fisioterapia, #clinicadental...' },
+                        ].map(s => (
+                          <div key={s.label} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] ring-1 ring-white/[0.06]">
+                            <span className="text-xl">{s.icon}</span>
+                            <div>
+                              <p className="text-xs font-medium text-slate-300">{s.label}</p>
+                              <p className="text-[10px] text-slate-600">{s.desc}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Safety limits */}
+                    <div className="bg-amber-500/5 rounded-xl p-4 ring-1 ring-amber-500/20">
+                      <h4 className="font-medium text-amber-300 text-sm mb-2">⚠️ Límites de seguridad</h4>
+                      <ul className="text-xs text-amber-300/60 space-y-1.5">
+                        <li>→ Máximo 8 DMs fríos por día</li>
+                        <li>→ Máximo 1 follow-up por lead</li>
+                        <li>→ Delays aleatorios entre envíos (3-7 seg)</li>
+                        <li>→ Leads bloqueados nunca son re-contactados</li>
+                        <li>→ Si no responden al follow-up, se descartan</li>
+                      </ul>
                     </div>
                   </>
                 )}

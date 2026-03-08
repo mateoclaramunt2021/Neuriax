@@ -416,6 +416,41 @@ export async function POST(request: NextRequest) {
             .is('sender_name', null);
         }
 
+        // ─── Check if this sender is a cold lead who responded ───
+        try {
+          const { data: coldLead } = await supabase
+            .from('instagram_cold_leads')
+            .select('id, status, sector')
+            .eq('instagram_user_id', senderId)
+            .in('status', ['contacted', 'dm_failed'])
+            .single();
+
+          if (coldLead) {
+            // Cold lead responded! Update status
+            await supabase
+              .from('instagram_cold_leads')
+              .update({
+                status: 'responded',
+                responded: true,
+                responded_at: new Date().toISOString(),
+                updated_at: new Date().toISOString(),
+              })
+              .eq('id', coldLead.id);
+
+            // Update label to interesado
+            await supabase
+              .from('instagram_followers')
+              .upsert({
+                instagram_user_id: senderId,
+                label: 'interesado',
+              }, { onConflict: 'instagram_user_id' });
+
+            console.log(`Cold lead ${senderId} responded! Sector: ${coldLead.sector}`);
+          }
+        } catch {
+          // Table might not exist yet, skip silently
+        }
+
         // Check if bot is enabled
         const { data: config } = await supabase
           .from('instagram_config')

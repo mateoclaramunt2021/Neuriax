@@ -75,6 +75,53 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ logs: logs || [] });
     }
 
+    // ─── Cold leads / Prospecting section ───
+    if (section === 'cold_leads') {
+      const status = searchParams.get('status') || 'all';
+      const sector = searchParams.get('sector') || 'all';
+
+      let query = supabase
+        .from('instagram_cold_leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(200);
+
+      if (status !== 'all') query = query.eq('status', status);
+      if (sector !== 'all') query = query.eq('sector', sector);
+
+      const { data: coldLeads, error: coldError } = await query;
+
+      // Stats
+      const { count: totalLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true });
+      const { count: newLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('status', 'new');
+      const { count: contactedLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('status', 'contacted');
+      const { count: respondedLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('responded', true);
+      const { count: noResponseLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('status', 'no_response');
+      const { count: convertedLeads } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('converted', true);
+
+      // Sector breakdown
+      const sectorCounts: Record<string, number> = {};
+      for (const s of ['restaurante', 'clinica_estetica', 'barberia', 'clinica_salud']) {
+        const { count } = await supabase.from('instagram_cold_leads').select('id', { count: 'exact', head: true }).eq('sector', s);
+        sectorCounts[s] = count || 0;
+      }
+
+      return NextResponse.json({
+        coldLeads: coldLeads || [],
+        coldLeadsError: coldError?.message || null,
+        coldStats: {
+          total: totalLeads || 0,
+          new: newLeads || 0,
+          contacted: contactedLeads || 0,
+          responded: respondedLeads || 0,
+          noResponse: noResponseLeads || 0,
+          converted: convertedLeads || 0,
+          responseRate: (contactedLeads || 0) > 0 ? Math.round(((respondedLeads || 0) / (contactedLeads || 0)) * 100) : 0,
+          sectors: sectorCounts,
+        },
+      });
+    }
+
     if (senderId) {
       // Get conversation with specific sender
       const { data: messages } = await supabase
@@ -227,6 +274,53 @@ export async function PUT(request: NextRequest) {
           instagram_user_id: body.senderId,
           label: body.label,
         }, { onConflict: 'instagram_user_id' });
+      return NextResponse.json({ success: true });
+    }
+
+    // ─── Cold lead actions ───
+    if (body.action === 'blacklist_lead') {
+      await supabase
+        .from('instagram_cold_leads')
+        .update({ blacklisted: true, status: 'blacklisted', updated_at: new Date().toISOString() })
+        .eq('id', body.leadId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === 'convert_lead') {
+      await supabase
+        .from('instagram_cold_leads')
+        .update({ converted: true, status: 'converted', updated_at: new Date().toISOString() })
+        .eq('id', body.leadId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === 'update_lead_status') {
+      await supabase
+        .from('instagram_cold_leads')
+        .update({ status: body.status, updated_at: new Date().toISOString() })
+        .eq('id', body.leadId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === 'update_lead_notes') {
+      await supabase
+        .from('instagram_cold_leads')
+        .update({ notes: body.notes, updated_at: new Date().toISOString() })
+        .eq('id', body.leadId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === 'toggle_cold_outreach') {
+      const { data: existing } = await supabase
+        .from('instagram_config')
+        .select('id')
+        .single();
+      if (existing) {
+        await supabase
+          .from('instagram_config')
+          .update({ cold_outreach_enabled: body.enabled, updated_at: new Date().toISOString() })
+          .eq('id', existing.id);
+      }
       return NextResponse.json({ success: true });
     }
 
