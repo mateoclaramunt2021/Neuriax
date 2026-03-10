@@ -598,10 +598,43 @@ async function getAIResponse(
     systemPrompt += '\n\n' + conversationCtx.contextBlock;
   }
 
-  // First message special handling (only if we haven't greeted today)
+  // Build messages array for the AI
+  const messages: Array<{role: string; content: string}> = [
+    { role: 'system', content: systemPrompt },
+    ...history.slice(-14),
+  ];
+
+  // First message: inject a SEPARATE system reminder right before user message
+  // (LLMs pay most attention to the last system message before user input)
   if (isFirstMessage && !conversationCtx?.alreadyGreetedToday) {
-    systemPrompt += '\n\n═══ PRIMER MENSAJE ═══\nEste es su PRIMER mensaje contigo. PRIMERO devuelve el saludo de forma cálida y natural (ej: "ey! qué tal? 👋"). DESPUÉS, en el mismo mensaje o a continuación, pregúntale de forma casual a qué se dedica. Máximo 2 líneas. Sé cercano, no formal.';
+    messages.push({
+      role: 'system',
+      content: `⚠️ INSTRUCCIÓN CRÍTICA — PRIMER CONTACTO ⚠️
+Esta persona te escribe POR PRIMERA VEZ. Es vuestra primera interacción NUNCA.
+
+Tu respuesta DEBE:
+1. EMPEZAR con un saludo cálido y natural ("ey! qué tal? 👋" o "buenas! 😊" o "hola! qué tal?")
+2. Después del saludo, hacer UNA pregunta casual sobre a qué se dedica
+3. Máximo 2 líneas, tono cercano
+
+Ejemplo perfecto: "ey! qué tal? 👋 a qué te dedicas? vi tu perfil y me llamó la atención"
+Otro ejemplo: "buenas! 😊 encantado, a qué os dedicáis?"
+
+NUNCA respondas sin saludar primero. SIEMPRE sé educado y cálido.`
+    });
+  } else if (!isFirstMessage) {
+    // Ongoing conversation: remind to greet back if they greet
+    const userLower = userMessage.toLowerCase().trim();
+    const isGreeting = /^(hola|buenas|hey|ey|qué tal|que tal|hi|hello|buenos días|buenas tardes|buenas noches|holi|saludos|👋)/.test(userLower);
+    if (isGreeting) {
+      messages.push({
+        role: 'system',
+        content: '⚠️ El usuario te está saludando. Sé EDUCADO: devuelve el saludo de forma cálida antes de cualquier otra cosa. No saltes directamente a preguntas de negocio.'
+      });
+    }
   }
+
+  messages.push({ role: 'user', content: userMessage });
 
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -612,11 +645,7 @@ async function getAIResponse(
       },
       body: JSON.stringify({
         model: 'llama-3.3-70b-versatile',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          ...history.slice(-14), // More context for better coherence
-          { role: 'user', content: userMessage },
-        ],
+        messages,
         max_tokens: 200,
         temperature: 0.8,
       }),
