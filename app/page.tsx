@@ -1,21 +1,21 @@
-import { Metadata } from "next";
+﻿import { Metadata } from "next";
 import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
 
 export const metadata: Metadata = {
-  title: "Neuriax | Agencia de IA en España · Agentes IA & Automatización 24/7",
+  title: "Neuriax | Agencia de IA en EspaÃ±a Â· Agentes IA & AutomatizaciÃ³n 24/7",
   description:
-    "Agencia de inteligencia artificial líder en España. Agentes de IA conversacional que atienden a tus clientes 24/7 por WhatsApp, voz y web. Implementación en 5 días. +50 empresas confían en Neuriax. Consultoría gratuita.",
+    "Agencia de inteligencia artificial lÃ­der en EspaÃ±a. Agentes de IA conversacional que atienden a tus clientes 24/7 por WhatsApp, voz y web. ImplementaciÃ³n en 5 dÃ­as. +50 empresas confÃ­an en Neuriax. ConsultorÃ­a gratuita.",
   keywords:
-    "agencia de IA, agencias de IA, agencia inteligencia artificial, mejor agencia IA España, agente IA, atención al cliente IA, chatbot personalizado, agente conversacional, automatización IA, agentes de voz IA, empresa IA España, consultoría IA, implementar IA empresa, chatbot IA empresas",
+    "agencia de IA, agencias de IA, agencia inteligencia artificial, mejor agencia IA EspaÃ±a, agente IA, atenciÃ³n al cliente IA, chatbot personalizado, agente conversacional, automatizaciÃ³n IA, agentes de voz IA, empresa IA EspaÃ±a, consultorÃ­a IA, implementar IA empresa, chatbot IA empresas",
   alternates: {
     canonical: 'https://www.neuriax.com',
   },
 };
 
-/* ─────────────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    INTEGRATIONS DATA
-   ───────────────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const INTEGRATIONS = [
   "WhatsApp Business", "Google Calendar", "Google Maps", "Google Reviews",
   "Instagram", "Stripe", "Bizum", "Redsys", "Make", "Zapier",
@@ -24,39 +24,39 @@ const INTEGRATIONS = [
   "n8n", "OpenAI", "ElevenLabs", "Vapi", "REST API", "Webhook",
 ];
 
-/* ─────────────────────────────────────────────────────
-   DASHBOARD DEMO DATA — Multi-channel Command Center
-   ───────────────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   DASHBOARD DEMO DATA â€” Multi-channel Command Center
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 const DEMO_CONVERSATIONS = [
-  { time: "09:12", name: "Laura Fernández", channel: "instagram", preview: "Hola! Vi vuestro post sobre...", status: "resolved", sentiment: "positive" },
+  { time: "09:12", name: "Laura FernÃ¡ndez", channel: "instagram", preview: "Hola! Vi vuestro post sobre...", status: "resolved", sentiment: "positive" },
   { time: "09:34", name: "Carlos Ruiz", channel: "whatsapp", preview: "Necesito info sobre el plan Pro", status: "resolved", sentiment: "positive" },
-  { time: "10:01", name: "Ana Martínez", channel: "email", preview: "Solicitud de presupuesto para...", status: "active", sentiment: "neutral" },
-  { time: "10:15", name: "Pedro López", channel: "web", preview: "¿Cómo funciona la integración?", status: "resolved", sentiment: "positive" },
-  { time: "10:42", name: "Sofía García", channel: "voice", preview: "Llamada entrante - Consulta comercial", status: "resolved", sentiment: "positive" },
-  { time: "11:03", name: "Roberto Díaz", channel: "instagram", preview: "Me interesa el servicio de IA para...", status: "resolved", sentiment: "positive" },
-  { time: "11:28", name: "Elena Torres", channel: "whatsapp", preview: "¿Tenéis disponibilidad esta semana?", status: "active", sentiment: "neutral" },
-  { time: "11:45", name: "Javier Moreno", channel: "web", preview: "Quiero automatizar mi atención al...", status: "pending", sentiment: "positive" },
-  { time: "12:10", name: "María Sánchez", channel: "email", preview: "Seguimiento propuesta comercial", status: "resolved", sentiment: "positive" },
-  { time: "12:33", name: "Diego Ramírez", channel: "voice", preview: "Llamada - Demo del producto", status: "resolved", sentiment: "positive" },
+  { time: "10:01", name: "Ana MartÃ­nez", channel: "email", preview: "Solicitud de presupuesto para...", status: "active", sentiment: "neutral" },
+  { time: "10:15", name: "Pedro LÃ³pez", channel: "web", preview: "Â¿CÃ³mo funciona la integraciÃ³n?", status: "resolved", sentiment: "positive" },
+  { time: "10:42", name: "SofÃ­a GarcÃ­a", channel: "voice", preview: "Llamada entrante - Consulta comercial", status: "resolved", sentiment: "positive" },
+  { time: "11:03", name: "Roberto DÃ­az", channel: "instagram", preview: "Me interesa el servicio de IA para...", status: "resolved", sentiment: "positive" },
+  { time: "11:28", name: "Elena Torres", channel: "whatsapp", preview: "Â¿TenÃ©is disponibilidad esta semana?", status: "active", sentiment: "neutral" },
+  { time: "11:45", name: "Javier Moreno", channel: "web", preview: "Quiero automatizar mi atenciÃ³n al...", status: "pending", sentiment: "positive" },
+  { time: "12:10", name: "MarÃ­a SÃ¡nchez", channel: "email", preview: "Seguimiento propuesta comercial", status: "resolved", sentiment: "positive" },
+  { time: "12:33", name: "Diego RamÃ­rez", channel: "voice", preview: "Llamada - Demo del producto", status: "resolved", sentiment: "positive" },
 ];
 
 const DEMO_CHANNEL_STATS = {
-  instagram: { conversations: 847, resolved: 812, avgTime: "0.8s", satisfaction: 4.9, color: "from-pink-500 to-purple-500", icon: "📸", trend: "+24%" },
-  whatsapp: { conversations: 1243, resolved: 1198, avgTime: "1.1s", satisfaction: 4.8, color: "from-emerald-500 to-green-500", icon: "💬", trend: "+18%" },
-  email: { conversations: 562, resolved: 541, avgTime: "2.3s", satisfaction: 4.7, color: "from-blue-500 to-cyan-500", icon: "📧", trend: "+12%" },
-  web: { conversations: 934, resolved: 912, avgTime: "0.6s", satisfaction: 4.9, color: "from-violet-500 to-indigo-500", icon: "🌐", trend: "+31%" },
-  voice: { conversations: 389, resolved: 371, avgTime: "3.2s", satisfaction: 4.8, color: "from-amber-500 to-orange-500", icon: "📞", trend: "+15%" },
+  instagram: { conversations: 847, resolved: 812, avgTime: "0.8s", satisfaction: 4.9, color: "from-pink-500 to-purple-500", icon: "ðŸ“¸", trend: "+24%" },
+  whatsapp: { conversations: 1243, resolved: 1198, avgTime: "1.1s", satisfaction: 4.8, color: "from-emerald-500 to-green-500", icon: "ðŸ’¬", trend: "+18%" },
+  email: { conversations: 562, resolved: 541, avgTime: "2.3s", satisfaction: 4.7, color: "from-blue-500 to-cyan-500", icon: "ðŸ“§", trend: "+12%" },
+  web: { conversations: 934, resolved: 912, avgTime: "0.6s", satisfaction: 4.9, color: "from-violet-500 to-indigo-500", icon: "ðŸŒ", trend: "+31%" },
+  voice: { conversations: 389, resolved: 371, avgTime: "3.2s", satisfaction: 4.8, color: "from-amber-500 to-orange-500", icon: "ðŸ“ž", trend: "+15%" },
 };
 
-/* ───────────────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F1F5F9] text-slate-900 overflow-x-hidden">
 
-      {/* ════════════════════════════════════════════════
-          HERO — Formulario + Mensaje de conversión
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          HERO â€” Formulario + Mensaje de conversiÃ³n
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="contacto" className="relative min-h-[100svh] flex items-center px-4 overflow-hidden">
         {/* Animated aurora BG */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
@@ -67,7 +67,7 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto w-full py-20 sm:py-28 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
-            {/* LEFT COLUMN — Conversion message */}
+            {/* LEFT COLUMN â€” Conversion message */}
             <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
               {/* Badge */}
               <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-4 py-2 mb-6 backdrop-blur-md">
@@ -76,7 +76,7 @@ export default function Home() {
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
                 <span className="text-[12px] sm:text-[13px] text-violet-700 font-semibold">
-                  Implementación en 5 días
+                  ImplementaciÃ³n en 5 dÃ­as
                 </span>
               </div>
 
@@ -95,7 +95,7 @@ export default function Home() {
               {/* Subtitle */}
               <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
                 Agentes de IA que atienden, convierten y escalan.{" "}
-                <span className="text-slate-900 font-semibold">Más clientes, menos trabajo manual.</span>
+                <span className="text-slate-900 font-semibold">MÃ¡s clientes, menos trabajo manual.</span>
               </p>
 
               {/* Value bullets */}
@@ -107,7 +107,7 @@ export default function Home() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
                     ),
-                    title: "Respuesta instantánea",
+                    title: "Respuesta instantÃ¡nea",
                     desc: "Tu agente IA responde en menos de 2 segundos, 24/7",
                   },
                   {
@@ -117,7 +117,7 @@ export default function Home() {
                       </svg>
                     ),
                     title: "Multi-canal integrado",
-                    desc: "WhatsApp, web chat, voz y más en un solo panel",
+                    desc: "WhatsApp, web chat, voz y mÃ¡s en un solo panel",
                   },
                   {
                     icon: (
@@ -126,7 +126,7 @@ export default function Home() {
                       </svg>
                     ),
                     title: "ROI desde el primer mes",
-                    desc: "Reduce costes de atención hasta un 70%",
+                    desc: "Reduce costes de atenciÃ³n hasta un 70%",
                   },
                 ].map((item) => (
                   <div key={item.title} className="flex items-start gap-3 text-left">
@@ -173,7 +173,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN — Contact Form */}
+            {/* RIGHT COLUMN â€” Contact Form */}
             <div className="w-full max-w-lg mx-auto lg:mx-0 lg:ml-auto">
               <div className="relative">
                 <div className="absolute -inset-3 sm:-inset-4 bg-violet-500/[0.06] rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl" />
@@ -187,9 +187,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SOCIAL PROOF BAR
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-12 px-4 bg-white border-t border-b border-slate-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-3 md:grid-cols-6 gap-6 md:gap-8 text-center items-end">
@@ -210,9 +210,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          COMMAND CENTER — Multi-Channel Professional Dashboard
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          COMMAND CENTER â€” Multi-Channel Professional Dashboard
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="dashboard" className="py-16 sm:py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
@@ -222,7 +222,7 @@ export default function Home() {
                 Un solo panel. Todos tus canales.
               </h2>
               <p className="text-base sm:text-lg text-slate-500 max-w-2xl mx-auto">
-                Instagram, WhatsApp, Email, Web y Voz — todo controlado por IA desde un único command center en tiempo real.
+                Instagram, WhatsApp, Email, Web y Voz â€” todo controlado por IA desde un Ãºnico command center en tiempo real.
               </p>
             </div>
           </ScrollReveal>
@@ -250,7 +250,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex">
-                  {/* Sidebar — hidden on mobile */}
+                  {/* Sidebar â€” hidden on mobile */}
                   <div className="hidden md:flex flex-col w-48 lg:w-56 border-r border-white/[0.06] bg-[#0b0f14] p-3 lg:p-4 min-h-[680px]">
                     <div className="flex items-center gap-2 mb-5">
                       <div className="w-8 h-8 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-lg flex items-center justify-center text-[10px] font-bold text-white shadow-lg shadow-violet-500/20">N</div>
@@ -275,11 +275,11 @@ export default function Home() {
 
                     <span className="text-[8px] text-gray-600 uppercase tracking-widest font-semibold mt-4 mb-2 px-3">Canales</span>
                     {[
-                      { emoji: "📸", label: "Instagram", count: "847", color: "text-pink-400" },
-                      { emoji: "💬", label: "WhatsApp", count: "1.2K", color: "text-emerald-400" },
-                      { emoji: "📧", label: "Email", count: "562", color: "text-blue-400" },
-                      { emoji: "🌐", label: "Web Chat", count: "934", color: "text-violet-400" },
-                      { emoji: "📞", label: "Voz IA", count: "389", color: "text-amber-400" },
+                      { emoji: "ðŸ“¸", label: "Instagram", count: "847", color: "text-pink-400" },
+                      { emoji: "ðŸ’¬", label: "WhatsApp", count: "1.2K", color: "text-emerald-400" },
+                      { emoji: "ðŸ“§", label: "Email", count: "562", color: "text-blue-400" },
+                      { emoji: "ðŸŒ", label: "Web Chat", count: "934", color: "text-violet-400" },
+                      { emoji: "ðŸ“ž", label: "Voz IA", count: "389", color: "text-amber-400" },
                     ].map((ch) => (
                       <div key={ch.label} className="flex items-center gap-2.5 px-3 py-1.5 rounded-lg text-[11px] text-gray-500 hover:text-gray-300 hover:bg-white/[0.03] cursor-pointer transition-all">
                         <span className="text-[12px]">{ch.emoji}</span>
@@ -331,12 +331,12 @@ export default function Home() {
                             En vivo
                           </span>
                         </div>
-                        <p className="text-[9px] sm:text-[10px] text-gray-500">Lunes 17 Feb, 2025 · 5 canales · Agente IA v3.2 · Última actividad hace 12s</p>
+                        <p className="text-[9px] sm:text-[10px] text-gray-500">Lunes 17 Feb, 2025 Â· 5 canales Â· Agente IA v3.2 Â· Ãšltima actividad hace 12s</p>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="flex items-center gap-2 bg-slate-800/40 border border-slate-700/30 rounded-lg px-2 sm:px-3 py-1 sm:py-1.5">
                           <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                          <span className="text-[8px] sm:text-[9px] text-gray-500">Buscar conversación...</span>
+                          <span className="text-[8px] sm:text-[9px] text-gray-500">Buscar conversaciÃ³n...</span>
                         </div>
                         <div className="relative">
                           <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
@@ -347,7 +347,7 @@ export default function Home() {
                     </div>
 
                     <div className="p-3 sm:p-4">
-                      {/* ── ROW 1: Channel Status Cards ── */}
+                      {/* â”€â”€ ROW 1: Channel Status Cards â”€â”€ */}
                       <div className="grid grid-cols-2 sm:grid-cols-5 gap-2 mb-4">
                         {(Object.entries(DEMO_CHANNEL_STATS) as [string, typeof DEMO_CHANNEL_STATS.instagram][]).map(([key, ch]) => (
                           <div key={key} className="relative bg-slate-800/30 border border-white/[0.04] rounded-xl p-2.5 sm:p-3 overflow-hidden group hover:border-white/[0.08] transition-all">
@@ -371,13 +371,13 @@ export default function Home() {
                         ))}
                       </div>
 
-                      {/* ── ROW 2: Main KPI Bar ── */}
+                      {/* â”€â”€ ROW 2: Main KPI Bar â”€â”€ */}
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
                         {[
-                          { label: "Total Conversaciones", value: "3,975", sub: "hoy", icon: "💬", change: "+22%", color: "text-violet-400", bg: "bg-violet-500/[0.08]" },
-                          { label: "Auto-resueltas", value: "3,834", sub: "97.2%", icon: "✓", change: "+3.1%", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]" },
-                          { label: "Leads Generados", value: "127", sub: "32 calificados", icon: "◆", change: "+41%", color: "text-pink-400", bg: "bg-pink-500/[0.08]" },
-                          { label: "Satisfacción", value: "4.87", sub: "de 5.0", icon: "★", change: "+0.3", color: "text-amber-400", bg: "bg-amber-500/[0.08]" },
+                          { label: "Total Conversaciones", value: "3,975", sub: "hoy", icon: "ðŸ’¬", change: "+22%", color: "text-violet-400", bg: "bg-violet-500/[0.08]" },
+                          { label: "Auto-resueltas", value: "3,834", sub: "97.2%", icon: "âœ“", change: "+3.1%", color: "text-emerald-400", bg: "bg-emerald-500/[0.08]" },
+                          { label: "Leads Generados", value: "127", sub: "32 calificados", icon: "â—†", change: "+41%", color: "text-pink-400", bg: "bg-pink-500/[0.08]" },
+                          { label: "SatisfacciÃ³n", value: "4.87", sub: "de 5.0", icon: "â˜…", change: "+0.3", color: "text-amber-400", bg: "bg-amber-500/[0.08]" },
                         ].map((kpi) => (
                           <div key={kpi.label} className={`${kpi.bg} border border-white/[0.04] rounded-xl p-2.5 sm:p-3`}>
                             <div className="flex items-center justify-between mb-1">
@@ -387,13 +387,13 @@ export default function Home() {
                             <div className={`text-xl sm:text-2xl font-bold ${kpi.color}`}>{kpi.value}</div>
                             <div className="flex items-center justify-between mt-0.5">
                               <span className="text-[8px] text-gray-500">{kpi.sub}</span>
-                              <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{kpi.change} ↑</span>
+                              <span className="text-[8px] sm:text-[9px] text-emerald-400 font-semibold">{kpi.change} â†‘</span>
                             </div>
                           </div>
                         ))}
                       </div>
 
-                      {/* ── ROW 3: Main content grid ── */}
+                      {/* â”€â”€ ROW 3: Main content grid â”€â”€ */}
                       <div className="flex flex-col lg:flex-row gap-3">
                         {/* LEFT: Unified Inbox */}
                         <div className="flex-1 min-w-0">
@@ -401,11 +401,11 @@ export default function Home() {
                           <div className="flex items-center gap-1.5 mb-3 overflow-x-auto">
                             {[
                               { label: "Todos", count: "23", active: true },
-                              { label: "📸 Instagram", count: "7", active: false },
-                              { label: "💬 WhatsApp", count: "5", active: false },
-                              { label: "📧 Email", count: "4", active: false },
-                              { label: "🌐 Web", count: "4", active: false },
-                              { label: "📞 Voz", count: "3", active: false },
+                              { label: "ðŸ“¸ Instagram", count: "7", active: false },
+                              { label: "ðŸ’¬ WhatsApp", count: "5", active: false },
+                              { label: "ðŸ“§ Email", count: "4", active: false },
+                              { label: "ðŸŒ Web", count: "4", active: false },
+                              { label: "ðŸ“ž Voz", count: "3", active: false },
                             ].map((tab) => (
                               <span key={tab.label} className={`whitespace-nowrap text-[8px] sm:text-[9px] px-2 sm:px-2.5 py-1 rounded-lg cursor-pointer transition-all font-medium ${
                                 tab.active
@@ -421,11 +421,11 @@ export default function Home() {
                           <div className="space-y-1">
                             {DEMO_CONVERSATIONS.map((conv, i) => {
                               const channelConfig: Record<string, { emoji: string; label: string; bgClass: string; textClass: string }> = {
-                                instagram: { emoji: "📸", label: "Instagram", bgClass: "bg-pink-500/10", textClass: "text-pink-400" },
-                                whatsapp: { emoji: "💬", label: "WhatsApp", bgClass: "bg-emerald-500/10", textClass: "text-emerald-400" },
-                                email: { emoji: "📧", label: "Email", bgClass: "bg-blue-500/10", textClass: "text-blue-400" },
-                                web: { emoji: "🌐", label: "Web", bgClass: "bg-violet-500/10", textClass: "text-violet-400" },
-                                voice: { emoji: "📞", label: "Voz", bgClass: "bg-amber-500/10", textClass: "text-amber-400" },
+                                instagram: { emoji: "ðŸ“¸", label: "Instagram", bgClass: "bg-pink-500/10", textClass: "text-pink-400" },
+                                whatsapp: { emoji: "ðŸ’¬", label: "WhatsApp", bgClass: "bg-emerald-500/10", textClass: "text-emerald-400" },
+                                email: { emoji: "ðŸ“§", label: "Email", bgClass: "bg-blue-500/10", textClass: "text-blue-400" },
+                                web: { emoji: "ðŸŒ", label: "Web", bgClass: "bg-violet-500/10", textClass: "text-violet-400" },
+                                voice: { emoji: "ðŸ“ž", label: "Voz", bgClass: "bg-amber-500/10", textClass: "text-amber-400" },
                               };
                               const cc = channelConfig[conv.channel];
                               const avatarColors = ["bg-pink-500/20 text-pink-300", "bg-emerald-500/20 text-emerald-300", "bg-blue-500/20 text-blue-300", "bg-violet-500/20 text-violet-300", "bg-amber-500/20 text-amber-300"];
@@ -442,7 +442,7 @@ export default function Home() {
                                   <div className="flex-1 min-w-0">
                                     <div className="flex items-center gap-1.5">
                                       <span className="text-[10px] sm:text-[11px] text-white font-medium truncate">{conv.name}</span>
-                                      {conv.sentiment === "positive" && <span className="text-[7px]">😊</span>}
+                                      {conv.sentiment === "positive" && <span className="text-[7px]">ðŸ˜Š</span>}
                                     </div>
                                     <span className="text-[7px] sm:text-[8px] text-gray-600 block truncate">{conv.preview}</span>
                                   </div>
@@ -456,14 +456,14 @@ export default function Home() {
                                       conv.status === "active" ? "bg-violet-500/[0.12] text-violet-400 animate-pulse" :
                                       "bg-amber-500/[0.12] text-amber-400"
                                     }`}>
-                                      {conv.status === "resolved" ? "✓" : conv.status === "active" ? "●" : "⏳"}
+                                      {conv.status === "resolved" ? "âœ“" : conv.status === "active" ? "â—" : "â³"}
                                     </span>
                                   </div>
                                 </div>
                               );
                             })}
                             <div className="text-center pt-2">
-                              <span className="text-[9px] text-violet-400 cursor-pointer hover:text-violet-300 transition-colors">Ver todas las conversaciones (3,975) →</span>
+                              <span className="text-[9px] text-violet-400 cursor-pointer hover:text-violet-300 transition-colors">Ver todas las conversaciones (3,975) â†’</span>
                             </div>
                           </div>
                         </div>
@@ -473,8 +473,8 @@ export default function Home() {
                           {/* Channel Distribution */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                             <div className="flex items-center justify-between mb-3">
-                              <span className="text-[10px] text-gray-400 font-medium">Distribución por canal</span>
-                              <span className="text-[8px] text-gray-600">Últimas 24h</span>
+                              <span className="text-[10px] text-gray-400 font-medium">DistribuciÃ³n por canal</span>
+                              <span className="text-[8px] text-gray-600">Ãšltimas 24h</span>
                             </div>
                             {/* Stacked bar */}
                             <div className="flex h-3 rounded-full overflow-hidden mb-3">
@@ -504,7 +504,7 @@ export default function Home() {
 
                           {/* Conversion Funnel */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
-                            <span className="text-[10px] text-gray-400 font-medium block mb-3">Funnel de conversión</span>
+                            <span className="text-[10px] text-gray-400 font-medium block mb-3">Funnel de conversiÃ³n</span>
                             <div className="space-y-1.5">
                               {[
                                 { label: "Visitantes", value: "12,847", width: "100%", color: "from-slate-500 to-slate-400" },
@@ -529,26 +529,26 @@ export default function Home() {
                           {/* Live conversation preview */}
                           <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-[12px]">📸</span>
-                              <span className="text-[10px] text-gray-400 font-medium">Instagram DM — En vivo</span>
+                              <span className="text-[12px]">ðŸ“¸</span>
+                              <span className="text-[10px] text-gray-400 font-medium">Instagram DM â€” En vivo</span>
                               <span className="ml-auto relative flex h-1.5 w-1.5"><span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" /><span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" /></span>
                             </div>
                             <div className="space-y-1.5">
                               <div className="bg-slate-700/30 rounded-xl rounded-tl-sm p-2 max-w-[85%]">
-                                <p className="text-[9px] text-gray-300 leading-relaxed">Hola! Vi vuestro post sobre automatización. ¿Cómo funciona exactamente? 🤔</p>
-                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana Martínez · 10:01</span>
+                                <p className="text-[9px] text-gray-300 leading-relaxed">Hola! Vi vuestro post sobre automatizaciÃ³n. Â¿CÃ³mo funciona exactamente? ðŸ¤”</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana MartÃ­nez Â· 10:01</span>
                               </div>
                               <div className="bg-gradient-to-r from-violet-500/20 to-indigo-500/20 border border-violet-500/20 rounded-xl rounded-tr-sm p-2 max-w-[85%] ml-auto">
                                 <div className="flex items-center gap-1 mb-1">
                                   <svg className="w-2.5 h-2.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                                   <span className="text-[7px] text-violet-400 font-semibold">Agente IA</span>
                                 </div>
-                                <p className="text-[9px] text-gray-300 leading-relaxed">¡Hola Ana! 👋 Nuestro agente IA se integra con tu negocio en 5 días y atiende clientes 24/7 en todos los canales. ¿Te gustaría agendar una demo gratuita?</p>
-                                <span className="text-[6px] text-gray-600 block mt-0.5">Respuesta automática · 0.8s</span>
+                                <p className="text-[9px] text-gray-300 leading-relaxed">Â¡Hola Ana! ðŸ‘‹ Nuestro agente IA se integra con tu negocio en 5 dÃ­as y atiende clientes 24/7 en todos los canales. Â¿Te gustarÃ­a agendar una demo gratuita?</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Respuesta automÃ¡tica Â· 0.8s</span>
                               </div>
                               <div className="bg-slate-700/30 rounded-xl rounded-tl-sm p-2 max-w-[85%]">
-                                <p className="text-[9px] text-gray-300 leading-relaxed">Sí por favor! ¿Qué horarios tenéis? 📅</p>
-                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana Martínez · 10:02</span>
+                                <p className="text-[9px] text-gray-300 leading-relaxed">SÃ­ por favor! Â¿QuÃ© horarios tenÃ©is? ðŸ“…</p>
+                                <span className="text-[6px] text-gray-600 block mt-0.5">Ana MartÃ­nez Â· 10:02</span>
                               </div>
                             </div>
                           </div>
@@ -558,12 +558,12 @@ export default function Home() {
                             <span className="text-[10px] text-gray-400 font-medium block mb-2">Actividad en tiempo real</span>
                             <div className="space-y-2">
                               {[
-                                { icon: "📸", color: "bg-pink-500/20 text-pink-400", text: "DM de Instagram respondido automáticamente", time: "hace 12s" },
-                                { icon: "✓", color: "bg-emerald-500/20 text-emerald-400", text: "Lead calificado vía WhatsApp → CRM", time: "hace 1 min" },
-                                { icon: "📧", color: "bg-blue-500/20 text-blue-400", text: "Email de seguimiento enviado a Pedro L.", time: "hace 3 min" },
-                                { icon: "📞", color: "bg-amber-500/20 text-amber-400", text: "Llamada de voz atendida · 2:34 min", time: "hace 5 min" },
-                                { icon: "🌐", color: "bg-violet-500/20 text-violet-400", text: "Chat web: demo agendada para mañana", time: "hace 8 min" },
-                                { icon: "🔔", color: "bg-rose-500/20 text-rose-400", text: "Alerta: lead de alto valor detectado", time: "hace 11 min" },
+                                { icon: "ðŸ“¸", color: "bg-pink-500/20 text-pink-400", text: "DM de Instagram respondido automÃ¡ticamente", time: "hace 12s" },
+                                { icon: "âœ“", color: "bg-emerald-500/20 text-emerald-400", text: "Lead calificado vÃ­a WhatsApp â†’ CRM", time: "hace 1 min" },
+                                { icon: "ðŸ“§", color: "bg-blue-500/20 text-blue-400", text: "Email de seguimiento enviado a Pedro L.", time: "hace 3 min" },
+                                { icon: "ðŸ“ž", color: "bg-amber-500/20 text-amber-400", text: "Llamada de voz atendida Â· 2:34 min", time: "hace 5 min" },
+                                { icon: "ðŸŒ", color: "bg-violet-500/20 text-violet-400", text: "Chat web: demo agendada para maÃ±ana", time: "hace 8 min" },
+                                { icon: "ðŸ””", color: "bg-rose-500/20 text-rose-400", text: "Alerta: lead de alto valor detectado", time: "hace 11 min" },
                               ].map((a, i) => (
                                 <div key={i} className="flex items-start gap-2">
                                   <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[8px] flex-shrink-0 ${a.color}`}>{a.icon}</span>
@@ -578,13 +578,13 @@ export default function Home() {
                         </div>
                       </div>
 
-                      {/* ── ROW 4: Bottom analytics ── */}
+                      {/* â”€â”€ ROW 4: Bottom analytics â”€â”€ */}
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 pt-4 border-t border-white/[0.04]">
                         {/* Weekly chart by channel */}
                         <div className="bg-slate-800/20 border border-white/[0.04] rounded-xl p-3">
                           <div className="flex items-center justify-between mb-2">
                             <span className="text-[10px] text-gray-400 font-medium">Esta semana</span>
-                            <span className="text-[9px] text-emerald-400 font-medium">+22% ↑</span>
+                            <span className="text-[9px] text-emerald-400 font-medium">+22% â†‘</span>
                           </div>
                           <div className="flex items-end gap-1 h-20">
                             {[
@@ -654,28 +654,28 @@ export default function Home() {
                             <div className="w-6 h-6 bg-violet-500/20 rounded-lg flex items-center justify-center">
                               <svg className="w-3.5 h-3.5 text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                             </div>
-                            <span className="text-[10px] text-violet-300 font-semibold">Resumen IA del día</span>
+                            <span className="text-[10px] text-violet-300 font-semibold">Resumen IA del dÃ­a</span>
                           </div>
                           <div className="space-y-1.5">
                             <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
-                              <span className="text-emerald-400 mt-0.5">●</span>
-                              <span><span className="text-white font-medium">3,834 de 3,975</span> resueltas sin intervención humana</span>
+                              <span className="text-emerald-400 mt-0.5">â—</span>
+                              <span><span className="text-white font-medium">3,834 de 3,975</span> resueltas sin intervenciÃ³n humana</span>
                             </p>
                             <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
-                              <span className="text-pink-400 mt-0.5">●</span>
+                              <span className="text-pink-400 mt-0.5">â—</span>
                               <span>Instagram es el canal con <span className="text-pink-400 font-medium">mayor crecimiento (+24%)</span></span>
                             </p>
                             <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
-                              <span className="text-violet-400 mt-0.5">●</span>
+                              <span className="text-violet-400 mt-0.5">â—</span>
                               <span>Velocidad media de respuesta: <span className="text-white font-medium">1.2 segundos</span></span>
                             </p>
                             <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
-                              <span className="text-amber-400 mt-0.5">●</span>
-                              <span><span className="text-amber-400 font-medium">127 leads</span> generados · 32 requieren seguimiento</span>
+                              <span className="text-amber-400 mt-0.5">â—</span>
+                              <span><span className="text-amber-400 font-medium">127 leads</span> generados Â· 32 requieren seguimiento</span>
                             </p>
                             <p className="text-[8px] sm:text-[9px] text-gray-400 leading-relaxed flex items-start gap-1.5">
-                              <span className="text-cyan-400 mt-0.5">●</span>
-                              <span>Próx. acción sugerida: <span className="text-cyan-400 font-medium">campaña de retargeting IG</span></span>
+                              <span className="text-cyan-400 mt-0.5">â—</span>
+                              <span>PrÃ³x. acciÃ³n sugerida: <span className="text-cyan-400 font-medium">campaÃ±a de retargeting IG</span></span>
                             </p>
                           </div>
                         </div>
@@ -689,9 +689,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          LANDING PAGE EXAMPLES — Scrollable previews
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          LANDING PAGE EXAMPLES â€” Scrollable previews
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="ejemplos" className="py-24 px-4 bg-slate-50">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -701,13 +701,13 @@ export default function Home() {
                 Landing page white-label. Personalizable.
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Cada agente incluye una landing profesional con la identidad de tu marca. Dominio propio, diseño adaptado y conversión optimizada.
+                Cada agente incluye una landing profesional con la identidad de tu marca. Dominio propio, diseÃ±o adaptado y conversiÃ³n optimizada.
               </p>
             </div>
           </ScrollReveal>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-            {/* Landing 1 — Restaurant Ultra-Premium */}
+          <div className="max-w-2xl mx-auto">
+            {/* Landing â€” Restaurant Ultra-Premium */}
             <ScrollReveal>
               <div className="relative">
                 <div className="absolute -inset-3 bg-amber-500/[0.06] rounded-3xl blur-2xl" />
@@ -731,7 +731,7 @@ export default function Home() {
                     {/* Navbar */}
                     <div className="flex items-center justify-between px-5 py-2.5 border-b border-white/[0.04] bg-[#0c1015]/95 backdrop-blur-xl sticky top-0 z-10">
                       <div className="flex items-center gap-2">
-                        <span className="text-amber-400 text-sm">🍝</span>
+                        <span className="text-amber-400 text-sm">ðŸ</span>
                         <span className="text-[12px] text-white font-semibold tracking-wide">Trattoria La Nonna</span>
                       </div>
                       <div className="flex items-center gap-5">
@@ -764,51 +764,51 @@ export default function Home() {
                       <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/70 backdrop-blur-sm rounded-lg px-2.5 py-1.5 border border-white/10 animate-pulse">
                         <div className="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-[7px] font-bold text-black">A</div>
                         <div>
-                          <p className="text-[8px] text-white font-medium">Ana reservó mesa para 4</p>
+                          <p className="text-[8px] text-white font-medium">Ana reservÃ³ mesa para 4</p>
                           <p className="text-[7px] text-gray-400">hace 5 min</p>
                         </div>
                       </div>
                       <div className="absolute bottom-0 left-0 right-0 p-5">
                         <div className="flex items-center gap-2 mb-2">
                           <span className="text-[9px] bg-amber-500/20 text-amber-400 font-semibold px-2 py-0.5 rounded-full border border-amber-500/20">Fine Dining</span>
-                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">📍 Madrid Centro</span>
+                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">ðŸ“ Madrid Centro</span>
                         </div>
                         <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">Trattoria La Nonna</h3>
-                        <p className="text-[12px] text-gray-300/80 italic">Cocina italiana auténtica desde 1998</p>
+                        <p className="text-[12px] text-gray-300/80 italic">Cocina italiana autÃ©ntica desde 1998</p>
                         <div className="flex items-center gap-3 mt-2">
                           <div className="flex items-center gap-1">
                             <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
                             <span className="text-[10px] text-gray-400 ml-0.5">4.8</span>
                           </div>
-                          <span className="text-[9px] text-gray-500">·</span>
-                          <span className="text-[10px] text-gray-400">324 reseñas</span>
-                          <span className="text-[9px] text-gray-500">·</span>
-                          <span className="text-[10px] text-gray-400">€€€</span>
+                          <span className="text-[9px] text-gray-500">Â·</span>
+                          <span className="text-[10px] text-gray-400">324 reseÃ±as</span>
+                          <span className="text-[9px] text-gray-500">Â·</span>
+                          <span className="text-[10px] text-gray-400">â‚¬â‚¬â‚¬</span>
                         </div>
                       </div>
                     </div>
-                    {/* Galería de platos — masonry 2x2 */}
+                    {/* GalerÃ­a de platos â€” masonry 2x2 */}
                     <div className="grid grid-cols-4 grid-rows-2 gap-1 px-1 py-1 h-32">
                       <div className="col-span-2 row-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
                         <img src="/mockups/restaurante/plato1.jpg" alt="Pasta fresca" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                          <span className="text-[9px] text-white font-semibold">🍝 Pasta fresca del día</span>
+                          <span className="text-[9px] text-white font-semibold">ðŸ Pasta fresca del dÃ­a</span>
                         </div>
                       </div>
                       <div className="col-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
                         <img src="/mockups/restaurante/plato2.jpg" alt="Especialidad" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                          <span className="text-[9px] text-white font-semibold">🥩 Especialidad de la casa</span>
+                          <span className="text-[9px] text-white font-semibold">ðŸ¥© Especialidad de la casa</span>
                         </div>
                       </div>
                       <div className="col-span-2 relative rounded-lg overflow-hidden group cursor-pointer">
                         <img src="/mockups/restaurante/plato3.jpg" alt="Carta del chef" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
-                          <span className="text-[9px] text-white font-semibold">👨‍🍳 Menú degustación</span>
+                          <span className="text-[9px] text-white font-semibold">ðŸ‘¨â€ðŸ³ MenÃº degustaciÃ³n</span>
                         </div>
                       </div>
                     </div>
-                    {/* Menú categorías */}
+                    {/* MenÃº categorÃ­as */}
                     <div className="px-5 pt-4 pb-2">
                       <div className="flex items-center gap-2 mb-3">
                         <div className="w-1 h-4 bg-amber-500 rounded-full" />
@@ -816,10 +816,10 @@ export default function Home() {
                       </div>
                       <div className="grid grid-cols-4 gap-2">
                         {[
-                          { icon: "🥗", name: "Entrantes", count: "12" },
-                          { icon: "🍝", name: "Pasta", count: "8" },
-                          { icon: "🥩", name: "Carnes", count: "6" },
-                          { icon: "🍰", name: "Postres", count: "5" },
+                          { icon: "ðŸ¥—", name: "Entrantes", count: "12" },
+                          { icon: "ðŸ", name: "Pasta", count: "8" },
+                          { icon: "ðŸ¥©", name: "Carnes", count: "6" },
+                          { icon: "ðŸ°", name: "Postres", count: "5" },
                         ].map((cat) => (
                           <div key={cat.name} className="text-center bg-white/[0.03] border border-white/[0.06] rounded-xl p-2 hover:border-amber-500/30 transition-colors cursor-pointer group">
                             <span className="text-base block mb-0.5 group-hover:scale-110 transition-transform">{cat.icon}</span>
@@ -831,7 +831,7 @@ export default function Home() {
                     </div>
                     {/* Urgencia de disponibilidad */}
                     <div className="mx-5 mb-2 flex items-center gap-2 bg-amber-500/[0.08] border border-amber-500/20 rounded-lg px-3 py-2">
-                      <span className="text-amber-400 text-xs">⚡</span>
+                      <span className="text-amber-400 text-xs">âš¡</span>
                       <span className="text-[10px] text-amber-300 font-medium">Solo quedan 2 mesas para viernes noche</span>
                       <span className="text-[8px] text-amber-500/60 ml-auto">Alta demanda</span>
                     </div>
@@ -840,7 +840,7 @@ export default function Home() {
                       <div className="flex items-center gap-2 mb-1">
                         <div className="w-1 h-5 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full" />
                         <span className="text-[13px] text-white font-semibold">Reserva tu mesa</span>
-                        <span className="ml-auto text-[8px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">Confirmación inmediata</span>
+                        <span className="ml-auto text-[8px] text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full font-medium">ConfirmaciÃ³n inmediata</span>
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
@@ -894,32 +894,32 @@ export default function Home() {
                         <div className="flex-1">
                           <div className="flex items-center gap-1.5 mb-1">
                             <span className="text-[9px] text-emerald-400 font-semibold">WhatsApp</span>
-                            <span className="text-[7px] text-gray-600">· Confirmación automática</span>
+                            <span className="text-[7px] text-gray-600">Â· ConfirmaciÃ³n automÃ¡tica</span>
                           </div>
                           <div className="bg-[#0d2e1a] rounded-lg px-2.5 py-2 border border-emerald-500/10">
-                            <p className="text-[10px] text-gray-300 leading-relaxed">✅ <span className="text-white font-medium">Reserva confirmada</span></p>
-                            <p className="text-[9px] text-gray-400 mt-0.5">Trattoria La Nonna · Vie 21 Feb · 20:30</p>
-                            <p className="text-[9px] text-gray-400">Mesa para 4 · Ref: #TLN-2847</p>
+                            <p className="text-[10px] text-gray-300 leading-relaxed">âœ… <span className="text-white font-medium">Reserva confirmada</span></p>
+                            <p className="text-[9px] text-gray-400 mt-0.5">Trattoria La Nonna Â· Vie 21 Feb Â· 20:30</p>
+                            <p className="text-[9px] text-gray-400">Mesa para 4 Â· Ref: #TLN-2847</p>
                           </div>
                         </div>
                       </div>
-                      {/* Reseñas con fuente */}
+                      {/* ReseÃ±as con fuente */}
                       <div className="pt-4 border-t border-white/[0.06] space-y-2.5">
                         <div className="flex items-center justify-between mb-1">
-                          <span className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">Reseñas verificadas</span>
+                          <span className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">ReseÃ±as verificadas</span>
                           <div className="flex items-center gap-2">
                             <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
                               <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
                               <span className="text-[8px] text-gray-400 font-semibold">4.8</span>
                             </div>
                             <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
-                              <span className="text-[8px]">🍴</span>
+                              <span className="text-[8px]">ðŸ´</span>
                               <span className="text-[8px] text-gray-400 font-semibold">TheFork 9.2</span>
                             </div>
                           </div>
                         </div>
                         {[
-                          { name: "Carmen R.", text: "Increíble pasta casera. El mejor italiano de la zona. Reservé online en 20 segundos.", stars: 5, time: "hace 2 días", source: "Google", badge: "Local Guide" },
+                          { name: "Carmen R.", text: "IncreÃ­ble pasta casera. El mejor italiano de la zona. ReservÃ© online en 20 segundos.", stars: 5, time: "hace 2 dÃ­as", source: "Google", badge: "Local Guide" },
                           { name: "Miguel A.", text: "Ambiente acogedor y servicio impecable. Ya hemos vuelto 3 veces.", stars: 5, time: "hace 1 semana", source: "TripAdvisor", badge: "Verificado" },
                         ].map((rev) => (
                           <div key={rev.name} className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3">
@@ -932,8 +932,8 @@ export default function Home() {
                                     <span className="text-[7px] text-amber-400 bg-amber-500/10 px-1.5 py-0.5 rounded-full border border-amber-500/10">{rev.badge}</span>
                                   </div>
                                   <div className="flex items-center gap-1 mt-0.5">
-                                    <span className="text-[7px] text-gray-500">vía {rev.source}</span>
-                                    <span className="text-[7px] text-gray-600">· {rev.time}</span>
+                                    <span className="text-[7px] text-gray-500">vÃ­a {rev.source}</span>
+                                    <span className="text-[7px] text-gray-600">Â· {rev.time}</span>
                                   </div>
                                 </div>
                               </div>
@@ -943,14 +943,14 @@ export default function Home() {
                           </div>
                         ))}
                       </div>
-                      {/* Ubicación con mapa estilizado */}
+                      {/* UbicaciÃ³n con mapa estilizado */}
                       <div className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3 overflow-hidden">
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            <span className="text-[11px] text-white font-medium">C/ Gran Vía 45, Madrid</span>
+                            <span className="text-[11px] text-white font-medium">C/ Gran VÃ­a 45, Madrid</span>
                           </div>
-                          <span className="text-[8px] text-amber-400 cursor-pointer hover:text-amber-300">Cómo llegar →</span>
+                          <span className="text-[8px] text-amber-400 cursor-pointer hover:text-amber-300">CÃ³mo llegar â†’</span>
                         </div>
                         <div className="h-20 bg-[#1a1f2e] rounded-lg relative overflow-hidden border border-white/[0.06]">
                           {/* Stylized map */}
@@ -965,7 +965,7 @@ export default function Home() {
                             </div>
                           </div>
                           <div className="absolute bottom-1 left-2 flex items-center gap-1">
-                            <span className="text-[7px] text-gray-500 bg-black/40 px-1 rounded">Metro: Gran Vía · 2 min</span>
+                            <span className="text-[7px] text-gray-500 bg-black/40 px-1 rounded">Metro: Gran VÃ­a Â· 2 min</span>
                           </div>
                         </div>
                       </div>
@@ -1001,7 +1001,7 @@ export default function Home() {
                       {/* Cookie banner mini */}
                       <div className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2">
                         <div className="flex items-center gap-1.5">
-                          <span className="text-xs">🍪</span>
+                          <span className="text-xs">ðŸª</span>
                           <span className="text-[8px] text-gray-500">Usamos cookies para mejorar tu experiencia</span>
                         </div>
                         <div className="flex gap-1.5">
@@ -1017,378 +1017,23 @@ export default function Home() {
                 </div>
               </div>
             </ScrollReveal>
-
-            {/* Landing 2 — Barbershop Ultra-Premium */}
-            <ScrollReveal delay={150}>
-              <div className="relative">
-                <div className="absolute -inset-3 bg-indigo-500/[0.04] rounded-3xl blur-2xl" />
-                <div className="relative bg-[#0d1117] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/60 overflow-hidden">
-                  {/* Browser chrome */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                    <div className="ml-3 flex items-center gap-1.5 bg-slate-800/50 px-3 py-0.5 rounded-md">
-                      <svg className="w-2.5 h-2.5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" /></svg>
-                      <span className="text-[10px] text-gray-500 font-mono">reservas.urbancutbarberia.es</span>
-                    </div>
-                    <div className="ml-auto flex items-center gap-1">
-                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-                      <svg className="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" /></svg>
-                    </div>
-                  </div>
-                  <div className="max-h-[540px] overflow-y-auto scrollbar-thin">
-                    {/* Navbar */}
-                    <div className="flex items-center justify-between px-5 py-2.5 border-b border-white/[0.04] bg-[#0b0f14]/95 backdrop-blur-xl sticky top-0 z-10">
-                      <div className="flex items-center gap-2">
-                        <span className="text-indigo-400 text-sm">💈</span>
-                        <span className="text-[11px] text-white font-bold tracking-wide">Urban Cut Barbería</span>
-                      </div>
-                      <div className="flex items-center gap-4">
-                        <span className="text-[9px] text-gray-500 hidden sm:block hover:text-gray-300 cursor-pointer transition-colors">Servicios</span>
-                        <span className="text-[9px] text-gray-500 hidden sm:block hover:text-gray-300 cursor-pointer transition-colors">Equipo</span>
-                        <div className="flex items-center gap-1.5">
-                          <span className="relative flex h-1.5 w-1.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" /><span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" /></span>
-                          <span className="text-[8px] text-emerald-400 font-medium hidden sm:block">Abierto · 2 en espera</span>
-                        </div>
-                        <span className="text-[9px] bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold px-3 py-1 rounded-full shadow-lg shadow-indigo-500/25">Reservar</span>
-                      </div>
-                    </div>
-                    {/* Hero with real image */}
-                    <div className="relative h-52 overflow-hidden">
-                      <img src="/mockups/barberia/salon.jpg" alt="Urban Cut Barbería" className="w-full h-full object-cover" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0d1117] via-[#0d1117]/30 to-black/20" />
-                      {/* Trust badges */}
-                      <div className="absolute top-3 right-3 flex flex-col gap-1.5">
-                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
-                          <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
-                          <span className="text-[7px] text-white font-bold">4.9 Google</span>
-                        </div>
-                        <div className="flex items-center gap-1 bg-black/60 backdrop-blur-sm rounded-full px-2 py-0.5 border border-white/10">
-                          <span className="text-[8px]">🏆</span>
-                          <span className="text-[7px] text-white font-bold">Top 10 BCN</span>
-                        </div>
-                      </div>
-                      {/* Social proof toast */}
-                      <div className="absolute top-3 left-3 flex items-center gap-2 bg-black/70 backdrop-blur-sm rounded-lg px-2.5 py-1.5 border border-white/10 animate-pulse">
-                        <div className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-400 to-violet-500 flex items-center justify-center text-[7px] font-bold text-white">J</div>
-                        <div>
-                          <p className="text-[8px] text-white font-medium">Javi reservó con Carlos</p>
-                          <p className="text-[7px] text-gray-400">hace 8 min</p>
-                        </div>
-                      </div>
-                      <div className="absolute bottom-0 left-0 right-0 p-5">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-[9px] bg-indigo-500/20 text-indigo-300 font-semibold px-2 py-0.5 rounded-full border border-indigo-500/20">Barbería Premium</span>
-                          <span className="text-[9px] bg-white/10 text-white/70 font-medium px-2 py-0.5 rounded-full backdrop-blur-sm">📍 Barcelona</span>
-                        </div>
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 tracking-tight">Urban Cut Barbería</h3>
-                        <p className="text-[12px] text-gray-300/80">Estilo y precisión en cada corte</p>
-                        <div className="flex items-center gap-3 mt-2">
-                          <div className="flex items-center gap-1">
-                            <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-3 h-3 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
-                            <span className="text-[10px] text-gray-400 ml-0.5">4.9</span>
-                          </div>
-                          <span className="text-[9px] text-gray-500">·</span>
-                          <span className="text-[10px] text-gray-400">187 reseñas</span>
-                          <span className="text-[9px] text-gray-500">·</span>
-                          <span className="text-[10px] text-gray-400">€€</span>
-                        </div>
-                      </div>
-                    </div>
-                    {/* Before/After gallery */}
-                    <div className="px-4 pt-3 pb-1">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">✂️ Nuestros trabajos</span>
-                        <span className="text-[8px] text-indigo-400 cursor-pointer">Ver todos →</span>
-                      </div>
-                      <div className="grid grid-cols-4 gap-1.5">
-                        {[
-                          { src: "/mockups/barberia/corte1.jpg", label: "Degradado", tag: "Popular" },
-                          { src: "/mockups/barberia/corte2.jpg", label: "Clásico", tag: null },
-                          { src: "/mockups/barberia/corte-barba.jpg", label: "Barba", tag: "Nuevo" },
-                          { src: "/mockups/barberia/corte-estilo.jpg", label: "Premium", tag: null },
-                        ].map((cut, i) => (
-                          <div key={i} className="relative rounded-lg overflow-hidden group cursor-pointer aspect-square">
-                            <img src={cut.src} alt={cut.label} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col items-center justify-end pb-1.5">
-                              <span className="text-[8px] text-white font-semibold">{cut.label}</span>
-                            </div>
-                            {cut.tag && <span className="absolute top-1 right-1 text-[6px] bg-indigo-500 text-white px-1.5 py-0.5 rounded-full font-bold">{cut.tag}</span>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    {/* Instagram feed preview */}
-                    <div className="mx-4 mt-2 mb-1 bg-white/[0.02] border border-white/[0.06] rounded-xl p-2.5">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-5 h-5 rounded-md bg-gradient-to-br from-pink-500 via-red-500 to-amber-500 flex items-center justify-center">
-                          <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" /></svg>
-                        </div>
-                        <div>
-                          <span className="text-[9px] text-white font-semibold">@urbancutbarberia</span>
-                          <span className="text-[7px] text-gray-500 ml-1.5">· 2.4k seguidores</span>
-                        </div>
-                        <span className="ml-auto text-[7px] bg-indigo-500/20 text-indigo-400 px-2 py-0.5 rounded-full font-semibold cursor-pointer">Seguir</span>
-                      </div>
-                      <div className="grid grid-cols-4 gap-1">
-                        {["/mockups/barberia/corte1.jpg", "/mockups/barberia/corte-estilo.jpg", "/mockups/barberia/corte-barba.jpg", "/mockups/barberia/corte2.jpg"].map((src, i) => (
-                          <div key={i} className="aspect-square rounded overflow-hidden">
-                            <img src={src} alt="" className="w-full h-full object-cover hover:opacity-80 transition-opacity cursor-pointer" />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    {/* Urgencia */}
-                    <div className="mx-4 my-2 flex items-center gap-2 bg-indigo-500/[0.08] border border-indigo-500/20 rounded-lg px-3 py-2">
-                      <span className="text-indigo-400 text-xs">⚡</span>
-                      <span className="text-[10px] text-indigo-300 font-medium">Próxima cita disponible: <span className="text-white font-bold">Hoy 15:30</span></span>
-                      <span className="text-[8px] text-indigo-400/60 ml-auto">3 huecos hoy</span>
-                    </div>
-                    {/* Booking form */}
-                    <div className="p-5 sm:p-6 space-y-4">
-                      {/* Barber selector */}
-                      <div>
-                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 flex items-center gap-1.5">
-                          <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                          Elige barbero
-                        </label>
-                        <div className="grid grid-cols-3 gap-2">
-                          {[
-                            { name: "Carlos", specialty: "Degradados", rating: "4.9", reviews: "84", selected: true },
-                            { name: "Alex", specialty: "Clásico & Barba", rating: "4.8", reviews: "62", selected: false },
-                            { name: "David", specialty: "Diseño", rating: "4.9", reviews: "41", selected: false },
-                          ].map((b) => (
-                            <div key={b.name} className={`text-center p-2.5 rounded-xl cursor-pointer transition-all duration-300 ${b.selected ? "bg-indigo-500/[0.15] border-2 border-indigo-500/40 shadow-lg shadow-indigo-500/10" : "bg-slate-800/50 border border-slate-700/40 hover:border-indigo-500/20"}`}>
-                              <div className={`w-10 h-10 rounded-full mx-auto mb-1.5 flex items-center justify-center text-sm font-bold ring-2 ${b.selected ? "bg-gradient-to-br from-indigo-500 to-violet-500 text-white ring-indigo-400/30" : "bg-slate-700 text-gray-400 ring-transparent"}`}>{b.name[0]}</div>
-                              <p className="text-[11px] text-white font-semibold">{b.name}</p>
-                              <p className="text-[8px] text-gray-500">{b.specialty}</p>
-                              <div className="flex items-center justify-center gap-0.5 mt-1">
-                                <svg className="w-2 h-2 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
-                                <span className="text-[7px] text-gray-400">{b.rating} ({b.reviews})</span>
-                              </div>
-                              {b.selected && <span className="text-[7px] text-emerald-400 mt-0.5 block">● Disponible hoy</span>}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      {/* Services */}
-                      <div>
-                        <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-2 flex items-center gap-1.5">
-                          <svg className="w-3 h-3 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
-                          Servicio
-                        </label>
-                        <div className="space-y-1.5">
-                          {[
-                            { name: "Corte Degradado", price: "15€", duration: "30 min", selected: false, popular: true },
-                            { name: "Corte + Barba", price: "22€", duration: "45 min", selected: true, popular: false },
-                            { name: "Corte Premium", price: "28€", duration: "40 min", selected: false, popular: false },
-                            { name: "Tratamiento Capilar", price: "35€", duration: "50 min", selected: false, popular: false },
-                          ].map((s) => (
-                            <div key={s.name} className={`flex items-center justify-between px-3 py-2.5 rounded-lg cursor-pointer transition-all duration-200 ${s.selected ? "bg-indigo-500/[0.12] border border-indigo-500/30 shadow-md shadow-indigo-500/5" : "bg-slate-800/30 border border-slate-700/30 hover:border-indigo-500/20 hover:bg-slate-800/50"}`}>
-                              <div className="flex items-center gap-2.5">
-                                <div className={`w-3.5 h-3.5 rounded-full border-2 transition-all ${s.selected ? "border-indigo-400 bg-indigo-400 shadow-sm shadow-indigo-400/50" : "border-gray-600"}`}>
-                                  {s.selected && <svg className="w-full h-full text-white p-[1px]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>}
-                                </div>
-                                <div>
-                                  <span className={`text-[12px] block ${s.selected ? "text-white font-semibold" : "text-gray-300"}`}>{s.name}</span>
-                                  {s.popular && <span className="text-[7px] text-amber-400">🔥 Más popular</span>}
-                                </div>
-                              </div>
-                              <div className="text-right flex items-center gap-2">
-                                <span className={`text-[12px] font-bold ${s.selected ? "text-indigo-300" : "text-white"}`}>{s.price}</span>
-                                <span className="text-[9px] text-gray-500 bg-slate-800/60 px-1.5 py-0.5 rounded flex items-center gap-1">
-                                  <svg className="w-2 h-2 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                                  {s.duration}
-                                </span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      {/* Date & Time */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div>
-                          <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1 block">Fecha</label>
-                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center gap-2 hover:border-indigo-500/30 transition-colors cursor-pointer">
-                            <svg className="w-3.5 h-3.5 text-indigo-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                            Mar, 18 Feb
-                            <svg className="w-3 h-3 text-gray-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                          </div>
-                        </div>
-                        <div>
-                          <label className="text-[10px] text-gray-400 uppercase tracking-wider font-semibold mb-1 block">Hora</label>
-                          <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg px-3 py-2.5 text-[12px] text-white flex items-center gap-2 hover:border-indigo-500/30 transition-colors cursor-pointer">
-                            <svg className="w-3.5 h-3.5 text-indigo-400/60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                            10:30
-                            <svg className="w-3 h-3 text-gray-500 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Loyalty Points */}
-                      <div className="bg-gradient-to-r from-indigo-500/[0.08] to-violet-500/[0.06] border border-indigo-500/15 rounded-xl p-3.5">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-amber-400 text-xs">⭐</span>
-                            <span className="text-[10px] text-indigo-300 font-semibold">Puntos de fidelidad</span>
-                          </div>
-                          <span className="text-[11px] text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded-full">340 pts</span>
-                        </div>
-                        <div className="w-full h-2 bg-slate-700/40 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full transition-all" style={{ width: "68%" }} />
-                        </div>
-                        <div className="flex items-center justify-between mt-1.5">
-                          <span className="text-[8px] text-gray-500">160 pts más para un corte gratis 🎉</span>
-                          <span className="text-[7px] text-indigo-400/60">Nv. Plata</span>
-                        </div>
-                      </div>
-                      {/* CTA button */}
-                      <button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 text-white font-bold py-3.5 rounded-xl text-sm shadow-xl shadow-indigo-500/20 hover:shadow-indigo-500/30 hover:from-indigo-400 hover:to-violet-400 transition-all duration-300 flex items-center justify-center gap-2">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                        Reservar cita · 22€
-                      </button>
-                      {/* WhatsApp confirmation preview */}
-                      <div className="bg-[#0b2014] border border-emerald-500/20 rounded-xl p-3 flex items-start gap-2.5">
-                        <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
-                          <svg className="w-3.5 h-3.5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" /><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" /></svg>
-                        </div>
-                        <div className="flex-1">
-                          <div className="flex items-center gap-1.5 mb-1">
-                            <span className="text-[9px] text-emerald-400 font-semibold">WhatsApp</span>
-                            <span className="text-[7px] text-gray-600">· Confirmación automática</span>
-                          </div>
-                          <div className="bg-[#0d2e1a] rounded-lg px-2.5 py-2 border border-emerald-500/10">
-                            <p className="text-[10px] text-gray-300 leading-relaxed">✅ <span className="text-white font-medium">Cita confirmada</span></p>
-                            <p className="text-[9px] text-gray-400 mt-0.5">Urban Cut · Mar 18 Feb · 10:30</p>
-                            <p className="text-[9px] text-gray-400">Corte + Barba con Carlos · Ref: #UC-1293</p>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Reviews con fuente */}
-                      <div className="space-y-2 pt-3 border-t border-white/[0.06]">
-                        <div className="flex items-center justify-between mb-1">
-                          <span className="text-[9px] text-gray-500 uppercase tracking-wider font-semibold">Reseñas verificadas</span>
-                          <div className="flex items-center gap-2">
-                            <div className="flex items-center gap-1 bg-white/[0.04] px-2 py-0.5 rounded-full">
-                              <svg className="w-2.5 h-2.5 text-[#4285F4]" viewBox="0 0 24 24" fill="currentColor"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" /><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" /><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" /><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" /></svg>
-                              <span className="text-[8px] text-gray-400 font-semibold">4.9</span>
-                            </div>
-                          </div>
-                        </div>
-                        {[
-                          { name: "Sergio M.", text: "El mejor degradado que me han hecho. Carlos es un artista. La reserva online es genial.", rating: 5, source: "Google", badge: "Local Guide", time: "hace 3 días" },
-                          { name: "Pablo R.", text: "Siempre salgo contento. Ambiente top y nunca esperas.", rating: 5, source: "Google", badge: "Verificado", time: "hace 1 semana" },
-                        ].map((r) => (
-                          <div key={r.name} className="bg-slate-800/30 border border-slate-700/20 rounded-lg p-3">
-                            <div className="flex items-center justify-between mb-1">
-                              <div className="flex items-center gap-2">
-                                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-[8px] text-white font-bold">{r.name[0]}</div>
-                                <div>
-                                  <div className="flex items-center gap-1.5">
-                                    <span className="text-[10px] text-white font-semibold">{r.name}</span>
-                                    <span className="text-[7px] text-indigo-400 bg-indigo-500/10 px-1.5 py-0.5 rounded-full">{r.badge}</span>
-                                  </div>
-                                  <div className="flex items-center gap-1">
-                                    <span className="text-[7px] text-gray-500">vía {r.source}</span>
-                                    <span className="text-[7px] text-gray-600">· {r.time}</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="flex gap-0.5">{[1,2,3,4,5].map(s => <svg key={s} className="w-2.5 h-2.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>)}</div>
-                            </div>
-                            <p className="text-[10px] text-gray-400 italic leading-relaxed">&ldquo;{r.text}&rdquo;</p>
-                          </div>
-                        ))}
-                      </div>
-                      {/* Ubicación */}
-                      <div className="bg-white/[0.03] border border-white/[0.04] rounded-xl p-3 overflow-hidden">
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="flex items-center gap-2">
-                            <svg className="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            <span className="text-[11px] text-white font-medium">C/ Enric Granados 38, Barcelona</span>
-                          </div>
-                          <span className="text-[8px] text-indigo-400 cursor-pointer hover:text-indigo-300">Cómo llegar →</span>
-                        </div>
-                        <div className="h-16 bg-[#1a1f2e] rounded-lg relative overflow-hidden border border-white/[0.06]">
-                          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 50% 50%, #334155 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
-                          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 200 80"><path d="M0 40h40l10-10 20 20 15-15 20 10h95" stroke="#475569" strokeWidth="0.5" fill="none" /><path d="M20 0v80M60 0v80M100 0v80M140 0v80M180 0v80" stroke="#334155" strokeWidth="0.3" /><path d="M0 20h200M0 60h200" stroke="#334155" strokeWidth="0.3" /></svg>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="relative">
-                              <div className="absolute -inset-3 bg-indigo-500/20 rounded-full animate-ping" />
-                              <div className="relative w-6 h-6 bg-gradient-to-br from-indigo-500 to-violet-500 rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/30 border-2 border-white/20">
-                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="absolute bottom-1 left-2 flex items-center gap-1">
-                            <span className="text-[7px] text-gray-500 bg-black/40 px-1 rounded">Metro: Diagonal · 3 min</span>
-                          </div>
-                        </div>
-                      </div>
-                      {/* Footer */}
-                      <div className="pt-4 border-t border-white/[0.04] grid grid-cols-3 gap-3">
-                        <div>
-                          <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Horario</p>
-                          <p className="text-[9px] text-gray-400">L-V: 10:00-20:00</p>
-                          <p className="text-[9px] text-gray-400">S: 10:00-15:00</p>
-                          <p className="text-[9px] text-indigo-400/60 mt-0.5">D: Cerrado</p>
-                        </div>
-                        <div>
-                          <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Contacto</p>
-                          <p className="text-[9px] text-gray-400">+34 633 456 789</p>
-                          <p className="text-[9px] text-emerald-400/70 flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" />WhatsApp
-                          </p>
-                        </div>
-                        <div>
-                          <p className="text-[8px] text-gray-600 uppercase tracking-wider font-semibold mb-1">Social</p>
-                          <div className="flex gap-1.5">
-                            {[
-                              { label: "IG", gradient: "from-pink-500 to-purple-500" },
-                              { label: "TK", gradient: "from-cyan-400 to-blue-500" },
-                              { label: "G", gradient: "from-amber-500 to-red-500" },
-                            ].map(s => (
-                              <div key={s.label} className={`w-5 h-5 rounded-md bg-gradient-to-br ${s.gradient} flex items-center justify-center text-[7px] text-white font-bold shadow-sm hover:scale-110 transition-transform cursor-pointer`}>{s.label}</div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      {/* Cookie mini */}
-                      <div className="flex items-center justify-between bg-white/[0.03] border border-white/[0.06] rounded-lg px-3 py-2">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-xs">🍪</span>
-                          <span className="text-[8px] text-gray-500">Usamos cookies para mejorar tu experiencia</span>
-                        </div>
-                        <div className="flex gap-1.5">
-                          <span className="text-[7px] text-gray-500 cursor-pointer hover:text-white transition-colors">Configurar</span>
-                          <span className="text-[7px] bg-indigo-500/20 text-indigo-400 px-1.5 py-0.5 rounded cursor-pointer font-medium">Aceptar</span>
-                        </div>
-                      </div>
-                      <div className="text-center pt-3 border-t border-white/[0.04]">
-                        <span className="text-[9px] text-gray-600">Powered by <span className="bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent font-semibold">Neuriax</span></span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           REMINDERS TIMELINE
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-24 px-4 bg-gradient-to-b from-[#EFF6FF] to-[#F1F5F9]">
         <div className="max-w-4xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-6">
-              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">Comunicación automatizada</span>
+              <span className="text-emerald-400 text-xs font-semibold tracking-[0.2em] uppercase">ComunicaciÃ³n automatizada</span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mt-3 mb-4">
-                Comunicación multi-canal con IA
+                ComunicaciÃ³n multi-canal con IA
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto mb-2">
-                El agente se comunica con tus clientes a través de WhatsApp, email y web chat. Cada interacción se registra y analiza.
+                El agente se comunica con tus clientes a travÃ©s de WhatsApp, email y web chat. Cada interacciÃ³n se registra y analiza.
               </p>
             </div>
           </ScrollReveal>
@@ -1397,7 +1042,7 @@ export default function Home() {
             <div className="text-center mb-14">
               <div className="inline-flex items-center gap-3 bg-emerald-500/[0.08] border border-emerald-500/20 rounded-2xl px-6 py-4">
                 <span className="text-4xl sm:text-5xl font-extrabold text-emerald-400">97%</span>
-                <span className="text-sm text-slate-500 text-left">tasa de resolución<br />automática</span>
+                <span className="text-sm text-slate-500 text-left">tasa de resoluciÃ³n<br />automÃ¡tica</span>
               </div>
             </div>
           </ScrollReveal>
@@ -1408,28 +1053,28 @@ export default function Home() {
 
             {[
               {
-                icon: "✓", color: "bg-emerald-500", label: "Confirmación automática", time: "Al instante",
-                message: "¡Hola María! 🎉 Tu mesa para 4 en Trattoria La Nonna está confirmada:\n📅 Viernes 21 Feb — 20:30\n📍 C/ Gran Vía 45, Madrid\n\nSi necesitas cambiar algo, responde a este mensaje.",
-                quickReplies: ["👍 Perfecto", "📝 Modificar"],
+                icon: "âœ“", color: "bg-emerald-500", label: "ConfirmaciÃ³n automÃ¡tica", time: "Al instante",
+                message: "Â¡Hola MarÃ­a! ðŸŽ‰ Tu mesa para 4 en Trattoria La Nonna estÃ¡ confirmada:\nðŸ“… Viernes 21 Feb â€” 20:30\nðŸ“ C/ Gran VÃ­a 45, Madrid\n\nSi necesitas cambiar algo, responde a este mensaje.",
+                quickReplies: ["ðŸ‘ Perfecto", "ðŸ“ Modificar"],
                 timestamp: "14:23",
               },
               {
-                icon: "◆", color: "bg-violet-500", label: "Follow-up programado", time: "Jueves 20:30",
-                message: "Hola María 👋 Te recordamos tu reserva mañana viernes a las 20:30 en Trattoria La Nonna.\n\n¿Sigues viniendo?",
-                quickReplies: ["✅ Confirmo", "❌ Cancelar", "🔄 Cambiar hora"],
+                icon: "â—†", color: "bg-violet-500", label: "Follow-up programado", time: "Jueves 20:30",
+                message: "Hola MarÃ­a ðŸ‘‹ Te recordamos tu reserva maÃ±ana viernes a las 20:30 en Trattoria La Nonna.\n\nÂ¿Sigues viniendo?",
+                quickReplies: ["âœ… Confirmo", "âŒ Cancelar", "ðŸ”„ Cambiar hora"],
                 timestamp: "20:30",
               },
               {
-                icon: "◆", color: "bg-indigo-500", label: "Notificación contextual", time: "Viernes 19:30",
-                message: "¡María, te esperamos en 1 hora! 🍝\n\n📍 Cómo llegar: maps.google.com/trattoria\n🅿️ Parking: Parking Centro (2 min)\n\n¡Buen provecho!",
+                icon: "â—†", color: "bg-indigo-500", label: "NotificaciÃ³n contextual", time: "Viernes 19:30",
+                message: "Â¡MarÃ­a, te esperamos en 1 hora! ðŸ\n\nðŸ“ CÃ³mo llegar: maps.google.com/trattoria\nðŸ…¿ï¸ Parking: Parking Centro (2 min)\n\nÂ¡Buen provecho!",
                 hasMap: true,
-                quickReplies: ["🚗 Abrir mapa"],
+                quickReplies: ["ðŸš— Abrir mapa"],
                 timestamp: "19:30",
               },
               {
-                icon: "◆", color: "bg-amber-500", label: "Post-interacción · Feedback loop", time: "Sábado 10:00",
-                message: "¡Hola María! Esperamos que disfrutaras de tu cena 😊\n\n¿Nos dejas tu opinión? Nos ayuda muchísimo:",
-                quickReplies: ["⭐ Dejar reseña", "📅 Reservar otra vez"],
+                icon: "â—†", color: "bg-amber-500", label: "Post-interacciÃ³n Â· Feedback loop", time: "SÃ¡bado 10:00",
+                message: "Â¡Hola MarÃ­a! Esperamos que disfrutaras de tu cena ðŸ˜Š\n\nÂ¿Nos dejas tu opiniÃ³n? Nos ayuda muchÃ­simo:",
+                quickReplies: ["â­ Dejar reseÃ±a", "ðŸ“… Reservar otra vez"],
                 timestamp: "10:00",
               },
             ].map((step, i) => (
@@ -1450,11 +1095,11 @@ export default function Home() {
                         <div className="flex items-center gap-2 px-3 py-2 bg-[#1f2c34] border-b border-white/[0.04]">
                           <svg className="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                           <div className="w-7 h-7 bg-emerald-500/20 rounded-full flex items-center justify-center">
-                            <span className="text-[9px]">🍝</span>
+                            <span className="text-[9px]">ðŸ</span>
                           </div>
                           <div className="flex-1 min-w-0">
                             <span className="text-[11px] text-white font-medium block">Trattoria La Nonna</span>
-                            <span className="text-[8px] text-emerald-400">en línea</span>
+                            <span className="text-[8px] text-emerald-400">en lÃ­nea</span>
                           </div>
                           <svg className="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
                           <svg className="w-3.5 h-3.5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"><path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" /></svg>
@@ -1470,13 +1115,13 @@ export default function Home() {
                                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "linear-gradient(#1a4731 1px, transparent 1px), linear-gradient(90deg, #1a4731 1px, transparent 1px)", backgroundSize: "12px 12px" }} />
                                 <div className="relative flex items-center gap-1 text-[9px] text-emerald-400">
                                   <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" /></svg>
-                                  Ver ubicación
+                                  Ver ubicaciÃ³n
                                 </div>
                               </div>
                             )}
                             <div className="flex items-center justify-end gap-1 mt-1">
                               <span className="text-[8px] text-emerald-700">{step.timestamp}</span>
-                              <span className="text-[8px] text-blue-400">✓✓</span>
+                              <span className="text-[8px] text-blue-400">âœ“âœ“</span>
                             </div>
                           </div>
                           {/* Quick reply buttons */}
@@ -1506,9 +1151,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           BEFORE vs AFTER
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -1527,16 +1172,16 @@ export default function Home() {
                   <div className="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center">
                     <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                   </div>
-                  <h3 className="text-xl font-bold text-red-600">Operación manual</h3>
+                  <h3 className="text-xl font-bold text-red-600">OperaciÃ³n manual</h3>
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { icon: "○", text: "Atención limitada a horario comercial — clientes perdidos fuera de horas" },
-                    { icon: "○", text: "Respuestas manuales e inconsistentes entre canales" },
-                    { icon: "○", text: "Datos dispersos sin análisis ni trazabilidad" },
-                    { icon: "○", text: "Escalabilidad limitada por recursos humanos" },
-                    { icon: "○", text: "Costes crecientes con cada nuevo canal de comunicación" },
-                    { icon: "○", text: "Sin métricas de satisfacción ni feedback automatizado" },
+                    { icon: "â—‹", text: "AtenciÃ³n limitada a horario comercial â€” clientes perdidos fuera de horas" },
+                    { icon: "â—‹", text: "Respuestas manuales e inconsistentes entre canales" },
+                    { icon: "â—‹", text: "Datos dispersos sin anÃ¡lisis ni trazabilidad" },
+                    { icon: "â—‹", text: "Escalabilidad limitada por recursos humanos" },
+                    { icon: "â—‹", text: "Costes crecientes con cada nuevo canal de comunicaciÃ³n" },
+                    { icon: "â—‹", text: "Sin mÃ©tricas de satisfacciÃ³n ni feedback automatizado" },
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
@@ -1557,12 +1202,12 @@ export default function Home() {
                 </div>
                 <ul className="space-y-4">
                   {[
-                    { icon: "◆", text: "Cobertura 24/7 sin intervención humana en todos los canales" },
-                    { icon: "◆", text: "Respuestas personalizadas con NLP avanzado en <2 segundos" },
-                    { icon: "◆", text: "Analytics en tiempo real con insights accionables" },
-                    { icon: "◆", text: "Escalabilidad ilimitada sin incremento de costes operativos" },
-                    { icon: "◆", text: "Un único sistema multi-canal: WhatsApp, voz, web chat" },
-                    { icon: "◆", text: "Feedback loop automático con medición de satisfacción" },
+                    { icon: "â—†", text: "Cobertura 24/7 sin intervenciÃ³n humana en todos los canales" },
+                    { icon: "â—†", text: "Respuestas personalizadas con NLP avanzado en <2 segundos" },
+                    { icon: "â—†", text: "Analytics en tiempo real con insights accionables" },
+                    { icon: "â—†", text: "Escalabilidad ilimitada sin incremento de costes operativos" },
+                    { icon: "â—†", text: "Un Ãºnico sistema multi-canal: WhatsApp, voz, web chat" },
+                    { icon: "â—†", text: "Feedback loop automÃ¡tico con mediciÃ³n de satisfacciÃ³n" },
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3">
                       <span className="text-base flex-shrink-0">{item.icon}</span>
@@ -1576,9 +1221,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           SECTORS
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="sectores" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] to-[#EFF6FF]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -1594,20 +1239,20 @@ export default function Home() {
             <ScrollReveal>
               <div className="group bg-gradient-to-br from-amber-50 to-white border border-amber-200/60 rounded-2xl p-6 sm:p-8 hover:border-amber-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">�</div>
+                  <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl">ï¿½</div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900">Hostelería & Restauración</h3>
-                    <p className="text-xs text-slate-500">Gestión integral de reservas y atención</p>
+                    <h3 className="text-xl font-bold text-slate-900">HostelerÃ­a & RestauraciÃ³n</h3>
+                    <p className="text-xs text-slate-500">GestiÃ³n integral de reservas y atenciÃ³n</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
                   {[
                     "Agente IA que gestiona reservas por WhatsApp, voz y web",
                     "Landing personalizada con carta, horarios y reserva online",
-                    "Follow-up automático y recogida de feedback post-visita",
-                    "Integración con Google Reviews, Maps y plataformas de reserva",
-                    "Panel de control con analytics de ocupación y satisfacción",
-                    "Multi-idioma para establecimientos turísticos",
+                    "Follow-up automÃ¡tico y recogida de feedback post-visita",
+                    "IntegraciÃ³n con Google Reviews, Maps y plataformas de reserva",
+                    "Panel de control con analytics de ocupaciÃ³n y satisfacciÃ³n",
+                    "Multi-idioma para establecimientos turÃ­sticos",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -1615,27 +1260,27 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, bares, hoteles, cafeterías, catering, gastrobares</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, bares, hoteles, cafeterÃ­as, catering, gastrobares</p>
               </div>
             </ScrollReveal>
 
             <ScrollReveal delay={100}>
               <div className="group bg-gradient-to-br from-indigo-50 to-white border border-indigo-200/60 rounded-2xl p-6 sm:p-8 hover:border-indigo-300 transition-all duration-500 h-full">
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl">✂️</div>
+                  <div className="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center text-2xl">âœ‚ï¸</div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900">Servicios & Bienestar</h3>
-                    <p className="text-xs text-slate-500">Automatización de citas y fidelización</p>
+                    <p className="text-xs text-slate-500">AutomatizaciÃ³n de citas y fidelizaciÃ³n</p>
                   </div>
                 </div>
                 <ul className="space-y-3 mb-6">
                   {[
                     "Agente IA que gestiona citas por profesional/especialista",
-                    "Landing con catálogo de servicios, galería y booking",
-                    "Programa de fidelización y puntos integrado",
-                    "Recordatorios inteligentes y reprogramación automática",
-                    "Analytics por profesional: agenda, retención, ingresos",
-                    "Gestión de reseñas y reputación online",
+                    "Landing con catÃ¡logo de servicios, galerÃ­a y booking",
+                    "Programa de fidelizaciÃ³n y puntos integrado",
+                    "Recordatorios inteligentes y reprogramaciÃ³n automÃ¡tica",
+                    "Analytics por profesional: agenda, retenciÃ³n, ingresos",
+                    "GestiÃ³n de reseÃ±as y reputaciÃ³n online",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-sm text-slate-500">
                       <svg className="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
@@ -1643,16 +1288,16 @@ export default function Home() {
                     </li>
                   ))}
                 </ul>
-                <p className="text-[11px] text-slate-400 italic">Ideal para: barberías, peluquerías, centros de estética, clínicas, spas, consultas</p>
+                <p className="text-[11px] text-slate-400 italic">Ideal para: restaurantes, peluquerÃ­as, centros de estÃ©tica, clÃ­nicas, spas, consultas</p>
               </div>
             </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           INTEGRATIONS MARQUEE
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-14 bg-white border-t border-b border-slate-200 overflow-hidden">
         <p className="text-center text-xs text-slate-400 uppercase tracking-[0.2em] mb-8">
           Integramos con las herramientas que ya usas
@@ -1669,16 +1314,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          PROCESS — 4 steps
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          PROCESS â€” 4 steps
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="proceso" className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="text-center mb-20">
-              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">Implementación</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">Proceso de implementación</h2>
-              <p className="text-lg text-slate-500">Del análisis al despliegue en 5 días laborables.</p>
+              <span className="text-violet-400 text-xs font-semibold tracking-[0.2em] uppercase">ImplementaciÃ³n</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mt-3 mb-4">Proceso de implementaciÃ³n</h2>
+              <p className="text-lg text-slate-500">Del anÃ¡lisis al despliegue en 5 dÃ­as laborables.</p>
             </div>
           </ScrollReveal>
 
@@ -1686,10 +1331,10 @@ export default function Home() {
             <div className="hidden lg:block absolute top-12 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-violet-500/30 via-indigo-500/30 to-amber-500/30" />
 
             {[
-              { num: "01", title: "Discovery", desc: "Análisis de tu operación, flujos de atención actuales y puntos de fricción. Definición de requisitos y arquitectura del agente.", gradient: "from-violet-500 to-violet-600" },
-              { num: "02", title: "Configuración", desc: "Personalización del agente IA, integraciones con tus sistemas, diseño de la landing page y flujos conversacionales.", gradient: "from-indigo-500 to-indigo-600" },
-              { num: "03", title: "Despliegue", desc: "Puesta en producción con testing end-to-end, validación de todos los canales y formación del equipo.", gradient: "from-blue-500 to-blue-600" },
-              { num: "04", title: "Optimización", desc: "Mejora continua basada en datos, ajuste de respuestas del agente y reporting mensual de rendimiento.", gradient: "from-amber-500 to-orange-500" },
+              { num: "01", title: "Discovery", desc: "AnÃ¡lisis de tu operaciÃ³n, flujos de atenciÃ³n actuales y puntos de fricciÃ³n. DefiniciÃ³n de requisitos y arquitectura del agente.", gradient: "from-violet-500 to-violet-600" },
+              { num: "02", title: "ConfiguraciÃ³n", desc: "PersonalizaciÃ³n del agente IA, integraciones con tus sistemas, diseÃ±o de la landing page y flujos conversacionales.", gradient: "from-indigo-500 to-indigo-600" },
+              { num: "03", title: "Despliegue", desc: "Puesta en producciÃ³n con testing end-to-end, validaciÃ³n de todos los canales y formaciÃ³n del equipo.", gradient: "from-blue-500 to-blue-600" },
+              { num: "04", title: "OptimizaciÃ³n", desc: "Mejora continua basada en datos, ajuste de respuestas del agente y reporting mensual de rendimiento.", gradient: "from-amber-500 to-orange-500" },
             ].map((step, i) => (
               <ScrollReveal key={step.num} delay={i * 100}>
                 <div className="text-center relative">
@@ -1706,7 +1351,7 @@ export default function Home() {
           <ScrollReveal>
             <div className="text-center mt-16">
               <a href="#contacto" className="inline-flex items-center gap-3 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-bold py-4 px-8 rounded-full text-base transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:shadow-amber-500/20">
-                Solicitar implementación
+                Solicitar implementaciÃ³n
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
               </a>
             </div>
@@ -1714,9 +1359,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          VOICE AGENTS — Premium add-on
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          VOICE AGENTS â€” Premium add-on
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="agentes" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]">
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
@@ -1728,8 +1373,8 @@ export default function Home() {
                 Agente de voz con IA
               </h2>
               <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-                Canal telefónico con procesamiento de lenguaje natural en tiempo real.
-                Voz sintética indistinguible, conectada al sistema central del agente.
+                Canal telefÃ³nico con procesamiento de lenguaje natural en tiempo real.
+                Voz sintÃ©tica indistinguible, conectada al sistema central del agente.
               </p>
             </div>
           </ScrollReveal>
@@ -1739,9 +1384,9 @@ export default function Home() {
               <div>
                 <ul className="space-y-5 mb-8">
                   {[
-                    { title: "Atención telefónica 24/7", desc: "Un cliente llama fuera de horario. El agente procesa la consulta, accede al sistema y resuelve la petición en tiempo real.", color: "text-cyan-400" },
-                    { title: "Voz natural con NLP avanzado", desc: "Síntesis de voz indistinguible de un operador humano. Procesamiento contextual y respuestas adaptadas al historial del cliente.", color: "text-violet-400" },
-                    { title: "Integrado con el sistema central", desc: "Todas las interacciones del agente de voz se sincronizan con el panel de control, analytics y los demás canales en tiempo real.", color: "text-amber-400" },
+                    { title: "AtenciÃ³n telefÃ³nica 24/7", desc: "Un cliente llama fuera de horario. El agente procesa la consulta, accede al sistema y resuelve la peticiÃ³n en tiempo real.", color: "text-cyan-400" },
+                    { title: "Voz natural con NLP avanzado", desc: "SÃ­ntesis de voz indistinguible de un operador humano. Procesamiento contextual y respuestas adaptadas al historial del cliente.", color: "text-violet-400" },
+                    { title: "Integrado con el sistema central", desc: "Todas las interacciones del agente de voz se sincronizan con el panel de control, analytics y los demÃ¡s canales en tiempo real.", color: "text-amber-400" },
                   ].map((item) => (
                     <li key={item.title} className="flex gap-4">
                       <div className="w-10 h-10 bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -1761,7 +1406,7 @@ export default function Home() {
               </div>
             </ScrollReveal>
 
-            {/* Agent Mockup — Enterprise */}
+            {/* Agent Mockup â€” Enterprise */}
             <ScrollReveal delay={150}>
               <div className="relative">
                 <div className="absolute -inset-4 bg-cyan-500/[0.04] rounded-3xl blur-2xl" />
@@ -1806,19 +1451,19 @@ export default function Home() {
                         </div>
                         <div className="flex items-center justify-center gap-4 mt-1">
                           <span className="text-[8px] text-gray-600">Escuchando</span>
-                          <span className="text-[8px] text-cyan-500/60">⬤ Grabando</span>
+                          <span className="text-[8px] text-cyan-500/60">â¬¤ Grabando</span>
                         </div>
                       </div>
 
                       {/* Chat messages with timestamps */}
                       <div className="p-4 space-y-3 max-h-[250px] overflow-y-auto scrollbar-thin">
                         {[
-                          { role: "user", text: "Hola buenas, quería reservar mesa para el viernes para 4 personas.", ts: "00:03" },
-                          { role: "agent", text: "¡Buenas tardes! Encantado de ayudarte. Para 4 personas el viernes, ¿tienes preferencia de horario? Tenemos disponibilidad a las 14:00, 21:00 y 21:30.", ts: "00:08" },
+                          { role: "user", text: "Hola buenas, querÃ­a reservar mesa para el viernes para 4 personas.", ts: "00:03" },
+                          { role: "agent", text: "Â¡Buenas tardes! Encantado de ayudarte. Para 4 personas el viernes, Â¿tienes preferencia de horario? Tenemos disponibilidad a las 14:00, 21:00 y 21:30.", ts: "00:08" },
                           { role: "user", text: "A las 21:00 perfecto.", ts: "00:18" },
-                          { role: "agent", text: "Genial, mesa para 4 el viernes a las 21:00. ¿A nombre de quién la reservo?", ts: "00:22" },
-                          { role: "user", text: "A nombre de Roberto Díaz.", ts: "00:28" },
-                          { role: "agent", text: "Perfecto Roberto. Reserva confirmada: viernes a las 21:00, mesa para 4. Te envío confirmación por WhatsApp ahora mismo. ¡Le esperamos!", ts: "00:35" },
+                          { role: "agent", text: "Genial, mesa para 4 el viernes a las 21:00. Â¿A nombre de quiÃ©n la reservo?", ts: "00:22" },
+                          { role: "user", text: "A nombre de Roberto DÃ­az.", ts: "00:28" },
+                          { role: "agent", text: "Perfecto Roberto. Reserva confirmada: viernes a las 21:00, mesa para 4. Te envÃ­o confirmaciÃ³n por WhatsApp ahora mismo. Â¡Le esperamos!", ts: "00:35" },
                         ].map((msg, i) => (
                           <div key={i} className={`flex gap-2.5 ${msg.role === "agent" ? "justify-end" : ""}`}>
                             {msg.role === "user" && (
@@ -1851,21 +1496,21 @@ export default function Home() {
                             WhatsApp enviado
                           </span>
                         </div>
-                        <span className="text-[9px] text-gray-600">Duración: 0:42</span>
+                        <span className="text-[9px] text-gray-600">DuraciÃ³n: 0:42</span>
                       </div>
                     </div>
 
-                    {/* Side panel — client data */}
+                    {/* Side panel â€” client data */}
                     <div className="hidden md:block w-44 border-l border-white/[0.06] bg-[#0b0f14] p-3">
                       <div className="mb-4">
                         <span className="text-[8px] text-gray-600 uppercase tracking-wider">Datos del cliente</span>
                         <div className="mt-2 space-y-2">
                           <div>
                             <span className="text-[8px] text-gray-500 block">Nombre</span>
-                            <span className="text-[11px] text-white font-medium">Roberto Díaz</span>
+                            <span className="text-[11px] text-white font-medium">Roberto DÃ­az</span>
                           </div>
                           <div>
-                            <span className="text-[8px] text-gray-500 block">Teléfono</span>
+                            <span className="text-[8px] text-gray-500 block">TelÃ©fono</span>
                             <span className="text-[11px] text-gray-400">+34 *** *** 89</span>
                           </div>
                           <div>
@@ -1899,7 +1544,7 @@ export default function Home() {
                           </div>
                           <span className="text-[9px] text-emerald-400 font-medium">92%</span>
                         </div>
-                        <span className="text-[8px] text-gray-600 mt-1 block">Positivo · Satisfecho</span>
+                        <span className="text-[8px] text-gray-600 mt-1 block">Positivo Â· Satisfecho</span>
                       </div>
                     </div>
                   </div>
@@ -1910,18 +1555,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
-          RESULTS — Big numbers
-          ════════════════════════════════════════════════ */}
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+          RESULTS â€” Big numbers
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <ScrollReveal>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-10">
               {[
                 { value: "<2s", label: "tiempo medio de respuesta", color: "text-emerald-400", bg: "from-emerald-500/[0.06] to-transparent" },
-                { value: "97%", label: "resolución automática", color: "text-violet-400", bg: "from-violet-500/[0.06] to-transparent" },
+                { value: "97%", label: "resoluciÃ³n automÃ¡tica", color: "text-violet-400", bg: "from-violet-500/[0.06] to-transparent" },
                 { value: "99.9%", label: "disponibilidad del servicio", color: "text-indigo-400", bg: "from-indigo-500/[0.06] to-transparent" },
-                { value: "4.9/5", label: "satisfacción usuarios finales", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
+                { value: "4.9/5", label: "satisfacciÃ³n usuarios finales", color: "text-amber-400", bg: "from-amber-500/[0.06] to-transparent" },
               ].map((r) => (
                 <div key={r.label} className={`bg-gradient-to-b ${r.bg} border border-slate-200 rounded-2xl p-6 text-center`}>
                   <div className={`text-3xl sm:text-4xl md:text-5xl font-extrabold ${r.color} mb-2`}>{r.value}</div>
@@ -1933,16 +1578,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           GUARANTEES
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section className="py-16 px-4 bg-slate-50 border-t border-b border-slate-200">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", title: "SLA garantizado", desc: "Disponibilidad 99.9%", bgClass: "bg-emerald-500/10", iconClass: "text-emerald-400" },
-              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Despliegue en 5 días", desc: "Implementación rápida", bgClass: "bg-violet-500/10", iconClass: "text-violet-400" },
-              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", title: "Soporte dedicado", desc: "Equipo técnico asignado", bgClass: "bg-indigo-500/10", iconClass: "text-indigo-400" },
+              { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", title: "Despliegue en 5 dÃ­as", desc: "ImplementaciÃ³n rÃ¡pida", bgClass: "bg-violet-500/10", iconClass: "text-violet-400" },
+              { icon: "M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z", title: "Soporte dedicado", desc: "Equipo tÃ©cnico asignado", bgClass: "bg-indigo-500/10", iconClass: "text-indigo-400" },
               { icon: "M13 7h8m0 0v8m0-8l-8 8-4-4-6 6", title: "Sin lock-in", desc: "Portabilidad total de datos", bgClass: "bg-amber-500/10", iconClass: "text-amber-400" },
             ].map((item) => (
               <ScrollReveal key={item.title}>
@@ -1961,9 +1606,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           FAQ
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="faq" className="py-24 px-4 bg-[#F1F5F9]">
         <div className="max-w-3xl mx-auto">
           <ScrollReveal>
@@ -1975,13 +1620,13 @@ export default function Home() {
           <ScrollReveal>
             <div className="space-y-3">
               {[
-                { q: "¿Cuál es el modelo de pricing?", a: "Ofrecemos planes adaptados al volumen de interacciones y canales requeridos. En la demostración técnica definimos el alcance y proporcionamos un presupuesto cerrado. Sin costes ocultos." },
-                { q: "¿Para qué sectores funciona la plataforma?", a: "Cualquier negocio que requiera atención al cliente: hostelería, servicios profesionales, salud, retail, consultorías. El agente se personaliza para cada vertical con flujos conversacionales adaptados." },
-                { q: "¿Qué experiencia tienen los usuarios finales?", a: "Los clientes interactuían de forma natural por WhatsApp, teléfono o web chat. El agente responde en <2 segundos con lenguaje natural. La experiencia es indistinguible de un operador humano." },
-                { q: "¿Cómo se entrena al agente?", a: "Durante la fase de Discovery analizamos tus flujos de atención y configuramos el agente con tu información: servicios, políticas, horarios, FAQ. El sistema mejora automáticamente con cada interacción." },
-                { q: "¿Qué integraciones soporta la plataforma?", a: "Más de 25 integraciones nativas: WhatsApp Business, Google Calendar, Stripe, CRMs, Make, Zapier, n8n, APIs REST y webhooks. Si necesitas una integración específica, la desarrollamos." },
-                { q: "¿Cuánto tarda la implementación?", a: "5 días laborables desde el kickoff. Incluye análisis, configuración del agente, diseño de la landing, integraciones, testing y formación del equipo." },
-                { q: "¿Cumplís con RGPD?", a: "Sí. Todos los datos se procesan en la UE, con cifrado end-to-end, políticas de retención configurables y cumplimiento total con RGPD. Proporcionamos DPA si es necesario." },
+                { q: "Â¿CuÃ¡l es el modelo de pricing?", a: "Ofrecemos planes adaptados al volumen de interacciones y canales requeridos. En la demostraciÃ³n tÃ©cnica definimos el alcance y proporcionamos un presupuesto cerrado. Sin costes ocultos." },
+                { q: "Â¿Para quÃ© sectores funciona la plataforma?", a: "Cualquier negocio que requiera atenciÃ³n al cliente: hostelerÃ­a, servicios profesionales, salud, retail, consultorÃ­as. El agente se personaliza para cada vertical con flujos conversacionales adaptados." },
+                { q: "Â¿QuÃ© experiencia tienen los usuarios finales?", a: "Los clientes interactuÃ­an de forma natural por WhatsApp, telÃ©fono o web chat. El agente responde en <2 segundos con lenguaje natural. La experiencia es indistinguible de un operador humano." },
+                { q: "Â¿CÃ³mo se entrena al agente?", a: "Durante la fase de Discovery analizamos tus flujos de atenciÃ³n y configuramos el agente con tu informaciÃ³n: servicios, polÃ­ticas, horarios, FAQ. El sistema mejora automÃ¡ticamente con cada interacciÃ³n." },
+                { q: "Â¿QuÃ© integraciones soporta la plataforma?", a: "MÃ¡s de 25 integraciones nativas: WhatsApp Business, Google Calendar, Stripe, CRMs, Make, Zapier, n8n, APIs REST y webhooks. Si necesitas una integraciÃ³n especÃ­fica, la desarrollamos." },
+                { q: "Â¿CuÃ¡nto tarda la implementaciÃ³n?", a: "5 dÃ­as laborables desde el kickoff. Incluye anÃ¡lisis, configuraciÃ³n del agente, diseÃ±o de la landing, integraciones, testing y formaciÃ³n del equipo." },
+                { q: "Â¿CumplÃ­s con RGPD?", a: "SÃ­. Todos los datos se procesan en la UE, con cifrado end-to-end, polÃ­ticas de retenciÃ³n configurables y cumplimiento total con RGPD. Proporcionamos DPA si es necesario." },
               ].map((faq, i) => (
                 <details key={i} className="group bg-white border border-slate-200 rounded-xl overflow-hidden hover:border-violet-500/20 transition-colors">
                   <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
@@ -1998,9 +1643,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════════════════════════════════════════
+      {/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
           CONTACT / CTA FINAL
-          ════════════════════════════════════════════════ */}
+          â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
       <section id="contacto" className="py-24 px-4 bg-gradient-to-b from-[#F1F5F9] via-[#EFF6FF] to-[#EFF6FF]">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -2012,7 +1657,7 @@ export default function Home() {
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-amber-400" />
                   </span>
                   <span className="text-amber-300 text-xs font-medium">
-                    Implementación disponible
+                    ImplementaciÃ³n disponible
                   </span>
                 </div>
 
@@ -2020,12 +1665,12 @@ export default function Home() {
                   Empieza a operar<br />con IA
                 </h2>
                 <p className="text-lg text-slate-500 mb-8 leading-relaxed">
-                  Solicita una demostración personalizada.{" "}
-                  <span className="text-slate-900 font-medium">Nuestro equipo técnico analizará tu caso</span> y propondrá una solución a medida.
+                  Solicita una demostraciÃ³n personalizada.{" "}
+                  <span className="text-slate-900 font-medium">Nuestro equipo tÃ©cnico analizarÃ¡ tu caso</span> y propondrÃ¡ una soluciÃ³n a medida.
                 </p>
 
                 <ul className="space-y-4 mb-8">
-                  {["Análisis técnico de tu operación actual", "Propuesta de arquitectura personalizada", "Presupuesto cerrado sin costes ocultos"].map((b) => (
+                  {["AnÃ¡lisis tÃ©cnico de tu operaciÃ³n actual", "Propuesta de arquitectura personalizada", "Presupuesto cerrado sin costes ocultos"].map((b) => (
                     <li key={b} className="flex items-center gap-3 text-slate-600 text-sm">
                       <div className="w-6 h-6 bg-violet-500/10 rounded-md flex items-center justify-center flex-shrink-0">
                         <svg className="w-3.5 h-3.5 text-violet-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
