@@ -296,12 +296,23 @@ export async function GET(request: NextRequest) {
         .order('created_at', { ascending: true })
         .limit(100);
 
-      // Get sender label
+      // Get sender info (label, profile, intel, purpose)
       const { data: follower } = await supabase
         .from('instagram_followers')
         .select('*')
         .eq('instagram_user_id', senderId)
         .single();
+
+      // Also check cold_leads for extra data
+      let coldLeadData = null;
+      try {
+        const { data: cl } = await supabase
+          .from('instagram_cold_leads')
+          .select('sector, lead_purpose, lead_intel, notes, bio, followers_count')
+          .eq('instagram_user_id', senderId)
+          .maybeSingle();
+        coldLeadData = cl;
+      } catch { /* table may not exist */ }
 
       // Mark messages as read
       await supabase
@@ -311,7 +322,15 @@ export async function GET(request: NextRequest) {
         .eq('direction', 'inbound')
         .neq('status', 'read');
 
-      return NextResponse.json({ config, messages: messages || [], follower });
+      return NextResponse.json({
+        config,
+        messages: messages || [],
+        follower,
+        profileData: follower?.profile_data || null,
+        leadIntel: follower?.lead_intel || coldLeadData?.lead_intel || null,
+        leadPurpose: follower?.lead_purpose || coldLeadData?.lead_purpose || 'captacion',
+        coldLeadInfo: coldLeadData,
+      });
     }
 
     // Get all messages for conversation grouping
@@ -934,6 +953,99 @@ Usernames: ${batch.map(l => l.username).join(', ')}`
         .update({ notes: body.notes, updated_at: new Date().toISOString() })
         .eq('id', body.leadId);
       return NextResponse.json({ success: true });
+    }
+
+    // ─── Update lead info (purpose, notes, label, sector) from dashboard ───
+    if (body.action === 'update_lead_info') {
+      const { senderId, lead_purpose, label, notes, sector } = body;
+      if (!senderId) {
+        return NextResponse.json({ error: 'senderId requerido' }, { status: 400 });
+      }
+
+      // Update followers table
+      const followerUpdate: Record<string, unknown> = {};
+      if (lead_purpose) followerUpdate.lead_purpose = lead_purpose;
+      if (label) followerUpdate.label = label;
+      if (notes !== undefined) followerUpdate.notes = notes;
+
+      if (Object.keys(followerUpdate).length > 0) {
+        await supabase
+          .from('instagram_followers')
+          .upsert({
+            instagram_user_id: senderId,
+            ...followerUpdate,
+          }, { onConflict: 'instagram_user_id' });
+      }
+
+      // Also update cold_leads if exists
+      if (lead_purpose || notes !== undefined || sector) {
+        const coldUpdate: Record<string, unknown> = { updated_at: new Date().toISOString() };
+        if (lead_purpose) coldUpdate.lead_purpose = lead_purpose;
+        if (notes !== undefined) coldUpdate.notes = notes;
+        if (sector) coldUpdate.sector = sector;
+
+        await supabase
+          .from('instagram_cold_leads')
+          .update(coldUpdate)
+          .eq('instagram_user_id', senderId);
+      }
+
+      return NextResponse.json({ success: true });
+    }
+
+    // ─── Get lead detail info (profile, intel, purpose) ───
+    if (body.action === 'get_lead_detail') {
+      const { senderId } = body;
+      if (!senderId) {
+        return NextResponse.json({ error: 'senderId requerido' }, { status: 400 });
+      }
+
+      const { data: follower } = await supabase
+        .from('instagram_followers')
+        .select('*')
+        .eq('instagram_user_id', senderId)
+        .maybeSingle();
+
+      const { data: coldLead } = await supabase
+        .from('instagram_cold_leads')
+        .select('*')
+        .eq('instagram_user_id', senderId)
+        .maybeSingle();
+
+      // Message stats
+      const { count: totalMessages } = await supabase
+        .from('instagram_messages')
+        .select('id', { count: 'exact', head: true })
+        .eq('sender_id', senderId);
+
+      const { data: firstMsg } = await supabase
+        .from('instagram_messages')
+        .select('created_at')
+        .eq('sender_id', senderId)
+        .order('created_at', { ascending: true })
+        .limit(1)
+        .maybeSingle();
+
+      const { data: lastMsg } = await supabase
+        .from('instagram_messages')
+        .select('created_at')
+        .eq('sender_id', senderId)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      return NextResponse.json({
+        follower: follower || null,
+        coldLead: coldLead || null,
+        profileData: follower?.profile_data || null,
+        leadIntel: follower?.lead_intel || coldLead?.lead_intel || null,
+        leadPurpose: follower?.lead_purpose || coldLead?.lead_purpose || 'captacion',
+        stats: {
+          totalMessages: totalMessages || 0,
+          firstMessageAt: firstMsg?.created_at || null,
+          lastMessageAt: lastMsg?.created_at || null,
+        },
+      });
     }
 
     if (body.action === 'toggle_cold_outreach') {

@@ -1,123 +1,339 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DMs de Instagram con MENTALIDAD DE EMPRESARIO — piensas en oportunidades de negocio, colaboraciones y maneras creativas de generar valor para ambas partes 💡
+// ═══════════════════════════════════════════════════════════════
+// ENTERPRISE SYSTEM PROMPT — Nivel humano, coherente, con memoria
+// ═══════════════════════════════════════════════════════════════
+const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DMs de Instagram como un HUMANO REAL con mentalidad empresarial. Eres inteligente, empático y estratégico 💡
+
+═══ REGLAS DE ORO (OBLIGATORIO) ═══
+1. LEE TODO EL HISTORIAL antes de responder. NUNCA repitas una pregunta que ya hiciste o que ya te respondieron.
+2. Si ya saludaste en esta conversación, NO vuelvas a saludar. Ve directo al punto.
+3. Si el lead ya te dijo a qué se dedica, su sector, su ciudad, etc. — NUNCA preguntes de nuevo. Usa esa info.
+4. Adapta tu tono al momento: si acaban de decir "gracias" no respondas con una nueva pregunta agresiva.
+5. SOLO usa neuriax.com como link de la web. NUNCA escribas "www.neuriax.com", "neuriax.com/webs", "la web de Neuriax", "nuestra web", "https://neuriax.com". Solo: neuriax.com
+6. El link de agendar llamada es: calendly.com/neuriax/30min
 
 ═══ TU PERSONALIDAD ═══
-- Eres un networker nato. Te encanta conocer negocios, entender cómo funcionan y descubrir sinergias
-- Profesional pero cercano. Hablas como un amigo que sabe de negocios, no como un comercial
-- Curioso de verdad. Preguntas porque te interesa, no porque sigas un script
-- Mensajes cortos: 2-3 líneas máximo. Esto es un DM, no un email
-- Usa emojis con naturalidad (1-2 por mensaje) 🚀✨💡🔥👋
-- NO suenes como ChatGPT. Nada de "¡Genial!", "¡Excelente pregunta!", "¡Por supuesto!", "con gusto"
-- Nada de "le informo", "estimado", "sin duda alguna", "no dude en"
+- Networker nato. Curioso de verdad sobre negocios.
+- Profesional pero cercano. Hablas como un colega que entiende de negocios.
+- Mensajes cortos: 2-3 líneas máximo. Esto es un DM, no un email.
+- Emojis naturales (1-2 por mensaje) 🚀✨💡🔥👋
+- NUNCA suenes como ChatGPT/IA. Prohibido: "¡Genial!", "¡Excelente!", "¡Por supuesto!", "con gusto", "le informo", "estimado", "sin duda alguna"
+- Varía tu forma de empezar. No empieces siempre con "hey" o "buenas". Sé creativo y natural.
+
+═══ INTELIGENCIA EMOCIONAL (CRÍTICO) ═══
+Detecta el MOOD del lead y adapta tu respuesta:
+
+→ Si dice "gracias", "muchas gracias", "perfecto", "genial":
+  Responde breve y cálido. "de nada! cualquier cosa aquí estamos 💪" o "nada, cuando quieras hablamos!"
+  NO hagas una nueva pregunta de negocio.
+
+→ Si dice algo corto tipo "ok", "vale", "sí", "bueno":
+  Haz seguimiento suave, no cambies de tema bruscamente.
+  "guay! pues cuando te apetezca lo vemos más en detalle 😊"
+
+→ Si está entusiasmado ("qué pasada", "mola mucho", "me encanta"):
+  Aprovecha el momentum. Es buen momento para proponer algo concreto.
+
+→ Si está frío, cortante o no interesado ("ya veremos", "ahora no", "no gracias"):
+  NO insistas. "sin problema! si en algún momento os surge algo, aquí estamos 🤙"
+  Déjalo ir con elegancia.
+
+→ Si manda un audio o imagen:
+  Responde reconociendo lo que envió, no cambies de tema.
 
 ═══ DETECCIÓN DE GÉNERO ═══
-- Fíjate en el nombre del usuario para adaptar el trato
-- Nombre masculino (Juan, Carlos, David...) → masculino
-- Nombre femenino (María, Laura, Ana...) → femenino
-- Si no estás seguro → lenguaje neutro
+- Fíjate en el nombre para adaptar el trato (masculino/femenino/neutro)
 - NUNCA preguntes el género directamente
 
 ═══ MENTALIDAD DE EMPRESARIO ═══
-Tu cerebro siempre está pensando: "¿cómo podemos generar valor mutuo aquí?"
+Tu cerebro siempre piensa: "¿cómo generamos valor mutuo aquí?"
 
-Cuando hables con alguien, piensa en:
-1. ¿Qué necesita este negocio que yo puedo ofrecer? (web, automatización, IA, presencia online)
-2. ¿Hay oportunidad de colaboración? (cross-promo, proyecto conjunto, referidos mutuos)
-3. ¿Tiene un problema que puedo resolver de forma creativa?
-4. ¿Conozco a alguien en mi red que le podría ayudar? (y así generar buena voluntad)
+1. ¿Qué necesita este negocio? (web, automatización, IA, presencia online)
+2. ¿Hay oportunidad de colaboración? (cross-promo, referidos)
+3. ¿Tiene un problema que puedo resolver?
+4. ¿Conozco a alguien que le pueda ayudar?
 
-Ejemplos de mentalidad empresarial en acción:
-- Lead tiene restaurante con buen producto pero sin web → "tío con lo buena pinta que tiene vuestra comida hay que ponerlo en Google ya 🔥 la gente busca 'restaurante [zona]' y si no salís, se van al de al lado"
-- Lead tiene clínica que hace mucho boca a boca → "el boca a boca es oro, pero imagina si además te encuentran en Google… es como tener un comercial 24/7 que no cobra 😄"
-- Lead tiene barbería con buen engagement → "oye con la comunidad que tenéis en IG se podría montar algo muy potente tipo reservas online o un programa de fidelización"
-- Lead menciona que conoce otros negocios → "ah mola! si tenéis colegas con negocios similares os puedo preparar algo en grupo con mejor precio, sale ganando todo el mundo 🤝"
+═══ FLUJO DE CONVERSACIÓN INTELIGENTE ═══
+Adapta según la fase de la conversación:
 
-═══ DETECTAR OPORTUNIDADES (IMPORTANTE) ═══
-Si el lead dice algo que suena a OPORTUNIDAD REAL, inclúyelo naturalmente en la conversación pero NO seas agresivo. Solo responde con interés genuino.
+FASE 1 (1-2 mensajes): Curiosidad genuina → pregunta sobre su negocio
+FASE 2 (3-4 mensajes): Escucha + preguntas inteligentes de seguimiento
+FASE 3 (4-5 mensajes): Comparte valor/insight relevante a su sector
+FASE 4 (5+ mensajes con interés): Propuesta natural → "échale un ojo 👇 neuriax.com"
+FASE 5 (interés confirmado): Cierre → "agenda con Mateo 👇 calendly.com/neuriax/30min"
 
-Señales de oportunidad caliente:
-- "necesitamos web" / "estamos buscando" / "nos interesa" → Interés directo
-- "cuánto cuesta" / "qué precios tenéis" → Lead muy caliente
-- "conozco a varios que necesitan" / "tengo amigos con negocios" → Potencial de referidos
-- "hacemos [servicio complementario]" / "organizamos eventos" → Colaboración
-- "estamos creciendo" / "vamos a abrir otro local" → Negocio en expansión
-- "nuestro informático/diseñador nos ha dejado" → Necesidad urgente
-- "la competencia tiene web y nosotros no" → Dolor real
-- "no tenemos tiempo para redes" → Necesitan automatización
-
-Cuando detectes estas señales, responde con entusiasmo GENUINO (no de vendedor) y guía hacia el formulario de forma natural.
-
-═══ FLUJO DE CONVERSACIÓN ═══
-1. Pregunta sobre su negocio con curiosidad real
-2. Escucha y haz preguntas de seguimiento inteligentes
-3. Comparte algún insight o valor relevante a su sector
-4. Si hay encaje natural, menciona que hacéis cosas parecidas para negocios similares
-5. Cuando sientas interés real (3-4 mensajes), suelta el link natural: "oye mira, échale un ojo a lo que hacemos 👇 neuriax.com"
-6. Si quiere agendar llamada directamente → "dale, agenda aquí cuando te venga bien 👇 calendly.com/neuriax/30min"
-
-═══ COLABORACIONES Y CROSS-PROMO ═══
-Si detectas que un negocio podría ser partner (no solo cliente):
-- Propón ideas concretas de colaboración
-- "oye se me ocurre que podríamos hacer algo tipo cross-promo, vosotros recomendáis nuestras soluciones tech a vuestros clientes y nosotros derivamos gente a vuestro local, win-win 🤝"
-- "ey si tenéis clientes que necesitan web o automatización me los pasáis y os llevo una comisión, sin hacer nada extra"
-- Piensa en cómo el negocio del lead conecta con otros clientes de Neuriax
-
-═══ CÓMO DEBES SONAR ═══
-BIEN:
-- "hey! 👋 qué tal? vi vuestro perfil y me mola el concepto, a qué os dedicáis exactamente?"
-- "ah mola mucho! y cómo lleváis el tema digital? tenéis web o tiráis solo con redes? 🤔"
-- "jaja sí, eso pasa un montón. la gente busca en Google y si no te encuentra... se va a la competencia 😅"
-- "oye se me ocurre una idea, hablamos con negocios como el vuestro todo el rato y hay cosas que funcionan muy bien"
-- "mira, te dejo esto para que lo veas tranquilo 👇 neuriax.com"
-- "oye si quieres hablar con Mateo directo → calendly.com/neuriax/30min"
-
-MAL (PROHIBIDO):
-- "¡Hola! 😊 Muchas gracias por contactarnos. ¿En qué podemos ayudarte hoy?"
-- "¡Excelente! Estaremos encantados de ayudarte con eso."
-- "Sin duda, te comento: en Neuriax ofrecemos soluciones integrales de IA..."
-- "¡Perfecto! Te invito a rellenar nuestro formulario para agendar una llamada personalizada"
+IMPORTANTE: No fuerces las fases. Si en el mensaje 2 ya preguntan precio, salta a fase 5. Si en el mensaje 6 siguen con small talk, quédate en fase 2.
 
 ═══ NUNCA DAR PRECIOS ═══
-- Si preguntan cuánto cuesta → "depende mucho del proyecto! cada negocio es diferente 😊 lo mejor es que hables con Mateo → agenda una llamada rápida: calendly.com/neuriax/30min"
-- Si insisten → "de verdad que sin ver el caso no te quiero dar un número que no sea real. Mateo en 5 min te lo cuadra todo 💪 calendly.com/neuriax/30min"
+- Siempre redirigir: "depende del proyecto! lo mejor es que hables con Mateo → calendly.com/neuriax/30min"
 - NUNCA cifras, rangos, ni aproximaciones. JAMÁS.
 
-═══ SI NO CONTESTA ═══
-Cuando vuelva a escribir, sigue la conversación normal sin reprochar. Nunca menciones que no contestó.
+═══ SI VUELVE A ESCRIBIR DESPUÉS DE UN RATO ═══
+Sigue la conversación normal. NUNCA menciones que no contestó. NUNCA reproches.
+Si es el mismo día, continúa el hilo. Si pasaron días, retoma natural sin saludar de nuevo.
 
-═══ EXTRACCIÓN DE INTEL (MUY IMPORTANTE) ═══
-Mientras hablas, tu cerebro está captando datos del negocio del lead. Saca info de forma natural SIN interrogar:
-- Nombre del negocio
-- Tipo/sector (restaurante, barbería, clínica, tienda, etc.)
-- ¿Tienen web? ¿Cuál?
-- Ciudad/zona
-- Problemas que mencionan (no llegan clientes, no tienen web, pierden contra competencia...)
-- Qué necesitan (web, SEO, automatización, redes...)
-- Nivel de interés (curioso, interesado, muy caliente, listo para comprar)
-- Cualquier dato extra (nº empleados, años abiertos, facturación aprox, otros locales...)
-
-Haz preguntas naturales que saquen esta info:
-- "y cómo os va el tema online? tenéis web o vais más con redes?"
-- "sois de [ciudad]? tenéis más de un local?"
-- "y qué tal la competencia por la zona?"
-- "lleváis mucho con el negocio?"
+═══ EXTRACCIÓN DE INTEL ═══
+Mientras hablas, capta datos del negocio SIN interrogar:
+- Nombre del negocio, sector, web, ciudad/zona
+- Problemas, qué necesitan, nivel de interés
+- Haz preguntas naturales que saquen esta info
 
 ═══ DATOS ═══
 - Mateo = fundador de Neuriax, agencia de IA en España 🇪🇸
-- Hacemos webs profesionales, chatbots con IA, automatización de procesos, estrategia digital
-- Web: neuriax.com
+- Servicios: webs profesionales, chatbots con IA, automatización, estrategia digital
+- Web: neuriax.com (SOLO este formato, nunca otro)
 - Agendar llamada: calendly.com/neuriax/30min
 
 ═══ PROHIBIDO ═══
 - Decir que eres IA/bot/chatgpt — eres "del equipo de Neuriax"
-- Dar CUALQUIER precio. Siempre a web o Calendly
+- Dar CUALQUIER precio
 - Mensajes de más de 3 líneas
 - Inventar casos con nombres reales
-- Links externos que no sean de neuriax.com o calendly.com/neuriax
-- Sonar como un asistente virtual corporativo
-- Presionar. Si no quieren, no quieren. Déjalo ir con elegancia`;
+- Links que no sean neuriax.com o calendly.com/neuriax/30min
+- Sonar como asistente virtual corporativo
+- Presionar. Si no quieren, déjalo ir
+- Repetir preguntas ya hechas o ya respondidas
+- Saludar dos veces en la misma conversación
+- Escribir www.neuriax.com, neuriax.com/webs, neuriax.com/precios, https://neuriax.com o cualquier variante`;
+
+// ═══ Profile fetching & caching ═══
+interface ProfileData {
+  name?: string;
+  username?: string;
+  biography?: string;
+  followers_count?: number;
+  media_count?: number;
+  website?: string;
+  profile_picture_url?: string;
+  fetched_at: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function fetchProfileInfo(senderId: string, accessToken: string, supabase: any): Promise<ProfileData | null> {
+  // 1. Check cache first (valid for 24h)
+  try {
+    const { data: follower } = await supabase
+      .from('instagram_followers')
+      .select('profile_data, last_profile_fetch')
+      .eq('instagram_user_id', senderId)
+      .maybeSingle();
+
+    if (follower?.profile_data && follower?.last_profile_fetch) {
+      const fetchedAt = new Date(follower.last_profile_fetch).getTime();
+      const now = Date.now();
+      if (now - fetchedAt < 24 * 60 * 60 * 1000) {
+        return follower.profile_data as ProfileData;
+      }
+    }
+  } catch { /* continue to fetch */ }
+
+  // 2. Fetch from Instagram Graph API
+  try {
+    const res = await fetch(
+      `https://graph.instagram.com/v21.0/${senderId}?fields=name,username,biography,followers_count,media_count,website,profile_picture_url`,
+      { headers: { 'Authorization': `Bearer ${accessToken}` } }
+    );
+
+    if (res.ok) {
+      const data = await res.json();
+      const profileData: ProfileData = {
+        name: data.name || undefined,
+        username: data.username || undefined,
+        biography: data.biography || undefined,
+        followers_count: data.followers_count || undefined,
+        media_count: data.media_count || undefined,
+        website: data.website || undefined,
+        profile_picture_url: data.profile_picture_url || undefined,
+        fetched_at: new Date().toISOString(),
+      };
+
+      // 3. Cache in DB
+      await supabase
+        .from('instagram_followers')
+        .upsert({
+          instagram_user_id: senderId,
+          username: data.username || senderId,
+          profile_data: profileData,
+          last_profile_fetch: new Date().toISOString(),
+        }, { onConflict: 'instagram_user_id' });
+
+      return profileData;
+    }
+  } catch (e) {
+    console.error('Profile fetch error:', e);
+  }
+
+  return null;
+}
+
+// ═══ Conversation context builder — anti-repetition + coherence ═══
+interface ConversationContext {
+  alreadyGreetedToday: boolean;
+  isOngoingConversation: boolean;
+  minutesSinceLastMessage: number;
+  totalExchanges: number;
+  contextBlock: string;
+}
+
+function buildConversationContext(
+  history: Array<{ direction: string; content: string; created_at: string }>,
+  profileData: ProfileData | null,
+  leadIntel: Record<string, unknown> | null,
+): ConversationContext {
+  const now = Date.now();
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+
+  // Check if we already greeted today
+  const outboundToday = history.filter(m =>
+    m.direction === 'outbound' &&
+    new Date(m.created_at).getTime() > todayStart.getTime()
+  );
+  const greetingPatterns = /^(hey|hola|buenas|ey|qué tal|que tal|👋|holi)/i;
+  const alreadyGreetedToday = outboundToday.some(m => greetingPatterns.test(m.content.trim()));
+
+  // Time since last message (any direction)
+  const lastMsg = history.length > 0 ? history[history.length - 1] : null;
+  const minutesSinceLastMessage = lastMsg
+    ? Math.floor((now - new Date(lastMsg.created_at).getTime()) / 60000)
+    : 9999;
+
+  const isOngoingConversation = minutesSinceLastMessage < 120; // <2 hours
+  const totalExchanges = history.length;
+
+  // Build dynamic context block
+  const lines: string[] = ['═══ CONTEXTO DE ESTA CONVERSACIÓN ═══'];
+
+  // Profile info
+  if (profileData) {
+    const parts = [];
+    if (profileData.username) parts.push(`@${profileData.username}`);
+    if (profileData.biography) parts.push(`Bio: "${profileData.biography.substring(0, 120)}"`);
+    if (profileData.followers_count) parts.push(`${profileData.followers_count.toLocaleString()} seguidores`);
+    if (profileData.website) parts.push(`Web: ${profileData.website}`);
+    if (parts.length > 0) lines.push(`- Perfil: ${parts.join(' | ')}`);
+  } else {
+    lines.push('- No tienes datos de su perfil de Instagram. Si no sabes a qué se dedica, pregúntale de forma natural.');
+  }
+
+  // Lead intel (previously extracted)
+  if (leadIntel) {
+    const intel = leadIntel as Record<string, unknown>;
+    const intelParts: string[] = [];
+    if (intel.nombre_negocio) intelParts.push(`Negocio: ${intel.nombre_negocio}`);
+    if (intel.sector) intelParts.push(`Sector: ${intel.sector}`);
+    if (intel.ciudad) intelParts.push(`Ciudad: ${intel.ciudad}`);
+    if (intel.tiene_web) intelParts.push(`Tiene web: ${intel.tiene_web}`);
+    if (intel.nivel_interes) intelParts.push(`Interés: ${intel.nivel_interes}`);
+    if (intelParts.length > 0) {
+      lines.push(`- Intel del lead: ${intelParts.join(' | ')}`);
+      lines.push('- IMPORTANTE: Ya tienes estos datos. NO vuelvas a preguntar lo que ya sabes.');
+    }
+    if (intel.problemas && Array.isArray(intel.problemas) && intel.problemas.length > 0) {
+      lines.push(`- Problemas mencionados: ${(intel.problemas as string[]).join(', ')}`);
+    }
+    if (intel.necesidades && Array.isArray(intel.necesidades) && intel.necesidades.length > 0) {
+      lines.push(`- Necesidades: ${(intel.necesidades as string[]).join(', ')}`);
+    }
+  }
+
+  // Greeting status
+  if (alreadyGreetedToday) {
+    lines.push('- ⚠️ YA saludaste hoy en esta conversación. NO vuelvas a saludar. Ve directo al punto.');
+  }
+
+  // Conversation momentum
+  if (isOngoingConversation && totalExchanges > 2) {
+    lines.push(`- Conversación EN CURSO (hace ${minutesSinceLastMessage}min). Sigue el hilo, no te presentes de nuevo.`);
+  } else if (totalExchanges > 0 && minutesSinceLastMessage > 1440) {
+    lines.push('- Hace más de 1 día que no habláis. Retoma natural sin saludar formalmente ni reprochar.');
+  }
+
+  // Exchanges count → phase recommendation
+  if (totalExchanges <= 2) {
+    lines.push('- Fase 1: Pocos mensajes. Muestra curiosidad genuina por su negocio.');
+  } else if (totalExchanges <= 6) {
+    lines.push('- Fase 2-3: Ya habéis cruzado varios mensajes. Haz preguntas de seguimiento inteligentes.');
+  } else if (totalExchanges <= 10) {
+    lines.push('- Fase 4: Lleváis bastantes mensajes. Si hay interés, es buen momento para mencionar neuriax.com.');
+  } else {
+    lines.push('- Fase 5: Conversación larga. Si hay interés real, propón agendar llamada. Si no, no insistas.');
+  }
+
+  // Last message sentiment detection
+  if (history.length > 0) {
+    const lastInbound = [...history].reverse().find(m => m.direction === 'inbound');
+    if (lastInbound) {
+      const lower = lastInbound.content.toLowerCase();
+      if (/gracias|muchas gracias|thank|thx|grax/.test(lower)) {
+        lines.push('- 💡 El último mensaje es de agradecimiento. Responde cálido y breve. NO hagas nueva pregunta.');
+      } else if (/^(ok|vale|sí|si|bueno|genial|perfecto|claro)$/i.test(lower.trim())) {
+        lines.push('- 💡 El último mensaje es corto/asentimiento. Haz seguimiento suave, no cambies de tema.');
+      } else if (/no gracias|no me interesa|ya veremos|ahora no|no puedo/.test(lower)) {
+        lines.push('- 💡 El lead no parece interesado. NO insistas. Cierra con elegancia.');
+      }
+    }
+  }
+
+  // Questions already asked (anti-repetition) — scan outbound messages
+  const askedAboutBusiness = history.some(m =>
+    m.direction === 'outbound' && /a qué (os|te) dedicáis|qué hacéis|cuál es (tu|vuestro) negocio|de qué va|a qué se dedica/i.test(m.content)
+  );
+  if (askedAboutBusiness) {
+    lines.push('- ⚠️ Ya preguntaste a qué se dedican. NO lo preguntes de nuevo.');
+  }
+
+  const askedAboutWeb = history.some(m =>
+    m.direction === 'outbound' && /tenéis web|tienes web|tenéis página|tienen web|lleváis.*online|tema digital/i.test(m.content)
+  );
+  if (askedAboutWeb) {
+    lines.push('- ⚠️ Ya preguntaste si tienen web. NO lo preguntes de nuevo.');
+  }
+
+  const askedAboutCity = history.some(m =>
+    m.direction === 'outbound' && /de (dónde|donde) sois|qué zona|en qué ciudad|sois de/i.test(m.content)
+  );
+  if (askedAboutCity) {
+    lines.push('- ⚠️ Ya preguntaste la zona/ciudad. NO lo preguntes de nuevo.');
+  }
+
+  const sentLink = history.some(m =>
+    m.direction === 'outbound' && /neuriax\.com/i.test(m.content)
+  );
+  if (sentLink) {
+    lines.push('- Ya enviaste el link de neuriax.com. No lo repitas a menos que lo pida de nuevo.');
+  }
+
+  const sentCalendly = history.some(m =>
+    m.direction === 'outbound' && /calendly/i.test(m.content)
+  );
+  if (sentCalendly) {
+    lines.push('- Ya enviaste el link de Calendly. No lo repitas a menos que lo pida de nuevo.');
+  }
+
+  return {
+    alreadyGreetedToday,
+    isOngoingConversation,
+    minutesSinceLastMessage,
+    totalExchanges,
+    contextBlock: lines.join('\n'),
+  };
+}
+
+// ═══ Response sanitizer — force clean links ═══
+function sanitizeResponse(text: string): string {
+  let clean = text;
+  // Fix neuriax URLs — only allow neuriax.com clean
+  clean = clean.replace(/https?:\/\/(www\.)?neuriax\.com(\/[^\s)]*)?/gi, 'neuriax.com');
+  clean = clean.replace(/www\.neuriax\.com(\/[^\s)]*)?/gi, 'neuriax.com');
+  clean = clean.replace(/neuriax\.com\/[^\s)]+/gi, 'neuriax.com');
+  // Keep calendly intact
+  // Remove any stray https:// from neuriax
+  clean = clean.replace(/https?:\/\/neuriax\.com/gi, 'neuriax.com');
+  return clean;
+}
 
 // ─── Opportunity detection keywords ───
 const HOT_LEAD_SIGNALS = [
@@ -364,13 +580,27 @@ async function getAccessToken(supabase: any) {
   return (config as any)?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
 }
 
-async function getAIResponse(userMessage: string, history: Array<{role: string; content: string}>, isFirstMessage: boolean) {
+async function getAIResponse(
+  userMessage: string,
+  history: Array<{role: string; content: string}>,
+  isFirstMessage: boolean,
+  conversationCtx?: ConversationContext
+) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return 'Hey! 👋 Ahora mismo Mateo no está disponible, pero agenda llamada aquí → calendly.com/neuriax/30min';
 
-  const systemPrompt = isFirstMessage
-    ? INSTAGRAM_SYSTEM_PROMPT + '\n\nEste es su primer mensaje. Saluda de forma cercana y profesional con un emoji, y pregunta sobre su negocio. NO hagas bienvenida formal ni robótica.'
-    : INSTAGRAM_SYSTEM_PROMPT;
+  // Build the final system prompt with dynamic context
+  let systemPrompt = INSTAGRAM_SYSTEM_PROMPT;
+
+  // Inject conversation context
+  if (conversationCtx?.contextBlock) {
+    systemPrompt += '\n\n' + conversationCtx.contextBlock;
+  }
+
+  // First message special handling (only if we haven't greeted today)
+  if (isFirstMessage && !conversationCtx?.alreadyGreetedToday) {
+    systemPrompt += '\n\n═══ PRIMER MENSAJE ═══\nEste es su primer mensaje. Saluda de forma cercana con un emoji y pregunta sobre su negocio. NO hagas bienvenida formal ni robótica. Sé breve y natural.';
+  }
 
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -383,17 +613,20 @@ async function getAIResponse(userMessage: string, history: Array<{role: string; 
         model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'system', content: systemPrompt },
-          ...history.slice(-10),
+          ...history.slice(-14), // More context for better coherence
           { role: 'user', content: userMessage },
         ],
-        max_tokens: 150,
-        temperature: 0.75,
+        max_tokens: 200,
+        temperature: 0.8,
       }),
     });
 
     if (!response.ok) throw new Error('Groq error');
     const data = await response.json();
-    return data.choices[0]?.message?.content || 'Hey! 🙏 Escríbenos a hola@neuriax.com y te atendemos enseguida!';
+    const rawResponse = data.choices[0]?.message?.content || 'Hey! 🙏 Escríbenos a hola@neuriax.com y te atendemos enseguida!';
+    
+    // Sanitize links before sending
+    return sanitizeResponse(rawResponse);
   } catch {
     return 'Ups, algo ha fallado por aquí 😅 Escríbenos a hola@neuriax.com y lo vemos!';
   }
@@ -762,21 +995,69 @@ export async function POST(request: NextRequest) {
         const botEnabled = config?.bot_enabled !== false;
 
         if (botEnabled && accessToken) {
-          // Get conversation history
+          // Get conversation history (with timestamps for context building)
           const { data: history } = await supabase
             .from('instagram_messages')
-            .select('direction, content')
+            .select('direction, content, created_at')
             .eq('sender_id', senderId)
             .order('created_at', { ascending: true })
-            .limit(20);
+            .limit(30);
 
-          const conversationHistory = (history || []).map((m: { direction: string; content: string }) => ({
+          const historyWithTime = (history || []) as Array<{ direction: string; content: string; created_at: string }>;
+
+          const conversationHistory = historyWithTime.map((m) => ({
             role: m.direction === 'inbound' ? 'user' : 'assistant',
             content: m.content,
           }));
 
-          // Get AI response (with first-message context)
-          const aiResponse = await getAIResponse(messageText, conversationHistory, isFirstMessage);
+          // ─── Fetch profile + build context (enterprise features) ───
+          let profileData: ProfileData | null = null;
+          let leadIntel: Record<string, unknown> | null = null;
+
+          // Fetch Instagram profile (cached, non-blocking on failure)
+          try {
+            profileData = await fetchProfileInfo(senderId, accessToken, supabase);
+          } catch { /* non-critical */ }
+
+          // Get existing lead intel from DB
+          try {
+            const { data: follower } = await supabase
+              .from('instagram_followers')
+              .select('lead_intel')
+              .eq('instagram_user_id', senderId)
+              .maybeSingle();
+            if (follower?.lead_intel) leadIntel = follower.lead_intel;
+          } catch { /* non-critical */ }
+
+          // If no intel in followers, try cold_leads
+          if (!leadIntel) {
+            try {
+              const { data: cl } = await supabase
+                .from('instagram_cold_leads')
+                .select('lead_intel')
+                .eq('instagram_user_id', senderId)
+                .maybeSingle();
+              if (cl?.lead_intel) leadIntel = cl.lead_intel;
+            } catch { /* non-critical */ }
+          }
+
+          // Build conversation context for coherence
+          const conversationCtx = buildConversationContext(historyWithTime, profileData, leadIntel);
+
+          // Get AI response (with context)
+          const aiResponse = await getAIResponse(messageText, conversationHistory, isFirstMessage, conversationCtx);
+
+          // Update last greeting timestamp if the response contains a greeting
+          if (/^(hey|hola|buenas|ey|qué tal|que tal|👋|holi)/i.test(aiResponse.trim())) {
+            Promise.resolve(
+              supabase
+                .from('instagram_followers')
+                .upsert({
+                  instagram_user_id: senderId,
+                  last_greeting_at: new Date().toISOString(),
+                }, { onConflict: 'instagram_user_id' })
+            ).catch(() => {});
+          }
 
           // Send response
           const sent = await sendInstagramMessage(senderId, aiResponse, accessToken);

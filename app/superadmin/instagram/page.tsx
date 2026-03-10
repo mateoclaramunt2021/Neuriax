@@ -100,6 +100,36 @@ interface Stats {
   labelCounts: Record<string, number>;
 }
 
+/* ─── Lead purposes ─── */
+const LEAD_PURPOSES = [
+  { value: 'captacion',       label: 'Captación',       icon: '🎯', color: 'text-cyan-400' },
+  { value: 'colaboracion',    label: 'Colaboración',    icon: '🤝', color: 'text-violet-400' },
+  { value: 'informacion',     label: 'Información',     icon: 'ℹ️', color: 'text-amber-400' },
+  { value: 'acompanamiento',  label: 'Acompañamiento',  icon: '🧭', color: 'text-emerald-400' },
+];
+
+/* ─── Lead detail data ─── */
+interface LeadDetail {
+  profileData: ProfileData | null;
+  leadIntel: LeadIntel | null;
+  leadPurpose: string;
+  stats: {
+    totalMessages: number;
+    firstMessageAt: string | null;
+    lastMessageAt: string | null;
+  };
+}
+interface ProfileData {
+  name?: string;
+  username?: string;
+  biography?: string;
+  followers_count?: number;
+  media_count?: number;
+  website?: string;
+  profile_picture_url?: string;
+  fetched_at?: string;
+}
+
 /* ─── Pipeline labels ─── */
 const LABELS = [
   { value: 'nuevo',      label: 'Nuevo',      color: 'bg-slate-500/10 text-slate-300 ring-slate-500/30',      dot: 'bg-slate-400',  icon: '○' },
@@ -191,6 +221,11 @@ export default function InstagramPage() {
   const [bulkDuplicatesList, setBulkDuplicatesList] = useState<string[]>([]);
   const [toastType, setToastType] = useState<'success' | 'error' | 'warning'>('success');
   const [fixingSectors, setFixingSectors] = useState(false);
+  const [showLeadPanel, setShowLeadPanel] = useState(false);
+  const [leadDetail, setLeadDetail] = useState<LeadDetail | null>(null);
+  const [editPurpose, setEditPurpose] = useState('captacion');
+  const [editNotes, setEditNotes] = useState('');
+  const [savingLead, setSavingLead] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -467,6 +502,61 @@ export default function InstagramPage() {
     }
   };
 
+  /* — Fetch lead detail — */
+  const fetchLeadDetail = useCallback(async (senderId: string) => {
+    try {
+      const res = await fetch('/api/superadmin/instagram', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'get_lead_detail', senderId }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        setLeadDetail({
+          profileData: data.profileData || null,
+          leadIntel: data.leadIntel || null,
+          leadPurpose: data.leadPurpose || 'captacion',
+          stats: data.stats || { totalMessages: 0, firstMessageAt: null, lastMessageAt: null },
+        });
+        setEditPurpose(data.leadPurpose || 'captacion');
+        setEditNotes(data.follower?.notes || data.coldLead?.notes || '');
+      }
+    } catch (err) { console.error('Lead detail error:', err); }
+  }, []);
+
+  /* — Save lead info — */
+  const handleSaveLeadInfo = async () => {
+    if (!selectedSender || savingLead) return;
+    setSavingLead(true);
+    try {
+      const res = await fetch('/api/superadmin/instagram', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update_lead_info',
+          senderId: selectedSender,
+          lead_purpose: editPurpose,
+          notes: editNotes,
+          label: selectedConvLabel,
+        }),
+      });
+      if (res.ok) {
+        showToast('Lead actualizado ✅');
+        if (leadDetail) {
+          setLeadDetail({ ...leadDetail, leadPurpose: editPurpose });
+        }
+      }
+    } catch (err) { console.error('Save lead error:', err); showToast('Error al guardar', 'error'); }
+    finally { setSavingLead(false); }
+  };
+
+  /* — Toggle lead panel and fetch detail — */
+  useEffect(() => {
+    if (selectedSender && showLeadPanel) {
+      fetchLeadDetail(selectedSender);
+    }
+  }, [selectedSender, showLeadPanel, fetchLeadDetail]);
+
   /* — Filters — */
   const filteredConversations = conversations.filter(conv => {
     const matchesLabel = filterLabel === 'all' || conv.label === filterLabel;
@@ -705,7 +795,7 @@ export default function InstagramPage() {
             </div>
 
             {/* ── Chat panel ── */}
-            <div className="lg:col-span-8 xl:col-span-9 flex flex-col">
+            <div className={`${showLeadPanel ? 'lg:col-span-5 xl:col-span-6' : 'lg:col-span-8 xl:col-span-9'} flex flex-col transition-all`}>
               {selectedSender ? (
                 <>
                   {/* Chat header */}
@@ -729,6 +819,13 @@ export default function InstagramPage() {
                           <option key={l.value} value={l.value} className="bg-[#1a1a2e] text-white">{l.icon} {l.label}</option>
                         ))}
                       </select>
+                      <button
+                        onClick={() => setShowLeadPanel(!showLeadPanel)}
+                        className={`p-2 rounded-lg transition-all ${showLeadPanel ? 'bg-fuchsia-500/20 text-fuchsia-300 ring-1 ring-fuchsia-500/30' : 'bg-white/[0.04] text-slate-400 hover:text-white hover:bg-white/[0.08]'}`}
+                        title="Info del Lead"
+                      >
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                      </button>
                     </div>
                   </div>
 
@@ -826,6 +923,196 @@ export default function InstagramPage() {
                 </div>
               )}
             </div>
+
+            {/* ── Lead Detail Panel ── */}
+            {showLeadPanel && selectedSender && (
+              <div className="lg:col-span-3 xl:col-span-3 border-l border-white/[0.06] flex flex-col overflow-y-auto max-h-[600px]">
+                <div className="px-4 py-3 border-b border-white/[0.06] flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                    <svg className="w-4 h-4 text-fuchsia-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    Info del Lead
+                  </h3>
+                  <button onClick={() => setShowLeadPanel(false)} className="text-slate-500 hover:text-white">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                  </button>
+                </div>
+
+                <div className="p-4 space-y-4">
+                  {/* Profile Data */}
+                  {leadDetail?.profileData ? (
+                    <div className="bg-white/[0.03] rounded-xl p-3 space-y-2">
+                      <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Perfil de Instagram</p>
+                      {leadDetail.profileData.name && (
+                        <p className="text-sm text-white font-medium">{leadDetail.profileData.name}</p>
+                      )}
+                      {leadDetail.profileData.username && (
+                        <a href={`https://instagram.com/${leadDetail.profileData.username}`} target="_blank" rel="noopener noreferrer" className="text-xs text-fuchsia-400 hover:underline">@{leadDetail.profileData.username}</a>
+                      )}
+                      {leadDetail.profileData.biography && (
+                        <p className="text-xs text-slate-400 leading-relaxed">{leadDetail.profileData.biography}</p>
+                      )}
+                      <div className="flex gap-4 pt-1">
+                        {leadDetail.profileData.followers_count !== undefined && (
+                          <div>
+                            <p className="text-sm font-semibold text-white">{leadDetail.profileData.followers_count.toLocaleString()}</p>
+                            <p className="text-[10px] text-slate-500">seguidores</p>
+                          </div>
+                        )}
+                        {leadDetail.profileData.media_count !== undefined && (
+                          <div>
+                            <p className="text-sm font-semibold text-white">{leadDetail.profileData.media_count.toLocaleString()}</p>
+                            <p className="text-[10px] text-slate-500">publicaciones</p>
+                          </div>
+                        )}
+                      </div>
+                      {leadDetail.profileData.website && (
+                        <p className="text-xs text-slate-400">🌐 {leadDetail.profileData.website}</p>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="bg-white/[0.03] rounded-xl p-3">
+                      <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold mb-1">Perfil</p>
+                      <p className="text-xs text-slate-600">Sin datos de perfil</p>
+                    </div>
+                  )}
+
+                  {/* Lead Purpose (editable) */}
+                  <div className="bg-white/[0.03] rounded-xl p-3 space-y-2">
+                    <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Categoría del Lead</p>
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {LEAD_PURPOSES.map(p => (
+                        <button
+                          key={p.value}
+                          onClick={() => setEditPurpose(p.value)}
+                          className={`px-2 py-1.5 rounded-lg text-[11px] font-medium transition-all flex items-center gap-1.5 ${
+                            editPurpose === p.value
+                              ? 'bg-fuchsia-500/15 text-fuchsia-300 ring-1 ring-fuchsia-500/30'
+                              : 'bg-white/[0.04] text-slate-400 hover:bg-white/[0.08]'
+                          }`}
+                        >
+                          <span>{p.icon}</span>
+                          <span>{p.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Lead Intel (auto-extracted) */}
+                  {leadDetail?.leadIntel && (
+                    <div className="bg-white/[0.03] rounded-xl p-3 space-y-2">
+                      <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Intel del Negocio (auto)</p>
+                      {leadDetail.leadIntel.nombre_negocio && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Negocio</span>
+                          <span className="text-slate-300">{leadDetail.leadIntel.nombre_negocio}</span>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.sector && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Sector</span>
+                          <span className="text-slate-300">{leadDetail.leadIntel.sector}</span>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.ciudad && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Ciudad</span>
+                          <span className="text-slate-300">{leadDetail.leadIntel.ciudad}</span>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.tiene_web && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Tiene web</span>
+                          <span className="text-slate-300">{leadDetail.leadIntel.tiene_web}</span>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.nivel_interes && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Interés</span>
+                          <span className={`font-medium ${
+                            leadDetail.leadIntel.nivel_interes === 'muy_caliente' ? 'text-red-400' :
+                            leadDetail.leadIntel.nivel_interes === 'caliente' ? 'text-amber-400' :
+                            leadDetail.leadIntel.nivel_interes === 'tibio' ? 'text-cyan-400' : 'text-slate-400'
+                          }`}>{leadDetail.leadIntel.nivel_interes}</span>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.problemas && leadDetail.leadIntel.problemas.length > 0 && (
+                        <div className="pt-1">
+                          <p className="text-[10px] text-slate-500 mb-1">Problemas:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {leadDetail.leadIntel.problemas.map((p, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 bg-red-500/10 text-red-400 rounded">{p}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.necesidades && leadDetail.leadIntel.necesidades.length > 0 && (
+                        <div className="pt-1">
+                          <p className="text-[10px] text-slate-500 mb-1">Necesidades:</p>
+                          <div className="flex flex-wrap gap-1">
+                            {leadDetail.leadIntel.necesidades.map((n, i) => (
+                              <span key={i} className="text-[10px] px-1.5 py-0.5 bg-cyan-500/10 text-cyan-400 rounded">{n}</span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                      {leadDetail.leadIntel.resumen && (
+                        <div className="pt-1 border-t border-white/[0.04]">
+                          <p className="text-xs text-slate-400 italic mt-1">&ldquo;{leadDetail.leadIntel.resumen}&rdquo;</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Interaction Stats */}
+                  {leadDetail?.stats && (
+                    <div className="bg-white/[0.03] rounded-xl p-3 space-y-1.5">
+                      <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Historial</p>
+                      <div className="flex justify-between text-xs">
+                        <span className="text-slate-500">Total mensajes</span>
+                        <span className="text-slate-300">{leadDetail.stats.totalMessages}</span>
+                      </div>
+                      {leadDetail.stats.firstMessageAt && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Primera vez</span>
+                          <span className="text-slate-300">{new Date(leadDetail.stats.firstMessageAt).toLocaleDateString('es-ES')}</span>
+                        </div>
+                      )}
+                      {leadDetail.stats.lastMessageAt && (
+                        <div className="flex justify-between text-xs">
+                          <span className="text-slate-500">Último mensaje</span>
+                          <span className="text-slate-300">{timeAgo(leadDetail.stats.lastMessageAt)}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Notes (editable) */}
+                  <div className="bg-white/[0.03] rounded-xl p-3 space-y-2">
+                    <p className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Notas</p>
+                    <textarea
+                      value={editNotes}
+                      onChange={(e) => setEditNotes(e.target.value)}
+                      placeholder="Añade notas sobre este lead..."
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg p-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/50 resize-none h-20"
+                    />
+                  </div>
+
+                  {/* Save button */}
+                  <button
+                    onClick={handleSaveLeadInfo}
+                    disabled={savingLead}
+                    className="w-full py-2.5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-xl text-xs font-semibold hover:shadow-lg hover:shadow-fuchsia-500/20 disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+                  >
+                    {savingLead ? (
+                      <div className="w-3 h-3 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                    ) : (
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                    )}
+                    Guardar Cambios
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )}
 
