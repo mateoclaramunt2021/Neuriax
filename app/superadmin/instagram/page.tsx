@@ -85,6 +85,7 @@ interface InstagramConfig {
   token_expires_at?: string;
   cold_outreach_enabled?: boolean;
   cold_dm_daily_limit?: number;
+  ice_breakers?: Array<{ question: string; payload: string }>;
 }
 interface Stats {
   totalConversations: number;
@@ -196,7 +197,16 @@ export default function InstagramPage() {
   const [sending, setSending] = useState(false);
   const [filterLabel, setFilterLabel] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [settingsTab, setSettingsTab] = useState<'bot' | 'welcome' | 'quick' | 'outreach'>('bot');
+  const [settingsTab, setSettingsTab] = useState<'bot' | 'welcome' | 'quick' | 'icebreakers' | 'outreach'>('bot');
+  // Ice breakers state
+  const [iceBreakers, setIceBreakers] = useState<Array<{ question: string; payload: string }>>([
+    { question: '¿Qué servicios ofrecéis?', payload: 'ICE_SERVICES' },
+    { question: 'Quiero automatizar mi negocio', payload: 'ICE_AUTOMATE' },
+    { question: '¿Cuánto cuesta?', payload: 'ICE_PRICES' },
+    { question: 'Agendar una llamada', payload: 'ICE_CALL' },
+  ]);
+  const [iceSaving, setIceSaving] = useState(false);
+  const [iceStatus, setIceStatus] = useState<'idle' | 'saved' | 'error'>('idle');
   const [toast, setToast] = useState<string | null>(null);
   const [coldLeads, setColdLeads] = useState<ColdLead[]>([]);
   const [coldStats, setColdStats] = useState<ColdStats | null>(null);
@@ -264,6 +274,10 @@ export default function InstagramPage() {
         setConnected(data.connected);
         setStats(data.stats || null);
         setQuickReplies(data.quickReplies || []);
+        // Load saved ice breakers from config
+        if (data.config?.ice_breakers?.length) {
+          setIceBreakers(data.config.ice_breakers);
+        }
       }
     } catch (err) { console.error('Error:', err); }
     finally { setLoading(false); }
@@ -1843,6 +1857,7 @@ export default function InstagramPage() {
                   {([
                     { id: 'bot' as const, label: 'AI Bot & Conexión', icon: '🤖' },
                     { id: 'welcome' as const, label: 'DM de Bienvenida', icon: '👋' },
+                    { id: 'icebreakers' as const, label: 'Ice Breakers', icon: '❄️' },
                     { id: 'quick' as const, label: 'Respuestas Rápidas', icon: '⚡' },
                     { id: 'outreach' as const, label: 'Captación en Frío', icon: '🎯' },
                   ]).map(s => (
@@ -2025,6 +2040,165 @@ export default function InstagramPage() {
                   </>
                 )}
 
+                {/* ── Ice Breakers ── */}
+                {settingsTab === 'icebreakers' && (
+                  <>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white mb-1">❄️ Ice Breakers</h3>
+                      <p className="text-sm text-slate-500">Botones que aparecen cuando alguien abre el chat contigo por primera vez. Máximo 4.</p>
+                    </div>
+
+                    {/* Ice breaker list */}
+                    <div className="space-y-3">
+                      {iceBreakers.map((ib, idx) => (
+                        <div key={idx} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] ring-1 ring-white/[0.06]">
+                          <span className="text-lg text-slate-500 font-mono w-6 text-center">{idx + 1}</span>
+                          <input
+                            type="text"
+                            value={ib.question}
+                            onChange={(e) => {
+                              const updated = [...iceBreakers];
+                              updated[idx] = { ...updated[idx], question: e.target.value };
+                              setIceBreakers(updated);
+                              setIceStatus('idle');
+                            }}
+                            placeholder="Texto del botón..."
+                            maxLength={80}
+                            className="flex-1 px-3 py-2 bg-white/[0.04] border border-white/[0.08] rounded-lg text-sm text-white placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/50"
+                          />
+                          <input
+                            type="text"
+                            value={ib.payload}
+                            onChange={(e) => {
+                              const updated = [...iceBreakers];
+                              updated[idx] = { ...updated[idx], payload: e.target.value.toUpperCase().replace(/[^A-Z0-9_]/g, '_') };
+                              setIceBreakers(updated);
+                              setIceStatus('idle');
+                            }}
+                            placeholder="PAYLOAD"
+                            maxLength={30}
+                            className="w-32 px-3 py-2 bg-white/[0.04] border border-white/[0.08] rounded-lg text-xs text-slate-400 font-mono placeholder-slate-600 focus:outline-none focus:border-fuchsia-500/50"
+                          />
+                          <button
+                            onClick={() => {
+                              setIceBreakers(iceBreakers.filter((_, i) => i !== idx));
+                              setIceStatus('idle');
+                            }}
+                            className="p-2 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-all"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Add button */}
+                    {iceBreakers.length < 4 && (
+                      <button
+                        onClick={() => {
+                          setIceBreakers([...iceBreakers, { question: '', payload: `ICE_${iceBreakers.length + 1}` }]);
+                          setIceStatus('idle');
+                        }}
+                        className="w-full py-2.5 border-2 border-dashed border-white/[0.08] rounded-xl text-sm text-slate-500 hover:text-slate-300 hover:border-white/[0.15] transition-all"
+                      >
+                        + Añadir ice breaker
+                      </button>
+                    )}
+
+                    {/* Preview */}
+                    <div className="bg-white/[0.02] rounded-xl p-4 ring-1 ring-white/[0.06]">
+                      <p className="text-[10px] text-slate-600 font-medium mb-3 uppercase tracking-wider">Preview — Así se ve en Instagram</p>
+                      <div className="max-w-[280px] mx-auto space-y-2">
+                        {iceBreakers.filter(ib => ib.question.trim()).map((ib, idx) => (
+                          <div key={idx} className="px-4 py-2.5 bg-white/[0.06] rounded-full text-sm text-blue-300 text-center ring-1 ring-blue-400/20 cursor-default">
+                            {ib.question}
+                          </div>
+                        ))}
+                        {iceBreakers.filter(ib => ib.question.trim()).length === 0 && (
+                          <p className="text-xs text-slate-600 text-center py-4">Añade al menos un ice breaker</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* How it works */}
+                    <div className="bg-cyan-500/5 rounded-xl p-4 ring-1 ring-cyan-500/20">
+                      <h4 className="font-medium text-cyan-300 text-sm mb-2">¿Cómo funciona?</h4>
+                      <ul className="text-xs text-cyan-300/60 space-y-1.5">
+                        <li>→ Cuando alguien abre el chat contigo por primera vez, ve estos botones</li>
+                        <li>→ Al tocar uno, se envía como mensaje y el bot responde automáticamente</li>
+                        <li>→ Máximo 4 ice breakers, cada uno con hasta 80 caracteres</li>
+                        <li>→ Solo aparecen en la primera conversación con cada usuario</li>
+                      </ul>
+                    </div>
+
+                    {/* Action buttons */}
+                    <div className="flex gap-3">
+                      <button
+                        onClick={async () => {
+                          const valid = iceBreakers.filter(ib => ib.question.trim() && ib.payload.trim());
+                          if (!valid.length) { showToast('Añade al menos un ice breaker con texto'); return; }
+                          setIceSaving(true);
+                          setIceStatus('idle');
+                          try {
+                            const res = await fetch('/api/superadmin/instagram', {
+                              method: 'PUT',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ action: 'set_ice_breakers', ice_breakers: valid }),
+                            });
+                            const data = await res.json();
+                            if (res.ok && data.success) {
+                              setIceStatus('saved');
+                              showToast('❄️ Ice breakers configurados en Instagram!');
+                            } else {
+                              setIceStatus('error');
+                              showToast(data.error || 'Error configurando ice breakers');
+                            }
+                          } catch {
+                            setIceStatus('error');
+                            showToast('Error de conexión');
+                          }
+                          setIceSaving(false);
+                        }}
+                        disabled={iceSaving}
+                        className="flex-1 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-xl text-sm font-semibold hover:shadow-lg hover:shadow-cyan-500/20 disabled:opacity-30 transition-all"
+                      >
+                        {iceSaving ? 'Guardando...' : iceStatus === 'saved' ? '✅ Configurados!' : '❄️ Guardar en Instagram'}
+                      </button>
+                      <button
+                        onClick={async () => {
+                          if (!confirm('¿Eliminar todos los ice breakers de Instagram?')) return;
+                          setIceSaving(true);
+                          try {
+                            const res = await fetch('/api/superadmin/instagram', {
+                              method: 'PUT',
+                              headers: { 'Content-Type': 'application/json' },
+                              body: JSON.stringify({ action: 'delete_ice_breakers' }),
+                            });
+                            if (res.ok) {
+                              setIceBreakers([]);
+                              setIceStatus('idle');
+                              showToast('Ice breakers eliminados');
+                            }
+                          } catch { showToast('Error de conexión'); }
+                          setIceSaving(false);
+                        }}
+                        disabled={iceSaving}
+                        className="px-5 py-3 bg-red-500/10 text-red-400 ring-1 ring-red-500/20 rounded-xl text-sm font-medium hover:bg-red-500/20 disabled:opacity-30 transition-all"
+                      >
+                        🗑️ Eliminar
+                      </button>
+                    </div>
+
+                    {/* Status */}
+                    {iceStatus === 'error' && (
+                      <div className="bg-red-500/10 rounded-xl p-3 ring-1 ring-red-500/20">
+                        <p className="text-xs text-red-400">Error al configurar. Verifica que el token de Instagram esté activo y tenga permisos de messaging.</p>
+                      </div>
+                    )}
+                  </>
+                )}
+
+                {/* ── Quick Replies ── */}
                 {/* ── Quick Replies ── */}
                 {settingsTab === 'quick' && (
                   <>

@@ -1048,6 +1048,75 @@ Usernames: ${batch.map(l => l.username).join(', ')}`
       });
     }
 
+    // ─── Ice Breakers Management ───
+    if (body.action === 'set_ice_breakers') {
+      const { data: cfgToken } = await supabase.from('instagram_config').select('access_token, id').single();
+      const accessToken = cfgToken?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
+      if (!accessToken) return NextResponse.json({ error: 'No hay token de Instagram configurado' }, { status: 400 });
+
+      const iceBreakers = body.ice_breakers as Array<{ question: string; payload: string }>;
+      if (!iceBreakers?.length) return NextResponse.json({ error: 'Debes enviar al menos 1 ice breaker' }, { status: 400 });
+
+      try {
+        const igRes = await fetch(`https://graph.instagram.com/v21.0/me/ice_breakers`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${accessToken}` },
+          body: JSON.stringify({ ice_breakers: iceBreakers }),
+        });
+        if (!igRes.ok) {
+          const err = await igRes.json().catch(() => ({}));
+          return NextResponse.json({ error: err?.error?.message || 'Error de Instagram configurando ice breakers' }, { status: 400 });
+        }
+        // Save to config for dashboard display
+        if (cfgToken?.id) {
+          await supabase.from('instagram_config').update({ ice_breakers: iceBreakers, updated_at: new Date().toISOString() }).eq('id', cfgToken.id);
+        }
+        return NextResponse.json({ success: true });
+      } catch (e) {
+        return NextResponse.json({ error: `Error de conexión: ${e instanceof Error ? e.message : 'unknown'}` }, { status: 500 });
+      }
+    }
+
+    if (body.action === 'get_ice_breakers') {
+      const { data: cfgToken } = await supabase.from('instagram_config').select('access_token, ice_breakers').single();
+      const accessToken = cfgToken?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
+      if (!accessToken) return NextResponse.json({ ice_breakers: cfgToken?.ice_breakers || [] });
+
+      try {
+        const igRes = await fetch(`https://graph.instagram.com/v21.0/me/ice_breakers`, {
+          headers: { 'Authorization': `Bearer ${accessToken}` },
+        });
+        if (igRes.ok) {
+          const data = await igRes.json();
+          return NextResponse.json({ ice_breakers: data.data || data.ice_breakers || [] });
+        }
+      } catch { /* fallback to DB */ }
+      return NextResponse.json({ ice_breakers: cfgToken?.ice_breakers || [] });
+    }
+
+    if (body.action === 'delete_ice_breakers') {
+      const { data: cfgToken } = await supabase.from('instagram_config').select('access_token, id').single();
+      const accessToken = cfgToken?.access_token || process.env.INSTAGRAM_ACCESS_TOKEN || process.env.WHATSAPP_ACCESS_TOKEN;
+      if (!accessToken) return NextResponse.json({ error: 'No hay token configurado' }, { status: 400 });
+
+      try {
+        const igRes = await fetch(`https://graph.instagram.com/v21.0/me/ice_breakers`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${accessToken}` },
+        });
+        if (!igRes.ok) {
+          const err = await igRes.json().catch(() => ({}));
+          return NextResponse.json({ error: err?.error?.message || 'Error eliminando ice breakers' }, { status: 400 });
+        }
+        if (cfgToken?.id) {
+          await supabase.from('instagram_config').update({ ice_breakers: null, updated_at: new Date().toISOString() }).eq('id', cfgToken.id);
+        }
+        return NextResponse.json({ success: true });
+      } catch (e) {
+        return NextResponse.json({ error: `Error de conexión: ${e instanceof Error ? e.message : 'unknown'}` }, { status: 500 });
+      }
+    }
+
     if (body.action === 'toggle_cold_outreach') {
       const { data: existing } = await supabase
         .from('instagram_config')

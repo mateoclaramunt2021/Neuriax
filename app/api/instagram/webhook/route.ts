@@ -841,18 +841,22 @@ export async function POST(request: NextRequest) {
           continue;
         }
 
-        // Handle postback (button clicks)
+        // Handle postback (button clicks / ice breaker taps)
         if (event.postback) {
           const senderId = event.sender?.id;
           const payload = event.postback.payload;
           if (senderId && accessToken) {
-            let replyMsg = '¡Gracias! ¿En qué puedo ayudarte?';
-            if (payload === 'GET_PRICES') {
-              replyMsg = 'Cada proyecto es diferente 😊 Habla con Mateo y te prepara un presupuesto personalizado → calendly.com/neuriax/30min 💪';
-            } else if (payload === 'SCHEDULE_CALL') {
-              replyMsg = '📅 ¡Genial! Agenda una llamada rápida con Mateo y te prepara una propuesta personalizada gratis:\nhttps://calendly.com/neuriax/30min';
-            } else if (payload === 'VIEW_PORTFOLIO') {
-              replyMsg = '🎨 Mira nuestro portfolio en:\nhttps://www.neuriax.com/webs\n\n¿Quieres algo similar?';
+            let replyMsg = 'ey! en qué te puedo ayudar? 😊';
+            if (payload === 'ICE_SERVICES' || payload === 'GET_SERVICES') {
+              replyMsg = 'en Neuriax diseñamos webs y automatizamos negocios con IA 🚀 desde chatbots hasta webs completas. a qué te dedicas tú? así te cuento qué podría encajarte';
+            } else if (payload === 'ICE_AUTOMATE' || payload === 'GET_AUTOMATE') {
+              replyMsg = 'buena elección! 💡 la automatización con IA es lo que más impacto tiene en un negocio. desde chatbots hasta flujos automáticos. a qué se dedica tu negocio?';
+            } else if (payload === 'ICE_PRICES' || payload === 'GET_PRICES') {
+              replyMsg = 'depende del proyecto 😊 pero para que te hagas una idea: webs desde 500€ y automatizaciones desde 300€/mes. quieres que Mateo te haga un presupuesto? → calendly.com/neuriax/30min';
+            } else if (payload === 'ICE_CALL' || payload === 'SCHEDULE_CALL') {
+              replyMsg = 'perfecto! agenda aquí con Mateo, os preparamos una propuesta gratis 💪\n\ncalendly.com/neuriax/30min';
+            } else if (payload === 'ICE_PORTFOLIO' || payload === 'VIEW_PORTFOLIO') {
+              replyMsg = 'mira nuestros proyectos en neuriax.com 🎨 quieres algo parecido?';
             }
             
             const sent = await sendInstagramMessage(senderId, replyMsg, accessToken);
