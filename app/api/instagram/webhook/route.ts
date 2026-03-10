@@ -8,11 +8,12 @@ const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DM
 
 ═══ REGLAS DE ORO (OBLIGATORIO) ═══
 1. LEE TODO EL HISTORIAL antes de responder. NUNCA repitas una pregunta que ya hiciste o que ya te respondieron.
-2. Si ya saludaste en esta conversación, NO vuelvas a saludar. Ve directo al punto.
-3. Si el lead ya te dijo a qué se dedica, su sector, su ciudad, etc. — NUNCA preguntes de nuevo. Usa esa info.
-4. Adapta tu tono al momento: si acaban de decir "gracias" no respondas con una nueva pregunta agresiva.
-5. SOLO usa neuriax.com como link de la web. NUNCA escribas "www.neuriax.com", "neuriax.com/webs", "la web de Neuriax", "nuestra web", "https://neuriax.com". Solo: neuriax.com
-6. El link de agendar llamada es: calendly.com/neuriax/30min
+2. Si alguien te dice "hola", "buenas", "hey", "qué tal" o cualquier saludo → SIEMPRE devuelve el saludo de forma cálida y natural ANTES de cualquier otra cosa. Sé educado.
+3. Si ya saludaste Y el lead ya respondió al saludo, NO vuelvas a saludar. Ve directo al punto.
+4. Si el lead ya te dijo a qué se dedica, su sector, su ciudad, etc. — NUNCA preguntes de nuevo. Usa esa info.
+5. Adapta tu tono al momento: si acaban de decir "gracias" no respondas con una nueva pregunta agresiva.
+6. SOLO usa neuriax.com como link de la web. NUNCA escribas "www.neuriax.com", "neuriax.com/webs", "la web de Neuriax", "nuestra web", "https://neuriax.com". Solo: neuriax.com
+7. El link de agendar llamada es: calendly.com/neuriax/30min
 
 ═══ TU PERSONALIDAD ═══
 - Networker nato. Curioso de verdad sobre negocios.
@@ -599,7 +600,7 @@ async function getAIResponse(
 
   // First message special handling (only if we haven't greeted today)
   if (isFirstMessage && !conversationCtx?.alreadyGreetedToday) {
-    systemPrompt += '\n\n═══ PRIMER MENSAJE ═══\nEste es su primer mensaje. Saluda de forma cercana con un emoji y pregunta sobre su negocio. NO hagas bienvenida formal ni robótica. Sé breve y natural.';
+    systemPrompt += '\n\n═══ PRIMER MENSAJE ═══\nEste es su PRIMER mensaje contigo. PRIMERO devuelve el saludo de forma cálida y natural (ej: "ey! qué tal? 👋"). DESPUÉS, en el mismo mensaje o a continuación, pregúntale de forma casual a qué se dedica. Máximo 2 líneas. Sé cercano, no formal.';
   }
 
   try {
@@ -1009,7 +1010,10 @@ export async function POST(request: NextRequest) {
 
           const historyWithTime = (history || []) as Array<{ direction: string; content: string; created_at: string }>;
 
-          const conversationHistory = historyWithTime.map((m) => ({
+          // Exclude the current message from history (it gets added separately in getAIResponse)
+          const historyWithoutCurrent = historyWithTime.slice(0, -1);
+
+          const conversationHistory = historyWithoutCurrent.map((m) => ({
             role: m.direction === 'inbound' ? 'user' : 'assistant',
             content: m.content,
           }));
