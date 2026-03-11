@@ -710,10 +710,10 @@ export default function InstagramPage() {
 
         {/* ═══════════════════ INBOX TAB ═══════════════════ */}
         {tab === 'inbox' && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] overflow-hidden min-h-[600px]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] overflow-hidden min-h-[600px] h-[calc(100vh-280px)]">
 
             {/* ── Sidebar: Conversations ── */}
-            <div className="lg:col-span-4 xl:col-span-3 border-r border-white/[0.06] flex flex-col">
+            <div className="lg:col-span-4 xl:col-span-3 border-r border-white/[0.06] flex flex-col overflow-hidden">
               {/* Search & Filter */}
               <div className="p-4 space-y-3 border-b border-white/[0.06]">
                 <div className="relative">
