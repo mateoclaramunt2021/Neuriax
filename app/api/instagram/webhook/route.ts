@@ -601,7 +601,7 @@ async function getAIResponse(
   // Build messages array for the AI
   const messages: Array<{role: string; content: string}> = [
     { role: 'system', content: systemPrompt },
-    ...history.slice(-14),
+    ...history.slice(-20),
   ];
 
   // First message: inject a SEPARATE system reminder right before user message
@@ -662,6 +662,19 @@ NUNCA respondas sin saludar primero. SIEMPRE sé educado y cálido.`
   }
 }
 
+// ─── Message deduplication (Instagram retries webhooks) ───
+const processedMids = new Set<string>();
+const MAX_MID_CACHE = 200;
+function trackMid(mid: string): boolean {
+  if (processedMids.has(mid)) return true; // already processed
+  processedMids.add(mid);
+  if (processedMids.size > MAX_MID_CACHE) {
+    const first = processedMids.values().next().value;
+    if (first) processedMids.delete(first);
+  }
+  return false;
+}
+
 // ─── IGSID Resolution ───
 // Instagram webhook sends truncated sender IDs (15 digits) that differ from
 // the full API participant IDs (16 digits). We resolve the correct ID via
@@ -694,34 +707,9 @@ async function resolveIGSID(webhookSenderId: string, accessToken: string): Promi
     console.error('IGSID resolution error:', error);
   }
 
-  // Fallback: try appending digits 0-9 and sending until one works
-  console.warn(`IGSID: no match found for ${webhookSenderId}, trying brute-force`);
-  for (let d = 0; d <= 9; d++) {
-    const candidate = webhookSenderId + d;
-    try {
-      const testRes = await fetch(
-        `https://graph.instagram.com/v21.0/me/messages`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({
-            recipient: { id: candidate },
-            message: { text: '.' }, // minimal test — will be followed by real message
-          }),
-        }
-      );
-      if (testRes.ok) {
-        igsidCache[webhookSenderId] = candidate;
-        console.log(`IGSID brute-force: ${webhookSenderId} → ${candidate}`);
-        return candidate;
-      }
-    } catch { /* continue */ }
-  }
-
-  return webhookSenderId; // absolute fallback
+  // Fallback: use the webhook sender ID as-is (works for replying to received messages)
+  console.warn(`IGSID: no match found for ${webhookSenderId}, using original ID`);
+  return webhookSenderId;
 }
 
 async function sendInstagramMessage(recipientId: string, message: string, accessToken: string) {
@@ -871,6 +859,55 @@ export async function POST(request: NextRequest) {
           continue;
         }
 
+        // Handle new follower → send welcome DM
+        if (event.follow || event.optin) {
+          const senderId = event.sender?.id;
+          if (senderId && accessToken) {
+            try {
+              const { data: config } = await supabase
+                .from('instagram_config')
+                .select('welcome_dm_enabled, welcome_message')
+                .single();
+
+              if (config?.welcome_dm_enabled) {
+                const welcomeMsg = config.welcome_message || 'Hola! 👋 Gracias por seguirnos! ¿En qué podemos ayudarte? 🚀';
+
+                // Check we haven't already welcomed this user
+                const { data: existingFollower } = await supabase
+                  .from('instagram_followers')
+                  .select('welcome_sent')
+                  .eq('instagram_user_id', senderId)
+                  .maybeSingle();
+
+                if (!existingFollower?.welcome_sent) {
+                  const sent = await sendInstagramMessage(senderId, welcomeMsg, accessToken);
+
+                  await supabase.from('instagram_followers').upsert({
+                    instagram_user_id: senderId,
+                    welcome_sent: true,
+                    welcome_sent_at: new Date().toISOString(),
+                    label: 'nuevo',
+                  }, { onConflict: 'instagram_user_id' });
+
+                  await supabase.from('instagram_messages').insert({
+                    sender_id: senderId,
+                    direction: 'outbound',
+                    content: welcomeMsg,
+                    status: sent ? 'sent' : 'failed',
+                    is_bot: true,
+                    message_type: 'welcome_dm',
+                  });
+
+                  console.log(`👋 Welcome DM ${sent ? 'sent' : 'failed'} to ${senderId}`);
+                }
+              }
+            } catch (e) {
+              console.error('Welcome DM error:', e);
+            }
+          }
+          continue;
+        }
+
         // Handle postback (button clicks / ice breaker taps)
         if (event.postback) {
           const senderId = event.sender?.id;
@@ -906,33 +943,78 @@ export async function POST(request: NextRequest) {
         // Regular DMs - only process text messages (not echoes)
         if (!event.message || event.message.is_echo) continue;
 
-        const senderId = event.sender?.id;
+        // Deduplication: skip if we already processed this message
+        const mid = event.message?.mid;
+        if (mid && trackMid(mid)) {
+          console.log(`⏭️ Duplicate message skipped: ${mid}`);
+          continue;
+        }
+
+        let senderId = event.sender?.id;
         const messageText = event.message?.text || '';
         const attachments = event.message?.attachments;
 
         if (!senderId) continue;
 
-        // Handle image/media messages
+        // Normalize sender ID: resolve full IGSID early so all DB records are consistent
+        if (accessToken) {
+          try {
+            const resolvedId = await resolveIGSID(senderId, accessToken);
+            if (resolvedId !== senderId) {
+              console.log(`📎 Sender ID normalized: ${senderId} → ${resolvedId}`);
+              senderId = resolvedId;
+            }
+          } catch { /* use original */ }
+        }
+
+        // Handle image/media messages — let AI respond with context
         if (!messageText && attachments) {
+          const mediaType = attachments[0]?.type || 'media';
+          const mediaLabel = mediaType === 'image' ? '📸 Imagen' : mediaType === 'video' ? '🎬 Video' : mediaType === 'audio' ? '🎤 Audio' : `📎 ${mediaType}`;
+
           await supabase.from('instagram_messages').insert({
             sender_id: senderId,
             direction: 'inbound',
-            content: `[📎 ${attachments[0]?.type || 'media'}]`,
+            content: `[${mediaLabel}]`,
             status: 'received',
             is_bot: false,
             message_type: 'media',
           });
 
           if (accessToken) {
-            const mediaReply = '¡Gracias por compartir! 😊 Si necesitas ayuda con algo, escríbeme y te respondo al momento.';
-            const sent = await sendInstagramMessage(senderId, mediaReply, accessToken);
-            await supabase.from('instagram_messages').insert({
-              sender_id: senderId,
-              direction: 'outbound',
-              content: mediaReply,
-              status: sent ? 'sent' : 'failed',
-              is_bot: true,
-            });
+            // Check bot enabled
+            const { data: mediaConfig } = await supabase
+              .from('instagram_config')
+              .select('bot_enabled')
+              .limit(1)
+              .single();
+
+            if (mediaConfig?.bot_enabled !== false) {
+              // Get history for context
+              const { data: mediaHistory } = await supabase
+                .from('instagram_messages')
+                .select('direction, content, created_at')
+                .eq('sender_id', senderId)
+                .order('created_at', { ascending: true })
+                .limit(20);
+
+              const mediaConvoHistory = (mediaHistory || []).slice(0, -1).map((m: { direction: string; content: string }) => ({
+                role: m.direction === 'inbound' ? 'user' as const : 'assistant' as const,
+                content: m.content,
+              }));
+
+              const mediaPrompt = `El usuario ha enviado un/a ${mediaLabel.replace(/[\[\]]/g, '')}. No puedes ver el contenido, pero responde de forma natural reconociendo que lo has visto. Si tenéis conversación previa, sigue el hilo. Si no, pregunta de qué se trata.`;
+              const mediaAiResponse = await getAIResponse(mediaPrompt, mediaConvoHistory, mediaConvoHistory.length === 0);
+              const sent = await sendInstagramMessage(senderId, mediaAiResponse, accessToken);
+
+              await supabase.from('instagram_messages').insert({
+                sender_id: senderId,
+                direction: 'outbound',
+                content: mediaAiResponse,
+                status: sent ? 'sent' : 'failed',
+                is_bot: true,
+              });
+            }
           }
           continue;
         }
