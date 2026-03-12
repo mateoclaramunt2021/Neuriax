@@ -1309,9 +1309,21 @@ export async function POST(request: NextRequest) {
           const mediaId = comment.media?.id;
           const commentId = comment.id;
 
-          // Skip our own comments
-          if (commenterId === ourAccountId) {
-            console.log(`💬 Skipping own comment: ${commentText.substring(0, 50)}`);
+          // Skip our own comments (check ID match AND username match)
+          const ourUsername = process.env.INSTAGRAM_USERNAME || 'neuriax';
+          if (
+            commenterId === ourAccountId ||
+            commenterUsername.toLowerCase() === ourUsername.toLowerCase() ||
+            commenterId === entry.id
+          ) {
+            console.log(`💬 Skipping own comment from @${commenterUsername}: ${commentText.substring(0, 50)}`);
+            continue;
+          }
+
+          // Skip replies TO comments (only reply to top-level comments)
+          // Instagram sends parent_id when it's a reply to another comment
+          if (comment.parent_id) {
+            console.log(`💬 Skipping reply-to-comment from @${commenterUsername}`);
             continue;
           }
 
