@@ -859,53 +859,27 @@ export async function POST(request: NextRequest) {
           continue;
         }
 
-        // Handle new follower → send welcome DM
-        if (event.follow || event.optin) {
+        // Handle messaging_referral (user came from ad/link/story)
+        if (event.referral) {
           const senderId = event.sender?.id;
-          if (senderId && accessToken) {
-            try {
-              const { data: config } = await supabase
-                .from('instagram_config')
-                .select('welcome_dm_enabled, welcome_message')
-                .single();
-
-              if (config?.welcome_dm_enabled) {
-                const welcomeMsg = config.welcome_message || 'Hola! 👋 Gracias por seguirnos! ¿En qué podemos ayudarte? 🚀';
-
-                // Check we haven't already welcomed this user
-                const { data: existingFollower } = await supabase
-                  .from('instagram_followers')
-                  .select('welcome_sent')
-                  .eq('instagram_user_id', senderId)
-                  .maybeSingle();
-
-                if (!existingFollower?.welcome_sent) {
-                  const sent = await sendInstagramMessage(senderId, welcomeMsg, accessToken);
-
-                  await supabase.from('instagram_followers').upsert({
-                    instagram_user_id: senderId,
-                    welcome_sent: true,
-                    welcome_sent_at: new Date().toISOString(),
-                    label: 'nuevo',
-                  }, { onConflict: 'instagram_user_id' });
-
-                  await supabase.from('instagram_messages').insert({
-                    sender_id: senderId,
-                    direction: 'outbound',
-                    content: welcomeMsg,
-                    status: sent ? 'sent' : 'failed',
-                    is_bot: true,
-                    message_type: 'welcome_dm',
-                  });
-
-                  console.log(`👋 Welcome DM ${sent ? 'sent' : 'failed'} to ${senderId}`);
-                }
-              }
-            } catch (e) {
-              console.error('Welcome DM error:', e);
-            }
+          const ref = event.referral;
+          console.log(`📎 Referral from ${senderId}: source=${ref.source}, type=${ref.type}, ref=${ref.ref}`);
+          if (senderId) {
+            await supabase.from('instagram_messages').insert({
+              sender_id: senderId,
+              direction: 'inbound',
+              content: `[📎 Referral] source: ${ref.source || 'unknown'}, type: ${ref.type || 'unknown'}, ref: ${ref.ref || ''}`,
+              status: 'received',
+              is_bot: false,
+              message_type: 'referral',
+            });
+            // Tag follower with referral source
+            await supabase.from('instagram_followers').upsert({
+              instagram_user_id: senderId,
+              label: 'referral',
+            }, { onConflict: 'instagram_user_id' });
           }
-          continue;
+          // Don't continue — let it fall through to process the message if there is one
         }
 
         // Handle postback (button clicks / ice breaker taps)
@@ -1255,20 +1229,86 @@ export async function POST(request: NextRequest) {
         }
       }
 
-      // Handle comment events (changes field)
+      // Handle changes (comments, mentions, etc.)
       const changes = entry.changes || [];
       for (const change of changes) {
+        // ─── Comments: auto-reply with AI ───
         if (change.field === 'comments' && change.value) {
           const comment = change.value;
+          const commenterId = comment.from?.id || 'unknown';
+          const commenterUsername = comment.from?.username || 'unknown';
+          const commentText = comment.text || '';
+          const mediaId = comment.media?.id;
+          const commentId = comment.id;
+
+          // Log the comment
           await supabase.from('instagram_messages').insert({
-            sender_id: comment.from?.id || 'unknown',
-            sender_name: comment.from?.username,
+            sender_id: commenterId,
+            sender_name: commenterUsername,
             direction: 'inbound',
-            content: `[💬 Comentario] ${comment.text || ''}`,
+            content: `[💬 Comentario] ${commentText}`,
             status: 'received',
             is_bot: false,
             message_type: 'comment',
           });
+
+          // Auto-reply to comment if bot is enabled and we have the comment ID
+          if (accessToken && commentId && commentText.length > 1) {
+            try {
+              const { data: commentConfig } = await supabase
+                .from('instagram_config')
+                .select('bot_enabled')
+                .single();
+
+              if (commentConfig?.bot_enabled !== false) {
+                // Generate AI reply for the comment
+                const commentPrompt = `Alguien (@${commenterUsername}) ha comentado en tu post de Instagram: "${commentText}"
+
+Responde al comentario de forma natural, breve (1-2 líneas máximo) y cercana. Es un comentario público, no un DM. Sé agradecido si es positivo, responde la duda si es una pregunta, y si muestran interés invítales a escribirte por DM.`;
+                const commentReply = await getAIResponse(commentPrompt, [], true);
+
+                // Reply to the comment via Instagram API
+                const replyRes = await fetch(
+                  `https://graph.instagram.com/v21.0/${commentId}/replies`,
+                  {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization': `Bearer ${accessToken}`,
+                    },
+                    body: JSON.stringify({ message: commentReply }),
+                  }
+                );
+
+                const replySent = replyRes.ok;
+                if (!replySent) {
+                  const errBody = await replyRes.text();
+                  console.error('Comment reply error:', errBody);
+                }
+
+                // Log the reply
+                await supabase.from('instagram_messages').insert({
+                  sender_id: commenterId,
+                  sender_name: commenterUsername,
+                  direction: 'outbound',
+                  content: `[💬 Respuesta comentario] ${commentReply}`,
+                  status: replySent ? 'sent' : 'failed',
+                  is_bot: true,
+                  message_type: 'comment_reply',
+                });
+
+                console.log(`💬 Comment reply ${replySent ? 'sent' : 'failed'} to @${commenterUsername} on media ${mediaId}`);
+              }
+            } catch (e) {
+              console.error('Comment auto-reply error:', e);
+            }
+          }
+        }
+
+        // ─── Mentions: already handled via messaging story_mention above ───
+        if (change.field === 'mentions' && change.value) {
+          const mention = change.value;
+          console.log(`📢 Mention from @${mention.sender?.username || 'unknown'} on media ${mention.media_id}`);
         }
       }
     }

@@ -7,35 +7,8 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// Instagram webhook IDs are truncated vs the real API participant IDs.
-// Resolve via Conversations API.
-const igsidCache: Record<string, string> = {};
-
-async function resolveIGSID(webhookSenderId: string, accessToken: string): Promise<string> {
-  if (igsidCache[webhookSenderId]) return igsidCache[webhookSenderId];
+async function sendInstagramDM(recipientId: string, message: string, accessToken: string) {
   try {
-    const res = await fetch(
-      `https://graph.instagram.com/v21.0/me/conversations?platform=instagram&fields=participants&limit=50`,
-      { headers: { 'Authorization': `Bearer ${accessToken}` } }
-    );
-    if (res.ok) {
-      const data = await res.json();
-      for (const conv of data.data || []) {
-        for (const p of conv.participants?.data || []) {
-          if (p.id.startsWith(webhookSenderId)) {
-            igsidCache[webhookSenderId] = p.id;
-            return p.id;
-          }
-        }
-      }
-    }
-  } catch { /* ignore */ }
-  return webhookSenderId;
-}
-
-async function sendInstagramDM(recipientId: string, message: string, accessToken: string, _igAccountId: string) {
-  try {
-    const resolvedId = await resolveIGSID(recipientId, accessToken);
     const response = await fetch(
       `https://graph.instagram.com/v21.0/me/messages`,
       {
@@ -45,19 +18,45 @@ async function sendInstagramDM(recipientId: string, message: string, accessToken
           'Authorization': `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-          recipient: { id: resolvedId },
+          recipient: { id: recipientId },
           message: { text: message },
         }),
       }
     );
     if (!response.ok) {
       const err = await response.json();
-      console.error('Send DM error:', err, 'resolvedId:', resolvedId);
+      console.error('Welcome DM send error:', err, 'recipientId:', recipientId);
     }
     return response.ok;
   } catch {
     return false;
   }
+}
+
+// Fetch all followers from Instagram Graph API with pagination
+async function fetchAllFollowers(igAccountId: string, accessToken: string): Promise<Array<{ id: string; username?: string }>> {
+  const followers: Array<{ id: string; username?: string }> = [];
+  let nextUrl: string | null = `https://graph.instagram.com/v21.0/${igAccountId}/followers?fields=id,username&limit=100&access_token=${accessToken}`;
+
+  while (nextUrl && followers.length < 500) {
+    try {
+      const res: Response = await fetch(nextUrl);
+      if (!res.ok) {
+        const errBody = await res.text();
+        console.error('Followers API error:', res.status, errBody);
+        break;
+      }
+      const data: { data?: Array<{ id: string; username?: string }>; paging?: { next?: string } } = await res.json();
+      for (const f of data.data || []) {
+        followers.push({ id: f.id, username: f.username });
+      }
+      nextUrl = data.paging?.next || null;
+    } catch (e) {
+      console.error('Followers fetch error:', e);
+      break;
+    }
+  }
+  return followers;
 }
 
 // GET - Check for new followers and send welcome DM
@@ -85,141 +84,115 @@ export async function GET() {
     }
 
     const welcomeMessage = config?.welcome_message ||
-      '¡Hola! 👋 Gracias por seguirnos en Instagram!\nSoy el asistente de Neuriax. Si necesitas una web, chatbot o automatización con IA, ¡estoy aquí para ayudarte! 🚀\n\n¿En qué puedo echarte una mano?';
+      'ey! qué tal? 👋 gracias por seguirnos! si alguna vez necesitas una web, chatbot o automatizar algo con IA, estamos por aquí 🚀 a qué te dedicas?';
 
-    // Get current followers from Instagram API
-    // Note: Instagram Business API doesn't have direct follower list endpoint
-    // We use the approach of tracking conversations - when someone messages us for the first time
-    // OR we can check recent followers through the Instagram Graph API
-    
-    // Alternative: Check for new conversations that haven't received a welcome message
-    const { data: recentMessages } = await supabase
-      .from('instagram_messages')
-      .select('sender_id')
-      .eq('direction', 'inbound')
-      .order('created_at', { ascending: false })
-      .limit(100);
+    // 1. Fetch real followers from Instagram API
+    const apiFollowers = await fetchAllFollowers(igAccountId, accessToken);
 
-    if (!recentMessages || recentMessages.length === 0) {
-      return NextResponse.json({ processed: 0, message: 'No new conversations' });
+    if (apiFollowers.length === 0) {
+      // API might not be available — log and return
+      await supabase.from('instagram_token_log').insert({
+        action: 'welcome_dm_cron',
+        details: JSON.stringify({ error: 'No followers returned from API', timestamp: new Date().toISOString() }),
+      });
+      return NextResponse.json({ processed: 0, message: 'No followers from API (check permissions)' });
     }
 
-    // Get unique sender IDs
-    const uniqueSenders = [...new Set(recentMessages.map(m => m.sender_id))];
-
-    // Check which ones already received a welcome DM
-    const { data: alreadyWelcomed } = await supabase
+    // 2. Get all known followers from DB
+    const followerIds = apiFollowers.map(f => f.id);
+    const { data: knownFollowers } = await supabase
       .from('instagram_followers')
-      .select('instagram_user_id')
-      .in('instagram_user_id', uniqueSenders)
-      .eq('welcome_sent', true);
+      .select('instagram_user_id, welcome_sent')
+      .in('instagram_user_id', followerIds);
 
-    const welcomed = new Set(alreadyWelcomed?.map(f => f.instagram_user_id) || []);
-    const newUsers = uniqueSenders.filter(id => !welcomed.has(id));
+    const knownMap = new Map(
+      (knownFollowers || []).map(f => [f.instagram_user_id, f.welcome_sent])
+    );
+
+    // 3. Find new followers (not in DB) or not yet welcomed
+    const toWelcome = apiFollowers.filter(f => {
+      const known = knownMap.get(f.id);
+      return known === undefined || known === false;
+    });
 
     let sentCount = 0;
     let failedCount = 0;
+    let skippedCount = 0;
 
-    for (const userId of newUsers) {
-      // Rate limit: max 20 welcome DMs per cron run
-      if (sentCount >= 20) break;
+    for (const follower of toWelcome) {
+      // Rate limit: max 15 welcome DMs per cron run
+      if (sentCount >= 15) break;
 
-      // Check if this user is already in the followers table
-      const { data: existing } = await supabase
-        .from('instagram_followers')
-        .select('id')
-        .eq('instagram_user_id', userId)
-        .single();
+      // Skip if they already have conversations (they're talking with the bot already)
+      const { count: existingConvos } = await supabase
+        .from('instagram_messages')
+        .select('id', { count: 'exact', head: true })
+        .eq('sender_id', follower.id);
 
-      if (existing) {
-        // Already recorded but welcome not sent - send it
-        const sent = await sendInstagramDM(userId, welcomeMessage, accessToken, igAccountId);
-
-        if (sent) {
-          await supabase
-            .from('instagram_followers')
-            .update({ welcome_sent: true, welcome_sent_at: new Date().toISOString() })
-            .eq('instagram_user_id', userId);
-
-          // Save the welcome message in conversations
-          await supabase.from('instagram_messages').insert({
-            sender_id: userId,
-            direction: 'outbound',
-            content: welcomeMessage,
-            status: 'sent',
-            is_bot: true,
-            message_type: 'welcome',
-          });
-
-          sentCount++;
-        } else {
-          failedCount++;
-        }
-      } else {
-        // New user - record and send welcome
-        // Get username if possible
-        let username = userId;
-        try {
-          const profileRes = await fetch(
-            `https://graph.instagram.com/v21.0/${userId}?fields=name,username&access_token=${accessToken}`
-          );
-          if (profileRes.ok) {
-            const profile = await profileRes.json();
-            username = profile.username || profile.name || userId;
-          }
-        } catch {
-          // Username fetch failed, use ID
-        }
-
-        await supabase.from('instagram_followers').insert({
-          instagram_user_id: userId,
-          username: username,
-          welcome_sent: false,
-        });
-
-        const sent = await sendInstagramDM(userId, welcomeMessage, accessToken, igAccountId);
-
-        if (sent) {
-          await supabase
-            .from('instagram_followers')
-            .update({ welcome_sent: true, welcome_sent_at: new Date().toISOString() })
-            .eq('instagram_user_id', userId);
-
-          await supabase.from('instagram_messages').insert({
-            sender_id: userId,
-            direction: 'outbound',
-            content: welcomeMessage,
-            status: 'sent',
-            is_bot: true,
-            message_type: 'welcome',
-          });
-
-          sentCount++;
-        } else {
-          failedCount++;
-        }
+      if ((existingConvos || 0) > 0) {
+        // Already in conversation — mark as welcomed, don't interrupt
+        await supabase.from('instagram_followers').upsert({
+          instagram_user_id: follower.id,
+          username: follower.username || follower.id,
+          welcome_sent: true,
+          welcome_sent_at: new Date().toISOString(),
+        }, { onConflict: 'instagram_user_id' });
+        skippedCount++;
+        continue;
       }
 
-      // Small delay between sends to avoid rate limits
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Send welcome DM
+      const sent = await sendInstagramDM(follower.id, welcomeMessage, accessToken);
+
+      // Upsert follower record
+      await supabase.from('instagram_followers').upsert({
+        instagram_user_id: follower.id,
+        username: follower.username || follower.id,
+        welcome_sent: sent,
+        welcome_sent_at: sent ? new Date().toISOString() : null,
+        label: 'nuevo',
+      }, { onConflict: 'instagram_user_id' });
+
+      if (sent) {
+        // Save the welcome message in conversations
+        await supabase.from('instagram_messages').insert({
+          sender_id: follower.id,
+          direction: 'outbound',
+          content: welcomeMessage,
+          status: 'sent',
+          is_bot: true,
+          message_type: 'welcome',
+        });
+        sentCount++;
+        console.log(`👋 Welcome DM sent to @${follower.username || follower.id}`);
+      } else {
+        failedCount++;
+      }
+
+      // Delay between sends to avoid rate limits
+      await new Promise(resolve => setTimeout(resolve, 1500));
     }
 
     // Log the run
     await supabase.from('instagram_token_log').insert({
       action: 'welcome_dm_cron',
       details: JSON.stringify({
-        new_users: newUsers.length,
+        api_followers: apiFollowers.length,
+        to_welcome: toWelcome.length,
         sent: sentCount,
         failed: failedCount,
+        skipped: skippedCount,
         timestamp: new Date().toISOString(),
       }),
     });
 
     return NextResponse.json({
       success: true,
-      new_users_found: newUsers.length,
+      api_followers: apiFollowers.length,
+      new_followers_found: toWelcome.length,
       welcome_sent: sentCount,
       failed: failedCount,
+      skipped_existing_convos: skippedCount,
     });
   } catch (error) {
     console.error('Instagram followers cron error:', error);
