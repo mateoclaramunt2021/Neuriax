@@ -21,10 +21,6 @@
       "schedule": "0 3 1,15 * *"
     },
     {
-      "path": "/api/cron/instagram-followers",
-      "schedule": "0 9 * * *"
-    },
-    {
       "path": "/api/cron/instagram-cold-orchestrator",
       "schedule": "0 10 * * *"
     }

@@ -648,17 +648,18 @@ async function getAIResponse(
     messages.push({
       role: 'system',
       content: `⚠️ INSTRUCCIÓN CRÍTICA — PRIMER CONTACTO ⚠️
-Esta persona te escribe POR PRIMERA VEZ. Es vuestra primera interacción NUNCA.
+Esta persona te escribe POR PRIMERA VEZ. Es vuestra primera interacción.
 
 Tu respuesta DEBE:
-1. EMPEZAR con un saludo cálido y natural ("ey! qué tal? 👋" o "buenas! 😊" o "hola! qué tal?")
-2. Después del saludo, hacer UNA pregunta casual sobre a qué se dedica
-3. Máximo 2 líneas, tono cercano
+1. EMPEZAR con un saludo de bienvenida cálido ("ey! qué tal? bienvenid@ 👋" o "buenas! 😊 bienvenid@!")
+2. Si su bio dice a qué se dedica → menciónalo directamente en vez de preguntar
+3. Si NO tienes info de su perfil → haz UNA pregunta casual sobre a qué se dedica
+4. Máximo 2-3 líneas, tono cercano
 
-Ejemplo perfecto: "ey! qué tal? 👋 a qué te dedicas? vi tu perfil y me llamó la atención"
-Otro ejemplo: "buenas! 😊 encantado, a qué os dedicáis?"
+Ejemplo perfecto (con bio): "ey! bienvenid@ 👋 vi que tenéis una pizzería, qué buena pinta! hacéis reparto? 🍕"
+Ejemplo perfecto (sin info): "ey! bienvenid@ 👋 a qué te dedicas? así te cuento cómo podemos ayudarte 🚀"
 
-NUNCA respondas sin saludar primero. SIEMPRE sé educado y cálido.`
+NUNCA respondas sin saludar primero. SIEMPRE sé educado y cálido. La palabra "bienvenid@" es OBLIGATORIA en el primer mensaje.`
     });
   } else if (!isFirstMessage) {
     // Ongoing conversation: remind to greet back if they greet
@@ -986,11 +987,11 @@ export async function POST(request: NextRequest) {
           if (senderId && accessToken) {
             let replyMsg = 'ey! en qué te puedo ayudar? 😊';
             if (payload === 'ICE_SERVICES' || payload === 'GET_SERVICES') {
-              replyMsg = 'en Neuriax diseñamos webs y automatizamos negocios con IA 🚀 desde chatbots hasta webs completas. a qué te dedicas tú? así te cuento qué podría encajarte';
+              replyMsg = 'ey! bienvenid@ 👋 en Neuriax diseñamos webs y automatizamos negocios con IA 🚀 desde chatbots hasta webs completas. a qué te dedicas? así te cuento qué podría encajarte';
             } else if (payload === 'ICE_AUTOMATE' || payload === 'GET_AUTOMATE') {
-              replyMsg = 'buena elección! 💡 la automatización con IA es lo que más impacto tiene en un negocio. desde chatbots hasta flujos automáticos. a qué se dedica tu negocio?';
+              replyMsg = 'ey! bienvenid@ 👋 la automatización con IA es lo que más impacto tiene en un negocio. desde chatbots hasta flujos automáticos. a qué se dedica tu negocio?';
             } else if (payload === 'ICE_PRICES' || payload === 'GET_PRICES') {
-              replyMsg = 'depende del proyecto 😊 pero para que te hagas una idea: webs desde 500€ y automatizaciones desde 300€/mes. quieres que Mateo te haga un presupuesto? → calendly.com/neuriax/30min';
+              replyMsg = 'ey! bienvenid@ 👋 la IA puede ayudarte a automatizar tareas, captar clientes, o mejorar tu web. a qué te dedicas? así te cuento qué podríamos hacer por ti 🚀';
             } else if (payload === 'ICE_CALL' || payload === 'SCHEDULE_CALL') {
               replyMsg = 'perfecto! agenda aquí con Mateo, os preparamos una propuesta gratis 💪\n\ncalendly.com/neuriax/30min';
             } else if (payload === 'ICE_PORTFOLIO' || payload === 'VIEW_PORTFOLIO') {
@@ -999,14 +1000,34 @@ export async function POST(request: NextRequest) {
             
             const sent = await sendInstagramMessage(senderId, replyMsg, accessToken);
             
+            // Record as new lead from ice breaker
+            await supabase.from('instagram_followers').upsert({
+              instagram_user_id: senderId,
+              label: 'lead',
+              welcome_sent: true,
+              welcome_sent_at: new Date().toISOString(),
+            }, { onConflict: 'instagram_user_id' });
+
+            // Log the ice breaker tap as inbound + the reply as outbound
+            await supabase.from('instagram_messages').insert({
+              sender_id: senderId,
+              direction: 'inbound',
+              content: `[🧊 Ice Breaker] ${event.postback.title || payload}`,
+              status: 'received',
+              is_bot: false,
+              message_type: 'ice_breaker',
+            });
+
             await supabase.from('instagram_messages').insert({
               sender_id: senderId,
               direction: 'outbound',
               content: replyMsg,
               status: sent ? 'sent' : 'failed',
               is_bot: true,
-              message_type: 'postback_reply',
+              message_type: 'ice_breaker_reply',
             });
+
+            console.log(`🧊 Ice breaker "${payload}" tapped by ${senderId} — reply ${sent ? 'sent' : 'failed'}`);
           }
           continue;
         }
