@@ -623,13 +623,14 @@ async function getAIResponse(
   userMessage: string,
   history: Array<{role: string; content: string}>,
   isFirstMessage: boolean,
-  conversationCtx?: ConversationContext
+  conversationCtx?: ConversationContext,
+  customSystemPrompt?: string
 ) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return 'Hey! 👋 Ahora mismo Mateo no está disponible, pero agenda llamada aquí → calendly.com/neuriax/30min';
 
   // Build the final system prompt with dynamic context
-  let systemPrompt = INSTAGRAM_SYSTEM_PROMPT;
+  let systemPrompt = customSystemPrompt || INSTAGRAM_SYSTEM_PROMPT;
 
   // Inject conversation context
   if (conversationCtx?.contextBlock) {
@@ -1146,6 +1147,13 @@ export async function POST(request: NextRequest) {
             .is('sender_name', null);
         }
 
+        // Fetch config early (needed for alerts_enabled + bot_enabled)
+        const { data: config } = await supabase
+          .from('instagram_config')
+          .select('*')
+          .limit(1)
+          .single();
+
         // ─── Check if this sender is a cold lead who responded ───
         try {
           const { data: coldLead } = await supabase
@@ -1177,28 +1185,23 @@ export async function POST(request: NextRequest) {
 
             console.log(`Cold lead ${senderId} responded! Sector: ${coldLead.sector}`);
 
-            // Alert Mateo — cold lead responded (always important)
-            const baseUrl = request.nextUrl.origin;
-            sendAlertToMateo(
-              'hot_lead',
-              coldLead.username || senderId,
-              coldLead.sector || 'general',
-              messageText,
-              `Un lead frío del sector "${coldLead.sector}" ha respondido al DM. Esto es una señal muy positiva — el lead tiene interés.`,
-              `👤 Lead: ${messageText}`,
-              baseUrl
-            ).catch(() => {});
+            // Alert Mateo — cold lead responded
+            if (config?.alerts_enabled !== false) {
+              const baseUrl = request.nextUrl.origin;
+              sendAlertToMateo(
+                'hot_lead',
+                coldLead.username || senderId,
+                coldLead.sector || 'general',
+                messageText,
+                `Un lead frío del sector "${coldLead.sector}" ha respondido al DM. Esto es una señal muy positiva — el lead tiene interés.`,
+                `👤 Lead: ${messageText}`,
+                baseUrl
+              ).catch(() => {});
+            }
           }
         } catch {
           // Table might not exist yet, skip silently
         }
-
-        // Check if bot is enabled
-        const { data: config } = await supabase
-          .from('instagram_config')
-          .select('*')
-          .limit(1)
-          .single();
 
         const botEnabled = config?.bot_enabled !== false;
 
@@ -1255,8 +1258,9 @@ export async function POST(request: NextRequest) {
           // Build conversation context for coherence
           const conversationCtx = buildConversationContext(historyWithTime, profileData, leadIntel);
 
-          // Get AI response (with context)
-          const aiResponse = await getAIResponse(messageText, conversationHistory, isFirstMessage, conversationCtx);
+          // Get AI response (with context + custom prompt from DB)
+          const customPrompt = config?.system_prompt || undefined;
+          const aiResponse = await getAIResponse(messageText, conversationHistory, isFirstMessage, conversationCtx, customPrompt);
 
           // Update last greeting timestamp if the response contains a greeting
           if (/^(hey|hola|buenas|ey|qué tal|que tal|👋|holi)/i.test(aiResponse.trim())) {
@@ -1320,16 +1324,18 @@ export async function POST(request: NextRequest) {
             ).join('\n');
 
             // Send alert (non-blocking)
-            const baseUrl = request.nextUrl.origin;
-            sendAlertToMateo(
-              opportunity.type,
-              alertUsername,
-              alertSector,
-              messageText,
-              opportunity.context,
-              snippet + `\n👤 Lead: ${messageText}\n🤖 Neuri: ${aiResponse}`,
-              baseUrl
-            ).catch(() => {});
+            if (config?.alerts_enabled !== false) {
+              const baseUrl = request.nextUrl.origin;
+              sendAlertToMateo(
+                opportunity.type,
+                alertUsername,
+                alertSector,
+                messageText,
+                opportunity.context,
+                snippet + `\n👤 Lead: ${messageText}\n🤖 Neuri: ${aiResponse}`,
+                baseUrl
+              ).catch(() => {});
+            }
 
             console.log(`🔥 Opportunity detected from @${alertUsername}: ${opportunity.type}`);
           }
@@ -1354,9 +1360,10 @@ export async function POST(request: NextRequest) {
       // Get our own account ID to avoid replying to ourselves
       const { data: igConfig } = await supabase
         .from('instagram_config')
-        .select('instagram_account_id, bot_enabled')
+        .select('instagram_account_id, bot_enabled, comment_replies_enabled, comment_trigger_words, alerts_enabled')
         .single();
       const ourAccountId = igConfig?.instagram_account_id || process.env.INSTAGRAM_ACCOUNT_ID || '';
+      const commentRepliesEnabled = igConfig?.comment_replies_enabled !== false;
 
       for (const change of changes) {
         // ─── Comments: auto-reply with AI ───
@@ -1406,8 +1413,13 @@ export async function POST(request: NextRequest) {
           // Limit: max 5 comment replies per webhook call
           if (commentRepliesThisBatch >= 5) continue;
 
-          // ─── Comment Trigger: "IA", "info", "quiero", "precio" → DM + reply ───
-          const triggerWords = /\b(ia|info|quiero|precio|interesado|interesada)\b/i;
+          // Skip if comment replies are disabled
+          if (!commentRepliesEnabled) continue;
+
+          // ─── Comment Trigger: keywords from config (or defaults) → DM + reply ───
+          const triggerWordsStr = igConfig?.comment_trigger_words || 'ia,info,quiero,precio,interesado,interesada';
+          const triggerWordsPattern = triggerWordsStr.split(',').map((w: string) => w.trim()).filter(Boolean).join('|');
+          const triggerWords = new RegExp(`\\b(${triggerWordsPattern})\\b`, 'i');
           const isCommentTrigger = triggerWords.test(commentText);
 
           if (isCommentTrigger && accessToken && commentId) {

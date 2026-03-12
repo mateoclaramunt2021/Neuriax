@@ -86,6 +86,42 @@ interface InstagramConfig {
   cold_outreach_enabled?: boolean;
   cold_dm_daily_limit?: number;
   ice_breakers?: Array<{ question: string; payload: string }>;
+  comment_replies_enabled?: boolean;
+  alerts_enabled?: boolean;
+  system_prompt?: string;
+  comment_trigger_words?: string;
+}
+interface StaleChat {
+  senderId: string;
+  name: string;
+  label: string;
+  lastMessage: string;
+  lastMessageAt: string;
+  lastDirection: string;
+  hoursSinceLastMessage: number;
+  totalMessages: number;
+  reason: string;
+  sector: string | null;
+}
+interface AgentMetrics {
+  botMessagesWeek: number;
+  iceBreakersWeek: number;
+  commentRepliesWeek: number;
+  firstContactsWeek: number;
+  responseRate: number;
+  totalLeads: number;
+  respondedLeads: number;
+  labelCounts: Record<string, number>;
+}
+interface AgentLog {
+  sender_id?: string;
+  sender_name?: string;
+  content?: string;
+  message_type?: string;
+  status?: string;
+  created_at: string;
+  action?: string;
+  details?: string;
 }
 interface Stats {
   totalConversations: number;
@@ -191,7 +227,7 @@ export default function InstagramPage() {
   const [connected, setConnected] = useState(false);
   const [selectedSender, setSelectedSender] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
-  const [tab, setTab] = useState<'inbox' | 'pipeline' | 'prospecting' | 'settings'>('inbox');
+  const [tab, setTab] = useState<'inbox' | 'pipeline' | 'prospecting' | 'settings' | 'agente'>('inbox');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [sending, setSending] = useState(false);
@@ -236,6 +272,18 @@ export default function InstagramPage() {
   const [editPurpose, setEditPurpose] = useState('captacion');
   const [editNotes, setEditNotes] = useState('');
   const [savingLead, setSavingLead] = useState(false);
+  // Agent tab state
+  const [staleChats, setStaleChats] = useState<StaleChat[]>([]);
+  const [agentMetrics, setAgentMetrics] = useState<AgentMetrics | null>(null);
+  const [agentLogs, setAgentLogs] = useState<AgentLog[]>([]);
+  const [agentLoading, setAgentLoading] = useState(false);
+  const [agentPrompt, setAgentPrompt] = useState('');
+  const [agentTriggerWords, setAgentTriggerWords] = useState('ia,info,quiero,precio,interesado,interesada');
+  const [agentCommentReplies, setAgentCommentReplies] = useState(true);
+  const [agentAlerts, setAgentAlerts] = useState(true);
+  const [sendingFollowup, setSendingFollowup] = useState<string | null>(null);
+  const [bulkFollowingUp, setBulkFollowingUp] = useState(false);
+  const [agentSaving, setAgentSaving] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedSenderRef = useRef<string | null>(null);
 
@@ -571,6 +619,102 @@ export default function InstagramPage() {
     }
   }, [selectedSender, showLeadPanel, fetchLeadDetail]);
 
+  /* — Agent tab data — */
+  const fetchAgentData = useCallback(async () => {
+    setAgentLoading(true);
+    try {
+      const [staleRes, metricsRes, logsRes] = await Promise.all([
+        fetch('/api/superadmin/instagram/agent?section=stale_chats'),
+        fetch('/api/superadmin/instagram/agent?section=metrics'),
+        fetch('/api/superadmin/instagram/agent?section=logs'),
+      ]);
+      if (staleRes.ok) {
+        const d = await staleRes.json();
+        setStaleChats(d.staleChats || []);
+        if (d.agentConfig) {
+          setAgentPrompt(d.agentConfig.system_prompt || '');
+          setAgentTriggerWords(d.agentConfig.comment_trigger_words || 'ia,info,quiero,precio,interesado,interesada');
+          setAgentCommentReplies(d.agentConfig.comment_replies_enabled !== false);
+          setAgentAlerts(d.agentConfig.alerts_enabled !== false);
+        }
+      }
+      if (metricsRes.ok) {
+        const d = await metricsRes.json();
+        setAgentMetrics(d.metrics || null);
+      }
+      if (logsRes.ok) {
+        const d = await logsRes.json();
+        setAgentLogs(d.recentBotActions || []);
+      }
+    } catch (e) { console.error('Agent data error:', e); }
+    finally { setAgentLoading(false); }
+  }, []);
+
+  useEffect(() => {
+    if (tab === 'agente') fetchAgentData();
+  }, [tab, fetchAgentData]);
+
+  const handleSendFollowup = async (senderId: string) => {
+    setSendingFollowup(senderId);
+    try {
+      const res = await fetch('/api/superadmin/instagram/agent', {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'followup', senderId }),
+      });
+      const data = await res.json();
+      if (data.sent) {
+        showToast(`Follow-up enviado ✅`);
+        setStaleChats(prev => prev.filter(c => c.senderId !== senderId));
+      } else {
+        showToast('Error al enviar follow-up', 'error');
+      }
+    } catch { showToast('Error de conexión', 'error'); }
+    finally { setSendingFollowup(null); }
+  };
+
+  const handleBulkFollowup = async () => {
+    if (bulkFollowingUp) return;
+    setBulkFollowingUp(true);
+    try {
+      const ids = staleChats.slice(0, 10).map(c => c.senderId);
+      const res = await fetch('/api/superadmin/instagram/agent', {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'bulk_followup', senderIds: ids }),
+      });
+      const data = await res.json();
+      showToast(`${data.sent} follow-ups enviados, ${data.failed} fallidos`);
+      fetchAgentData();
+    } catch { showToast('Error', 'error'); }
+    finally { setBulkFollowingUp(false); }
+  };
+
+  const handleMarkCold = async (senderId: string) => {
+    await fetch('/api/superadmin/instagram/agent', {
+      method: 'PUT', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'mark_cold', senderId }),
+    });
+    setStaleChats(prev => prev.filter(c => c.senderId !== senderId));
+    showToast('Marcado como frío');
+  };
+
+  const handleSaveAgentConfig = async () => {
+    setAgentSaving(true);
+    try {
+      const res = await fetch('/api/superadmin/instagram/agent', {
+        method: 'PUT', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'save_config',
+          system_prompt: agentPrompt,
+          comment_trigger_words: agentTriggerWords,
+          comment_replies_enabled: agentCommentReplies,
+          alerts_enabled: agentAlerts,
+        }),
+      });
+      if (res.ok) showToast('Configuración del agente guardada ✅');
+    } catch { showToast('Error al guardar', 'error'); }
+    finally { setAgentSaving(false); }
+  };
+
   /* — Filters — */
   const filteredConversations = conversations.filter(conv => {
     const matchesLabel = filterLabel === 'all' || conv.label === filterLabel;
@@ -641,6 +785,7 @@ export default function InstagramPage() {
                 { id: 'pipeline' as const, label: 'Pipeline' },
                 { id: 'prospecting' as const, label: 'Prospección', count: coldStats?.new },
                 { id: 'settings' as const, label: 'Settings' },
+                { id: 'agente' as const, label: '🤖 Agente', count: staleChats.length || undefined },
               ]).map(t => (
                 <button
                   key={t.id}
@@ -679,7 +824,7 @@ export default function InstagramPage() {
 
           {/* Mobile tabs */}
           <nav className="md:hidden flex items-center gap-1 mt-3 bg-white/[0.04] rounded-xl p-1">
-            {(['inbox', 'pipeline', 'prospecting', 'settings'] as const).map(t => (
+            {(['inbox', 'pipeline', 'prospecting', 'settings', 'agente'] as const).map(t => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -687,7 +832,7 @@ export default function InstagramPage() {
                   tab === t ? 'bg-white/[0.08] text-white' : 'text-slate-500'
                 }`}
               >
-                {t === 'inbox' ? '📥 Inbox' : t === 'pipeline' ? '📊 Pipeline' : t === 'prospecting' ? '🎯 Prospección' : '⚙️ Settings'}
+                {t === 'inbox' ? '📥' : t === 'pipeline' ? '📊' : t === 'prospecting' ? '🎯' : t === 'settings' ? '⚙️' : '🤖'}
               </button>
             ))}
           </nav>
@@ -2350,6 +2495,239 @@ export default function InstagramPage() {
                       </ul>
                     </div>
                   </>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* ═══════════════════ AGENTE TAB ═══════════════════ */}
+        {tab === 'agente' && (
+          <div className="space-y-6">
+
+            {/* Agent metrics row */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-3">
+              <StatCard value={agentMetrics?.botMessagesWeek || 0} label="Bot DMs (7d)" accent="text-fuchsia-400" />
+              <StatCard value={agentMetrics?.iceBreakersWeek || 0} label="Ice Breakers (7d)" accent="text-cyan-400" />
+              <StatCard value={agentMetrics?.commentRepliesWeek || 0} label="Comentarios (7d)" accent="text-violet-400" />
+              <StatCard value={agentMetrics?.firstContactsWeek || 0} label="1er Contacto (7d)" accent="text-emerald-400" />
+              <StatCard value={`${agentMetrics?.responseRate || 0}%`} label="Tasa Respuesta" accent="text-amber-400" />
+              <StatCard value={staleChats.length} label="Chats Pendientes" accent="text-red-400" />
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+              {/* ── LEFT: Stale chats / Follow-up panel ── */}
+              <div className="lg:col-span-2 space-y-4">
+                <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] overflow-hidden">
+                  <div className="p-4 border-b border-white/[0.06] flex items-center justify-between">
+                    <div>
+                      <h3 className="text-sm font-semibold text-white flex items-center gap-2">
+                        📋 Chats sin seguimiento
+                        {staleChats.length > 0 && (
+                          <span className="px-2 py-0.5 text-[10px] bg-red-500/20 text-red-300 rounded-full">{staleChats.length}</span>
+                        )}
+                      </h3>
+                      <p className="text-xs text-slate-500 mt-0.5">Leads que necesitan follow-up</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={fetchAgentData}
+                        disabled={agentLoading}
+                        className="px-3 py-1.5 text-xs rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white transition-all"
+                      >
+                        {agentLoading ? '...' : '🔄 Analizar'}
+                      </button>
+                      {staleChats.length > 0 && (
+                        <button
+                          onClick={handleBulkFollowup}
+                          disabled={bulkFollowingUp}
+                          className="px-3 py-1.5 text-xs rounded-lg bg-fuchsia-500/20 hover:bg-fuchsia-500/30 text-fuchsia-300 font-medium transition-all disabled:opacity-50"
+                        >
+                          {bulkFollowingUp ? 'Enviando...' : `📩 Follow-up masivo (${Math.min(staleChats.length, 10)})`}
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {staleChats.length === 0 ? (
+                    <div className="p-8 text-center">
+                      <p className="text-2xl mb-2">✅</p>
+                      <p className="text-sm text-slate-400">No hay chats pendientes de seguimiento</p>
+                      <p className="text-xs text-slate-600 mt-1">Todos los leads están siendo atendidos</p>
+                    </div>
+                  ) : (
+                    <div className="divide-y divide-white/[0.04] max-h-[500px] overflow-y-auto">
+                      {staleChats.map(chat => (
+                        <div key={chat.senderId} className="p-4 hover:bg-white/[0.02] transition-all group">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-sm text-white truncate">@{chat.name}</span>
+                                <span className={`px-1.5 py-0.5 text-[9px] rounded-full ring-1 ${
+                                  chat.label === 'lead' ? 'bg-cyan-500/10 text-cyan-300 ring-cyan-500/30' :
+                                  chat.label === 'interesado' ? 'bg-amber-500/10 text-amber-300 ring-amber-500/30' :
+                                  'bg-slate-500/10 text-slate-300 ring-slate-500/30'
+                                }`}>{chat.label}</span>
+                                {chat.sector && (
+                                  <span className="text-[9px] text-slate-600">{chat.sector}</span>
+                                )}
+                              </div>
+                              <p className="text-xs text-slate-500 mt-1 truncate">{chat.lastMessage}</p>
+                              <div className="flex items-center gap-3 mt-1.5">
+                                <span className={`text-[10px] px-1.5 py-0.5 rounded ${
+                                  chat.reason.includes('Respondió') ? 'bg-amber-500/10 text-amber-400' :
+                                  chat.reason.includes('ice breaker') ? 'bg-cyan-500/10 text-cyan-400' :
+                                  'bg-red-500/10 text-red-400'
+                                }`}>
+                                  {chat.reason}
+                                </span>
+                                <span className="text-[10px] text-slate-600">{chat.hoursSinceLastMessage}h · {chat.totalMessages} msgs</span>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition-all shrink-0">
+                              <button
+                                onClick={() => handleSendFollowup(chat.senderId)}
+                                disabled={sendingFollowup === chat.senderId}
+                                className="px-2.5 py-1.5 text-[10px] rounded-lg bg-fuchsia-500/20 hover:bg-fuchsia-500/30 text-fuchsia-300 font-medium transition-all disabled:opacity-50"
+                                title="Enviar follow-up con IA"
+                              >
+                                {sendingFollowup === chat.senderId ? '...' : '📩 Follow-up'}
+                              </button>
+                              <button
+                                onClick={() => { setSelectedSender(chat.senderId); setTab('inbox'); }}
+                                className="px-2.5 py-1.5 text-[10px] rounded-lg bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white transition-all"
+                                title="Abrir chat"
+                              >
+                                💬
+                              </button>
+                              <button
+                                onClick={() => handleMarkCold(chat.senderId)}
+                                className="px-2.5 py-1.5 text-[10px] rounded-lg bg-white/[0.05] hover:bg-red-500/20 text-slate-500 hover:text-red-400 transition-all"
+                                title="Marcar como frío"
+                              >
+                                🚫
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {/* ── Agent Logs ── */}
+                <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] overflow-hidden">
+                  <div className="p-4 border-b border-white/[0.06]">
+                    <h3 className="text-sm font-semibold text-white">📊 Actividad reciente del bot</h3>
+                  </div>
+                  <div className="divide-y divide-white/[0.04] max-h-[300px] overflow-y-auto">
+                    {agentLogs.length === 0 ? (
+                      <div className="p-6 text-center text-xs text-slate-600">Sin actividad reciente</div>
+                    ) : (
+                      agentLogs.slice(0, 20).map((log, i) => (
+                        <div key={i} className="px-4 py-2.5 flex items-center gap-3 text-xs">
+                          <span className="shrink-0">
+                            {log.message_type === 'ice_breaker_reply' ? '🧊' :
+                             log.message_type === 'comment_reply' ? '💬' :
+                             log.message_type === 'comment_trigger_dm' ? '🎯' :
+                             log.message_type === 'setter_followup' ? '📩' :
+                             log.message_type === 'welcome' ? '👋' :
+                             log.message_type === 'story_reply' ? '📷' :
+                             '🤖'}
+                          </span>
+                          <div className="flex-1 min-w-0">
+                            <span className="text-slate-300 truncate block">
+                              {log.sender_name ? `@${log.sender_name}` : log.sender_id?.substring(0, 8)}
+                              {' · '}
+                              {log.content?.substring(0, 60)}
+                            </span>
+                          </div>
+                          <span className={`shrink-0 px-1.5 py-0.5 rounded text-[9px] ${
+                            log.status === 'sent' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'
+                          }`}>
+                            {log.status}
+                          </span>
+                          <span className="text-slate-600 shrink-0">{timeAgo(log.created_at)}</span>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* ── RIGHT: Agent config panel ── */}
+              <div className="space-y-4">
+                <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] p-5 space-y-5">
+                  <h3 className="text-sm font-semibold text-white">⚙️ Configuración del Agente</h3>
+
+                  {/* Toggles */}
+                  <div className="space-y-3">
+                    <Toggle on={agentCommentReplies} onChange={setAgentCommentReplies} label="Respuestas a comentarios" />
+                    <Toggle on={agentAlerts} onChange={setAgentAlerts} label="Alertas email a Mateo" />
+                  </div>
+
+                  {/* Trigger words */}
+                  <div>
+                    <label className="text-xs text-slate-400 mb-1.5 block">Palabras trigger (comentarios → DM)</label>
+                    <input
+                      value={agentTriggerWords}
+                      onChange={e => setAgentTriggerWords(e.target.value)}
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-fuchsia-500/50"
+                      placeholder="ia,info,quiero,precio..."
+                    />
+                    <p className="text-[10px] text-slate-600 mt-1">Separadas por comas. Si un comentario contiene alguna → DM automático</p>
+                  </div>
+
+                  {/* System prompt */}
+                  <div>
+                    <label className="text-xs text-slate-400 mb-1.5 block">System Prompt personalizado</label>
+                    <textarea
+                      value={agentPrompt}
+                      onChange={e => setAgentPrompt(e.target.value)}
+                      rows={8}
+                      className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-3 py-2 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-1 focus:ring-fuchsia-500/50 resize-y font-mono"
+                      placeholder="Deja vacío para usar el prompt por defecto del bot. Escribe aquí para personalizarlo..."
+                    />
+                    <p className="text-[10px] text-slate-600 mt-1">{agentPrompt ? `${agentPrompt.length} caracteres` : 'Usando prompt por defecto'}</p>
+                  </div>
+
+                  <button
+                    onClick={handleSaveAgentConfig}
+                    disabled={agentSaving}
+                    className="w-full py-2.5 rounded-xl text-sm font-medium bg-gradient-to-r from-fuchsia-500 to-violet-500 text-white hover:shadow-lg hover:shadow-fuchsia-500/20 transition-all disabled:opacity-50"
+                  >
+                    {agentSaving ? 'Guardando...' : 'Guardar configuración'}
+                  </button>
+                </div>
+
+                {/* Pipeline summary */}
+                {agentMetrics?.labelCounts && Object.keys(agentMetrics.labelCounts).length > 0 && (
+                  <div className="bg-[#1a1a2e]/60 backdrop-blur rounded-2xl border border-white/[0.06] p-5 space-y-3">
+                    <h3 className="text-sm font-semibold text-white">📊 Pipeline</h3>
+                    <div className="space-y-2">
+                      {Object.entries(agentMetrics.labelCounts).sort((a, b) => b[1] - a[1]).map(([label, count]) => (
+                        <div key={label} className="flex items-center justify-between">
+                          <span className="text-xs text-slate-400 capitalize">{label}</span>
+                          <div className="flex items-center gap-2">
+                            <div className="w-20 h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
+                              <div
+                                className={`h-full rounded-full ${
+                                  label === 'cliente' ? 'bg-emerald-500' :
+                                  label === 'interesado' ? 'bg-amber-500' :
+                                  label === 'lead' ? 'bg-cyan-500' :
+                                  label === 'spam' ? 'bg-red-500' :
+                                  'bg-slate-500'
+                                }`}
+                                style={{ width: `${Math.min(100, (count / (agentMetrics.totalLeads || 1)) * 100)}%` }}
+                              />
+                            </div>
+                            <span className="text-xs text-white font-medium w-6 text-right">{count}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
             </div>
