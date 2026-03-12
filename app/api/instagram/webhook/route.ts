@@ -1347,6 +1347,81 @@ export async function POST(request: NextRequest) {
           // Limit: max 5 comment replies per webhook call
           if (commentRepliesThisBatch >= 5) continue;
 
+          // ─── Comment Trigger: "IA", "info", "quiero", "precio" → DM + reply ───
+          const triggerWords = /\b(ia|info|quiero|precio|interesado|interesada)\b/i;
+          const isCommentTrigger = triggerWords.test(commentText);
+
+          if (isCommentTrigger && accessToken && commentId) {
+            try {
+              // 1. Reply to the comment publicly
+              const triggerCommentReply = 'te escribo por DM! 💡';
+              const replyRes = await fetch(
+                `https://graph.instagram.com/v21.0/${commentId}/replies`,
+                {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`,
+                  },
+                  body: JSON.stringify({ message: triggerCommentReply }),
+                }
+              );
+              const replySent = replyRes.ok;
+              if (!replySent) {
+                const errBody = await replyRes.text();
+                console.error('Trigger comment reply error:', errBody);
+              }
+
+              await supabase.from('instagram_messages').insert({
+                sender_id: commenterId,
+                sender_name: commenterUsername,
+                direction: 'outbound',
+                content: `[💬 Respuesta comentario] ${triggerCommentReply}`,
+                status: replySent ? 'sent' : 'failed',
+                is_bot: true,
+                message_type: 'comment_reply',
+              });
+
+              // 2. Send DM to the commenter (only if not already DM'd from a comment trigger)
+              const { count: alreadyDmd } = await supabase
+                .from('instagram_messages')
+                .select('id', { count: 'exact', head: true })
+                .eq('sender_id', commenterId)
+                .eq('message_type', 'comment_trigger_dm');
+
+              if ((alreadyDmd || 0) === 0) {
+                const triggerDmMsg = 'ey! vi que te interesa la IA 🚀 en Neuriax ayudamos a negocios a automatizar con inteligencia artificial. a qué te dedicas? así te cuento qué podríamos hacer por ti 💡';
+                const dmSent = await sendInstagramMessage(commenterId, triggerDmMsg, accessToken);
+
+                await supabase.from('instagram_messages').insert({
+                  sender_id: commenterId,
+                  sender_name: commenterUsername,
+                  direction: 'outbound',
+                  content: triggerDmMsg,
+                  status: dmSent ? 'sent' : 'failed',
+                  is_bot: true,
+                  message_type: 'comment_trigger_dm',
+                });
+
+                // Record in followers
+                await supabase.from('instagram_followers').upsert({
+                  instagram_user_id: commenterId,
+                  username: commenterUsername,
+                  label: 'lead',
+                }, { onConflict: 'instagram_user_id' });
+
+                console.log(`🎯 Comment trigger DM ${dmSent ? 'sent' : 'failed'} to @${commenterUsername} (keyword match in comment)`);
+              } else {
+                console.log(`🎯 Skipped trigger DM to @${commenterUsername} — already sent before`);
+              }
+
+              commentRepliesThisBatch++;
+              continue; // Skip normal AI reply for trigger comments
+            } catch (e) {
+              console.error('Comment trigger error:', e);
+            }
+          }
+
           // Auto-reply to comment if bot is enabled and we have the comment ID
           if (accessToken && commentId && commentText.length > 1) {
             try {
