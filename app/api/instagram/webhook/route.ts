@@ -23,6 +23,21 @@ const INSTAGRAM_SYSTEM_PROMPT = `Eres Neuri, del equipo de Neuriax. Contestas DM
 - NUNCA suenes como ChatGPT/IA. Prohibido: "¡Genial!", "¡Excelente!", "¡Por supuesto!", "con gusto", "le informo", "estimado", "sin duda alguna"
 - Varía tu forma de empezar. No empieces siempre con "hey" o "buenas". Sé creativo y natural.
 
+═══ INTELIGENCIA DE PERFIL (CRÍTICO) ═══
+Antes de preguntar NADA, mira el contexto del perfil que te damos:
+- Si la bio dice a qué se dedica → YA LO SABES. Menciona su negocio directamente: "vi que tenéis [X], qué chulo!" o "mola lo de [X]!"
+- Si tiene web en el perfil → NO preguntes si tiene web.
+- Si tiene muchos seguidores → No le hables como si necesitara ayuda. Habla de tú a tú.
+- Usa esta info para hacer preguntas INTELIGENTES, no genéricas.
+  Ejemplo MAL: "a qué te dedicas?" (cuando la bio dice "Pizzería artesanal")
+  Ejemplo BIEN: "vi la pizzería! hacéis reparto también o solo en local? 🍕"
+
+═══ CONTINUIDAD CON MATEO ═══
+A veces Mateo (el fundador) escribe manualmente en la conversación. Si ves en el contexto que Mateo intervino:
+- SIGUE su línea. No contradigas lo que propuso.
+- Si él ya ofreció una llamada o algo concreto, no lo repitas.
+- Actúa como si fuerais el mismo equipo. Transición natural.
+
 ═══ INTELIGENCIA EMOCIONAL (CRÍTICO) ═══
 Detecta el MOOD del lead y adapta tu respuesta:
 
@@ -179,7 +194,7 @@ interface ConversationContext {
 }
 
 function buildConversationContext(
-  history: Array<{ direction: string; content: string; created_at: string }>,
+  history: Array<{ direction: string; content: string; created_at: string; is_bot?: boolean }>,
   profileData: ProfileData | null,
   leadIntel: Record<string, unknown> | null,
 ): ConversationContext {
@@ -207,14 +222,26 @@ function buildConversationContext(
   // Build dynamic context block
   const lines: string[] = ['═══ CONTEXTO DE ESTA CONVERSACIÓN ═══'];
 
-  // Profile info
+  // Profile info — INTELLIGENT USE
   if (profileData) {
     const parts = [];
     if (profileData.username) parts.push(`@${profileData.username}`);
-    if (profileData.biography) parts.push(`Bio: "${profileData.biography.substring(0, 120)}"`);
+    if (profileData.name) parts.push(`Nombre: ${profileData.name}`);
+    if (profileData.biography) parts.push(`Bio: "${profileData.biography.substring(0, 200)}"`);
     if (profileData.followers_count) parts.push(`${profileData.followers_count.toLocaleString()} seguidores`);
     if (profileData.website) parts.push(`Web: ${profileData.website}`);
     if (parts.length > 0) lines.push(`- Perfil: ${parts.join(' | ')}`);
+
+    // Deduce sector from bio/name if available
+    if (profileData.biography) {
+      lines.push(`- ⚠️ IMPORTANTE: Lee su bio de Instagram. Si dice a qué se dedica (restaurante, peluquería, coach, fotografía, tienda, etc.), YA LO SABES. NO preguntes "a qué te dedicas?". En su lugar, menciona lo que ves: "vi que tenéis [lo que dice la bio], mola!" y haz una pregunta de seguimiento inteligente.`);
+    }
+    if (profileData.website) {
+      lines.push(`- Ya tiene web: ${profileData.website}. NO preguntes si tiene web. Puedes comentar algo sobre ella.`);
+    }
+    if (profileData.followers_count && profileData.followers_count > 5000) {
+      lines.push(`- Tiene ${profileData.followers_count.toLocaleString()} seguidores — cuenta grande. Trátalo con respeto, no como alguien que "necesita ayuda".`);
+    }
   } else {
     lines.push('- No tienes datos de su perfil de Instagram. Si no sabes a qué se dedica, pregúntale de forma natural.');
   }
@@ -312,6 +339,17 @@ function buildConversationContext(
   );
   if (sentCalendly) {
     lines.push('- Ya enviaste el link de Calendly. No lo repitas a menos que lo pida de nuevo.');
+  }
+
+  // ─── Detect Mateo's manual messages (not from bot) ───
+  const recentOutbound = history.filter(m => m.direction === 'outbound').slice(-5);
+  const hasManualMessages = recentOutbound.some(m => m.is_bot === false);
+  const lastManualMsg = [...history].reverse().find(m => m.direction === 'outbound' && m.is_bot === false);
+
+  if (hasManualMessages && lastManualMsg) {
+    lines.push(`- 🚨 MATEO (humano, el fundador) ha escrito manualmente en esta conversación. Su último mensaje manual: "${lastManualMsg.content.substring(0, 150)}"`);
+    lines.push('- SIGUE EL HILO de lo que Mateo propuso. No contradigas ni repitas lo que él ya dijo. Continúa su línea de conversación como si fueras parte del mismo equipo.');
+    lines.push('- Si Mateo ya ofreció algo concreto o propuso una llamada, no vuelvas a proponerlo.');
   }
 
   return {
@@ -1144,15 +1182,15 @@ export async function POST(request: NextRequest) {
         const botEnabled = config?.bot_enabled !== false;
 
         if (botEnabled && accessToken) {
-          // Get conversation history (with timestamps for context building)
+          // Get conversation history (with timestamps + is_bot for context building)
           const { data: history } = await supabase
             .from('instagram_messages')
-            .select('direction, content, created_at')
+            .select('direction, content, created_at, is_bot')
             .eq('sender_id', senderId)
             .order('created_at', { ascending: true })
             .limit(30);
 
-          const historyWithTime = (history || []) as Array<{ direction: string; content: string; created_at: string }>;
+          const historyWithTime = (history || []) as Array<{ direction: string; content: string; created_at: string; is_bot?: boolean }>;
 
           // Exclude the current message from history (it gets added separately in getAIResponse)
           const historyWithoutCurrent = historyWithTime.slice(0, -1);
