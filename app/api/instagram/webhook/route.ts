@@ -675,6 +675,65 @@ function trackMid(mid: string): boolean {
   return false;
 }
 
+// ─── Comment deduplication ───
+const processedCommentIds = new Set<string>();
+const MAX_COMMENT_CACHE = 100;
+function trackComment(commentId: string): boolean {
+  if (processedCommentIds.has(commentId)) return true;
+  processedCommentIds.add(commentId);
+  if (processedCommentIds.size > MAX_COMMENT_CACHE) {
+    const first = processedCommentIds.values().next().value;
+    if (first) processedCommentIds.delete(first);
+  }
+  return false;
+}
+
+// ─── Separate AI for comment replies (lightweight, fast) ───
+async function getCommentReply(commentText: string, commenterUsername: string): Promise<string> {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) return 'gracias! 🙏 escríbenos por DM si necesitas algo 😊';
+
+  try {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          {
+            role: 'system',
+            content: `Eres el community manager de Neuriax (agencia de IA y webs). Respondes comentarios de Instagram.
+
+REGLAS:
+- Máximo 1 línea, breve y natural
+- Tono cercano y profesional, como un colega
+- Si es un halago → agradece con naturalidad
+- Si es una pregunta → responde breve y si es compleja invita a DM
+- Si son solo emojis (🔥❤️👏) → responde con emojis + algo breve
+- Si preguntan precio → "escríbenos por DM y te contamos! 💡"
+- NUNCA suenes como bot/IA
+- NUNCA uses: "¡Genial!", "¡Excelente!", "¡Por supuesto!", "con gusto"
+- Usa 1-2 emojis máximo
+- Es un comentario PÚBLICO, sé profesional`
+          },
+          { role: 'user', content: `@${commenterUsername} comenta: "${commentText}"` },
+        ],
+        max_tokens: 80,
+        temperature: 0.7,
+      }),
+    });
+
+    if (!response.ok) throw new Error('Groq error');
+    const data = await response.json();
+    return data.choices[0]?.message?.content || 'gracias! 🙏';
+  } catch {
+    return 'gracias! 🙏 escríbenos por DM si necesitas algo 😊';
+  }
+}
+
 // ─── IGSID Resolution ───
 // Instagram webhook sends truncated sender IDs (15 digits) that differ from
 // the full API participant IDs (16 digits). We resolve the correct ID via
@@ -1231,6 +1290,15 @@ export async function POST(request: NextRequest) {
 
       // Handle changes (comments, mentions, etc.)
       const changes = entry.changes || [];
+      let commentRepliesThisBatch = 0;
+
+      // Get our own account ID to avoid replying to ourselves
+      const { data: igConfig } = await supabase
+        .from('instagram_config')
+        .select('instagram_account_id, bot_enabled')
+        .single();
+      const ourAccountId = igConfig?.instagram_account_id || process.env.INSTAGRAM_ACCOUNT_ID || '';
+
       for (const change of changes) {
         // ─── Comments: auto-reply with AI ───
         if (change.field === 'comments' && change.value) {
@@ -1240,6 +1308,18 @@ export async function POST(request: NextRequest) {
           const commentText = comment.text || '';
           const mediaId = comment.media?.id;
           const commentId = comment.id;
+
+          // Skip our own comments
+          if (commenterId === ourAccountId) {
+            console.log(`💬 Skipping own comment: ${commentText.substring(0, 50)}`);
+            continue;
+          }
+
+          // Deduplication: skip if already processed
+          if (commentId && trackComment(commentId)) {
+            console.log(`⏭️ Duplicate comment skipped: ${commentId}`);
+            continue;
+          }
 
           // Log the comment
           await supabase.from('instagram_messages').insert({
@@ -1252,20 +1332,15 @@ export async function POST(request: NextRequest) {
             message_type: 'comment',
           });
 
+          // Limit: max 5 comment replies per webhook call
+          if (commentRepliesThisBatch >= 5) continue;
+
           // Auto-reply to comment if bot is enabled and we have the comment ID
           if (accessToken && commentId && commentText.length > 1) {
             try {
-              const { data: commentConfig } = await supabase
-                .from('instagram_config')
-                .select('bot_enabled')
-                .single();
-
-              if (commentConfig?.bot_enabled !== false) {
-                // Generate AI reply for the comment
-                const commentPrompt = `Alguien (@${commenterUsername}) ha comentado en tu post de Instagram: "${commentText}"
-
-Responde al comentario de forma natural, breve (1-2 líneas máximo) y cercana. Es un comentario público, no un DM. Sé agradecido si es positivo, responde la duda si es una pregunta, y si muestran interés invítales a escribirte por DM.`;
-                const commentReply = await getAIResponse(commentPrompt, [], true);
+              if (igConfig?.bot_enabled !== false) {
+                // Generate AI reply with lightweight comment-specific function
+                const commentReply = await getCommentReply(commentText, commenterUsername);
 
                 // Reply to the comment via Instagram API
                 const replyRes = await fetch(
@@ -1297,6 +1372,7 @@ Responde al comentario de forma natural, breve (1-2 líneas máximo) y cercana. 
                   message_type: 'comment_reply',
                 });
 
+                commentRepliesThisBatch++;
                 console.log(`💬 Comment reply ${replySent ? 'sent' : 'failed'} to @${commenterUsername} on media ${mediaId}`);
               }
             } catch (e) {
