@@ -548,7 +548,9 @@ export default function Soluciones() {
                   </li>
                 </ul>
                 <a 
-                  href="https://ig.me/m/neuriaxx" 
+                  href="https://wa.me/34643045488?text=Hola%2C%20me%20gustar%C3%ADa%20saber%20m%C3%A1s%20sobre%20los%20servicios%20de%20Neuriax" 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full text-center px-6 py-4 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white font-semibold rounded-xl transition-all shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40"
                 >
                   Hablar con un experto

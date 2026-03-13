@@ -96,6 +96,8 @@ export default function WhatsAppPage() {
   const [massFollowingUp, setMassFollowingUp] = useState(false);
   const chatEndRef = useRef<HTMLDivElement>(null);
   const selectedPhoneRef = useRef<string | null>(null);
+  const prevMsgCountRef = useRef(0);
+  const isFirstLoadRef = useRef(true);
 
   useEffect(() => {
     selectedPhoneRef.current = selectedPhone;
@@ -143,11 +145,19 @@ export default function WhatsAppPage() {
   }, [fetchData, fetchConversation]);
 
   useEffect(() => {
-    if (selectedPhone) fetchConversation(selectedPhone);
+    if (selectedPhone) {
+      isFirstLoadRef.current = true;
+      fetchConversation(selectedPhone);
+    }
   }, [selectedPhone, fetchConversation]);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Only auto-scroll on first load of a conversation or when new messages arrive
+    if (messages.length > 0 && (isFirstLoadRef.current || messages.length > prevMsgCountRef.current)) {
+      chatEndRef.current?.scrollIntoView({ behavior: isFirstLoadRef.current ? 'auto' : 'smooth' });
+      isFirstLoadRef.current = false;
+    }
+    prevMsgCountRef.current = messages.length;
   }, [messages]);
 
   const handleSendMessage = async () => {
