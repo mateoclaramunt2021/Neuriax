@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import ContactForm from "../components/ContactForm";
 import ScrollReveal from "../components/ScrollReveal";
+import HeroParticles from "../components/HeroParticles";
 
 export const metadata: Metadata = {
   title: "Neuriax | Agencia de IA en España · Agentes IA & Automatización 24/7",
@@ -61,16 +62,18 @@ export default function Home() {
         {/* Animated aurora BG */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#F1F5F9] via-[#EDE9FE] to-[#F1F5F9]" />
         <div className="absolute inset-0 hero-aurora opacity-30" />
-        <div className="absolute top-[10%] right-[-10%] w-[300px] sm:w-[600px] h-[300px] sm:h-[600px] bg-violet-400/[0.15] rounded-full blur-[120px] sm:blur-[200px] animate-pulse-slow" />
-        <div className="absolute bottom-[5%] left-[-5%] w-[250px] sm:w-[500px] h-[250px] sm:h-[500px] bg-indigo-400/[0.12] rounded-full blur-[100px] sm:blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
+        <div className="absolute inset-0 grid-pattern" />
+        <HeroParticles />
+        <div className="absolute top-[10%] right-[-10%] w-[250px] sm:w-[600px] h-[250px] sm:h-[600px] bg-violet-400/[0.12] rounded-full blur-[100px] sm:blur-[200px] animate-pulse-slow" />
+        <div className="absolute bottom-[5%] left-[-5%] w-[200px] sm:w-[500px] h-[200px] sm:h-[500px] bg-indigo-400/[0.10] rounded-full blur-[80px] sm:blur-[180px] animate-pulse-slow" style={{ animationDelay: "3s" }} />
 
-        <div className="relative z-10 max-w-7xl mx-auto w-full py-20 sm:py-28 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto w-full py-16 sm:py-28 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
 
             {/* LEFT COLUMN — Conversion message */}
             <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-4 py-2 mb-6 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 bg-violet-100/80 border border-violet-200 rounded-full px-3 py-1.5 sm:px-4 sm:py-2 mb-4 sm:mb-6 backdrop-blur-md">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
@@ -81,7 +84,7 @@ export default function Home() {
               </div>
 
               {/* H1 */}
-              <h1 className="text-[2.5rem] sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-black leading-[1.05] tracking-[-0.03em] mb-5">
+              <h1 className="text-[2rem] sm:text-5xl lg:text-6xl xl:text-[4.25rem] font-black leading-[1.08] tracking-[-0.03em] mb-4 sm:mb-5">
                 <span className="block text-slate-900">Tu negocio</span>
                 <span className="block text-slate-900">atendido 24/7</span>
                 <span className="relative inline-block mt-1">
@@ -93,13 +96,13 @@ export default function Home() {
               </h1>
 
               {/* Subtitle */}
-              <p className="text-base sm:text-lg text-slate-500 leading-relaxed mb-8 max-w-lg">
+              <p className="text-[15px] sm:text-lg text-slate-500 leading-relaxed mb-5 sm:mb-8 max-w-lg">
                 Agentes de IA que atienden, convierten y escalan.{" "}
                 <span className="text-slate-900 font-semibold">Más clientes, menos trabajo manual.</span>
               </p>
 
               {/* Value bullets */}
-              <div className="space-y-4 mb-8 w-full max-w-md">
+              <div className="space-y-3 sm:space-y-4 mb-5 sm:mb-8 w-full max-w-md">
                 {[
                   {
                     icon: (
@@ -142,7 +145,7 @@ export default function Home() {
               </div>
 
               {/* Social proof mini */}
-              <div className="flex items-center gap-5 mb-6">
+              <div className="flex items-center gap-4 sm:gap-5 mb-4 sm:mb-6">
                 {[
                   { value: "99.9%", label: "uptime" },
                   { value: "<2s", label: "respuesta" },
