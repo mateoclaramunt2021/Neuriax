@@ -10,6 +10,7 @@ interface Lead {
   sector: string | null;
   empleados: string | null;
   necesidad: string | null;
+  urgencia: string | null;
   presupuesto: string | null;
   presupuesto_ok: boolean | null;
   resumen: string | null;
@@ -357,6 +358,7 @@ export default function WhatsAppPage() {
                   <div><span className="text-slate-400">Sector:</span> <span className="text-slate-700 font-medium">{currentLead.sector || '—'}</span></div>
                   <div><span className="text-slate-400">Empleados:</span> <span className="text-slate-700 font-medium">{currentLead.empleados || '—'}</span></div>
                   <div><span className="text-slate-400">Necesidad:</span> <span className="text-slate-700 font-medium">{currentLead.necesidad || '—'}</span></div>
+                  <div><span className="text-slate-400">Urgencia:</span> <span className="text-slate-700 font-medium">{currentLead.urgencia || '—'}</span></div>
                   <div>
                     <span className="text-slate-400">Presupuesto:</span>{' '}
                     <span className={`font-medium ${currentLead.presupuesto_ok === true ? 'text-green-600' : currentLead.presupuesto_ok === false ? 'text-red-500' : 'text-slate-700'}`}>
@@ -496,6 +498,7 @@ export default function WhatsAppPage() {
                         {conv.lead?.negocio && <p>🏢 {conv.lead.negocio}</p>}
                         {conv.lead?.empleados && <p>👥 {conv.lead.empleados}</p>}
                         {conv.lead?.necesidad && <p>💡 {conv.lead.necesidad}</p>}
+                        {conv.lead?.urgencia && <p>⏰ {conv.lead.urgencia}</p>}
                         {conv.lead?.presupuesto && (
                           <p className={conv.lead.presupuesto_ok ? 'text-green-600 font-medium' : ''}>
                             💰 {conv.lead.presupuesto} {conv.lead.presupuesto_ok ? '✅' : ''}

@@ -17,23 +17,26 @@ const WHATSAPP_SYSTEM_PROMPT = `Eres Neuri, el asistente virtual de Neuriax por 
 - Integraciones con herramientas existentes del cliente
 
 ## FLUJO DE CUALIFICACIÓN
-Tu objetivo secreto es averiguar 4 cosas sobre cada lead. Hazlo de forma NATURAL en la conversación, NO como un interrogatorio:
+Tu objetivo secreto es averiguar 5 cosas sobre cada lead. Hazlo de forma NATURAL en la conversación, NO como un interrogatorio. Ve una por una, integradas en la charla:
 
 1. **NEGOCIO**: ¿Qué tipo de negocio tiene? (sector, a qué se dedica)
 2. **EMPLEADOS**: ¿Cuántos empleados o tamaño del equipo?
 3. **NECESIDAD**: ¿Qué necesita exactamente? ¿Qué problema quiere resolver?
-4. **PRESUPUESTO**: ¿Tiene presupuesto en mente? ¿Cuánto estaría dispuesto a invertir?
+4. **URGENCIA**: ¿Para cuándo lo necesita? ¿Es algo inmediato o está explorando?
+5. **PRESUPUESTO**: Esta es la última pregunta y se hace de forma SUAVE. NO preguntes cuánto quiere gastar. En su lugar di algo como: "Para que te hagas una idea, nuestros servicios van desde los 600€. ¿Tendrías ese capital mínimo para invertir?"
 
 ### Cómo preguntar cada cosa:
 - NEGOCIO: "¿A qué se dedica tu empresa?" / "Cuéntame un poco sobre tu negocio"
 - EMPLEADOS: "¿Sois un equipo grande o más bien pequeño?" / "¿Cuántas personas sois?"
 - NECESIDAD: "¿Qué te gustaría mejorar o automatizar?" / "¿Qué es lo que más os frena ahora mismo?"
-- PRESUPUESTO: "¿Tenéis algún presupuesto orientativo en mente?" / "¿Habéis valorado cuánto invertir en esto?"
+- URGENCIA: "¿Es algo que necesitáis ya o estáis mirando opciones?" / "¿Para cuándo lo necesitaríais?"
+- PRESUPUESTO: "Para que te hagas una idea, nuestros servicios van desde los 600€. ¿Tendrías ese capital mínimo para invertir?" (SOLO cuando ya tengas las otras 4 respuestas)
 
 ### Regla de presupuesto:
-- Si el presupuesto es ≥600€ → "¡Perfecto! Creo que podemos ayudarte. Te recomiendo agendar una llamada gratuita de 15 min con Mateo para ver tu caso: https://calendly.com/neuriax/30min 📅"
-- Si el presupuesto es <600€ → "Entiendo. Para ese rango de inversión ahora mismo no tenemos un servicio que encaje bien, pero te recomiendo echar un vistazo a nuestra web neuriax.com donde hay recursos gratuitos que te pueden ayudar 💪"
-- Si no quiere dar presupuesto → no insistas, sigue la conversación y ofrece Calendly igualmente
+- Si dice que sí (≥600€) → "¡Genial! Entonces creo que podemos ayudarte. Te recomiendo agendar una llamada gratuita de 15 min con Mateo para ver tu caso: https://calendly.com/neuriax/30min 📅"
+- Si dice que no (<600€) → "Entiendo perfectamente, cada negocio tiene sus tiempos. Te recomiendo echar un vistazo a neuriax.com donde hay recursos que te pueden ayudar. Y cuando estés listo, aquí estaremos 💪"
+- Si no quiere responder → no insistas NADA, ofrece Calendly igualmente de forma natural
+- IMPORTANTE: la pregunta del presupuesto se hace SOLO al final, cuando ya tienes las otras 4 respuestas
 
 ## NUNCA DAR PRECIOS
 - JAMÁS des cifras, rangos ni aproximaciones de precio
@@ -47,7 +50,7 @@ Tu objetivo secreto es averiguar 4 cosas sobre cada lead. Hazlo de forma NATURAL
 - NUNCA hagas chistes sobre la competencia ni sobre el cliente
 
 ## AGENDAR LLAMADA
-Cuando tengas las 4 respuestas del lead (o al menos 3), y el presupuesto sea ≥600€:
+Cuando tengas las 5 respuestas del lead (o al menos 4) y el presupuesto sea ≥600€:
 "¡Genial! Creo que Mateo puede ayudarte. Agenda una llamada gratuita de 15 min: https://calendly.com/neuriax/30min 📅"
 
 ## DATOS EMPRESA
@@ -61,10 +64,11 @@ Cuando tengas las 4 respuestas del lead (o al menos 3), y el presupuesto sea ≥
 - NO inventes datos ni estadísticas  
 - NO seas agresivo con la venta
 - NO des NUNCA precios, cifras ni rangos económicos
-- NO hagas las 4 preguntas de golpe — ve una por una en la conversación`;
+- NO hagas las 5 preguntas de golpe — ve una por una en la conversación
+- NO preguntes por presupuesto hasta tener las otras 4 respuestas`;
 
 // ─── QUALIFYING QUESTIONS ───────────────────────────────────────────────────
-const QUALIFYING_FIELDS = ['negocio', 'empleados', 'necesidad', 'presupuesto'] as const;
+const QUALIFYING_FIELDS = ['negocio', 'empleados', 'necesidad', 'urgencia', 'presupuesto'] as const;
 
 // ─── HELPERS ────────────────────────────────────────────────────────────────
 function getSupabase() {
@@ -88,9 +92,10 @@ Devuelve SOLO un JSON válido con estos campos (null si no se sabe):
   "sector": "sector (ej: hostelería, salud, retail, servicios...)",
   "empleados": "número o rango de empleados",
   "necesidad": "qué necesita o quiere resolver",
-  "presupuesto": "presupuesto mencionado (cifra o rango)",
-  "presupuesto_ok": true/false si presupuesto >= 600€ (null si no se sabe),
-  "resumen": "resumen de 1 línea del lead. Ejemplo: María, peluquería en Barcelona, 3 empleadas, quiere web con reservas, ~1000€"
+  "urgencia": "cuándo lo necesita (ej: ya, este mes, explorando, no definido)",
+  "presupuesto": "presupuesto mencionado o si acepta mínimo de 600€",
+  "presupuesto_ok": true/false si acepta invertir al menos 600€ (null si no se sabe),
+  "resumen": "resumen de 1 línea del lead. Ejemplo: María, peluquería en Barcelona, 3 empleadas, quiere web con reservas, lo necesita ya, acepta 600€+"
 }
 
 Info que ya tenemos del lead (no cambiar a null si ya existe):
@@ -137,7 +142,7 @@ IMPORTANTE: Solo devuelve el JSON, sin texto adicional ni markdown.`;
 function determineEstado(lead: Record<string, unknown>): string {
   const filled = QUALIFYING_FIELDS.filter(f => lead[f] != null && lead[f] !== '').length;
   if (lead.presupuesto_ok === false) return 'no_cualificado';
-  if (filled >= 3 && lead.presupuesto_ok === true) return 'cualificado';
+  if (filled >= 4 && lead.presupuesto_ok === true) return 'cualificado';
   if (filled > 0) return 'cualificando';
   return 'nuevo';
 }
@@ -359,6 +364,7 @@ export async function POST(request: NextRequest) {
               sector: currentLead.sector || null,
               empleados: currentLead.empleados || null,
               necesidad: currentLead.necesidad || null,
+              urgencia: currentLead.urgencia || null,
               presupuesto: currentLead.presupuesto || null,
             };
 
@@ -369,6 +375,7 @@ export async function POST(request: NextRequest) {
               if (intel.sector && !currentLead.sector) updates.sector = intel.sector;
               if (intel.empleados && !currentLead.empleados) updates.empleados = intel.empleados;
               if (intel.necesidad && !currentLead.necesidad) updates.necesidad = intel.necesidad;
+              if (intel.urgencia && !currentLead.urgencia) updates.urgencia = intel.urgencia;
               if (intel.presupuesto && !currentLead.presupuesto) updates.presupuesto = intel.presupuesto;
               if (intel.presupuesto_ok != null) updates.presupuesto_ok = intel.presupuesto_ok;
               if (intel.resumen) updates.resumen = intel.resumen;
