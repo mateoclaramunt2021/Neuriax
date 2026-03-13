@@ -322,17 +322,32 @@ export async function POST(request: NextRequest) {
           if (lead?.bot_paused) continue; // Bot paused for this chat
 
           // Upsert lead record if doesn't exist
+          const now = new Date().toISOString();
           if (!lead) {
             await supabase.from('whatsapp_leads').insert({
               phone_number: from,
               contact_name: contactName,
               estado: 'nuevo',
               qualifying_step: 0,
+              last_inbound_at: now,
             });
-          } else if (lead.contact_name === 'Desconocido' && contactName !== 'Desconocido') {
+          } else {
+            // Update last_inbound_at + reset followup tracking (lead replied!)
+            const leadUpdates: Record<string, unknown> = {
+              last_inbound_at: now,
+              followup_count: 0,
+              followup_sent_at: null,
+            };
+            if (lead.contact_name === 'Desconocido' && contactName !== 'Desconocido') {
+              leadUpdates.contact_name = contactName;
+            }
+            // If lead was marked no_responde and they reply, move back to previous state
+            if (lead.estado === 'no_responde') {
+              leadUpdates.estado = lead.negocio ? 'cualificando' : 'nuevo';
+            }
             await supabase
               .from('whatsapp_leads')
-              .update({ contact_name: contactName })
+              .update(leadUpdates)
               .eq('phone_number', from);
           }
 
