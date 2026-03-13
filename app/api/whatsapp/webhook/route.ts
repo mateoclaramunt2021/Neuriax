@@ -332,47 +332,10 @@ export async function POST(request: NextRequest) {
             content: m.content,
           }));
 
-          // Build lead context for AI
-          const currentLead = lead || {};
-          const filledFields = QUALIFYING_FIELDS.filter(f => currentLead[f]);
-          const missingFields = QUALIFYING_FIELDS.filter(f => !currentLead[f]);
-          
-          let leadContext: string;
-          if (filledFields.length === 0) {
-            leadContext = 'No sabemos nada aún del lead. Empieza preguntando por su NEGOCIO de forma natural. NO ofrezcas Calendly todavía.';
-          } else {
-            const nextQuestion = missingFields[0];
-            const canAskPresupuesto = missingFields.length === 1 && missingFields[0] === 'presupuesto';
-            leadContext = `Ya sabemos: ${filledFields.map(f => `${f}: ${currentLead[f]}`).join(', ')}. `;
-            if (canAskPresupuesto) {
-              leadContext += 'Ya tienes las 4 primeras respuestas. AHORA puedes hacer la pregunta del presupuesto de forma suave: "Para que te hagas una idea, nuestros servicios van desde los 600€. ¿Tendrías ese capital mínimo para invertir?"';
-            } else if (missingFields.length > 0) {
-              leadContext += `La SIGUIENTE pregunta que debes hacer es sobre: ${nextQuestion}. NO preguntes por presupuesto aún. NO ofrezcas Calendly aún.`;
-            } else {
-              leadContext += 'Ya tienes TODA la info. Ofrece Calendly si presupuesto >= 600€.';
-            }
-          }
-
-          // Get AI response with lead context
-          const aiResponse = await getAIResponse(messageText, conversationHistory, leadContext);
-
-          // Send response
-          const sent = await sendWhatsAppMessage(from, aiResponse);
-
-          // Save outbound message
-          await supabase.from('whatsapp_messages').insert({
-            phone_number: from,
-            contact_name: contactName,
-            direction: 'outbound',
-            message_type: 'text',
-            content: aiResponse,
-            status: sent ? 'sent' : 'failed',
-            is_bot: true,
-          });
-
-          // Intel extraction every 3 messages (after message 2)
+          // Extract intel BEFORE building context (runs every message after msg 3)
+          let currentLead: Record<string, any> = lead || {};
           const msgCount = (history || []).length;
-          if (msgCount >= 2 && msgCount % 3 === 0) {
+          if (msgCount >= 3) {
             const existingData = {
               negocio: currentLead.negocio || null,
               sector: currentLead.sector || null,
@@ -394,7 +357,6 @@ export async function POST(request: NextRequest) {
               if (intel.presupuesto_ok != null) updates.presupuesto_ok = intel.presupuesto_ok;
               if (intel.resumen) updates.resumen = intel.resumen;
 
-              // Determine estado
               const merged = { ...currentLead, ...updates };
               updates.estado = determineEstado(merged);
 
@@ -402,8 +364,49 @@ export async function POST(request: NextRequest) {
                 .from('whatsapp_leads')
                 .update(updates)
                 .eq('phone_number', from);
+
+              // Update currentLead with fresh data
+              currentLead = { ...currentLead, ...updates };
             }
           }
+
+          // Build lead context for AI
+          const filledFields = QUALIFYING_FIELDS.filter(f => currentLead[f]);
+          const missingFields = QUALIFYING_FIELDS.filter(f => !currentLead[f]);
+          
+          let leadContext: string;
+          if (filledFields.length === 0) {
+            leadContext = 'No sabemos nada aún del lead. Empieza preguntando por su NEGOCIO de forma natural. NO ofrezcas Calendly todavía.';
+          } else {
+            const nextQuestion = missingFields[0];
+            const canAskPresupuesto = missingFields.length === 1 && missingFields[0] === 'presupuesto';
+            leadContext = `Ya sabemos: ${filledFields.map(f => `${f}: ${currentLead[f]}`).join(', ')}. `;
+            if (canAskPresupuesto) {
+              leadContext += 'Ya tienes las 4 primeras respuestas. AHORA puedes hacer la pregunta del presupuesto de forma suave: "Para que te hagas una idea, nuestros servicios van desde los 600€. ¿Tendrías ese capital mínimo para invertir?"';
+            } else if (missingFields.length > 0) {
+              leadContext += `La SIGUIENTE pregunta que debes hacer es sobre: ${nextQuestion}. NO preguntes por presupuesto aún. NO ofrezcas Calendly aún.`;
+            } else {
+              leadContext += 'Ya tienes TODA la info. Ofrece Calendly si presupuesto >= 600€.';
+            }
+          }
+          leadContext += '\n\n⚠️ NUNCA repitas una pregunta que ya has hecho o que el lead ya ha respondido. Lee el historial de la conversación. Si el lead ya ha respondido algo, NO lo preguntes de nuevo. Avanza a la siguiente pregunta.';
+
+          // Get AI response with lead context
+          const aiResponse = await getAIResponse(messageText, conversationHistory, leadContext);
+
+          // Send response
+          const sent = await sendWhatsAppMessage(from, aiResponse);
+
+          // Save outbound message
+          await supabase.from('whatsapp_messages').insert({
+            phone_number: from,
+            contact_name: contactName,
+            direction: 'outbound',
+            message_type: 'text',
+            content: aiResponse,
+            status: sent ? 'sent' : 'failed',
+            is_bot: true,
+          });
 
           // Auto-create CRM lead if new contact
           const { data: existingContact } = await supabase
