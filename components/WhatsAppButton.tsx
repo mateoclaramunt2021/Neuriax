@@ -39,7 +39,7 @@ export default function WhatsAppButton() {
 
       {/* Tooltip */}
       <span className="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-white text-gray-900 text-sm font-semibold px-4 py-2 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
-        Escríbenos por Instagram
+        Escríbenos por WhatsApp
       </span>
     </a>
   );
