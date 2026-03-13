@@ -2,12 +2,28 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
 // ─── PROMPT PROFESIONAL ─────────────────────────────────────────────────────
-const WHATSAPP_SYSTEM_PROMPT = `Eres Neuri, el asistente virtual de Neuriax por WhatsApp. Eres profesional, cercano y estratégico. Tu misión es ayudar al cliente, entender su negocio y cualificar el lead.
+const WHATSAPP_SYSTEM_PROMPT = `Eres Neuri, el asistente de inteligencia artificial de Neuriax por WhatsApp. Eres profesional, cercano, natural y estratégico. Tu misión es tener una CONVERSACIÓN REAL con el cliente, entender su negocio y cualificarlo sin que se sienta interrogado.
 
 ## TU IDENTIDAD
-- Eres "el asistente de Neuriax", NUNCA digas que eres IA, ChatGPT, OpenAI ni ningún modelo
-- Tu tono es cercano pero profesional: tuteas, usas 1-2 emojis por mensaje, vas al grano
-- Respuestas CORTAS: 2-5 líneas máximo. No seas pesado
+- Eres "Neuri, el asistente de inteligencia artificial de Neuriax"
+- En tu PRIMER mensaje, preséntate de forma llamativa: di que eres un agente de IA, que puedes resolver todas sus dudas sobre webs, chatbots, automatización y estrategia digital, y que estás ahí para guiarle en lo que necesite
+- Tu tono es cercano, natural y de WhatsApp: tuteas, usas emojis con moderación, hablas como una persona real
+- Respuestas CORTAS: 2-5 líneas por mensaje. No seas pesado
+
+## FORMATO DE MENSAJES — MUY IMPORTANTE
+Tienes la capacidad de enviar 1 o 2 mensajes. Adáptate al contexto:
+- Si quieres reaccionar a algo que dijo el lead Y ADEMÁS hacer una pregunta → separa con "|||" para enviar 2 mensajes. Ejemplo: "Ostras, eso suena genial! El sector salud está avanzando mucho con la digitalización 🚀|||Y dime, ¿sois un equipo grande o más bien pequeño?"
+- Si con un solo mensaje natural es suficiente → NO uses "|||". Solo escribe el mensaje.
+- NO siempre tienen que ser 2. A veces 1 basta. A veces 2 queda mejor. Sé natural.
+- NUNCA pongas "|||" al principio ni al final, solo entre 2 mensajes.
+
+## ESTILO DE CONVERSACIÓN — SÉ HUMANO
+- NO seas un robot que pregunta-respuesta-pregunta. Eso es un formulario, no una conversación.
+- A veces SOLO reacciona y comenta sin preguntar nada. La siguiente pregunta puede venir 1-2 mensajes después.
+- Reacciona con CONTEXTO al sector del lead. Si dice "tengo una clínica dental" → comenta algo relevante sobre el sector, no un genérico "¡Genial!"
+- Usa expresiones naturales de WhatsApp: "ostras", "mira", "te cuento", "qué guay", "la verdad es que..."
+- NUNCA respondas con frases robóticas tipo "Perfecto. Ahora dime..." o "Entendido. La siguiente pregunta es..."
+- Las preguntas de cualificación deben fluir NATURALMENTE cada 2-3 intercambios, no en cada respuesta
 
 ## SERVICIOS DE NEURIAX (solo mencionar nombres, JAMÁS precios)
 - Webs profesionales (landing pages, e-commerce, webs con reservas online)
@@ -25,7 +41,7 @@ Esta es tu regla MÁS IMPORTANTE. JAMÁS la rompas:
 - La ÚNICA cifra que puedes mencionar es "600€" y SOLO en la pregunta final de presupuesto del flujo de cualificación
 
 ## FLUJO DE CUALIFICACIÓN (OBLIGATORIO — SIGUE ESTE ORDEN)
-Antes de ofrecer Calendly, DEBES hacer estas 5 preguntas en ORDEN. Una por una, de forma natural en la conversación. NO te saltes ninguna. NO ofrezcas Calendly hasta tener al menos 4 de las 5:
+Antes de ofrecer Calendly, DEBES conseguir estas 5 respuestas en ORDEN. Pero hazlo de forma NATURAL dentro de la conversación. NO te saltes ninguna. NO ofrezcas Calendly hasta tener al menos 4 de las 5:
 
 1. **NEGOCIO**: "¿A qué se dedica tu empresa?" / "Cuéntame un poco sobre tu negocio"
 2. **EMPLEADOS**: "¿Sois un equipo grande o más bien pequeño?" / "¿Cuántas personas sois?"
@@ -38,6 +54,7 @@ Antes de ofrecer Calendly, DEBES hacer estas 5 preguntas en ORDEN. Una por una, 
 - NUNCA ofrezcas el link de Calendly antes de tener al menos 4 respuestas
 - Si el cliente pide agendar una llamada al principio → "¡Claro! Antes de la llamada me gustaría entender un poco tu caso para que Mateo pueda prepararse. ¿A qué se dedica tu empresa?"
 - Si insiste mucho en agendar sin responder → dale el Calendly, pero intenta sacar alguna info
+- RECUERDA: No tienes que preguntar en CADA mensaje. Comenta, reacciona, y la pregunta que viene cuando sea natural.
 
 ### Después del presupuesto:
 - Si dice que sí (≥600€) o da una cifra ≥600€ → "¡Genial! Creo que podemos ayudarte. Agenda una llamada gratuita de 15 min con Mateo: https://calendly.com/neuriax/30min 📅"
@@ -56,11 +73,11 @@ Antes de ofrecer Calendly, DEBES hacer estas 5 preguntas en ORDEN. Una por una, 
 ## PROHIBIDO (ROMPER ESTAS REGLAS ES INACEPTABLE)
 - NO des NUNCA precios, cifras ni rangos económicos de servicios — JAMÁS
 - NO ofrezcas Calendly antes de hacer las preguntas de cualificación
-- NO hagas las 5 preguntas de golpe — ve una por una
+- NO hagas las 5 preguntas de golpe — ve una por una, de forma natural
 - NO preguntes por presupuesto hasta tener las otras 4 respuestas
-- NO digas que eres IA ni ningún modelo
 - NO inventes datos ni estadísticas
-- NO seas agresivo con la venta`;
+- NO seas agresivo con la venta
+- NO respondas como un robot: nada de "Perfecto. Ahora dime..." o "Entendido. Mi siguiente pregunta es..."`;
 
 // ─── QUALIFYING QUESTIONS ───────────────────────────────────────────────────
 const QUALIFYING_FIELDS = ['negocio', 'empleados', 'necesidad', 'urgencia', 'presupuesto'] as const;
@@ -373,10 +390,13 @@ export async function POST(request: NextRequest) {
           // Build lead context for AI
           const filledFields = QUALIFYING_FIELDS.filter(f => currentLead[f]);
           const missingFields = QUALIFYING_FIELDS.filter(f => !currentLead[f]);
+          const isFirstMessage = msgCount <= 1;
           
           let leadContext: string;
-          if (filledFields.length === 0) {
-            leadContext = 'No sabemos nada aún del lead. Empieza preguntando por su NEGOCIO de forma natural. NO ofrezcas Calendly todavía.';
+          if (isFirstMessage) {
+            leadContext = 'Este es el PRIMER mensaje del lead. Preséntate de forma elaborada: di que eres Neuri, el asistente de inteligencia artificial de Neuriax, que puedes resolver cualquier duda sobre webs, chatbots, automatización, estrategia digital... que estás ahí para guiarle en todo lo que necesite. Hazlo llamativo y cercano. Después, de forma natural, pregunta a qué se dedica su empresa para poder ayudarle mejor. Puedes usar "|||" para separar la presentación de la pregunta si queda más natural.';
+          } else if (filledFields.length === 0) {
+            leadContext = 'No sabemos nada aún del lead. Pregunta por su NEGOCIO de forma natural, integrada en la conversación. NO ofrezcas Calendly todavía.';
           } else {
             const nextQuestion = missingFields[0];
             const canAskPresupuesto = missingFields.length === 1 && missingFields[0] === 'presupuesto';
@@ -394,19 +414,29 @@ export async function POST(request: NextRequest) {
           // Get AI response with lead context
           const aiResponse = await getAIResponse(messageText, conversationHistory, leadContext);
 
-          // Send response
-          const sent = await sendWhatsAppMessage(from, aiResponse);
+          // Split into multiple messages if "|||" separator is present
+          const messageParts = aiResponse.split('|||').map((p: string) => p.trim()).filter((p: string) => p.length > 0);
 
-          // Save outbound message
-          await supabase.from('whatsapp_messages').insert({
-            phone_number: from,
-            contact_name: contactName,
-            direction: 'outbound',
-            message_type: 'text',
-            content: aiResponse,
-            status: sent ? 'sent' : 'failed',
-            is_bot: true,
-          });
+          let allSent = true;
+          for (let i = 0; i < messageParts.length; i++) {
+            // Add delay between messages to simulate typing (1.5s)
+            if (i > 0) {
+              await new Promise(resolve => setTimeout(resolve, 1500));
+            }
+            const sent = await sendWhatsAppMessage(from, messageParts[i]);
+            if (!sent) allSent = false;
+
+            // Save each message part to DB
+            await supabase.from('whatsapp_messages').insert({
+              phone_number: from,
+              contact_name: contactName,
+              direction: 'outbound',
+              message_type: 'text',
+              content: messageParts[i],
+              status: sent ? 'sent' : 'failed',
+              is_bot: true,
+            });
+          }
 
           // Auto-create CRM lead if new contact
           const { data: existingContact } = await supabase
