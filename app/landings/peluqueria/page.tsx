@@ -579,7 +579,7 @@ export default function PeluqueriaDemo() {
               Reservar Cita Ahora
             </a>
             <a 
-              href="https://wa.me/34912345678" 
+              href="https://wa.me/34643045488" 
               className="bg-white/20 hover:bg-white/30 text-white px-10 py-5 rounded-lg font-bold transition-all duration-300 border-2 border-white text-lg"
             >
               Hablar por WhatsApp

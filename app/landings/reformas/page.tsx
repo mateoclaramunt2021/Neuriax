@@ -176,7 +176,7 @@ export default function ReformasDemo() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const mensaje = `Presupuesto solicitado: ${formData.nombre} - ${formData.telefono} - Tipo: ${formData.tipoReforma} - ${formData.metrosCuadrados} m²`;
-    const whatsappUrl = `https://wa.me/34631415151?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://wa.me/34643045488?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl);
   };
 

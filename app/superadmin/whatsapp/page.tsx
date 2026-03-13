@@ -3,6 +3,22 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import LiveIndicator from '@/components/superadmin/LiveIndicator';
 
+interface Lead {
+  phone_number: string;
+  contact_name: string;
+  negocio: string | null;
+  sector: string | null;
+  empleados: string | null;
+  necesidad: string | null;
+  presupuesto: string | null;
+  presupuesto_ok: boolean | null;
+  resumen: string | null;
+  estado: string;
+  bot_paused: boolean;
+  qualifying_step: number;
+  updated_at: string;
+}
+
 interface Conversation {
   phone: string;
   name: string;
@@ -10,6 +26,7 @@ interface Conversation {
   lastTime: string;
   unread: number;
   totalMessages: number;
+  lead: Lead | null;
 }
 
 interface Message {
@@ -32,14 +49,23 @@ interface WhatsAppConfig {
   phone_number_id?: string;
 }
 
+const ESTADO_LABELS: Record<string, { label: string; color: string; bg: string }> = {
+  nuevo: { label: '🆕 Nuevo', color: 'text-slate-600', bg: 'bg-slate-100' },
+  cualificando: { label: '🔄 Cualificando', color: 'text-amber-700', bg: 'bg-amber-50' },
+  cualificado: { label: '✅ Cualificado', color: 'text-green-700', bg: 'bg-green-50' },
+  no_cualificado: { label: '❌ No cualificado', color: 'text-red-600', bg: 'bg-red-50' },
+  llamada_agendada: { label: '📅 Llamada agendada', color: 'text-blue-700', bg: 'bg-blue-50' },
+};
+
 export default function WhatsAppPage() {
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [config, setConfig] = useState<WhatsAppConfig | null>(null);
   const [stats, setStats] = useState<any>({});
+  const [currentLead, setCurrentLead] = useState<Lead | null>(null);
   const [selectedPhone, setSelectedPhone] = useState<string | null>(null);
   const [newMessage, setNewMessage] = useState('');
-  const [tab, setTab] = useState<'conversations' | 'config'>('conversations');
+  const [tab, setTab] = useState<'conversations' | 'pipeline' | 'config'>('conversations');
   const [loading, setLoading] = useState(true);
   const [savingConfig, setSavingConfig] = useState(false);
   const [sending, setSending] = useState(false);
@@ -72,18 +98,15 @@ export default function WhatsAppPage() {
       if (res.ok) {
         const data = await res.json();
         setMessages(data.messages || []);
+        setCurrentLead(data.lead || null);
       }
     } catch (err) {
       console.error('Error:', err);
     }
   }, []);
 
-  // Initial load
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  useEffect(() => { fetchData(); }, [fetchData]);
 
-  // Real-time polling every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       fetchData();
@@ -95,12 +118,9 @@ export default function WhatsAppPage() {
   }, [fetchData, fetchConversation]);
 
   useEffect(() => {
-    if (selectedPhone) {
-      fetchConversation(selectedPhone);
-    }
+    if (selectedPhone) fetchConversation(selectedPhone);
   }, [selectedPhone, fetchConversation]);
 
-  // Auto-scroll
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -115,17 +135,41 @@ export default function WhatsAppPage() {
         body: JSON.stringify({ phone: selectedPhone, message: newMessage }),
       });
       if (res.ok) {
-        const data = await res.json();
         setNewMessage('');
         await fetchConversation(selectedPhone);
-        if (!data.sent) {
-          console.warn('Mensaje guardado pero no enviado por WhatsApp. Configura las credenciales de Meta.');
-        }
       }
     } catch (err) {
       console.error('Error:', err);
     } finally {
       setSending(false);
+    }
+  };
+
+  const handleToggleBotPause = async (phone: string, paused: boolean) => {
+    try {
+      await fetch('/api/superadmin/whatsapp', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, bot_paused: paused }),
+      });
+      await fetchData();
+      if (selectedPhone === phone) await fetchConversation(phone);
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  };
+
+  const handleChangeEstado = async (phone: string, estado: string) => {
+    try {
+      await fetch('/api/superadmin/whatsapp', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone, estado }),
+      });
+      await fetchData();
+      if (selectedPhone === phone) await fetchConversation(phone);
+    } catch (err) {
+      console.error('Error:', err);
     }
   };
 
@@ -154,13 +198,15 @@ export default function WhatsAppPage() {
     );
   }
 
+  const pipeline = stats.pipeline || { nuevo: 0, cualificando: 0, cualificado: 0, no_cualificado: 0, llamada_agendada: 0 };
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">💬 WhatsApp IA</h1>
-          <p className="text-slate-500 mt-1">Gestiona conversaciones y automatización</p>
+          <p className="text-slate-500 mt-1">Conversaciones, leads y automatización</p>
         </div>
         <div className="flex items-center gap-4">
           <LiveIndicator lastUpdated={new Date()} />
@@ -171,7 +217,7 @@ export default function WhatsAppPage() {
         </div>
       </div>
 
-      {/* Stats */}
+      {/* Stats + Pipeline */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <p className="text-2xl font-bold text-slate-900">{stats.totalConversations || 0}</p>
@@ -183,12 +229,22 @@ export default function WhatsAppPage() {
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <p className="text-2xl font-bold text-green-600">{stats.botMessages || 0}</p>
-          <p className="text-xs text-slate-500">Respuestas del bot</p>
+          <p className="text-xs text-slate-500">Respuestas bot</p>
         </div>
         <div className="bg-white rounded-xl border border-slate-200 p-4">
           <p className="text-2xl font-bold text-blue-600">{stats.humanMessages || 0}</p>
           <p className="text-xs text-slate-500">Mensajes manuales</p>
         </div>
+      </div>
+
+      {/* Pipeline mini-bar */}
+      <div className="grid grid-cols-5 gap-2">
+        {Object.entries(ESTADO_LABELS).map(([key, { label, bg, color }]) => (
+          <div key={key} className={`${bg} rounded-lg p-3 text-center`}>
+            <p className={`text-xl font-bold ${color}`}>{pipeline[key] || 0}</p>
+            <p className="text-[11px] text-slate-500">{label}</p>
+          </div>
+        ))}
       </div>
 
       {/* Tabs */}
@@ -202,15 +258,24 @@ export default function WhatsAppPage() {
           💬 Conversaciones
         </button>
         <button
+          onClick={() => setTab('pipeline')}
+          className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
+            tab === 'pipeline' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
+          }`}
+        >
+          📊 Pipeline Leads
+        </button>
+        <button
           onClick={() => setTab('config')}
           className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
             tab === 'config' ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
           }`}
         >
-          ⚙️ Configuración Bot
+          ⚙️ Configuración
         </button>
       </div>
 
+      {/* ─── CONVERSATIONS TAB ──────────────────────────────────────────── */}
       {tab === 'conversations' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Conversation list */}
@@ -220,124 +285,240 @@ export default function WhatsAppPage() {
               <span className="text-xs text-slate-400">{conversations.length} total</span>
             </div>
             <div className="divide-y divide-slate-100 max-h-[500px] overflow-y-auto">
-              {conversations.length > 0 ? conversations.map((conv) => (
-                <button
-                  key={conv.phone}
-                  onClick={() => setSelectedPhone(conv.phone)}
-                  className={`w-full text-left p-4 hover:bg-slate-50 transition-colors ${
-                    selectedPhone === conv.phone ? 'bg-green-50 border-l-4 border-green-500' : ''
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <p className="font-medium text-slate-900 text-sm">{conv.name}</p>
-                    {conv.unread > 0 && (
-                      <span className="w-5 h-5 bg-green-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse">
-                        {conv.unread}
+              {conversations.length > 0 ? conversations.map((conv) => {
+                const estado = conv.lead?.estado || 'nuevo';
+                const estadoInfo = ESTADO_LABELS[estado] || ESTADO_LABELS.nuevo;
+                return (
+                  <button
+                    key={conv.phone}
+                    onClick={() => setSelectedPhone(conv.phone)}
+                    className={`w-full text-left p-4 hover:bg-slate-50 transition-colors ${
+                      selectedPhone === conv.phone ? 'bg-green-50 border-l-4 border-green-500' : ''
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <p className="font-medium text-slate-900 text-sm">{conv.name}</p>
+                      <div className="flex items-center gap-1.5">
+                        {conv.lead?.bot_paused && (
+                          <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">⏸</span>
+                        )}
+                        {conv.unread > 0 && (
+                          <span className="w-5 h-5 bg-green-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse">
+                            {conv.unread}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-xs text-slate-500 truncate mt-1">{conv.lastMessage}</p>
+                    <div className="flex items-center justify-between mt-1">
+                      <p className="text-[10px] text-slate-400">
+                        {new Date(conv.lastTime).toLocaleString('es-ES')} · {conv.totalMessages} msgs
+                      </p>
+                      <span className={`text-[10px] px-1.5 py-0.5 rounded ${estadoInfo.bg} ${estadoInfo.color}`}>
+                        {estadoInfo.label}
                       </span>
-                    )}
-                  </div>
-                  <p className="text-xs text-slate-500 truncate mt-1">{conv.lastMessage}</p>
-                  <p className="text-[10px] text-slate-400 mt-1">
-                    {new Date(conv.lastTime).toLocaleString('es-ES')} · {conv.totalMessages} msgs
-                  </p>
-                </button>
-              )) : (
+                    </div>
+                  </button>
+                );
+              }) : (
                 <div className="p-8 text-center text-slate-400 text-sm">
                   <p className="text-4xl mb-3">📱</p>
                   <p className="font-medium">No hay conversaciones aún</p>
-                  <p className="mt-2 text-xs">Cuando alguien te escriba por WhatsApp, las conversaciones aparecerán aquí en tiempo real.</p>
+                  <p className="mt-2 text-xs">Cuando alguien te escriba por WhatsApp, las conversaciones aparecerán aquí.</p>
                 </div>
               )}
             </div>
           </div>
 
-          {/* Chat view */}
-          <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 flex flex-col min-h-[500px]">
-            {selectedPhone ? (
-              <>
-                <div className="p-4 border-b border-slate-200 flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-slate-900">
-                      {conversations.find(c => c.phone === selectedPhone)?.name || selectedPhone}
-                    </p>
-                    <p className="text-xs text-slate-400">{selectedPhone}</p>
-                  </div>
-                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                    WhatsApp
-                  </span>
-                </div>
-                <div className="flex-1 p-4 overflow-y-auto space-y-3 max-h-[400px] bg-[#f0f2f5]">
-                  {messages.map((msg) => (
-                    <div
-                      key={msg.id}
-                      className={`flex ${msg.direction === 'outbound' ? 'justify-end' : 'justify-start'}`}
+          {/* Chat + Lead Card */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Lead Summary Card */}
+            {selectedPhone && currentLead && (currentLead.negocio || currentLead.necesidad || currentLead.resumen) && (
+              <div className="bg-white rounded-xl border border-slate-200 p-4">
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="font-semibold text-slate-900 text-sm">📋 Ficha del Lead</h4>
+                  <div className="flex items-center gap-2">
+                    <select
+                      value={currentLead.estado || 'nuevo'}
+                      onChange={(e) => handleChangeEstado(selectedPhone, e.target.value)}
+                      className="text-xs border border-slate-300 rounded px-2 py-1"
                     >
-                      <div
-                        className={`max-w-[70%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
-                          msg.direction === 'outbound'
-                            ? msg.is_bot
-                              ? 'bg-green-100 text-green-900'
-                              : 'bg-cyan-500 text-white'
-                            : 'bg-white text-slate-800'
-                        }`}
-                      >
-                        {msg.is_bot && <p className="text-[10px] opacity-60 mb-1">🤖 Bot IA</p>}
-                        {msg.direction === 'outbound' && !msg.is_bot && <p className="text-[10px] opacity-60 mb-1">👤 Manual</p>}
-                        <p className="whitespace-pre-wrap">{msg.content}</p>
-                        <div className="flex items-center gap-1 mt-1">
-                          <p className={`text-[10px] ${msg.direction === 'outbound' && !msg.is_bot ? 'text-cyan-100' : 'text-slate-400'}`}>
-                            {new Date(msg.created_at).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
-                          </p>
-                          {msg.direction === 'outbound' && (
-                            <span className={`text-[10px] ${msg.status === 'sent' ? 'text-green-500' : 'text-slate-300'}`}>
-                              {msg.status === 'sent' ? '✓✓' : '✓'}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                  {messages.length === 0 && (
-                    <div className="flex items-center justify-center h-full text-slate-400 text-sm">
-                      Sin mensajes
-                    </div>
-                  )}
-                  <div ref={chatEndRef} />
+                      {Object.entries(ESTADO_LABELS).map(([key, { label }]) => (
+                        <option key={key} value={key}>{label}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                <div className="p-4 border-t border-slate-200 flex gap-3">
-                  <input
-                    type="text"
-                    value={newMessage}
-                    onChange={(e) => setNewMessage(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
-                    placeholder="Escribe un mensaje..."
-                    className="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                    disabled={sending}
-                  />
-                  <button
-                    onClick={handleSendMessage}
-                    disabled={!newMessage.trim() || sending}
-                    className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 disabled:opacity-50 transition-colors flex items-center gap-2"
-                  >
-                    {sending ? (
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      '📤'
-                    )}
-                    Enviar
-                  </button>
+                {currentLead.resumen && (
+                  <p className="text-sm text-slate-700 bg-slate-50 rounded-lg p-3 mb-3 italic">&quot;{currentLead.resumen}&quot;</p>
+                )}
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div><span className="text-slate-400">Negocio:</span> <span className="text-slate-700 font-medium">{currentLead.negocio || '—'}</span></div>
+                  <div><span className="text-slate-400">Sector:</span> <span className="text-slate-700 font-medium">{currentLead.sector || '—'}</span></div>
+                  <div><span className="text-slate-400">Empleados:</span> <span className="text-slate-700 font-medium">{currentLead.empleados || '—'}</span></div>
+                  <div><span className="text-slate-400">Necesidad:</span> <span className="text-slate-700 font-medium">{currentLead.necesidad || '—'}</span></div>
+                  <div>
+                    <span className="text-slate-400">Presupuesto:</span>{' '}
+                    <span className={`font-medium ${currentLead.presupuesto_ok === true ? 'text-green-600' : currentLead.presupuesto_ok === false ? 'text-red-500' : 'text-slate-700'}`}>
+                      {currentLead.presupuesto || '—'}
+                      {currentLead.presupuesto_ok === true && ' ✅'}
+                      {currentLead.presupuesto_ok === false && ' ❌'}
+                    </span>
+                  </div>
                 </div>
-              </>
-            ) : (
-              <div className="flex flex-col items-center justify-center h-full text-slate-400 text-sm gap-3">
-                <span className="text-5xl">💬</span>
-                <p>Selecciona una conversación para ver los mensajes</p>
               </div>
             )}
+
+            {/* Chat view */}
+            <div className="bg-white rounded-xl border border-slate-200 flex flex-col min-h-[500px]">
+              {selectedPhone ? (
+                <>
+                  <div className="p-4 border-b border-slate-200 flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-slate-900">
+                        {conversations.find(c => c.phone === selectedPhone)?.name || selectedPhone}
+                      </p>
+                      <p className="text-xs text-slate-400">{selectedPhone}</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => handleToggleBotPause(selectedPhone, !(currentLead?.bot_paused))}
+                        className={`text-xs px-3 py-1.5 rounded-lg font-medium transition-colors ${
+                          currentLead?.bot_paused
+                            ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                            : 'bg-red-100 text-red-600 hover:bg-red-200'
+                        }`}
+                      >
+                        {currentLead?.bot_paused ? '▶️ Activar bot' : '⏸️ Pausar bot'}
+                      </button>
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                        WhatsApp
+                      </span>
+                    </div>
+                  </div>
+                  <div className="flex-1 p-4 overflow-y-auto space-y-3 max-h-[400px] bg-[#f0f2f5]">
+                    {messages.map((msg) => (
+                      <div
+                        key={msg.id}
+                        className={`flex ${msg.direction === 'outbound' ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div
+                          className={`max-w-[70%] rounded-2xl px-4 py-2 text-sm shadow-sm ${
+                            msg.direction === 'outbound'
+                              ? msg.is_bot
+                                ? 'bg-green-100 text-green-900'
+                                : 'bg-cyan-500 text-white'
+                              : 'bg-white text-slate-800'
+                          }`}
+                        >
+                          {msg.is_bot && <p className="text-[10px] opacity-60 mb-1">🤖 Bot IA</p>}
+                          {msg.direction === 'outbound' && !msg.is_bot && <p className="text-[10px] opacity-60 mb-1">👤 Manual</p>}
+                          <p className="whitespace-pre-wrap">{msg.content}</p>
+                          <div className="flex items-center gap-1 mt-1">
+                            <p className={`text-[10px] ${msg.direction === 'outbound' && !msg.is_bot ? 'text-cyan-100' : 'text-slate-400'}`}>
+                              {new Date(msg.created_at).toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                            {msg.direction === 'outbound' && (
+                              <span className={`text-[10px] ${msg.status === 'sent' ? 'text-green-500' : 'text-slate-300'}`}>
+                                {msg.status === 'sent' ? '✓✓' : '✓'}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    {messages.length === 0 && (
+                      <div className="flex items-center justify-center h-full text-slate-400 text-sm">
+                        Sin mensajes
+                      </div>
+                    )}
+                    <div ref={chatEndRef} />
+                  </div>
+                  <div className="p-4 border-t border-slate-200 flex gap-3">
+                    <input
+                      type="text"
+                      value={newMessage}
+                      onChange={(e) => setNewMessage(e.target.value)}
+                      onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && handleSendMessage()}
+                      placeholder="Escribe un mensaje..."
+                      className="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                      disabled={sending}
+                    />
+                    <button
+                      onClick={handleSendMessage}
+                      disabled={!newMessage.trim() || sending}
+                      className="px-4 py-2 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700 disabled:opacity-50 transition-colors flex items-center gap-2"
+                    >
+                      {sending ? (
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      ) : (
+                        '📤'
+                      )}
+                      Enviar
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="flex flex-col items-center justify-center h-full text-slate-400 text-sm gap-3">
+                  <span className="text-5xl">💬</span>
+                  <p>Selecciona una conversación para ver los mensajes</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
 
+      {/* ─── PIPELINE TAB ───────────────────────────────────────────────── */}
+      {tab === 'pipeline' && (
+        <div className="space-y-4">
+          {Object.entries(ESTADO_LABELS).map(([estado, { label, bg, color }]) => {
+            const leadsInState = conversations.filter(c => (c.lead?.estado || 'nuevo') === estado);
+            if (leadsInState.length === 0) return null;
+            return (
+              <div key={estado}>
+                <h3 className={`font-semibold text-sm mb-2 ${color}`}>{label} ({leadsInState.length})</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {leadsInState.map((conv) => (
+                    <div
+                      key={conv.phone}
+                      className={`${bg} border border-slate-200 rounded-xl p-4 cursor-pointer hover:shadow-md transition-shadow`}
+                      onClick={() => { setSelectedPhone(conv.phone); setTab('conversations'); }}
+                    >
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="font-medium text-slate-900 text-sm">{conv.name}</p>
+                        {conv.lead?.bot_paused && <span className="text-[10px] bg-red-100 text-red-600 px-1.5 py-0.5 rounded">⏸ Bot pausado</span>}
+                      </div>
+                      {conv.lead?.resumen && (
+                        <p className="text-xs text-slate-600 italic mb-2">&quot;{conv.lead.resumen}&quot;</p>
+                      )}
+                      <div className="grid grid-cols-2 gap-1 text-[11px] text-slate-500">
+                        {conv.lead?.negocio && <p>🏢 {conv.lead.negocio}</p>}
+                        {conv.lead?.empleados && <p>👥 {conv.lead.empleados}</p>}
+                        {conv.lead?.necesidad && <p>💡 {conv.lead.necesidad}</p>}
+                        {conv.lead?.presupuesto && (
+                          <p className={conv.lead.presupuesto_ok ? 'text-green-600 font-medium' : ''}>
+                            💰 {conv.lead.presupuesto} {conv.lead.presupuesto_ok ? '✅' : ''}
+                          </p>
+                        )}
+                      </div>
+                      <p className="text-[10px] text-slate-400 mt-2">{conv.totalMessages} msgs · {new Date(conv.lastTime).toLocaleDateString('es-ES')}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          {conversations.length === 0 && (
+            <div className="text-center py-12 text-slate-400">
+              <p className="text-4xl mb-3">📊</p>
+              <p>No hay leads aún. Los leads aparecerán aquí cuando lleguen mensajes por WhatsApp.</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* ─── CONFIG TAB ─────────────────────────────────────────────────── */}
       {tab === 'config' && config && (
         <div className="bg-white rounded-xl border border-slate-200 p-6 space-y-6">
           <div className="flex items-center justify-between">

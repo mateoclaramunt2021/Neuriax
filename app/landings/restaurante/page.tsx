@@ -420,7 +420,7 @@ export default function RestauranteDemo() {
               Llamar Ahora
             </a>
             <a 
-              href="https://wa.me/34915823456" 
+              href="https://wa.me/34643045488" 
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-amber-400 text-amber-400 hover:bg-amber-400 hover:text-black px-10 py-5 rounded-none font-light tracking-wide transition-all duration-300 uppercase text-sm inline-block"
@@ -492,7 +492,7 @@ export default function RestauranteDemo() {
                 </a>
 
                 <a 
-                  href="https://wa.me/34915823456" 
+                  href="https://wa.me/34643045488" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-gray-900 border border-gray-700 p-5 hover:border-green-500 transition-all group"
@@ -539,7 +539,7 @@ export default function RestauranteDemo() {
               <h4 className="text-white font-light text-lg mb-6 uppercase tracking-wide">Contacto</h4>
               <ul className="text-sm space-y-3">
                 <li><a href="tel:+34915823456" className="text-gray-500 hover:text-white transition-colors">+34 91 582 3456</a></li>
-                <li><a href="https://wa.me/34915823456" className="text-gray-500 hover:text-white transition-colors">WhatsApp</a></li>
+                <li><a href="https://wa.me/34643045488" className="text-gray-500 hover:text-white transition-colors">WhatsApp</a></li>
                 <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">Dirección</a></li>
                 <li><a href="#ubicacion" className="text-gray-500 hover:text-white transition-colors">Horarios</a></li>
               </ul>

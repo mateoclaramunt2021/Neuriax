@@ -7,7 +7,7 @@ function getSupabase() {
   return createClient(url, key);
 }
 
-// GET - WhatsApp messages & config
+// GET - WhatsApp messages, config & leads
 export async function GET(request: NextRequest) {
   try {
     const supabase = getSupabase();
@@ -20,8 +20,16 @@ export async function GET(request: NextRequest) {
       .select('*')
       .single();
 
+    // Get all leads
+    const { data: leads } = await supabase
+      .from('whatsapp_leads')
+      .select('*')
+      .order('updated_at', { ascending: false });
+
+    const leadsMap: Record<string, any> = {};
+    (leads || []).forEach((l: any) => { leadsMap[l.phone_number] = l; });
+
     if (phone) {
-      // Get conversation with specific phone
       const { data: messages } = await supabase
         .from('whatsapp_messages')
         .select('*')
@@ -29,7 +37,11 @@ export async function GET(request: NextRequest) {
         .order('created_at', { ascending: true })
         .limit(100);
 
-      return NextResponse.json({ config, messages: messages || [] });
+      return NextResponse.json({
+        config,
+        messages: messages || [],
+        lead: leadsMap[phone] || null,
+      });
     }
 
     // Get all conversations (grouped by phone)
@@ -39,7 +51,6 @@ export async function GET(request: NextRequest) {
       .order('created_at', { ascending: false })
       .limit(500);
 
-    // Group by phone number
     const conversations: Record<string, {
       phone: string;
       name: string;
@@ -47,6 +58,7 @@ export async function GET(request: NextRequest) {
       lastTime: string;
       unread: number;
       totalMessages: number;
+      lead: any;
     }> = {};
 
     allMessages?.forEach((msg: any) => {
@@ -58,6 +70,7 @@ export async function GET(request: NextRequest) {
           lastTime: msg.created_at,
           unread: 0,
           totalMessages: 0,
+          lead: leadsMap[msg.phone_number] || null,
         };
       }
       conversations[msg.phone_number].totalMessages++;
@@ -66,19 +79,34 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    // Stats
+    // Pipeline stats
+    const pipeline = {
+      nuevo: 0,
+      cualificando: 0,
+      cualificado: 0,
+      no_cualificado: 0,
+      llamada_agendada: 0,
+    };
+    (leads || []).forEach((l: any) => {
+      if (l.estado && l.estado in pipeline) {
+        pipeline[l.estado as keyof typeof pipeline]++;
+      }
+    });
+
     const stats = {
       totalConversations: Object.keys(conversations).length,
       totalMessages: allMessages?.length || 0,
       botMessages: allMessages?.filter((m: any) => m.is_bot).length || 0,
       humanMessages: allMessages?.filter((m: any) => !m.is_bot && m.direction === 'outbound').length || 0,
+      pipeline,
     };
 
     return NextResponse.json({
       config,
-      conversations: Object.values(conversations).sort((a, b) => 
+      conversations: Object.values(conversations).sort((a, b) =>
         new Date(b.lastTime).getTime() - new Date(a.lastTime).getTime()
       ),
+      leads: leads || [],
       stats,
     });
   } catch (error) {
@@ -171,5 +199,46 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Send WhatsApp error:', error);
     return NextResponse.json({ error: 'Error enviando mensaje' }, { status: 500 });
+  }
+}
+
+// PATCH - Toggle bot pause per chat or update lead estado
+export async function PATCH(request: NextRequest) {
+  try {
+    const supabase = getSupabase();
+    const { phone, bot_paused, estado } = await request.json();
+
+    if (!phone) {
+      return NextResponse.json({ error: 'Teléfono requerido' }, { status: 400 });
+    }
+
+    const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+    if (bot_paused !== undefined) updates.bot_paused = bot_paused;
+    if (estado !== undefined) updates.estado = estado;
+
+    // Upsert: create lead if it doesn't exist
+    const { data: existing } = await supabase
+      .from('whatsapp_leads')
+      .select('id')
+      .eq('phone_number', phone)
+      .single();
+
+    if (existing) {
+      await supabase
+        .from('whatsapp_leads')
+        .update(updates)
+        .eq('phone_number', phone);
+    } else {
+      await supabase.from('whatsapp_leads').insert({
+        phone_number: phone,
+        bot_paused: bot_paused ?? false,
+        estado: estado ?? 'nuevo',
+      });
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('WhatsApp PATCH error:', error);
+    return NextResponse.json({ error: 'Error actualizando lead' }, { status: 500 });
   }
 }

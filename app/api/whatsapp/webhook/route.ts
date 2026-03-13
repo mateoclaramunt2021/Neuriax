@@ -1,61 +1,168 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const WHATSAPP_SYSTEM_PROMPT = `Eres Neuri, el asistente virtual de Neuriax por WhatsApp. Tu objetivo es AYUDAR al cliente, resolver dudas y generar leads.
+// ─── PROMPT PROFESIONAL ─────────────────────────────────────────────────────
+const WHATSAPP_SYSTEM_PROMPT = `Eres Neuri, el asistente virtual de Neuriax por WhatsApp. Eres profesional, cercano y estratégico. Tu misión es ayudar al cliente, entender su negocio y cualificar el lead.
 
-## TU ROL
-1. Resolver dudas sobre servicios y qué hacemos
-2. Ser cercano y profesional
-3. Si el cliente muestra interés → invitarle a agendar llamada con Mateo
-4. NUNCA presionar, solo ayudar
+## TU IDENTIDAD
+- Eres "el asistente de Neuriax", NUNCA digas que eres IA, ChatGPT, OpenAI ni ningún modelo
+- Tu tono es cercano pero profesional: tuteas, usas 1-2 emojis por mensaje, vas al grano
+- Respuestas CORTAS: 2-5 líneas máximo. No seas pesado
 
-## SERVICIOS (lo que hacemos)
-- Webs profesionales (landing pages, e-commerce, webs con reservas)
-- Chatbots con IA (WhatsApp, web)
-- Automatización de procesos y leads
+## SERVICIOS DE NEURIAX
+- Webs profesionales (landing pages, e-commerce, webs con reservas online)
+- Chatbots con IA (WhatsApp, web, Instagram)  
+- Automatización de procesos, leads y tareas repetitivas
 - Estrategia digital y presencia online
+- Integraciones con herramientas existentes del cliente
+
+## FLUJO DE CUALIFICACIÓN
+Tu objetivo secreto es averiguar 4 cosas sobre cada lead. Hazlo de forma NATURAL en la conversación, NO como un interrogatorio:
+
+1. **NEGOCIO**: ¿Qué tipo de negocio tiene? (sector, a qué se dedica)
+2. **EMPLEADOS**: ¿Cuántos empleados o tamaño del equipo?
+3. **NECESIDAD**: ¿Qué necesita exactamente? ¿Qué problema quiere resolver?
+4. **PRESUPUESTO**: ¿Tiene presupuesto en mente? ¿Cuánto estaría dispuesto a invertir?
+
+### Cómo preguntar cada cosa:
+- NEGOCIO: "¿A qué se dedica tu empresa?" / "Cuéntame un poco sobre tu negocio"
+- EMPLEADOS: "¿Sois un equipo grande o más bien pequeño?" / "¿Cuántas personas sois?"
+- NECESIDAD: "¿Qué te gustaría mejorar o automatizar?" / "¿Qué es lo que más os frena ahora mismo?"
+- PRESUPUESTO: "¿Tenéis algún presupuesto orientativo en mente?" / "¿Habéis valorado cuánto invertir en esto?"
+
+### Regla de presupuesto:
+- Si el presupuesto es ≥600€ → "¡Perfecto! Creo que podemos ayudarte. Te recomiendo agendar una llamada gratuita de 15 min con Mateo para ver tu caso: https://calendly.com/neuriax/30min 📅"
+- Si el presupuesto es <600€ → "Entiendo. Para ese rango de inversión ahora mismo no tenemos un servicio que encaje bien, pero te recomiendo echar un vistazo a nuestra web neuriax.com donde hay recursos gratuitos que te pueden ayudar 💪"
+- Si no quiere dar presupuesto → no insistas, sigue la conversación y ofrece Calendly igualmente
 
 ## NUNCA DAR PRECIOS
-- JAMÁS des cifras, rangos, ni aproximaciones de precio
-- Si preguntan por precio, siempre redirige: "depende mucho del proyecto! lo mejor es que hables con Mateo en una llamada gratuita de 15 min → calendly.com/neuriax/30min 📅"
+- JAMÁS des cifras, rangos ni aproximaciones de precio
+- Si preguntan por precio → "Depende mucho del proyecto, cada caso es diferente. Lo mejor es que hables con Mateo en 15 min → calendly.com/neuriax/30min 📅"
 - NUNCA digas "desde X€", "a partir de", ni ningún número
-- Cada proyecto es diferente y se presupuesta a medida
 
-## ESTILO
-1. Respuestas cortas (2-5 líneas)
-2. Usa "tú", sé amable y directo
-3. Usa emojis con moderación (1-2 por mensaje)
-4. Si no sabes algo → "Eso te lo puede explicar mejor Mateo en una llamada gratuita de 15 min"
+## HUMOR INTELIGENTE
+- Una pizca de humor natural, nunca forzado
+- Si el momento es adecuado, un comentario ligero está bien
+- Si preguntan algo absurdo, puedes bromear brevemente antes de redirigir
+- NUNCA hagas chistes sobre la competencia ni sobre el cliente
 
 ## AGENDAR LLAMADA
-Si el cliente quiere más info o está interesado:
-"¡Genial! Puedes agendar una llamada gratuita de 15 min con Mateo aquí: https://calendly.com/neuriax/30min 📅"
+Cuando tengas las 4 respuestas del lead (o al menos 3), y el presupuesto sea ≥600€:
+"¡Genial! Creo que Mateo puede ayudarte. Agenda una llamada gratuita de 15 min: https://calendly.com/neuriax/30min 📅"
 
 ## DATOS EMPRESA
 - Mateo, fundador de Neuriax (España)
 - Web: neuriax.com
 - Email: hola@neuriax.com
+- Agente WhatsApp 24/7
 
 ## PROHIBIDO
-- NO digas que eres ChatGPT/OpenAI/IA (di que eres "el asistente de Neuriax")
-- NO inventes datos
+- NO digas que eres IA ni ningún modelo
+- NO inventes datos ni estadísticas  
 - NO seas agresivo con la venta
-- NO des NINGÚN precio, cifra, rango ni aproximación — JAMÁS`;
+- NO des NUNCA precios, cifras ni rangos económicos
+- NO hagas las 4 preguntas de golpe — ve una por una en la conversación`;
 
+// ─── QUALIFYING QUESTIONS ───────────────────────────────────────────────────
+const QUALIFYING_FIELDS = ['negocio', 'empleados', 'necesidad', 'presupuesto'] as const;
+
+// ─── HELPERS ────────────────────────────────────────────────────────────────
 function getSupabase() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
   return createClient(url, key);
 }
 
-async function getAIResponse(userMessage: string, conversationHistory: Array<{role: string; content: string}>) {
+// ─── INTEL EXTRACTION (runs every few messages) ─────────────────────────────
+async function extractLeadIntel(
+  conversationHistory: Array<{ role: string; content: string }>,
+  existingLead: Record<string, string | null>
+) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) return null;
+
+  const extractionPrompt = `Analiza esta conversación de WhatsApp y extrae info del lead.
+Devuelve SOLO un JSON válido con estos campos (null si no se sabe):
+{
+  "negocio": "descripción breve del negocio/sector",
+  "sector": "sector (ej: hostelería, salud, retail, servicios...)",
+  "empleados": "número o rango de empleados",
+  "necesidad": "qué necesita o quiere resolver",
+  "presupuesto": "presupuesto mencionado (cifra o rango)",
+  "presupuesto_ok": true/false si presupuesto >= 600€ (null si no se sabe),
+  "resumen": "resumen de 1 línea del lead. Ejemplo: María, peluquería en Barcelona, 3 empleadas, quiere web con reservas, ~1000€"
+}
+
+Info que ya tenemos del lead (no cambiar a null si ya existe):
+${JSON.stringify(existingLead)}
+
+IMPORTANTE: Solo devuelve el JSON, sin texto adicional ni markdown.`;
+
+  try {
+    const msgs = [
+      { role: 'system' as const, content: extractionPrompt },
+      ...conversationHistory.slice(-20).map(m => ({
+        role: m.role as 'user' | 'assistant',
+        content: m.content,
+      })),
+    ];
+
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: msgs,
+        max_tokens: 300,
+        temperature: 0.1,
+      }),
+    });
+
+    if (!response.ok) return null;
+    const data = await response.json();
+    const raw = data.choices[0]?.message?.content || '';
+    // Extract JSON from response
+    const jsonMatch = raw.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) return null;
+    return JSON.parse(jsonMatch[0]);
+  } catch {
+    return null;
+  }
+}
+
+// ─── DETERMINE LEAD STATE ───────────────────────────────────────────────────
+function determineEstado(lead: Record<string, unknown>): string {
+  const filled = QUALIFYING_FIELDS.filter(f => lead[f] != null && lead[f] !== '').length;
+  if (lead.presupuesto_ok === false) return 'no_cualificado';
+  if (filled >= 3 && lead.presupuesto_ok === true) return 'cualificado';
+  if (filled > 0) return 'cualificando';
+  return 'nuevo';
+}
+
+// ─── AI RESPONSE ────────────────────────────────────────────────────────────
+async function getAIResponse(
+  userMessage: string,
+  conversationHistory: Array<{ role: string; content: string }>,
+  leadContext?: string
+) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) return '¡Hola! Gracias por escribirnos. Mateo te responderá pronto. Si quieres, puedes agendar una llamada: https://calendly.com/neuriax/30min';
 
+  let systemPrompt = WHATSAPP_SYSTEM_PROMPT;
+  if (leadContext) {
+    systemPrompt += `\n\n## CONTEXTO DEL LEAD ACTUAL\n${leadContext}\nUsa esta info para NO repetir preguntas que ya tienes respondidas. Enfócate en lo que falta.`;
+  }
+
   const messages = [
-    { role: 'system', content: WHATSAPP_SYSTEM_PROMPT },
-    ...conversationHistory.slice(-10), // Last 10 messages for context
-    { role: 'user', content: userMessage },
+    { role: 'system' as const, content: systemPrompt },
+    ...conversationHistory.slice(-10).map(m => ({
+      role: m.role as 'user' | 'assistant',
+      content: m.content,
+    })),
+    { role: 'user' as const, content: userMessage },
   ];
 
   try {
@@ -81,6 +188,7 @@ async function getAIResponse(userMessage: string, conversationHistory: Array<{ro
   }
 }
 
+// ─── SEND WHATSAPP MESSAGE ──────────────────────────────────────────────────
 async function sendWhatsAppMessage(to: string, message: string) {
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const accessToken = process.env.WHATSAPP_ACCESS_TOKEN;
@@ -120,7 +228,7 @@ async function sendWhatsAppMessage(to: string, message: string) {
   }
 }
 
-// GET - Webhook verification (Meta requires this)
+// ─── GET - Webhook verification (Meta requires this) ────────────────────────
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const mode = searchParams.get('hub.mode');
@@ -137,13 +245,12 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 }
 
-// POST - Receive messages
+// ─── POST - Receive messages ────────────────────────────────────────────────
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const supabase = getSupabase();
 
-    // Process each entry
     const entries = body.entry || [];
     for (const entry of entries) {
       const changes = entry.changes || [];
@@ -151,15 +258,14 @@ export async function POST(request: NextRequest) {
         if (change.field !== 'messages') continue;
 
         const value = change.value;
-        const messages = value.messages || [];
+        const incomingMessages = value.messages || [];
 
-        for (const message of messages) {
-          const from = message.from; // Phone number
+        for (const message of incomingMessages) {
+          const from = message.from;
           const contactName = value.contacts?.[0]?.profile?.name || 'Desconocido';
           const messageText = message.text?.body || '';
           const messageType = message.type || 'text';
 
-          // Only process text messages
           if (messageType !== 'text' || !messageText) continue;
 
           // Save inbound message
@@ -173,7 +279,7 @@ export async function POST(request: NextRequest) {
             is_bot: false,
           });
 
-          // Check if bot is enabled
+          // Check global bot enabled
           const { data: config } = await supabase
             .from('whatsapp_config')
             .select('*')
@@ -181,66 +287,130 @@ export async function POST(request: NextRequest) {
             .single();
 
           const botEnabled = config?.bot_enabled !== false;
+          if (!botEnabled) continue;
 
-          if (botEnabled) {
-            // Get conversation history for context
-            const { data: history } = await supabase
-              .from('whatsapp_messages')
-              .select('direction, content')
-              .eq('phone_number', from)
-              .order('created_at', { ascending: true })
-              .limit(20);
+          // Check per-chat bot_paused in whatsapp_leads
+          const { data: lead } = await supabase
+            .from('whatsapp_leads')
+            .select('*')
+            .eq('phone_number', from)
+            .single();
 
-            const conversationHistory = (history || []).map((m: { direction: string; content: string }) => ({
-              role: m.direction === 'inbound' ? 'user' : 'assistant',
-              content: m.content,
-            }));
+          if (lead?.bot_paused) continue; // Bot paused for this chat
 
-            // Get AI response
-            const aiResponse = await getAIResponse(messageText, conversationHistory);
-
-            // Send response via WhatsApp
-            const sent = await sendWhatsAppMessage(from, aiResponse);
-
-            // Save outbound message
-            await supabase.from('whatsapp_messages').insert({
+          // Upsert lead record if doesn't exist
+          if (!lead) {
+            await supabase.from('whatsapp_leads').insert({
               phone_number: from,
               contact_name: contactName,
-              direction: 'outbound',
-              message_type: 'text',
-              content: aiResponse,
-              status: sent ? 'sent' : 'failed',
-              is_bot: true,
+              estado: 'nuevo',
+              qualifying_step: 0,
             });
+          } else if (lead.contact_name === 'Desconocido' && contactName !== 'Desconocido') {
+            await supabase
+              .from('whatsapp_leads')
+              .update({ contact_name: contactName })
+              .eq('phone_number', from);
+          }
 
-            // Auto-create CRM lead if new contact
-            const { data: existingContact } = await supabase
+          // Get conversation history
+          const { data: history } = await supabase
+            .from('whatsapp_messages')
+            .select('direction, content')
+            .eq('phone_number', from)
+            .order('created_at', { ascending: true })
+            .limit(20);
+
+          const conversationHistory = (history || []).map((m: { direction: string; content: string }) => ({
+            role: m.direction === 'inbound' ? 'user' : 'assistant',
+            content: m.content,
+          }));
+
+          // Build lead context for AI
+          const currentLead = lead || {};
+          const filledFields = QUALIFYING_FIELDS.filter(f => currentLead[f]);
+          const missingFields = QUALIFYING_FIELDS.filter(f => !currentLead[f]);
+          const leadContext = filledFields.length > 0
+            ? `Ya sabemos: ${filledFields.map(f => `${f}: ${currentLead[f]}`).join(', ')}. Falta por averiguar: ${missingFields.join(', ')}.`
+            : 'No sabemos nada aún del lead. Empieza preguntando por su negocio de forma natural.';
+
+          // Get AI response with lead context
+          const aiResponse = await getAIResponse(messageText, conversationHistory, leadContext);
+
+          // Send response
+          const sent = await sendWhatsAppMessage(from, aiResponse);
+
+          // Save outbound message
+          await supabase.from('whatsapp_messages').insert({
+            phone_number: from,
+            contact_name: contactName,
+            direction: 'outbound',
+            message_type: 'text',
+            content: aiResponse,
+            status: sent ? 'sent' : 'failed',
+            is_bot: true,
+          });
+
+          // Intel extraction every 3 messages (after message 2)
+          const msgCount = (history || []).length;
+          if (msgCount >= 2 && msgCount % 3 === 0) {
+            const existingData = {
+              negocio: currentLead.negocio || null,
+              sector: currentLead.sector || null,
+              empleados: currentLead.empleados || null,
+              necesidad: currentLead.necesidad || null,
+              presupuesto: currentLead.presupuesto || null,
+            };
+
+            const intel = await extractLeadIntel(conversationHistory, existingData);
+            if (intel) {
+              const updates: Record<string, unknown> = { updated_at: new Date().toISOString() };
+              if (intel.negocio && !currentLead.negocio) updates.negocio = intel.negocio;
+              if (intel.sector && !currentLead.sector) updates.sector = intel.sector;
+              if (intel.empleados && !currentLead.empleados) updates.empleados = intel.empleados;
+              if (intel.necesidad && !currentLead.necesidad) updates.necesidad = intel.necesidad;
+              if (intel.presupuesto && !currentLead.presupuesto) updates.presupuesto = intel.presupuesto;
+              if (intel.presupuesto_ok != null) updates.presupuesto_ok = intel.presupuesto_ok;
+              if (intel.resumen) updates.resumen = intel.resumen;
+
+              // Determine estado
+              const merged = { ...currentLead, ...updates };
+              updates.estado = determineEstado(merged);
+
+              await supabase
+                .from('whatsapp_leads')
+                .update(updates)
+                .eq('phone_number', from);
+            }
+          }
+
+          // Auto-create CRM lead if new contact
+          const { data: existingContact } = await supabase
+            .from('contact_forms')
+            .select('id')
+            .eq('telefono', from)
+            .limit(1)
+            .single();
+
+          if (!existingContact) {
+            const { data: newContact } = await supabase
               .from('contact_forms')
+              .insert({
+                nombre: contactName,
+                email: `wa_${from}@whatsapp.local`,
+                telefono: from,
+                mensaje: `[WhatsApp] ${messageText}`,
+              })
               .select('id')
-              .eq('telefono', from)
-              .limit(1)
               .single();
 
-            if (!existingContact) {
-              const { data: newContact } = await supabase
-                .from('contact_forms')
-                .insert({
-                  nombre: contactName,
-                  email: `wa_${from}@whatsapp.local`,
-                  telefono: from,
-                  mensaje: `[WhatsApp] ${messageText}`,
-                })
-                .select('id')
-                .single();
-
-              if (newContact) {
-                await supabase.from('client_status').insert({
-                  contact_id: newContact.id,
-                  status: 'nuevo',
-                  source: 'whatsapp',
-                  priority: 'normal',
-                });
-              }
+            if (newContact) {
+              await supabase.from('client_status').insert({
+                contact_id: newContact.id,
+                status: 'nuevo',
+                source: 'whatsapp',
+                priority: 'normal',
+              });
             }
           }
         }

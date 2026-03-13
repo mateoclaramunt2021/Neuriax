@@ -276,7 +276,7 @@ export default function ClinicaDemo() {
               Llamar Ahora
             </a>
             <a 
-              href="https://wa.me/34915823456" 
+              href="https://wa.me/34643045488" 
               className="bg-white/20 hover:bg-white/30 text-white px-10 py-5 rounded-lg font-bold transition-all duration-300 border-2 border-white text-lg inline-block"
             >
               WhatsApp
@@ -337,7 +337,7 @@ export default function ClinicaDemo() {
                 </a>
 
                 <a 
-                  href="https://wa.me/34915823456" 
+                  href="https://wa.me/34643045488" 
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 bg-white p-5 rounded-xl border border-gray-200 hover:border-green-400 hover:bg-green-50 transition-all group"
@@ -389,7 +389,7 @@ export default function ClinicaDemo() {
               <h4 className="text-white font-semibold mb-4">Contacto</h4>
               <ul className="text-sm space-y-2">
                 <li><a href="tel:+34915823456" className="hover:text-white transition-colors">+34 91 582 3456</a></li>
-                <li><a href="https://wa.me/34915823456" className="hover:text-white transition-colors">WhatsApp</a></li>
+                <li><a href="https://wa.me/34643045488" className="hover:text-white transition-colors">WhatsApp</a></li>
                 <li><a href="#ubicacion" className="hover:text-white transition-colors">Ubicación</a></li>
                 <li><a href="#ubicacion" className="hover:text-white transition-colors">Horarios</a></li>
               </ul>

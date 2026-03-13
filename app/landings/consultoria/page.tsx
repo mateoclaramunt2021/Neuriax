@@ -294,7 +294,7 @@ export default function ConsultoriaDemo() {
               Llamar Ahora
             </a>
             <a 
-              href="https://wa.me/34915823456" 
+              href="https://wa.me/34643045488" 
               className="bg-white/20 hover:bg-white/30 text-white px-10 py-5 rounded-lg font-bold transition-all duration-300 border-2 border-white text-lg inline-block"
             >
               Enviar WhatsApp
@@ -328,7 +328,7 @@ export default function ConsultoriaDemo() {
               <h4 className="text-white font-semibold mb-4">Contacto</h4>
               <ul className="text-sm space-y-2">
                 <li><a href="tel:+34915823456" className="hover:text-white transition-colors">+34 91 582 3456</a></li>
-                <li><a href="https://wa.me/34915823456" className="hover:text-white transition-colors">WhatsApp</a></li>
+                <li><a href="https://wa.me/34643045488" className="hover:text-white transition-colors">WhatsApp</a></li>
                 <li><a href="#contacto" className="hover:text-white transition-colors">Agendar Cita</a></li>
               </ul>
             </div>
