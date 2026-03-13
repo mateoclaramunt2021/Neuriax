@@ -26,7 +26,7 @@ export default function WhatsAppButton() {
       <span className="absolute inset-0 rounded-full bg-green-500/30 animate-ping-slow" />
 
       {/* Badge */}
-      <span className="absolute -top-2 -left-2 bg-white text-[10px] font-bold text-green-700 px-2 py-0.5 rounded-full shadow-md border border-green-200 whitespace-nowrap">
+      <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-white text-[10px] font-bold text-green-700 px-2 py-0.5 rounded-full shadow-md border border-green-200 whitespace-nowrap z-10">
         Agente IA 24/7
       </span>
 
