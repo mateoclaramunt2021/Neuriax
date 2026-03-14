@@ -42,11 +42,35 @@ function extractContactFromBody(body: any): { phone: string; name: string; email
   const msg = body.message || body;
   const call = msg?.call || body.call || {};
   const customer = call?.customer || msg?.customer || body.customer || {};
+  // Try structured data from analysis
+  const sd = msg?.analysis?.structuredData || msg?.artifact?.analysis?.structuredData || {};
   return {
     phone: customer?.number || customer?.phone || '',
-    name: customer?.name || '',
-    email: customer?.email || '',
+    name: customer?.name || sd?.name || sd?.nombre || sd?.customerName || '',
+    email: customer?.email || sd?.email || '',
   };
+}
+
+// Helper: Extract name from summary/transcript text
+function extractNameFromText(summary: string, transcript?: any[]): string {
+  const namePatterns = [
+    /(?:se llama|mi nombre es|soy|me llamo)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)/i,
+    /(?:caller|customer|contact|nombre|name)(?:\s*[:=]\s*|\s+(?:is|es)\s+)([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)/i,
+  ];
+  for (const p of namePatterns) {
+    const m = summary.match(p);
+    if (m?.[1] && m[1].length > 2 && m[1].length < 50) return m[1];
+  }
+  if (Array.isArray(transcript)) {
+    for (const msg of transcript.slice(0, 10)) {
+      const text = msg.message || msg.content || msg.text || '';
+      for (const p of namePatterns) {
+        const m = text.match(p);
+        if (m?.[1] && m[1].length > 2 && m[1].length < 50) return m[1];
+      }
+    }
+  }
+  return '';
 }
 
 // Helper: Ensure a vapi_calls record exists for a given call ID.
@@ -234,11 +258,18 @@ export async function POST(req: NextRequest) {
         report?.customer?.number ||
         body.customer?.number ||
         '';
-      const customerName =
+      let customerName =
         report?.call?.customer?.name ||
         report?.customer?.name ||
         body.customer?.name ||
+        report?.analysis?.structuredData?.name ||
+        report?.analysis?.structuredData?.nombre ||
         '';
+
+      // If no name from customer object, try to extract from summary/transcript
+      if (!customerName && (summary || (Array.isArray(transcript) && transcript.length > 0))) {
+        customerName = extractNameFromText(summary, Array.isArray(transcript) ? transcript : []);
+      }
 
       // Check if call exists (use maybeSingle to avoid errors)
       const { data: existingCall } = await supabase
