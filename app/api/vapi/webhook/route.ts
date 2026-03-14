@@ -348,24 +348,149 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      // Send notification to Mateo with call summary
+      // Send notification to Mateo with FULL client briefing report
       try {
         const resend = getResend();
+
+        // Fetch business profile if exists
+        const { data: profile } = await supabase
+          .from('vapi_business_profiles')
+          .select('*')
+          .eq('vapi_call_id', cId)
+          .maybeSingle();
+
+        // Fetch meeting details if scheduled
+        let meetingDetails = null;
+        if (meetingScheduled) {
+          const { data: meeting } = await supabase
+            .from('vapi_meetings')
+            .select('*')
+            .eq('vapi_call_id', cId)
+            .maybeSingle();
+          meetingDetails = meeting;
+        }
+
+        // Build transcript preview (last 10 messages max)
+        const transcriptArr = Array.isArray(transcript) ? transcript : [];
+        const transcriptPreview = transcriptArr
+          .slice(-15)
+          .map((msg: any) => {
+            const role = msg.role === 'assistant' ? '🤖 Marta' : '👤 Cliente';
+            const text = msg.message || msg.content || msg.text || '';
+            return `<tr><td style="padding:4px 8px;color:#64748b;font-size:12px;vertical-align:top;white-space:nowrap;">${role}</td><td style="padding:4px 8px;color:#334155;font-size:13px;line-height:1.5;">${text}</td></tr>`;
+          })
+          .join('');
+
+        const durationMin = Math.floor(Number(duration) / 60);
+        const durationSec = Math.round(Number(duration) % 60);
+        const durationStr = `${durationMin}:${durationSec.toString().padStart(2, '0')}`;
+
+        const sectorLabels: Record<string, string> = {
+          hosteleria: '🍽️ Hostelería', inmobiliaria: '🏠 Inmobiliaria', clinica: '🏥 Clínica',
+          ecommerce: '🛒 E-commerce', abogados: '⚖️ Abogados', asesoria: '📊 Asesoría',
+          marketing: '📢 Marketing', construccion: '🏗️ Construcción', formacion: '🎓 Formación',
+          retail: '🏪 Retail', tecnologia: '💻 Tecnología', otro: '🏢 Otro',
+        };
+
+        const subjectEmoji = meetingScheduled ? '📅' : '📞';
+        const subjectType = meetingScheduled ? 'REUNIÓN AGENDADA' : 'Informe de llamada';
+
         await resend.emails.send({
           from: 'Neuriax <hola@neuriax.com>',
           to: 'mateoclaramunt2021@gmail.com',
-          subject: `📞 Llamada VAPI finalizada — ${customerName || phoneNumber || 'Desconocido'}`,
+          subject: `${subjectEmoji} ${subjectType} — ${customerName || phoneNumber || 'Desconocido'}`,
           html: `
-            <div style="font-family: Arial; max-width: 600px; margin: 0 auto; padding: 20px;">
-              <h2 style="color: #0891b2;">📞 Llamada VAPI Finalizada</h2>
-              <p><strong>Contacto:</strong> ${customerName || 'No identificado'}</p>
-              <p><strong>Teléfono:</strong> ${phoneNumber || 'No disponible'}</p>
-              <p><strong>Duración:</strong> ${Math.round(Number(duration) || 0)} segundos</p>
-              <p><strong>Motivo fin:</strong> ${endedReason || 'No especificado'}</p>
-              <p><strong>Reunión agendada:</strong> ${meetingScheduled ? '✅ Sí' : '❌ No'}</p>
-              ${summary ? `<h3 style="color: #0891b2;">📝 Resumen:</h3><p style="background: #f1f5f9; padding: 15px; border-radius: 8px; line-height: 1.6;">${summary}</p>` : '<p style="color:#94a3b8;">Sin resumen disponible</p>'}
-              <hr style="border-color: #e2e8f0; margin: 20px 0;">
-              <p style="font-size: 12px; color: #94a3b8;">ID: ${cId}</p>
+            <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:600px;width:100%;margin:0 auto;background:#ffffff;">
+              
+              <!-- Header -->
+              <div style="background:linear-gradient(135deg,#0f172a,#1e293b);padding:24px 20px;text-align:center;">
+                <h1 style="color:#06b6d4;font-size:22px;margin:0;font-weight:800;">📋 Informe del Cliente</h1>
+                <p style="color:#94a3b8;font-size:13px;margin:6px 0 0 0;">${new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' })}</p>
+              </div>
+
+              <div style="padding:20px;">
+
+                <!-- Status Banner -->
+                ${meetingScheduled ? `
+                <div style="background:#ecfdf5;border:2px solid #10b981;border-radius:10px;padding:16px;margin-bottom:16px;text-align:center;">
+                  <p style="color:#059669;font-size:16px;font-weight:700;margin:0;">📅 REUNIÓN AGENDADA</p>
+                  ${meetingDetails ? `
+                  <p style="color:#0f172a;font-size:15px;font-weight:600;margin:8px 0 0 0;">
+                    ${meetingDetails.meeting_date ? new Date(meetingDetails.meeting_date).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' }) : ''}
+                  </p>
+                  <p style="color:#64748b;font-size:13px;margin:4px 0 0 0;">Tipo: ${meetingDetails.meeting_type || 'demo'}</p>
+                  ` : ''}
+                </div>
+                ` : `
+                <div style="background:#f0f9ff;border:2px solid #0ea5e9;border-radius:10px;padding:16px;margin-bottom:16px;text-align:center;">
+                  <p style="color:#0284c7;font-size:16px;font-weight:700;margin:0;">ℹ️ LLAMADA INFORMATIVA</p>
+                  <p style="color:#64748b;font-size:13px;margin:4px 0 0 0;">No se agendó reunión</p>
+                </div>
+                `}
+
+                <!-- Client Info -->
+                <div style="background:#f8fafc;border-radius:10px;padding:16px;margin-bottom:16px;">
+                  <h3 style="color:#0f172a;font-size:14px;margin:0 0 12px 0;text-transform:uppercase;letter-spacing:1px;">👤 Datos del cliente</h3>
+                  <table style="width:100%;border-collapse:collapse;">
+                    <tr><td style="padding:6px 0;color:#64748b;font-size:13px;width:120px;">Nombre</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${customerName || 'No identificado'}</td></tr>
+                    <tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Teléfono</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${phoneNumber || 'No disponible'}</td></tr>
+                    ${profile?.contact_email || '' ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Email</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${profile?.contact_email || ''}</td></tr>` : ''}
+                    <tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Duración</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${durationStr}</td></tr>
+                    <tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Motivo fin</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${endedReason || '—'}</td></tr>
+                  </table>
+                </div>
+
+                <!-- Business Profile (if captured) -->
+                ${profile ? `
+                <div style="background:#fefce8;border-radius:10px;padding:16px;margin-bottom:16px;">
+                  <h3 style="color:#0f172a;font-size:14px;margin:0 0 12px 0;text-transform:uppercase;letter-spacing:1px;">🏢 Perfil del negocio</h3>
+                  <table style="width:100%;border-collapse:collapse;">
+                    ${profile.nombre_negocio ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;width:120px;">Empresa</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${profile.nombre_negocio}</td></tr>` : ''}
+                    ${profile.sector ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Sector</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${sectorLabels[profile.sector] || profile.sector}</td></tr>` : ''}
+                    ${profile.num_empleados ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Empleados</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.num_empleados}</td></tr>` : ''}
+                    ${profile.problema_principal ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Problema</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.problema_principal}</td></tr>` : ''}
+                    ${profile.herramientas_actuales ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Herramientas</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.herramientas_actuales}</td></tr>` : ''}
+                    ${profile.experiencia_ia ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Exp. IA</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.experiencia_ia}</td></tr>` : ''}
+                    ${profile.presupuesto_mensual ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Presupuesto</td><td style="padding:6px 0;color:#0f172a;font-size:14px;font-weight:600;">${profile.presupuesto_mensual}</td></tr>` : ''}
+                    ${profile.urgencia ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Urgencia</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.urgencia}</td></tr>` : ''}
+                    ${profile.lead_score ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Lead Score</td><td style="padding:6px 0;font-size:14px;font-weight:700;color:${profile.lead_score >= 7 ? '#059669' : profile.lead_score >= 4 ? '#d97706' : '#dc2626'};">${profile.lead_score}/10</td></tr>` : ''}
+                    ${profile.notas ? `<tr><td style="padding:6px 0;color:#64748b;font-size:13px;">Notas</td><td style="padding:6px 0;color:#0f172a;font-size:14px;">${profile.notas}</td></tr>` : ''}
+                  </table>
+                </div>
+                ` : ''}
+
+                <!-- Summary -->
+                ${summary ? `
+                <div style="background:#f0fdfa;border-left:4px solid #06b6d4;border-radius:4px;padding:16px;margin-bottom:16px;">
+                  <h3 style="color:#0891b2;font-size:14px;margin:0 0 8px 0;text-transform:uppercase;letter-spacing:1px;">📝 Resumen de la conversación</h3>
+                  <p style="color:#334155;font-size:14px;line-height:1.7;margin:0;">${summary}</p>
+                </div>
+                ` : ''}
+
+                <!-- Transcript -->
+                ${transcriptPreview ? `
+                <div style="border:1px solid #e2e8f0;border-radius:10px;padding:16px;margin-bottom:16px;">
+                  <h3 style="color:#0f172a;font-size:14px;margin:0 0 12px 0;text-transform:uppercase;letter-spacing:1px;">💬 Transcripción (últimos mensajes)</h3>
+                  <table style="width:100%;border-collapse:collapse;">
+                    ${transcriptPreview}
+                  </table>
+                </div>
+                ` : ''}
+
+                <!-- Recording -->
+                ${recordingUrl ? `
+                <div style="text-align:center;margin-bottom:16px;">
+                  <a href="${recordingUrl}" style="display:inline-block;background:#0f172a;color:#ffffff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:14px;">
+                    🎧 Escuchar grabación
+                  </a>
+                </div>
+                ` : ''}
+
+                <!-- Footer -->
+                <div style="border-top:1px solid #e2e8f0;padding-top:12px;text-align:center;">
+                  <p style="color:#94a3b8;font-size:11px;margin:0;">ID: ${cId} · Coste: ${(Number(cost) || 0).toFixed(4)}€</p>
+                </div>
+              </div>
             </div>
           `,
         });
