@@ -11,21 +11,21 @@ function vapiEmailWrapper(content: string): string {
 <html lang="es">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="margin: 0; padding: 0; background: #f1f5f9; font-family: 'Segoe UI', Arial, sans-serif;">
-<div style="max-width: 600px; margin: 0 auto; background: #ffffff;">
+<div style="max-width: 600px; width: 100%; margin: 0 auto; background: #ffffff;">
   
   <!-- Header -->
-  <div style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 30px 40px; text-align: center;">
-    <h1 style="color: #06b6d4; font-size: 28px; margin: 0; font-weight: 800; letter-spacing: -0.5px;">Neuriax</h1>
+  <div style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 24px 20px; text-align: center;">
+    <h1 style="color: #06b6d4; font-size: 26px; margin: 0; font-weight: 800; letter-spacing: -0.5px;">Neuriax</h1>
     <p style="color: #94a3b8; font-size: 13px; margin: 8px 0 0 0;">Automatización inteligente para tu negocio</p>
   </div>
 
   <!-- Body -->
-  <div style="padding: 40px;">
+  <div style="padding: 24px 20px;">
     ${content}
   </div>
 
   <!-- Footer -->
-  <div style="background: #f8fafc; padding: 24px 40px; border-top: 1px solid #e2e8f0; text-align: center;">
+  <div style="background: #f8fafc; padding: 20px; border-top: 1px solid #e2e8f0; text-align: center;">
     <p style="color: #94a3b8; font-size: 12px; margin: 0 0 8px 0;">
       © 2026 Neuriax · <a href="${SITE_URL}" style="color: #06b6d4; text-decoration: none;">neuriax.com</a>
     </p>
@@ -70,18 +70,18 @@ export function getMeetingConfirmationEmail(params: {
     </p>
 
     <!-- Meeting Details Box -->
-    <div style="background: linear-gradient(135deg, #ecfeff, #f0f9ff); border: 2px solid #06b6d4; border-radius: 12px; padding: 28px; margin: 24px 0; text-align: center;">
-      <p style="color: #0891b2; font-size: 13px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">
+    <div style="background: linear-gradient(135deg, #ecfeff, #f0f9ff); border: 2px solid #06b6d4; border-radius: 12px; padding: 20px 16px; margin: 20px 0; text-align: center;">
+      <p style="color: #0891b2; font-size: 12px; margin: 0 0 4px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">
         ${meetingLabel}
       </p>
-      <p style="color: #0f172a; font-size: 28px; font-weight: 800; margin: 8px 0 4px 0;">
+      <p style="color: #0f172a; font-size: 20px; font-weight: 800; margin: 8px 0 4px 0;">
         📅 ${fecha}
       </p>
-      <p style="color: #0f172a; font-size: 22px; font-weight: 700; margin: 0 0 4px 0;">
+      <p style="color: #0f172a; font-size: 18px; font-weight: 700; margin: 0 0 4px 0;">
         🕐 ${hora}h (hora España)
       </p>
       ${meetingUrl ? `
-      <a href="${meetingUrl}" style="display: inline-block; margin-top: 16px; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 700; font-size: 15px;">
+      <a href="${meetingUrl}" style="display: inline-block; margin-top: 12px; background: linear-gradient(135deg, #06b6d4, #3b82f6); color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px;">
         Unirse a la reunión →
       </a>
       ` : ''}
@@ -94,12 +94,12 @@ export function getMeetingConfirmationEmail(params: {
     </p>
 
     <!-- PDF Gift Box -->
-    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 12px; padding: 28px; margin: 24px 0; text-align: center;">
+    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 12px; padding: 20px 16px; margin: 20px 0; text-align: center;">
       <p style="color: #fbbf24; font-size: 14px; margin: 0 0 4px 0; font-weight: 700;">🎁 TU REGALO</p>
-      <h3 style="color: #ffffff; font-size: 18px; margin: 0 0 8px 0; font-weight: 700;">
+      <h3 style="color: #ffffff; font-size: 16px; margin: 0 0 8px 0; font-weight: 700;">
         Guía: Cómo la IA Transforma tu Negocio
       </h3>
-      <p style="color: #94a3b8; font-size: 13px; margin: 0 0 16px 0;">
+      <p style="color: #94a3b8; font-size: 13px; margin: 0 0 12px 0;">
         8 páginas · Casos reales · Plan de acción 30 días
       </p>
       <p style="color: #06b6d4; font-size: 13px; margin: 0;">
@@ -148,15 +148,15 @@ export function getMeetingReminderEmail(params: {
     </p>
 
     <!-- Reminder Box -->
-    <div style="background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
-      <p style="color: #92400e; font-size: 24px; font-weight: 800; margin: 0 0 4px 0;">
+    <div style="background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px 16px; margin: 20px 0; text-align: center;">
+      <p style="color: #92400e; font-size: 20px; font-weight: 800; margin: 0 0 4px 0;">
         📅 ${fecha}
       </p>
-      <p style="color: #92400e; font-size: 20px; font-weight: 700; margin: 0;">
+      <p style="color: #92400e; font-size: 18px; font-weight: 700; margin: 0;">
         🕐 ${hora}h (hora España)
       </p>
       ${meetingUrl ? `
-      <a href="${meetingUrl}" style="display: inline-block; margin-top: 16px; background: #0f172a; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 700; font-size: 14px;">
+      <a href="${meetingUrl}" style="display: inline-block; margin-top: 12px; background: #0f172a; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px;">
         Unirse a la reunión →
       </a>
       ` : ''}
@@ -198,7 +198,7 @@ export function getPostCallEmail(params: {
 
     ${summary ? `
     <!-- Call Summary -->
-    <div style="background: #f8fafc; border-left: 4px solid #06b6d4; border-radius: 4px; padding: 20px; margin: 20px 0;">
+    <div style="background: #f8fafc; border-left: 4px solid #06b6d4; border-radius: 4px; padding: 16px; margin: 20px 0;">
       <p style="color: #0891b2; font-size: 12px; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Resumen de tu consulta</p>
       <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0;">${summary}</p>
     </div>
@@ -210,12 +210,12 @@ export function getPostCallEmail(params: {
     </p>
 
     <!-- PDF Gift Box -->
-    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 12px; padding: 28px; margin: 24px 0; text-align: center;">
+    <div style="background: linear-gradient(135deg, #0f172a, #1e293b); border-radius: 12px; padding: 20px 16px; margin: 20px 0; text-align: center;">
       <p style="color: #fbbf24; font-size: 14px; margin: 0 0 4px 0; font-weight: 700;">🎁 TU REGALO</p>
-      <h3 style="color: #ffffff; font-size: 18px; margin: 0 0 8px 0; font-weight: 700;">
+      <h3 style="color: #ffffff; font-size: 16px; margin: 0 0 8px 0; font-weight: 700;">
         Guía: Cómo la IA Transforma tu Negocio
       </h3>
-      <p style="color: #94a3b8; font-size: 13px; margin: 0 0 16px 0;">
+      <p style="color: #94a3b8; font-size: 13px; margin: 0 0 12px 0;">
         8 páginas · Casos reales · Plan de acción 30 días
       </p>
       <p style="color: #06b6d4; font-size: 13px; margin: 0;">
@@ -224,7 +224,7 @@ export function getPostCallEmail(params: {
     </div>
 
     <!-- CTA -->
-    <div style="background: #f0fdfa; border: 2px solid #06b6d4; border-radius: 12px; padding: 24px; text-align: center; margin: 20px 0;">
+    <div style="background: #f0fdfa; border: 2px solid #06b6d4; border-radius: 12px; padding: 20px 16px; text-align: center; margin: 20px 0;">
       <p style="color: #0f172a; font-size: 15px; margin: 0 0 12px 0; font-weight: 600;">
         ¿Quieres seguir hablando? Agenda una reunión cuando te venga bien
       </p>
